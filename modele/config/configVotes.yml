@@ -1,0 +1,8 @@
+Ce fichier contiens la config de base du serveur---
+methode: 1
+id: Diamond
+quantite: 5
+message: >
+    &9[Votes] Merci à &9 {JOUEUR} &equi gagne &9{QUANTITE} x {ID} &epour
+    son vote !
+liens: 

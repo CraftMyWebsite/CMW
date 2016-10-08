@@ -1,0 +1,16 @@
+Ce fichier contiens la config de base du serveur---
+Widgets: 
+    - 
+        type: 0
+        titre: GERER MON COMPTE
+    - 
+        type: 1
+        titre: JOUEURS EN LIGNE
+    - 
+        type: 2
+        titre: ETAT DES SERVEURS
+    - 
+        type: 3
+        titre: PARTENAIRES
+        message: |
+            Nos partenaires: <a href="http://craftmywebsite.fr">CraftMyWebsite</a>

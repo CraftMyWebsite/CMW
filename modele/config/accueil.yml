@@ -1,0 +1,30 @@
+Ce fichier contiens la config de base du serveur---
+Infos: 
+    - 
+        message: Image de démo à modifier dans votre panel CraftMyWebsite !
+        image: miniature-demo-1.png
+        lien: #
+    - 
+        message: Image de démo à modifier dans votre panel CraftMyWebsite !
+        image: miniature-demo-2.png
+        lien: #
+    - 
+        message: Image de démo à modifier dans votre panel CraftMyWebsite !
+        image: miniature-demo-3.png
+        lien: #
+Slider: 
+    - 
+        message: CraftMyWebsite , Votre CMS Ultra complet.
+        image: slider1.png
+    - 
+        message: >
+            Vous voulez avoir un site Web qui grâce aux dons des
+            joueurs vous permet de réduire considérablement les coûts
+            serveur?
+        image: slider2.png
+    - 
+        message: >
+            Avec votre site CraftMyWebsite, vos joueurs apprécieront
+            d'utiliser le site web !
+        image: slider3.png
+SliderTitre: Sliders
