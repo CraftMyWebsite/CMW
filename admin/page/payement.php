@@ -15,27 +15,21 @@
 	  	<input type="checkbox" name="paypal" <?php if($lectureP['paypal'] == true) echo 'checked'; ?>> Paypal
 	</label>
 	<label class="checkbox-inline">
-	  	<input type="checkbox" name="starpass" <?php if($lectureP['starpass'] == true) echo 'checked'; ?>> Starpass
+	  	<input type="checkbox" name="dedipass" <?php if($lectureP['dedipass'] == true) echo 'checked'; ?>> Dedipass
 	</label>
 	</center>
 	</br>
 	<center><h4>Starpass</h4></center>
 	<div class="form-group">
-		<label class="col-sm-4 control-label">Starpass IDD</label>
+		<label class="col-sm-4 control-label">Dedipass PublicKey</label>
 		<div class="col-sm-8">
-			<input style="width: 50%" type="text" name="starpassIDD" class="form-control" value="<?php echo $lectureP['starpassIDD']; ?>" placeholder="Trouvez le sur votre panel starpass..." >
+			<input style="width: 50%" type="text" name="dedipass_public" class="form-control" value="<?php echo $lectureP['dedipass_public']; ?>" placeholder="Trouvez le sur votre panel dedipass..." >
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-sm-4 control-label">Starpass IDP</label>
+		<label class="col-sm-4 control-label">Dedipass PrivateKey</label>
 		<div class="col-sm-8">
-			<input type="text" style="width: 50%" name="starpassIDP" class="form-control" value="<?php echo $lectureP['starpassIDP']; ?>" placeholder="Pareil que pour IDD" >
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Starpass Jetons Donnés</label>
-		<div class="col-sm-8">
-			<input type="text" style="width: 50%" name="starpassJetons" class="form-control" value="<?php echo $lectureP['starpassJetons']; ?>" placeholder="ex: 500" >
+			<input style="width :50%" type="text" name="dedipass_private" class="form-control" value="<?php echo $lectureP['dedipass_private']; ?>" placeholder="Pareil que pour IDD" >
 		</div>
 	</div>
 	</br>
