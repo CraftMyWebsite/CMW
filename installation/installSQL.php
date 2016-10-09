@@ -229,6 +229,143 @@ $sql->exec("INSERT INTO `cmw_sysip` (`id`, `idPerIP`, `nbrPerIP`) VALUES (1, 0, 
 
 $sql->exec("INSERT INTO `cmw_maintenance` (`maintenanceId`, `maintenanceMsg`, `maintenanceMsgAdmin`, `maintenanceTime`, `maintenancePref`, `maintenanceEtat`) VALUES (1, 'Malheureusement le site est actuellement en maintenance..</br>Revenez plus tard.', 'Vous êtes administrateur ? Alors connectez-vous :', 0, 0, 0);");
 
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2;");
+
+$sql->exec("INSERT INTO `cmw_forum` (`id`, `nom`) VALUES
+(1, 'Ton Forum');");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_answer` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id_topic` smallint(6) NOT NULL,
+  `pseudo` varchar(40) NOT NULL,
+  `contenue` varchar(10000) NOT NULL,
+  `date_post` date NOT NULL,
+  `d_edition` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;");
+
+$sql->exec("INSERT INTO `cmw_forum_answer` (`id`, `id_topic`, `pseudo`, `contenue`, `date_post`, `d_edition`) VALUES
+(1, 1, 'florentlife', 'Bienvenue sur ton forum :D ', '2016-05-01', '2016-07-02');");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_answer_removed` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id_answer` smallint(5) unsigned NOT NULL,
+  `id_topic` smallint(5) unsigned NOT NULL,
+  `auteur_answer` varchar(60) NOT NULL,
+  `date_creation` date DEFAULT NULL,
+  `Raison` varchar(200) DEFAULT NULL,
+  `date_suppression` date NOT NULL,
+  `auteur_suppression` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_categorie` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(40) NOT NULL,
+  `img` varchar(300) DEFAULT NULL,
+  `description` varchar(300) NOT NULL,
+  `sous-forum` tinyint(4) NOT NULL DEFAULT '0',
+  `forum` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;");
+
+$sql->exec("INSERT INTO `cmw_forum_categorie` (`id`, `nom`, `img`, `description`, `sous-forum`, `forum`) VALUES
+(1, 'Forum créer par Florentlife', NULL, 'Oh blabla :O', 0, 1);");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_like` (
+  `id` smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(40) NOT NULL,
+  `id_answer` int(11) NOT NULL,
+  `Appreciation` smallint(6) NOT NULL,
+  `vu` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_lu` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(82) NOT NULL,
+  `id_topic` int(10) unsigned NOT NULL,
+  `vu` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_post` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id_categorie` smallint(6) NOT NULL,
+  `nom` varchar(40) NOT NULL,
+  `pseudo` varchar(40) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `contenue` varchar(10000) NOT NULL,
+  `date_creation` date NOT NULL,
+  `last_answer` varchar(40) DEFAULT NULL,
+  `sous_forum` smallint(6) DEFAULT NULL,
+  `etat` int(11) NOT NULL,
+  `d_edition` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+$sql->exec("INSERT INTO `cmw_forum_post` (`id`, `id_categorie`, `nom`, `pseudo`, `description`, `contenue`, `date_creation`, `last_answer`, `sous_forum`, `etat`, `d_edition`) VALUES
+(1, 1, 'Test', 'genesis3044', 'Test du forum', 'Test du forum', '2016-05-01', 'florentlife', NULL, 0, '2016-07-02');");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_report` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `type` smallint(6) NOT NULL,
+  `id_topic_answer` int(11) NOT NULL,
+  `reason` varchar(200) NOT NULL,
+  `reporteur` varchar(40) NOT NULL,
+  `vu` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_sous_forum` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id_categorie` smallint(6) NOT NULL,
+  `nom` varchar(40) NOT NULL,
+  `description` varchar(300) DEFAULT NULL,
+  `img` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;");
+
+$sql->exec("INSERT INTO `cmw_forum_sous_forum` (`id`, `id_categorie`, `nom`, `description`, `img`) VALUES
+(1, 1, 'blabla', 'bla', NULL);");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_topic_followed` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(40) NOT NULL,
+  `id_topic` int(11) NOT NULL,
+  `last_answer` int(11) NOT NULL,
+  `vu` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_topic_removed` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(80) NOT NULL,
+  `nb_reponse` int(10) unsigned NOT NULL,
+  `auteur_topic` varchar(50) NOT NULL,
+  `date_creation` date NOT NULL,
+  `raison` varchar(300) NOT NULL,
+  `date_suppression` date NOT NULL,
+  `auteur_suppression` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_dedipass` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(40) NOT NULL,
+  `code` varchar(8) NOT NULL,
+  `rate` varchar(60) NOT NULL,
+  `payout` float NOT NULL,
+  `tokens` int(11) NOT NULL,
+  `date_achat` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+
 #----Fin de l'intégration----#
 
 

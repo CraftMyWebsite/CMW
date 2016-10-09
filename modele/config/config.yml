@@ -10,6 +10,8 @@ General:
     bgType: 0
     permsPlugin: groupManager
     permsWorld: world
+    version_forum: 1.4
+    license_forum: 0
 DataBase: 
     dbAdress: 
     dbName: 
@@ -18,10 +20,9 @@ DataBase:
     dbPort: 3306
 Payement: 
     paypal: true
-    starpass: true
-    starpassIDD: 
-    starpassIDP: 
-    starpassJetons: 
+    dedipass: true
+    dedipass_public:
+    dedipass_private:
     paypalUser: 
     paypalPass: 
     paypalSignature: 

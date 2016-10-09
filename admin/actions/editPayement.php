@@ -7,18 +7,17 @@ if(isset($_POST['paypal']))
 	$lecture['Payement']['paypal'] = true;
 else
 	$lecture['Payement']['paypal'] = false;	
-if(isset($_POST['starpass']))
-	$lecture['Payement']['starpass'] = true;
+if(isset($_POST['dedipass']))
+	$lecture['Payement']['dedipass'] = true;
 else
-	$lecture['Payement']['starpass'] = false;	
+	$lecture['Payement']['dedipass'] = false;	
 if(isset($_POST['telipass']))
 	$lecture['Payement']['telipass'] = true;
 else
 	$lecture['Payement']['telipass'] = false;	
 
-$lecture['Payement']['starpassIDD'] = $_POST['starpassIDD'];
-$lecture['Payement']['starpassIDP'] = $_POST['starpassIDP'];
-$lecture['Payement']['starpassJetons'] = $_POST['starpassJetons'];
+$lecture['Payement']['dedipass_public'] = $_POST['dedipass_public'];
+$lecture['Payement']['dedipass_private'] = $_POST['dedipass_private'];
 $lecture['Payement']['paypalUser'] = $_POST['paypalUser'];
 $lecture['Payement']['paypalPass'] = $_POST['paypalPass'];
 $lecture['Payement']['paypalSignature'] = $_POST['paypalSignature'];
