@@ -66,10 +66,10 @@ if(isset($_GET['action']))
 		break;
 		
 		// Appellé lorsqu'un code starpass est validé.
-		case 'starpass':
+		case 'dedipass':
 			include('controleur/starpass.php');
 			// On redirige sur la page d'achat de token, le joueur vas surrement racheter un code(quoi !? Pas le droit de rêver?).
-			header('Location: ?page=token&success=true');
+			//header('Location: ?page=token&success=true');
 		break;
 		
 		case 'monelib':

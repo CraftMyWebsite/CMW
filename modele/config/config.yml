@@ -18,10 +18,9 @@ DataBase:
     dbPort: 3306
 Payement: 
     paypal: true
-    starpass: true
-    starpassIDD: 
-    starpassIDP: 
-    starpassJetons: 
+    dedipass: true
+    dedipass_public:
+    dedipass_private:
     paypalUser: 
     paypalPass: 
     paypalSignature: 

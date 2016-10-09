@@ -35,8 +35,7 @@ if($maintenance[$i]['maintenanceEtat'] == 1){
 	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<link href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/style-<?php echo $_Serveur_['General']['themeOption']; ?>.css" rel="stylesheet" type="text/css">
 	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/snarl.js"></script>
-	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/snarl.min.js"></script>
-
+	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/snarl.min.js"></script>	<script src="//api.dedipass.com/v1/pay.js"></script>
 	<?php
 	if(isset($_GET['page']))
 	{
