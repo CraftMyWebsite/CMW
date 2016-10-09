@@ -20,6 +20,42 @@ if(isset($_GET['page']))
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/boutique.php');
 		break;
 		
+		// Pour le forum 
+						
+		case 'forum':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/forum.php');
+		break;
+		
+		case 'signalement':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/signalement.php');
+		break;
+		
+		case 'edit_topic':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/edit_topic.php');
+		break;
+		
+		case 'edit_answer':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/edit_answer.php');
+		break;
+		
+		case 'forum_categorie':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/forum_categorie.php');
+		break;
+		
+		case 'post':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/post.php');
+		break;
+		
+		case 'confirmation':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/confirmation.php');
+		break;
+		
+		case 'alert':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/alert.php');
+		break;
+			
+			// Fin du forum
+		
 		case 'admin': 
 			include('controleur/admin/admin.php');
 		break;

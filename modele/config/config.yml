@@ -10,6 +10,8 @@ General:
     bgType: 0
     permsPlugin: groupManager
     permsWorld: world
+    version_forum: 1.4
+    license_forum: 0
 DataBase: 
     dbAdress: 
     dbName: 

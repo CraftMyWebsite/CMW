@@ -93,13 +93,51 @@
 									- Connecté :
 										- Admin, on lui rajoutte un lien "administration".
 										- Pas admin, il a juste le lien vers son profil plus un lien déconnection.
-								*/
-								
+								*/								
 								if(isset($_Joueur_))
 								{
+									$req_topic = $bddConnection->prepare('SELECT cmw_forum_topic_followed.pseudo, id_topic, vu, cmw_forum_topic_followed.last_answer AS last_answer_int, cmw_forum_post.last_answer AS last_answer_pseudo FROM cmw_forum_topic_followed
+									INNER JOIN cmw_forum_post WHERE id_topic = cmw_forum_post.id AND cmw_forum_topic_followed.pseudo = :pseudo');
+									$req_topic->execute(array(
+										'pseudo' => $_Joueur_['pseudo']
+									));
+									$alerte = 0;
+									while($td = $req_topic->fetch())
+									{
+										if($td['pseudo'] != $td['last_answer_pseudo'] AND $td['last_answer_pseudo'] != NULL AND $td['vu'] == 0)
+										{
+											$alerte++;
+										}
+									}
+									$req_answer = $bddConnection->prepare('SELECT cmw_forum_like.pseudo AS pseudo_likeur, Appreciation, id_answer, cmw_forum_answer.pseudo
+									AS pseudo_posteur, id_topic, vu	FROM cmw_forum_like INNER JOIN cmw_forum_answer WHERE id_answer = cmw_forum_answer.id
+									AND cmw_forum_like.pseudo != :pseudo AND cmw_forum_answer.pseudo = :pseudop');
+									$req_answer->execute(array(
+										'pseudo' => $_Joueur_['pseudo'],
+										'pseudop' => $_Joueur_['pseudo']
+									));
+									while($answer_liked = $req_answer->fetch())
+									{
+										if($answer_liked['vu'] == 0)
+										{
+											$alerte++;
+										}
+									}
 									if($_Joueur_['rang'] == 1)
-										echo '<a href="admin.php" class="btn btn-success btn-block" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-cog"></span> Administration</a>';
-								?>
+										{
+											$req_report = $bddConnection->query('SELECT * FROM cmw_forum_report WHERE vu = 0');
+											$signalement = $req_report->rowCount();
+											echo '<a href="admin.php" class="btn btn-success btn-block" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-cog"></span> Administration</a>';
+											if($signalement != 0)
+											{
+												echo '<a href="?page=signalement" class="btn btn-success btn-block" style="margin-bottom: 5px"><span class="glyphicon glyphicon-bell"></span> Signalement <span class="badges">' . $signalement . '</span></a>';
+											}
+										}
+										if($alerte != 0)
+										{
+											echo '<a href="?page=alert" class="btn btn-success btn-block" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-envelope"></span> Alertes <span class="badges">' . $alerte . '</span></a>';
+										}
+										?>
 								<a href="?&page=profil&profil=<?php echo $_Joueur_['pseudo']; ?>" class="btn btn-primary btn-block" style="margin-bottom: 5px;"><img class="icon-player-topbar" src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_Joueur_['pseudo']; ?>&s=32&v=front" /> <?php echo $_Joueur_['pseudo']; ?></a></a>
 								<a href="index.php?&page=token" class="btn btn-danger btn-block" style="margin-bottom: 5px;height: 45px;font-size: 18px;"><?php if(isset($_Joueur_['tokens'])) echo $_Joueur_['tokens'] . ' '; ?><img class="icon-player-topbar" src="./theme/default/img/jeton.png" /></a>
 								

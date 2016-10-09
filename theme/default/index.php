@@ -18,7 +18,9 @@ if($maintenance[$i]['maintenanceEtat'] == 1){
 	} else { // Si le joueur n'est pas connecté il est redirigé vers la page de maintenance
 	header('Location: index.php?&redirection=maintenance');
 }
-} 
+}
+require('modele/forum/joueurforum.class.php');
+	$_JoueurForum_ = new JoueurForum($_Joueur_['pseudo'], $_Joueur_['id'], $bddConnection);
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +32,8 @@ if($maintenance[$i]['maintenanceEtat'] == 1){
 	<link href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/style.css" rel="stylesheet" type="text/css">
 	<link href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/main.css" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/snarl.css">
 	<link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/snarl.min.css">
 	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>

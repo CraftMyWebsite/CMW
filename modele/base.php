@@ -8,7 +8,7 @@ class base
     {	
 		try
 		{
-			$bdd = new PDO('mysql:host=' .$_Serveur_['dbAdress'] .';dbname=' .$_Serveur_['dbName'], $_Serveur_['dbUser'], $_Serveur_['dbPassword']);
+			$bdd = new PDO('mysql:host=' .$_Serveur_['dbAdress'] .';dbname=' .$_Serveur_['dbName'].';port=' .$_Serveur_['dbPort'], $_Serveur_['dbUser'], $_Serveur_['dbPassword']);
 			
 			// Cette requette SQL permet d'encoder correctement tout ce qui rentre / sort de la base.
 			$bdd->exec("SET CHARACTER SET utf8");
