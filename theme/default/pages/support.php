@@ -181,7 +181,7 @@
 										}
 									}		
 									else
-										echo '<h3 class="ticket-commentaire-titre">0 Commentaires</h3>';
+										echo '<h3 class="ticket-commentaire-titre">0 Commentaire</h3>';
 									?>
 									
 									
@@ -232,7 +232,7 @@
 										<span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
 										<input type="text" name="titre" class="form-control" placeholder="TITRE (Ex: [PvP Box][Bug] Mon jeux crash quand je prends le portail...)">
 									</div>
-									<textarea name="message" class="champ form-control" rows="11" placeholder="La description détaillée de la proposition ou du probleme..."></textarea>
+									<textarea name="message" class="champ form-control" rows="11" placeholder="La description détaillée de la proposition ou du problème..."></textarea>
 									</br>
 									<button type="submit" class="btn btn-success champ valider pull-right">Envoyer</button>
 								</form>

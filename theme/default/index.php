@@ -19,8 +19,11 @@ if($maintenance[$i]['maintenanceEtat'] == 1){
 	header('Location: index.php?&redirection=maintenance');
 }
 }
-require('modele/forum/joueurforum.class.php');
+if(isset($_Joueur_))
+{
+	require('modele/forum/joueurforum.class.php');
 	$_JoueurForum_ = new JoueurForum($_Joueur_['pseudo'], $_Joueur_['id'], $bddConnection);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -76,7 +79,7 @@ require('modele/forum/joueurforum.class.php');
 				function WaitActivate() {
 					Snarl.addNotification({
 						title: 'Info',
-						text: 'Un mail vient de vous êtres envoyé pour l\'activation de votre compte. Vérifier dans les Courriers indésirables.',
+						text: 'Un mail vient de vous être envoyé pour l\'activation de votre compte. Vérifiez dans les Courriers indésirables.',
 						icon: '<i class="fa fa-info-circle" aria-hidden="true"></i>'
 					});
 				}
@@ -155,7 +158,7 @@ require('modele/forum/joueurforum.class.php');
 											function LikeExist() {
 												Snarl.addNotification({
 													title: 'Erreur',
-													text: 'Votre mention j\'aime est déjà existant.',
+													text: 'Votre mention j\'aime est déjà existante.',
 													icon: '<i class="fa fa-times-circle" aria-hidden="true"></i>'
 												});
 											}
@@ -166,7 +169,7 @@ require('modele/forum/joueurforum.class.php');
 												function LikeAdd() {
 													Snarl.addNotification({
 														title: 'Succès',
-														text: 'Votre mention j\'aime vient d\'être envoyé.',
+														text: 'Votre mention j\'aime vient d\'être envoyée.',
 														icon: '<i class="fa fa-check-circle" aria-hidden="true"></i>'
 													});
 												}
@@ -212,7 +215,7 @@ require('modele/forum/joueurforum.class.php');
 															<div class="container" style="background-color: white;margin-top: -20px;margin-bottom: -20px;border-left: 4px solid #e74c3c;border-right: 4px solid #e74c3c;">
 															</br>
 															<div class="alert alert-danger">
-																<center><strong>Erreur :</strong> Vous devez absolument effacter le dossier "installation" a la racine de votre site pour commencer a utiliser votre site.</br>
+																<center><strong>Erreur :</strong> Vous devez absolument effacer le dossier "installation" à la racine de votre site pour commencer à utiliser votre site.</br>
 																	Rafraichissez la page ou appuyez sur le bouton si dessous pour vérifier.
 																</center>
 															</div>

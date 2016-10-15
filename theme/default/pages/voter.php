@@ -37,7 +37,7 @@
                 
 				<?php 
                 if(!isset($jsonCon) OR empty($jsonCon))
-                    echo '<p>Veuillez relier votre serveur à votre site à votre serveur avec JsonAPI depuis le panel pour avoir les liens de votes !</p>';
+                    echo '<p>Veuillez relier votre serveur à votre site avec JsonAPI depuis le panel pour avoir les liens de votes !</p>';
                 
                 for($i = 0; $i < count($jsonCon); $i++) { ?>
 					

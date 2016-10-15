@@ -17,10 +17,10 @@
 					
 					?>
 					<li><a href="?&page=profil&profil=<?php echo $_Joueur_['pseudo']; ?>"><span class="glyphicon glyphicon-pencil"></span> Mon Profil</a></li>
-					<li><a href="?&page=token"><span class="glyphicon glyphicon-euro"></span> acheter des Jetons</a></li>
+					<li><a href="?&page=token"><span class="glyphicon glyphicon-euro"></span> Acheter des Jetons</a></li>
 					<li><a href="?&action=deco"><span class="glyphicon glyphicon-off"></span> Deconnexion</a></li>
 				</ul>
-				<p class="gestionCompteInfos">J'ai <?php echo $_Joueur_['tokens']; ?> Jetons.</p>
+				<p class="gestionCompteInfos">J'ai <?php echo $_Joueur_['tokens']; ?> Jeton<?php if($_Joueur_['tokens'] > 1) { echo 's'; } ?>.</p>
 				
 				<?php } elseif($_Widgets_['Widgets'][$i]['type'] == 1){ 
 					for($j = 0; $j < count($lecture['Json']); $j++)

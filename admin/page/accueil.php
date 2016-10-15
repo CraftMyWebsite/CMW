@@ -1,7 +1,7 @@
 <center>  <?php if($_Joueur_['rang'] == 1) { ?>  
   
 <h1><center>L'accueil de votre site</center></h1>
-<div style="width: 75%" class="alert alert-dismissable alert-success"><center>L'accueil de votre site, la vitrine de votre serveur, ne négligez jamais cette page, ajoutez de belles images de slider ou encore des liens de navigations rapides le plus ergonomiques possibles !</center></a></div>
+<div style="width: 75%" class="alert alert-dismissable alert-success"><center>L'accueil de votre site, la vitrine de votre serveur, ne négligez jamais cette page, ajoutez de belles images de slider ou encore des liens de navigations rapides les plus ergonomiques possibles !</center></a></div>
 <hr>
 	<h2><center>Slider</center></h2>
 <h3><center>Configuration de votre slider</center></h3>
