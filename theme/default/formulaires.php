@@ -111,7 +111,7 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					<div class="row">
-						<p style="text-align: center;font-weight: bold;">Merci d'indiquer votre email utilisé a l'inscription , vous receverez un lien pour réinitialiser votre mot de passe.</p>
+						<p style="text-align: center;font-weight: bold;">Merci d'indiquer votre email utilisé à l'inscription , vous recevrez un lien pour réinitialiser votre mot de passe.</p>
 						<form class="form-signin" role="form" method="post" action="?&action=passRecover" style="max-width: none;">
 							<div class="col-md-8"><input type="email" name="email" class="form-control" id="EmailRecoverForm" placeholder="Email" required autofocus></div>
 							<div class="col-md-4"><button class="btn btn-lg btn-primary btn-block" type="submit"> Envoyer</button></div>

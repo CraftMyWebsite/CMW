@@ -267,6 +267,6 @@
 
 								<?php $i++; }
 								else
-									echo '<div class="alert alert-warning">Aucune news n\'a été crée à ce jour...</div>'; ?>
+									echo '<div class="alert alert-warning">Aucune news n\'a été créé à ce jour...</div>'; ?>
 							</div>
 						</div>

@@ -9,12 +9,12 @@
 			<ul class="nav navbar-nav">
 	<?php
 	// Je rappelle que _Menu_ est une variable utilisable partout. Elle est générée en début d'index. 
-	// Cette variable contient le texte des liens de la barre des menus, l'adresse des liens, le liste déroulantes etc...
+	// Cette variable contient le texte des liens de la barre des menus, l'adresse des liens, les liste déroulantes etc...
 	
-	// Cette boucle afficheun lien / menu déroulant à chaque tour. On fait autant de tour qu'il y a de textes à afficher.
+	// Cette boucle affiche un lien / menu déroulant à chaque tour. On fait autant de tour qu'il y a de textes à afficher.
 	for($i = 0; $i < count($_Menu_['MenuTexte']); $i++)
 	{
-		// Si il y a une listé déroulante contenant le texte du texte de ce tour de boucle, le lien devient un menu déroulant.
+		// Si il y a une liste déroulante contenant le texte du texte de ce tour de boucle, le lien devient un menu déroulant.
 		if(isset($_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]]))
 		{
 			// On affiche la structure de base du menu déroulant de Bootstrap :
@@ -49,7 +49,7 @@
 		<?php
 		}
 		
-		// Si le lien n'est pas un menu déroulant, on l'affiche tout simplement, ou presque, il faut prévoir que si on est sur la page du lien, le lien doit être en foncé (class="active" fonction bootstrap.
+		// Si le lien n'est pas un menu déroulant, on l'affiche tout simplement, ou presque, il faut prévoir que si on est sur la page du lien, le lien doit être en foncé (class="active" fonction bootstrap).
 		else
 		{
 			// Cette variable contient la valeur du lien de la puce(on enlève donc ?&page= en le remplaçant par '' et on garde que la fin.
@@ -89,10 +89,10 @@
 								<?php
 								/*
 								Le menu de droite est différent selon si le joueur est connecté ou pas :
-									- Pas connecté, on lui propose un lien Connection et un autre Inscription.
+									- Pas connecté, on lui propose un lien Connexion et un autre Inscription.
 									- Connecté :
-										- Admin, on lui rajoutte un lien "administration".
-										- Pas admin, il a juste le lien vers son profil plus un lien déconnection.
+										- Admin, on lui rajoutte un lien "administration". Et un lien "signalement".
+										- Pas admin, il a juste le lien vers son profil plus un lien déconnexion ainsi qu'un lien "alerte" pour le forum.
 								*/								
 								if(isset($_Joueur_))
 								{

@@ -116,7 +116,7 @@ header('Location: index.php');
 			<div class="modal-content">
 				<div class="modal-body">
 					<div class="row">
-						<h4 style="text-align: center;font-family: Minecraftia;font-weight: bold;">Seul les administrateurs peuvent ce connecter pour administrer le site !</h4>
+						<h4 style="text-align: center;font-family: Minecraftia;font-weight: bold;">Seul les administrateurs peuvent se connecter pour administrer le site !</h4>
 						<form class="form-signin" role="form" method="post" action="?&action=connection">
 							<input type="text" name="pseudo" class="form-control" id="PseudoConectionForm" placeholder="Pseudo" required autofocus>
 							<input type="password" name="mdp" class="form-control" id="MdpConnectionForm" placeholder="Votre mot de passe" required>

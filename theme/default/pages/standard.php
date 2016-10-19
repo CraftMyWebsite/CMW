@@ -14,11 +14,11 @@
                 <h2>
                     Erreur 404</h2>
                 <div class="error-details">
-                    Désolé mais la page demandé et introuvable ! :(
+                    Désolé mais la page demandé est introuvable ! :(
                 </div>
                 <div class="error-actions">
                     <a href="index.php" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
-                        Retourner a l'accueil</a>
+                        Retourner sur l'accueil</a>
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@
 	<?php } else { ?>
 	<hr>
 	<center>
-	<h4>Veuillez vous connecter pour accéder a la boutique:</h4>
+	<h4>Veuillez vous connecter pour accéder à la boutique:</h4>
 	<a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-warning btn-lg" ><span class="glyphicon glyphicon-user"></span> Connexion</a>
 	</center>
 	<?php } ?>
@@ -27,7 +27,7 @@
 </div>
 </br>
 	</br>
-	<h3><center>Choissiez votre catégorie :</center></h3>
+	<h3><center>Choisissez votre catégorie :</center></h3>
 			<div class="tabbable">
 						<ul class="nav nav-tabs">
 						<?php

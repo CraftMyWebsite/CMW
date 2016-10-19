@@ -99,7 +99,7 @@
                               <li><a data-toggle="collapse" data-parent="#adminPanel" href="#maintenance"> Maintenance</a></li>
                         </ul>
                     </li>
-                    <li><a data-toggle="collapse" data-parent="#adminPanel" href="#maj"><span class="fa fa-refresh fa-spin" aria-hidden="true"></span> Mises a jours</a></li>
+                    <li><a data-toggle="collapse" data-parent="#adminPanel" href="#maj"><span class="fa fa-refresh fa-spin" aria-hidden="true"></span> Mises à jours</a></li>
 
                     <?php
                     include "./include/version.php";
@@ -108,7 +108,7 @@
                     ?>
                     <center><span class="badge" style="background-color: rgb(45, 179, 45);">A jours</span></center>
                     <?php } else { ?>
-                    <span class="badge" style="background-color: red;">Pas a jours !!</span>
+                    <span class="badge" style="background-color: red;">Pas à jours !!</span>
                     <?php } ?>
                 </ul>
             </div>
