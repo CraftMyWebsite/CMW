@@ -78,8 +78,8 @@ if(isset($_GET['action']) AND $_GET['action'] == 'sql' AND isset($_POST['hote'])
 			<div class="p-install">
 				<center>
 					<h1>Merci d'avoir choisi CraftMyWebsite !</h1>
-					<p>Des mises à jours seront disponibles très fréquemment sur le site officiel.<br/>
-						Il peu néanmoins y avoir des bugs ! Merci de les report sur le forum pour les corriger au plus vite.<br/>
+					<p>Des mises à jour seront disponibles très fréquemment sur le site officiel.<br/>
+						Il peut néanmoins y avoir des bugs ! Merci de les report sur le forum pour les corriger au plus vite.<br/>
 						Suivez les instructions pour installer CraftMyWebsite.<br/>
 					</p>
 					<p><a href="http://craftmywebsite.fr" class="btn btn-primary btn-installation" role="button">Aller sur CraftMyWebsite.fr</a></p>
@@ -150,7 +150,7 @@ if(isset($_GET['action']) AND $_GET['action'] == 'sql' AND isset($_POST['hote'])
 
 					<h3>Configuration du site</h3>
 					<div class="form-group col-md-6">
-						<label>Adresse d'acces au site</label>
+						<label>Adresse d'accès au site</label>
 						<input type="text" name="adresse" class="form-control form-install" placeholder="Exemple: http://monsite.fr"/>
 					</div>
 					<div class="form-group col-md-6">

@@ -163,6 +163,17 @@ function DrawChmod($return)
     <?php } ?>
 </table>
 <?php } ?>
-<center><a href="index.php" class="btn btn-primary btn-installation">Relancer la vérification</a></center>
+<center><a href="index.php" class="btn btn-primary btn-installation">Relancer la vérification</a></center><br/>
+<center><a onclick="ajax_chmod();" class="btn btn-primary btn-installation">Tenter de modifier les chmod automatiquement</a></center>
 </div>
+<script src="../theme/default/js/jquery.js"></script>
+<script src="../theme/default/js/bootstrap.min.js"></script>
+<script>
+	function ajax_chmod(){
+		var url = 'chmod.php';
+		$.post(url, function(data){
+        window.location = "index.php"
+    });
+	}
+</script>
 <?php } ?>
