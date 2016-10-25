@@ -87,8 +87,7 @@
                     <li><a data-toggle="collapse" data-parent="#adminPanel" href="#news"><span class="fa fa-fw fa-comment" aria-hidden="true"></span> Nouveautés</a></li>
                     <li><a data-toggle="collapse" data-parent="#adminPanel" href="#boutique"><span class="fa fa-fw fa-shopping-cart" aria-hidden="true"></span> Boutique</a></li>
                     <li><a data-toggle="collapse" data-parent="#adminPanel" href="#payement"><span class="fa fa-fw fa-credit-card" aria-hidden="true"></span> Payement</a></li>
-					<li><a data-toggle="collapse" data-parent="#adminPanel" href="#forum"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span> Forum </a></li>
-                    <li><a data-toggle="collapse" data-parent="#adminPanel" href="#menus"><span class="fa fa-fw fa-align-justify" aria-hidden="true"></span> Menus</a></li>
+					<li><a data-toggle="collapse" data-parent="#adminPanel" href="#menus"><span class="fa fa-fw fa-align-justify" aria-hidden="true"></span> Menus</a></li>
                     <li><a data-toggle="collapse" data-parent="#adminPanel" href="#voter"><span class="fa fa-fw fa-bullhorn" aria-hidden="true"></span> Voter</a></li>
                     <li><a data-toggle="collapse" data-parent="#adminPanel" href="#membres"><span class="fa fa-fw fa-user" aria-hidden="true"></span> Membres</a></li>
                     <li><a data-toggle="collapse" data-parent="#adminPanel" href="#widgets"><span class="fa fa-book fa-fw" aria-hidden="true"></span> Widgets</a></li>
@@ -99,7 +98,7 @@
                               <li><a data-toggle="collapse" data-parent="#adminPanel" href="#maintenance"> Maintenance</a></li>
                         </ul>
                     </li>
-                    <li><a data-toggle="collapse" data-parent="#adminPanel" href="#maj"><span class="fa fa-refresh fa-spin" aria-hidden="true"></span> Mises à jours</a></li>
+                    <li><a data-toggle="collapse" data-parent="#adminPanel" href="#maj"><span class="fa fa-refresh fa-spin" aria-hidden="true"></span> Mises à jour</a></li>
 
                     <?php
                     include "./include/version.php";
@@ -108,7 +107,7 @@
                     ?>
                     <center><span class="badge" style="background-color: rgb(45, 179, 45);">A jours</span></center>
                     <?php } else { ?>
-                    <span class="badge" style="background-color: red;">Pas à jours !!</span>
+                    <span class="badge" style="background-color: red;">Pas à jour !!</span>
                     <?php } ?>
                 </ul>
             </div>
@@ -176,11 +175,6 @@
                     <?php include('donnees/payement.php');
                          include('page/payement.php'); ?>
     </div>
-  </div>
-  <div class="panel">
-	<div id="forum" class="panel-collapse collapse <?php if(isset($referrer) && $referrer == 'forum') { echo 'in'; } ?> bloc-deroulant-menu">
-					<?php include('page/forum.php'); ?>
-	</div>
   </div>
   <div class="panel">
     <div id="menus" class="panel-collapse collapse <?php if(isset($referrer)&& $referrer == 'menus'){ echo 'in'; } ?> bloc-deroulant-menu">
