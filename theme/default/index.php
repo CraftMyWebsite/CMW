@@ -37,6 +37,7 @@ if(isset($_Joueur_))
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/toastr.css">
 	<link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/snarl.css">
 	<link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/snarl.min.css">
 	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -240,5 +241,6 @@ if(isset($_Joueur_))
 												}
 												?>
 												<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/gotop.js"></script>
+												<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/toastr.min.js"></script>
 											</div>
 										</body>

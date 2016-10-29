@@ -26,7 +26,7 @@ if(isset($_Joueur_))
 			'id_topic' => $id,
 			'last_answer' => $id_answerd['id']
 		));
-		$modif = $bddConnection->prepare('UPDATE cmw_forum_topic_followed SET vu = 0 WHERE id_topic = :id AND pseudo != :pseudo');
+		$modif = $bddConnection->prepare('UPDATE cmw_forum_topic_followed SET vu = 0, new = 0 WHERE id_topic = :id AND pseudo != :pseudo');
 		$modif->execute(array(
 			'id' => $id,
 			'pseudo' => $_Joueur_['pseudo']
