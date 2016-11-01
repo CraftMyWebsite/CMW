@@ -11,7 +11,7 @@
 		<div class="col-sm-8">
 			<select class="form-control" name="theme">
 				<option value="<?php echo $lecture['General']['theme']; ?>"><?php echo $lecture['General']['theme']; ?></option>
-				<?php foreach($themes as $element){ if($element != 'upload' AND $element != $lecture['General']['theme'] AND $element != '..') { ?>
+				<?php foreach($themes as $element){ if($element != 'upload' AND $element != 'smileys' AND $element != $lecture['General']['theme'] AND $element != '..') { ?>
 				<option value="<?php echo $element; ?>"><?php echo $element; ?></option><?php } } ?>
 			</select>
 		</div>
