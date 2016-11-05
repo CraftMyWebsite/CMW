@@ -44,7 +44,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 		<?php if(isset($topicd['sous_forum'])) { ?><li><a href="?page=foum_categorie&id=<?php echo $topicd['id_categorie']; ?>&id_sous_forum=<?php echo $topicd['sous_forum']; ?>"><?php $nom = $bddConnection->prepare('SELECT nom FROM cmw_forum_sous_forum WHERE id = :id'); $nom->execute(array('id' => $topicd['sous_forum'])); $nomd = $nom->fetch(); echo $nomd['nom']; ?></a></li><?php } ?>
 		<li class="active"><?php echo $topicd['nom']; ?></li>
 	</ol>		
-		<center>
+		<center><?php if(isset($_Joueur_) AND $_Joueur_['rang'] == 1) { ?>
 	<div class="row">
 		<div class="clo-lg-8">
 			<div class="dropdown">
@@ -68,7 +68,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 				</ul>
 			</div>
 		</div>
-	</div></center>
+		</div><?php } ?></center>
 	<h3>Sujet : <?php echo $topicd['nom']; ?></h3><br/>
 	<div class="row">
 		<div class="col-md-2">
