@@ -46,7 +46,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 	</ol>		
 		<center><?php if(isset($_Joueur_) AND $_Joueur_['rang'] == 1) { ?>
 	<div class="row">
-		<div class="clo-lg-8">
+		<div class="col-lg-8">
 			<div class="dropdown">
 				<button class="btn btn-link dropdown-toggle" type="button" id="Actions-Modération" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					Actions de Modération .... <span class="caret"></span>
