@@ -5,12 +5,14 @@ MenuTexte:
     - [glyph]shopping-cart[/glyph]Boutique
     - [glyph]envelope[/glyph]Support
     - [glyph]thumbs-up[/glyph]Voter
+    - [glyph]bullhorn[/glyph]Forum
 MenuLien: 
     - index.php
     - #
     - ?&page=boutique
     - ?&page=support
     - ?&page=voter
+    - ?page=forum
 MenuListeDeroulante: 
     [glyph]signal[/glyph]Serveur: 
         - Ban-List

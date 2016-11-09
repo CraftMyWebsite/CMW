@@ -95,7 +95,7 @@
 					</div>
 					<div class="tab-pane" id="serveur">
 					</br>
-						ça arrive mon choux ça arrive ..<br />
+						ça arrive mon chou ça arrive ..<br />
 					</div>
 					<hr>
 				</div>

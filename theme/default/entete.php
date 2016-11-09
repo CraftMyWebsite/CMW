@@ -78,7 +78,7 @@
 		<li class="divider-vertical"></li>
 		<?php if(isset($_Joueur_)) { ?>
 		<li class="dropdown" style="height: 50px;margin-top: -5px;">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Mon profil<b class="caret"></b> <img class="icon-player-topbar" src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_Joueur_['pseudo']; ?>&s=32&v=front" /></a>
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Mon profil<span id="id_alert"></span><b class="caret"></b> <img class="icon-player-topbar" src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_Joueur_['pseudo']; ?>&s=32&v=front" /></a>
 		<?php } else { ?>
 		<li class="dropdown" style="height: 50px;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Connexion/Inscription<b class="caret"></b></a>
@@ -128,15 +128,9 @@
 											$req_report = $bddConnection->query('SELECT * FROM cmw_forum_report WHERE vu = 0');
 											$signalement = $req_report->rowCount();
 											echo '<a href="admin.php" class="btn btn-success btn-block" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-cog"></span> Administration</a>';
-											if($signalement != 0)
-											{
-												echo '<a href="?page=signalement" class="btn btn-success btn-block" style="margin-bottom: 5px"><span class="glyphicon glyphicon-bell"></span> Signalement <span class="badges">' . $signalement . '</span></a>';
-											}
+											echo '<a href="?page=signalement" class="btn btn-success btn-block" style="margin-bottom: 5px"><span class="glyphicon glyphicon-bell"></span> Signalement <span class="badges" id="signalement">' . $signalement . '</span></a>';
 										}
-										if($alerte != 0)
-										{
-											echo '<a href="?page=alert" class="btn btn-success btn-block" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-envelope"></span> Alertes <span class="badges">' . $alerte . '</span></a>';
-										}
+										echo '<a href="?page=alert" class="btn btn-success btn-block" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-envelope"></span> Alertes <span class="badges" id="alerts">' . $alerte . '</span></a>';
 										?>
 								<a href="?&page=profil&profil=<?php echo $_Joueur_['pseudo']; ?>" class="btn btn-primary btn-block" style="margin-bottom: 5px;"><img class="icon-player-topbar" src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_Joueur_['pseudo']; ?>&s=32&v=front" /> <?php echo $_Joueur_['pseudo']; ?></a></a>
 								<a href="index.php?&page=token" class="btn btn-danger btn-block" style="margin-bottom: 5px;height: 45px;font-size: 18px;"><?php if(isset($_Joueur_['tokens'])) echo $_Joueur_['tokens'] . ' '; ?><img class="icon-player-topbar" src="./theme/default/img/jeton.png" /></a>
@@ -158,3 +152,85 @@
 </header>
     <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/bootstrap.min.js"></script>
 	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/jquery-1.10.2.min.js"></script>
+	<?php 
+	if(isset($_Joueur_))
+	{
+		?><script>
+	setInterval(ajax_alerts, 10000);
+	function ajax_alerts(){
+		var url = '<?php echo $_Serveur_['General']['url']; ?>?action=get_alerts';
+		$.post(url, function(data){
+			alerts.innerHTML = data;
+			ajax_new_alerts();
+    });
+	}
+	function ajax_new_alerts(){
+		var url = '<?php echo $_Serveur_['General']['url']; ?>?action=new_alert';
+		$.post(url, function(donnees){
+			if(donnees > 0)
+			{
+				var message = "Vous avez ";
+				message += donnees;
+				message += " nouvelles alertes";
+				toastr["success"](message, "Message Système")
+				toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "newestOnTop": false,
+				  "progressBar": true,
+				  "positionClass": "toast-bottom-left",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "1000",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
+			}
+		 });
+	}
+</script>
+	<?php }
+	if(isset($_Joueur_['rang']) AND $_Joueur_['rang'] == 1)
+	{
+		?>
+		<script>
+		setInterval(ajax_signalement, 10000);
+		function ajax_signalement(){
+			var url = '<?php echo $_Serveur_['General']['url']; ?>?action=get_signalement';
+			$.post(url, function(signalement){
+				if(signalement > 0)
+				{
+					signalement.innerHTML = signalement;
+					var message = "Il y'a ";
+					message += signalement;
+					message += ' nouveaux signalements !';
+					toastr["error"](message, "Message système")
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": true,
+					  "newestOnTop": false,
+					  "progressBar": true,
+					  "positionClass": "toast-top-left",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "1000",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+				}
+			});
+		}
+		</script>
+		<?php 
+	}
+	?>

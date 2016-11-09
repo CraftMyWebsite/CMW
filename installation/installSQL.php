@@ -282,6 +282,7 @@ $sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_like` (
   `id_answer` int(11) NOT NULL,
   `Appreciation` smallint(6) NOT NULL,
   `vu` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `new` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
@@ -318,6 +319,7 @@ $sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_report` (
   `reason` varchar(200) NOT NULL,
   `reporteur` varchar(40) NOT NULL,
   `vu` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `new` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
@@ -339,6 +341,7 @@ $sql->exec("CREATE TABLE IF NOT EXISTS `cmw_forum_topic_followed` (
   `id_topic` int(11) NOT NULL,
   `last_answer` int(11) NOT NULL,
   `vu` int(10) unsigned NOT NULL DEFAULT '1',
+  `new`int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
