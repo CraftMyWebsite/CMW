@@ -172,9 +172,9 @@ if(isset($_GET['action']))
 			header('Location: index.php');
 		break;
 		
-		// Appellé lorsqu'un code starpass est validé.
+		// Appellé lorsqu'un code dedipass est validé.
 		case 'dedipass':
-			include('controleur/starpass.php');
+			include('controleur/dedipass.php');
 			// On redirige sur la page d'achat de token, le joueur vas surrement racheter un code(quoi !? Pas le droit de rêver?).
 			//header('Location: ?page=token&success=true');
 		break;
