@@ -1,0 +1,21 @@
+Liste des changements de la 1.5 :
+
+	- Poster une discussion
+	- De l'AJAX pour dynamiser le tout
+	
+- [+] Ajout d'un nouveau panel avec:
+	- Un nouveau design 
+
+
+- [+] Ajout de commentaires sur les news + de mention J'aime
+
+Installation :
+
+- [+] Nouveau design
+
+
+Correction :
+
+- Correction du bug de vote ( page blanche + double bouton )
+- Correction de fautes d'orthographe
+
