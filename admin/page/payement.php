@@ -4,7 +4,7 @@
 </div></center>
 
 
-<h3><center>Starpass/Paypal ID</center></h3>
+<h3><center>Dedipass/Paypal ID</center></h3>
 <center><div style="width: 50%" class="alert alert-dismissable alert-success">
     <center>Vous trouverez ces informations sur le site officiel de votre méthode de payement !</center>
 </div></center>
