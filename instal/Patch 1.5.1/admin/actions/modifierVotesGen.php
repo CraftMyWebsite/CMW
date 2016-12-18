@@ -1,10 +1,4 @@
 <?php
-
-//					Version 1.3 - TokensPlus - Elmoren
-//					Utilisant la technologie TokensPlus, script recodé par Elmoren
-//					***************************************************************
-//									By LekyDev'
-
 $votes = new Lire('modele/config/configVotes.yml');
 $votes = $votes->GetTableau();
 

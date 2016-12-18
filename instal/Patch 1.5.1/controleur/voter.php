@@ -1,12 +1,5 @@
 <?php
 
-// 				Version TokensPlus - Elmoren 
-//						Une partie du code
-//						Provient de TokensPlus
-//						Le script recodé par Elmoren 
-//				*************************************
-//							By LekyDev'
-
 $id = $_POST['site'];
 
 require_once('modele/joueur/maj.class.php');

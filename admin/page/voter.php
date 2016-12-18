@@ -1,8 +1,4 @@
-<!--
-		Script de vote Version 1.3 - TokensPlus - Elmoren
-		Script conçu avec le code TokensPlus recodé par Elmoren
-		**********************************************************
---><div class="row">
+<div class="row">
 	<center><a href="?action=resetVotes" class="btn btn-danger btn-block" style="width: 25%">Réinitialiser les votes ..</a></center>
 	</br>
 	<h1><center>Réglages des votes</center></h1>
