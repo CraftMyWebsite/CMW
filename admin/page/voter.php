@@ -1,4 +1,8 @@
-<div class="row">
+<!--
+		Script de vote Version 1.3 - TokensPlus - Elmoren
+		Script conçu avec le code TokensPlus recodé par Elmoren
+		**********************************************************
+--><div class="row">
 	<center><a href="?action=resetVotes" class="btn btn-danger btn-block" style="width: 25%">Réinitialiser les votes ..</a></center>
 	</br>
 	<h1><center>Réglages des votes</center></h1>
@@ -8,42 +12,55 @@
 <center><form method="post" action="?&action=modifierVotesGen">
 	<div class="form-group">
 		<label>Message affiché lors du vote pour que les autres joueurs pensent à voter</label>
-		<input style="width: 25%;text-align: center;" type="text" name="message" class="form-control" value="<?php echo $lectureVotes['message']; ?>"/>
+		<input type="text" style="width: 25%;text-align: center;" name="message" class="form-control" value="<?php echo $lectureVotes['message']; ?>" />
 	</div>
 	<div class="row">
-		<div>
-			<label>Afficher le message ?</label>
+	
+		<div class="col-md-5">
+			<label> Afficher le message ? </label>
 			<input type="radio" name="display" value="1" id="1" <?php if($lectureVotes['display'] == 1){ echo 'checked'; } ?> /><label for="1"> Oui </label>
 			<input type="radio" name="display" value="2" id="2" <?php if($lectureVotes['display'] == 2){ echo 'checked'; } ?>/><label for="2"> Non </label>
 		</div>
+	<br/>
 		<div style="margin-top: 1%;">
-			<label>Executer une Commande/Give d'item :</label>
-			<select style="width: 25%" name="action" class="form-control">
-				<option value="<?php echo $lectureVotes['action']; ?>" />
+			<label>Executer une commande/Give d'item :</label>
+			<select  style="width: 25%;"name="action" class="form-control">
+				<option value="<?php echo $lectureVotes['action']; ?>">Actuellement : <?php if($lectureVotes['action'] == 1) { echo 'Commande'; }elseif($lectureVotes['action'] == 2) { echo 'Give item'; } else { echo 'Give Jetons'; } ?>
 				<option value="1"> Executer une commande </option>
 				<option value="2"> Give d'item </option>
+				<option value="3"> Ajout de Jetons </option>
 			</select>
 		</div>
+
 		<div style="margin-top: 1%;">
-			<label>Le joueur obtiendra sa récompense sur :</label>
-			<select style="width: 25%" name="methode" class="form-control">	  	
-                <option value="<?php echo $lectureVotes['methode']; ?>" />
+			<label>Le joueur obtiendra sa récompense sur:</label>
+			<select name="methode" style="width: 25%;" class="form-control">
+				<option value="<?php echo $lectureVotes['methode']; ?>" />			
 				<option value="1"> Le serveur où il est en ligne </option>
 				<option value="2"> Le serveur de la catégorie </option>
 			</select>
 		</div>		
+
 		<div class="form-group" style="margin-top: 1%;">
-			<label> Commande à éxectuer ( SANS / ) </label>
-			<input style="width: 25%" type="text" name="cmd" class="form-control" value="<?php echo $lectureVotes['cmd']; ?>" />
+			<label> Commande à éxectuer ( SANS / ) si option sélectionné ! Vous pouvez utiliser {JOUEUR} si vous faîtes référence au joueurs ayant voté </label>
+			<input type="text" style="width: 25%;" name="cmd" class="form-control" value="<?php echo $lectureVotes['cmd']; ?>" />
 		</div>
+		
 		<div class="form-group" style="margin-top: 1%;">
-			<label>ID de l'item donné</label>
-			<input style="width: 25%" type="text" name="id" value="<?php echo $lectureVotes['id']; ?>" class="form-control" value="264" />
-    	</div>
+			<label> Nombre de Jetons à donner si option sélectionné </label>
+			<input type="number"style="width: 25%;" name="tokens" class="form-control" value="<?php echo $lectureVotes['tokens']; ?>" />
+		</div>
+
 		<div class="form-group" style="margin-top: 1%;">
-			<label>Quantité donnée</label>
-			<input style="width: 25%" type="text" name="quantite" value="<?php echo $lectureVotes['quantite']; ?>" class="form-control" value="4" />
+			<label>ID de l'item donné si option sélectionné </label>
+			<input type="text" style="width: 25%;" name="id" value="<?php echo $lectureVotes['id']; ?>" class="form-control" value="264" />
     	</div>
+
+		<div class="form-group" style="margin-top: 1%;">
+			<label>Quantité donnée si option sélectionné </label>
+			<input type="text" style="width: 25%;" name="quantite" value="<?php echo $lectureVotes['quantite']; ?>" class="form-control" value="4" />
+    	</div>
+		
 	</div>
 	<input type="submit" class="btn btn-warning"/>
 </form></center>

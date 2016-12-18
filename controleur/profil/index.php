@@ -23,7 +23,15 @@
 	
 		
 	if($joueurDonnees['rang'] == 1)
+		$gradeSite = 'Créateur';
+	elseif($joueurDonnees['rang'] == 2) 
 		$gradeSite = 'Administrateur';
+	elseif($joueurDonnees['rang'] == 3)
+		$gradeSite = 'Modérateur';
+	elseif($joueurDonnees['rang'] == 4)
+		$gradeSite = 'Développeur';
+	elseif($joueurDonnees['rang'] == 5)
+		$gradeSite = 'Buildeur'
 	else
 		$gradeSite = 'Joueur';
 	

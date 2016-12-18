@@ -6,7 +6,6 @@ for($i = 0; $i < $_POST['nombreUsers']; $i++)
 		$pseudo = $_POST['pseudo' . $i];
 		$email = $_POST['email' . $i];
 		$rang = $_POST['rang' . $i];
-		if($rang == 'Administrateur') { $rang = 1; } else { $rang = 0; }
 		$jetons = $_POST['jetons' . $i];
 		
 		if($pseudo != $membres[$i]['pseudo'] OR $email != $membres[$i]['email'] OR $rang != $membres[$i]['rang'] OR $jetons != $membres[$i]['jetons'])
