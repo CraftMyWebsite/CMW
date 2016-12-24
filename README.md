@@ -1,4 +1,8 @@
 # CMW
 Votre CMS de qualité
+Github officiel de CraftMyWebsite !
 
-Goto 1.5.0
+Site: http://craftmywebsite.fr
+Discord: https://discord.gg/VrcmF8V
+
+
