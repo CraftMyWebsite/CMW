@@ -35,20 +35,20 @@ $messagesErreur = Array(
 		'titre' => 'Mauvais mot de passe...',
 		'message' => 'Le mot de passe rentré est incorrect... Si vous êtes le propriétaire du compte, vous pouvez changer votre mot de passe en suivant les étapes suivantes: 
 		<ul>
-			<li>Connectez vous en jeux avec le pseudo du compte.</li>
-			<li>Marquez le message {READY} dans le chat général du jeux pour prouver que vous êtes bien identifié correctement in game..</li>
-			<li>Rentrez votre pseudo ici: <form method="post" action="?action=changeMdp"><input type="text" name="pseudo" /><input type="submit" value="valider" /></form></li>
-			<li>Un code va vous être envoyé in game, entrez le dans la page de redirection...</li>
+			<li>Inscrivez votre adresse mail ici : <form action="?action=passRecover" method="post"><input type="email" name="email" /><input type="submit" value="Valider"/></form></li>
+			<li>Si nous reconnaissons votre adresse mail, vous recevrez votre mot de passe par mail ! </li>
+			<li>Le mail peut mettre jusqu\'a 5 minutes pour arrivée !</li>
+			<li>Vousq recevrez d\'abord un mail de confirmation de changement du mot de passe puis un nouveau mot de passe toujours par mail vous sera adressé ! </li>
 		</ul>' ),
 	Array(
 		'type' => 'Erreur: Connexion',
 		'titre' => 'Mauvais mot de passe...',
-		'message' => '<div class="alert alert-danger">Vous avez rentré le mauvais pseudo ou vous n\'avez pas marqué dans le chat le message: {OK} !</div>Le mot de passe rentré est incorrect... Si vous êtes le propriétaire du compte, vous pouvez changer votre mot de passe en suivant les étapes suivantes: 
+		'message' => 'Le mot de passe rentré est incorrect... Si vous êtes le propriétaire du compte, vous pouvez changer votre mot de passe en suivant les étapes suivantes: 
 		<ul>
-			<li>Connectez vous en jeux avec le pseudo du compte.</li>
-			<li>Marquez le message {READY} dans le chat général du jeux pour prouver que vous êtes bien identifié correctement in game..</li>
-			<li>Rentrez votre pseudo ici: <form method="post" action="?action=changeMdp"><input type="text" name="pseudo" /><input type="submit" value="valider" /></form></li>
-			<li>Un code va vous être envoyé in game, entrez le dans la page de redirection...</li>
+			<li>Inscrivez votre adresse mail ici : <form action="?action=passRecover" method="post"><input type="email" name="email" /><input type="submit" value="Valider"/></form></li>
+			<li>Si nous reconnaissons votre adresse mail, vous recevrez votre mot de passe par mail ! </li>
+			<li>Le mail peut mettre jusqu\'a 5 minutes pour arrivée !</li>
+			<li>Vousq recevrez d\'abord un mail de confirmation de changement du mot de passe puis un nouveau mot de passe toujours par mail vous sera adressé ! </li>
 		</ul>' ),
 	Array(
 		'type' => 'Erreur: Création du compte',
