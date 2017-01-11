@@ -19,7 +19,7 @@ else
 	
 	function genMdp(){
 		$caracAllows = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        return substr(str_shuffle($caracAllows), 0, 5);
+        return substr(str_shuffle($caracAllows), 0, 7);
     }   
             
     $mdp = uniqid();
