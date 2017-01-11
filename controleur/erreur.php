@@ -37,8 +37,8 @@ $messagesErreur = Array(
 		<ul>
 			<li>Inscrivez votre adresse mail ici : <form action="?action=passRecover" method="post"><input type="email" name="email" /><input type="submit" value="Valider"/></form></li>
 			<li>Si nous reconnaissons votre adresse mail, vous recevrez votre mot de passe par mail ! </li>
-			<li>Le mail peut mettre jusqu\'a 5 minutes pour arrivée !</li>
-			<li>Vousq recevrez d\'abord un mail de confirmation de changement du mot de passe puis un nouveau mot de passe toujours par mail vous sera adressé ! </li>
+			<li>Le mail peut mettre jusqu\'a 5 minutes pour arriver !</li>
+			<li>Vous recevrez d\'abord un mail de confirmation de changement du mot de passe puis un nouveau mot de passe toujours par mail vous sera adressé ! </li>
 		</ul>' ),
 	Array(
 		'type' => 'Erreur: Connexion',
