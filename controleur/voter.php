@@ -1,7 +1,7 @@
 <?php
 
 $id = $_POST['site'];
-
+$id = $id - 1;
 require_once('modele/joueur/maj.class.php');
 include('controleur/topVoteurs.php');
 $joueurMaj = new Maj($_Joueur_['pseudo'], $bddConnection);
@@ -12,7 +12,7 @@ if(!ExistPost($id, $liensVotes))
 	header('Location: ?&page=voter&erreur=3');
 	
 	
-if(isset($_Joueur_['pseudo']))
+if(isset($_Joueur_['pseudo']) && $_POST['site'] > 0)
 {
 
 

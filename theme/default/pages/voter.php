@@ -54,7 +54,7 @@
 					
                     
 					<?php $k = 0; for($j = 0; $j < count($liensVotes); $j++) { if($i == $liensVotes[$j]['serveur']) {?>
-						<button type="submit" class="btn btn-primary bouton-vote" name="site" value="<?php echo $j; ?>" onclick="window.open('<?php echo $liensVotes[$j]['lien']; ?>','Fiche','toolbar=no,status=no,width=1350 ,height=900,scrollbars=yes,location=no,resize=yes,menubar=yes')" >
+						<button type="submit" class="btn btn-primary bouton-vote" name="site" value="<?php echo $j + 1; ?>" onclick="window.open('<?php echo $liensVotes[$j]['lien']; ?>','Fiche','toolbar=no,status=no,width=1350 ,height=900,scrollbars=yes,location=no,resize=yes,menubar=yes')" >
 							<?php echo $liensVotes[$j]['titre']; ?>
                         </button>					
 					<?php	} else{ $k++;	 } }
