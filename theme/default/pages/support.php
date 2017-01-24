@@ -144,7 +144,11 @@
 								</div>
 								
 								<div class="modal-body">
-									<p class="corp-ticket"><?php echo $tickets['message']; ?></p>
+									<p class="corp-ticket"><?php 
+									unset($message);
+									$message = espacement($tickets['message']);
+									$message = BBCode($message);
+									echo $message; ?></p>
 									<span class="badge pull-right">Ticket de : <img src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $tickets['auteur']; ?>&s=16&v=front" alt="none" /> <?php echo $tickets['auteur']; ?></span>
 									</br>
 									<hr>
@@ -181,7 +185,10 @@
 												
 											</div>
 											<div class="right-ticket-commentaire">
-												<?php echo $ticketCommentaires[$tickets['id']][$i]['message']; ?>
+												<?php unset($message);
+												$message = espacement($ticketCommentaires[$tickets['id']][$i]['message']);
+												$message = BBCode($message);
+												echo $message;  ?>
 											</div>
 										</div>
 										</div>
