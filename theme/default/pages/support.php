@@ -164,7 +164,19 @@
 												<span class="img-ticket-commentaire"><img src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>&s=32&v=front" alt="none" /></span>
 												<span class="desc-ticket-commentaire">
 													<span class="ticket-commentaire-auteur"><?php echo $ticketCommentaires[$tickets['id']][$i]['auteur']; ?></span>
-													<span class="ticket-commentaire-date"><?php echo 'Le ' .$ticketCommentaires[$tickets['id']][$i]['jour']. '/' .$ticketCommentaires[$tickets['id']][$i]['mois']. ' à ' .$ticketCommentaires[$tickets['id']][$i]['heure']. ':' .$ticketCommentaires[$tickets['id']][$i]['minute']; ?></span> 
+													<span class="ticket-commentaire-date"><?php echo 'Le ' .$ticketCommentaires[$tickets['id']][$i]['jour']. '/' .$ticketCommentaires[$tickets['id']][$i]['mois']. ' à ' .$ticketCommentaires[$tickets['id']][$i]['heure']. ':' .$ticketCommentaires[$tickets['id']][$i]['minute']; ?></span>
+													<?php if(isset($_Joueur_)) { ?>
+													    <span class="ticket-commentaire-action pull-right">
+							                                <div class="dropdown">
+								                                <a type="button" class="btn btn-info collapsed" data-toggle="dropdown" style="font-size: 10px;">Action <b class="caret"></b></a>
+								                                <ul class="dropdown-menu">
+									                                <?php if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1) {
+										                                echo '<li><a href="?&action=delete_support_commentaire&id_comm='.$i.'&id_ticket='.$tickets['id'].'&auteur='.$ticketCommentaires[$tickets['id']][$i]['auteur'].'">Supprimer</a></li>';
+									                                } ?>
+								                                </ul>
+							                                </div>
+						                                </span>
+						                            <?php } ?>
 												</span>
 												
 											</div>
