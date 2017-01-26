@@ -8,13 +8,14 @@ class PostTicket
 		$this->bdd = $bdd;
 	}
 	
-	public function AddTicket($titre, $message, $pseudo)
+	public function AddTicket($titre, $message, $pseudo, $ticketDisplay)
 	{
-		$tickets = $this->bdd->prepare('INSERT INTO cmw_support (auteur, titre, message, date_post) VALUES (:auteur, :titre, :message, NOW())');
+		$tickets = $this->bdd->prepare('INSERT INTO cmw_support (auteur, titre, message, date_post, ticketDisplay) VALUES (:auteur, :titre, :message, NOW(), :ticketDisplay)');
 		$tickets->execute(Array( 
 			'auteur' => $pseudo,
 			'titre' => $titre,
-			'message' => $message ));
+			'message' => $message,
+			'ticketDisplay' => $ticketDisplay ));
 		return $tickets;
 	}
 }

@@ -73,36 +73,48 @@
 		<div class="panel-body">
 				<table class="table">
 						<tr>
-							<th>Pseudo</th>
-							<th>Titre</th>
-							<th>Date</th>
-							<th>Action</th>
-                            <th style="width: 20px;text-align: center;">Status </th>
-							<?php if($_Joueur_['rang'] == 1){ echo '<th style="width: 20px;text-align: center;">Modification</th>'; } ?>
+							<?php if($_Joueur_['rang'] == 1){ echo '<th style="text-align: center;">Visuel</th>'; } ?>
+							<th style="text-align: center;">Pseudo</th>
+							<th style="text-align: center;">Titre</th>
+							<th style="text-align: center;">Date</th>
+							<th style="text-align: center;">Action</th>
+                            <th style="text-align: center;">Status </th>
+							<?php if($_Joueur_['rang'] == 1){ echo '<th style="text-align: center;">Modification</th>'; } ?>
 						</tr>
 					<?php $j = 0;
 					while($tickets = $ticketReq->fetch()) { ?>
 						<tr>
-							<td>
+						    <?php if($tickets['ticketDisplay'] == 0 OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1) {
+						    if($_Joueur_['rang'] == 1) { ?>
+						    <td style="text-align: center;">
+						        <?php if($tickets['ticketDisplay'] == "0") {
+						                echo '<span><i class="glyphicon glyphicon-eye-open"></i> Public</span>';
+						            } else {
+								        echo '<span ><i class="glyphicon glyphicon-eye-close"></i> Privé</span>';
+								} ?>
+							</td>
+							<?php } ?>
+
+							<td style="text-align: center;">
 								<a href="index.php?&page=profil&profil=<?php echo $tickets['auteur'] ?>"><img class="icon-player-topbar" src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $tickets['auteur']; ?>&s=32&v=front" /> <?php echo $tickets['auteur'] ?></a>
 							</td>
 						
 						
-							<td>
+							<td style="text-align: center;">
 								<?php echo $tickets['titre'] ?>​
 							</td>
 						
 						
-							<td>
+							<td style="text-align: center;">
 								<?php echo $tickets['jour']. '/' .$tickets['mois']. ' à ' .$tickets['heure']. ':' .$tickets['minute']; ?>
 							</td>
 						
 						
-							<td>
+							<td style="text-align: center;">
 								<a class="btn btn-warning btn-block <?php if($j%2 == 0) echo 'StyleSaut'; ?>" data-toggle="modal" data-target="#<?php echo $tickets['id']; ?>Slide" >​Voir</a>
 							</td>
                             
-                            <td>
+                            <td style="text-align: center;">
                                 <?php
                                     $ticketstatus = $tickets['etat'];
                                     if($ticketstatus == "1"){
@@ -113,7 +125,7 @@
                                 ?>
                             </td>
 							<?php if($_Joueur_['rang'] == 1) { ?>
-								<td>
+								<td style="text-align: center;">
 									<form class="form-horizontal default-form" method="post" action="?&action=ticketEtat&id=<?php echo $tickets['id']; ?>">
 										<?php if($tickets['etat'] == 0){ 
 											echo '<button type="submit" name="etat" class="btn btn-warning" value="1" />Fermer le ticket</button>';
@@ -122,9 +134,11 @@
 										} ?>
 									</form>
 								</td>
-							<?php } ?>
+							<?php }
+							} ?>
 						</tr>
 						
+					<?php if($tickets['ticketDisplay'] == "0" OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1) { ?>
 					<!-- Modal -->
 					<div class="modal fade" id="<?php echo $tickets['id']; ?>Slide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-support">
@@ -227,7 +241,8 @@
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal-dialog -->
 					</div><!-- /.modal -->
-					<?php $j++; } ?>
+					<?php }
+					$j++; } ?>
 				</table>
 				</br>
 				<div class="TicketFormButton">
@@ -250,6 +265,13 @@
 									<div class="champ input-group">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
 										<input type="text" name="titre" class="form-control" placeholder="TITRE (Ex: [PvP Box][Bug] Mon jeux crash quand je prends le portail...)">
+									</div>
+									<div class="champ input-group">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i> Type de visuel</span>
+										<select class="form-control" name="ticketDisplay">
+										    <option value="0">Public</option>
+										    <option value="1">Privé</option>
+										</select>
 									</div>
 									<textarea name="message" class="champ form-control" rows="11" placeholder="La description détaillée de la proposition ou du problème..."></textarea>
 									</br>

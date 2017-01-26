@@ -48,6 +48,7 @@ $sql->exec("CREATE TABLE IF NOT EXISTS `cmw_support`
 	`message` text NOT NULL,
 	`date_post` datetime NOT NULL,
 	`etat` int(1) NOT NULL,
+	`ticketDisplay` int(1) NOT NULL,
 	PRIMARY KEY (`id`)
 ) 
 ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;"	);
