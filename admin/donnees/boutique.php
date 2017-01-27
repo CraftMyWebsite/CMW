@@ -38,6 +38,7 @@ function GetListeOffres($bdd)
 		$offres[$i]['ordre'] = $donnees['ordre'];
 		$offres[$i]['nom'] = $donnees['nom'];
 		$offres[$i]['description'] = $donnees['description'];
+		$offres[$i]['infos'] = $donnees['infos'];
 		$offres[$i]['prix'] = $donnees['prix'];
 		$offres[$i]['categorie'] = $donnees['categorie_id'];
 		$i++;

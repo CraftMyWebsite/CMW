@@ -57,6 +57,15 @@ function GetTableau($post)
 	$i = 0;
 	foreach($post as $cle => $element)
 	{
+		if(preg_match("#offresInfos#", $cle))
+		{
+			$boutiqueData['infos'][$i] = $element;
+			$i++;
+		}
+	}
+	$i = 0;
+	foreach($post as $cle => $element)
+	{
 		if (preg_match("#offresCategorie#", $cle))
 		{
 			$boutiqueData['categorie'][$i] = $element;
@@ -97,16 +106,17 @@ function GetTableau($post)
 function UpdatePourTableau($bdd, $tableau)
 {
 	for($i = 0;$i < count($tableau['id']);$i++)
-		SetInBdd($bdd, $tableau['nom'][$i], $tableau['description'][$i], $tableau['categorie'][$i], $tableau['prix'][$i], $tableau['id'][$i], $tableau['ordre'][$i]);
+		SetInBdd($bdd, $tableau['nom'][$i], $tableau['description'][$i], $tableau['infos'][$i], $tableau['categorie'][$i], $tableau['prix'][$i], $tableau['id'][$i], $tableau['ordre'][$i]);
 }
 
-function SetInBdd($bdd, $nom, $description, $categorie, $prix, $id, $ordre)
+function SetInBdd($bdd, $nom, $description, $infos, $categorie, $prix, $id, $ordre)
 {
-	$req = $bdd->prepare('UPDATE cmw_boutique_offres SET ordre = :ordre, nom = :nom, description = :description, prix = :prix, categorie_id = :categorie WHERE id = :id');
+	$req = $bdd->prepare('UPDATE cmw_boutique_offres SET ordre = :ordre, nom = :nom, description = :description, infos = :infos, prix = :prix, categorie_id = :categorie WHERE id = :id');
 	$req->execute(Array (
 		'id' => $id,
 		'nom' => $nom,
 		'description' => $description,
+		'infos' => $infos,
 		'categorie' => $categorie,
 		'prix' => $prix,
 		'ordre' => $ordre,

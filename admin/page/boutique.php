@@ -113,7 +113,8 @@ while($i < count($categories))
 		<table class="table">
 			<tr>
 				<th>Nom</th>
-				<th>Description</th>
+				<th>Image</th>
+				<th>Description achat</th>
 				<th>Prix</th>
 				<th>catégorie</th>
 				<th>Ordre</th>
@@ -130,6 +131,7 @@ while($i < count($categories))
 				<tr>
 					<td><input type="text" name="offresNom<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nom']; ?>" /></td>
 					<td><input type="text" name="offresDescription<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($offres[$j]['description']); ?>" /></td>
+					<td><input type="text" name="offresInfos<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($offres[$j]['infos']); ?>" /></td>
 					<td><input type="text" name="offresPrix<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['prix']; ?>" /></td>
 					<td>
 						<select class="form-control" name="offresCategorie<?php echo $offres[$j]['id']; ?>">

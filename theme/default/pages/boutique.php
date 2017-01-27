@@ -132,18 +132,13 @@ if(isset($_GET['offre']))
 				<br />
 				Cette offre contiens: <br />
 				<blockquote>
-				<?php
-				if(isset($infosOffre['action']))
-					for($i = 0; $i < count($infosOffre['action']); $i++)
-					{
-						?>
-						<strong><?php echo $infosOffre['action'][$i]['methode'] . $infosOffre['action'][$i]['commande_valeur']; ?></strong><br />
-						<?php
-					}
-				else
-					echo 'Cette offre est un don sans contrepartie...';
-				?>
-				</blockquote>
+                <?php
+                if(isset($infosOffre['offre']['infos']))
+                    echo $infosOffre['offre']['infos'];
+                else
+                    echo 'Cette offre est un don sans contrepartie...';
+                ?>
+                </blockquote>
 			</p>
       </div>
       <div class="modal-footer">
