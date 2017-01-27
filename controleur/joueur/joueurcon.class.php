@@ -2,13 +2,18 @@
 class JoueurCon
 {
 	
-    public function __construct($id, $pseudo, $email, $rang, $tokens)
+    public function __construct($id, $pseudo, $email, $rang, $tokens, $reco, $mdp)
     {	
 		$_SESSION['Player']['id'] = $id;
 		$_SESSION['Player']['pseudo'] = $pseudo;
 		$_SESSION['Player']['email'] = $email;
 		$_SESSION['Player']['rang'] = $rang;
 		$_SESSION['Player']['tokens'] = $tokens;
+		if($reco != NULL)
+		{
+			setcookie('id', $id, time() + 31536000, '/', null, false, false);
+			setcookie('pass', $mdp, time() + 31536000, '/', null, false, false);
+		}
 	}
 	
 }

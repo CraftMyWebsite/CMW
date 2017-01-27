@@ -27,7 +27,10 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND !empty($_POST['pseudo'])
 			if($VerifMailBdd == '1')
 			{
 				require_once('controleur/joueur/joueurcon.class.php');
-				$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens']);
+				$reconnexion = NULL;
+				if(isset($_POST['reconnexion']))
+					$reconnexion = 1;
+				$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], $reconnexion, $donneesJoueur['mdp']);
 				header('Location: index.php');
 			}
 			else

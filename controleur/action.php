@@ -10,6 +10,8 @@ if(isset($_GET['action']))
 		case 'deco': 
 			// Destruction des sessions + redirection sur l'accueil.
 			session_destroy();
+			setcookie('id', 0, time(), '/', null, false, false);
+			setcookie('pass', 0, time(), '/', null, false, false);
 			header('Location: index.php');
 		break;
 		

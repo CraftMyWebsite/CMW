@@ -94,6 +94,12 @@
 						<form class="form-signin" role="form" method="post" action="?&action=connection<?php echo $namePage; if($_GET['profil']) { echo $_GET['profil']; } ?>">
 							<input type="text" name="pseudo" class="form-control" id="PseudoConectionForm" placeholder="Pseudo" required autofocus>
 							<input type="password" name="mdp" class="form-control" id="MdpConnectionForm" placeholder="Votre mot de passe" required>
+							<div class="form-check">
+							  <label class="form-check-label">
+								<input class="form-check-input" type="checkbox" name="reconnexion">
+									Se souvenir de moi ? 
+							  </label>
+							</div>	
 							<button class="btn btn-lg btn-primary btn-block" type="submit"> Connexion</button>
 						</form>
 						<center><a data-target="#passRecover" data-toggle="modal">Mot de passe oublié ?</a></center>
