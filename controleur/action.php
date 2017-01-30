@@ -243,6 +243,10 @@ if(isset($_GET['action']))
 		case 'delete_support_commentaire':
 		    include('controleur/support/ticketCommentaireDelete.php');
 		break;
+
+		case 'edit_support_commentaire':
+		    include('controleur/support/ticketCommentaireEdit.php');
+		break;
 		
 		// Si le joueur a rentré un url contenant une valeur d'action innexistant?
 		default:

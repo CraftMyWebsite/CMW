@@ -14,6 +14,7 @@ while($a = $ticketCommentairesReq->fetch())
 	if(!isset($ticketCommentaires[$i]))
 		$j = 0;
 		
+	$ticketCommentaires[$i][$j]['id'] = $a['id'];
 	$ticketCommentaires[$i][$j]['auteur'] = $a['auteur'];
 	$ticketCommentaires[$i][$j]['message'] = $a['message'];
 	$ticketCommentaires[$i][$j]['jour'] = $a['jour'];

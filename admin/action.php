@@ -2,7 +2,7 @@
 /*
 	Ce fichier PHP effectue telle ou telle action selon le contenu des gets envoyés par la theme(selon le lien sur lequel l'utilisateur à cliqué etc...).
 */
-	if(isset($_GET['action']) AND isset($_Joueur_['rang']) AND $_Joueur_['rang'] == 1)
+	if(isset($_GET['action']) AND isset($_Joueur_['rang']) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['access'] == true))
 	{
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 				
@@ -265,7 +265,8 @@
 		break;
 
 		case 'resetVotes':
-		$bddConnection->exec('DELETE FROM cmw_votes'); 
+		if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['resetVote'] == true)
+			$bddConnection->exec('DELETE FROM cmw_votes');
 		$_SESSION['referrerAdmin'] = 'votes';
 		break;
 		
@@ -323,6 +324,22 @@
 		require_once('admin/actions/editNbrPerIP.php');
 		$_SESSION['referrerAdmin'] = 'informations';
 		break;
+
+		case 'supprGrade': 
+		require_once('admin/actions/supprGrade.php');
+		$_SESSION['referrerAdmin'] = 'grades';
+		break;
+
+		case 'addGrade': 
+		require_once('admin/actions/addGrade.php');
+		$_SESSION['referrerAdmin'] = 'grades';
+		break;
+
+		case 'editGrade': 
+		require_once('admin/actions/editGrade.php');
+		$_SESSION['referrerAdmin'] = 'grades';
+		break;
+		
 		// Si le joueur a rentré un url contenant une valeur d'action innexistant?
 		default:
 		header('Location: admin.php');

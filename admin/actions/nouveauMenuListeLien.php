@@ -1,5 +1,5 @@
 <?php
-
+if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['actions']['editDropAndLinkMenu'] == true) {
 require_once('modele/config/yml.class.php');
 
 $lectureMenu = new Lire('modele/config/configMenu.yml');
@@ -18,4 +18,5 @@ if($lectureMenu['MenuListeDeroulante'][$_POST['listeNum']]['0'] == "LastLinkDont
 
 $ecriture = new Ecrire('modele/config/configMenu.yml', $lectureMenu);
 
+}
 ?>

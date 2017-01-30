@@ -1,4 +1,5 @@
 <?php
+if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['widgets']['actions']['addWidgets'] == true) { 
 $lectureWidgets = new Lire('modele/config/configWidgets.yml');
 $lectureWidgets = $lectureWidgets->GetTableau();
 
@@ -14,4 +15,6 @@ if($_POST['type'] == 3)
 
 
 $ecriture = new Ecrire('modele/config/configWidgets.yml', $lectureWidgets);
+
+}
 ?>

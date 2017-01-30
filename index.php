@@ -24,6 +24,9 @@ if (isset($_SESSION['Player']['pseudo']) OR isset($_COOKIE['id'], $_COOKIE['pass
     $connection = true;
 }  else $connection = false;
 require_once ('controleur/json/json.php');
+// Système des permissions pour les nouveaux grades rajoutés dans le CMS
+// Récupération des permissions du grade avec la variable globale $_PGrades_
+require_once ('controleur/grades/grades.php');
 // système de Get(tout le site passe par index.php).
 // Les deux types de Get pricipaux utilisés sont les "pages" et les "actions.
 // Les actions n'affichent aucun code html alors que les pages sont dans la theme.

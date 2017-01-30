@@ -4,7 +4,7 @@ if(isset($_Joueur_)) {
     $id_news = urldecode($_GET['id_news']);
     $id = urldecode($_GET['id_comm']);
     $auteur = urldecode($_GET['auteur']);
-    if($_Joueur_['rang'] == 1)
+    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['news']['deleteMemberComm'] == true)
         $adminMode = true;
 
     require_once('modele/accueil/existNews.class.php');
@@ -35,11 +35,7 @@ if(isset($_Joueur_)) {
          } else {
             require_once('modele/accueil/deleteNews.class.php');
             $req_DeleteInfo = new DeleteNews($bddConnection);
-            if($adminMode = true) {
-                $req_DeleteInfo->DeleteOwnerCommentaire($id_news, $auteur, $id);
-            } else {
-                $req_DeleteInfo->DeleteOwnerCommentaire($id_news, $pseudo, $id);
-            }
+            $req_DeleteInfo->DeleteOwnerCommentaire($id_news, $auteur, $id);
             $req_DeleteInfo->DeleteOwnerReports($id, $id_news);
             header('Location: index.php?&SuppressionCommentaire=true');
         }

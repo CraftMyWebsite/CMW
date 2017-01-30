@@ -14,6 +14,16 @@ class CommentairesTickets
 		return $tickets;
 	}
 
+	public function EditCommentaireTicket($edit_message, $id_comm, $id_ticket, $auteur)
+	{
+		$ticket_editCommentaire = $this->bdd->prepare('UPDATE cmw_support_commentaires SET message LIKE :message WHERE id LIKE :id_comm AND id_ticket LIKE :id_ticket AND auteur LIKE :auteur');
+		$ticket_editCommentaire->bindParam(':message', $edit_message);
+		$ticket_editCommentaire->bindParam(':id_comm', $id_comm);
+        $ticket_editCommentaire->bindParam(':id_ticket', $id_ticket);
+        $ticket_editCommentaire->bindParam(':auteur', $auteur);
+		$ticket_editCommentaire->execute();
+	}
+
 	public function DeleteCommentaireTicket($id_comm, $id_ticket, $auteur)
 	{
 		$ticket_deleteCommentaire = $this->bdd->prepare('DELETE FROM cmw_support_commentaires WHERE id LIKE :id_comm AND id_ticket LIKE :id_ticket AND auteur LIKE :auteur');
@@ -37,6 +47,7 @@ class CommentairesTickets
 		$ticket_getExistCommentaire->bindParam(':id_comm', $id_comm);
 		$ticket_getExistCommentaire->bindParam(':id_ticket', $id_ticket);
 		$ticket_getExistCommentaire->bindParam(':auteur', $auteur);
+		$ticket_getExistCommentaire->execute();
 		return $ticket_getExistCommentaire;
 	}
 
