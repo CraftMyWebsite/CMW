@@ -11,16 +11,22 @@ require_once ('controleur/connection_base.php');
 session_start();
 /* Si l'utilisateur est connecté, on met ses informations dans un tableau global, qui sera utilisable que
  le laps de temps du chargement de la page contrairement aux sessions. */
-if (isset($_SESSION['Player']['pseudo'])) {
+if (isset($_SESSION['Player']['pseudo']) OR isset($_COOKIE['id'], $_COOKIE['pass'])) {
     /* On instancie un joueur, et on récupère le tableau de données. $_Joueur_ sera donc utilisable
      sur toutes les pages grâce au système de GET sur l'index.*/
+	if(!isset($_SESSION['Player']['pseudo']))
+		require_once('controleur/joueur/connexion_cookie.php');
+	
     require_once ('controleur/joueur/joueur.class.php');
     $globalJoueur = new Joueur();
     // Cette variable contiens toutes les informations du joueur.
     $_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
     $connection = true;
-} else $connection = false;
+}  else $connection = false;
 require_once ('controleur/json/json.php');
+// Système des permissions pour les nouveaux grades rajoutés dans le CMS
+// Récupération des permissions du grade avec la variable globale $_PGrades_
+require_once ('controleur/grades/grades.php');
 // système de Get(tout le site passe par index.php).
 // Les deux types de Get pricipaux utilisés sont les "pages" et les "actions.
 // Les actions n'affichent aucun code html alors que les pages sont dans la theme.

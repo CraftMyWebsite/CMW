@@ -1,5 +1,5 @@
 <?php
-
+if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['actions']['addLinkMenu'] == true) {
 $lectureMenu = new Lire('modele/config/configMenu.yml');
 $lectureMenu = $lectureMenu->GetTableau();
 
@@ -17,4 +17,5 @@ else
 
 $ecriture = new Ecrire('modele/config/configMenu.yml', $lectureMenu);
 
+}
 ?>

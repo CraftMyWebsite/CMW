@@ -73,36 +73,45 @@
 		<div class="panel-body">
 				<table class="table">
 						<tr>
-							<th>Pseudo</th>
-							<th>Titre</th>
-							<th>Date</th>
-							<th>Action</th>
-                            <th style="width: 20px;text-align: center;">Status </th>
-							<?php if($_Joueur_['rang'] == 1){ echo '<th style="width: 20px;text-align: center;">Modification</th>'; } ?>
+							<?php if($_Joueur_['rang'] == 1) { echo '<th style="text-align: center;">Visuel</th>'; } ?>
+							<th style="text-align: center;">Pseudo</th>
+							<th style="text-align: center;">Titre</th>
+							<th style="text-align: center;">Date</th>
+							<th style="text-align: center;">Action</th>
+                            <th style="text-align: center;">Status </th>
+							<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['closeTicket'] == true) { echo '<th style="text-align: center;">Modification</th>'; } ?>
 						</tr>
 					<?php $j = 0;
 					while($tickets = $ticketReq->fetch()) { ?>
 						<tr>
-							<td>
+						    <?php if($tickets['ticketDisplay'] == 0 OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1) {
+						    if($_Joueur_['rang'] == 1) { ?>
+						    <td style="text-align: center;">
+						        <?php if($tickets['ticketDisplay'] == "0") {
+						                echo '<span><i class="glyphicon glyphicon-eye-open"></i> Public</span>';
+						            } else {
+								        echo '<span ><i class="glyphicon glyphicon-eye-close"></i> Privé</span>';
+								} ?>
+							</td>
+							<?php } ?>
+
+							<td style="text-align: center;">
 								<a href="index.php?&page=profil&profil=<?php echo $tickets['auteur'] ?>"><img class="icon-player-topbar" src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $tickets['auteur']; ?>&s=32&v=front" /> <?php echo $tickets['auteur'] ?></a>
 							</td>
 						
-						
-							<td>
+							<td style="text-align: center;">
 								<?php echo $tickets['titre'] ?>​
 							</td>
 						
-						
-							<td>
+							<td style="text-align: center;">
 								<?php echo $tickets['jour']. '/' .$tickets['mois']. ' à ' .$tickets['heure']. ':' .$tickets['minute']; ?>
 							</td>
 						
-						
-							<td>
+							<td style="text-align: center;">
 								<a class="btn btn-warning btn-block <?php if($j%2 == 0) echo 'StyleSaut'; ?>" data-toggle="modal" data-target="#<?php echo $tickets['id']; ?>Slide" >​Voir</a>
 							</td>
                             
-                            <td>
+                            <td style="text-align: center;">
                                 <?php
                                     $ticketstatus = $tickets['etat'];
                                     if($ticketstatus == "1"){
@@ -112,8 +121,9 @@
                                     }
                                 ?>
                             </td>
-							<?php if($_Joueur_['rang'] == 1) { ?>
-								<td>
+
+							<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['closeTicket'] == true) { ?>
+								<td style="text-align: center;">
 									<form class="form-horizontal default-form" method="post" action="?&action=ticketEtat&id=<?php echo $tickets['id']; ?>">
 										<?php if($tickets['etat'] == 0){ 
 											echo '<button type="submit" name="etat" class="btn btn-warning" value="1" />Fermer le ticket</button>';
@@ -122,9 +132,11 @@
 										} ?>
 									</form>
 								</td>
-							<?php } ?>
+							<?php }
+							} ?>
 						</tr>
 						
+					<?php if($tickets['ticketDisplay'] == "0" OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1) { ?>
 					<!-- Modal -->
 					<div class="modal fade" id="<?php echo $tickets['id']; ?>Slide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-support">
@@ -144,7 +156,11 @@
 								</div>
 								
 								<div class="modal-body">
-									<p class="corp-ticket"><?php echo $tickets['message']; ?></p>
+									<p class="corp-ticket"><?php 
+									unset($message);
+									$message = espacement($tickets['message']);
+									$message = BBCode($message);
+									echo $message; ?></p>
 									<span class="badge pull-right">Ticket de : <img src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $tickets['auteur']; ?>&s=16&v=front" alt="none" /> <?php echo $tickets['auteur']; ?></span>
 									</br>
 									<hr>
@@ -156,6 +172,11 @@
 										echo '<h3 class="ticket-commentaire-titre"><center>' .count($ticketCommentaires[$tickets['id']]). ' Commentaires</center></h3>';
 										for($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++)
 										{
+											$get_idComm = $bddConnection->prepare('SELECT id FROM cmw_support_commentaires WHERE auteur LIKE :auteur AND id_ticket LIKE :id_ticket');
+											$get_idComm->bindParam(':auteur', $ticketCommentaires[$tickets['id']][$i]['auteur']);
+											$get_idComm->bindParam(':id_ticket', $tickets['id']);
+											$get_idComm->execute();
+											$req_idComm = $get_idComm->fetch();
 									?>
 									<div class="panel panel-default">
 										<div class="panel-body">
@@ -164,12 +185,29 @@
 												<span class="img-ticket-commentaire"><img src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>&s=32&v=front" alt="none" /></span>
 												<span class="desc-ticket-commentaire">
 													<span class="ticket-commentaire-auteur"><?php echo $ticketCommentaires[$tickets['id']][$i]['auteur']; ?></span>
-													<span class="ticket-commentaire-date"><?php echo 'Le ' .$ticketCommentaires[$tickets['id']][$i]['jour']. '/' .$ticketCommentaires[$tickets['id']][$i]['mois']. ' à ' .$ticketCommentaires[$tickets['id']][$i]['heure']. ':' .$ticketCommentaires[$tickets['id']][$i]['minute']; ?></span> 
+													<span class="ticket-commentaire-date"><?php echo 'Le ' .$ticketCommentaires[$tickets['id']][$i]['jour']. '/' .$ticketCommentaires[$tickets['id']][$i]['mois']. ' à ' .$ticketCommentaires[$tickets['id']][$i]['heure']. ':' .$ticketCommentaires[$tickets['id']][$i]['minute']; ?></span>
+													<?php if(isset($_Joueur_)) { ?>
+													    <span class="ticket-commentaire-action pull-right">
+							                                <div class="dropdown">
+								                                <a type="button" class="btn btn-info collapsed" data-toggle="dropdown" style="font-size: 10px;">Action <b class="caret"></b></a>
+								                                <ul class="dropdown-menu">
+									                                <?php if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['deleteMemberComm'] == true) {
+										                                echo '<li><a href="?&action=delete_support_commentaire&id_comm='.$req_idComm['id'].'&id_ticket='.$tickets['id'].'&auteur='.$ticketCommentaires[$tickets['id']][$i]['auteur'].'">Supprimer</a></li>';
+									                                } if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['editMemberComm'] == true) {
+									                                	echo '<li><a href="#editComm-'.$req_idComm['id'].'" data-toggle="modal" data-target="#editComm-'.$req_idComm['id'].'" >Editer</a></li>';
+									                                }?>
+								                                </ul>
+							                                </div>
+						                                </span>
+						                            <?php } ?>
 												</span>
 												
 											</div>
 											<div class="right-ticket-commentaire">
-												<?php echo $ticketCommentaires[$tickets['id']][$i]['message']; ?>
+												<?php unset($message);
+												$message = espacement($ticketCommentaires[$tickets['id']][$i]['message']);
+												$message = BBCode($message);
+												echo $message;  ?>
 											</div>
 										</div>
 										</div>
@@ -208,7 +246,44 @@
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal-dialog -->
 					</div><!-- /.modal -->
-					<?php $j++; } ?>
+
+					<?php if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['editMemberComm'] == true) {
+						for($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) {
+							$get_idComm = $bddConnection->prepare('SELECT id FROM cmw_support_commentaires WHERE auteur LIKE :auteur AND id_ticket LIKE :id_ticket');
+							$get_idComm->bindParam(':auteur', $ticketCommentaires[$tickets['id']][$i]['auteur']);
+							$get_idComm->bindParam(':id_ticket', $tickets['id']);
+							$get_idComm->execute();
+							$req_idComm = $get_idComm->fetch(); ?>
+					<div class="modal fade" id="editComm-<?php echo $req_idComm['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editComm">
+					    <form method="POST" action="?&action=edit_support_commentaire&id_comm=<?php echo $req_idComm['id']; ?>&id_ticket=<?php echo $tickets['id']; ?>&auteur=<?php echo $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>">
+				        <div class="modal-dialog modal-lg" role="document">
+					        <div class="modal-content">
+						        <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							        <h4 class="modal-title text-center" id="editComm">Edition du commentaire</h4>
+						        </div>
+						        <div class="modal-body">
+						            <div class="col-lg-12 text-center">
+						            	<div class="row">
+						            		<textarea name="editMessage" class="form-control" rows="3" style="resize: none;"><?php echo $ticketCommentaires[$tickets['id']][$i]['message']; ?></textarea>
+						            	</div>
+						            </div>
+						        </div>
+						        <div class="modal-footer">
+						        	<div class="col-lg-12 text-center">
+						        		<div class="row">
+						        			<button type="submit" class="btn btn-primary">Valider !</button>
+						        		</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						</form>
+				    </div>
+				    <?php }
+				       }
+				    }
+					$j++; } ?>
 				</table>
 				</br>
 				<div class="TicketFormButton">
@@ -231,6 +306,13 @@
 									<div class="champ input-group">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
 										<input type="text" name="titre" class="form-control" placeholder="TITRE (Ex: [PvP Box][Bug] Mon jeux crash quand je prends le portail...)">
+									</div>
+									<div class="champ input-group">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i> Type de visuel</span>
+										<select class="form-control" name="ticketDisplay">
+										    <option value="0">Public</option>
+										    <option value="1">Privé</option>
+										</select>
 									</div>
 									<textarea name="message" class="champ form-control" rows="11" placeholder="La description détaillée de la proposition ou du problème..."></textarea>
 									</br>

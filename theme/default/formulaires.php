@@ -91,9 +91,15 @@
 					<?php } ?>
 					<div class="row">
 						<img class="profile-img" src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_COOKIE['pseudo']; ?>&s=128&v=front" alt="">
-						<form class="form-signin" role="form" method="post" action="?&action=connection">
+						<form class="form-signin" role="form" method="post" action="?&action=connection<?php echo $namePage; if($_GET['profil']) { echo $_GET['profil']; } ?>">
 							<input type="text" name="pseudo" class="form-control" id="PseudoConectionForm" placeholder="Pseudo" required autofocus>
 							<input type="password" name="mdp" class="form-control" id="MdpConnectionForm" placeholder="Votre mot de passe" required>
+							<div class="form-check">
+							  <label class="form-check-label">
+								<input class="form-check-input" type="checkbox" name="reconnexion">
+									Se souvenir de moi ? 
+							  </label>
+							</div>	
 							<button class="btn btn-lg btn-primary btn-block" type="submit"> Connexion</button>
 						</form>
 						<center><a data-target="#passRecover" data-toggle="modal">Mot de passe oublié ?</a></center>
@@ -134,7 +140,7 @@
 						<h4 class="modal-title" id="myModalLabel" style="color: white;" ><center>Inscription</center></h4>
 					</div>
 					<div class="modal-body">
-						<form role="form" method="post" action="?&action=inscription">
+						<form role="form" method="post" action="?&action=inscription<?php echo $namePage; if(isset($_GET['profil'])) { echo $_GET['profil']; } ?>">
 							<?php if($apiMail == 1) { ?>
 								<center><p><div class="alert alert-warning" style="text-align: center;">Veuillez mettre une adresse email correct, car une demande de confirmation du compte sera demandé ! Vérifier dans les spams/courriers indésirables.</div></p></center>
 								<?php } ?>

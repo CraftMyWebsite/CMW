@@ -1,5 +1,5 @@
 <?php
-
+if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['editSettings'] == true) {
 $votes = new Lire('modele/config/configVotes.yml');
 $votes = $votes->GetTableau();
 
@@ -14,5 +14,5 @@ $votes['methode'] = $_POST['methode'];
 
 $ecriture = new Ecrire('modele/config/configVotes.yml', $votes);
 
-
+}
 ?>

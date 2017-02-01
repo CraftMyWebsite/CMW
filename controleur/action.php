@@ -10,6 +10,8 @@ if(isset($_GET['action']))
 		case 'deco': 
 			// Destruction des sessions + redirection sur l'accueil.
 			session_destroy();
+			setcookie('id', 0, time(), '/', null, false, false);
+			setcookie('pass', 0, time(), '/', null, false, false);
 			header('Location: index.php');
 		break;
 		
@@ -236,6 +238,14 @@ if(isset($_GET['action']))
         
 		case 'validationMail':
 			include('controleur/joueur/validationMail.php');
+		break;
+
+		case 'delete_support_commentaire':
+		    include('controleur/support/ticketCommentaireDelete.php');
+		break;
+
+		case 'edit_support_commentaire':
+		    include('controleur/support/ticketCommentaireEdit.php');
 		break;
 		
 		// Si le joueur a rentré un url contenant une valeur d'action innexistant?

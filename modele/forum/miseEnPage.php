@@ -12,6 +12,7 @@ function BBCode($contenue)
 	$contenue = preg_replace('#\[color=(.+)\](.+)\[/color\]#isU', '<span style="color: $1">$2</span>', $contenue);
 	$contenue = preg_replace('#\[u\](.+)\[/u\]#isU', '<u>$1</u>', $contenue);
 	$contenue = preg_replace('#\[s(?:trike)?\](.+)\[/s(trike)?\]#isU', '<s>$1</s>', $contenue);
+	$contenue = preg_replace('#\[center\](.+)\[/center\]#isU', '<center>$1</center>', $contenue);
 	if(preg_match("#\[url\](.+)\[/url\]#isU", $contenue))
 	{
 		$contenue = preg_replace("#\[url\](.+)\[/url\]#isU", "<a href='$1' target='_blank'>$1</a>", $contenue);

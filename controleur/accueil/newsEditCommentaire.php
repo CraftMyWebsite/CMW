@@ -5,7 +5,7 @@ if(isset($_Joueur_)) {
 	$id_news = urldecode($_GET['id_news']);
 	$auteur = urldecode($_GET['auteur']);
 	$id_comm = urldecode($_GET['id_comm']);
-	if($_Joueur_['rang'] == 1)
+	if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['news']['editMemberComm'] == true)
 		$adminMode = true;
 
 	require_once('modele/accueil/existNews.class.php');
@@ -28,7 +28,7 @@ if(isset($_Joueur_)) {
 	if($ExistNews == "0") {
 		header('Location: index.php?&NewsNotExist=true');
 	} else {
-		if(!$auteur == $pseudo AND !$CheckOwnerCommentaire == $pseudo OR !$adminMode = true) {
+		if(!$CheckOwnerCommentaire == $pseudo OR !$adminMode = true) {
 			header('Location: index.php?&EditImpossible=true');
 		} else {
 			if(strlen($commentaire) > 255) {

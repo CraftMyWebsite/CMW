@@ -1,76 +1,81 @@
-<center><h1><center> Réglages & Informations générales de votre site </center></h1>
-<?php 
-include "./include/version.php";
-include "./include/version_distant.php";
-if($versioncms == $versioncmsrelease) {
-?>
-<div style="width: 50%" class="alert alert-success"><center>Votre CMS CraftMyWebsite est bien a jours en version <?php echo $versioncms; ?> !</center></div>
-<?php } else { ?>
-<div style="width: 50%" class="alert alert-danger"><center><strong>ATTENTION: Votre CMS CraftMyWebsite n'est PAS a jours !! Vous étes en <?php echo $versioncms; ?> et la dérniere version est la <?php echo $versioncmsrelease; ?> ! Rdv sur <a style="color: blue;" href="http://craftmywebsite.fr/telechargement.php">CraftMyWebsite Release</a></strong></center></div>
-<?php } ?>
-
-<?php if(isset($_SESSION['Player']['pseudo']) AND $_SESSION['Player']['rang'] == 1)
-{
-
- ?>
-<div style="width: 75%" class="alert alert-dismissable alert-success"><center>Modifiez ici les informations principales de votre serveur. La plupart des autres données du site dépendent de la base de données, qui est donc essentielle, changez les identifiants de la base seulement si vous savez ce que vous faites ! </center></a></div>
-<form style="width: 50%" class="form-horizontal default-form" method="post" action="?&action=general">
-	<h4 style="text-decoration:underline;"><center><strong>Description</strong></center></h4>
-	</br>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Adresse du site</label>
-		<div class="col-sm-8">
-			<input type="url" name="adresseWeb" class="form-control" placeholder="http://monsiteminecraft.fr/" value="<?php echo $lecture['General']['url']; ?>">
-		</div>
+<!-- Page Heading -->
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header"> General
+            <small>Gestionnaire General</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a data-toggle="collapse" data-parent="#adminPanel" href="#informations">Informations</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i> General
+            </li>
+        </ol>
+        <hr>
+        <?php if($_Joueur_['rang'] != 1 AND $_PGrades_['PermsPanel']['general']['actions']['editGeneral'] == false) { ?>
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <div class="alert alert-danger">
+                    <strong>Vous avez aucune permission pour accéder aux réglages généraux.</strong>
+                </div>
+            </div>
+        <?php } else { ?>
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <div class="alert alert-success">
+                    <strong>Modifiez ici les informations principales de votre serveur. La plupart des autres données du site dépendent de la base de données, qui est donc essentielle, changez les identifiants de la base seulement si vous savez ce que vous faites ! </strong>
+                </div>
+            </div>
+        <?php }
+        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['general']['actions']['editGeneral'] == true) { ?>
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <h3>Edition des informations</h3>
+            </div>
+            <form method="POST" action="?&action=general">
+                <div class="col-lg-6 col-lg-offset-3 text-center">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <div class="col-lg-6 col-lg-offset-3">
+                                <h3>Informations</h3>
+                                <div class="row">
+                                    <label class="control-label">Adresse du site</label>
+                                    <input type="url" name="adresseWeb" class="form-control text-center" placeholder="http://monsiteminecraft.fr/" value="<?php echo $lecture['General']['url']; ?>">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">Nom du serveur</label>
+                                    <input type="text" name="nom" class="form-control text-center" placeholder="MineServeur" value="<?php echo $lecture['General']['name']; ?>">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">Description</label>
+                                    <input type="text" name="description" class="form-control text-center" placeholder="Mon super serveur minecraft !" value="<?php echo $lecture['General']['description']; ?>">
+                                </div>
+                                <hr>
+                                <h3>Base de données</h3>
+                                <div class="row">
+                                    <label class="control-label">Adresse</label>
+                                    <input type="text" name="adresse" class="form-control text-center" placeholder="localhost" value="<?php echo $lecture['DataBase']['dbAdress']; ?>">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">Nom de la base</label>
+                                    <input type="text" name="dbNom" class="form-control text-center" placeholder="BaseSite" value="<?php echo $lecture['DataBase']['dbName']; ?>">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">Nom d'utilisateur</label>
+                                    <input type="text" name="dbUtilisateur" class="form-control text-center" placeholder="root" value="<?php echo $lecture['DataBase']['dbUser']; ?>">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">Mot de passe</label>
+                                    <input type="password" name="dbMdp" class="form-control text-center" placeholder="Balançoire" value="<?php echo $lecture['DataBase']['dbPassword']; ?>">
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <input type="submit" class="btn btn-danger" value="Valider les changements" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <?php } ?>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Nom du serveur</label>
-		<div class="col-sm-8">
-			<input type="text" name="nom" class="form-control" placeholder="MineServeur" value="<?php echo $lecture['General']['name']; ?>">
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Description</label>
-		<div class="col-sm-8">
-			<input type="text" name="description" class="form-control" placeholder="Mon super serveur minecraft !" value="<?php echo $lecture['General']['description']; ?>">
-		</div>
-	</div>
-	</br>
-	<h4 style="text-decoration:underline;"><center><strong>Base de données MySQL</center></strong></h4>
-	</br>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Adresse</label>
-		<div class="col-sm-8">
-			<input type="text" name="adresse" class="form-control" placeholder="localhost" value="<?php echo $lecture['DataBase']['dbAdress']; ?>">
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Nom de la base</label>
-		<div class="col-sm-8">
-			<input type="text" name="dbNom" class="form-control" placeholder="BaseSite" value="<?php echo $lecture['DataBase']['dbName']; ?>">
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Nom d'utilisateur</label>
-		<div class="col-sm-8">
-			<input type="text" name="dbUtilisateur" class="form-control" placeholder="root" value="<?php echo $lecture['DataBase']['dbUser']; ?>">
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Mot de passe</label>
-		<div class="col-sm-8">
-			<input type="password" name="dbMdp" class="form-control" placeholder="Balançoire" value="<?php echo $lecture['DataBase']['dbPassword']; ?>">
-		</div>
-	</div>
-	<div class="form-group">
-		<center><div class="">
-			<input type="submit" class="btn btn-danger" value="Valider les changements" />
-		</div></center>
-	</div>
-<?php } else { ?>
-
-<div class="alert alert-danger"><center><strong><center>INFORMATION</center></stronge><br/>En étant modérateur du serveur vous n'avez actuellement accès aux options de base du site.</center></div>
-
-<?php } ?>
-</form>
-</center>
+</div>
+<!-- /.row -->
