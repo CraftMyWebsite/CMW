@@ -95,8 +95,15 @@
                             if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['console'] == true) { ?>
                               <h4>Console</h4>
                               <div class="row">
+                                <script type="text/javascript">
+                                  function updateConsole() {
+                                    var $console = $("#console");
+                                    $console.load("admin.php #console");
+                                  }
+                                  setInterval("updateConsole()", 10000);
+                                </script>
                                 <?php $date = date("Y-m-d");
-                                echo '<div style="background-color: #373737;color: #8F8F8F;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:solid 2px #8F8F8F;overflow: hidden;">';
+                                echo '<div id="console"><div style="background-color: #373737;color: #8F8F8F;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:solid 2px #8F8F8F;overflow: hidden;">';
                                 foreach ($console[$j]['Test'] as $value) {
                                   $console[$j]['Test'] = $value["line"];
                                   $console[$j]['Test'] = str_replace($date, '', $console[$j]['Test']);
@@ -109,14 +116,51 @@
                                   echo '<br/></div>';
                                   echo '</div>';
                                 }
-                                echo '</div>'; ?>
+                                echo '</div>
+                                </div>'; ?>
                               </div>
                               <?php }
                               if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['command'] == 1) { ?>
                                 <div class="row">
-                                  <form method="post" action="?&action=commandeConsole">
-                                    <input id="commandeConsole" class="form-control" name="commandeConsole" type="text" onclick="if(getElementById('commandeConsole').value == 'Mettre une commande sans le /') getElementById('commandeConsole').value = ''" value="Mettre une commande sans le /" />
-                                    <button type="submit" class="btn btn-info">Exécuter la commande</button>
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                      $("#sendCommand").click(function(e){
+                                        $("#commandeConsole").prop('disabled', true);
+                                        $("#sendCommand").prop('disabled', true);
+                                        e.preventDefault();
+                                        $.ajax({
+                                          type : 'POST',
+                                          url : '?&action=commandeConsole',
+                                          data : $('#commandeExec').serialize(),
+                                          success: function() {
+                                            $('input[name=commandeConsole]').val('');
+                                            $("#commandeConsole").prop('disabled', false);
+                                            $("#sendCommand").prop('disabled', false);
+                                            Snarl.addNotification({
+                                              title: 'Succès',
+                                              text: 'La commande est executée.',
+                                              icon: '<i class="fa fa-globe"></i>',
+                                              timeout: 8000
+                                            });
+                                            },
+                                            error: function() {
+                                              $('input[name=commandeConsole]').val('');
+                                              $("#commandeConsole").prop('disabled', false);
+                                              $("#sendCommand").prop('disabled', false);
+                                              Snarl.addNotification({
+                                              title: 'Erreur',
+                                              text: 'La commande à échoué.',
+                                              icon: '<i class="fa fa-globe"></i>',
+                                              timeout: 8000
+                                            });
+                                            }
+                                        });
+                                      });
+                                    });
+                                  </script>
+                                  <form id="commandeExec" method="POST" action="?&action=commandeConsole">
+                                    <input class="form-control" type="text" name="commandeConsole" id="commandeConsole" value="" placeholder="Mettre une commande sans /" required/>
+                                    <button id="sendCommand" class="btn btn-info">Exécuter la commande</button>
                                   </form>
                                 </div>
                                 <div hidden="hidden" aria-hidden="true" style="display: none;" alt="Pour une prochaine maj">

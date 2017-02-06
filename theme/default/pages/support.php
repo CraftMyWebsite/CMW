@@ -73,7 +73,7 @@
 		<div class="panel-body">
 				<table class="table">
 						<tr>
-							<?php if($_Joueur_['rang'] == 1) { echo '<th style="text-align: center;">Visuel</th>'; } ?>
+							<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['displayTicket'] == true) { echo '<th style="text-align: center;">Visuel</th>'; } ?>
 							<th style="text-align: center;">Pseudo</th>
 							<th style="text-align: center;">Titre</th>
 							<th style="text-align: center;">Date</th>
@@ -84,8 +84,8 @@
 					<?php $j = 0;
 					while($tickets = $ticketReq->fetch()) { ?>
 						<tr>
-						    <?php if($tickets['ticketDisplay'] == 0 OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1) {
-						    if($_Joueur_['rang'] == 1) { ?>
+						    <?php if($tickets['ticketDisplay'] == 0 OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['displayTicket'] == true) {
+						    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['displayTicket'] == true) { ?>
 						    <td style="text-align: center;">
 						        <?php if($tickets['ticketDisplay'] == "0") {
 						                echo '<span><i class="glyphicon glyphicon-eye-open"></i> Public</span>';
@@ -136,7 +136,7 @@
 							} ?>
 						</tr>
 						
-					<?php if($tickets['ticketDisplay'] == "0" OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1) { ?>
+					<?php if($tickets['ticketDisplay'] == "0" OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['displayTicket'] == true) { ?>
 					<!-- Modal -->
 					<div class="modal fade" id="<?php echo $tickets['id']; ?>Slide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-support">
