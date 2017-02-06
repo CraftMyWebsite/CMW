@@ -3,7 +3,7 @@ if(isset($_POST['id_topic2']) AND isset($_Joueur_))
 {
 	if(!isset($_GET['confirmation']))
 	{
-		header('Location: ' . $_Serveur_['General']['url'] . '?&page=confirmation&choix=5&id_topic=' . $_POST['id_topic2'] . '');
+		header('Location: ?&page=confirmation&choix=5&id_topic=' . $_POST['id_topic2'] . '');
 	}
 	else
 	{
@@ -18,5 +18,7 @@ if(isset($_POST['id_topic2']) AND isset($_Joueur_))
 		
 	}
 }
+else
+	header('Location: ?page=erreur&erreur=0');
 
 ?>

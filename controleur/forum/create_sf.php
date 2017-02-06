@@ -34,3 +34,5 @@ if(isset($_Joueur_) AND $_Joueur_['rang'] == 1 AND isset($_POST['nom']) AND strl
 	));
 	header('Location: index.php?page=forum_categorie&id=' .$id. '');
 }
+else
+	header('Location: ?page=erreur&erreur=0');

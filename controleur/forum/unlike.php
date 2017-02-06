@@ -10,7 +10,7 @@ if(isset($_POST['id_answer']) && isset($_Joueur_))
 	$testcount = $rtest->rowCount();
 	if($testcount > 1)
 	{
-		//erreur
+		header('Location: ?page=erreur&erreur=17');
 	}
 	else
 	{
@@ -27,7 +27,8 @@ if(isset($_POST['id_answer']) && isset($_Joueur_))
 		'id' => $id
 	));
 	$header = $rheader->fetch();
-	header('Location: ' . $_Serveur_['General']['url'] . '?&page=post&id=' . $header['id_topic'] . '');
+	header('Location: ?&page=post&id=' . $header['id_topic'] . '');
 }
-
+else
+	header('Location: ?page=erreur&erreur=0');
 ?>

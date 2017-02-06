@@ -30,3 +30,5 @@ if($_Joueur_['rang'] == 1 AND isset($_GET['id_cat'], $_GET['id_sf']))
 	));
 	header('Location: index.php?page=forum_categorie&id=' .$id_cat. '');
 }
+else
+	header('Location: ?page=erreur&erreur=0');

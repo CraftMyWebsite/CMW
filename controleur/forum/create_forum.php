@@ -9,3 +9,5 @@ if(isset($_Joueur_) AND $_Joueur_['rang'] == 1 AND !empty($_POST['nom']))
 	));
 	header('Location: ?page=forum');
 }
+else
+	header('Location: ?page=erreur&erreur=0');

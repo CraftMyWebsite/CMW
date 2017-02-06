@@ -10,14 +10,14 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 		$close->execute(array(
 			'id' => $id
 		));
-		header('Location: ' . $_Serveur_['General']['url'] . '?&page=forum');
+		header('Location: ?&page=forum');
 	}
 	if($choix == 2)
 	{
 		//on supprime le topic 
 		if(!isset($_GET['confirmation']))
 		{
-			header('Location: ' . $_Serveur_['General']['url'] . '?&page=confirmation&id_topic=' .$id. '&choix=2');
+			header('Location: ?&page=confirmation&id_topic=' .$id. '&choix=2');
 		}
 		else
 		{
@@ -53,8 +53,10 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 				$delete_post->execute(array(
 					'id' => $id 
 				));
-				header('Location: ' . $_Serveur_['General']['url'] .'?&page=forum');
+				header('Location: ?&page=forum');
 			}
+			else
+				header('Location: ?page=erreur&erreur=0');
 		}
 	}
 	if($choix == 3)
@@ -62,7 +64,7 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 		//Alors on déplace :P
 		if(!isset($_GET['confirmation']))
 		{
-			header('Location: ' . $_Serveur_['General']['url'] . '?&page=confirmation&id_topic=' . $id . '&choix=3');
+			header('Location: ?&page=confirmation&id_topic=' . $id . '&choix=3');
 			
 		}
 		else 
@@ -88,8 +90,10 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 						'id' => $id
 					));
 				}
-				header('Location: ' . $_Serveur_['General']['url'] . '?&page=forum');
+				header('Location: ?&page=forum');
 			}
+			else
+				header('Location: ?page=erreur&erreur=0');
 		}
 	}
 	if($choix == 4)
@@ -102,4 +106,6 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 		header('Location: ' . $_Serveur_['General']['url'] . '?&page=forum');
 	}
 }
+else
+	header('Location: ?page=erreur&erreur=0');
 ?>

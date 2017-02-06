@@ -30,3 +30,7 @@ if($_Joueur_['rang'] == 1 AND isset($_GET['id']))
 	));
 	header('Location: index.php?page=forum');
 }
+else
+	header('Location: ?page=erreur&erreur=0');
+
+?>

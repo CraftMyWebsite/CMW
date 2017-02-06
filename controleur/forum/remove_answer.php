@@ -37,5 +37,5 @@ if(isset($_POST['id_answer']) AND isset($_Joueur_) AND isset($_POST['page']))
 }
 else 
 {
-	header('Location: ?erreur=1');
+	header('Location: ?page=erreur&erreur=0');
 }

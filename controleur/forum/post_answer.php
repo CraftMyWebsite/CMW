@@ -43,5 +43,9 @@ if(isset($_Joueur_))
 		));
 		header('Location: ' . $_Serveur_['General']['url'] . '?&page=post&id=' . $id . '');
 	}
+	else
+		header('Location: ?page=erreur&erreur=0');
 }
+else
+	header('Location: ?page=erreur&erreur=16');
 ?>

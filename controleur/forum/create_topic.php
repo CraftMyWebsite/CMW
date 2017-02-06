@@ -41,15 +41,11 @@ if(isset($_Joueur_))
 			'pseudo' => $_Joueur_['pseudo'],
 			'id_topic' => $return['id']
 		));
-		header('Location: ' . $_Serveur_['General']['url'] . '?&page=post&id=' . $return['id'] . '');
+		header('Location: ?&page=post&id=' . $return['id'] . '');
 	}
 	else
-	{
-	?><div class="alert alert-info" role="alert">Il manque des infos </div><?php
-	}
+		header('Location: ?page=erreur&erreur=0');
 }
 else 
-{
-	?><div class="alert alert-danger" role="alert">Non connecté ! </div><?php
-}
+	header('Location: ?page=erreur&erreur=7');
 ?>

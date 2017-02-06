@@ -9,4 +9,7 @@ if(isset($_GET['id']) AND $_Joueur_['rang'] == 1)
 	));
 	header('Location: index.php?page=post&id=' .$id. '');
 }
+else
+	header('Location: ?page=erreur&erreur=0');
+
 ?>

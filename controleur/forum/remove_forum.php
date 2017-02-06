@@ -10,13 +10,13 @@ if(isset($_Joueur_) AND $_Joueur_['rang'] == 1 AND isset($_GET['id']))
 }
 elseif(!isset($_Joueur_))
 {
-	?><script> console.log("Erreur t pas co bouffon"); </script> <?php 
+	header('Location: ?page=erreur&erreur=16');
 }
 elseif($_Joueur_ != 1)
 {
-	?><script> console.log("Mauvais truc de perm :("); </script> <?php 
+	header('Location: ?page=erreur&erreur=7');
 }
 else
 {
-	?><script> console.log("PBL"); </script><?php 
+	header('Location: ?page=erreur&erreur=0'); 
 }

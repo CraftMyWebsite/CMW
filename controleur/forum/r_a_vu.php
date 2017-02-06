@@ -12,3 +12,7 @@ if(isset($_GET['id_a']) AND $_Joueur_['rang'] == 1)
 	header('Location: index.php?page=post&id=' .$id_t. '&page_post=' .$page. '#' .$id. '');
 	
 }
+else
+	header('Location: ?page=erreur&erreur=0');
+
+?>
