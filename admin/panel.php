@@ -23,6 +23,9 @@
     <!-- Morris Charts CSS -->
     <link href="./admin/css/plugins/morris.css" rel="stylesheet">
 
+    <!-- Snarl Notif CSS -->
+    <link href="./admin/css/snarl.min.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link type="text/css" href="./admin/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
@@ -278,6 +281,9 @@
     <script src="./admin/js/plugins/morris/raphael.min.js"></script>
     <script src="./admin/js/plugins/morris/morris.min.js"></script>
     <script src="./admin/js/plugins/morris/morris-data.js"></script>
+
+    <!-- Snarl Notif JavaScript -->
+    <script src="./admin/js/snarl.min.js"></script>
 
 </body>
 
