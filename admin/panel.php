@@ -74,7 +74,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://infectedz.cmwph.fr/ApiSkins/face.php?user=<?php echo $_Joueur_['pseudo']; ?>&s=32&v=front"/> <?php echo $_Joueur_['pseudo']; ?> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_Joueur_['pseudo']; ?>&s=32&v=front"/> <?php echo $_Joueur_['pseudo']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="index.php?&page=profil&profil=<?php echo $_Joueur_['pseudo']; ?>"><i class="fa fa-fw fa-user"></i> Profil</a>

@@ -35,6 +35,7 @@ if(isset($_Joueur_)) {
 				$editGrade['PermsDefault']['support']['deleteMemberComm'] = $_POST['permsDefaultSupportDeleteMemberComm'.$i];
 				$editGrade['PermsDefault']['support']['editMemberComm'] = $_POST['permsDefaultSupportEditMemberComm'.$i];
 				$editGrade['PermsDefault']['support']['closeTicket'] = $_POST['permsDefaultSupportCloseTicket'.$i];
+				$editGrade['PermsDefault']['support']['displayTicket'] = $_POST['permsDefaultSupportDisplayTicket'.$i];
 
 				$editGrade['PermsPanel']['access'] = $_POST['permsPanelAccess'.$i];
 
