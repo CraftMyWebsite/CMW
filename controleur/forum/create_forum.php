@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_) AND $_Joueur_['rang'] == 1 AND !empty($_POST['nom']))
+if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addForum'] == true) AND !empty($_POST['nom']))
 {
 	//Creation forum 
 	$nom = htmlspecialchars($_POST['nom']);

@@ -32,7 +32,7 @@
 				<th></th>
 				<th>Nom</th>
 				<th>Description</th>
-				<?php if($_Joueur_['rang'] == 1)
+				<?php if($_PGrades_['PermsForum']['general']['deleteSousForum'] == true OR $_Joueur_['rang'] == 1)
 				{
 					?><th>Actions</th><?php 
 				} ?>
@@ -49,7 +49,7 @@
 					else { ?><a href="<?php echo $_Serveur_['General']['url']; ?>?page=forum_categorie&id=<?php echo $id; ?>&id_sous_forum=<?php echo $sousforumd['id']; ?>"><i class="material-icons"><?php echo $sousforumd['img']; ?></a><?php }?></td>
 				<td><a href="<?php echo $_Serveur_['General']['url']; ?>?&page=forum_categorie&id=<?php echo $id; ?>&id_sous_forum=<?php echo $sousforumd['id']; ?>"><?php echo $sousforumd['nom']; ?></a></td>	
 				<td><?php if(isset($sousforumd['description']) AND $sousforumd['description'] != NULL) { ?><a href="<?php echo $_Serveur_['General']['url']; ?>?&page=forum_categorie&id=<?php echo $id; ?>&id_sous_forum=<?php echo $sousforumd['id']; ?>"><?php echo $sousforumd['description']; ?></a><?php } ?></td>
-				<?php if($_Joueur_['rang'] == 1)
+				<?php if($_PGrades_['PermsForum']['general']['deleteSousForum'] == true OR $_Joueur_['rang'] == 1)
 				{
 					?><td><a href="?action=remove_sf&id_cat=<?php echo $id; ?>&id_sf=<?php echo $sousforumd['id']; ?>">Supprimer le Sous-Forum</a></td><?php 
 				} ?>
@@ -60,12 +60,12 @@
 		</table>
 		<?php 
 		}
-		if($_Joueur_['rang'] == 1)
+		if($_PGrades_['PermsForum']['general']['addSousForum'] == true OR $_Joueur_['rang'] == 1)
 		{
 			?>
 			<div class="col-md-offset-8 col-md-4">
 				<a class="btn btn-primary" role="button" data-toggle="collapse" href="#sous_cat" aria-expanded="false" aria-controls="collapseExample">
-				  Créez une sous-catégorie
+				  Créez un sous-forum
 				</a>
 			</div>
 				<div class="collapse" id="sous_cat">

@@ -44,7 +44,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 		<?php if(isset($topicd['sous_forum'])) { ?><li><a href="?page=foum_categorie&id=<?php echo $topicd['id_categorie']; ?>&id_sous_forum=<?php echo $topicd['sous_forum']; ?>"><?php $nom = $bddConnection->prepare('SELECT nom FROM cmw_forum_sous_forum WHERE id = :id'); $nom->execute(array('id' => $topicd['sous_forum'])); $nomd = $nom->fetch(); echo $nomd['nom']; ?></a></li><?php } ?>
 		<li class="active"><?php echo $topicd['nom']; ?></li>
 	</ol>		
-		<center><?php if(isset($_Joueur_) AND $_Joueur_['rang'] == 1) { ?>
+		<center><?php if(isset($_Joueur_) AND ($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1)) { ?>
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="dropdown">
@@ -53,6 +53,8 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 				</button>
 				<ul class="dropdown-menu list-inline" aria-labeledby="Actions-Modérations">
 				<?php 
+				if($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_Joueur_['rang'] == 1)
+				{
 					if($topicd['etat'] == 1)
 					{
 						?><li> <a href="<?php echo $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=4">Ouvrir la discussion</a></li><?php
@@ -62,9 +64,20 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 						?><li><a href="<?php echo $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=1">Fermer la discussion</a></li>
 					<?php 
 					}
+				}
+				if($_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1)
+				{
 					?>
 					<li><a href="<?php echo $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=2">Supprimer le topic</a></li>
+					<?php 
+				}
+				if($_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1)
+				{
+					?>
 					<li><a href="<?php echo $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=3">Déplacer la discussion</a></li>
+					<?php
+				}
+				?>
 				</ul>
 			</div>
 		</div>
@@ -92,13 +105,19 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 		<button type="submit" class="btn btn-primary">Signaler !</button>
 	</form>
 	</div>
-	<?php if($_Joueur_['pseudo'] == $topicd['pseudo'] OR $_Joueur_['rang'] == 1)
+	<?php if($_Joueur_['pseudo'] == $topicd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['editTopic'] == true OR $_Joueur_['rang'] == 1)
 	{
 		?><div class="col-md-2"><form action="?page=edit_topic" method="post">
 			<input type="hidden" name="id_topic" value="<?php echo $id; ?>" />
 			<button type="submit" class="btn btn-rounded btn-default">Editer le topic</button>
 		</form>
-		</div><div class="col-md-2">
+		</div>
+		<?php 
+	}
+	if($_Joueur_['pseudo'] == $topicd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1)
+	{
+		?>
+		<div class="col-md-2">
 		<form action="?action=remove_topic" method="post">
 			<input type="hidden" name="id_topic" value="<?php echo $id; ?>" />
 			<a class="btn btn-round btn-default" role="button" data-toggle="collapse" href="#topic_<?php echo $id; ?>" aria-expanded="false" aria-controls="collapseExample" >
@@ -151,9 +170,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 			<?php// include('modele/forum/getBBCode.php'); ?>
 				<p><?php $answere = $answerd['contenue'];
 				$answere = espacement($answere);
-				$answere = BBCode($answere);
-				//$answere = preg_replace('#\[url(?:=(.+))?\](.+)\[/url\]#isU', '<a href="$1">' if(isset($2))) { '$2'; } else { '$1'; } '</a>', $answer);
-				
+				$answere = BBCode($answere);				
 				echo $answere;
 				?></p>
 				<br/><div style="border-top: 0.1px grey solid;" class="separator" ></div>
@@ -276,12 +293,18 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 				</form></div>
 				<?php
 			}
-			if($_Joueur_['pseudo'] === $answerd['pseudo'] OR $_Joueur_['rang'] == 1)
+			if($_Joueur_['pseudo'] === $answerd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['editMessage'] == true OR $_Joueur_['rang'] == 1)
 			{
 				?><div class="col-md-2"><form action="?page=edit_answer" method="post">
 					<input type="hidden" name="id_answer" value="<?php echo $answerd['id']; ?>" />
 					<button type="submit" class="btn btn-default">Editer ce message</button>
-				</form></div><div class="col-md-2">
+				</form></div>
+				<?php 
+			}
+			if($_Joueur_['pseudo'] === $answerd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['deleteMessage'] == true OR $_Joueur_['rang'] == 1)
+			{
+				?>
+				<div class="col-md-2">
 				<form action="?action=remove_answer" method="post">
 					<input type="hidden" name="id_answer" value="<?php echo $answerd['id']; ?>" />
 					<input type="hidden" name="page" value="<?php if(isset($_GET['page_post'])) { echo $_GET['page_post']; } else { echo '1'; }?>" />

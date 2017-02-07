@@ -31,3 +31,6 @@ if(isset($_Joueur_) AND isset($_POST['id_topic']))
 	  </form>
       <?php 
 }
+else
+	header('Location: ?page=erreur&erreur=0');
+?>

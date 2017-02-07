@@ -2,7 +2,7 @@
 
 if(isset($_Joueur_) AND isset($_POST['nom']) AND isset($_POST['forum']) AND isset($_POST['desc']) AND strlen($_POST['nom']) <= 40 AND strlen($_POST['desc']) <= 300)
 {
-	if($_Joueur_['rang'] == 1)
+	if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addCategorie'] == true)
 	{
 		$nom = htmlspecialchars($_POST['nom']);
 		$desc = htmlspecialchars($_POST['desc']);

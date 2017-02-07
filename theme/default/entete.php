@@ -123,7 +123,7 @@
 											$alerte++;
 										}
 									}
-									if($_Joueur_['rang'] == 1)
+									if($_PGrades_['PermsForum']['moderation']['seeSignalement'] == true OR $_Joueur_['rang'] == 1)
 										{
 											$req_report = $bddConnection->query('SELECT * FROM cmw_forum_report WHERE vu = 0');
 											$signalement = $req_report->rowCount();
@@ -195,7 +195,7 @@
 	}
 </script>
 	<?php }
-	if(isset($_Joueur_['rang']) AND $_Joueur_['rang'] == 1)
+	if($_PGrades_['PermsForum']['moderation']['seeSignalement'] == true OR $_Joueur_['rang'] == 1)
 	{
 		?>
 		<script>

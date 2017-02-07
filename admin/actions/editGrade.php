@@ -35,7 +35,6 @@ if(isset($_Joueur_)) {
 				$editGrade['PermsDefault']['support']['deleteMemberComm'] = $_POST['permsDefaultSupportDeleteMemberComm'.$i];
 				$editGrade['PermsDefault']['support']['editMemberComm'] = $_POST['permsDefaultSupportEditMemberComm'.$i];
 				$editGrade['PermsDefault']['support']['closeTicket'] = $_POST['permsDefaultSupportCloseTicket'.$i];
-				$editGrade['PermsDefault']['support']['displayTicket'] = $_POST['permsDefaultSupportDisplayTicket'.$i];
 
 				$editGrade['PermsPanel']['access'] = $_POST['permsPanelAccess'.$i];
 
@@ -118,7 +117,20 @@ if(isset($_Joueur_)) {
 				$editGrade['PermsPanel']['support']['maintenance']['actions']['editAdminMessage'] = $_POST['permsPanelSupportMaintenanceActionsEditAdminMessage'.$i];
 				$editGrade['PermsPanel']['support']['maintenance']['actions']['editEtatMaintenance'] = $_POST['permsPanelSupportMaintenanceActionsEditEtatMaintenance'.$i];
 				$editGrade['PermsPanel']['support']['maintenance']['actions']['switchRedirectMode'] = $_POST['permsPanelSupportMaintenanceActionsSwitchRedirectMode'.$i];
-
+				$editGrade['PermsForum']['general']['addCategorie'] = $_POST['permsForumGeneralAddCategorie'.$i];
+				$editGrade['PermsForum']['general']['addForum'] = $_POST['permsForumGeneralAddForum'.$i];
+				$editGrade['PermsForum']['general']['deleteForum'] = $_POST['permsForumGeneralDeleteForum'.$i];
+				$editGrade['PermsForum']['general']['deleteCategorie'] = $_POST['permsForumGeneralDeleteCategorie'.$i];
+				$editGrade['PermsForum']['general']['addSousForum'] = $_POST['permsForumGeneralAddSousForum'.$i];
+				$editGrade['PermsForum']['general']['deleteSousForum'] = $_POST['permsForumGeneralDeleteSousForum'.$i];
+				$editGrade['PermsForum']['moderation']['editTopic'] = $_POST['permsForumModerationEditTopic'.$i];
+				$editGrade['PermsForum']['moderation']['deleteTopic'] = $_POST['permsForumModerationDeleteTopic'.$i];
+				$editGrade['PermsForum']['moderation']['editMessage'] = $_POST['permsForumModerationEditMessage'.$i];
+				$editGrade['PermsForum']['moderation']['deleteMessage'] = $_POST['permsForumModerationDeleteMessage'.$i];
+				$editGrade['PermsForum']['moderation']['closeTopic'] = $_POST['permsForumModerationCloseTopic'.$i];
+				$editGrade['PermsForum']['moderation']['mooveTopic'] = $_POST['permsForumModerationMooveTopic'.$i];
+				$editGrade['PermsForum']['moderation']['seeSignalement'] = $_POST['permsForumModerationSeeSignalement'.$i];
+				
 				$updateGrade = new Ecrire($grade, $editGrade);
 			} 
 		}
