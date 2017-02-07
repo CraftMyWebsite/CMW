@@ -125,7 +125,6 @@
                                 <script type="text/javascript">
                                     $(document).ready(function() {
                                       $("#sendCommand").click(function(e){
-                                        $("#commandeConsole").prop('disabled', true);
                                         $("#sendCommand").prop('disabled', true);
                                         e.preventDefault();
                                         $.ajax({
@@ -134,7 +133,6 @@
                                           data : $('#commandeExec').serialize(),
                                           success: function() {
                                             $('input[name=commandeConsole]').val('');
-                                            $("#commandeConsole").prop('disabled', false);
                                             $("#sendCommand").prop('disabled', false);
                                             Snarl.addNotification({
                                               title: 'Succès',
@@ -145,7 +143,6 @@
                                             },
                                             error: function() {
                                               $('input[name=commandeConsole]').val('');
-                                              $("#commandeConsole").prop('disabled', false);
                                               $("#sendCommand").prop('disabled', false);
                                               Snarl.addNotification({
                                               title: 'Erreur',
