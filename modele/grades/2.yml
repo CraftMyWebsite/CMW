@@ -8,6 +8,7 @@ PermsDefault:
         closeTicket: 
         deleteMemberComm: 
         editMemberComm: 
+        displayTicket: 
 PermsPanel: 
     access: 
     info: 
