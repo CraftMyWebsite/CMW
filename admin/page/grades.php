@@ -122,6 +122,12 @@
                                                                                         <input type="checkbox" name="permsDefaultSupportCloseTicket<?php echo $i; ?>" <?php if($idGrade[$i]['PermsDefault']['support']['closeTicket'] == true) echo 'checked'; ?> /> Ouvrir/Fermer les tickets dans le support
                                                                                     </label>
                                                                                 </div>
+                                                                                <div class="checkbox">
+                                                                                    <label>
+                                                                                        <input type="checkbox" name="permsDefaultSupportDisplayTicket<?php echo $i; ?>" <?php if($idGrade[$i]['PermsDefault']['support']['displayTicket'] == true) echo 'checked'; ?> /> Voir les tickets
+                                                                                        privés dans le support
+                                                                                    </label>
+                                                                               </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
