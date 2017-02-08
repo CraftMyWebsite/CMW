@@ -11,3 +11,5 @@ if(isset($_Joueur_))
 	));
 	header('Location: index.php?page=post&id=' .$id. '&page_post=' .$pages. '#' .$answer. '');
 }
+else
+	header('Location: ?page=erreur&erreur=0');

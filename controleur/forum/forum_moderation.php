@@ -3,21 +3,21 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 {
 	$id = htmlspecialchars($_GET['id_topic']);
 	$choix = htmlspecialchars($_GET['choix']);
-	if($choix == 1)
+	if($choix == 1 && $_PGrades_['PermsForum']['moderation']['closeTopic'] == true)
 	{
 		//On lock
 		$close = $bddConnection->prepare('UPDATE cmw_forum_post SET etat = 1 WHERE id = :id');
 		$close->execute(array(
 			'id' => $id
 		));
-		header('Location: ' . $_Serveur_['General']['url'] . '?&page=forum');
+		header('Location: ?&page=forum');
 	}
-	if($choix == 2)
+	if($choix == 2 && $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true)
 	{
 		//on supprime le topic 
 		if(!isset($_GET['confirmation']))
 		{
-			header('Location: ' . $_Serveur_['General']['url'] . '?&page=confirmation&id_topic=' .$id. '&choix=2');
+			header('Location: ?&page=confirmation&id_topic=' .$id. '&choix=2');
 		}
 		else
 		{
@@ -53,16 +53,18 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 				$delete_post->execute(array(
 					'id' => $id 
 				));
-				header('Location: ' . $_Serveur_['General']['url'] .'?&page=forum');
+				header('Location: ?&page=forum');
 			}
+			else
+				header('Location: ?page=erreur&erreur=0');
 		}
 	}
-	if($choix == 3)
+	if($choix == 3 && $_PGrades_['PermsForum']['moderation']['mooveTopic'] == true)
 	{
 		//Alors on déplace :P
 		if(!isset($_GET['confirmation']))
 		{
-			header('Location: ' . $_Serveur_['General']['url'] . '?&page=confirmation&id_topic=' . $id . '&choix=3');
+			header('Location: ?&page=confirmation&id_topic=' . $id . '&choix=3');
 			
 		}
 		else 
@@ -88,11 +90,13 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 						'id' => $id
 					));
 				}
-				header('Location: ' . $_Serveur_['General']['url'] . '?&page=forum');
+				header('Location: ?&page=forum');
 			}
+			else
+				header('Location: ?page=erreur&erreur=0');
 		}
 	}
-	if($choix == 4)
+	if($choix == 4 && $_PGrades_['PermsForum']['moderation']['closeTopic'] == true)
 	{
 		//On rouvre 
 		$ouvre = $bddConnection->prepare('UPDATE cmw_forum_post SET etat = 0 WHERE id = :id');
@@ -102,4 +106,6 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 		header('Location: ' . $_Serveur_['General']['url'] . '?&page=forum');
 	}
 }
+else
+	header('Location: ?page=erreur&erreur=0');
 ?>

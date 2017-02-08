@@ -14,5 +14,8 @@ if(isset($_POST['choix']) AND isset($_Joueur_) AND isset($_POST['id_answer']))
 		'id' => $id
 	));
 	$postd = $post->fetch();
-	header('Location: ' . $_Serveur_['General']['url'] . '?&page=post&id=' . $postd['id_topic'] . '');
+	header('Location: ?&page=post&id=' . $postd['id_topic'] . '');
 }
+else
+	header('Location: ?page=erreur&erreur=0');
+?>

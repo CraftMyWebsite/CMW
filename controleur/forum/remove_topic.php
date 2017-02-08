@@ -43,3 +43,5 @@ if(isset($_POST['id_topic']) AND isset($_Joueur_))
 	));
 	header('Location: ?page=forum');
 }
+else
+	header('Location: ?page=erreur&erreur=0');

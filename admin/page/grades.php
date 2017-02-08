@@ -124,9 +124,10 @@
                                                                                 </div>
                                                                                 <div class="checkbox">
                                                                                     <label>
-                                                                                        <input type="checkbox" name="permsDefaultSupportDisplayTicket<?php echo $i; ?>" <?php if($idGrade[$i]['PermsDefault']['support']['displayTicket'] == true) echo 'checked'; ?> /> Voir les tickets privés dans le support
+                                                                                        <input type="checkbox" name="permsDefaultSupportDisplayTicket<?php echo $i; ?>" <?php if($idGrade[$i]['PermsDefault']['support']['displayTicket'] == true) echo 'checked'; ?> /> Voir les tickets
+                                                                                        privés dans le support
                                                                                     </label>
-                                                                                </div>
+                                                                               </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -820,6 +821,128 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+														<div class="panel panel-default">
+															<div class="panel-heading" role="tab" id="headingFour<?php echo $i; ?>">
+																<h4 class="panel-title">
+																	<a role="button" data-toggle="collapse" data-parent="#accordion<?php echo $i; ?>" href="#collapseFour<?php echo $i; ?>" aria-expanded="true" aria-controls="collapseFour<?php echo $i; ?>"><strong>Permissions Forum</strong></a>
+																</h4>
+															</div>
+															<div id="collapseFour<?php echo $i; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour<?php echo $i; ?>">
+																<div class="panel-body">
+																	<div class="col-lg-12 text-center">
+																		<div class="row">
+																			<div class="col-lg-10 col-lg-offset-1">
+																				<div class="panel-group" id="accordionForum<?php echo $i; ?>" role="tablist"aria-multiselectable="true">
+																					<div class="panel panel-default">
+																						<div class="panel-heading" role="tab" id="headingGeneral<?php echo $i; ?>">
+																							<h4 class="panel-title">
+																								<a role="button" data-toggle="collapse" data-parent="accordionForum<?php echo $i; ?>" href="#collapseGeneral<?php echo $i; ?>" aria-expanded="true" aria-controls="collapseGeneral<?php echo $i; ?>"><strong>Général</strong></a>
+																							</h4>
+																						</div>
+																						<div id="collapseGeneral<?php echo $i; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingGeneral<?php echo $i; ?>">
+																							<div class="panel-body">
+																								<div class="col-lg-12 text-center">
+																									<div class="row">
+																										<div class="col-lg-12 col-lg-offset-2 text-left">
+																											<div class="col-lg-10">
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumGeneralAddCategorie<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['general']['addCategorie'] == true) echo 'checked'; ?> /> Ajouter des Catégories
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumGeneralAddForum<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['general']['addForum'] == true) echo 'checked'; ?> /> Ajouter des Forums
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumGeneralDeleteForum<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['general']['deleteForum'] == true) echo 'checked'; ?> /> Supprimer des Forums
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumGeneralDeleteCategorie<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['general']['deleteCategorie'] == true) echo 'checked'; ?> /> Supprimer des Catégories
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumGeneralAddSousForum<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['general']['addSousForum'] == true) echo 'checked'; ?> /> Ajouter des Sous-Forums
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumGeneralDeleteSousForum<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['general']['deleteSousForum'] == true) echo 'checked'; ?> /> Supprimer des Sous-Forums
+																													</label>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>	
+																					<div class="panel panel-default">
+																						<div class="panel-heading" role="tab" id="headingModeration<?php echo $i; ?>">
+																							<h4 class="panel-title">
+																								<a role="button" data-toggle="collapse" data-parent="accordionForum<?php echo $i; ?>" href="#collapseModeration<?php echo $i; ?>" aria-expanded="true" aria-controls="collapseModeration<?php echo $i; ?>"><strong>Modération</strong></a>
+																							</h4>
+																						</div>
+																						<div id="collapseModeration<?php echo $i; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingModeration<?php echo $i; ?>">
+																							<div class="panel-body">
+																								<div class="col-lg-12 text-center">
+																									<div class="row">
+																										<div class="col-lg-12 col-lg-offset-2 text-left">
+																											<div class="col-lg-10">
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumModerationEditTopic<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['moderation']['editTopic'] == true) echo 'checked'; ?> /> Editer des Topics
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumModerationDeleteTopic<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['moderation']['deleteTopic'] == true) echo 'checked'; ?> /> Supprimer des Topics
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumModerationEditMessage<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['moderation']['editMessage'] == true) echo 'checked'; ?> /> Editer des Messages
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumModerationDeleteMessage<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['moderation']['deleteMessage'] == true) echo 'checked'; ?> /> Supprimer des Messages
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumModerationCloseTopic<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['moderation']['closeTopic'] == true) echo 'checked'; ?> /> Fermer/Ouvrir des Topics
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumModerationMooveTopic<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['moderation']['mooveTopic'] == true) echo 'checked'; ?> /> Déplacer des Topics
+																													</label>
+																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumModerationSeeSignalement<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['moderation']['seeSignalement'] == true) echo 'checked'; ?> /> Voir les topics/messages signalé 
+																													</label>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
 
                                                         <hr>
                                                         <div class="row">

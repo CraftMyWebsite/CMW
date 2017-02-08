@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_GET['id_a']) AND $_Joueur_['rang'] == 1)
+if(isset($_GET['id_a']) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['moderation']['seeSignalement'] == true))
 {
 	$id = htmlspecialchars($_GET['id_a']);
 	$id_t = htmlspecialchars($_GET['id']);
@@ -12,3 +12,7 @@ if(isset($_GET['id_a']) AND $_Joueur_['rang'] == 1)
 	header('Location: index.php?page=post&id=' .$id_t. '&page_post=' .$page. '#' .$id. '');
 	
 }
+else
+	header('Location: ?page=erreur&erreur=0');
+
+?>

@@ -1,6 +1,6 @@
 <?php 
 
-if($_Joueur_['rang'] == 1 AND isset($_GET['id']))
+if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteCategorie'] == true) AND isset($_GET['id']))
 {
 	$id = htmlspecialchars($_GET['id']);
 	$select = $bddConnection->prepare('SELECT * FROM cmw_forum_post WHERE id_categorie = :id');
@@ -30,3 +30,7 @@ if($_Joueur_['rang'] == 1 AND isset($_GET['id']))
 	));
 	header('Location: index.php?page=forum');
 }
+else
+	header('Location: ?page=erreur&erreur=0');
+
+?>

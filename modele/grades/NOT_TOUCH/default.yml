@@ -113,3 +113,19 @@ PermsPanel:
         switchRedirectMode: 
   update:
     showPage: 
+PermsForum: 
+  general: 
+      addCategorie: 
+      addForum: 
+      deleteForum: 
+      deleteCategorie: 
+      addSousForum: 
+      deleteSousForum: 
+  moderation: 
+      editTopic: 
+      deleteMessage: 
+      deleteTopic: 
+      editMessage: 
+      closeTopic: 
+      mooveTopic: 
+      seeSignalement: 

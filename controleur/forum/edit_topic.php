@@ -19,3 +19,5 @@ if(isset($_POST['id_topic']) && isset($_Joueur_))
 	}
 	header('Location: index.php?page=post&id=' .$id. '');
 }
+else
+	header('Location: ?page=erreur&erreur=0');

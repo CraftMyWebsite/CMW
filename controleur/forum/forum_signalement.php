@@ -4,7 +4,7 @@ if(isset($_POST['id_answer']) AND isset($_Joueur_) )
 	$id = htmlspecialchars($_POST['id_answer']);
 	if(!isset($_GET['confirmation']))
 	{
-		header("Location: {$_Serveur_['General']['url']}?&page=confirmation&choix=4&id={$id}");
+		header("Location: ?&page=confirmation&choix=4&id={$id}");
 	}
 	else
 	{
@@ -18,4 +18,6 @@ if(isset($_POST['id_answer']) AND isset($_Joueur_) )
 		header('Location: ?&page=forum');
 	}
 }
+else
+	header('Location: ?page=erreur&erreur=0');
 ?>

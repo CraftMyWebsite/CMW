@@ -62,6 +62,11 @@ if(isset($_GET['page']))
 
 		case 'erreur':
 		    include('controleur/erreur.php'); 
+			$erreur = (!isset($_GET['erreur'])) ? $erreur = 1500879564 : (int)$_GET['erreur'];
+			unset($type);
+			unset($titre);
+			unset($contenue);
+			get_erreur($erreur, $type, $titre, $contenue);
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/erreur.php');
 		break;
 
@@ -74,10 +79,6 @@ if(isset($_GET['page']))
 			include('controleur/topVoteurs.php');
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/voter.php');
 		break;
-		
-		case 'kits': 
-			include('theme/' .$_Serveur_['General']['theme']. '/pages/kits.php');
-		break;	
 		
 		case 'support': 
 			require_once('controleur/support/support.php');
@@ -114,6 +115,11 @@ if(isset($_GET['page']))
 			if(!isset($pages) OR empty($pages))
 			{
 				include('controleur/erreur.php');
+				$erreur = (!isset($_GET['erreur'])) ? $erreur = 1500879564 : (int)$_GET['erreur'];
+				unset($type);
+				unset($titre);
+				unset($contenue);
+				get_erreur($erreur, $type, $titre, $contenue);
 				include('theme/' .$_Serveur_['General']['theme']. '/pages/erreur.php');
 			}
 			else

@@ -1,6 +1,6 @@
 <?php 
 
-if($_Joueur_['rang'] == 1 AND isset($_GET['id_cat'], $_GET['id_sf']))
+if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteSousForum'] == true) AND isset($_GET['id_cat'], $_GET['id_sf']))
 {
 	$id_cat = htmlspecialchars($_GET['id_cat']);
 	$id_sf = htmlspecialchars($_GET['id_sf']);
@@ -30,3 +30,5 @@ if($_Joueur_['rang'] == 1 AND isset($_GET['id_cat'], $_GET['id_sf']))
 	));
 	header('Location: index.php?page=forum_categorie&id=' .$id_cat. '');
 }
+else
+	header('Location: ?page=erreur&erreur=0');

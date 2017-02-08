@@ -1,10 +1,11 @@
 <?php 
 
 
-if(isset($_Joueur_) AND $_Joueur_['rang'] == 1 AND isset($_POST['nom']) AND strlen($_POST['nom']) <= 40 AND isset($_POST['desc']) AND strlen($_POST['desc']) <= 300 AND isset($_POST['id_categorie']))
+if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addSousForum'] == true) AND isset($_POST['nom']) AND strlen($_POST['nom']) <= 40 AND isset($_POST['id_categorie']))
 {
 	$nom = htmlspecialchars($_POST['nom']);
-	$desc = htmlspecialchars($_POST['desc']);
+	if(isset($_POST['desc'] AND strlen($_POST['desc']) <= 300)
+		$desc = htmlspecialchars($_POST['desc']);
 	$id = htmlspecialchars($_POST['id_categorie']);
 	if(!empty($_POST['img']) AND strlen($_POST['img']) <= 300 )
 	{
@@ -34,3 +35,5 @@ if(isset($_Joueur_) AND $_Joueur_['rang'] == 1 AND isset($_POST['nom']) AND strl
 	));
 	header('Location: index.php?page=forum_categorie&id=' .$id. '');
 }
+else
+	header('Location: ?page=erreur&erreur=0');

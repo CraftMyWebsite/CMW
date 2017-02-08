@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_Joueur_) AND $_Joueur_['rang'] == 1)
+if(isset($_Joueur_) AND ($_PGrades_['PermsForum']['moderation']['seeSignalement'] == true OR $_Joueur_['rang'] == 1))
 {
 	$req = $bddConnection->query('SELECT * FROM cmw_forum_report WHERE vu = 0');
 	?><div class="container">
@@ -77,3 +77,5 @@ if(isset($_Joueur_) AND $_Joueur_['rang'] == 1)
 	?></table>
 	</div><?php 
 }
+else
+	header('Location: ?page=erreur&erreuur=7');

@@ -7,8 +7,9 @@ if(isset($_Joueur_) AND isset($_GET['id_topic']))
 		'id_topic' => $id,
 		'pseudo' => $_Joueur_['pseudo']
 	));
-	header('Location: ' . $_Serveur_['General']['url'] . '?&page=forum');
+	header('Location: ?&page=forum');
 }
-
+else
+	header('Location: ?page=erreur&erreur=0');
 
 ?>
