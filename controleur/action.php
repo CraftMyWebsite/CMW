@@ -120,6 +120,16 @@ if(isset($_GET['action']))
 		case 'signalement_topic':
 			require('controleur/forum/forum_signalement_topic.php');
 		break;
+		
+		case 'mode_joueur':
+			if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['modeJoueur'] == true)
+			{
+				$_SESSION['mode'] = ($_SESSION['mode'] == 1) ? false : true;
+				header('Location: ?page=forum');
+			}
+			else
+				header('Location: ?page=erreur&erreur=7');
+		break;
 		// Fin d'appel en cas d'action forum
 		
 		// Appellé lorsqu'on envoie un formulaire de conneciton.

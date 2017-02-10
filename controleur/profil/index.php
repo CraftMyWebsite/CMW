@@ -31,7 +31,7 @@
 	elseif($joueurDonnees['rang'] == 4)
 		$gradeSite = 'Développeur';
 	elseif($joueurDonnees['rang'] == 5)
-		$gradeSite = 'Buildeur'
+		$gradeSite = 'Buildeur';
 	else
 		$gradeSite = 'Joueur';
 	

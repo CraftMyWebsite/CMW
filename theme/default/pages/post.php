@@ -44,7 +44,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 		<?php if(isset($topicd['sous_forum'])) { ?><li><a href="?page=foum_categorie&id=<?php echo $topicd['id_categorie']; ?>&id_sous_forum=<?php echo $topicd['sous_forum']; ?>"><?php $nom = $bddConnection->prepare('SELECT nom FROM cmw_forum_sous_forum WHERE id = :id'); $nom->execute(array('id' => $topicd['sous_forum'])); $nomd = $nom->fetch(); echo $nomd['nom']; ?></a></li><?php } ?>
 		<li class="active"><?php echo $topicd['nom']; ?></li>
 	</ol>		
-		<center><?php if(isset($_Joueur_) AND ($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1)) { ?>
+		<center><?php if(isset($_Joueur_) AND ($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1) AND !$_SESSION['mode']) { ?>
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="dropdown">
@@ -53,7 +53,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 				</button>
 				<ul class="dropdown-menu list-inline" aria-labeledby="Actions-Modérations">
 				<?php 
-				if($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_Joueur_['rang'] == 1)
+				if($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 				{
 					if($topicd['etat'] == 1)
 					{
@@ -65,13 +65,13 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 					<?php 
 					}
 				}
-				if($_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1)
+				if($_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 				{
 					?>
 					<li><a href="<?php echo $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=2">Supprimer le topic</a></li>
 					<?php 
 				}
-				if($_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1)
+				if($_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 				{
 					?>
 					<li><a href="<?php echo $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=3">Déplacer la discussion</a></li>
@@ -105,7 +105,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 		<button type="submit" class="btn btn-primary">Signaler !</button>
 	</form>
 	</div>
-	<?php if($_Joueur_['pseudo'] == $topicd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['editTopic'] == true OR $_Joueur_['rang'] == 1)
+	<?php if($_Joueur_['pseudo'] == $topicd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['editTopic'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 	{
 		?><div class="col-md-2"><form action="?page=edit_topic" method="post">
 			<input type="hidden" name="id_topic" value="<?php echo $id; ?>" />
@@ -114,7 +114,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 		</div>
 		<?php 
 	}
-	if($_Joueur_['pseudo'] == $topicd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1)
+	if($_Joueur_['pseudo'] == $topicd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 	{
 		?>
 		<div class="col-md-2">
@@ -293,7 +293,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 				</form></div>
 				<?php
 			}
-			if($_Joueur_['pseudo'] === $answerd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['editMessage'] == true OR $_Joueur_['rang'] == 1)
+			if($_Joueur_['pseudo'] === $answerd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['editMessage'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 			{
 				?><div class="col-md-2"><form action="?page=edit_answer" method="post">
 					<input type="hidden" name="id_answer" value="<?php echo $answerd['id']; ?>" />
@@ -301,7 +301,7 @@ if(isset($_GET['id']) AND isset($_Joueur_))
 				</form></div>
 				<?php 
 			}
-			if($_Joueur_['pseudo'] === $answerd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['deleteMessage'] == true OR $_Joueur_['rang'] == 1)
+			if($_Joueur_['pseudo'] === $answerd['pseudo'] OR $_PGrades_['PermsForum']['moderation']['deleteMessage'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 			{
 				?>
 				<div class="col-md-2">

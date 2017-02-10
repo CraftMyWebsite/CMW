@@ -122,6 +122,7 @@ PermsForum:
         deleteCategorie: 
         addSousForum: 
         deleteSousForum: 
+        modeJoueuur:
     moderation: 
         editTopic: 
         deleteMessage: 

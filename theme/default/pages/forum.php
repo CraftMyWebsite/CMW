@@ -3,21 +3,27 @@
 <div class="alert alert-info" role="alert">
 	Bienvenue sur le forum de <?php echo $_Serveur_['General']['name']; ?>,
 	Ici vous pourrez échanger et partager avec toute la communauté du serveur ! </div>
-
-<?php 
+	<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['modeJoueur'] == true)
+	{
+		?>
+			<div class="col-md-offset-6 col-md-6">
+				<a href="?action=mode_joueur" class="btn btn-primary">Passer en mode visuel <?php if($_SESSION['mode']) echo "Administrateur"; else echo "Joueur"; ?></a>
+			</div>
+		<?php 
+	}
 $forum = $bddConnection->query('SELECT * FROM cmw_forum');
 while($fofo = $forum->fetch())
 { ?>
 		</br><br/>
 		<table class="table table-striped">
-		<caption><div class="row"><div class="col-md-3"><h3><?php echo ucfirst($fofo['nom']); ?></h3></div><?php if(isset($_Joueur_) AND $_PGrades_['PermsForum']['general']['deleteForum'] == true OR $_Joueur_['rang'] == 1){ ?><div class="col-md-9" style="text-align: right;"><a href="?action=remove_forum&id=<?php echo $fofo['id']; ?>" class="btn btn-danger" style="text-align: right;">Supprimer</a></div><?php } ?></div></caption>
+		<caption><div class="row"><div class="col-md-3"><h3><?php echo ucfirst($fofo['nom']); ?></h3></div><?php if(isset($_Joueur_) AND $_PGrades_['PermsForum']['general']['deleteForum'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode']){ ?><div class="col-md-9" style="text-align: right;"><a href="?action=remove_forum&id=<?php echo $fofo['id']; ?>" class="btn btn-danger" style="text-align: right;">Supprimer</a></div><?php } ?></div></caption>
 		<thead>
 			<tr>
 				<th></th>
 				<th>Nom</th>
 				<th>Description</th>
 				<th>Sous-Forum</th>
-				<?php if($_PGrades_['PermsForum']['general']['deleteCategorie'] == true OR $_Joueur_['rang'] == 1)
+				<?php if($_PGrades_['PermsForum']['general']['deleteCategorie'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 				{
 					?><th>Actions</th><?php
 				}
@@ -74,7 +80,7 @@ while($categorieDonnees = $categorieReq->fetch())
 				Il n'y a pas de sous-forum
 				<?php } ?>
 				</td>
-				<?php if(isset($_Joueur_) AND $_PGrades_['PermsForum']['general']['deleteCategorie'] == true OR $_Joueur_['rang'] == 1)
+				<?php if(isset($_Joueur_) AND $_PGrades_['PermsForum']['general']['deleteCategorie'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 				{
 					?><td><a href="?action=remove_cat&id=<?php echo $categorie[$i]['id']; ?>">Supprimer la catégorie</a></td><?php
 				}
@@ -85,7 +91,7 @@ while($categorieDonnees = $categorieReq->fetch())
 </table><br/><br/><br/><hr/>
 <?php
 }
-if(isset($_Joueur_) AND $_PGrades_['PermsForum']['general']['addCategorie'] == true OR $_Joueur_['rang'] == 1)
+if(isset($_Joueur_) AND $_PGrades_['PermsForum']['general']['addCategorie'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 {
 	?>
 	<h3>Créer une catégorie : </h3>
@@ -125,7 +131,7 @@ if(isset($_Joueur_) AND $_PGrades_['PermsForum']['general']['addCategorie'] == t
 	</div>
 	
 <br><hr/>
-	<?php if($_PGrades_['PermsForum']['general']['addForum'] == true OR $_Joueur_['rang'] == 1)
+	<?php if($_PGrades_['PermsForum']['general']['addForum'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
 	{
 		?><a class="btn btn-primary btn-xs btn-block" role="button" data-toggle="collapse" href="#add_forum" aria-expanded="false" aria-controls="add_forum">
 	Ajouter un forum
