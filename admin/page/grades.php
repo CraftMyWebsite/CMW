@@ -875,6 +875,11 @@
 																														<input type="checkbox" name="permsForumGeneralDeleteSousForum<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['general']['deleteSousForum'] == true) echo 'checked'; ?> /> Supprimer des Sous-Forums
 																													</label>
 																												</div>
+																												<div class="checkbox">
+																													<label>
+																														<input type="checkbox" name="permsForumGeneralModeJoueur<?php echo $i; ?>" <?php if($idGrade[$i]['PermsForum']['general']['modeJoueur'] == true) echo 'checked'; ?> /> Passer au visuel Joueur/Administrateur
+																													</label>
+																												</div>
 																											</div>
 																										</div>
 																									</div>

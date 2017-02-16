@@ -125,6 +125,7 @@ if(isset($_Joueur_)) {
 				$editGrade['PermsForum']['general']['deleteCategorie'] = $_POST['permsForumGeneralDeleteCategorie'.$i];
 				$editGrade['PermsForum']['general']['addSousForum'] = $_POST['permsForumGeneralAddSousForum'.$i];
 				$editGrade['PermsForum']['general']['deleteSousForum'] = $_POST['permsForumGeneralDeleteSousForum'.$i];
+				$editGrade['PermsForum']['general']['modeJoueur'] = $_POST['permsForumGeneralModeJoueur'.$i];
 				$editGrade['PermsForum']['moderation']['editTopic'] = $_POST['permsForumModerationEditTopic'.$i];
 				$editGrade['PermsForum']['moderation']['deleteTopic'] = $_POST['permsForumModerationDeleteTopic'.$i];
 				$editGrade['PermsForum']['moderation']['editMessage'] = $_POST['permsForumModerationEditMessage'.$i];

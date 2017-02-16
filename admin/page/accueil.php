@@ -177,6 +177,7 @@
                                             <option value="support">Support</option>
                                             <option value="voter">Voter</option>
                                             <option value="tokens">Jetons</option>
+											<option value="forum">Forum</option>
                                             <?php $j = 0;
                                             while($j < count($pages)) { ?>
                                                 <option value="<?php echo $pages[$j]; ?>"><?php echo $pages[$j]; ?></option>
