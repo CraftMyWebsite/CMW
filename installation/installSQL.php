@@ -161,6 +161,18 @@ ENGINE=InnoDB DEFAULT CHARSET=latin1;	");
 
 #----Début de l'intégration----#
 
+$sql->exec("CREATE TABLE IF NOT EXISTS `cmw_alloconv`
+(
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`pseudo` varchar(32) NOT NULL,
+	`code` varchar(8) NOT NULL,
+	`numero_surtaxe` varchar(10) NOT NULL,
+	`prix_total` int(11) NOT NULL,
+	`date_achat` datetime NOT NULL,
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB DEFAULT CHARSET=latin1;	");
+
 $sql->exec("CREATE TABLE IF NOT EXISTS `cmw_news_commentaires`
 (
 	`id` int(11) NOT NULL AUTO_INCREMENT,

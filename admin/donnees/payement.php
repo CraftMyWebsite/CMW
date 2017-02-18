@@ -4,6 +4,9 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['payment']['showPage'] == 
 	$lectureP = $lectureP->GetTableau();
 	$lectureP = $lectureP['Payement'];
 
+	$microTokens = new Lire('modele/config/configAlloconv.yml');
+	$microTokens = $microTokens->GetTableau();
+
 	$query = $bddConnection->query('SELECT * FROM cmw_jetons_paypal_offres');
 
 	$i = 0;

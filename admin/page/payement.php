@@ -29,7 +29,7 @@
         if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['payment']['actions']['editPayment'] == true) { ?>
             <div class="col-lg-6 col-lg-offset-3 text-center">
                 <div class="row">
-                    <h3>Dedipass/Paypal ID</h3>
+                    <h3>AlloConv/Paypal ID</h3>
                 </div>
                 <div class="row">
                     <div class="alert alert-success">
@@ -48,17 +48,29 @@
                                         <input type="checkbox" name="paypal" <?php if($lectureP['paypal'] == true) echo 'checked'; ?>/> Paypal
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="dedipass" <?php if($lectureP['dedipass'] == true) echo 'checked'; ?>/> Dedipass
+                                        <input type="checkbox" name="alloconv" <?php if($microTokens['enabled'] == true) echo 'checked'; ?>/> Alloconv
                                     </label>
                                 </div>
-                                <h3>Dedipass</h3>
+                                <h3>AlloConv</h3>
                                 <div class="row">
-                                    <label class="control-label">Dedipass PublicKey</label>
-                                    <input type="text" name="dedipass_public" class="form-control" value="<?php echo $lectureP['dedipass_public']; ?>" placeholder="Trouvez le sur votre panel dedipass..."/>
+                                    <label class="control-label">Jetons</label>
+                                    <input type="number" name="alloconv_tokens" class="form-control text-center" value="<?php echo $microTokens['tokens']; ?>" placeholder="Nombre de Jetons"/>
                                 </div>
                                 <div class="row">
-                                    <label class="control-label">Dedipass PrivateKey</label>
-                                    <input type="text" name="dedipass_private" class="form-control" value="<?php echo $lectureP['dedipass_private']; ?>" placeholder="Egalement sur votre panel dedipass"/>
+                                    <label class="control-label">Palier</label>
+                                    <input type="text" name="alloconv_palier" class="form-control text-center" value="<?php echo $microTokens['palier']; ?>" placeholder="Voir palier disponible sur alloconv"/>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">ID Client</label>
+                                    <input type="text" name="alloconv_idClient" class="form-control text-center" value="<?php echo $microTokens['Infos']['idClient']; ?>" placeholder="ID de votre compte sur alloconv"/>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">ID Site</label>
+                                    <input type="number" name="alloconv_idSite" class="form-control text-center" value="<?php echo $microTokens['Infos']['idSite']; ?>" placeholder="ID de votre site confirmé par alloconv"/>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">Cle API</label>
+                                    <input type="text" name="alloconv_cle" class="form-control text-center" value="<?php echo $microTokens['Infos']['cle']; ?>" placeholder="Cle API de votre compte sur alloconv"/>
                                 </div>
                                 <h3>PayPal</h3>
                                 <div class="row">
