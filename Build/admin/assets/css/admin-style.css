@@ -1,0 +1,131 @@
+/* ***************************************************************************/
+/*    _____            __ _   __  __    __          __  _         _ _        */
+/*   / ____|          / _| | |  \/  |   \ \        / / | |       (_) |       */
+/*  | |     _ __ __ _| |_| |_| \  / |_   \ \  /\  / /__| |__  ___ _| |_ ___  */
+/*  | |    | '__/ _` |  _| __| |\/| | | | \ \/  \/ / _ \ '_ \/ __| | __/ _ \ */
+/*  | |____| | | (_| | | | |_| |  | | |_| |\  /\  /  __/ |_) \__ \ | ||  __/ */
+/*   \_____|_|  \__,_|_|  \__|_|  |_|\__, | \/  \/ \___|_.__/|___/_|\__\___| */
+/*                                    __/ |                                  */
+/*                                   |___/          By TheTueurCiTy          */
+/*                                                                           */
+/* ************************************************************************* */
+
+body {
+    background: url('../img/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.cmw-cube {max-width: 95%;margin: 0 auto;margin-top: 20px;}
+
+.cmw-main-container {
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.cmw-page-container {background: white;min-height: 764px;padding: 15px;}
+
+.cmw-sidebar {margin-left: 0px;}
+
+.cmw-navbar {border-radius: 0px;background-color: var(--color-panel-main);max-width: 95% !important;width: 100%;margin: 0 auto;margin-bottom: 20px;}
+.cmw-left-navbar {background-color: var(--color-panel-main);padding: 10px;font-size: 21px;font-weight: bold;max-width: 100%;width: 100%;height: 50px;}
+.cmw-left-navbar a{color: white !important;text-decoration: none !important;}
+.cmw-right-navbar {color: white !important;background-color: var(--color-panel-main);padding: 9px;font-size: 21px;font-weight: bold;max-width: 100%;width: 100%;height: 50px;}
+.cmw-right-navbar a{color: white !important;text-decoration: none !important;}
+
+.cmw-sidebar-btn {background-color: var(--color-panel-main);border-radius: 0px;font-size: 17px;padding: 7px;transition: 1s;border: 0px;text-align: left;color: white;}
+.cmw-sidebar-btn:hover {transition: 1s;transform: scale(1.02);}
+
+.cmw-sidebar-panel {border-radius: 0px;}
+
+.cmw-sidebar-panel-body {
+    padding: 5px;
+}
+
+.cmw-nav-disconnect {
+    float: right;
+    height: 40px;
+    width: 185px;
+    text-decoration: none !important;
+}
+
+.cmw-fa-sidebar {float: right;margin-top: 0px;font-size: 28px;}
+
+.cmw-header-username {
+    text-decoration: none !important;
+}
+
+.cmw-egg-1 {
+    float: right;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 0px;
+    border: 0px;
+    padding: 8px;
+    width: 115px;
+    color: rgba(255, 255, 255, 0.06);
+    margin-top: 20px;
+}
+
+.cmw-footer {
+    background-color: var(--color-panel-main);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.cmw-pull-right {
+    float: right;
+}
+
+.cmw-page-content-header {
+    background: var(--color-panel-main);
+    color: white;
+    font-size: 23px;
+    padding: 10px;
+    margin: -15px -15px 15px -15px;
+}
+
+.cmw-panel {
+
+}
+.cmw-panel-header {background-color: var(--color-panel-main) !important;color: white !important;}
+.cmw-panel-body {
+
+}
+.cmw-panel-footer {
+
+}
+
+.cmw-transition {
+    transition: 1s;
+}
+
+a {color: #2c3e50;}
+a:hover {color:var(--color-panel-main);}
+
+
+#divScroll{
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	cursor: pointer;
+}
+
+.hvr-bounce-to-right:before{
+	background-color: var(--color-panel-hover);
+}
+.btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default{
+	background-color: var(--color-panel-focus);
+}
+
+.d-none {
+    display: none;
+}

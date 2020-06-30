@@ -1,0 +1,25 @@
+#Ce fichier contiens la config de base du serveur---
+MenuTexte:
+    - Accueil
+    - Serveur
+    - Boutique
+    - Support
+    - Voter
+    - Forum
+    - Liste des membres
+MenuLien:
+    - index.php
+    - '#'
+    - '?&page=boutique'
+    - '?&page=support'
+    - '?&page=voter'
+    - ?page=forum
+    - '?&page=membres'
+MenuListeDeroulante:
+    Serveur:
+        - Ban-List
+        - Chat
+MenuListeDeroulanteLien:
+    Serveur:
+        - ?page=banlist
+        - ?page=chat

@@ -1,0 +1,183 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Raleway:600|Montserrat');
+/*
+*   2017 Minedev by Amjido & Florentlife
+*   Touts droits reservés
+*/
+
+body {
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body,
+button,
+input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+    font-family: "Raleway", sans-serif;
+}
+
+#page{
+    flex: 1;
+}
+
+section {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.link:hover{
+    cursor:pointer;
+}
+
+.heading-mask {
+    height: 350px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.heading {
+    background-position: center;
+}
+
+.heading-pagination {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    text-align: right;
+    background-image: url('../img/mineur_victorieux.jpg');
+    background-position: center;
+}
+
+.layout {
+    background-image: url('../img/texture.png');
+    width: 100%;
+}
+
+.layout-content {
+    padding: 10px;
+}
+
+.micro-blog {
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.text-facebook {
+    color: #3C579A;
+    text-shadow: 2px 2px #2b3e6e;
+}
+
+.text-youtube {
+    color: #EE1C1B;
+    text-shadow: 2px 2px #be0e0e;
+}
+
+.text-twitter {
+    color: #1dcaff;
+    text-shadow: 2px 2px #009ccc;
+}
+
+.text-steam {
+    color: #231F20;
+    text-shadow: 2px 2px #363031;
+}
+
+.text-discord {
+    color: #7289DA;
+    text-shadow:  2px 2px #5b71bf;
+}
+
+.btn-colored{
+    background-color: var(--color-main);
+    border-color: var(--color-main);
+}
+
+.btn-colored:hover{
+    background-color: var(--color-hover);
+    border-color: var(--color-hover);
+    transition: 0.2s;
+}
+
+.btn-colored:active{
+    background-color: var(--color-focus);
+    border-color: var(--color-focus);
+    transition: 0.2s;
+}
+
+.btn-colored:focus{
+    background-color: var(--color-focus);
+    border-color: var(--color-focus);
+    transition: 0.2s;
+}
+
+#loader {
+	position : fixed;
+	z-index: 9999;
+	background : url('../img/gif-charge.gif') 50% 50% no-repeat;
+	top : 0px;
+	left : 0px;
+	height : 100%;
+	width : 100%;
+	cursor : wait;
+}
+
+.nav-item.dropdown:hover .dropdown-menu{
+    display: block;
+}
+
+#divScroll{
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	cursor: pointer;
+}
+
+.dropdown-hover:hover .dropdown-menu{
+    display: block;
+}
+
+.btn-message
+{
+    width: 100%;
+    outline: none;
+}
+
+.btn-message:focus, .btn-message:active, .btn-message:hover
+{
+    box-shadow: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.card-header-messagerie:hover
+{
+    background-color: #d6d6d6;
+}
+
+.text-message
+{
+    text-align: left;
+    margin-bottom: 0px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.text-message-conv
+{
+    max-width: 100%;
+    overflow: auto;
+}

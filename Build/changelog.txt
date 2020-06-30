@@ -1,0 +1,37 @@
+Changelog CraftMyWebsite 1.7.3
+
+Ajouts ([+]), modifications ([=]) et suppression ([-]) 
+(|) Bug Fix
+
+[+]	: Ajout de la possibilité d'obliger la connexion du joueur lors du vote (le joueur devra être connecté au serveur pour voter)
+(|)	: Fix de l'impossibilité de mettre des caractères dans les ids uniques des sites de votes
+[+]	: Ajout du site liste-serveurs.fr dans notre base de donnée des sites de votes compatible
+[+] : Ajout du site liste-serveur.fr dans notre base de donnée des sites de votes compatible
+(|)	: Fix d'un bug sur l'inscription qui amenait une page blanche
+(|)	: Fix d'une memory leak
+(|)	: Fix d'un bug lié au panier qui était accessible même déconnecté
+(|)	: Fix d'un bug lié à une page blanche lors de l'édition d'un topic
+(|)	: Fix d'un bug lié à une page blanche lors de la suppression d'un topic
+[+]	: Ajout d'un skin par défaut sur l'API interne de skin
+[=]	: Renforcement de l'API interne de skin
+[+]	: Ajout d'un regroupement des mêmes récompenses sur la page vote
+[+]	: Le top vote est mis à jours en temps réel
+(|)	: Fix d'un bug mineur sur la partie vote
+(|)	: Fix d'un bug mineur sur la newsletter
+(|)	: Fix d'un bug de connexion sur la page maintenance
+[+] : Ajout d'une permission pour la page de bannissement
+(|) : Fix d'un bug sur une page d'erreur d'accès
+(|)	: Mise à jours de PHPMailer
+(|)	: Fix des icones qui n'apparaissaient plus dans le panel
+[+]	: Ajout de fonctionnalités lors de l'envoie de newsletter
+(|)	: Fix de bugs sur la page de vote
+(|)	: Fin de suppression de MCGPass
+(|)	: Fix du non envoie de jetons lors d'un paiement paypal
+[+]	: Ajout de la notification de réception d'un paiement Paypal pour le client
+[+]	: Ajout d'une notification lors de l'annulation d'un paiement Paypal pour le client
+[=] : Modification de la page d'accueil si l'adresse du serveur n'est pas renseigné, le site affichera "Adresse Introuvable"
+(|) : Fix d'un bug sur les récompenses auto
+(|) : Fix d'un bug sur les votes
+(|) : Fix d'un bug qui empêchait l'affichement des liens de réseaux sociaux sur la page de maintenance
+
+Contributeurs : Emilien52, Guedesite, BadiiiiX, Florentlife

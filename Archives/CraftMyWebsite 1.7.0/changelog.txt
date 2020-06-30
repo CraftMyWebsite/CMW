@@ -1,0 +1,88 @@
+Changelog CraftMyWebsite 1.7
+
+Ajouts ([+]), modifications ([=]) et suppression ([-]) :
+
+[+] : Possibilité d'importer et modifier sa photo de profil sur le site
+[=] : Possibilité de mettre des offres paypal contenant des centimes d'euros (un nombre entier était demandé auparavant)
+[=] : L'affichage des smileys se fait dans un dropdown
+[+] : Dans la partie Serveur, une chat Minecraft a été rajouté : vous pourrez (en étant connecté au site) parler sur le serveur Minecraft en direct, mais aussi lire ce que les autres vous répondent !!
+[+] : Possibilité de fermer un sous-forum 
+[+] : Possibilité de changer d'ordre les sous-forum 
+[+] : Implémentation de "niveaux de permissions" pour les forums, sous-forum, catégorie et topics, les utilisateurs ayant un niveau de permission inférieur strictement à l'objet, ne pourront pas le voir.
+[=] : Rajout de la possibilité de supprimer les topics en les cochant (même manière que pour les fermer ou appliquer un préfix)
+[+] : Ajout du choix sur la visibilité de l'adresse mail rentré lors de l'inscription, si elle est visible publiquement ou non
+[+] : Ajout de la liste des utilisateurs du site accessible à tous, fonction de trie disponible.
+[+] : Ajout d'un testeur de force de mot de passe lors de l'inscription, basé sur la library zxcvbn.js, toutefois, il aucune condition de mot de passe sont requise lors de l'inscription
+[+] : Possibilité de modifier en totalité la partie réseau sociaux du profil
+[+] : Possibilité de changer les couleurs du site (principal) en un clic, directement depuis le panel admin
+[+] : Possibilité d'ajouter ou de retirer des miniatures sur l'accueil, 3 reste prédéfinis
+[+] : Ajout d'un système de messagerie entre joueurs
+[+] : Ajout de la possibilité d'envoyer une Newsletter, via la fonction mail, ou par serveur SMTP
+[+] : Ajout de la possibilité de bannir un joueur du site (via adresse IP et/ou via pseudo)
+[=] : Mise en page disponible sur les offres boutiques et paypal (saut de ligne automatique)
+[+] : Ajout de boutons "tout cocher" dans les permissions sur le panel admin, vous pourrez ainsi soit cocher toutes les permissions pour votre grade, ou cocher toute les permission d'une catégorie de permission
+[=] : Il n'est plus nécessaire de cliquer sur le bouton pour afficher les listes déroulantes de la barre de navigation, un simple survol de souris vous l'affiche
+[=] : Le pseudo du créateur du topic apparait désormais en dessous du titre du topic dans le forum
+[+] : Système de récompenses automatique dans les votes, deux options sont configurables dans le panel : 
+	-> Une récompense au bout d'un certains nombre de vote
+	-> Une récompense pour le premier, second ou troisième meilleur voteur à la date indiquée
+[=] : Les récompenses des votes sont désormais stocké sur le site et vous pouvez les récupérer dès que vous le souhaiter en un clic ! (Les récompenses automatique sont donc automatiquement attribué dans ce stock)
+[+] : Ajout de la possibilité de vendre un article boutique un certain nombre de fois, l'article sera déclaré en "rupture de stock" si les stocks arrivent à 0
+[=] : Dans la boutique, les offres misent à 0Jetons, sont désormais considéré comme "gratuite" par le site
+[+] : Ajout de la possibilité de mettre fonctionnel un code de réduction uniquement sur une catégorie
+[+] : Ajout d'un petit bandeau sur le site (principal) indiquant aux administrateurs qu'une nouvelle version du CMS est disponible
+[+] : Ajout de la possibilité d'importer vos propres images directement sur votre site, elles seront par la suite réutilisable pour n'importe quel action via le lien qui vous sera donné lors de l'ajout
+[=] : Ajout de la possibilité de choisir le statut de votre serveur Minecraft entre : "En Ligne" (affichera alors le nombre de connecté / le nombre de joueur maximum), "Hors-Ligne" (n'affichera qu'un écriteau "Hors-Ligne"), "En Maintenance" (STATUT PAR DEFAUT, affichera un écriteau "En Maintenance"). Attention, le système ne reconnait donc plus automatiquement si le serveur est En ligne ou Hors ligne.
+[+] : Possibilité de modifier l'ordre des forums
+[=] : Fix du bug empêchant d'autres joueurs à passer Créateur
+[=] : Fix du bug lié au bouton "Se souvenir de moi" qui ne fonctionnait plus
+[+] : Ajout dans les statistique utilisateur, du nombre de votes effectué sur le site
+[+] : Ajout d'un aperçu visuel du site lorsque vous partager le lien sur Discord ou autre
+[+] : Ajout de la possibilité de mettre le support uniquement en mode Privé, uniquement en mode Public ou au choix de l'utilisateur
+[=] : Fix d'un bug qui empêcher d'avoir plus de 10 grades (unique)
+[=] : Corrections graphiques pour l'édition du nombre d'IP maximum par compte et pour l'API de mail de confirmation de compte
+[=] : Fix d'un bug qui redirigeait vers la page d'accueil du panel admin lorsque l'on faisait une quelconque action sur les grades
+[=] : La page d'accueil de l'administration ne se refresh plus lorsque l'on poste un post-it ou lorsque l'on en supprime un
+[+] : Ajout d'un prévisualiseur sur le forum pour voir a quoi vas ressembler notre texte une fois poster
+[+] : Ajout de la possibilité d'ajouter une signature sur notre profil qui sera affiché a la fin de chacun de nos post sur le forum
+[=] : Possibilité de modifier le nom d'un forum directement via un bouton
+[=] : Possibilité de modifier le nom d'un topic en tant que créateur de celui-ci ou en tant qu'administrateur
+[+] : Ajout d'une permission pour le panel admin, les IP des utilisateurs ne seront visibles que si l'administrateur a la permission
+[+] : Ajout d'un système qui fusionne automatiquement les double-post d'une personne sur le forum si un délai de 24h n'est pas respecté
+[=] : Affichage de l'id du membre sur le panel admin dans la page Informations des membres
+[+] : Ajout d'un bouton "Remonter en haut" sur le panel admin
+[+] : Ajout dans les statistiques d'activités le dernier échange de jetons
+[=] : Les membres sont rangés par ordre alphabétique dans le panel admin, sur la page d'information des membres
+[+] : Possibilité de changer les icones d'un forum via un bouton 
+[+] : Possibilité de changer les icones d'un sous-forum via un bouton 
+[+] : Ajout d'un utilisateur "CraftMyWebsite" qui aura un accès de type "Créateur" sur le site, le mot de passe n'est connu que de l'équipe de CraftMyWebsite, vous pourrez donc faire confiance à ses agissements. Cet utilisateur existe uniquement dans le but de simplifier les actions support entre l'équipe de CraftMyWebsite et votre équipe.
+[+] : Ajout d'une date de début et de fin sur un code de promotion, le code est automatiquement supprimé lorsque la date est dépassée, et le code est inutilisable si la date de début n'est pas encore dépassée
+[+] : Ajout de la possibilité de mettre un temps de Maintenance avec compte à rebours, votre site passera donc en maintenance, et en sortira automatiquement dès que le compteur sera à 0
+[=] : Fix d'un bug de mauvais nom dans les catégories boutique
+[=] : La première news est indiqué comme étant la #0 de sorte a ce que votre première news soit véritablement la #1 !
+[+] : Le forum est désormais accessible aux non-inscrit, cependant ils ne peuvent ni réagir à un message, ni poster de message...
+[+] : Possibilité d'épingler une news afin qu'elle soit visible en premier !
+[+] : Possibilité de changer le nom du grade par défaut
+[+] : Possibilité de changer le nom du grade "Créateur"
+[+] : Possibilité de changer les couleurs et les effets du grade "Créateur"
+[+] : Possibilité de valider les comptes des utilisateurs directement depuis l'espace administrateur
+[=] : Fix d'un bug graphique sur la page des rangs dans le panel admin
+[+] : Les réseaux sociaux sont désormais affichés sur la page de maintenance
+[=] : Fix de bugs sur le forum
+[+] : Ajout d'une page dans l'espace administrateur permettant de consulter l'entièreté des achats effectués sur la boutique, avec des fonctions de trie et de page
+[=] : Si l'utilisateur recherché n'existe pas, sa page profil renverra vers une erreur
+[+] : Possibilité de liker un topic
+[=] : Lorsque l'on ferme une discussion ou qu'on la supprime, on est redirigé soit vers la discussion soit vers le forum (sous-forum) où elle était postée.
+[=] : Rajout de la possibilité de mettre en italique lorsque l'on edit une réponse ou un topic sur le forum
+[=] : Fix d'un bug qui lrosqu'on changeait notre pseudo skype faisait passer l'age à 1
+[+] : Possibilité de réinitialiser le nombre de visite sur la panel admin
+[+] : Possibilité d'utiliser un code de réduction un nombre de fois pré-définis
+[+] : Vérificateur de faille .htaccess lors de l'installation (Si une erreur 500 apparait lors de votre installation, alors contactez-nous, il est possible que vous n'ayez pas les bons modules Apache)
+[=] : Ajout des 0 initiaux devant les dates dans le support
+[=] : Si aucun topics n'est sélectionné sur le forum, alors la barre de gestion ne s'affiche pas
+[=] : Fix d'un bug d'affichage lorsqu'il y'avait deux liste déroulantes
+[=] : Ban list de nouveau opérationnel et remanié graphiquement
+[+] : Ajout de la possibilité de mettre en place les paiements via Dedipass (en plus de MCGPass qui reste disponible)
+[=] : Fix des smileys qui ne fonctionnaient pas lors d'un post de ticket
+[=] : Nombreux fix de syntaxe et de correction du code
+[=] : Nombreuses modifications graphique (autant sur le panel que sur le thème)

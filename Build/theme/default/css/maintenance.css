@@ -1,0 +1,36 @@
+/*
+*   PAGE DE MAINTENANCE
+*/
+
+body {
+    background: url('../img/texture.png');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#clockdiv{
+	color: #fff;
+	display: inline-block;
+	font-size: 30px;
+	margin-bottom: 25px;
+}
+
+#clockdiv > div{
+	padding: 10px;
+	border-radius: 3px;
+	background: var(--color-main);
+	display: inline-block;
+}
+
+#clockdiv div > span{
+	padding: 15px;
+	border-radius: 3px;
+	background: var(--color-focus);
+	display: inline-block;
+}
+
+.smalltext{
+	padding-top: 5px;
+	font-size: 16px;
+}

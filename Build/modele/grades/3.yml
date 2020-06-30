@@ -1,0 +1,151 @@
+#Ce fichier contiens la config de base du serveur---
+0: Ce fichier contiens la config de base du serveur---
+Grade: Modérateur
+PermsDefault:
+    news:
+        deleteMemberComm: null
+        editMemberComm: null
+    support:
+        closeTicket: null
+        deleteMemberComm: null
+        editMemberComm: null
+        displayTicket: null
+    chat:
+        color: null
+    forum:
+        perms: "0"
+PermsPanel:
+    access: null
+    info:
+        showPage: null
+        details:
+            showModal: ""
+            player: null
+            console: null
+            command: null
+            plugins: null
+            server: null
+        stats:
+            visitors:
+                showTable: null
+            members:
+                showTable: null
+                editLimitIp: null
+                editEmail: null
+            activity:
+                showTable: null
+            shop:
+                showTable: null
+    general:
+        showPage: null
+        actions:
+            editGeneral: null
+    theme:
+        showPage: null
+        actions:
+            editTheme: null
+            editBackground: null
+            editTypeBackground: null
+    home:
+        showPage: null
+        actions:
+            uploadSlider: null
+            editSlider: null
+            uploadMiniature: null
+            editMiniature: null
+            addSlider: null
+    server:
+        showPage: null
+        actions:
+            addServer: null
+            editServer: null
+    pages:
+        showPage: null
+        actions:
+            editPage: null
+            addPage: null
+    news:
+        showPage: null
+        actions:
+            addNews: null
+            editNews: null
+    shop:
+        showPage: null
+        actions:
+            addCategorie: null
+            addOffre: null
+            editCategorieOffre: null
+    payment:
+        showPage: null
+        actions:
+            editPayment: null
+            addOffrePaypal: null
+            editOffrePaypal: null
+    menus:
+        showPage: null
+        actions:
+            addLinkMenu: null
+            addDropLinkMenu: null
+            editDropAndLinkMenu: null
+    vote:
+        showPage: null
+        actions:
+            editSettings: null
+            addVote: null
+            resetVote: null
+            deleteVote: null
+    members:
+        showPage: null
+        actions:
+            editMember: null
+    forum:
+        showPage: null
+        actions:
+            addSmiley: null
+            seeSmileys: null
+            addPrefix: null
+            seePrefix: null
+    widgets:
+        showPage: null
+        actions:
+            addWidgets: null
+            editWidgets: null
+    support:
+        showPage: ""
+        tickets:
+            showPage: null
+            actions:
+                editEtatTicket: null
+                deleteTicket: null
+        maintenance:
+            showPage: null
+            actions:
+                editDefaultMessage: null
+                editAdminMessage: null
+                editEtatMaintenance: null
+                switchRedirectMode: null
+    update:
+        showPage: null
+PermsForum:
+    general:
+        addCategorie: null
+        addForum: null
+        deleteForum: null
+        deleteCategorie: null
+        addSousForum: null
+        deleteSousForum: null
+        modeJoueuur: ""
+        modeJoueur: null
+    moderation:
+        editTopic: null
+        deleteMessage: null
+        deleteTopic: null
+        editMessage: null
+        closeTopic: null
+        mooveTopic: null
+        seeSignalement: null
+        addPrefix: null
+        epingle: null
+        selTopic: null
+prefix: prefixRed
+effets: style5

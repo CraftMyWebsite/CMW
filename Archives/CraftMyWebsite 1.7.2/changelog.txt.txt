@@ -1,0 +1,44 @@
+Changelog CraftMyWebsite 1.7.2
+
+Ajouts ([+]), modifications ([=]) et suppression ([-]) 
+(*) signifie que cette modification a été suggérer par les membres du Discord
+(|) Bug Fix
+
+[=](*) : "0" avant le nombre de joueurs connectés ( dans le footer ) quand le lien avec le serveur n'est pas établi
+[+](*) : Ajout d'un message annoncant l'utilisation des cookies sur le site et à quoi ils servent
+(|)    : Correction du nom de variable définissant la couleur d'en-tête du navigateur sur téléphone
+[=](*) : Le bouton "voir le site" sur le panel admin ouvre désormais un nouvel onglet
+[=](*) : Font Awesome 5.3
+[=](*) : Affichage des possibilités de paiements uniquement lorsque l'utilisateur est connecté
+[=](*) : Le titre de chaque page devient NOM SERVEUR | DESCRIPTION sur la page d'accueil et NOM SERVEUR | PAGE sur les autres page du site 
+[+](*) : Ajout de paramètre supplémentaire (facultatif) à l'inscription : Age et visibilité de l'adresse mail*
+[+]    : Système de cache pour les requêtes JSONAPI (1min)
+(|)    : Fix de mise en page de la Newsletter et mise en copie caché des destinataires
+(|)    : Fix d'un bug sur les couleurs et effets des grades qui étaient non modifiables
+[+]    : Possibilité d'envoyer les mails de récupération de mot de passe via SMTP (se synchronise avec la newsletter)
+[=]    : Remise en fonctionnement des notifications d'envoie des mails lors de la récupération du mot de passe
+[+]    : Possibilité de mettre des centimes dans les offres PayPal
+[-]    : Suppression de MCGPass suite à leur fermeture définitive
+(|)    : Fix de bugs sur le chat
+(|)    : Fix d'un bug sur le profil si la connexion RCON était active
+(|)    : Fix d'un bug sur la banlist qui ne s'affichait pas s'il y'avais moins de 2 serveurs
+(|)    : Fix de bugs JSONAPI
+(|)    : Fix d'un bug sur les coupons qui ne marchaient pas s'ils avaient une limite d'utilisation et une catégorie spécifique
+[+]    : Envoie des newsletter via AJAX
+[=]    : Mise à jours des lib PHPMailer
+(|)    : Fix bug mineur sur les utilisations Rcon/Query
+(|)    : Fix bug mineur Rcon/Query lié à la boutique
+(|)    : Fix bug mineur lorsqu'aucune catégorie n'est créé apparition d'un bloc d'information
+(|)    : Fix de différents bug lié à une absence de vérification dans la base de donnée
+(|)    : Fix d'un bug qui rendait la page de profil blanche
+(|)    : Fix d'une faille permettant de se give des votes
+(|)    : Ajout d'une limite de caractères sur les posts du forum
+[+]    : Ajout de vérificateur de vote pour certains sites
+[=]    : Modification du système pour les votes
+(|)    : Fix de l'age qui pouvait être infini ou négatif
+[=]    : Mise à jours automatique des données de l'utilisateur à chaque rechargement de page
+[+]    : Ajout d'un système de cache pour JSONAPI (pour contribuer à réduire la latence des pages)
+[+]    : Ajout de la possibilité d'avoir autant de compte par IP que l'on souhaite
+[=]    : Corrections orthographiques, simplification du code, mise à jours des crédits, modifications CSS et JS du theme par défaut
+
+Contributeurs : Ethanox, PinglsDzn, Emilien52, Mario359, Guedesite, Florentlife

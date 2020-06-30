@@ -1,0 +1,10 @@
+﻿Changelog CraftMyWebsite 1.7.1
+
+Ajouts ([+]), modifications ([=]) et suppression ([-]) :
+
+[=] : Réglage de 2 bugs liés aux offres paypal sur le panel admin
+[+] : Ajout de la possibilité de lié son site à son serveur Minecraft via Rcon et Query
+[=] : Réglage d'un bug sur le panel admin lié aux membres
+[=] : Mise à jours du footer du panel pour la nouvelle année
+[=] : Correction de fautes d'orthographes
+[=] : Réglage d'un bug lié à la liste des membres du site

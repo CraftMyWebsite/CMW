@@ -1,0 +1,17 @@
+#Ce fichier contiens la config de base du serveur---
+Infos:
+    1:
+        message: Image de démo à modifier dans votre panel CraftMyWebsite ! (1)
+        image: miniature-demo-1.jpg
+        lien: '#'
+    2:
+        message: Image de démo à modifier dans votre panel CraftMyWebsite ! (2)
+        image: miniature-demo-2.png
+        lien: '#'
+    3:
+        message: Image de démo à modifier dans votre panel CraftMyWebsite ! (3)
+        image: miniature-demo-3.png
+        lien: '#'
+Slider:
+    image: slider1.png
+SliderTitre: Sliders

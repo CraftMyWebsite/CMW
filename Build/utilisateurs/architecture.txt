@@ -1,0 +1,15 @@
+Architecture de ce dossier :
+
+Chaque joueur aura un dossier prévu pour lui dont le nom sera son id. 
+	Exemple: Joueur = Florentlife, id = 1 
+			Joueur = CraftMyWebsite, id = 2
+
+			Architecture : 
+				Dossier : 1, 2 
+Dans ces dossier, de multiples informations pourront être stockés.
+
+Actuellement, l'information stocker est une image de profil, sous la forme d'un fichier dans le  dossier du joueur, nommé : profil.extension
+
+L'extension de l'image de profil est conservé dans la base de donnée (voir modele/joueur/imgProfil.class.php)
+
+D'autres informations peuvent être stockés au désir des développeurs. Merci de modifier et d'expliquer votre architecture à chaque fois que vous souhaitez intégré une nouvelle fonctionnalité pour cette partie.

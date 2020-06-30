@@ -1,0 +1,149 @@
+#Ce fichier contiens la config de base du serveur---
+Grade: Administrateur
+prefix: prefixLightGreen
+effets: style16
+PermsDefault:
+    news:
+        deleteMemberComm: 'on'
+        editMemberComm: 'on'
+    support:
+        closeTicket: 'on'
+        deleteMemberComm: 'on'
+        editMemberComm: 'on'
+        displayTicket: 'on'
+    chat:
+        color: 'on'
+    forum:
+        perms: "5"
+PermsPanel:
+    access: null
+    info:
+        showPage: null
+        details:
+            showModal: ""
+            player: null
+            console: null
+            command: null
+            plugins: null
+            server: null
+        stats:
+            visitors:
+                showTable: null
+            members:
+                showTable: null
+                editLimitIp: null
+                editEmail: null
+            activity:
+                showTable: null
+            shop:
+                showTable: null
+    general:
+        showPage: null
+        actions:
+            editGeneral: null
+    theme:
+        showPage: null
+        actions:
+            editTheme: null
+            editBackground: null
+            editTypeBackground: null
+    home:
+        showPage: null
+        actions:
+            uploadSlider: null
+            editSlider: null
+            uploadMiniature: null
+            editMiniature: null
+            addSlider: null
+    server:
+        showPage: null
+        actions:
+            addServer: null
+            editServer: null
+    pages:
+        showPage: null
+        actions:
+            editPage: null
+            addPage: null
+    news:
+        showPage: null
+        actions:
+            addNews: null
+            editNews: null
+    shop:
+        showPage: null
+        actions:
+            addCategorie: null
+            addOffre: null
+            editCategorieOffre: null
+    payment:
+        showPage: null
+        actions:
+            editPayment: null
+            addOffrePaypal: null
+            editOffrePaypal: null
+    menus:
+        showPage: null
+        actions:
+            addLinkMenu: null
+            addDropLinkMenu: null
+            editDropAndLinkMenu: null
+    vote:
+        showPage: null
+        actions:
+            editSettings: null
+            addVote: null
+            resetVote: null
+            deleteVote: null
+    members:
+        showPage: null
+        actions:
+            editMember: null
+    forum:
+        showPage: null
+        actions:
+            addSmiley: null
+            seeSmileys: null
+            addPrefix: null
+            seePrefix: null
+    widgets:
+        showPage: null
+        actions:
+            addWidgets: null
+            editWidgets: null
+    support:
+        showPage: ""
+        tickets:
+            showPage: null
+            actions:
+                editEtatTicket: null
+                deleteTicket: null
+        maintenance:
+            showPage: null
+            actions:
+                editDefaultMessage: null
+                editAdminMessage: null
+                editEtatMaintenance: null
+                switchRedirectMode: null
+    update:
+        showPage: null
+PermsForum:
+    general:
+        addCategorie: 'on'
+        addForum: 'on'
+        deleteForum: 'on'
+        deleteCategorie: 'on'
+        addSousForum: 'on'
+        deleteSousForum: 'on'
+        modeJoueur: 'on'
+    moderation:
+        editTopic: 'on'
+        deleteMessage: 'on'
+        deleteTopic: 'on'
+        editMessage: 'on'
+        closeTopic: 'on'
+        mooveTopic: 'on'
+        seeSignalement: 'on'
+        addPrefix: 'on'
+        epingle: 'on'
+        selTopic: 'on'
