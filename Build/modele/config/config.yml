@@ -28,13 +28,10 @@ DataBase:
 Payement:
     paypal: true
     dedipass: false
+    paysafecard: false
     public_key: ""
     private_key: ""
-    paypalUser: ""
-    paypalPass: ""
-    paypalSignature: ""
     paypalEmail: 
-    paypalMethodeAPI: "1"
 color:
     theme:
         main: '#0080c0'

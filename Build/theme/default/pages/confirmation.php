@@ -23,7 +23,7 @@ if(isset($_GET['choix']))
 				case '2':
 					//si le $_GET['choix'] == 2 alors c'est une suppression de topic 
 					//On demande donc une raison et une confirmation
-					if($_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1)
+					if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic'))
  					{
 					?>
 					<div class="alert alert-danger">
@@ -53,7 +53,7 @@ if(isset($_GET['choix']))
 				case '3':
 					//Là c'est un déplacement du topic 
 					//On affiche donc un <select> pour que l'admin choisisse la bonne catégorie
-					if($_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1)
+					if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'mooveTopic'))
  					{
 					?>
 					<form action="<?php echo $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=3&confirmation=true" method="post">

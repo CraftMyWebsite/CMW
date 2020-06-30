@@ -26,8 +26,8 @@
   </div>
   <div class="panel-body">
     <p class="text-center"><strong>
-		Voter pour le serveur permet d'améliorer son référencement ! Les votes sont récompensés par des items In-Game.<br /><br /><?php // if(!isset($_Joueur_)) echo '<hr><a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-warning btn-lg" ><span class="glyphicon glyphicon-user"></span> Veuillez vous connecter.</a>';
-		if(isset($_Joueur_) AND  isset($_GET['player']) AND $_Joueur_['pseudo'] == $_GET['player'] )
+		Voter pour le serveur permet d'améliorer son référencement ! Les votes sont récompensés par des items In-Game.<br /><br /><?php 
+		if(Permission::getInstance()->verifPerm("connect") AND  isset($_GET['player']) AND $_Joueur_['pseudo'] == $_GET['player'] )
 		{
 			if(!empty($donneesVotesTemp))
 			{
@@ -45,8 +45,9 @@
 							$temp .="Give de ";
 							$action = explode(':', $action[1]);
 							$temp .=$action[3]. "x ".$action[1];
+							$cle = array_search($data['serveur'], array_column($lectureJSON, 'id'));
 							if($data['methode'] == 2)
-								$temp .=' sur le serveur '.$lecture['Json'][$data['serveur']]['nom'];
+								$temp .=' sur le serveur '.$lectureJSON[$cle]['nom'];
 							else
 								$temp .=' sur tout les serveurs de jeu';
 						}
@@ -56,7 +57,7 @@
 						}
 						else
 						{
-							$temp .="Vous récupérerez une surprise :D :P";
+							$temp .="Vous récupérerez une surprise !";
 						}
 
 					for($a=0;$a<count($list); $a++) {
@@ -96,11 +97,11 @@
                 
 				<?php 
                 if(!isset($jsonCon) OR empty($jsonCon))
-                    echo '<p>Veuillez relier votre serveur à votre site avec JsonAPI depuis le panel pour avoir les liens de vote !</p>';
+                    echo '<p>Veuillez relier votre serveur à votre site avec JsonAPI ou Rcon depuis le panel pour avoir les liens de vote !</p>';
                 
-                for($i = 0; $i < count($jsonCon); $i++) { ?>
+                foreach($lectureJSON as $i => $serveur) { ?>
 					
-					<li class="nav-item"><a href="#voter<?php echo $i; ?>" data-toggle="tab" class="nav-link <?php if($i == 0) echo ' active'; ?>"><?php echo $lecture['Json'][$i]['nom']; ?></a></li>
+					<li class="nav-item"><a href="#voter<?php echo $i; ?>" data-toggle="tab" class="nav-link <?php if($i == 0) echo ' active'; ?>"><?php echo $serveur['nom']; ?></a></li>
 					
 				<?php } ?>
 				</ul>
@@ -122,18 +123,16 @@
 				<?php } else
 				{ ?>
 				<div class="tab-content" style="background-color:white;padding:10px;">
-				<?php for($i = 0; $i < count($jsonCon); $i++) { ?>
+				<?php foreach($lectureJSON as $i => $serveur) { ?>
 				
 					<div id="voter<?php echo $i; ?>" class="tab-pane fade <?php if($i==0) echo 'in active show';?>" <?php if($i == 0) { echo 'aria-expanded="true"'; } else echo 'aria-expanded="false"'; ?>>  
 						<div class="panel-body">
 							<div class="alert alert-dismissable alert-success">
 							<button type="button" class="close" data-dismiss="alert">×</button>
-							<center>Bienvenue dans la catégorie de vote pour le serveur : <?=$lecture['Json'][$i]['nom'];?></center>
+							<center>Bienvenue dans la catégorie de vote pour le serveur : <?=$serveur['nom'];?></center>
 							</div>
-                    
 							<?php  
-							
-							
+								$serveurStats[$key] = $serveur->GetServeurInfos();
 								$pseudo = htmlspecialchars($_GET['player']);
 								
 								$enligne = false;
@@ -204,9 +203,8 @@
 						if(isset($topVoteurs))
 						{
 							for($i = 0; $i < count($topVoteurs) AND $i < 10; $i++) {
-								$Img = new ImgProfil($topVoteurs[$i]['pseudo'], 'pseudo');
 							 ?>
-							<tr><td><?php echo $i+1 ?></td><td><img src="<?=$Img->getImgToSize(30, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" alt="none" /> <strong><?php echo $topVoteurs[$i]['pseudo']; ?></strong></td><td id="nbr-vote-<?php echo $topVoteurs[$i]['pseudo']; ?>"><?php echo $topVoteurs[$i]['nbre_votes']; ?></td></tr>
+							<tr><td><?php echo $i+1 ?></td><td><img src="<?=$_ImgProfil_->getUrlHeadByPseudo($topVoteurs[$i]['pseudo']);?>" style="width:30px; height: 30px;" alt="none" /> <strong><?php echo $topVoteurs[$i]['pseudo']; ?></strong></td><td id="nbr-vote-<?php echo $topVoteurs[$i]['pseudo']; ?>"><?php echo $topVoteurs[$i]['nbre_votes']; ?></td></tr>
 							<?php }
 						} ?>
 				</table>
@@ -302,7 +300,11 @@ function RecupJoueur($pseudo, $id, $bddConnection)
 			$tempsM = $tempsM + 1;
 			$tempsRestant = $tempsRestant - 60;
 		}
-		if($tempsM <= 9)
+		if($tempsH == 0)
+		{
+			return $tempsM.' minute(s)';
+		}
+		else if ($tempsM <= 9)
 		{
 			return $tempsH. 'H0' .$tempsM;
 		}

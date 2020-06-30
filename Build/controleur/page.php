@@ -90,8 +90,14 @@ if(isset($_GET['page']))
 
 		
 		case 'token': 
-			if(isset($_Joueur_['pseudo']))
+			if(Permission::getInstance()->verifPerm("connect"))
+			{
+				if($_Serveur_['Payement']['paypal'])
+					require_once('modele/tokens/paypal.php'); 
+				if($_Serveur_['Payement']['paysafecard'])
+					require_once('modele/tokens/paysafecard.php');
 				include('theme/' .$_Serveur_['General']['theme']. '/pages/tokens.php');
+			}
 			else
 				header('Location: ?page=erreur&erreur=19&titre='.urlencode("Erreur d'accès")."&type=".urlencode("Connexion requise")."&contenue=".urlencode("Vous devez être connecté pour accéder à cette page !"));
 		break;

@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['actions']['editCategorieOffre'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre'])) {
 	$query = $bddConnection->prepare('SELECT id FROM cmw_boutique_offres WHERE id = :id');
 	$query->execute(array( ':id' => $_GET['id']));
 

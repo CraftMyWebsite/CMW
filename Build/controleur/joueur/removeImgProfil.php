@@ -1,7 +1,4 @@
 <?php
 
-$Img = new ImgProfil($_Joueur_['id']);
-$Img->getImg();
-if($Img->modif)
-	$Img->removeImg();
+$_ImgProfil_->removeImg($_Joueur_['pseudo']);
 header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&success=imageRemoved');

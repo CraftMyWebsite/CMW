@@ -10,6 +10,9 @@
 	require_once('./modele/config/yml.class.php');
 	require_once('./modele/ban.class.php');
 	require_once('./include/MinecraftPing/MinecraftPing.class.php');
+
+	//Récupération de la classe Permission
+	require_once("modele/grades/perms.class.php");
 	
 	// On lit le fichier de config et on récupère les information dans un tableau. Celui-ci contiens la config générale.
 	$configLecture = new Lire('modele/config/config.yml');
@@ -24,7 +27,7 @@
 		$_Menu_['MenuTexteBB'][$i] = $_Menu_['MenuTexte'][$i];
 	}
 
-
+	
 	$configLecture = new Lire('modele/config/configWidgets.yml');
 	$_Widgets_ = $configLecture->GetTableau();
 	
@@ -36,7 +39,6 @@
     else
         $bgType = 'background: url(\'theme/upload/bg.png\') repeat scroll center top rgb(0, 0, 0);';
 
-    require('modele/joueur/imgProfil.class.php');
 	
 	require_once('controleur/tempMess.class.php');
 	

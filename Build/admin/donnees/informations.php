@@ -1,96 +1,76 @@
 <?php
 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['showPage'] == true) {
-//Statistiques de la Boutique
+if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'showPage')) {
 
-    $boutiquesStatsReq = $bddConnection->query('SELECT * FROM cmw_boutique_stats ORDER BY id DESC LIMIT 0, 12;');
-    $i = 0;
-    while($boutiquesStatsDonnees = $boutiquesStatsReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $boutiquesStats[$i] = $boutiquesStatsDonnees;
-        $i++;
-    }
+    /* Statistiques de la boutique 
+        -> $boutiqueStats = 12 dernièrs achats sur la boutique
+        -> $lastOffre = Dernière offre Boutique créé
+        -> lastOffresPaypal = Dernière offre Paypal créé
+    */
+
+    $boutiquesStatsReq = $bddConnection->query('SELECT * FROM cmw_boutique_stats ORDER BY id DESC LIMIT 0, 12;'); //12 derniers achats
+    $boutiquesStats = $boutiquesStatsReq->fetchAll(PDO::FETCH_ASSOC);
+    
     $lastOffreReq = $bddConnection->query('SELECT * FROM cmw_boutique_offres ORDER BY id DESC LIMIT 1;');
-    $i = 0;
-    while($lastOffreDonnees = $lastOffreReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastOffre[$i] = $lastOffreDonnees;
-        $i++;
-    }
+    $lastOffre = $lastOffreReq->fetchAll(PDO::FETCH_ASSOC);
+
     $lastOffrePaypalReq = $bddConnection->query('SELECT * FROM cmw_jetons_paypal_offres ORDER BY id DESC LIMIT 1;');
-    $i = 0;
-    while($lastOffrePaypalDonnees = $lastOffrePaypalReq->fetch(PDO::FETCH_ASSOC))
+    $lastOffrePaypal = $lastOffrePaypalReq->fetchAll(PDO::FETCH_ASSOC);
+    
+    /*Récupération des données JSONAPI
+        $serveurStats -> toutes les données utiles du serveur (RAM, DD, Joueurs MAX, Actuels et leurs noms ...)
+        $console -> La console
+        $plugins -> les plugins 
+    */
+    if(isset($jsonCon))
     {
-        $lastOffrePaypal[$i] = $lastOffrePaypalDonnees;
-        $i++;
+        foreach($jsonCon as $key => $serveur)
+        {
+            if($conEtablie[$key])
+            {
+                $serveurStats[$key] = $serveur->GetServeurInfos();
+                $console[$key] = $serveur->GetConsole();
+                $plugins[$key] = $serveur->getPlugins();
+            }
+        }
     }
+    
+
     // <!-- Statistiques des membres -->
     $membresStatsReq = $bddConnection->query('SELECT * FROM cmw_users ORDER BY id DESC LIMIT 0, 8;');
-    $i = 0;
-    while($membresStatsDonnees = $membresStatsReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $membresStats[$i] = $membresStatsDonnees;
-        $i++;
-    }
-// Statistiques du dernier inscrit
+    $membresStats = $membresStatsReq->fetchAll(PDO::FETCH_ASSOC);
+   
+
+    // Statistiques du dernier inscrit
     $lastMembreReq = $bddConnection->query('SELECT * FROM cmw_users ORDER BY id DESC LIMIT 1;');
-    $i = 0;
-    while($lastMembreDonnees = $lastMembreReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastMembre[$i] = $lastMembreDonnees;
-        $i++;
-    }
-// <!-- Statistiques du dernier Ticket -->
+    $lastMembre = $lastMembreReq->fetchAll(PDO::FETCH_ASSOC);
+    
+
+    // <!-- Statistiques du dernier Ticket -->
     $lastTicketReq = $bddConnection->query('SELECT * FROM cmw_support ORDER BY id DESC LIMIT 1;');
-    $i = 0;
-    while($lastTicketDonnees = $lastTicketReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastTicket[$i] = $lastTicketDonnees;
-        $i++;
-    }
+    $lastTicket = $lastTicketReq->fetchAll(PDO::FETCH_ASSOC);
+
     // <!-- Statistiques du dernier Commentaire Support -->
     $lastCommentaireSuppReq = $bddConnection->query('SELECT * FROM cmw_support_commentaires ORDER BY id DESC LIMIT 1;');
-    $i = 0;
-    while($lastCommentaireDonneesSupp = $lastCommentaireSuppReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastCommentaireSupp[$i] = $lastCommentaireDonneesSupp;
-        $i++;
-    }
-    $lastCommentaireNewsReq = $bddConnection->query('SELECT * FROM cmw_news_commentaires ORDER BY id DESC LIMIT 1;');
-    $i = 0;
-    while($lastCommentaireDonneesNews = $lastCommentaireNewsReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastCommentaireNews[$i] = $lastCommentaireDonneesNews;
-        $i++;
-    }
-    $lastNewsReq = $bddConnection->query('SELECT * FROM cmw_news ORDER BY id DESC LIMIT 1;');
-    $i = 0;
-    while($lastNewsDonnees = $lastNewsReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastNews[$i] = $lastNewsDonnees;
-        $i++;
-    }
-    $lastVoteReq = $bddConnection->query('SELECT * FROM cmw_votes ORDER BY date_dernier DESC LIMIT 1;');
-    $i = 0;
-    while($lastVoteDonnees = $lastVoteReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastVote[$i] = $lastVoteDonnees;
-        $i++;
-    }
-    $lastMaintenanceReq = $bddConnection->query('SELECT * FROM cmw_maintenance WHERE maintenanceId = 1');
-    $i = 0;
-    while($lastMaintenanceDonnees = $lastMaintenanceReq->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastMaintenance[$i] = $lastMaintenanceDonnees;
-        $i++;
-    }
-    $req = $bddConnection->query('SELECT * FROM cmw_log_DealJeton ORDER BY date DESC LIMIT 10;');
-    $i = 0;
-    while($d = $req->fetch(PDO::FETCH_ASSOC))
-    {
-        $lastDealJeton[$i] = $d;
-        $i++;
-    }
+    $lastCommentaireSupp = $lastCommentaireSuppReq->fetchAll(PDO::FETCH_ASSOC);
 
+    //  Statistiques des News
+    $lastCommentaireNewsReq = $bddConnection->query('SELECT * FROM cmw_news_commentaires ORDER BY id DESC LIMIT 1;');
+    $lastCommentaireNews = $lastCommentaireNewsReq->fetchAll(PDO::FETCH_ASSOC);
+
+    $lastNewsReq = $bddConnection->query('SELECT * FROM cmw_news ORDER BY id DESC LIMIT 1;');
+    $lastNews = $lastNewsReq->fetchAll(PDO::FETCH_ASSOC);
+
+    //Stats des votes
+    $lastVoteReq = $bddConnection->query('SELECT * FROM cmw_votes ORDER BY date_dernier DESC LIMIT 1;');
+    $lastVote = $lastVoteReq->fetchAll(PDO::FETCH_ASSOC);
+
+    //Stats Maintenance
+    $lastMaintenanceReq = $bddConnection->query('SELECT * FROM cmw_maintenance WHERE maintenanceId = 1');
+    $lastMaintenance = $lastMaintenanceReq->fetchAll(PDO::FETCH_ASSOC);
+
+    //Stats échange Jetons
+    $req = $bddConnection->query('SELECT * FROM cmw_log_DealJeton ORDER BY date DESC LIMIT 10;');
+    $lastDealJeton = $req->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>

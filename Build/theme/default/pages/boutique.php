@@ -15,7 +15,7 @@
 		<br>
 		<hr>
 		<center>
-		<?php if(isset($_Joueur_)) { ?>
+		<?php if(Permission::getInstance()->verifPerm("connect")) { ?>
 			<font style="font-family: minecraftia;font-size: 20px;">Bonjour <?php echo $_Joueur_['pseudo']; ?></font>
 				<h4>Vous avez <strong><?php if(isset($_Joueur_['tokens'])) echo $_Joueur_['tokens'] . ' <i class="fas fa-gem"></i>'; ?></strong></h4>
 				<a href="?page=panier" class="btn btn-primary btn-block">Votre panier contient <?php echo $_Panier_->compterArticle().($_Panier_->compterArticle()>1 ? ' articles' : ' article') ?> </a>
@@ -78,7 +78,7 @@
 														<div class="offre-description">' .espacement($offresTableau[$i]['description']). '</div>
 													</div>
 													';
-														if(isset($_Joueur_)) {
+														if(Permission::getInstance()->verifPerm("connect")) {
 															echo '<a href="?page=boutique&offre=' .$offresTableau[$i]['id']. '" class="btn btn-primary btn-block" title="Voir la fiche produit"><i class="fa fa-eye"></i></a>';
 															if($offresTableau[$i]['nbre_vente'] == 0){
 																echo '<a href="#" class="btn btn-info btn-block">Rupture de stock</a>';
@@ -133,11 +133,11 @@
 					<?php
 					$enLigne = false;
 					if($infosCategories['serveurId'] == -2 OR $infosCategories['serveurId'] == -1)
-						for($i = 0; $i < count($lecture['Json']); $i++)
+						foreach($lectureJSON as $serveur)
 						{
 							if($enligne[$i])
 							{
-								echo 'Vous êtes connecté sur le serveur:<br /> "'. $lecture['Json'][$i]['nom'] .'"';
+								echo 'Vous êtes connecté sur le serveur:<br /> "'. $serveur['nom'] .'"';
 								$enLigne = true;
 							}
 							
@@ -145,7 +145,8 @@
 					else
 						if($enligne[$infosCategories['serveurId']])
 						{
-							echo 'Vous êtes connecté sur le serveur:<br /> "'. $lecture['Json'][$infosCategories['serveurId']]['nom'] .'"';
+							$cle = array_search($infosCategories['serveurId'], array_column($lectureJSON, 'id'));
+							echo 'Vous êtes connecté sur le serveur:<br /> "'. $lectureJSON[$cle]['nom'] .'"';
 							$enLigne = true;
 						}
 						

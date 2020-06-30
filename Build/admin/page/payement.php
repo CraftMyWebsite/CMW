@@ -1,7 +1,7 @@
 <div class="cmw-page-content-header"><strong>Réglages Paiement</strong> - Paramétrez les modes de paiement</div>
 
 <div class="row">
-    <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['payment']['actions']['editPayment'] == false AND $_PGrades_['PermsPanel']['payment']['actions']['editOffrePaypal'] == false AND $_PGrades_['PermsPanel']['payment']['actions']['addOffrePaypal'] == false)) { ?>
+    <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment') AND !Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND !Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal')) { ?>
     <div class="col-xs-12 text-center">
         <div class="alert alert-danger">
             <strong>Vous avez aucune permission pour accéder aux réglages des paiements.</strong>
@@ -14,7 +14,7 @@
         </div>
     </div>
     <?php }
-    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['payment']['actions']['editPayment'] == true) { ?>
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment')) { ?>
 
     <div class="col-xs-12 col-md-6 text-center">
         <div class="panel panel-default cmw-panel">
@@ -36,6 +36,9 @@
                         <label class="checkbox-inline">
                             <input type="checkbox" name="dedipass" <?php if($lectureP['dedipass'] == true) echo 'checked'; ?>> Dedipass
                         </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="paysafecard" <?php if($lectureP['paysafecard'] == true) echo 'checked'; ?>> Paysafecard
+                        </label>
                     </div>
                     <h3>Dedipass</h3>
                     <div class="row">
@@ -48,30 +51,8 @@
                     </div>
                     <h3>PayPal</h3>
                     <div class="row">
-                        <label class="control-label">
-                            <input type="radio" name="paypalMethodeAPI" value="1"<?php if($lectureP['paypalMethodeAPI'] == 1) echo ' checked'; ?>/>Utiliser mon email pour être payé par paypal.
-                        </label>
-                    </div>
-                    <div class="row">
                         <label class="control-label">Email paypal</label>
                         <input type="text" name="paypalEmail" class="form-control" value="<?php echo $lectureP['paypalEmail']; ?>" placeholder="L'email lié à votre compte paypal."/>
-                    </div>
-                    <div class="row">
-                        <label>
-                            <input type="radio" name="paypalMethodeAPI" value="2"<?php if($lectureP['paypalMethodeAPI'] == 2) echo ' checked'; ?>/>Utiliser mon compte buisness paypal pour être payé.
-                        </label>
-                    </div>
-                    <div class="row">
-                        <label class="control-label">User Paypal</label>
-                        <input type="text" name="paypalUser" class="form-control" value="<?php echo $lectureP['paypalUser']; ?>" placeholder="Demander une signature API pour connaitre cette donnée"/>
-                    </div>
-                    <div class="row">
-                        <label class="control-label">Mot de passe Paypal</label>
-                        <input type="text" name="paypalPass" class="form-control" value="<?php echo $lectureP['paypalPass']; ?>"/>
-                    </div>
-                    <div class="row">
-                        <label class="control-label">Signature API Paypal</label>
-                        <input type="text" name="paypalSignature" class="form-control" value="<?php echo $lectureP['paypalSignature']; ?>"/>
                     </div>
                     <hr>
                     <div class="row">
@@ -83,7 +64,7 @@
     </div>
 </div>
     <?php }
-    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['payment']['actions']['addOffrePaypal'] == true) { ?>
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal')) { ?>
     <div class="col-xs-12 col-md-6 text-center">
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">
@@ -122,14 +103,14 @@
         </div>
     </div>
     <?php }
-    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['payment']['actions']['editOffrePaypal'] == true) { ?>
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal')) { ?>
     <div class="col-xs-12 text-center">
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">
                 <h3 class="panel-title"><strong>Mes offres PayPal</strong></h3>
             </div>
         <div class="panel-body">
-        <?php if(!isset($paypalOffres) AND empty($paypalOffres)) { ?>
+        <?php if(!isset($paypalOffres) OR empty($paypalOffres)) { ?>
             <div class="alert alert-warning">
                 <strong>Vous devez créer une offre paypal !</strong>
             </div>
@@ -177,9 +158,96 @@
                         <?php } ?>
                     </div>
                 </div>
+            <?php } ?>
             </div>
         </div>
     </div>
-    <?php } ?>
-    <?php } ?>
+    <?php } 
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaysafeCard')) { ?>
+    <div class="col-xs-12 text-center">
+        <div class="panel panel-default cmw-panel">
+            <div class="panel-heading cmw-panel-header">
+                <h3 class="panel-title"><strong>Mes offres PaysafeCard</strong></h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs">
+                        <?php for($i = 0; $i < count($paysafecard) ; $i++)   { ?>
+                        <li <?php if($i == 0) echo 'class="active"'; ?>><a href="#payementPaysafecard<?php echo $i; ?>" data-toggle="tab">Offre #<?php echo $i; ?></a></li>
+                        <?php } ?>
+                    </ul>
+                    <div class="tab-content">
+                        <?php for($i = 0; $i < count($paysafecard) ; $i++)   { ?>
+                        <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="payementPaysafecard<?php echo $i; ?>">
+                            <form method="POST" action="?&action=modifierOffrePaysafecard&id=<?php echo $paysafecard[$i]['id']; ?>">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="statut" <?php if($paysafecard[$i]['statut'] == true) echo 'checked'; ?>> Activer l'offre
+                                        </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="control-label">Message de l'offre</label>
+                                        <textarea name="description" class="form-control" ><?php echo htmlspecialchars($paysafecard[$i]['description']); ?></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">Prix de l'offre</label>
+                                        <input type="number" step="0.01" value="<?php echo $paysafecard[$i]['montant']; ?>" class="form-control" disabled />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">Jetons donnés</label>
+                                        <input type="number" name="jetons" value="<?php echo $paysafecard[$i]['jetons']; ?>" class="form-control" placeholder="ex: 1500"/>
+                                    </div>
+                                </div><hr>
+                                <div class="row">
+                                    <input type="submit" class="btn btn-success" value="Modifier Les changements !"/>
+                                </div>
+                            </form>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php } 
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'verifPaysafecard') && !empty($tabPaysafe)) { ?>
+    <div class="col-xs-12 text-center">
+        <div class="panel panel-default cmw-panel">
+            <div class="panel-heading cmw-panel-header">
+                <h3 class="panel-title"><strong>Liste des achats Paysafecard</strong></h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Code</th>
+                        <th>Montant</th>
+                        <th>Jetons</th>
+                        <th>Traité ?</th>
+                        <th>Actions</th>
+                    </tr>
+                <?php
+                    foreach($tabPaysafe as $value)
+                    {
+                        ?><tr>
+                            <td><?=$value['pseudo'];?></td>
+                            <td><?=$value['code'];?></td>
+                            <td><?=$value['montant'];?></td>
+                            <td><?=$value['jetons'];?></td>
+                            <td><?=($value['statut']) ? '<span class="badge badge-success">Traité !</span>' : 'En attente';?></td>
+                            <td>
+                            <?php if(!$value['statut'])
+                                echo '<a href="?action=validerPaysafecard&offre='.$value['id'].'" class="btn btn-success">Valider l\'achat</a>';
+                            ?>
+                            <a href="?action=supprHistoPaysafecard&offre=<?=$value['id'];?>" class="btn btn-danger">Supprimer de l'historique</a>
+                            </td>
+                        </tr><?php
+                    }
+                ?>
+                </table>
+            </div>
+        </div>
+    </div>
+    <?php } ?> 
 </div>

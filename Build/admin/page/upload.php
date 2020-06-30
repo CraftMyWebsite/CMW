@@ -1,4 +1,6 @@
-<div class="cmw-page-content-header"><strong>Upload d'images</strong> - uploadez vos propres images</div>
+<?php 
+if(Permission::getInstance()->verifPerm('PermsPanel', 'update', 'showPage')) {
+?><div class="cmw-page-content-header"><strong>Upload d'images</strong> - uploadez vos propres images</div>
 <?php if(isset($_GET["erreur"])){
 	switch($_GET["erreur"]){
 		case 0:
@@ -72,4 +74,14 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div><?php 
+}
+else
+{
+	?><div class="col-lg-12 text-center">
+        <div class="alert alert-danger">
+            <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+        </div>
+    </div><?php
+}
+?>

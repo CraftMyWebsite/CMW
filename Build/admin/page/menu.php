@@ -1,6 +1,6 @@
 <div class="cmw-page-content-header"><strong>Gestionnaire des Menus</strong> - Personnalisez vos Menus</div>
 <div class="row">
-    <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['menus']['actions']['addLinkMenu'] == false AND $_PGrades_['PermsPanel']['menus']['actions']['addDropLinkMenu'] == false AND $_PGrades_['PermsPanel']['menus']['actions']['editDropAndLinkMenu'] == false)) { ?>
+    <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu') AND !Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'actions', 'addDropLinkMenu') AND !Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu')) { ?>
         <div class="col-md-12 text-center">
             <div class="alert alert-danger">
                 <strong>Vous avez aucune permission pour accéder aux menus.</strong>
@@ -13,7 +13,7 @@
             </div>
         </div>
     <?php }
-    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['actions']['addLinkMenu'] == true) { ?>
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) { ?>
     <div class="col-md-6">
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">
@@ -57,7 +57,7 @@
         </div>
     </div>
     <?php }
-    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['actions']['addDropLinkMenu'] == true) { ?>
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'actions', 'addDropLinkMenu')) { ?>
     <div class="col-md-6">
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">
@@ -106,7 +106,7 @@
         </div>
     </div>
     <?php }
-    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['actions']['editDropAndLinkMenu'] == true) { ?>
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu')) { ?>
     <div class="col-md-12">
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">

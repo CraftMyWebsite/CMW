@@ -12,7 +12,7 @@
 			<ul class="nav nav-tabs" style="margin-bottom:1vh;">
 			<?php for($i = 0; $i < count($jsonCon); $i++) {?>
 				<li class="nav-item">
-					<a href="#serv_<?= $i ?>" data-toggle="tab" class="nav-link <?php if($i == 0) echo 'active'; ?>"><?php echo $lecture['Json'][$i]['nom']; ?></a>
+					<a href="#serv_<?= $i ?>" data-toggle="tab" class="nav-link <?php if($i == 0) echo 'active'; ?>"><?php echo $lectureJSON[$i]['nom']; ?></a>
 				</li>
 			<?php }?>
 			</ul>

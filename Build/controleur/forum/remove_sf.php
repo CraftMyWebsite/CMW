@@ -1,6 +1,6 @@
 <?php 
 
-if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteSousForum'] == true) AND isset($_GET['id_cat'], $_GET['id_sf']))
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteSousForum') AND isset($_GET['id_cat'], $_GET['id_sf']))
 {
 	$id_cat = htmlspecialchars($_GET['id_cat']);
 	$id_sf = htmlspecialchars($_GET['id_sf']);

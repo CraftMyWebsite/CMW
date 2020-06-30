@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addForum'] == true) AND !empty($_POST['nom']))
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addForum')) AND !empty($_POST['nom']))
 {
 	//Creation forum 
 	$nom = htmlspecialchars($_POST['nom']);

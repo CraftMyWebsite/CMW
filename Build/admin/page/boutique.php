@@ -1,7 +1,7 @@
 <div class="cmw-page-content-header"><strong>Réglages boutique</strong> - Paramétrez votre boutique</div>
 
 <div class="row">
-	<?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['shop']['actions']['addCategorie'] == false AND $_PGrades_['PermsPanel']['shop']['actions']['addOffre'] == false AND $_PGrades_['PermsPanel']['shop']['actions']['editCategorieOffre'] == false)) { ?>
+	<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'showPage', 'addCategorie') AND !Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre') AND !Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { ?>
 
 	<div class="col-lg-6 col-lg-offset-3 text-center">
 		<div class="alert alert-danger">
@@ -15,7 +15,7 @@
 		<strong>Dans cette section, créez des catégories d'achat boutique, choisissez le/les serveur(s) d'action, créez vos offres et attribuez des actions(commandes) à vos offres. Réglez toute la partie "Boutique In-Game", pour ce qui est de l'achat de jetons(monnaie de la boutique), veuillez vous reporter à la section "paiement"</strong>
 	</div>
 
-	<?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['actions']['addCategorie'] == true) { ?>
+	<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'addCategorie')) { ?>
 
 	<div class="col-xs-12 col-md-6 text-center">
 		<div class="panel panel-default cmw-panel">
@@ -48,8 +48,8 @@
 						<select name="serveur" class="form-control">
 							<option value="-1">Tous</option>
 							<option value="-2">Au choix (Le joueur se connecte sur le serveur voulu)</option>
-							<?php for($i = 0; $i < count($lecture['Json']); $i++) { ?>
-							<option value="<?php echo $i; ?>"><?php echo $lecture['Json'][$i]['nom']; ?></option>
+							<?php foreach($lectureJSON as $serveur) { ?>
+							<option value="<?php echo $i; ?>"><?php echo $serveur['nom']; ?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -66,7 +66,7 @@
 		</div>
 	</div>
 
-	<?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['actions']['addOffre'] == true) { ?>
+	<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre')) { ?>
 
 	<div class="col-xs-12 col-md-6 text-center">
 	  	<div class="panel panel-default cmw-panel">
@@ -112,7 +112,7 @@
 		</div>
 	</div>
 
-	<?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['actions']['createCoupon'] == true ) { ?>
+	<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'createCoupon')) { ?>
 
 	<div class="col-xs-12 text-center">
 		<div class="panel panel-default cmw-panel">
@@ -206,7 +206,7 @@
 		</div>
 	</div>
 
-	<?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['actions']['modifCoupon'] == true) { ?>
+	<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'modifCoupon')) { ?>
 
 	<div class="col-xs-12 text-center">
 		<div class="panel panel-default cmw-panel">
@@ -253,7 +253,7 @@
 		</div>
 	</div>
 
-	<?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['actions']['editCategorieOffre'] == true) { ?>
+	<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { ?>
 
 	<div class="col-xs-12 text-center">
 	  	<div class="panel panel-default cmw-panel">

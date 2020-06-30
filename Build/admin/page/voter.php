@@ -1,15 +1,15 @@
 <div class="cmw-page-content-header"><strong>Votes</strong> - Gérez vos votes</div>
 <!-- Page Heading -->
-<div class="row">
+<div class="row" style="margin-top:10px;">
 	<div class="col-lg-12">
-        <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['vote']['actions']['editSettings'] == false AND $_PGrades_['PermsPanel']['vote']['actions']['addVote'] == false)) { ?>
+        <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings') AND Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'addVote')) { ?>
             <div class="col-lg-12 text-center">
                 <div class="alert alert-danger">
                     <strong>Vous avez aucune permission pour accéder aux votes.</strong>
                 </div>
             </div>
         <?php }
-        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['editSettings'] == true) { ?>
+        if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) { ?>
         <div class="col-lg-12 text-justify">
             <div class="alert alert-success">
                 <strong>Dans cette section vous pourrez configurer vos votes.</strong><br/>
@@ -34,18 +34,18 @@
                 <div class="panel-body">
                     <div class="col-md-5">
                         <h3>Réglages des votes</h3>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Message affiché lors du vote</label>
                             <input type="text" name="message" class="form-control"/>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Afficher le message ?</label>
                             <input type="radio" name="display" value="1" id="1" checked />
                             <label for="1"> Oui </label>
                             <input type="radio" name="display" value="2" id="2"/>
                             <label for="2"> Non </label>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Executer une Commande/Give d'item</label>
                             <select name="action" class="form-control">
                                 <option value="1"> Executer une commande </option>
@@ -53,28 +53,28 @@
                                 <option value="3"> Give de jetons site</option>
                             </select>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Obtention de la récompense</label>
                             <select name="methode" class="form-control">     
                                 <option value="1"> Le serveur où il est en ligne </option>
                                 <option value="2"> Le serveur de la catégorie </option>
                             </select>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Commande à éxecuter (SANS /)</label>
                             <input type="text" name="cmd" class="form-control" />
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">ID de l'item</label>
                             <input type="text" name="id" class="form-control" value="264" />
                         </div>
                     </div>
                     <div class="col-md-offset-1 col-md-6">
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Quantité de l'item à donner <strong>OU</strong> quantité de jetons à donner</label>
                             <input type="text" name="quantite" class="form-control" value="4" />
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Lien de vote du serveur</label>
                             <select name="serveur" class="form-control">        
                                 <?php for($i = 0; $i < count($lectureServs); $i++) {        ?>
@@ -82,23 +82,23 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Lien de vote</label>
                             <input type="url" name="lien" placeholder="ex: http://serveurs-minecraft.com/...../" class="form-control" required>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Titre du lien</label>
                             <input type="text" name="titre" placeholder="ex: Voter sur McServ !" class="form-control" required>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <label class="control-label">Temps de vote</label>
                             <input type="number" name="temps" placeholder="ex: 86400 pour 24h" class="form-control" required>
                         </div>
-						 <div class="row">
+						 <div class="row" style="margin-top:10px;">
                             <label class="control-label">Id unique donné par le site web. *</label>
                             <input type="text" name="idCustom" placeholder="ex: 54748" value="" class="form-control" />
                         </div>
-						<div class="row">
+						<div class="row" style="margin-top:10px;">
                             <label class="control-label">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses )</label>
                             <input type="radio" name="enligne" value="1" id="3" checked />
                             <label for="3"> Oui </label>
@@ -124,22 +124,95 @@
             </div>
         </div>
         </form>
+		<form method="POST" action="?&action=changeVoteCron">
+        <div class="col-lg-12">
+            <div class="panel panel-default cmw-panel">
+                <div class="panel-heading cmw-panel-header">
+                    <h3 class="panel-title"><strong>Configuration tâche cron</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-7">
+                        <h3>Message</h3>
+                        <div class="row" style="margin-top:10px;">
+                            <label class="control-label">Entête du message</label>
+                            <input type="text" name="entete" value="<?php if(isset($_Serveur_['VoteCron']['entete'])) { echo $_Serveur_['VoteCron']['entete']; } else { echo '&3&m___________&r &b&l[> &b&l/Vote &b&l<] &3&m___________'; }  ?>" class="form-control"/>
+                        </div>
+                        <div class="row" style="margin-top:10px;">
+                            <label class="control-label">Contenue du message SI le joueur peut voter (laisser vide pour désactiver)</label>
+							<ul>
+								<li> <strong>{LIEN}</strong> contient l'url du site</li>
+							</ul>
+                            <input type="text" name="msgallow" value="<?php if(isset($_Serveur_['VoteCron']['msgallow'])) { echo $_Serveur_['VoteCron']['msgallow']; } else { echo '&3>> &b {LIEN} &3>> &b Voter ! &8/vote'; }  ?>" class="form-control"/>
+                        </div>
+                        <div class="row" style="margin-top:10px;">
+                            <label class="control-label">Contenue du message SI le joueur ne peut pas voter</label>
+							<ul>
+								<li> <strong>{LIEN}</strong> contient l'url du site</li>
+								<li> <strong>{TEMPS}</strong> contient le temps restant avant que le joueur puisse voter</li>
+							</ul>
+                             <input type="text" name="msgdeny" value="<?php if(isset($_Serveur_['VoteCron']['msgdeny'])) { echo $_Serveur_['VoteCron']['msgdeny']; } else { echo '&3>> &b {LIEN}&3>> &b {TEMPS} '; }  ?>" class="form-control"/>
+                        </div>
+                        <div class="row" style="margin-top:10px;">
+                            <label class="control-label">Footer du message (laisser vide pour désactiver)</label>
+                          <input type="text" name="footer" value="<?php if(isset($_Serveur_['VoteCron']['footer'])) { echo $_Serveur_['VoteCron']['footer']; } else { echo '&3&m_________________________________'; }  ?>" class="form-control"/>
+                      
+                        </div>
+						 <div class="row" style="margin-top:10px;">
+                            <label class="control-label">Mot de passe dela tâche cron, laisser vide pour désactivé l'accès à la tâche cron.</label>
+                          <input type="text" name="mdp" id="mdpurlCron" onchange="document.getElementById('urlCron').innerText = '<?php echo $_Serveur_['General']['url'].'/?action=voteCron&mdp='; ?>' + document.getElementById('mdpurlCron').value" value="<?php if(isset($_Serveur_['VoteCron']['mdp'])) { echo $_Serveur_['VoteCron']['mdp']; }  ?>" placeholder="ex: CMW123" class="form-control"/>
+                      
+                        </div>
+						
+						
+                       
+                    </div>
+                    <div class="col-md-offset-1 col-md-4">
+						<div class="row">
+                            <label class="control-label">Envoyé la notification même aux personnes qui n'ont jamais voté.
+                          <input type="checkbox" name="sendtoall"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoall']) && $_Serveur_['VoteCron']['sendtoall'] == 1) { echo 'checked'; }  ?>></label>
+                      
+                        </div>
+                        <div class="row" style="margin-top:10px;">
+		Pour faire fonctionnez ce système vous devez avoir accès au tâche cron sur votre hébergeur, créez en une nouvelle et configurez la sur "récupérer une url", sélectionnez le temps que vous désirez et rentrez comme url: </br><strong id="urlCron"><?php echo $_Serveur_['General']['url'].'/?action=voteCron&mdp='; if(isset($_Serveur_['VoteCron']['mdp'])) { echo $_Serveur_['VoteCron']['mdp']; } ?></strong>
+                        </div>
+ 
+                        <div class="row text-center" style="margin-top:10px;">
+                            <input type="submit" class="btn btn-success" value="Valider les changements"/>
+							<input type="button" onClick="tryCron()" id="trycron" class="btn btn-success" value="Try it !"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+		
+		<script>
+			function tryCron() {
+				document.getElementById('trycron').disabled = true;
+				$.post("index.php?action=voteCron&mdp=" + document.getElementById('mdpurlCron').value,{
+				},function(data, status){
+					console.log(data);
+					alert("Envoyé ! Si vous n'avez rien reçu sur votre serveur, vérifiez la connexion jsonapi et confirmez les changements !");
+					document.getElementById('trycron').disabled = false;
+				});
+			}
+		</script>
     <?php }
-    if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['vote']['actions']['resetVote'] == true OR $_PGrades_['PermsPanel']['vote']['actions']['deleteVote'] == true)) { ?>
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote') OR Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
         <div class="col-lg-12">
             <div class="panel panel-default cmw-panel">
                 <div class="panel-heading cmw-panel-header">
                     <h3 class="panel-title"><strong>Edition des votes</strong></h3>
                 </div>
                 <div class="panel-body">
-                    <?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['resetVote'] == true) { ?>
+                    <?php if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote')) { ?>
                         <div class="row text-center">
                             <h3>Réinitialisation</h3>
                             <a href="?action=resetVotes" class="btn btn-danger">Réinitialiser les votes</a>
                         </div>
                     <?php }
-                    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['deleteVote'] == true) { ?>
-                        <div class="row">
+                    if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
+                        <div class="row" style="margin-top:10px;">
                             <h3 class="text-center">Gestion des votes</h3>
                         </div>
                         <form action="?action=modifierVote" method="post">

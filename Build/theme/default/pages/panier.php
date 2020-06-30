@@ -1,4 +1,4 @@
-<?php if(isset($_Joueur_)){?>
+<?php if(Permission::getInstance()->verifPerm("connect")){?>
 <header class="heading-pagination">
     <div class="container-fluid">
         <h1 class="text-uppercase wow fadeInRight" style="color:white;">Boutique</h1>
@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-            	<?php $nbArticles = $_Panier_->compterArticle();
+            	<?php $nbArticles = $_Panier_->compterOffre();
                 $precedent = 0;
             	if($nbArticles == 0 )
             		echo '<tr><td colspan="6"><center>Votre panier est vide :\'( </center></td></tr>';

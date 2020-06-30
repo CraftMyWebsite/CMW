@@ -8,7 +8,7 @@
 <div class="alert alert-info" role="alert">
 	Bienvenue sur le forum de <?php echo $_Serveur_['General']['name']; ?>,
 	Ici vous pourrez échanger et partager avec toute la communauté du serveur ! </div>
-<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['modeJoueur'] == true)
+<?php if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur'))
  	{
  		?>
  			<p class="text-center">
@@ -19,12 +19,12 @@
 $fofo = $_Forum_->affichageForum();
 for($i = 0; $i < count($fofo); $i++)
 { 
-	if($_PGrades_['PermsDefault']['forum']['perms'] >= $fofo[$i]['perms'] OR ($_Joueur_['rang'] == 1 AND !$_SESSION['mode']) OR $fofo[$i]['perms'] == 0)
+	if(((Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $fofo[$i]['perms'] OR Permission::getInstance()->verifPerm("createur")) AND !$_SESSION['mode']) OR $fofo[$i]['perms'] == 0)
 	{
 	?>
 		<br><br/>
 		<table class="table table-striped">
-		<div class="row"><?php if(isset($_Joueur_) AND ($_PGrades_['PermsForum']['general']['deleteForum'] == true OR $_Joueur_['rang'] == 1) AND !$_SESSION['mode']){ ?>
+		<div class="row"><?php if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') AND !$_SESSION['mode']){ ?>
 		<div class="col-md-6 offset-md-6" style="text-align: right;">
 			<div class="dropdown" style="display: inline;">
 			  <button class="btn btn-info dropdown-toggle" type="button" id="ordreforum<?=$fofo[$i]['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -52,8 +52,8 @@ for($i = 0; $i < count($fofo); $i++)
 		</div><?php } ?></div>
 		<thead>
 			<tr>
-				<th colspan="5" style="width: <?=(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteCategorie'] == true) AND !$_SESSION['mode']) ? '75%' : '100%';?>;"><h3 class="text-center"><?php echo ucfirst($fofo[$i]['nom']); ?></h3></th>
-				<?php if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteCategorie'] == true) AND !$_SESSION['mode'])
+				<th colspan="5" style="width: <?=(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') AND !$_SESSION['mode']) ? '75%' : '100%';?>;"><h3 class="text-center"><?php echo ucfirst($fofo[$i]['nom']); ?></h3></th>
+				<?php if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') AND !$_SESSION['mode'])
 				{
 					?><th>Actions</th>
 					<?php
@@ -69,7 +69,7 @@ $categorie = $_Forum_->infosForum($fofo[$i]['id']);
 <?php   for($j = 0; $j < count($categorie); $j++) { 
 			
 			$derniereReponse = $_Forum_->derniereReponseForum($categorie[$j]['id']);
-			if(($_Joueur_['rang'] == 1 AND !$_SESSION['mode']) OR $_PGrades_['Permsdefault']['forum']['perms'] >= $categorie[$j]['perms'] OR $categorie[$j]['perms'] == 0)
+			if(((Permission::getInstance()->verifPerm("createur") OR Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > $categorie[$j]['perms']) AND !$_SESSION['mode']) OR $categorie[$j]['perms'] == 0)
 			{
 			?>
             <tr>
@@ -77,10 +77,10 @@ $categorie = $_Forum_->infosForum($fofo[$i]['id']);
 				<td style="width: 3%;"><?php if($categorie[$j]['img'] == NULL) { ?><a href="?&page=forum_categorie&id=<?php echo $categorie[$j]['id']; ?>"><i class="material-icons">chat</i></a><?php }
 					else { ?><a href="?page=forum_categorie&id=<?php echo $categorie[$j]['id']; ?>"><i class="material-icons"><?php echo $categorie[$j]['img']; ?></i></a><?php }?></td>
 				<td style="width: 32%;"><a href="?&page=forum_categorie&id=<?php echo $categorie[$j]['id']; ?>"><?php echo $categorie[$j]['nom']; ?></a>
-				<?php 	if($_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
+				<?php 	if(Permission::getInstance()->verifPerm("createur") AND !$_SESSION['mode'])
 							$perms = 100;
-						elseif($_PGrades_['PermsDefault']['forum']['perms'] > 0)
-							$perms = $_PGrades_['PermsDefault']['forum']['perms'];
+						elseif(Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > 0)
+							$perms = Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms');
 						else
 							$perms = 0;
 
@@ -117,7 +117,7 @@ $categorie = $_Forum_->infosForum($fofo[$i]['id']);
 				else { ?><p> Il n'y a pas de sujet dans ce forum </p> <?php } 
 				?></td>
 			<?php
-				if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteCategorie'] == true) AND !$_SESSION['mode'])
+				if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') AND !$_SESSION['mode'])
 				{
 					?><td><a href="?action=remove_cat&id=<?php echo $categorie[$j]['id']; ?>" style="text-align: left;"><i class="fas fa-trash-alt"></i></a>
 					<div class="dropdown" style="display: inline; text-align: center;">
@@ -153,7 +153,7 @@ $categorie = $_Forum_->infosForum($fofo[$i]['id']);
 <?php
 	}
 }
-if($_PGrades_['PermsForum']['general']['addForum'] == true OR $_Joueur_['rang'] == 1 AND !$_SESSION['mode'])
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addForum') AND !$_SESSION['mode'])
 {
 	?><a class="btn btn-primary btn-xs btn-block" role="button" data-toggle="collapse" href="#add_forum" aria-expanded="false" aria-controls="add_forum">
 Ajouter une Catégorie
@@ -173,7 +173,7 @@ Ajouter une Catégorie
 	</div>
 </div><br><?php
 }
-if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addCategorie'] == true ) AND !$_SESSION['mode'])
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addCategorie') AND !$_SESSION['mode'])
 {
 	?>
 	<a class="btn btn-primary btn-xs btn-block" role="button" data-toggle="collapse" href="#add_categorie" aria-exepanded="false" aria-controls="add_categorie"> Ajouter un Forum</a>

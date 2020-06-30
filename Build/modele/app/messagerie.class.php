@@ -165,7 +165,6 @@ class Messagerie
 		$return='';
 		foreach($conversations as $value)
 		{
-			$Img = new ImgProfil($value['from'], 'pseudo');
 			$return.='<div class="card">
 		    	<div class="card-header card-header-messagerie" id="messageHead'.$value['id'].'">
 		      		<h5 class="mb-0">
@@ -174,7 +173,7 @@ class Messagerie
 		    	$return.='<i style="font-size: 18px;margin-right: 8px;" class="fas fa-envelope" id="i'.$value['id'].'"></i>';
 		    else
 		    	$return.= '<i style="font-size: 18px;margin-right: 8px;" class="far fa-envelope-open" id="i'.$value['id'].'"></i>';
-		    $return.=' <img src="'.$Img->getImgToSize(24, $width, $height).'" style="width: '.$width.'px; height: '.$height.'px;" alt="none" /> <strong>'.$value['from'].'</strong>
+		    	$return.=' <img src="'.$_ImgProfil_->getUrlHeadByPseudo($value['from']).'" style="width: 24px; height: 24px;" alt="none" /> <strong>'.$value['from'].'</strong>
 		          			<span style="float: right;">le '.$value['date'].'</span></p>
 		          			<p class="text-message">'.$value['message'].'</p>
 		        		</button>

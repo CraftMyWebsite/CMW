@@ -1,6 +1,6 @@
 <div class="cmw-page-content-header"><strong>Gestion</strong> - Gérez vos nouveautés</div>
 <div class="row">
-        <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['news']['actions']['addNews'] == false AND $_PGrades_['PermsPanel']['news']['actions']['editNews'] == false)) { ?>
+        <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'addNews') AND !Permission::getInstance()->verifPerm('PermsPane', 'news', 'actions', 'editNews')) { ?>
             <div class="col-md-12 text-center">
                 <div class="alert alert-danger">
                     <strong>Vous avez aucune permission pour accéder aux nouveautés.</strong>
@@ -15,7 +15,7 @@
             </div>
         </div><div class="row" style="padding-top: 5px;">
         <?php }
-        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['news']['actions']['addNews'] == true) { ?>
+        if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) { ?>
             <div class="col-md-6">
                 <div class="panel panel-default cmw-panel">
                     <div class="panel-heading cmw-panel-header">
@@ -54,7 +54,7 @@
             </div>
         </div>
         <?php }
-        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['news']['actions']['editNews'] == true) { ?>
+        if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'editNews')) { ?>
             <div class="col-md-6">
                 <div class="panel panel-default cmw-panel">
                     <div class="panel-heading cmw-panel-header">

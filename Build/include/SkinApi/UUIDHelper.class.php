@@ -6,7 +6,6 @@
  * 
  *  Get Mojang ping state,
  *  Minecraft Nickname -> Mojang UUID,
- *  Mojang UUID -> is alex or steve (?),
  *  Mojang UUID -> Mojang skin url,
  *
  * @author Guedesite <contact@neocraft.fr>
@@ -17,57 +16,63 @@
 
 class UUIDHelper
 {
-    public $UUID;
-    public $url;
-    
+
     const SteveUUID = '8667ba71b85a4004af54457a9734eed7';
     
     private $ping;
-	private $session;
 
-    
-    public function __construct($Pseudo){
-		if($session = !isset($_SESSION["SkinApi"][$Pseudo]))
-		{
-			if(($this->ping = self::checkMojangApi()))
-			{
-				if(!($this->UUID = $this->getUUIDFromPseudo($Pseudo)))
-				{
-					$this->UUID = self::SteveUUID;
-				}
-				$_SESSION["SkinApi"][$Pseudo]['UUID'] = $this->UUID;
-				$this->url = $_SESSION["SkinApi"][$Pseudo]['URL'] = self::getUrlTextureByUUID();
-			}
-		}else {
-			$this->UUID = $_SESSION["SkinApi"][$Pseudo]['UUID'];
-			$this->url = $_SESSION["SkinApi"][$Pseudo]['URL'];
-		}
+    public function __construct(){
+        $this->ping = self::checkMojangApi();
     }
         
     public function isApiEnable() {
         return $this->ping;
     }
     
+    public function getUrlTextureByPseudo($pseudo) {
+        $uuid = $this->getUUIDFromPseudo($pseudo);
+        if(!isset($uuid))
+        {
+            return null;
+        }
+        return $this->getUrlTextureByUUID($uuid);
+    }
     
-    private function getUrlTextureByUUID() {
-		$json = @file_get_contents('https://sessionserver.mojang.com/session/minecraft/profile/'.$this->UUID);
-		$data = json_decode($json, true);
-		$data64 = json_decode(base64_decode($data['properties'][0]['value']), true);
-		return $data64['textures']['SKIN']['url'];
+    
+    private function getUrlTextureByUUID($uuid) {
+		$json =  $this->fetch('https://sessionserver.mojang.com/session/minecraft/profile/'.$uuid);
+		
+		if(!isset($json) | empty($json)) {
+            return null;
+        } else {
+			$data = json_decode($json, true);
+			if(array_key_exists('error', $data))
+			{
+			    return null;
+			}
+			$data64 = json_decode(base64_decode($data['properties'][0]['value']), true);
+			return $data64['textures']['SKIN']['url'];
+		}
     }
     
     private function getUUIDFromPseudo($pseudo) {
-        $json = @file_get_contents('https://api.mojang.com/users/profiles/minecraft/'.$pseudo);
-        $data = json_decode($json, true);
-        if(!isset($data)) {
-            return false;
+		$json = $this->fetch('https://api.mojang.com/users/profiles/minecraft/'.$pseudo);
+		
+		if(!isset($json) | empty($json)) {
+            return null;
         } else {
+            $data = json_decode($json, true);
+            if(array_key_exists('error', $data))
+            {
+                return null;
+            }
             return $data['id'];
         }
     }
-    
+
     private function checkMojangApi(){
-        $json = file_get_contents('https://status.mojang.com/check');
+		return true;
+        $json = $this->fetch('https://status.mojang.com/check');
         $data = json_decode($json, true);
         foreach($data as $address)
         {
@@ -80,5 +85,27 @@ class UUIDHelper
             }
         }
         return true;
+    }
+	
+	private function fetch($url)
+    {
+        if (function_exists('curl_init') and extension_loaded('curl')) {
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+
+            $output = curl_exec($ch);
+            curl_close($ch);
+
+            return $output;
+        } else {
+            return @file_get_contents($url);
+        }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 require_once('modele/joueur/maj.class.php');
-if(isset($_Joueur_))
+if(Permission::getInstance()->verifPerm("connect"))
 {
 	$req_recup = $bddConnection->prepare('SELECT * FROM cmw_votes_temp WHERE pseudo = :pseudo');
 	$req_recup->execute(array(

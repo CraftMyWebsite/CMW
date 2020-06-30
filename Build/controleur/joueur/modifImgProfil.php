@@ -9,20 +9,14 @@ if(isset($_FILES['img_profil']) AND $_FILES['img_profil']['error'] == 0)
 		$extension_autorisees = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico');
 		if(in_array($extensionFichier, $extension_autorisees))
 		{
-			$Img = new ImgProfil($_Joueur_['id']);
-			if(file_exists('utilisateurs/'.$_Joueur_['id']))
-			{
-				$extension = $Img->getExtension();
-				unlink('utilisateurs/'.$_Joueur_['id'].'/profil.'.$extension);
-				move_uploaded_file($_FILES['img_profil']['tmp_name'], 'utilisateurs/'.$_Joueur_['id'].'/profil.'.$extensionFichier);
-				$Img->redefineExt($extensionFichier);
-			}
-			else
-			{
-				mkdir('utilisateurs/'.$_Joueur_['id']);
-				move_uploaded_file($_FILES['img_profil']['tmp_name'], 'utilisateurs/'.$_Joueur_['id'].'/profil.'.$extensionFichier);
-				$Img->redefineExt($extensionFichier);
-			}
+		    $_ImgProfil_->removeImg($_Joueur_['pseudo']);
+		    if(!is_dir('utilisateurs/'.$_Joueur_['id']))
+		    {
+		      	mkdir('utilisateurs/'.$_Joueur_['id']);
+		    }
+			move_uploaded_file($_FILES['img_profil']['tmp_name'], 'utilisateurs/'.$_Joueur_['id'].'/profil.'.$extensionFichier);
+			$_ImgProfil_->defineExt($_Joueur_['pseudo'], $extensionFichier);
+			
 			header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&success=image');
 		}
 		else

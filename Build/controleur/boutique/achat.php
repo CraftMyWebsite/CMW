@@ -30,10 +30,6 @@
 				{
 					$recupActions = $bddConnection->prepare('SELECT * FROM cmw_boutique_action WHERE id_offre = :id_offre');
 					$recupActions->execute(array('id_offre' => $_SESSION['panier']['id'][$a]));
-					for($i = 0; $i < count($lecture['Json']); $i++)
-					{
-						$jsonCon[$i]->SetConnectionBase($bddConnection);
-					}
 					$offre = $_SESSION['panier']['id'][$a];
 					require_once('modele/boutique/offres.class.php'); 
 					$offres = new OffresList($bddConnection, $jsonCon);
@@ -44,42 +40,44 @@
 					$categoriesObj = new CategoriesList($bddConnection);
 					$categories = $categoriesObj->GetTableauCategories();
 
-					for($i = 0; $i < count($lecture['Json']); $i++)
+					foreach($jsonCon as $key => $serveur)
 					{
-						$enligne[$i] = false;
-						if(isset($_Joueur_['pseudo']) AND isset($serveurStats[$i]['joueurs']) AND in_array($_Joueur_['pseudo'], $serveurStats[$i]['joueurs']))
-							$enligne[$i] = true;
+						$enligne[$key] = false;
+						$serveurStats[$key] = $serveur->GetServeurInfos();
+						if(isset($_Joueur_['pseudo']) AND isset($serveurStats[$key]['joueurs']) AND in_array($_Joueur_['pseudo'], $serveurStats[$key]['joueurs']))
+							$enligne[$key] = true;
 					}
 					$infosOffre = $offres->GetInfosOffre($offre, $_Joueur_);
-					$infosCategories = $categoriesObj->GetInfosCategorie($infosOffre['offre']['categorie'], $lecture['Json']);
-					for($i = 0; $i < count($lecture['Json']); $i++)
+					$infosCategories = $categoriesObj->GetInfosCategorie($infosOffre['offre']['categorie'], $lectureJSON);
+					foreach($jsonCon as $serveur)
 					{
-						$jsonCon[$i]->SetPlayerName($_Joueur_['pseudo']);
+						$serveur->SetPlayerName($_Joueur_['pseudo']);
 					}
 					while($donneesActions = $recupActions->fetch(PDO::FETCH_ASSOC))
 					{
 
 						if($infosCategories['serveurId'] == -1) 
-							for($i = 0; $i < count($lecture['Json']); $i++)
+							foreach($jsonCon as $serveur)
 							{
 								for($z=0; $z < $_SESSION['panier']['quantite'][$a]; $z++)
 								{
-									SendCommand($jsonCon[$i], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
+									SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
 								}
 							}
 						elseif($infosCategories['serveurId'] == -2)
-							for($i = 0; $i < count($lecture['Json']); $i++)
+							foreach($jsonCon as $key => $serveur)
 							{
 								for($z = 0; $z < $_SESSION['panier']['quantite'][$a]; $z++)
 								{
-									if($enligne[$i])
-										SendCommand($jsonCon[$i], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+									if($enligne[$key])
+										SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
 								}
 							}
 						else
 							for($z = 0; $z < $_SESSION['panier']['quantite'][$a]; $z++)
 							{
-								SendCommand($jsonCon[$infosCategories['serveurId']], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
+								$cle = array_search($infosCategories['serveurId'], array_column($lectureJSON, 'id'));
+								SendCommand($jsonCon[$cle], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
 							}
 					}
 					require_once('modele/app/statistiques.class.php');

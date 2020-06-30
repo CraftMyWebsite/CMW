@@ -12,7 +12,7 @@
 	else
 		$sousforumd = $_Forum_->infosSousForum($id, 0);
 		
-	if(!(($_Joueur_['rang'] == 1 AND !$_SESSION['mode']) OR $_PGrades_['PermsDefault']['forum']['perms'] >= $categoried['perms'] OR $categoried['perms'] == 0)) header('Location: ?page=erreur&erreur=7');?>
+	if(!(((Permission::getInstance()->verifPerm("createur") OR Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $categoried['perms']) AND !$_SESSION['mode']) OR $categoried['perms'] == 0)) header('Location: ?page=erreur&erreur=7');?>
 		<header class="heading-pagination">
 			<div class="container-fluid">
 				<h1 class="text-uppercase wow fadeInRight" style="color:white;">Forum: <?=$categoried['nom'];?></h1>
@@ -48,7 +48,7 @@
 				<th style="width: 65%">Nom</th>
 				<th>Discussions</th>
 				<th>Messages</th>
-				<?php if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteSousForum'] == true) AND !$_SESSION['mode'])
+				<?php if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteSousForum') AND !$_SESSION['mode'])
 				{
 					?><th style="width: 28%">Actions</th><?php 
 				} ?>
@@ -57,7 +57,7 @@
 			$sousforumd = $_Forum_->infosSousForum($id, 1);
 			for($a = 0; $a < count($sousforumd); $a++)
 			{
-				if(($_Joueur_['rang'] == 1 AND !$_SESSION['mode']) OR $_PGrades_['PermsDefault']['forum']['perms'] >= $sousforumd[$a]['perms'] OR $sousforumd[$a]['perms'] == 0)
+				if(((Permission::getInstance()->verifPerm("createur") OR Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $sousforumd[$a]['perms']) AND !$_SESSION['mode']) OR $sousforumd[$a]['perms'] == 0)
 				{
 				?>
 			<tr>
@@ -66,7 +66,7 @@
 				<td><a href="?&page=forum_categorie&id=<?php echo $id; ?>&id_sous_forum=<?php echo $sousforumd[$a]['id']; ?>"><?php echo $sousforumd[$a]['nom']; ?></a></td>	
 				<td><a href="?page=forum_categorie&id=<?php echo $id; ?>&id_sous_forum=<?php echo $sousforumd[$a]['id']; ?>"><?php echo $_Forum_->compteTopicsSF($sousforumd[$a]['id']); ?></a></td>
 				<td><a href="?page=forum_categorie&id=<?php echo $id; ?>&id_sous_forum=<?php echo $sousforumd[$a]['id']; ?>"><?php echo $_Forum_->compteAnswerSF($sousforumd[$a]['id']); ?></a></td>
-				<?php if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteSousForum'] == true) AND !$_SESSION['mode'])
+				<?php if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteSousForum') AND !$_SESSION['mode'])
 				{
 					?><td><a href=<?php if($sousforumd[$a]['close'] == 0) { ?>"?action=lock_sf&id_f=<?=$sousforumd[$a]['id_categorie'];?>&id=<?=$sousforumd[$a]['id'];?>&lock=1" title="Fermer le sous-forum"><i class="fa fa-unlock-alt"<?php } else { ?>"?action=unlock_sf&id_f=<?=$sousforumd[$a]['id_categorie'];?>&id=<?=$sousforumd[$a]['id'];?>&lock=0" title="Ouvrir le sous-forum"><i class="fa fa-lock"<?php } ?> aria-hidden="true"></i></a>
 						<div class="dropdown" style="display: inline; text-align: center;">
@@ -102,7 +102,7 @@
 		</table>
 		<?php 
 		}
-		if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addSousForum'] == true) AND !$_SESSION['mode'] && !isset($id_sous_forum))
+		if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addSousForum') AND !$_SESSION['mode'] && !isset($id_sous_forum))
 		{
 			?>
 			<div class="col-md-offset-8 col-md-4">
@@ -163,7 +163,7 @@
 			?>
 			<table class="table table-striped table-hover">
 				<tr>
-					<?php if(isset($_Joueur_) && ($_PGrades_['PermsForum']['moderation']['selTopic'] == true OR $_Joueur_['rang'] == 1)  && !$_SESSION['mode'])
+					<?php if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic')  && !$_SESSION['mode'])
 					{
 						echo '<th></th>';
 					} ?>
@@ -175,18 +175,17 @@
 				<?php 
 				for($i = 0; $i < count($topicd); $i++)
 				{
-					if(($_Joueur_['rang'] == 1 AND !$_SESSION['mode']) OR $_PGrades_['PermsDefault']['forum']['perms'] >= $topicd[$i]['perms'] OR $topicd[$i]['perms'] == 0)
+					if(((Permission::getInstance()->verifPerm("createur") OR Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd[$i]['perms']) AND !$_SESSION['mode']) OR $topicd[$i]['perms'] == 0)
 					{
 					?>
 					<tr>
-						<?php if(isset($_Joueur_) && ($_PGrades_['PermsForum']['moderation']['selTopic'] == true OR $_Joueur_['rang'] == 1) && !$_SESSION['mode'])
+						<?php if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic') && !$_SESSION['mode'])
 							{
 								?><td><input name="selection" type="checkbox" value="<?php echo $topicd[$i]['id']; ?>"/></td>
 										<?php 
 							} 
-							$Img = new ImgProfil($topicd[$i]['pseudo'], 'pseudo');
 							?>
-						<td><a href="?page=profil&profil=<?=$topicd[$i]['pseudo'];?>"><img src="<?=$Img->getImgToSize(42, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" alt="avatar de l'auteur" title="<?php echo $topicd[$i]['pseudo']; ?>"/></a>
+						<td><a href="?page=profil&profil=<?=$topicd[$i]['pseudo'];?>"><img src="<?=$_ImgProfil_->getUrlHeadByPseudo($topicd[$i]['pseudo']);?>" style="width: 42px; height: 42px;" alt="avatar de l'auteur" title="<?php echo $topicd[$i]['pseudo']; ?>"/></a>
 						</td>
 						<td><a href="?&page=post&id=<?php echo $topicd[$i]['id']; ?>"><?php if(isset($topicd[$i]['prefix']) && $topicd[$i]['prefix'] != 0)
 						{
@@ -201,13 +200,13 @@
 				}
 				?>
 			</table><br/>
-			<?php if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['moderation']['addPrefix'] == true OR $_PGrades_['PermsForum']['moderation']['epingle'] == true OR $_PGrades_['PermsForum']['moderation']['closeTopic'] == true) AND !$_SESSION['mode'])
+			<?php if((Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic') OR Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic')) AND !$_SESSION['mode'])
 			{
 			?>
 			<div id="popover" style="display: none;"><hr/><form id="sel-form" method='POST' action='?action=selTopic' class="inline">
 				<input type='hidden' name='idCat' value='<?php echo $id; ?>'>
 				<?php if(isset($id_sous_forum)) echo "<input type='hidden' name='idSF' value='$id_sous_forum'>"; 
-				if($_PGrades_['PermsForum']['moderation']['addPrefix'] == true OR $_Joueur_['rang'] == 1)
+				if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'addPrefix'))
 				{ ?> 
 				<label for='prefix'>Appliquer un préfix de discussion : </label><select name='prefix' id='prefix'>
 					<option value="NULL">Ne pas changer le préfixe</option>
@@ -220,15 +219,15 @@
 					}
 					?>
 				</select>
-				<?php } if($_PGrades_['PermsForum']['moderation']['epingle'] == true or $_Joueur_['rang'] == 1)
+				<?php } if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'epingle'))
 				{ ?>
 				<label for='epingle'>Epingler une discussion : </label> <input type='radio' name='epingle' value='1' id='ouiEp'/> <label for='ouiEp'>Oui</label>
 																		<input type='radio' name='epingle' value='0' id='nonEp'/> <label for='nonEp'>Non</label>
-				<?php } if($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_Joueur_['rang'] ==1)
+				<?php } if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic'))
 				{ ?>
 				<label for='close'>Fermer une discussion : </label> <input type='radio' name='close' value='1' id='yes'/> <label for='yes'>Oui</label>
 																	<input type='radio' name='close' value='0' id='no'/> <label for='no'>Non</label>
-				<?php } if($_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1)
+				<?php } if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic'))
 				{
 					?><br/>
 					<label for='remove'>Supprimer les discussions : </label> <input type='radio' name='remove' value='1' id='ouiSP'/> <label for='ouiSP'>Oui</label>
@@ -258,7 +257,7 @@
 			</div>
 			<?php
 		} 
-	if(isset($_Joueur_) && ((($categoried['close'] == 0 AND $sousforumd['close'] == 0) OR ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['seeForumHide'] == true)) AND !$_SESSION['mode']))
+	if(Permission::getInstance()->verifPerm("connect") && ((($categoried['close'] == 0 AND $sousforumd['close'] == 0) OR Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide')) AND !$_SESSION['mode']))
 	{
 		?>
 		<hr/>
@@ -330,7 +329,7 @@
 		</form>
 		<?php 
 	}
-	elseif(!isset($_Joueur_))
+	elseif(!Permission::getInstance()->verifPerm("connect"))
 		echo '<div class="alert alert-warning text-center">Connectez-vous pour pouvoir interragir ! </div>';
 	?></div>
 </section>

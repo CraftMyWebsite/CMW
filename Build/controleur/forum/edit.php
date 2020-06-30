@@ -8,11 +8,11 @@ if(isset($_POST['id'], $_POST['objet'], $_Joueur_))
 	else
 		$objet = ($_POST['objet'] == "topic") ? 1 : 2;
 	$id = htmlentities($_POST['id']);
-	if($AdminForum->verifEdit($objet, $id, $_Joueur_, $_PGrades_) && !isset($_POST['contenue']))
+	if($AdminForum->verifEdit($objet, $id, $_Joueur_) && !isset($_POST['contenue']))
 	{
 		header('Location: ?page=editForum&objet='.$objet.'&id='.$id);
 	}
-	elseif($AdminForum->verifEdit($objet, $id, $_Joueur_, $_PGrades_) && isset($_POST['contenue']))
+	elseif($AdminForum->verifEdit($objet, $id, $_Joueur_) && isset($_POST['contenue']))
 	{
 		$contenue = htmlspecialchars($_POST['contenue']);
 		if(isset($_POST['titre']))

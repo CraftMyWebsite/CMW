@@ -2,14 +2,14 @@
 <!-- Page Heading -->
 <div class="row">
 	<div class="col-lg-12">
-        <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['vote']['actions']['editSettings'] == false AND $_PGrades_['PermsPanel']['vote']['actions']['addVote'] == false)) { ?>
+        <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'addRecompense') AND !Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense')) { ?>
             <div class="col-lg-12 text-center">
                 <div class="alert alert-danger">
                     <strong>Vous avez aucune permission pour accéder aux votes.</strong>
                 </div>
             </div>
         <?php }
-        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['editSettings'] == true) { ?>
+        if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'addRecompense')) { ?>
         <div class="col-lg-12 text-justify">
             <div class="alert alert-success">
                 <strong>Dans cette section vous pourrez configurer vos récompenses auto.</strong><br/>
@@ -88,71 +88,69 @@
         </div>
         </form>
     <?php }
-    if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['vote']['actions']['resetVote'] == true OR $_PGrades_['PermsPanel']['vote']['actions']['deleteVote'] == true)) { ?>
+    if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense')) { ?>
         <div class="col-lg-12">
             <div class="panel panel-default cmw-panel">
                 <div class="panel-heading cmw-panel-header">
                     <h3 class="panel-title"><strong>Edition des récompenses auto</strong></h3>
                 </div>
-                <div class="panel-body"><?php
-                    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['deleteVote'] == true) { ?>
-                        <div class="row">
-                            <h3 class="text-center">Gestion des récompenses auto</h3>
-                        </div>
-                        <table class="table table-striped table-hover">
-                            <tr>
-                                <th>Type</th>
-                                <th>Valeur</th>
-                                <th>Message</th>
-                                <th>Commande</th>
-                                <th>Serveur</th>
-                                <th>Action</th>
-                            </tr>
-                        <?php $donnees = $reqConfig->fetchAll();
-                        for($o=0; $o < count($donnees); $o++)
-                        {
-                            ?><tr>
-                                <td><?=($donnees[$o]['type'] == 1) ? 'Récompense tout les X votes' : 'Récompense pour les meilleurs voteurs'; ?></td>
-                                <td><?php if($donnees[$o]['type'] == 1)
-                                        echo $donnees[$o]['valueType'].' votes';
-                                    else
-                                    {
-                                        $explode = explode(':', $donnees[$o]['valueType']);
-                                        if($explode[2] == 1)
-                                            $rang = "premier";
-                                        elseif($explode[2] == 2)
-                                            $rang = "second";
-                                        else
-                                            $rang = "troisième";
-                                        echo 'Pour le <strong>'.$rang.'</strong> ';
-                                        echo 'le '.date('d-m-Y', $explode[0]);
-                                        echo $string = ($explode[1] == 1) ? ' avec réinitialisation des votes' : '';
-                                    }
-                                    ?>
-                                </td>
-                                <td><?=(isset($donnees[$o]['message']) && $donnees[$o]['message'] != 'NULL' && !empty($donnees[$o]['message'])) ? $donnees[$o]['message'] : 'Pas de message';?></td>
-                                <td><?php $explode = explode(':', $donnees[$o]['commande'], 2);
-                                if($explode[0] == 'cmd')
-                                    echo 'Commande : '.$explode[1];
-                                elseif($explode[0] == 'jeton')
-                                    echo 'Give de '.$explode[1].' jetons';
+                <div class="panel-body">
+                    <div class="row">
+                        <h3 class="text-center">Gestion des récompenses auto</h3>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th>Type</th>
+                            <th>Valeur</th>
+                            <th>Message</th>
+                            <th>Commande</th>
+                            <th>Serveur</th>
+                            <th>Action</th>
+                        </tr>
+                    <?php $donnees = $reqConfig->fetchAll();
+                    for($o=0; $o < count($donnees); $o++)
+                    {
+                        ?><tr>
+                            <td><?=($donnees[$o]['type'] == 1) ? 'Récompense tout les X votes' : 'Récompense pour les meilleurs voteurs'; ?></td>
+                            <td><?php if($donnees[$o]['type'] == 1)
+                                    echo $donnees[$o]['valueType'].' votes';
                                 else
                                 {
-                                    $action = explode(':', $explode[1]);
-                                    echo 'Give de '.$action[3].' fois l\'item '.$action[1];
+                                    $explode = explode(':', $donnees[$o]['valueType']);
+                                    if($explode[2] == 1)
+                                        $rang = "premier";
+                                    elseif($explode[2] == 2)
+                                        $rang = "second";
+                                    else
+                                        $rang = "troisième";
+                                    echo 'Pour le <strong>'.$rang.'</strong> ';
+                                    echo 'le '.date('d-m-Y', $explode[0]);
+                                    echo $string = ($explode[1] == 1) ? ' avec réinitialisation des votes' : '';
                                 }
                                 ?>
-                                </td>
-                                <td>
-                                    Sur le serveur <strong><?=$lectureServs[$donnees[$o]['serveur']]['nom'];?></strong>
-                                </td>
-                                <td><a href="?action=supprRecAuto&id=<?=$donnees[$o]['id'];?>" class="btn btn-danger">Supprimer</a></td>
-                            </tr>
-                                <?php 
-                        }
-                        ?>
-                        </table>
-                    <?php } ?>
+                            </td>
+                            <td><?=(isset($donnees[$o]['message']) && $donnees[$o]['message'] != 'NULL' && !empty($donnees[$o]['message'])) ? $donnees[$o]['message'] : 'Pas de message';?></td>
+                            <td><?php $explode = explode(':', $donnees[$o]['commande'], 2);
+                            if($explode[0] == 'cmd')
+                                echo 'Commande : '.$explode[1];
+                            elseif($explode[0] == 'jeton')
+                                echo 'Give de '.$explode[1].' jetons';
+                            else
+                            {
+                                $action = explode(':', $explode[1]);
+                                echo 'Give de '.$action[3].' fois l\'item '.$action[1];
+                            }
+                            ?>
+                            </td>
+                            <td>
+                                Sur le serveur <strong><?=$lectureServs[$donnees[$o]['serveur']]['nom'];?></strong>
+                            </td>
+                            <td><a href="?action=supprRecAuto&id=<?=$donnees[$o]['id'];?>" class="btn btn-danger">Supprimer</a></td>
+                        </tr>
+                            <?php 
+                    }
+                    ?>
+                    </table>
                 </div>
             </div>
         </div>

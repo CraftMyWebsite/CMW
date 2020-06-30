@@ -1,5 +1,5 @@
 <?php 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editTheme'] == true) 
+if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) 
 {
 	$ecritureTheme['Pied']['facebook'] = htmlspecialchars($_POST['facebook']);
 	$ecritureTheme['Pied']['twitter'] = htmlspecialchars($_POST['twitter']);

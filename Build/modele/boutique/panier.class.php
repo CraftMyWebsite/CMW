@@ -110,8 +110,18 @@ class Panier
 		else
 			return $total*(1-$_SESSION['panier']['reduction']);
 	}
-
+	
 	public function compterArticle()
+	{
+		$nbrArticle = 0;
+		for($i = 0; $i < count($_SESSION['panier']['id']); $i++) {
+			$nbrArticle += $_SESSION['panier']['quantite'][$i];
+		}
+		
+		return $nbrArticle;
+	}
+
+	public function compterOffre()
 	{
 		return count($_SESSION['panier']['id']);
 	}

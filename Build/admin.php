@@ -17,29 +17,26 @@ ini_set('display_errors', 1);
         // Cette variable contiens toutes les informations du joueur.
         $_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
 	}
-
-	// On récupère la variable globale des grades $_PGrades_
-	$switch = true;
-	require_once('controleur/grades/grades.php');
 	
+	require('modele/joueur/imgProfil.class.php');
+	$_ImgProfil_ = new ImgProfil($bddConnection);
 	/* Si l'utilisateur est connecté, on met ses informations dans un tableau global, qui sera utilisable que 
 	   le laps de temps du chargement de la page contrairement aux sessions. */
-	if(isset($_SESSION['Player']['pseudo']) AND ($_SESSION['Player']['rang'] == 1 OR $_PGrades_['PermsPanel']['access'] == true))
+  /* On instancie un joueur, et on récupère le tableau de données. $_Joueur_ sera donc utilisable 
+	   sur toutes les pages grâce au système de GET sur l'index.*/
+	if((isset($_SESSION['Player']['pseudo']) AND !empty($_SESSION['Player']['pseudo'])))
 	{
-		/* On instancie un joueur, et on récupère le tableau de données. $_Joueur_ sera donc utilisable 
-		   sur toutes les pages grâce au système de GET sur l'index.*/
 		require_once('controleur/joueur/joueur.class.php');
-		
+	
 		$globalJoueur = new Joueur();
-		
 		// Cette variable contiens toutes les informations du joueur.
 		$_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
 		$connection = true;
+	}
 
-		$switch = false;
-		require_once('controleur/grades/grades.php');
-		
-		require_once('controleur/json/json.php');
+	if(Permission::getInstance()->verifPerm("PermsPanel","access"))
+	{
+		require_once('modele/json/json.php');
 		
 		$admin = true;
 
@@ -47,13 +44,14 @@ ini_set('display_errors', 1);
 			include('admin/donnees.php');
 			include('admin/action.php');
 		}else {
-			$pageadmin = $_GET['page'];
+			if(isset($_GET['page']))
+				$pageadmin = $_GET['page'];
 			include('admin/page.php');
 		}
 	}
 	else
 	{
-		//header('Location: index.php');
+		header('Location: index.php');
 	}
 	
 ?>

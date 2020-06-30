@@ -1,5 +1,5 @@
 <div class="cmw-page-content-header"><strong>Gestion</strong> - Gérez vos Widgets</div>
-        <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['widgets']['actions']['addWidgets'] == false AND $_PGrades_['PermsPanel']['widgets']['actions']['editWidgets'] == false)) { ?>
+        <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'widgets', 'actions', 'addWidgets') AND !Permission::getInstance()->verifPerm('PermsPanel', 'widgets', 'actions', 'editWidgets')) { ?>
             <div class="row">
             <div class="col-md-12 text-center">
                 <div class="alert alert-danger">
@@ -14,7 +14,7 @@
                 </div>
             </div>
         <?php }
-        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['widgets']['actions']['addWidgets'] == true) { ?>
+        if(Permission::getInstance()->verifPerm('PermsPanel', 'widgets', 'actions', 'addWidgets')) { ?>
         <div class="col-md-6">
             <div class="panel panel-default cmw-panel">
                 <div class="panel-heading cmw-panel-header">
@@ -56,7 +56,7 @@
             </div>
         </div>
         <?php }
-        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['widgets']['actions']['editWidgets'] == true) { ?>
+        if(Permission::getInstance()->verifPerm('PermsPanel', 'widgets', 'actions', 'editWidgets')) { ?>
         <div class="col-md-6">
             <div class="panel panel-default cmw-panel">
                 <div class="panel-heading cmw-panel-header">

@@ -1,6 +1,6 @@
 <div class="cmw-page-content-header"><strong>Membres</strong> - Gérez vos réseaux sociaux</div>
 
-<?php if($_Joueur_['rang'] != 1 AND $_PGrades_['PermsPanel']['social']['showPage'] == false )
+<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'social', 'showPage'))
 {
 	echo '<div class="col-lg-6 col-lg-offset-3 text-center">
 		<div class="alert alert-danger">
@@ -9,13 +9,10 @@
 	</div>';
 }
 else
-	{
-		?><div class="alert alert-success">
-			<strong>Sur cette section, vous pouvez gérer les réseaux sociaux que peuvent rentrer vos membres, et voir leurs réseaux sociaux.</strong>
-		</div>
-	<?php 
-	}
-?>
+{
+?>><div class="alert alert-success">
+	<strong>Sur cette section, vous pouvez gérer les réseaux sociaux que peuvent rentrer vos membres, et voir leurs réseaux sociaux.</strong>
+</div>
 <div class="row">
 	<div class="col-md-6">
 		<div class="panel panel-default cmw-panel">
@@ -99,3 +96,4 @@ else
 		</div>
 	</div>
 </div>
+<?php } ?>

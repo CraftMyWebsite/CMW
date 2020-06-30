@@ -1,5 +1,5 @@
 <div class="cmw-page-content-header"><strong>Membres</strong> - Gérez les API d'email et d'IP</div>
-<?php if($_Joueur_['rang'] != 1 AND !$_PGrades_['PermsPanel']['info']['stats']['members']['showTable'] AND !$_PGrades_['PermsPanel']['info']['stats']['members']['editLimitIp'] AND !$_PGrades_['PermsPanel']['info']['stats']['members']['editEmail'])
+<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showTable') AND !Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editLimitIp') && !Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail'))
 {
   echo '<div class="col-lg-6 col-lg-offset-3 text-center">
     <div class="alert alert-danger">
@@ -14,7 +14,7 @@ else
     </div>
   <?php 
   }
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['members']['editLimitIp'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editLimitIp')) {
   for($i = 0; $i < count($nbrPerIP); $i++) { 
 ?>
 <div class="row">
@@ -39,7 +39,7 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['members'
 <?php 
   }
 }
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['members']['editEmail'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail'))
 {
   for($i = 0; $i < count($sysMail); $i++)
   {

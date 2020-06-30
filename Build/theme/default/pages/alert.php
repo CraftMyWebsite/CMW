@@ -1,4 +1,4 @@
-<?php if(isset($_Joueur_))
+<?php if(Permission::getInstance()->verifPerm("connect"))
 { ?><!--Vérif si le joueur est co -->
 <header class="heading-pagination">
 	<div class="container-fluid">

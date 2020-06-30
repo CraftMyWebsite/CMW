@@ -26,9 +26,9 @@
 </div>
 </div>
 <?php
-for($j = 0; $j < count($lecture['Json']); $j++)
+foreach($lectureJSON as $key => $serveur)
 {
-  if($conEtablie[$j] == true)
+  if($conEtablie[$key] == true)
     { ?>
   <div class="col-lg-3 col-md-6">
    <div class="panel panel-default cmw-panel">
@@ -53,7 +53,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
 </div>
 </div>
 
-<?php if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['info']['details']['player'] == true OR $_PGrades_['PermsPanel']['info']['details']['console'] == true OR $_PGrades_['PermsPanel']['info']['details']['command'] == true OR $_PGrades_['PermsPanel']['info']['details']['plugins'] == true OR $_PGrades_['PermsPanel']['info']['details']['server'] == true)) { ?>
+<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'player') OR Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'console') OR Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'command') OR Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'plugins') OR Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'server')) { ?>
 <div class="modal fade" id="infoServeur" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document" style="max-width: 1000px;width: 100%;">
     <div class="modal-content">
@@ -65,7 +65,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
         <div class="col-lg-offset-1 text-center">
           <div class="row">
             <div class="col-lg-11">
-              <?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['player'] == true) { ?>
+              <?php if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'player')) { ?>
               <h4>Joueur(s)</h4>
               <div class="row">
                 <?php for($i = 0;$i < count($serveurStats);$i++) {
@@ -75,14 +75,14 @@ for($j = 0; $j < count($lecture['Json']); $j++)
                 } ?>
               </div>
               <div class="row">
-                <?php foreach ($serveurStats[$j]['joueurs'] as $cle => $element) { ?>
-                <a href="index.php?&page=profil&profil=<?php echo $serveurStats[$j]['joueurs'][$cle]; ?>" class="icon-player">
-                  <?php echo '<img src="https://cravatar.eu/helmhead/' .$serveurStats[$j]['joueurs'][$cle]. '/56.png" title="Voir le profil de ' .$serveurStats[$j]['joueurs'][$cle]. '">'; ?></a>
+                <?php foreach ($serveurStats[$key]['joueurs'] as $cle => $element) { ?>
+                <a href="index.php?&page=profil&profil=<?php echo $element; ?>" class="icon-player">
+                  <?php echo '<img src="https://cravatar.eu/helmhead/' .$element. '/56.png" title="Voir le profil de ' .$element. '">'; ?></a>
                   <?php } ?>
                 </div>
                 <hr>
                 <?php }
-                if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['console'] == true) { ?>
+                if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'console')) { ?>
                 <h4>Console</h4>
                 <div class="row">
                   <script type="text/javascript">
@@ -94,15 +94,15 @@ for($j = 0; $j < count($lecture['Json']); $j++)
                   </script>
                   <?php $date = date("Y-m-d");
                   echo '<div id="console"><div style="background-color: #373737;color: #8F8F8F;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:solid 2px #8F8F8F;overflow: hidden;">';
-                  foreach ($console[$j]['Test'] as $value) {
-                    $console[$j]['Test'] = $value["line"];
-                    $console[$j]['Test'] = str_replace($date, '', $console[$j]['Test']);
+                  foreach ($console[$key]['Test'] as $value) {
+                    $console[$key]['Test'] = $value["line"];
+                    $console[$key]['Test'] = str_replace($date, '', $console[$key]['Test']);
                     $msg_prefix = array('INFO', 'WARN', 'SEVERE', "[0;31;22m", "[0;32;22m", "[0;33;22m", "[0;34;22m", "[0;35;22m", "[0;36;22m", "[0;37;22m", "[0;30;1m", "[0;31;1m", "[0;32;1m", "[0;33;1m", "[0;34;1m", "[0;35;1m", "[0;36;1m", "[0;37;1m", "[1;31m", "[21m", "[9m", "[5m", "[3m", "[0m", "[m", "<span><span", "</span></span>");
                     $color_prefix = array('<span style="color: #5555FF;">INFO</span>', '<span style="color: #FFAA00;">WARN</span>', '<span style="color: #FF5555;">SEVERE</span>', "</span><span style=\"color:#aa0000\">", "</span><span style=\"color:#00aa00\">", "</span><span style=\"color:#ffaa00\">", "</span><span style=\"color:#0000aa\">", "</span><span style=\"color:#aa00aa\">", "</span><span style=\"color:#00aaaa\">", "</span><span style=\"color:#aaaaaa\">", "</span><span style=\"color:#555555\">", "</span><span style=\"color:#ff5555\">", "</span><span style=\"color:#55ff55\">", "</span><span style=\"color:#ffffff\">", "</span><span style=\"color:#5555ff\">", "</span><span style=\"color:#ff55ff\">", "</span><span style=\"color:#55ffff\">", "</span><span style=\"color:#ffff55\">", "", "", "", "", "", "", "</span>", "<span", "</span>");
-                    $console[$j]['Test'] = str_replace($msg_prefix, $color_prefix, $console[$j]['Test']);
+                    $console[$key]['Test'] = str_replace($msg_prefix, $color_prefix, $console[$key]['Test']);
                     echo '<div style="text-align: left;">';
                     echo '<div>';
-                    echo $console[$j]['Test'];
+                    echo $console[$key]['Test'];
                     echo '<br/></div>';
                     echo '</div>';
                   }
@@ -110,7 +110,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
                 </div>'; ?>
               </div>
               <?php }
-              if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['command'] == 1) { ?>
+              if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'command')) { ?>
               <div class="row">
                 <script type="text/javascript">
                   $(document).ready(function() {
@@ -160,7 +160,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
               </div>
               <hr>
               <?php }
-              if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['plugins'] == true) { ?>
+              if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'plugins')) { ?>
               <div class="panel panel-default">
                 <div class="panel-heading">Plugins
                   <button class="cmw-spoiler" title="Afficher les plugins" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Dérouler la liste des plugins</button>
@@ -177,7 +177,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
                          </tr>
                        </thead>
                        <tbody>
-                         <?php foreach ($plugins[$j]['Test'] as $value) { ?>
+                         <?php foreach ($plugins[$key]['Test'] as $value) { ?>
                          <tr>
                            <td><?php echo $value['name']; ?></td>
                            <td><?php echo $value['version'] ?></td>
@@ -191,7 +191,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
              </div>
            </div>
            <?php }
-           if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['server'] == true) { ?>
+           if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'server')) { ?>
            <h4>Gérer le serveur</h4>
            <div class="row">
             <?php for($i = 0;$i < count($serveurStats); $i++) { ?>
@@ -236,7 +236,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
 </div>
 <?php } ?> 
 
-<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['command'] == 1) { ?>
+<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'details', 'command')) { ?>
 <div class="modal fade" id="giveSpec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
  <div class="modal-dialog" style="width: 35%">
   <div class="modal-content">
@@ -534,7 +534,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
 </div>
 <!-- /.row -->
 
-<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['visitors']['showTable'] == true) { ?>
+<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'visitors', 'showTable')) { ?>
 <div class="row">
   <div class="col-lg-8">
     <div class="panel panel-default cmw-panel">
@@ -650,7 +650,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
 
 
 <div class="row">
-  <?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['members']['showTable'] == true) { ?>
+  <?php if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showTable')) { ?>
   <div class="col-lg-4">
     <div class="panel panel-default cmw-panel">
      <div class="panel-heading cmw-panel-header">
@@ -685,7 +685,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
         <?php if($result_etatMail == "1") { ?>
         <td><?php if($membresStats[$i]['ValidationMail'] == "1"){echo "Valide";}else{echo "Invalide";} ?></td>
         <?php } ?>
-		<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['members']['showIP']){?>
+		<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')){?>
         <td><?php echo $membresStats[$i]['ip']; ?></td>
 		<?php }?>
       </tr>
@@ -703,7 +703,7 @@ for($j = 0; $j < count($lecture['Json']); $j++)
 <?php } ?>
 
 <!-- /.row -->
-<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['activity']['showTable'] == true) { ?>
+<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'activity', 'showTable')) { ?>
 <div class="col-lg-4">
   <div class="panel panel-default cmw-panel">
     <div class="panel-heading cmw-panel-header">
@@ -867,7 +867,7 @@ for($i = 0; $i < count($lastAchatmcgpass); $i++) {
 </div>
 <?php } ?>
 
-<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['shop']['showTable'] == true) { ?>
+<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'shop', 'showTable')) { ?>
 <div class="col-lg-4">
   <div class="panel panel-default cmw-panel">
    <div class="panel-heading cmw-panel-header">

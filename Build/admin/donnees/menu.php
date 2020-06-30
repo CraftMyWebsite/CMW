@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['showPage'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'showPage')) {
 	$pagesReq = $bddConnection->query('SELECT titre FROM cmw_pages');
 
 	$i = 0;

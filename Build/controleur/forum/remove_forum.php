@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteForum'] == true) AND isset($_GET['id']))
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') AND isset($_GET['id']))
 {
 	$id = htmlspecialchars($_GET['id']);
 	$remove = $bddConnection->prepare('DELETE FROM cmw_forum WHERE id = :id');

@@ -1,7 +1,7 @@
 <div class="cmw-page-content-header"><strong>Réglages Forum</strong> - Paramétrez votre Forum</div>
 
 <div class="row">
-	<?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['forum']['showPage'] == false AND $_PGrades_['PermsPanel']['forum']['actions']['addSmiley'] == false))
+	<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'showPage') AND !Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley'))
 	{
 		echo '<div class="col-lg-6 col-lg-offset-3 text-center">
 		<div class="alert alert-danger">
@@ -16,7 +16,7 @@
 		</div>
 	<?php 
 	}
-	if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['forum']['actions']['addSmiley'] == true)
+	if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley'))
 	{
 		?><form method="POST" action="?action=addSmiley" enctype="multipart/form-data">
 			<div class="col-lg-6">
@@ -46,7 +46,7 @@
 		    </div>
 		</form><?php
 	}
-	if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['forum']['actions']['addPrefix'])
+	if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix'))
 	{
 		?><form method="POST" action="?action=addPrefix">
 			<div class="col-lg-6">
@@ -128,7 +128,7 @@
 	?></div>
 	<div class="row">
 	<?php
-	if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['forum']['actions']['seeSmileys'] == true)
+	if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'seeSmileys'))
 	{
 		?><div class="col-md-6">
             <div class="panel panel-default cmw-panel">
@@ -163,7 +163,7 @@
             </div>
         </div><?php
 	}
-	if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['forum']['actions']['seePrefix'] == true)
+	if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'seePrefix'))
 	{
 		?><div class="col-md-6">
             <div class="panel panel-default cmw-panel">

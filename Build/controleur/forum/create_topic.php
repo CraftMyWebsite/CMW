@@ -1,5 +1,5 @@
 <?php
-if(isset($_Joueur_))
+if(Permission::getInstance()->verifPerm("connect"))
 {
 	if(!empty($_POST['nom']) AND !empty($_POST['contenue'] AND strlen($_POST['contenue']) <= 15000))
 	{
@@ -20,7 +20,7 @@ if(isset($_Joueur_))
 			'last_answer_temps' => time()
 			));
 		}
-		elseif(strlen($_POST['contenue']) <= 15000){
+		elseif(strlen($_POST['contenue']) > 15000){
 			header('Location: ?page=erreur&erreur=20');				
 		}
 		else

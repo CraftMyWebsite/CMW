@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['payment']['actions']['editPayment'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment')) {
 	$lecture = new Lire('modele/config/config.yml');
 	$lecture = $lecture->GetTableau();
 
@@ -11,14 +11,14 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['payment']['actions']['edi
 		$lecture['Payement']['dedipass'] = true;
 	else
 		$lecture['Payement']['dedipass'] = false;
+	if(isset($_POST['paysafecard']))
+		$lecture['Payement']["paysafecard"] = true;
+	else
+		$lecture['Payement']['paysafecard'] = false;
 	
 	$lecture['Payement']['public_key'] = $_POST['public_key'];
 	$lecture['Payement']['private_key'] = $_POST['private_key'];
-	$lecture['Payement']['paypalUser'] = $_POST['paypalUser'];
-	$lecture['Payement']['paypalPass'] = $_POST['paypalPass'];
-	$lecture['Payement']['paypalSignature'] = $_POST['paypalSignature'];
 	$lecture['Payement']['paypalEmail'] = $_POST['paypalEmail'];
-	$lecture['Payement']['paypalMethodeAPI'] = $_POST['paypalMethodeAPI'];
 	$ecriture = new Ecrire('modele/config/config.yml', $lecture);
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-
+echo '[DIV]';
 if(isset($_POST['id']) AND isset($_POST['pseudo']))
 {
 	$id = $_POST['id'];
@@ -9,193 +9,200 @@ if(isset($_POST['id']) AND isset($_POST['pseudo']))
 	$playerData = $joueurMaj->getReponseConnection();
 	$playerData = $playerData->fetch(PDO::FETCH_ASSOC);	
 
-
-	for($i = 0; $i < count($lecture['Json']); $i++)
-	{
-		$jsonCon[$i]->SetConnectionBase($bddConnection);
-	}
-
-
 	$donnees = RecupJoueur($pseudo, $id, $bddConnection);
 	$lectureVotes = LectureVote($id, $bddConnection);
 
 	$succes = false;
-			if(!Vote($pseudo, $id, $bddConnection, $donnees, $lectureVotes['temps']))
+	if(!Vote($pseudo, $id, $bddConnection, $donnees, $lectureVotes['temps']))
+	{
+		echo 'erreur-3';
+	}
+	else if(verifVote($lectureVotes['lien'], $lectureVotes['idCustom']))
+	{
+		$req = $bddConnection->prepare('UPDATE cmw_votes SET nbre_votes = nbre_votes + 1, date_dernier = :tmp WHERE pseudo = :pseudo AND site = :site');
+			$req->execute(array(
+				'tmp' => time(),
+				'pseudo' => $pseudo,
+				'site' => $id));
+		if(isset($_Joueur_) && $_Joueur_['pseudo'] == $pseudo)
+		{
+			//Système de vérification des récompenses auto
+			$key = array_search($pseudo, $voteurs['pseudo']);
+			$verif = $RecompenseAuto->verifRecVotes($voteurs['nbre_votes'][$key]+1);
+			if(!empty($verif))
 			{
-				echo 'erreur-3';
-			}
-			else if(verifVote($lectureVotes['lien'], $lectureVotes['idCustom']))
-			{
-				$req = $bddConnection->prepare('UPDATE cmw_votes SET nbre_votes = nbre_votes + 1, date_dernier = :tmp WHERE pseudo = :pseudo AND site = :site');
-					$req->execute(array(
-						'tmp' => time(),
-						'pseudo' => $pseudo,
-						'site' => $id));
-				if(isset($_Joueur_) && $_Joueur_['pseudo'] == $pseudo)
+				foreach($verif as $value)
 				{
-					//Système de vérification des récompenses auto
-					$key = array_search($pseudo, $voteurs['pseudo']);
-					$verif = $RecompenseAuto->verifRecVotes($voteurs['nbre_votes'][$key]+1);
-					if(!empty($verif))
+					$action = explode(':', $value['commande'], 2);
+					if($action[0] == "give")
 					{
-						foreach($verif as $value)
-						{
-							$action = explode(':', $value['commande'], 2);
-							if($action[0] == "give")
-							{
-								$action = explode(':', $action[1]);
-								$idI = $action[1];
-								$quantite = $action[3];
-							}
-							elseif($action[0] == "jeton")
-							{
-								$quantite = $action[1];
-							}
-							$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $quantite, str_replace('{ID}', $idI, str_replace('&amp;', '§', $value['message']))));
-							if(!empty($value['message']))
-							{
-								$jsonCon[$value['serveur']]->SendBroadcast($message);
-							}
-							$req = $bddConnection->prepare('INSERT INTO cmw_votes_temp (pseudo, methode, action, serveur) VALUES (:pseudo, :methode, :action, :serveur)');
-							$req->execute(array(
-								'pseudo' => $pseudo,
-								'methode' => 2,
-								'action' => $value['commande'],
-								'serveur' => $value['serveur']
-							));
-						}
-					}
-					//Système de l'envoie du message
-					if(!empty($lectureVotes['message']))
-					{
-						$action = explode(':', $lectureVotes['action'], 2);
-						if($action[0] == "give")
-						{
-							$action = explode(':', $action[1]);
-							$idI = $action[1];
-							$quantite = $action[3];
-						}
-						elseif($action[0] == "jeton")
-						{
-							$quantite = $action[1];
-						}
-						$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $quantite, str_replace('{ID}', $idI, str_replace('&amp;', '§', $lectureVotes['message']))));
-						if($lectureVotes['methode'] == 2)
-							$jsonCon[$value['serveur']]->SendBroadcast($message);
-						else
-							for($j =0; $j < count($jsonCon); $j++)
-								$jsonCon[$j]->SendBroadcast($message);
-					}
-					//Système de récupérer plus tard
-					$req = $bddConnection->prepare('INSERT INTO cmw_votes_temp (pseudo, methode, action, serveur) VALUES (:pseudo, :methode, :action, :serveur)');
-					$req->execute(array(
-						'pseudo' => $pseudo,
-						'methode' => $lectureVotes['methode'],
-						'action' => $lectureVotes['action'],
-						'serveur' => $lectureVotes['serveur']
-					));
-
-				
-				}else {
-					// give direct la récompense
-					
-					 $action = explode(':', $lectureVotes['action'], 2);
-					 if($action[0] == "give")
-					 {
 						$action = explode(':', $action[1]);
 						$idI = $action[1];
 						$quantite = $action[3];
-						if(!empty($lectureVotes['message']))
-						{
-							$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $quantite, str_replace('{ID}', $idI, str_replace('&amp;', '§', $lectureVotes['message']))));
-						}
-						if($lectureVotes['methode'] == 2)
-						{
-							if(!empty($lectureVotes['message']))
-							{
-								$jsonCon[$lectureVotes['serveur']]->SendBroadcast($message);
-							}
-							$jsonCon[$lectureVotes['serveur']]->GivePlayerItem($pseudo.' '.$idI . ' ' .$quantite);
-				
-						}
-						else
-						{
-							for($j =0; $j < count($jsonCon); $j++)
-							{
-								if(!empty($lectureVotes['message']))
-								{
-
-									$jsonCon[$j]->SendBroadcast($message);
-								}
-								$jsonCon[$j]->GivePlayerItem($pseudo.' '.$idI . ' ' .$quantite);
-							}
-				
-						}
-					 }
-					else if($action[0] == "jeton")
-					 {
-						 if(!empty($lectureVotes['message']))
-						{
-							$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $action[1], str_replace('&amp;', '§', $lectureVotes['message'])));
-						}
-						if($lectureVotes['methode'] == 2)
-						{
-							if(!empty($lectureVotes['message']))
-							{
-								$jsonCon[$lectureVotes['serveur']]->SendBroadcast($message);
-							}
-							ajouterTokens($action[1]);
-						
-						}
-						else
-						{
-							for($j =0; $j < count($jsonCon); $j++)
-							{
-								if(!empty($lectureVotes['message']))
-								{
-									$jsonCon[$j]->SendBroadcast($message);
-								}
-							}
-							ajouterTokens($action[1]);
-							
-						}
-					 }
-					 else
-					 {
+						$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $quantite, str_replace('{ID}', $idI, str_replace('&amp;', '§', $value['message']))));
+					}
+					elseif($action[0] == "jeton")
+					{
+						$quantite = $action[1];
+						$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $action[1], str_replace('&amp;', '§', $lectureVotes['message'])));
+					}else {
 						$cmd = str_replace('{JOUEUR}', $pseudo, $action[1]);
+						$message = str_replace('{JOUEUR}', $pseudo, str_replace('{CMD}', $cmd, str_replace('&amp;', '§', $lectureVotes['message'])));
+					}
+					if(!empty($value['message']))
+					{
+						$jsonCon[$value['serveur']]->SendBroadcast($message);
+					}
+					$req = $bddConnection->prepare('INSERT INTO cmw_votes_temp (pseudo, methode, action, serveur) VALUES (:pseudo, :methode, :action, :serveur)');
+					$req->execute(array(
+						'pseudo' => $pseudo,
+						'methode' => 2,
+						'action' => $value['commande'],
+						'serveur' => $value['serveur']
+					));
+				}
+			}
+			//Système de l'envoie du message
+			if(!empty($lectureVotes['message']))
+			{
+				$action = explode(':', $lectureVotes['action'], 2);
+				if($action[0] == "give")
+				{
+					$action = explode(':', $action[1]);
+					$idI = $action[1];
+					$quantite = $action[3];
+					$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $quantite, str_replace('{ID}', $idI, str_replace('&amp;', '§', $lectureVotes['message']))));
+				}
+				elseif($action[0] == "jeton")
+				{
+					$quantite = $action[1];
+					$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $action[1], str_replace('&amp;', '§', $lectureVotes['message'])));
+				} else {
+					$cmd = str_replace('{JOUEUR}', $pseudo, $action[1]);
+					$message = str_replace('{JOUEUR}', $pseudo, str_replace('{CMD}', $cmd, str_replace('&amp;', '§', $lectureVotes['message'])));
+				}
+				if($lectureVotes['methode'] == 2)
+				{
+					$jsonCon[$lectureVotes['serveur']]->SendBroadcast($message);
+				}
+				else
+				{
+					for($j =0; $j < count($jsonCon); $j++)
+					{
+						$jsonCon[$j]->SendBroadcast($message);
+					}
+				}
+			}
+			//Système de récupérer plus tard
+			$req = $bddConnection->prepare('INSERT INTO cmw_votes_temp (pseudo, methode, action, serveur) VALUES (:pseudo, :methode, :action, :serveur)');
+			$req->execute(array(
+				'pseudo' => $pseudo,
+				'methode' => $lectureVotes['methode'],
+				'action' => $lectureVotes['action'],
+				'serveur' => $lectureVotes['serveur']
+			));
+
+		
+		}else {
+			// give direct la récompense
+			
+			 $action = explode(':', $lectureVotes['action'], 2);
+			 if($action[0] == "give")
+			 {
+				$action = explode(':', $action[1]);
+				$idI = $action[1];
+				$quantite = $action[3];
+				if(!empty($lectureVotes['message']))
+				{
+					$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $quantite, str_replace('{ID}', $idI, str_replace('&amp;', '§', $lectureVotes['message']))));
+				}
+				if($lectureVotes['methode'] == 2)
+				{
+					if(!empty($lectureVotes['message']))
+					{
+						$jsonCon[$lectureVotes['serveur']]->SendBroadcast($message);
+					}
+					$jsonCon[$lectureVotes['serveur']]->GivePlayerItem($pseudo.' '.$idI . ' ' .$quantite);
+		
+				}
+				else
+				{
+					for($j =0; $j < count($jsonCon); $j++)
+					{
 						if(!empty($lectureVotes['message']))
 						{
-							$message = str_replace('{JOUEUR}', $pseudo, str_replace('{CMD}', $cmd, str_replace('&amp;', '§', $lectureVotes['message'])));
+
+							$jsonCon[$j]->SendBroadcast($message);
 						}
-						if($lectureVotes['methode'] == 2)
-						{
-							if(!empty($lectureVotes['message']))
-							{
-								$jsonCon[$lectureVotes['serveur']]->SendBroadcast($message);
-							}
-							$jsonCon[$lectureVotes['serveur']]->runConsoleCommand($cmd);
-					
-						}
-						else
-						{
-							for($j = 0; $j < count($jsonCon); $j++)
-							{
-								if(!empty($lectureVotes['message']))
-								{
-									$jsonCon[$j]->SendBroadcast($message);
-								}
-								$jsonCon[$j]->runConsoleCommand($cmd);
-							}
-							
-						}
-					 }
+						$jsonCon[$j]->GivePlayerItem($pseudo.' '.$idI . ' ' .$quantite);
+					}
+		
 				}
-				echo "success";
+			 }
+			else if($action[0] == "jeton")
+			 {
+				 if(!empty($lectureVotes['message']))
+				{
+					$message = str_replace('{JOUEUR}', $pseudo, str_replace('{QUANTITE}', $action[1], str_replace('&amp;', '§', $lectureVotes['message'])));
+				}
+				if($lectureVotes['methode'] == 2)
+				{
+					if(!empty($lectureVotes['message']))
+					{
+						$jsonCon[$lectureVotes['serveur']]->SendBroadcast($message);
+					}
+					ajouterTokens($action[1]);
 				
-			}
-			else {
-				echo 'erreur-1';
-			}
+				}
+				else
+				{
+					for($j =0; $j < count($jsonCon); $j++)
+					{
+						if(!empty($lectureVotes['message']))
+						{
+							$jsonCon[$j]->SendBroadcast($message);
+						}
+					}
+					ajouterTokens($action[1]);
+					
+				}
+			 }
+			 else
+			 {
+				$cmd = str_replace('{JOUEUR}', $pseudo, $action[1]);
+				if(!empty($lectureVotes['message']))
+				{
+					$message = str_replace('{JOUEUR}', $pseudo, str_replace('{CMD}', $cmd, str_replace('&amp;', '§', $lectureVotes['message'])));
+				}
+				if($lectureVotes['methode'] == 2)
+				{
+					if(!empty($lectureVotes['message']))
+					{
+						$jsonCon[$lectureVotes['serveur']]->SendBroadcast($message);
+					}
+					$jsonCon[$lectureVotes['serveur']]->runConsoleCommand($cmd);
+			
+				}
+				else
+				{
+					for($j = 0; $j < count($jsonCon); $j++)
+					{
+						if(!empty($lectureVotes['message']))
+						{
+							$jsonCon[$j]->SendBroadcast($message);
+						}
+						$jsonCon[$j]->runConsoleCommand($cmd);
+					}
+					
+				}
+			 }
+		}
+		echo "success";
+		
+	}
+	else {
+		echo 'erreur-1';
+	}
 }else 
 {
 	echo 'erreur-2';
@@ -210,8 +217,9 @@ if(isset($_POST['id']) AND isset($_POST['pseudo']))
 	 	$_SESSION['Player']['tokens'] = $_Joueur_['tokens']; 
 	 }
 	
-	function verifVote($url, $id) 
-	{		if(isset($id) AND !empty($id) and $id != "")
+	function verifVote($url, $id)
+	{
+		if(isset($id) AND !empty($id) and $id != "")
 		{
 			if(strpos($url, 'serveur-prive.net'))
 			{
@@ -246,34 +254,39 @@ if(isset($_POST['id']) AND isset($_POST['pseudo']))
 				else
 				{
 					$data_decoded = json_decode($data,true);
-					if ( $data_decoded["DateVote"] >= $data_decoded["DateActuelle"] - 360 )
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
+					if ( $data_decoded["DateVote"] >= $data_decoded["DateActuelle"] - 360 ){return true;}else{return false;}
 				}
 			}else if(strpos($url, 'liste-minecraft-serveurs.com'))
 			{
 				$api = json_decode(file_get_contents("https://www.liste-minecraft-serveurs.com/Api/Worker/id_server/".$id."/ip/".get_client_ip()));
-				if($api->result == 202){
-					return true;
-				}else{
-					return false;
-				}
-			} else if(strpos($url, 'liste-serveurs.fr'))			{				$api = json_decode(file_get_contents("https://www.liste-serveurs.fr/api/checkVote/".$id."/".get_client_ip()));				if($api->success == true){					return true;				}else{					return false;				}			}else if(strpos($url, 'liste-serveurs.fr'))
+				if($api->result == 202){return true;}else{return false;}
+			} else if(strpos($url, 'liste-serveurs.fr'))
+			{
+				$api = json_decode(file_get_contents("https://www.liste-serveurs.fr/api/checkVote/".$id."/".get_client_ip()));
+				if($api->success == true){return true;}else{return false;}
+			}else if(strpos($url, 'liste-serveur.fr'))
 			{
 				$api = json_decode(file_get_contents("https://www.liste-serveur.fr/api/hasVoted/".$id."/".get_client_ip()));
-				if($api->hasVoted == true){
-					return true;
-				}else{
-					return false;
-				}
+				if($api->hasVoted == true){return true;}else{return false;}
+			}else if(strpos($url, 'top-serveurs.net'))  {
+				$api = json_decode(file_get_contents("https://api.top-serveurs.net/v1/votes/check-ip?server_token=".$id."&ip=".get_client_ip()));
+				if($api->success == true){return true;}else{return false;}
+			}else if(strpos($url, 'serveursminecraft.org'))  {
+				$api =file_get_contents("https://www.serveursminecraft.org/sm_api/peutVoter.php?id=".$id."&ip=".get_client_ip());
+				if($api == "true"){return true;}else{return false;}
+			}else if(strpos($url, 'https://serveur-multigames.net'))  {
+				$api =file_get_contents("https://serveur-multigames.net/api/v2/vote/true/".$id."/".get_client_ip()));
+				if($api == "1"){return true;}else{return false;}
+			}else if(strpos($url, 'https://minecraft-top.com'))  {
+				$api = json_decode(file_get_contents("https://api.minecraft-top.com/v1/vote/".get_client_ip()."/".$id));
+				if($api->vote == 1){return true;}else{return false;}
 			}else {
 				return true;
-			}		} else {			return true;		}
+			}
+
+		} else {
+			return true;
+		}
 	}
 	
 	function get_client_ip() {

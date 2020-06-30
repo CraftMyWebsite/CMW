@@ -26,6 +26,7 @@ function bouclevote(id2, pseudo2) {
 		pseudo: pseudo2
 	},function(data, status){ 
 		console.log(data);
+		data = data.substring(data.indexOf('[DIV]')+5);
 		if(data == "success")
 		{
 			$("#vote-success").fadeIn(500);setTimeout(function(){ $("#vote-success").fadeOut(500);}, 5000);
@@ -41,3 +42,20 @@ function bouclevote(id2, pseudo2) {
 		}
     });
 }
+
+function showFunction(showId) {
+	var x = document.getElementById(showId);
+	if (x.style.opacity === "0") {
+		x.style.height = "auto";
+		x.style.opacity = "1";
+	} else {
+		x.style.height = "0";
+		x.style.opacity = "0";
+	}
+}
+
+function getUploadFileName(target) {
+
+	document.getElementById("file-name").innerHTML = target.files[0].name;
+}
+

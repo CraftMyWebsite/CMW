@@ -15,14 +15,14 @@
 			<div class="tabbable">
 				<ul class="nav nav-tabs" style="margin-bottom:1vh;">
 				<?php
-				for($i = 0; $i < count($jsonCon); $i++)
+				foreach($lectureJSON as $i => $serveur)
 				{
 				?>
 					<li class="nav-item">
-						<a href="#categorie-<?php echo $i; ?>" data-toggle="tab" class="nav-link <?php if($i == 0) echo 'active'; ?>"><?php echo $lecture['Json'][$i]['nom']; ?></a>
+						<a href="#categorie-<?php echo $i; ?>" data-toggle="tab" class="nav-link <?php if($i == 0) echo 'active'; ?>"><?php echo $serveur['nom']; ?></a>
 					</li>
 				<?php 
-				} 
+				}
 				?>
 				</ul>
 				<div class="tab-content" id="messages">
@@ -34,20 +34,21 @@
 					<div id="categorie-<?php echo $i; ?>" class="tab-pane fade <?php if($i==0) echo 'in active show'; ?>" aria-expanded="false">
 						<div class="panel-body" style="background-color: #CCCCCC;">
 							<?php 
-							if($messages != false)
+							if($messages != false && $messages != "erreur" && $messages != "query")
 							{
 								foreach($messages as $value)
 								{
-									//var_dump($value);
-									$Img = new ImgProfil($value['player'], 'pseudo');
-
 									?>
-										<p class="username"><img class="rounded" src="<?=$Img->getImgToSize(32, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" alt="avatar de l'auteur" title="<?php echo $value['player']; ?>" /> <?=($value['player'] == '') ? 'Console': $value['player'].', '.$_Forum_->gradeJoueur($value['player']);?> à <span class="font-weight-light"><?=date('H:i:s', $value['time']);?></span> -> <?=$Chat->formattage(htmlspecialchars($value['message']));?></p>
+										<p class="username"><img class="rounded" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value['player']);?>" style="width: 32px; height: 32px;" alt="avatar de l'auteur" title="<?php echo $value['player']; ?>" /> <?=($value['player'] == '') ? 'Console': $value['player'].', '.$_Forum_->gradeJoueur($value['player']);?> à <span class="font-weight-light"><?=date('H:i:s', $value['time']);?></span> -> <?=$Chat->formattage(htmlspecialchars($value['message']));?></p>
 									<?php
 								}
 							}
+							elseif($messages == "query")
+								echo '<div class="alert alert-warning">La connexion au serveur ne peut pas être établie avec ce protocole. </div>';
+							elseif($messages == "erreur")
+								echo '<div class="alert alert-info">Il n\'y a pas de messages actuellement ! </div>';
 							else
-								echo '<div class="alert alert-danger">La connexion au serveur n\'a pas pu être établie. :\'(</div>';
+								echo '<div class="alert alert-danger">La connexion au serveur n\'a pas pu être établie. </div>';
 							?>
 						</div>
 					</div>
@@ -56,7 +57,7 @@
 				?>
 				</div>
 			<?php 
-			if(isset($_Joueur_))
+			if(Permission::getInstance()->verifPerm("connect"))
 			{
 				?>
 				<form action="?action=sendChat" method="POST">	
@@ -67,9 +68,9 @@
 						<div class="col-md-2">
 							<select name="i" class="form-control">
 								<?php 
-								for($i=0; $i < count($jsonCon); $i++)
+								foreach($lectureJSON as $i => $serveur)
 								{
-									?><option value="<?=$i;?>"><?=$lecture['Json'][$i]['nom'];?></option><?php 
+									?><option value="<?=$i;?>"><?=$serveur['nom'];?></option><?php 
 								}
 								?>
 							</select>

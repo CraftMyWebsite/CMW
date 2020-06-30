@@ -4,12 +4,19 @@
 */
 
 
-	if(isset($_GET['action']) AND isset($_Joueur_['rang']) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['access'] == true))
+	if(isset($_GET['action']) AND Permission::getInstance()->verifPerm("PermsPanel", "access"))
 	{
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
+		case 'getJsonMember':
+			require('admin/actions/getJsonMember.php');
+			exit();
+		case 'changeVoteCron':
+			require('admin/actions/changeVoteCron.php');
+			$_SESSION['referrerAdmin'] = 'voter';
+		break;
 		case 'dropVisits':
-			if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['stats']['visitors']['showTable'] == true)
+			if(Permission::getInstance()->verifPerm("PermsPanel", "info", "stats", "visitors", "showTable"))
 				$bddConnection->exec('TRUNCATE cmw_visits');
 			$_SESSION['referrerAdmin'] = 'accueil';
 		break;
@@ -17,6 +24,21 @@
 		case 'testMail':
 			require('admin/actions/testMail.php');
 			exit();
+		break;
+
+		case 'validerPaysafecard':
+			require('admin/actions/validerPaysafecard.php');
+			$_SESSION['referrerAdmin'] = "paiement";
+		break;
+
+		case 'supprHistoPaysafecard':
+			require('admin/actions/supprHistoPaysafecard.php');
+			$_SESSION['referrerAdmin'] = 'paiement';
+		break;
+
+		case 'modifierOffrePaysafecard':
+			require('admin/actions/paysafecard.php');
+			$_SESSION['referrerAdmin'] = 'paiement';
 		break;
 
 		case 'editMail':
@@ -75,7 +97,7 @@
 		break;
 
 		case 'removeSocial':
-			if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['social']['showPage'])
+			if(Permission::getInstance()->verifPerm('PermsPanel', 'social', 'showPage'))
 				$bddConnection->exec('ALTER TABLE cmw_reseaux DROP '.$_GET['nom']);
 			$_SESSION['referrerAdmin'] = 'social';
 		break;
@@ -171,17 +193,17 @@
 		
 		case 'supprMembre': 
 		require_once('admin/actions/supprMembre.php');
-		$_SESSION['referrerAdmin'] = 'membres';
+		exit();
 		break;
 		
 		case 'validMail': 
 		require_once('admin/actions/validMail.php');
-		$_SESSION['referrerAdmin'] = 'membres';
+		exit();
 		break;
 		
 		case 'modifierMembres': 
 			require_once('admin/actions/modifierMembres.php');
-			$_SESSION['referrerAdmin'] = 'membres';
+			exit();
 		break;
 		
 		case 'creerPage': 
@@ -420,7 +442,7 @@
 		break;
 
 		case 'resetVotes':
-		if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['resetVote'] == true)
+		if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote'))
 			$bddConnection->exec('DELETE FROM cmw_votes');
 		$_SESSION['referrerAdmin'] = 'voter';
 		break;

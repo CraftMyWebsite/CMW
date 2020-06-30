@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['showPage'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'showPage')) {
 	$themes = scandir('theme/');
 	for($i = 2; $i < count($themes); $i++)
 	{

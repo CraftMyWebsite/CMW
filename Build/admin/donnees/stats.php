@@ -1,5 +1,6 @@
 <?php
-if($_Joueur_['rang'] == 1) {
+if(Permission::getInstance()->verifPerm("PermsPanel", "general", "showPage")) 
+{
 	$lectureStats = new Lire('modele/config/config.yml');
 	$lectureStats = $lectureStats->GetTableau();
 }

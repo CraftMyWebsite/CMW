@@ -14,21 +14,21 @@
 				<table class="table table-bordered">
 					<thead class="thead-inverse bg-primary">
 						<tr>
-							<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['displayTicket'] == true) { echo '<th style="text-align: center;">Visuel</th>'; } ?>
+							<?php if(Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) { echo '<th style="text-align: center;">Visuel</th>'; } ?>
 							<th style="text-align: center;">Pseudo</th>
 							<th style="text-align: center;">Titre</th>
 							<th style="text-align: center;">Date</th>
 							<th style="text-align: center;">Action</th>
                             <th style="text-align: center;">Status </th>
-							<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['closeTicket'] == true) { echo '<th style="text-align: center;">Modification</th>'; } ?>
+							<?php if(Permission::getInstance()->verifPerm('PermsDefault', 'support', 'closeTicket')) { echo '<th style="text-align: center;">Modification</th>'; } ?>
 						</tr>
 					</thead>
 					<tbody>
 					<?php $j = 0;
 					while($tickets = $ticketReq->fetch(PDO::FETCH_ASSOC)) { ?>
 						<tr>
-						    <?php if($tickets['ticketDisplay'] == 0 OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['displayTicket'] == true) {
-						    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['displayTicket'] == true) { ?>
+						    <?php if($tickets['ticketDisplay'] == 0 OR $tickets['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) {
+						    if(Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) { ?>
 						    <td class="align-middle">
 						        <?php if($tickets['ticketDisplay'] == "0") {
 						                echo '<span><i class="glyphicon glyphicon-eye-open"></i> Public</span>';
@@ -39,10 +39,8 @@
 							<?php } ?>
 
 							<td class="text-center align-middle">
-								<?php 
-								$Img = new ImgProfil($tickets['auteur'], 'pseudo');
-								?>
-								<a href="index.php?&page=profil&profil=<?php echo $tickets['auteur'] ?>"><img class="icon-player-topbar" src="<?=$Img->getImgToSize(32, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" /> <?php echo $tickets['auteur'] ?></a>
+							
+								<a href="index.php?&page=profil&profil=<?php echo $tickets['auteur'] ?>"><img class="icon-player-topbar" src="<?=$_ImgProfil_->getUrlHeadByPseudo($tickets['auteur']);?>" style="width: 32px; height: 32px;" /> <?php echo $tickets['auteur'] ?></a>
 							</td>
 						
 							<td class="text-center align-middle">
@@ -70,7 +68,7 @@
                                 ?>
                             </td>
 
-							<?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['closeTicket'] == true) { ?>
+							<?php if(Permission::getInstance()->verifPerm('PermsDefault', 'support', 'closeTicket')) { ?>
 								<td style="text-align: center;">
 									<form class="form-horizontal default-form" method="post" action="?&action=ticketEtat&id=<?php echo $tickets['id']; ?>">
 										<?php if($tickets['etat'] == 0){ 
@@ -84,7 +82,7 @@
 							} ?>
 						</tr>
 						
-					<?php if($tickets['ticketDisplay'] == "0" OR $tickets['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['displayTicket'] == true) { ?>
+					<?php if($tickets['ticketDisplay'] == "0" OR $tickets['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) { ?>
 					<!-- Modal -->
 					<div class="modal fade" id="<?php echo $tickets['id']; ?>Slide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-support">
@@ -109,9 +107,8 @@
 									$message = espacement($tickets['message']);
 									$message = BBCode($message, $bddConnection);
 									echo $message; 
-									$Img = new ImgProfil($tickets['auteur'], 'pseudo');
 									?></p>
-									<p class="text-right">Ticket de : <img src="<?=$Img->getImgToSize(16, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" alt="none" /> <?php echo $tickets['auteur']; ?></p>
+									<p class="text-right">Ticket de : <img src="<?=$_ImgProfil_->getUrlHeadByPseudo($tickets['auteur']);?>" style="width: 16px; height: 16px;" alt="none" /> <?php echo $tickets['auteur']; ?></p>
 									<br>
 									<hr>
 									
@@ -132,20 +129,18 @@
 										<div class="panel-body">
     										<div class="ticket-commentaire">
 											<div class="left-ticket-commentaire">
-												<?php 
-													$Img = new ImgProfil($ticketCommentaires[$tickets['id']][$i]['auteur'], 'pseudo');
-													?>
-												<span class="img-ticket-commentaire"><img src="<?=$Img->getImgToSize(32, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" alt="none" /></span>
+
+												<span class="img-ticket-commentaire"><img src="<?=$_ImgProfil_->getUrlHeadByPseudo($ticketCommentaires[$tickets['id']][$i]['auteur']);?>" style="width:32px; height:32px;" alt="none" /></span>
 												<span class="desc-ticket-commentaire">
 													<span class="ticket-commentaire-auteur"><?php echo $ticketCommentaires[$tickets['id']][$i]['auteur']; ?></span>
 													<span class="ticket-commentaire-date"><?php echo 'Le ' .$ticketCommentaires[$tickets['id']][$i]['jour']. '/' .$ticketCommentaires[$tickets['id']][$i]['mois']. ' à ' .$ticketCommentaires[$tickets['id']][$i]['heure']. ':' .$ticketCommentaires[$tickets['id']][$i]['minute']; ?></span>
-													<?php if(isset($_Joueur_) && (($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['deleteMemberComm'] == true) OR ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['editMemberComm'] == true))) { ?>
+													<?php if(isset($_Joueur_) && (($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) OR ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')))) { ?>
 							                             <span class="dropdown" style="padding-left: 40%">
 								                                <a type="button" class="btn btn-warning collapsed" data-toggle="dropdown">Action <b class="caret"></b></a>
 								                                <ul class="dropdown-menu">
-									                                <?php if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['deleteMemberComm'] == true) {
+									                                <?php if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) {
 										                                echo '<li><a href="?&action=delete_support_commentaire&id_comm='.$req_idComm['id'].'&id_ticket='.$tickets['id'].'&auteur='.$ticketCommentaires[$tickets['id']][$i]['auteur'].'">Supprimer</a></li>';
-									                                } if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['editMemberComm'] == true) {
+									                                } if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) {
 									                                	echo '<li><a href="#editComm-'.$req_idComm['id'].'" data-toggle="modal" data-target="#editComm-'.$req_idComm['id'].'" >Editer</a></li>';
 									                                }?>
 								                                </ul>
@@ -232,7 +227,7 @@
 						</div><!-- /.modal-dialog -->
 					</div><!-- /.modal -->
 
-					<?php if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['editMemberComm'] == true) {
+					<?php if($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) {
 						if(!empty($ticketCommentaires[$tickets['id']]))
 						{
 							for($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) {
@@ -277,7 +272,7 @@
 	</div>
 				<div class="card-footer">
 				<?php
-					if(!isset($_Joueur_)) 
+					if(!Permission::getInstance()->verifPerm("connect")) 
 						echo '<a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-warning btn-block" ><span class="glyphicon glyphicon-user"></span> Se connecter pour ouvrir un ticket</a>'; 
 					else 
 					{

@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['postit']['actions']['addPostIt'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'postit', 'actions', 'addPostIt')) {
 	$req = $bddConnection->prepare('DELETE FROM cmw_postit WHERE id = :id');
 	$req->execute(array(':id' => $_GET['id']));
 	$all_message_postit = $bddConnection->query('SELECT id, auteur, message FROM cmw_postit ORDER BY id DESC LIMIT 0, 4');

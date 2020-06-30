@@ -1,5 +1,5 @@
 <?php 
-if($_Joueur_['rang'] == 1 OR $_PGrades['PermsForum']['moderation']['setPerms'] == true)
+if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'setPerms'))
 {
 	if(isset($_POST['perms'], $_POST['id']))
 	{

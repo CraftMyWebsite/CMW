@@ -1,0 +1,38 @@
+[data-theme="dark"] {
+    background-color: #111 !important;
+    color: rgb(165, 167, 196);
+}
+[data-theme="dark"] main {
+    background-color: #111 !important;
+    color: rgb(165, 167, 196);
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: #333 !important;
+}
+
+[data-theme="dark"] .bg-white {
+    background-color: #000 !important;
+}
+
+[data-theme="dark"] .bg-black {
+    color: rgb(165, 167, 196);
+}
+
+[data-theme="dark"] .card-header ,
+[data-theme="dark"] .card-footer ,
+[data-theme="dark"] .card-body ,
+[data-theme="dark"] .card ,
+[data-theme="dark"] .list-group-item ,
+[data-theme="dark"] .form-control ,
+[data-theme="dark"] input ,
+[data-theme="dark"] footer ,
+[data-theme="dark"] table {
+    background-color: #333 !important;
+    color: rgb(165, 167, 196);
+    border-color: #000;
+    border-radius: 4px;
+}
+[data-theme="dark"] .gray {
+    color: rgb(165, 167, 196) !important;
+}

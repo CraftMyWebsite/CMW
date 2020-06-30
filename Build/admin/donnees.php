@@ -1,22 +1,22 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'showPage'))
 	require_once('donnees/informations.php');
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['general']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'general', 'showPage'))
 	require_once('donnees/general.php');
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'showPage'))
 	require_once('donnees/accueil.php');
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['server']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'showPage'))
 	require_once('donnees/regServeur.php');
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['pages']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'showPage'))
 	require_once('donnees/pages.php'); 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['news']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'showPage'))
 	require_once('donnees/news.php'); 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'showPage'))
 	require_once('donnees/boutique.php'); 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'showPage'))
 	require_once('donnees/menu.php'); 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['members']['showPage'] == true)
+if(Permission::getInstance()->verifPerm('PermsPanel', 'members', 'showPage'))
 	require_once('donnees/membres.php');
-if($_Joueur_['rang'] == 1)
+if(Permission::getInstance()->verifPerm("createur"))
 	require_once('donnees/grades.php'); 
 ?>

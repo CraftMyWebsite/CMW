@@ -1,6 +1,6 @@
 <?php
 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['postit']['actions']['addPostIt'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'postit', 'actions', 'addPostIt')) {
 	
 	$req = $bddConnection->prepare('INSERT INTO cmw_postit(auteur, message) VALUES (?, ?)');
 	$req->execute(array(

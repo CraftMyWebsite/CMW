@@ -8,7 +8,7 @@ if(isset($_GET['id']))
 	$topicd = $_Forum_->getTopic($id);
 	if(!empty($topicd['id']))
 	{
-		if(($_Joueur_['rang'] == 1 AND !$_SESSION['mode']) OR ($_PGrades_['PermsDefault']['forum']['perms'] >= $topicd['perms'] AND $_PGrades_['PermsDefault']['forum']['perms'] >= $topicd['permsCat']) OR ($topicd['perms'] == 0 AND $topicd['permsCat'] == 0))
+		if((Permission::getInstance()->verifPerm("createur") OR (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['perms'] AND Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['permsCat']) AND !$_SESSION['mode']) OR ($topicd['perms'] == 0 AND $topicd['permsCat'] == 0))
 		{
 	?><header class="heading-pagination">
 		<div class="container-fluid">
@@ -18,13 +18,13 @@ if(isset($_GET['id']))
 	<section class="layout" id="page">
 	<div class="container">
 	<nav class="nav nav-pills nav-justified">
-		<?php if(isset($_Joueur_) && $_JoueurForum_->is_followed($id))
+		<?php if(Permission::getInstance()->verifPerm("connect") && $_JoueurForum_->is_followed($id))
 		{
 			?>
 			<a class="nav-link" href="?&action=unfollow&id_topic=<?php echo $topicd['id']; ?>">Ne plus suivre cette discussion </a>
 				<?php
 		}
-		else if(isset($_Joueur_))
+		else if(Permission::getInstance()->verifPerm("connect"))
 		{
 			?>
 			<a class="nav-link" href="?&action=follow&id_topic=<?php echo $topicd['id']; ?>">Suivre cette discussion</a>
@@ -43,7 +43,7 @@ if(isset($_GET['id']))
 			<li class="breadcrumb-item active" aria-current="page"><?php echo $topicd['nom']; ?></li>
 		</ol>
 	</nav>		
-	<?php if(isset($_Joueur_) AND ($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1) AND !$_SESSION['mode']) { ?>
+	<?php if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic') OR Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic')) AND !$_SESSION['mode']) { ?>
 	<div class="row">
 		<div class="col-md-4 offset-md-2">
 			<div class="dropdown">
@@ -52,7 +52,7 @@ if(isset($_GET['id']))
 				</button>
 				<div class="dropdown-menu list-inline" aria-labeledby="Actions-Modérations">
 				<?php 
-				if($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_Joueur_['rang'] == 1)
+				if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic'))
 				{
 					if($topicd['etat'] == 1)
 					{
@@ -64,13 +64,13 @@ if(isset($_GET['id']))
 					<?php 
 					}
 				}
-				if($_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1)
+				if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic'))
 				{
 					?>
 					<a class="dropdown-item" href="?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=2">Supprimer le topic</a>
 					<?php 
 				}
-				if($_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1)
+				if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'mooveTopic'))
 				{
 					?>
 					<a class="dropdown-item" href="?&action=forum_moderation&id_topic=<?php echo $id; ?>&choix=3">Déplacer la discussion</a>
@@ -103,9 +103,9 @@ if(isset($_GET['id']))
 		<div class="col-md-2">
 		<!-- Div de droite où on met le profil de l'auteur -->
 		<center><?php
-			$Img = new ImgProfil($topicd['pseudo'], 'pseudo');
+	
 			?>
-			<img class="rounded" src="<?=$Img->getImgToSize(128, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" alt="avatar de l'auteur" title="<?php echo $topicd['pseudo']; ?>" /></center>
+			<img class="rounded" src="<?=$_ImgProfil_->getUrlHeadByPseudo($topicd['pseudo']);?>" style="width: 128px; height: 128px;" alt="avatar de l'auteur" title="<?php echo $topicd['pseudo']; ?>" /></center>
 			<p class="username text-center"><?php echo $topicd['pseudo']; ?><br/>
 			<?php echo $_Forum_->gradeJoueur($topicd['pseudo']); ?> </p>
 		</div>
@@ -136,7 +136,7 @@ if(isset($_GET['id']))
 			</form>
 		</div>
 		<?php }?>
-	<?php if(isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] OR ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['editTopic'] == true) AND !$_SESSION['mode']))
+	<?php if(isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] OR Permission::getInstance()->verifPerm('PermsForum', 'general', 'editTopic') AND !$_SESSION['mode']))
 	{
 		?><div class="col-md-2"><form action="?action=editForum" method="post">
 			<input type="hidden" name="objet" value="topic"/>
@@ -146,7 +146,7 @@ if(isset($_GET['id']))
 		</div>
 		<?php 
 	}
-		if(isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] OR ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteTopic'] == true) AND !$_SESSION['mode']))
+		if(isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] OR Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteTopic') AND !$_SESSION['mode']))
 		{
 			?>
 		<div class="col-md-2">
@@ -178,7 +178,7 @@ if(isset($_GET['id']))
 
 		echo '</div></div>';
 	}
-	if(isset($_Joueur_))
+	if(Permission::getInstance()->verifPerm("connect"))
 	{
 		if(array_search($_Joueur_['pseudo'], array_column($countlike, 'pseudo')) === FALSE AND array_search($_Joueur_['pseudo'], array_column($countdislike, 'pseudo')) === FALSE AND $_Joueur_['pseudo'] != $topicd['pseudo'])
 		{
@@ -237,9 +237,8 @@ if(isset($_GET['id']))
 			<div class="col-md-2">
 				<div id="<?php echo $answerd[$i]['id']; ?>"> <!-- div de droite avec les infos joueurs -->
 					<center><?php 
-					$Img = new ImgProfil($answerd[$i]['pseudo'], 'pseudo');
 					?>
-					<img class="rounded" src="<?=$Img->getImgToSize(128, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" alt="avatar de l'auteur" title="<?php echo $answerd[$i]['pseudo']; ?>" /></center>
+					<img class="rounded" src="<?=$_ImgProfil_->getUrlHeadByPseudo($answerd[$i]['pseudo']);?>" style="width: 128px; height: 128px;" alt="avatar de l'auteur" title="<?php echo $answerd[$i]['pseudo']; ?>" /></center>
 					<p class="username text-center"><?php echo $answerd[$i]['pseudo']; ?><br/>
 						<?php echo $_Forum_->gradeJoueur($answerd[$i]['pseudo']); ?>
 					</p>
@@ -262,7 +261,7 @@ if(isset($_GET['id']))
 			</div>
 		</div>
 		
-		<?php if(isset($_Joueur_)){ ?>
+		<?php if(Permission::getInstance()->verifPerm("connect")){ ?>
 		<div class="row">
 		<div class="col-md-2">
 			<form action="?&action=signalement" method="post">
@@ -362,7 +361,7 @@ if(isset($_GET['id']))
 				</form></div>
 				<?php
 			}
-			if($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] OR ($_PGrades_['PermsForum']['moderation']['editMessage'] == true OR $_Joueur_['rang'] == 1) AND !$_SESSION['mode'])
+			if($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] OR Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'editMessage') AND !$_SESSION['mode'])
 			{
 				?><div class="col-md-2"><form action="?action=editForum" method="post">
 					<input type="hidden" name="objet" value="answer" />
@@ -371,7 +370,7 @@ if(isset($_GET['id']))
 				</form></div>
 				<?php 
 			}
-			if($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] OR ($_PGrades_['PermsForum']['moderation']['deleteMessage'] == true OR $_Joueur_['rang'] == 1) AND !$_SESSION['mode'])
+			if($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] OR Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteMessage') AND !$_SESSION['mode'])
 			{
 				?>
 			<div class="col-md-2">
@@ -406,14 +405,14 @@ if(isset($_GET['id']))
 	</nav>
 	 <br/><?php 
 	 
-	 if($topicd['etat'] == 1 AND (($_Joueur_['rang'] != 1 OR $_PGrades_['PermsForum']['general']['seeForumHide'] != true) AND $_SESSION['mode']))
+	 if($topicd['etat'] == 1 AND (!Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide') AND $_SESSION['mode']))
 	 {
 		 ?><div class="alert alert-info" role="alert">Le topic est fermé ! Aucune réponse n'est possible ! </div><?php 
 	 }
-	 elseif(isset($_Joueur_) && ($topicd['etat'] == 0 OR (($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['seeForumHide'] == true) AND !$_SESSION['mode'])))
+	 elseif(isset($_Joueur_) && ($topicd['etat'] == 0 OR (Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide') AND !$_SESSION['mode'])))
 	 {
 		$data = $_Forum_->isLock($topicd['id_categorie']);	
-		if($data['close'] == 0 OR ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['seeForumHide'] == true) AND !$_SESSION['mode'])
+		if($data['close'] == 0 OR Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide') AND !$_SESSION['mode'])
 		{
 		 ?><hr/><div class="separator" style="border-top: 1px solid black;"></div>
 	<form action="?&action=post_answer" method="post">
@@ -484,7 +483,7 @@ if(isset($_GET['id']))
 	<?php 
 		}
 	 }
-	 elseif(!isset($_Joueur))
+	 elseif(!Permission::getInstance()->verifPerm("connect"))
 	 	echo '<div class="alert alert-warning text-center">Connectez-vous pour pouvoir interragir ! </div>';
 	 ?>
 	 	</div>

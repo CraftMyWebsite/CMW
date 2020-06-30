@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_GET['id_a']) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['moderation']['seeSignalement'] == true))
+if(isset($_GET['id_a']) AND Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement'))
 {
 	$id = htmlspecialchars($_GET['id_a']);
 	$id_t = htmlspecialchars($_GET['id']);

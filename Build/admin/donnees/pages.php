@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['pages']['showPage'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'showPage')) {
 	$pagesReq = $bddConnection->query('SELECT * FROM cmw_pages');
 
 	unset($pages);

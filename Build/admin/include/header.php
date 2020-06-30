@@ -24,6 +24,7 @@
   <script type="text/javascript" src="./admin/assets/js/Chart/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="./admin/assets/js/Chart/Chart.js"></script>
   <script type="text/javascript" src="./admin/assets/js/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="./admin/assets/js/toastr.min.js"></script>
   <?php if(file_exists('./favicon.ico'))
    {
      echo '<link rel="icon" type="image/x-icon" href="./favicon.ico"></link>';
@@ -45,6 +46,8 @@
   <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
   <link href="./admin/assets/css/admin-style.css" rel="stylesheet">
   <link href="./admin/assets/css/forum.css" rel="stylesheet">
+  <link href="./admin/assets/css/toastr.css" rel="stylesheet">
+  
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

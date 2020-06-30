@@ -5,19 +5,19 @@
         <strong>Ici configurez l'accueil de votre site, la vitrine de votre serveur, ne négligez jamais cette page, ajoutez de belles images, des sliders ou encore des liens de navigation rapide le plus ergonomiquement possible!</strong>
     </div>
     <div class="col-xs-12 col-md-6 text-center">
-        <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['home']['actions']['uploadSlider'] == false AND $_PGrades_['PermsPanel']['home']['actions']['editSlider'] == false AND $_PGrades_['PermsPanel']['home']['actions']['uploadMiniature'] == false AND $_PGrades_['PermsPanel']['home']['actions']['editMiniature'] == false)) { ?>
+        <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'uploadSlider') AND !Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editSlider') && !Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'uploadMiniature') AND !Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { ?>
 
         
         <div class="alert alert-danger">
             <strong>Vous avez aucune permission pour accéder aux réglagles de l'accueil.</strong>
         </div>
 
-        <?php } else { ?>
-        <?php } if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['home']['actions']['uploadSlider'] == true OR $_PGrades_['PermsPanel']['home']['actions']['editSlider'] == true)) { ?>
+        <?php }
+        if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'uploadSlider') OR Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editSlider')) { ?>
 
         <h2>Slider</h2>
 
-        <?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['actions']['uploadSlider'] == true) { ?>
+        <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'uploadSlider')) { ?>
 
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">
@@ -36,7 +36,7 @@
                     </div>
                 </form>
 
-        <?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['actions']['editSlider'] == true) { ?>
+        <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editSlider')) { ?>
 
 
         <h3>Configuration de votre slider</h3>
@@ -56,12 +56,12 @@
             </div>
         </div>
 
-    <?php } if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['home']['actions']['uploadMiniature'] == true OR $_PGrades_['PermsPanel']['home']['actions']['editMiniature'] == true)) { ?>
+    <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'uploadMiniature') OR Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { ?>
 
     <div class="col-xs-12 col-md-6 text-center">
         <h2>Miniature</h2>
 
-        <?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['actions']['uploadMiniature'] == true) { ?>
+        <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'uploadMiniature')) { ?>
 
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['actions']['editMiniature'] == true) { ?>
+        <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { ?>
 
         <div class="panel panel-default">
             <div class="panel-heading cmw-panel-header">
@@ -223,7 +223,7 @@
 	</div>
         </div>
 
-        <?php } if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['home']['actions']['editMiniature'] == true AND $_PGrades_['PermsPanel']['home']['actions']['addSlider'] == true)) { ?>
+        <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature') AND Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'addSlider')) { ?>
 
         <div class="modal fade" id="newSlider" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

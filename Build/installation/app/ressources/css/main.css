@@ -1,0 +1,136 @@
+.container {
+  max-width: 960px;
+}
+
+.lh-condensed {
+  line-height: 1.25;
+}
+
+.wrapper-progressBar {
+  width: 100%
+}
+
+.progressBar li {
+  list-style-type: none;
+  float: left;
+  width: 33%;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.progressBar li:before {
+  content: " ";
+  line-height: 30px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px;
+  background-color: white
+}
+
+.progressBar li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: #ddd;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+
+.progressBar li:first-child:after {
+  content: none;
+}
+
+.progressBar li.active {
+  color: dodgerblue;
+  font-weight: bold;
+}
+
+.progressBar li.active:before {
+  border-color: dodgerblue;
+  background-color: dodgerblue
+}
+
+.progressBar .active:after {
+  background-color: dodgerblue;
+}
+
+.anim-wow {
+  animation: anim-wow 0.5s ease infinite;
+}
+
+@keyframes anim-wow {
+  0% {
+    transform: scale(1);
+  }
+
+  5% {
+    transform: scale(1.25);
+  }
+
+  20% {
+    transform: scale(1.30);
+  }
+
+  30% {
+    transform: scale(1.35);
+  }
+
+  35% {
+    transform: scale(1.40);
+  }
+
+  50% {
+    transform: scale(1.45);
+  }
+
+  55% {
+    transform: scale(1.50);
+  }
+
+  70% {
+    transform: scale(1.55);
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bg-light2 {
+  background-color: rgb(240, 240, 240) !important;
+}
+
+.bg-texture {
+  background-image: url('../images/texture.png');
+  background-repeat: repeat;
+}
+
+@font-face {
+  font-family: 'Minecrafter';
+  src: url('../fonts/Minecrafter.ttf') format('truetype');
+}
+
+.minecrafter {
+  font-family: 'Minecrafter';
+}
+
+.minecraft {
+  background-image: url('../images/creeper.png');
+  background-size: contain;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  overflow: hidden;
+  padding: 5px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  bottom: 5;
+}

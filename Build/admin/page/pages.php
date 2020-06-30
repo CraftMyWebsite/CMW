@@ -1,6 +1,6 @@
 <div class="cmw-page-content-header"><strong>Pages personnalisées</strong> - Gérez les pages personnalisées de votre site</div>
 
-    <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['pages']['actions']['addPage'] == false AND $_PGrades_['PermsPanel']['pages']['actions']['editPage'] == false)) { ?>
+    <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'actions', 'addPage') AND !Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'actions', 'editPage')) { ?>
 
     <div class="row">
         <div class="alert alert-danger">
@@ -13,7 +13,7 @@
             <strong>En plus des pages de base du CMS, vous pouvez créer des pages personnalisées, ces pages peuvent être découpées en plusieurs "sections". Une fois la page créée vous pouvez faire un lien vers cette dernière dans la section "menus" de votre panel.</strong>
         </div>
     </div>
-    <?php } ?> <div class="row"> <?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['pages']['actions']['addPage'] == true) { ?>
+    <?php } ?> <div class="row"> <?php if(Permission::getInstance()->verifPerm('PermsPanel','pages', 'actions', 'addPage')) { ?>
     <div class="col-xs-12 col-md-6 text-center">
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['pages']['actions']['editPage'] == true) { ?>
+    <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'actions', 'editPage')) { ?>
     <div class="col-xs-12 col-md-6 text-center">
         <div class="panel panel-default cmw-panel">
             <div class="panel-heading cmw-panel-header">

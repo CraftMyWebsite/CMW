@@ -1,5 +1,5 @@
 <?php
-if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteForum'] == true) and isset($_GET['modif']))
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') and isset($_GET['modif']))
 {
 	$ordre = htmlspecialchars($_GET['ordre']);
 	$id = htmlspecialchars($_GET['id']);

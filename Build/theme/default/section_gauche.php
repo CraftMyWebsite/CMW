@@ -14,7 +14,7 @@
 			<?php if($_Widgets_['Widgets'][$i]['type'] == 0) { ?>
 				<ul class="nav nav-pills nav-stacked">
 					  <?php
-					if($_Joueur_['rang'] == 1)
+					if(Permission::getInstance()->verifPerm("PermsPanel", 'access'))
 						echo '<li class="active"><a href="admin.php"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>';
 					
 					?>
@@ -25,10 +25,11 @@
 				<p class="gestionCompteInfos">J'ai <?php echo $_Joueur_['tokens']; ?> Jeton<?php if($_Joueur_['tokens'] > 1) { echo 's'; } ?>.</p>
 				
 				<?php } elseif($_Widgets_['Widgets'][$i]['type'] == 1){ 
-					for($j = 0; $j < count($lecture['Json']); $j++)
+					foreach($jsonCon as $j => $serveur)
 					{
 						if($conEtablie[$j] == true)
 						{
+							$serveurStats[$j] = $serveur->GetServeurInfos();
 							foreach($serveurStats[$j]['joueurs'] as $cle => $element)
 							{ 
 							?>

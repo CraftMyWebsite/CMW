@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_Joueur_) AND ($_PGrades_['PermsForum']['moderation']['seeSignalement'] == true OR $_Joueur_['rang'] == 1))
+if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement'))
 {
 	$req = $bddConnection->query('SELECT * FROM cmw_forum_report WHERE vu = 0');
 	?><header class="heading-pagination">

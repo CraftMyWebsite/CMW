@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['general']['actions']['editGeneral'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) {
 	if(isset($_POST['adresseWeb']) AND isset($_POST['nom']) AND isset($_POST['description']) AND isset($_POST['adresse']) AND isset($_POST['dbNom']) AND isset($_POST['dbUtilisateur']) AND isset($_POST['dbMdp']))
 	{
 		$lecture = new Lire('modele/config/config.yml');

@@ -1,5 +1,5 @@
 <div class="cmw-page-content-header"><strong>Gestion</strong> - Gérez la maintenance</div>
-    <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['support']['maintenance']['actions']['editDefaultMessage'] == false AND $_PGrades_['PermsPanel']['support']['maintenance']['actions']['editAdminMessage'] == false AND $_PGrades_['PermsPanel']['support']['maintenance']['actions']['editEtatMaintenance'] == false AND $_PGrades_['PermsPanel']['support']['maintenance']['actions']['switchRedirectMode'] == false)) { ?>
+    <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editDefaultMessage') AND !Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editAdminMessage') AND !Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance') AND !Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchRedirectMode')) { ?>
     <div class="row">
         <div class="col-md-12 text-center">
             <div class="alert alert-danger">
@@ -18,7 +18,7 @@
     <?php } ?>
                 <div class=row><?php
         for($i = 0; $i < count($maintenance); $i++) {
-            if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['support']['maintenance']['actions']['editDefaultMessage'] == true OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['editAdminMessage'] == true)) { ?>
+            if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editDefaultMessage') OR Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editAdminMessage')) { ?>
                 <div class="col-md-6">
                     <div class="panel panel-default cmw-panel">
                         <div class="panel-heading cmw-panel-header">
@@ -27,26 +27,26 @@
                         <div class="panel-body">
                             <div class="row">
                                 <table class="table table-striped table-bordered">
-                                    <?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['editDefaultMessage'] == true) { ?>
+                                    <?php if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editDefaultMessage')) { ?>
                                         <tr>
                                             <th>Message :</th>
                                             <th>Action :</th>
                                         </tr>
                                         <tr>
                                             <form method="post" action="?&action=editMessage&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>">
-                                                <td><input style="width: 85%" type="text" name="maintenanceMsg" value="<?php echo $maintenance[$i]['maintenanceMsg']; ?>" class="form-control" placeholder="Ex : Maintenance en cours.." required></td>
+                                                <td><textarea style="width: 85%" name="maintenanceMsg" class="form-control" required><?php echo $maintenance[$i]['maintenanceMsg']; ?></textarea></td>
                                                 <td><input type="submit" class="btn btn-warning" value="Modifier le message !" /></td>
                                             </form>
                                         </tr>
                                     <?php }
-                                    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['editAdminMessage'] == true) { ?>
+                                    if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editAdminMessage')) { ?>
                                         <tr>
                                             <th>Message Administration :</th>
                                             <th></th>
                                         </tr>
                                         <tr>
                                             <form method="post" action="?&action=editMessageAdmin&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>">
-                                                <td><input style="width: 85%" type="text" name="maintenanceMsgAdmin" value="<?php echo $maintenance[$i]['maintenanceMsgAdmin']; ?>" class="form-control" placeholder="Ex : Vous êtes administrateur? Alors connectez-vous :" required></td>
+                                                <td><textara style="width: 85%" name="maintenanceMsgAdmin" class="form-control" required><?php echo $maintenance[$i]['maintenanceMsgAdmin']; ?></textara></td>
                                                 <td><input type="submit" class="btn btn-warning" value="Modifier le message !" /></td>
                                             </form>
                                         </tr>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             <?php }
-            if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['support']['maintenance']['actions']['editEtatMaintenance'] == true OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['switchRedirectMode'] == true)) { ?>
+            if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance') OR Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchRedirectMode')) { ?>
                 <div class="col-md-6">
                     <div class="panel panel-default cmw-panel">
                         <div class="panel-heading cmw-panel-header">
@@ -65,29 +65,28 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <?php if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['support']['maintenance']['actions']['editEtatMaintenance'] == true OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['switchRedirectMode'] == true)) { ?>
+                                <div class="col-md-12">
+                                <?php if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance')) { ?>
+                                    <?php if($maintenance[$i]['maintenanceEtat'] == 1) { ?> 
+                                        <button class="btn btn-block" style="background: #18bc9c;color: white;" disabled><strong>INFO :</strong> Maintenance activée</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-block" style="background: #e74c3c;color: white;" disabled><strong>INFO :</strong> Maintenance  désactivée</button>
+                                    <?php } ?>
+                                <?php } ?>
+                                </div>
+                                <?php
+                                if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchRedirectMode')) { ?>
                                     <div class="col-md-12">
-                                        <?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['editEtatMaintenance'] == true) { ?>
-                                            <?php if($maintenance[$i]['maintenanceEtat'] == 1) { ?> 
-                                                <button class="btn btn-block" style="background: #18bc9c;color: white;" disabled><strong>INFO :</strong> Maintenance activée</button>
-                                            <?php } else { ?>
-                                                <button class="btn btn-block" style="background: #e74c3c;color: white;" disabled><strong>INFO :</strong> Maintenance  désactivée</button>
-                                            <?php } ?>
+                                        <?php if($maintenance[$i]['maintenancePref'] == 1) { ?> 
+                                            <button class="btn btn-block" style="background: #3498db;color: white;" disabled><strong>Pref actuelle :</strong> Accès panel uniquement</button>
+                                        <?php } else { ?>
+                                            <button class="btn btn-block" style="background: #3498db;color: white;" disabled><strong>Pref actuelle :</strong> Accès panel + site </button>
                                         <?php } ?>
                                     </div>
-                                    <?php
-                                        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['switchRedirectMode'] == true) { ?>
-                                            <div class="col-md-12">
-                                                <?php if($maintenance[$i]['maintenancePref'] == 1) { ?> 
-                                                    <button class="btn btn-block" style="background: #3498db;color: white;" disabled><strong>Pref actuelle :</strong> Accès panel uniquement</button>
-                                                <?php } else { ?>
-                                                    <button class="btn btn-block" style="background: #3498db;color: white;" disabled><strong>Pref actuelle :</strong> Accès panel + site </button>
-                                                <?php } ?>
-                                            </div>
-                                        <?php } ?>
+                                <?php } ?>
                             </div>
                             <div class="row">
-                                <?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['editEtatMaintenance']) { ?>
+                                <?php if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance')) { ?>
                                     <div class="col-md-12">
                                         <div class="panel panel-success" style="text-align: center;">
                                             <div class="panel-heading">
@@ -108,7 +107,7 @@
                                         </div>
                                     </div>
                                         <?php }
-                                        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['support']['maintenance']['actions']['switchRedirectMode'] == true) { ?>
+                                        if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchRedirectMode')) { ?>
                                     <div class="col-md-12">
                                         <div class="panel panel-success" style="text-align: center;">
                                             <div class="panel-heading">
@@ -127,8 +126,7 @@
                                         </div>
                                     </div>
                                         <?php } ?>
-                                    </div>
-                                <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </div>

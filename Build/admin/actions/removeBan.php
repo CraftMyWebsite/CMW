@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_) && $_Joueur_['rang'] == 1)
+if(Permission::getInstance()->verifPerm("PermsPanel", 'ban', 'actions', 'removeBan'))
 {
 	if(isset($_GET['id']))
 	{

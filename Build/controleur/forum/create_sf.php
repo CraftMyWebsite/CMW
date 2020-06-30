@@ -1,7 +1,7 @@
 <?php 
 
 
-if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addSousForum'] == true) AND isset($_POST['nom']) AND strlen($_POST['nom']) <= 40 AND isset($_POST['id_categorie']))
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addSousForum') AND isset($_POST['nom']) AND strlen($_POST['nom']) <= 40 AND isset($_POST['id_categorie']))
 {
 	$nom = htmlspecialchars($_POST['nom']);
 	$id = htmlspecialchars($_POST['id_categorie']);

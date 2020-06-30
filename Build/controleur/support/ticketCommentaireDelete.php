@@ -1,9 +1,9 @@
 <?php
-if(isset($_Joueur_) && ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['deleteMemberComm'] == true)) {
+if(isset($_Joueur_) && ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) {
     $id_ticket = urldecode($_GET['id_ticket']);
     $id_comm = urldecode($_GET['id_comm']);
     $auteur = urldecode($_GET['auteur']);
-    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['deleteMemberComm'] == true)
+    if(Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm'))
         $adminMode = true;
 
     require_once('modele/support/commentaires.class.php');
@@ -17,7 +17,7 @@ if(isset($_Joueur_) && ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_J
     $get_AuteurCommentaire = $req_AuteurCommentaire->fetch(PDO::FETCH_ASSOC);
 
     $AuteurCommentaire = $get_AuteurCommentaire['auteur'];
-	if($AuteurCommentaire == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['deleteMemberComm'] == true)
+	if($AuteurCommentaire == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm'))
 	{
 		$ExistCommentaire = $req_ExistCommentaire->rowCount();
 		$ExistTicket = $req_ExistTicket->rowCount();

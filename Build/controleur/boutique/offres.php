@@ -9,11 +9,12 @@ require_once('modele/boutique/categories.class.php');
 $categoriesObj = new CategoriesList($bddConnection);
 $categories = $categoriesObj->GetTableauCategories();
 
-for($i = 0; $i < count($lecture['Json']); $i++)
+foreach($jsonCon as $key => $serveur)
 {
-	$enligne[$i] = false;
-	if(isset($_Joueur_['pseudo']) AND isset($serveurStats[$i]['joueurs']) AND $serveurStats[$i]['joueurs'] AND in_array($_Joueur_['pseudo'], $serveurStats[$i]['joueurs']))
-		$enligne[$i] = true;
+	$enligne[$key] = false;
+	$serveurStats[$key] = $serveur->GetServeurInfos();
+	if(isset($_Joueur_['pseudo']) AND isset($serveurStats[$key]['joueurs']) AND $serveurStats[$key]['joueurs'] AND in_array($_Joueur_['pseudo'], $serveurStats[$key]['joueurs']))
+		$enligne[$key] = true;
 }
 
 if(isset($_GET['offre']))

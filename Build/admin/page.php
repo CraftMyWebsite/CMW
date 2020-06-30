@@ -20,10 +20,7 @@ include './admin/include/header.php';
 				<div class="cmw-right-navbar">
 					<audio id="horn" src="./admin/assets/sound/horn.mp3"></audio>
 					<a onmouseover="document.getElementById('horn').play()" onmouseout="document.getElementById('horn').pause()" href="index.php?&page=profil&profil=<?php echo $_Joueur_['pseudo']; ?>" class="dropdown-toggle cmw-header-username hvr-buzz" data-toggle="dropdown">
-						<?php 
-							$Img = new ImgProfil($_Joueur_['id']);
-							?>
-						<img src="<?=$Img->getImgToSize(32, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" /> <?php echo $_Joueur_['pseudo']; ?></a>
+						<img src="<?=$_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo']);?>" style="width: 32px; height: 32px;" /> <?php echo $_Joueur_['pseudo']; ?></a>
 					<a href="../index.php?&action=deco" class="cmw-nav-disconnect hvr-underline-reveal"><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 				</div>
 

@@ -1,6 +1,6 @@
 <div class="cmw-page-content-header"><strong>Boutique</strong> - Visualisez les achats effectués</div>
 
-<?php if(isset($_Joueur_) && $_Joueur_['rang'] != 1 && !$_PGrades_['PermsPanel']['shop']['showPage'])
+<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'boutiqueList', 'showPage'))
 {
 	echo '<div class="col-lg-6 col-lg-offset-3 text-center">
 		<div class="alert alert-danger">
@@ -8,7 +8,7 @@
 		</div>
 	</div>';
 } 
-elseif(isset($_Joueur_) && ($_Joueur_['rang'] == 1 || $_PGrades_['PermsPanel']['shop']['showPage']))
+elseif(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'boutiqueList', 'showPage'))
 {
 	?>
 <div class="row">

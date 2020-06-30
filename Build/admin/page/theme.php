@@ -4,14 +4,14 @@
 
 <div class="row">
 
-    <?php if($_Joueur_['rang'] != 1 AND ($_PGrades_['PermsPanel']['theme']['actions']['editTheme'] == false AND $_PGrades_['PermsPanel']['theme']['actions']['editBackground'] == false AND $_PGrades_['PermsPanel']['theme']['actions']['editTypeBackground'] == false)) { ?>
+    <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme') AND !Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTypeBackground')) { ?>
 
     <div class="alert alert-danger">
        <strong>Vous avez aucune permission pour accéder aux thèmes.</strong>
    </div>
 
 
-   <?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editTheme'] == true) { ?>
+   <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) { ?>
 
    <div class="col-xs-12 col-md-4 text-center" style="height: 400px">
       <div class="panel panel-default cmw-panel">
@@ -53,7 +53,7 @@
     </div>
 
 <?php
- } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editBackground'] == true) { ?>
+ } if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground')) { ?>
 
 <div class="col-xs-12 col-md-4 text-center" style="height: 400px">
   <div class="panel panel-default cmw-panel">
@@ -80,7 +80,7 @@
 </div>
 </div>
 
-<?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editTypeBackground'] == true) { ?>
+<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTypeBackground')) { ?>
 
 <div class="col-xs-12 col-md-4 text-center" style="height: 400px">
   <div class="panel panel-default cmw-panel">
@@ -111,7 +111,7 @@
   </div>
 </div>
 </div>
-<?php } if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editTheme']) { ?>
+<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) { ?>
 
 <div class="col-xs-12 col-md-4 text-center" style="height: 400px">
 	<div class="panel panel-default cmw-panel">
@@ -149,7 +149,7 @@
 	</div>
 </div>
 <?php }
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editTheme'] == true) {
+if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) {
   include('theme/'.$_Serveur_['General']['theme'].'/config/configAdminVue.php'); 
 }?>
 </div>

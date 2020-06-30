@@ -69,12 +69,11 @@
 							echo '<li class="nav-item' .$active. ' wow fadeInDown" data-wow-delay"'. $i/10 .'s"><a href="' .$_Menu_['MenuLien'][$i]. '" class="nav-link">' .$_Menu_['MenuTexte'][$i]. '</a></li>';
 						}
 					}
-					if(isset($_Joueur_))
+					if(Permission::getInstance()->verifPerm("connect"))
 					{
-						$Img = new ImgProfil($_Joueur_['id']);
 					?>
 					<div class="btn-group dropdown-hover" role="group" aria-label="Dropdown Membres">
-                        <a href="?page=profil&profil=<?php echo $_Joueur_['pseudo']; ?>"><button type="button" class="btn btn-primary wow fadeInDown link btn-colored" data-wow-delay="<?php echo ($i+1)/10;?>s"><img src="<?=$Img->getImgToSize(24, $width, $height); ?>" style="margin-left: -10px; width: <?=$width;?>px; height: <?=$height;?>px;"> <?php echo $_Joueur_['pseudo']; ?></button></a>
+                        <a href="?page=profil&profil=<?php echo $_Joueur_['pseudo']; ?>"><button type="button" class="btn btn-primary wow fadeInDown link btn-colored" data-wow-delay="<?php echo ($i+1)/10;?>s"><img src="<?=$_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo']); ?>" style="margin-left: -10px; width: 24px; height: 24px;"> <?php echo $_Joueur_['pseudo']; ?></button></a>
                         <div class="btn-group" role="group">
                             <button id="btnGroupDrop3" type="button" class="btn btn-primary dropdown-toggle wow fadeInDown link btn-colored" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-wow-delay="<?php echo ($i+1)/10; ?>s"></button>
                             <div class="dropdown-menu  dropdown-menu-right animated fadeIn" aria-labelledby="btnGroupDrop3">
@@ -106,9 +105,9 @@
 											$alerte++;
 										}
 									}
-									if($_PGrades_['PermsPanel']['access'] == "on" OR $_Joueur_['rang'] == 1)
+									if(Permission::getInstance()->verifPerm('PermsPanel', 'access'))
 										echo '<a href="admin.php" class="dropdown-item text-success"><i class="fas fa-tachometer-alt"></i> Administration</a>';
-									if($_PGrades_['PermsForum']['moderation']['seeSignalement'] == true OR $_Joueur_['rang'] == 1)
+									if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement'))
 									{
 										$req_report = $bddConnection->query('SELECT id FROM cmw_forum_report WHERE vu = 0');
 										$signalement = $req_report->rowCount();

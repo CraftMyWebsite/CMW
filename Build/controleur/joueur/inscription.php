@@ -72,7 +72,11 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 								}
 								
 								require_once('modele/joueur/inscription.class.php');
-								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), 1, 0, $_POST["age"], $getIp, $_POST["show_email"], $bddConnection);
+								if(isset($_POST['souvenir']) && $_POST['souvenir'] == true)
+									$souvenir = true;
+								else
+									$souvenir = false;
+								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), $souvenir, 0, $_POST["age"], $getIp, $_POST["show_email"], $bddConnection);
 
 								require_once('modele/joueur/ScriptBySprik07/inscriptionCleUnique.class.php');
 								$userInsertIP = new InsertCleUnique($get_CleUnique, $get_Pseudo, $bddConnection);

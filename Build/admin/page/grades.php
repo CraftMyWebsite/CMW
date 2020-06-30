@@ -1,7 +1,7 @@
 <div class="cmw-page-content-header"><strong>Gestion</strong> - Gérez vos rangs</div>
 
 <div class="row">
-        <?php if($_Joueur_['rang'] != 1) { ?>
+        <?php if(!Permission::getInstance()->verifPerm("createur")) { ?>
             <div class="col-md-12 text-center">
                 <div class="alert alert-danger">
                     <strong>Vous n'êtes pas créateur.</strong>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         <?php }
-        if($_Joueur_['rang'] == 1) {
+        if(Permission::getInstance()->verifPerm("createur")) {
             if(isset($_GET['gradeCreated']))
             {
                 echo '<div class="alert alert-success text-center">Grade créé avec succès !</div>';
@@ -66,7 +66,7 @@
             </div>
         </div>
         <?php } 
-        if($_Joueur_['rang'] == 1 AND max($lastGrade) >= 2) { ?>
+        if(Permission::getInstance()->verifPerm("createur") AND max($lastGrade) >= 2) { ?>
         <div class="col-md-12">
             <div class="panel panel-default cmw-panel">
                 <div class="panel-heading cmw-panel-header">

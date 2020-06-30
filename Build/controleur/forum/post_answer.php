@@ -1,5 +1,5 @@
 <?php
-if(isset($_Joueur_))
+if(Permission::getInstance()->verifPerm("connect"))
 {
 	if(isset($_POST['id_topic']) AND isset($_POST['contenue']) AND strlen($_POST['contenue']) <= 10000)
 	{

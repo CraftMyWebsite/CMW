@@ -1,12 +1,12 @@
 <?php
 require('modele/forum/adminForum.class.php');
 
-if(isset($_Joueur_) AND isset($_GET['id'], $_GET['objet']))
+if(Permission::getInstance()->verifPerm("connect") AND isset($_GET['id'], $_GET['objet']))
 {
 	$AdminForum = new AdminForum($bddConnection);
 	$objet = htmlentities($_GET['objet']);
 	$id = htmlentities($_GET['id']);
-	if($AdminForum->verifEdit($objet, $id, $_Joueur_, $_PGrades_))
+	if($AdminForum->verifEdit($objet, $id, $_Joueur_))
 	{
 		$table = ($objet == 1) ? 'cmw_forum_post': 'cmw_forum_answer';
 		$req = $bddConnection->prepare('SELECT * FROM ' .$table. ' WHERE id = :id');

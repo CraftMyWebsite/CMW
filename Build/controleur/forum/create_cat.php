@@ -2,7 +2,7 @@
 
 if(isset($_Joueur_) AND isset($_POST['nom']) AND isset($_POST['forum']) AND strlen($_POST['nom']) <= 40 )
 {
-	if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addCategorie'] == true)
+	if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addCategorie'))
 	{
 		$nom = htmlspecialchars($_POST['nom']);
 		$forum = htmlspecialchars($_POST['forum']);
