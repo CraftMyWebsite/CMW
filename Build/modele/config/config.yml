@@ -34,6 +34,15 @@ Payement:
     paypalEmail: 
 color:
     theme:
+    #New Theme
+        bg-main: '#333336'
+        bg-secondary: '#c104ff'
+        bg-darkest: '#3f3f3f'
+        bg-lightest: '#585858'
+        text-base: '#e0e0e0'
+        text-main: '#e5a0fc'
+        text-active: '#d457fd'
+    #Ancien Theme
         main: '#0080c0'
         hover: '#0080ff'
         focus: '#2080c0'
