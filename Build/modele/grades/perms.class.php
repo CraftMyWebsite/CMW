@@ -97,7 +97,7 @@ class Permission {
 		}
 	}
 
-	private function readPerm($grade)
+	public function readPerm($grade)
 	{
 		$lecture = new Lire('modele/grades/'.$grade.'.yml');
 		$lecture = $lecture->GetTableau();
