@@ -36,6 +36,7 @@ if(isset($_GET['page']))
 		break;
 
 		case 'forum':
+			require_once('./admin/donnees/forum.php');
 			require_once('./admin/pages/forum.php');
 		break;
 		case 'configsite':  

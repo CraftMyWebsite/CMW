@@ -210,7 +210,7 @@
                                 <div class="modal-dialog  modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Serveur JSONAPI/Rcon</h5>
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Serveur JsonAPI/Rcon</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -438,7 +438,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <small>Ceci sont les 10 derniers membres inscrits.</small>
+                                <small>Ceci sont les derniers 10 membres inscrits.</small>
                             </div>
                         </div>
                     </div>
@@ -520,7 +520,7 @@
 
                             </div>
                             <div class="card-footer">
-                                <small>Ceci sont les dernières activitées effectuée.</small>
+                                <small>Ceci sont les dernières actions d'activité.</small>
                             </div>
                         </div>
                     </div>
@@ -564,7 +564,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <small>Ceci sont les derniers achats dans la boutique.</small>
+                                <small>Ceci sont les dernières achats dans la boutique.</small>
                             </div>
                         </div>
                     </div>

@@ -40,28 +40,27 @@ if(isset($_GET['paypal'])){
             <div class="card-header ">
                 <h3 class="card-title"><?php if($affichage == "paypal"){ echo 'PayPal'; }elseif($affichage == "dedipass"){echo 'Dedipass';}else{echo 'PaySafeCard';}?></h3>
             </div>
-        <div class="card-body">
-            <form method="POST" action="?&action=editPayement">
+        <div class="card-body" id="payementinfo">
                 <div class="col-md-12">
                     <div class="row">
                     <?php if($affichage == "paypal"){ ?>
                         <div class="offset-md-4 col-md-4">
                             <label class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" name="paypal" id="paypallabel" <?php if($lectureP['paypal'] == true) echo 'checked'; ?>/> 
+                                <input onclick="sendPost('payementinfo');" type="checkbox" class="custom-control-input" name="paypal" id="paypallabel" <?php if($lectureP['paypal'] == true) echo 'checked'; ?>/> 
                                 <label for="paypallabel" class="custom-control-label">Activé</label>
                             </label>
                         </div>
                     <?php }elseif($affichage == "dedipass"){?>
                         <div class="offset-md-4 col-md-4">
                             <label class="custom-control custom-switch">
-                                <input type="checkbox" name="dedipass" id="dedipasslabel" class="custom-control-input" <?php if($lectureP['dedipass'] == true) echo 'checked'; ?>>
+                                <input onclick="sendPost('payementinfo');" type="checkbox" name="dedipass" id="dedipasslabel" class="custom-control-input" <?php if($lectureP['dedipass'] == true) echo 'checked'; ?>>
                                 <label for="dedipasslabel" class="custom-control-label">Activé</label>
                             </label>
                         </div>
                     <?php }else{ ?>
                         <div class="offset-md-4 col-md-4">
                             <label class="custom-control custom-switch">
-                                <input type="checkbox" id="paysafecardlabel" class="custom-control-input" name="paysafecard" <?php if($lectureP['paysafecard'] == true) echo 'checked'; ?>>
+                                <input onclick="sendPost('payementinfo');" type="checkbox" id="paysafecardlabel" class="custom-control-input" name="paysafecard" <?php if($lectureP['paysafecard'] == true) echo 'checked'; ?>>
                                 <label for="paysafecardlabel" class="custom-control-label">Activé</label>
                             </label>
                         </div>
@@ -96,19 +95,19 @@ if(isset($_GET['paypal'])){
                     <div style="<?php if($affichage == "paypal"){ echo 'display: none;';}elseif($affichage == "dedipass"){echo'display: none';}else{echo 'display: block;';}?>">
                         <div class="row">
                             <div class="alert alert-danger">
-                                <p>Notre système "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuelle ! Lorsqu'un joueur achète des jetons via une offre PaySafeCard il faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livrer les jetons à l'acheteur ! Pour valider des codes paysafecard / vérifier le solde de la carte paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
+                                <p>Notre systéme "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuel ! Lorsqu'un joueur achéte des jetons via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livré les jetons à l'acheteur ! pour valider des code paysafecard / verifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
                                 Le saviez-vous: <strong>Vous pouvez payer l'hébergement de votre site web via code PaySafeCard <a href="https://webstrator.fr/" target="_blank" rel="noopener noreferrer">chez notre partenaire Webstrator.fr</a> !</strong>
                             </div>
                         </div>
                     </div>
                 </div>
         </div>
+        <script>initPost('payementinfo', 'admin.php?&action=editPayement', null);</script>
         <div class="card-footer">
             <div class="row">
-                <input type="submit" class="btn btn-success w-100" value="Valider les changements !" />
+                <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements !" />
             </div>
         </div>
-        </form>
     </div>
 </div>
     <?php }
@@ -118,11 +117,10 @@ if(isset($_GET['paypal'])){
             <div class="card-header ">
                 <h3 class="card-title">Création d'une offre Paypal</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body" id="newpaypal">
                 <div class="alert alert-success">
                     <strong>Une fois votre compte paypal configuré, vous allez devoir créer une offre paypal pour que les joueurs puissent l'acheter !</strong>
                 </div>
-                <form method="POST" action="?&action=creerOffrePaypal">
                     <div class="col-md-12">
                         <h3>Créer une offre</h3>
                         <div class="row">
@@ -145,22 +143,22 @@ if(isset($_GET['paypal'])){
 
                     </div>
             </div>
+             <script>initPost('newpaypal', 'admin.php?&action=creerOffrePaypal', function(data) { if(data) {paypalUpdate() ;}});</script>
             <div class="card-footer">
                 <div class="row">
-                    <input type="submit" class="btn btn-success w-100" value="Créer l'offre !" />
+                    <input type="submit" onclick="sendPost('newpaypal');" class="btn btn-success w-100" value="Créer l'offre !" />
                 </div>
             </div>
-            </form>
         </div>
     </div>
     <?php }
     if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND $affichage == "paypal") { ?>
     <div class="col-md-6 text-center">
-        <div class="card  ">
+        <div class="card  " >
             <div class="card-header ">
                 <h3 class="card-title">Mes offres PayPal</h3>
             </div>
-        <div class="card-body">
+        <div class="card-body" id="offrePaypal">
         <?php if(!isset($paypalOffres) OR empty($paypalOffres)) { ?>
             <div class="alert alert-warning">
                 <strong>Vous devez créer une offre paypal !</strong>
@@ -174,43 +172,42 @@ if(isset($_GET['paypal'])){
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
                         <?php for($i = 0; $i < count($paypalOffres) ; $i++)   { ?>
-                        <li class="nav-item"><a href="#payementPaypal<?php echo $i; ?>" data-toggle="tab" style="color: #000 !important" class="nav-link <?php if($i == 0) echo 'active'; ?>">Offre #<?php echo $i+1; ?></a></li>
+                        <li class="nav-item" id="tab-payementPaypal<?php echo $i; ?>"><a href="#payementPaypal<?php echo $i; ?>" data-toggle="tab" style="color: #000 !important" class="nav-link <?php if($i == 0) echo 'active'; ?>">Offre #<?php echo $i+1; ?></a></li>
                         <?php } ?>
                     </ul>
                     <div class="tab-content">
                         <?php for($i = 0; $i < count($paypalOffres) ; $i++)   { ?>
                         <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="payementPaypal<?php echo $i; ?>">
-                            <form method="POST" action="?&action=modifierOffrePaypal&id=<?php echo $paypalOffres[$i]['id']; ?>">
                                 <div class="row">
                                     <label class="control-label">Titre de l'offre</label>
-                                    <input type="text" name="nom" value="<?php echo $paypalOffres[$i]['nom']; ?>" class="form-control" placeholder="ex: 5€ - 1500Jetons"/>
+                                    <input type="text" name="nom" value="<?php echo $paypalOffres[$i]['nom']; ?>" class="form-control" placeholder="ex: 5€ - 1500Jetons" required/>
                                 </div>
                                 <div class="row">
                                     <label class="control-label">Message de l'offre</label>
-                                    <input type="text" name="description" value="<?php echo htmlspecialchars($paypalOffres[$i]['description']); ?>" class="form-control" placeholder="ex: < img src=... / >"/>
+                                    <input type="text" name="description" value="<?php echo htmlspecialchars($paypalOffres[$i]['description']); ?>" class="form-control" placeholder="ex: < img src=... / >" required/>
                                 </div>
                                 <div class="row">
                                     <label class="control-label">Prix de l'offre</label>
-                                    <input type="number" step="0.01" name="prix" value="<?php echo $paypalOffres[$i]['prix']; ?>" class="form-control" placeholder="ex: 5"/>
+                                    <input type="number" step="0.01" name="prix" value="<?php echo $paypalOffres[$i]['prix']; ?>" class="form-control" placeholder="ex: 5" required/>
                                 </div>
                                 <div class="row">
                                     <label class="control-label">Jetons donnés</label>
-                                    <input type="number" name="jetons_donnes" value="<?php echo $paypalOffres[$i]['jetons_donnes']; ?>" class="form-control" placeholder="ex: 1500"/>
+                                    <input type="number" name="jetons_donnes" value="<?php echo $paypalOffres[$i]['jetons_donnes']; ?>" class="form-control" placeholder="ex: 1500" required/>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <a href="?&action=supprimerPaypalOffre&id=<?php echo $paypalOffres[$i]['id']; ?>" class="btn btn-danger w-100">Supprimer</a>                                        
+                                                <button onclick="sendDirectPost('?&action=supprimerPaypalOffre&id=<?php echo $paypalOffres[$i]['id']; ?>',function(data) { if(data) { hide('payementPaypal<?php echo $i; ?>'); hide('tab-payementPaypal<?php echo $i; ?>');}});" class="btn btn-danger w-100">Supprimer</button>                                        
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="submit" class="btn btn-success w-100" value="Modifier Les changements !"/>
+                                                <input type="submit"  onclick="sendPost('payementPaypal<?php echo $i; ?>');" class="btn btn-success w-100" value="Modifier Les changements !"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                                <script>initPost('payementPaypal<?php echo $i; ?>', 'admin.php?&action=modifierOffrePaypal&id=<?php echo $paypalOffres[$i]['id']; ?>',null);</script>
                         </div>
                         <?php } ?>
                     </div>
@@ -236,11 +233,10 @@ if(isset($_GET['paypal'])){
                     <div class="tab-content">
                         <?php for($i = 0; $i < count($paysafecard) ; $i++)   { ?>
                         <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="payementPaysafecard<?php echo $i; ?>">
-                            <form method="POST" action="?&action=modifierOffrePaysafecard&id=<?php echo $paysafecard[$i]['id']; ?>">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="active<?=$i;?>" name="statut"
+                                            <input type="checkbox" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');"class="custom-control-input" id="active<?=$i;?>" name="statut"
                                             <?php if($paysafecard[$i]['statut'] == true) echo 'checked'; ?>>
                                             <label class="custom-control-label" for="active<?=$i;?>"> Activé l'offre #<?=$i+1;?></label>
                                         </div>
@@ -260,10 +256,10 @@ if(isset($_GET['paypal'])){
                                 </div><hr>
                                 <div class="row">
                                     <div class="offset-md-4 col-md-4">
-                                        <input type="submit" class="btn btn-success align-center w-75" value="Modifier Les changements !"/>
+                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Modifier Les changements !"/>
                                     </div>
                                 </div>
-                            </form>
+                                 <script>initPost('payementPaysafecard<?php echo $i; ?>', 'admin.php?&action=modifierOffrePaysafecard&id=<?php echo $paysafecard[$i]['id']; ?>',null);</script>
                         </div>
                         <?php } ?>
                     </div>

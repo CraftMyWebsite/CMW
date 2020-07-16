@@ -6,7 +6,7 @@
 <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) { ?>
 <div class="text-center">
     <div class="alert alert-danger">
-        <strong>Vous n'avez pas la permission pour accéder aux réglages généraux.</strong>
+        <strong>Vous avez aucune permission pour accéder aux réglages généraux.</strong>
     </div>
 </div>
 <?php } else { ?>
@@ -132,7 +132,7 @@
 						<label class="custom-control-label" for="sslradio">SSL</label>
 					</div>
 					<label class="control-label" for="ckeditor">Footer des mails</label>
-						<textarea id="ckeditor" name="footer"><?php if(isset($_Serveur_['SMTP']['Footer'])) { echo $_Serveur_['SMTP']['Footer']; } else { echo 'HTML autorisé'; } ?></textarea>
+						<textarea id="ckeditor" data-UUID="0001" name="footer"><?php if(isset($_Serveur_['SMTP']['Footer'])) { echo $_Serveur_['SMTP']['Footer']; } else { echo 'HTML autorisé'; } ?></textarea>
 
 				</div>
 				<div class="card-footer">

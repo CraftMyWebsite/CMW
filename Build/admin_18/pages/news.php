@@ -39,29 +39,29 @@
                 <?php } if(!empty($tableauNews)) { ?>
                 <ul class="nav nav-tabs">
                     <?php for($i = 0; $i < count($tableauNews); $i++) { ?>
-                    <li class="nav-item" id="tabnews<?php echo $tableauNews[$i]['id']; ?>"><a
+                    <li class="nav-item" id="tabnews-<?php echo $tableauNews[$i]['id']; ?>"><a
                             class="<?php if($i == 0) echo 'active'; ?> nav-link"
-                            href="#news<?php echo $tableauNews[$i]['id']; ?>" data-toggle="tab"
+                            href="#news-<?php echo $tableauNews[$i]['id']; ?>" data-toggle="tab"
                             style="color: black !important"><?php echo $tableauNews[$i]['titre']; ?></a></li>
                     <?php } ?>
                 </ul>
                 <div class="tab-content">
                     <?php for($i = 0; $i < count($tableauNews); $i++) { ?>
-                    <div class="tab-pane <?php if($i == 0) echo 'active'; ?>"
-                        id="news<?php echo $tableauNews[$i]['id']; ?>">
+                    <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>"id="news-<?php echo $tableauNews[$i]['id']; ?>">
                         <label class="control-label">Titre de la news</label>
                         <input type="text" class="form-control" name="titre"
                             value="<?php echo $tableauNews[$i]['titre']; ?>">
 
 
                         <label class="control-label">Text de la news</label>
-                        <?php echo '<textarea id="ckeditor" name="message" style="height: 275px; margin: 0px; width: 50%;">' . $tableauNews[$i]['message'] . '</textarea>';?>
+                        <?php echo '<textarea data-UUID="0002" id="ckeditor" name="message" style="height: 275px; margin: 0px; width: 50%;">' . $tableauNews[$i]['message'] . '</textarea>';?>
 
                         <div class="row" style="margin-top:20px;">
                             <div class="col-md-4">
                                 <input type="submit" class="btn btn-success w-100"
                                     onclick="sendPost('news-<?php echo $tableauNews[$i]['id']; ?>');"
                                     value="Modifer le message" />
+
                             </div>
                             <div class="col-md-4">
                                 <button type="button"
@@ -75,7 +75,9 @@
                                     class="btn btn-danger w-100">Supprimer la News</button>
                             </div>
                         </div>
+                        <div data-callback="news-<?php echo $tableauNews[$i]['id']; ?>" data-url="admin.php?action=editNews&id=<?php echo $tableauNews[$i]['id']; ?>"></div>
                         <script>
+
                             initPost("news-<?php echo $tableauNews[$i]['id']; ?>",
                                 "admin.php?action=editNews&id=<?php echo $tableauNews[$i]['id']; ?>", null);
                         </script>
@@ -97,12 +99,12 @@
                 <input type="text" name="titre" class="form-control" placeholder="ex: Sortie du launcher !" required>
 
                 <label class="control-label">Contenu de la news</label>
-                <textarea id="ckeditor" name="message"></textarea>
+                <textarea id="ckeditor" data-UUID="0003" name="message"></textarea>
             </div>
-            <script>initPost("postNews", "admin.php?action=postNews", async function (data) {if (data) {updateCont("admin.php?action=getNewsList", get('edit-news'), function () {clearAllInput("postNews");for (let el of document.querySelectorAll('#ckeditor')) {ClassicEditor.create(el).catch(error => {console.log(error); });}for (let el of document.querySelectorAll('#callback')) {initPost("news-" + el.getAttribute("post"),"admin.php?action=editNews&id=" + el.getAttribute("post"),null);}});}});</script>
+            <script>initPost("postNews", "admin.php?action=postNews",function (data) {if (data) { clearAllInput('postNews'); newsUpdate(); }});</script>
             <div class="card-footer">
                 <div class="row text-center">
-                    <input type="submit" onclick="sendPost('postNews');" class="btn btn-success w-100"
+                    <input type="submit" onclick="sendPost('postNews', null);" class="btn btn-success w-100"
                         value="Envoyer !" />
                 </div>
             </div>

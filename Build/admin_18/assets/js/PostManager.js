@@ -41,6 +41,11 @@ function loopChild(form, idform) {
 
 function get(id) { return document.getElementById(id);}
 
+function getEach(element, callBack) {
+    for (let el of document.querySelectorAll( element )) {
+        callBack(el);
+    }
+}
 
 function sendDirectPost(url, callback) {
     var returnData = false;
@@ -56,6 +61,10 @@ function sendDirectPost(url, callback) {
             callback(returnData);
         }
     });
+}
+
+function removePost(idform, del) {
+    allForm[idform].delete(del);
 }
 
 function sendPost(idform, callback) {
@@ -77,10 +86,15 @@ function sendPost(idform, callback) {
                 notif("warning", "Erreur", "Formulaire incomplet");
                 return;
             }
-            if(allForm[idform].get(key).id == "ckeditor")
+            if(allForm[idform].get(key).id == "ckeditor" && allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
             {
-                postData[key] = allForm[idform].get(key).innerHTML;
-                console.log(key+"-ckeditor-"+allForm[idform].get(key).innerHTML);
+                postData[key] = CK.get(allForm[idform].get(key)).getData();
+                console.log(key+"-ckeditor-"+postData[key]);
+            } 
+            else if(allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
+            {
+                 postData[key] = allForm[idform].get(key).innerHtml;
+                console.log(key+"-textarea-"+postData[key]);
             } else {
                 if((allForm[idform].get(key).type == "checkbox" && !allForm[idform].get(key).checked))
                 {
@@ -134,6 +148,9 @@ function clearAllInput(idform) {
         if(allForm[idform].get(key).type == "text")
         {
             allForm[idform].get(key).value = "";
+        } else if(allForm[idform].get(key).id == "ckeditor") {
+            CK.get(allForm[idform].get(key)).setData("");
+            removeCK(allForm[idform].get(key));
         }
     }
 }
@@ -142,19 +159,39 @@ function getValueByName(idform, name) {
     let it = allForm[idform].keys();
     for (let key of it) {
         if(key == name) {
-            return allForm[idform].get(key).value;
+            if(!Array.isArray(allForm[idform].get(key))) {
+                return allForm[idform].get(key).value;
+            } else {
+                for (let rad of allForm[idform].get(key)) {
+                    if(rad.checked) {
+                        return rad.value;
+                    }
+                }
+            }
         }
     }
 }
 
+function getElementByName(idform, name) {
+    let it = allForm[idform].keys();
+    for (let key of it) {
+        if(key == name) {
+            return allForm[idform].get(key);
+        }
+    }
+}
 function updateCont(action, el, callback) {
+    let pre = '<div class="loader-wave-background"></div><div class="loader-wave"></div>';
+    el.innerHTML = pre + el.innerHTML;
     $.post(action, {}, function(data, status) {
         if (status == "success") {
             data = data.substring(data.indexOf('[DIV]')+5);
             el.innerHTML = data;
-           if(isset(callback)) {callback()};
+           if(isset(callback)) {callback(true)};
         } else {
+            el.innerHTML = el.innerHTML.substring(73);
             notif("error", "Erreur", status);
+             if(isset(callback)) {callback(false)};
         }
     });
 }
@@ -182,7 +219,6 @@ function hide(el) {
 function show(el) {
     get(el).style.display = 'block';
 }
-
 function notif(type, header, message)
 {
      toastr[type](message, header);
