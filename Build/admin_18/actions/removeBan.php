@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm("createur"))
+if($_Permission_->verifPerm("createur"))
 {
 	if(isset($_GET['id']))
 	{

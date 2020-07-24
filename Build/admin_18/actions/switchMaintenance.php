@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance')) {
+if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance')) {
 	$req_Etat = $bddConnection->query('SELECT maintenanceEtat FROM cmw_maintenance WHERE maintenanceId = 1');
 	$get_Etat = $req_Etat->fetch(PDO::FETCH_ASSOC);
 	$result_Etat = $get_Etat['maintenanceEtat'];

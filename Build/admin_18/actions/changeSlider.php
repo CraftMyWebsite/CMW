@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editSlider')) {
+if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editSlider')) {
 
 	$lectureAccueil['Slider']['image'] = $_POST['image'];
 

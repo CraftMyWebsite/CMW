@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'actions', 'editPage')) {
+if($_Permission_->verifPerm('PermsPanel', 'pages', 'actions', 'editPage')) {
 	$i = 0;
 	foreach($_POST as $cle => $element)
 	{

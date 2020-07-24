@@ -3,7 +3,7 @@
         Gestion de vos nouveautés
     </h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'addNews') AND !Permission::getInstance()->verifPerm('PermsPane', 'news', 'actions', 'editNews')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews') AND !$_Permission_->verifPerm('PermsPane', 'news', 'actions', 'editNews')) { ?>
 
 <div class="row">
     <div class="col-md-12 text-center">
@@ -20,8 +20,8 @@
 </div>
 <?php }?>
 <div class="row">
-    <?php if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'editNews')) { ?>
-    <div class="col-md-12">
+    <?php if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'editNews')) { ?>
+    <div class="col-md-12 col-xl-12 col-12">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"><strong>Édition des nouveautés</strong></h3>
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-md-4">
                                 <button type="button"
-                                    onclick="sendDirectPost('admin.php?action=supprNews&newsId=<?php echo $tableauNews[$i]['id']; ?>', function(data) { if(data) { get('news-<?php echo $tableauNews[$i]['id']; ?>').style.display = 'none'; get('tabnews-<?php echo $tableauNews[$i]['id']; ?>').style.display = 'none';}});"
+                                    onclick="sendDirectPost('admin.php?action=supprNews&newsId=<?php echo $tableauNews[$i]['id']; ?>', function(data) { if(data) { hide('news-<?php echo $tableauNews[$i]['id']; ?>'); hide('tabnews-<?php echo $tableauNews[$i]['id']; ?>');}});"
                                     class="btn btn-danger w-100">Supprimer la News</button>
                             </div>
                         </div>
@@ -88,8 +88,8 @@
             </div>
         </div>
     </div>
-    <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) { ?>
-    <div class="col-md-12">
+    <?php } if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) { ?>
+    <div class="col-md-12 col-xl-12 col-12">
         <div class="card">
             <div class="card-header ">
                 <h3 class="card-title"><strong>Création d'une nouveauté</strong></h3>

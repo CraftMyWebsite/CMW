@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) {
+if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) {
 	if(isset($_POST['adresseWeb']) AND isset($_POST['nom']) AND isset($_POST['description']))
 	{
 		$_Serveur_['General']['url'] = $_POST['adresseWeb'];

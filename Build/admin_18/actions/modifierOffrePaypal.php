@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal')) {
+if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal')) {
 	$req = $bddConnection->prepare('UPDATE cmw_jetons_paypal_offres SET nom = :nom, description =:description, prix = :prix, jetons_donnes = :jetons_donnes WHERE id = :id');
 	$req->execute(array(
 		'nom' => $_POST['nom'],

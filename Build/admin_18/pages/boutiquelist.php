@@ -6,7 +6,7 @@
 
 
 
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'boutiqueList', 'showPage'))
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'shop', 'boutiqueList', 'showPage'))
 {
 	echo '
 		<div class="alert alert-danger">
@@ -19,7 +19,7 @@ else
 
 <div class="row">
 
-    <div class="col-xs-12 col-md-12">
+    <div class="col-md-12 col-xl-12 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -99,4 +99,4 @@ else
 </div>
 
 	<?php  include('./admin/assets/js/boutiquelist.php');
-}
+} ?>

@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'editNews')) { 
+if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'editNews')) { 
 	$req = $bddConnection->prepare('DELETE FROM cmw_news WHERE id = :id');
 	$req->bindParam(':id', $_GET['newsId']);
 	$req->execute();

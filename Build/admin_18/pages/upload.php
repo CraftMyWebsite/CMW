@@ -9,25 +9,25 @@
     <?php if(isset($_GET["erreur"])){
 	switch($_GET["erreur"]){
 		case 0:
-			echo "<divclass='alert alert-danger'>Vous devez uploader un fichier de type png, gif, jpg ou jpeg...</div>";
+			echo "<div class='alert alert-danger'>Vous devez uploader un fichier de type png, gif, jpg ou jpeg...</div>";
 			break;
 		case 1:
-			echo "<divclass='alert alert-danger'>Le fichier est trop volumineux...</div>";
+			echo "<div class='alert alert-danger'>Le fichier est trop volumineux...</div>";
 			break;
 		case 2:
-			echo "<divclass='alert alert-danger'>L'image existe déjà. Changez le nom de l'image pour pouvoir continuer</div>";
+			echo "<div class='alert alert-danger'>L'image existe déjà. Changez le nom de l'image pour pouvoir continuer</div>";
 			break;
 		case 3:
-			echo "<divclass='alert alert-danger'>Echec de l'upload !</div>";
+			echo "<div class='alert alert-danger'>Echec de l'upload !</div>";
 			break;
 		default:
-			echo "<divclass='alert alert-danger'>Erreur inconnue!</div>";
+			echo "<div class='alert alert-danger'>Erreur inconnue!</div>";
 			break;
 	}
 }?>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
@@ -98,8 +98,8 @@
                       </div>
                     </div>
                     <script>
-                      const fileInput = document.getElementById('img');
-                      const label = document.getElementById('img-text');
+                      const fileInput = get('img');
+                      const label = get('img-text');
                       
                       fileInput.onchange =
                       fileInput.onmouseout = function () {

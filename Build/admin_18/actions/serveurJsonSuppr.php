@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
+if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
 	$lecture = new Lire('modele/config/configServeur.yml');
 	$lecture = $lecture->GetTableau();
 

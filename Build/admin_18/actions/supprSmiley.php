@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'seeSmileys']))
+if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'seeSmileys']))
 {
 	if(isset($_GET['image'], $_GET['id']))
 	{

@@ -3,7 +3,7 @@
 		Gestion - Champs personnalisable
 	</h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm('Permscard', 'social', 'showPage'))
+<?php if(!$_Permission_->verifPerm('Permscard', 'social', 'showPage'))
 {
 	echo '
 		<div class="row">
@@ -21,7 +21,7 @@ else
 	<strong>Sur cette section, vous pouvez gérer les réseaux sociaux que peuvent rentrer vos membres, et voir leurs réseaux sociaux.</strong>
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card   ">
 			<div class="card-header">
 				<h3 class="card-title"><strong>Liste des réseaux sociaux ajoutés</strong></h3>
@@ -41,7 +41,7 @@ else
 							?><tr id="removeSocial&nom=<?=$value['nom'];?>">
 								<td><?=ucfirst($value['nom']);?></td>
 								<td><button type="button" onclick="sendPost('removeSocial&nom=<?=$value['nom'];?>');" class="btn btn-danger"><i class="fas fa-trash"></i></button></td>
-								<script>initPost("removeSocial&nom=<?=$value['nom'];?>", "admin.php?action=removeSocial&nom=<?=$value['nom'];?>",function (data) { if(data) {  document.getElementById('removeSocial&nom=<?=$value['nom'];?>').style.display='none';}});</script>
+								<script>initPost("removeSocial&nom=<?=$value['nom'];?>", "admin.php?action=removeSocial&nom=<?=$value['nom'];?>",function (data) { if(data) {  hide('removeSocial&nom=<?=$value['nom'];?>');}});</script>
 							</tr><?php 
 						}
 						?>
@@ -51,7 +51,7 @@ else
             </div>
         </div>
    	</div>
-   	<div class="col-md-6">
+   	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card   ">
 			<div class="card-header">
 				<h3 class="card-title"><strong>Ajouter un réseau</strong></h3>
@@ -68,7 +68,7 @@ else
             </div>
             <div class="card-footer">
             	 <script>initPost("addSocial", "admin.php?action=addSocial",function (data) { if(data) { 
-                    document.getElementById('cont-res').innerHTML+='<tr><td>'+getValueByName("addSocial","nom")+'</td><td></td></tr>';clearAllInput('addSocial');
+                    get('cont-res').innerHTML+='<tr><td>'+getValueByName("addSocial","nom")+'</td><td></td></tr>';clearAllInput('addSocial');
                     }});</script>
                 <input type="submit" onclick="sendPost('addSocial')" class="btn btn-success w-100" value="Ajouter le réseau social !" />
             </div>
@@ -76,7 +76,7 @@ else
    	</div>
 </div>
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-12 col-xl-12 col-12">
 		<div class="card   ">
 			<div class="card-header">
 				<h3 class="card-title"><strong>Réseaux sociaux de vos membres</strong></h3>

@@ -3,7 +3,7 @@
 		Gestion de la liaison de vos/votre serveur(s)
 	</h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'addServer') AND !Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) { 
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'addServer') AND !$_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) { 
 
 	echo '
 	<div class="row">
@@ -15,15 +15,15 @@
 	</div>';
 }
 else
-	{ echo '<div class="row">'; if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'addServer')) { ?>
+	{ echo '<div class="row">'; if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'addServer')) { ?>
 	<div class="alert alert-success">
 		<strong>Vous pouvez ajouter autant de serveurs minecraft que vous souhaitez. La connexion au(x) serveur(s) est essentielle ! Si vous n'avez pas JSONAPI, une connexion RCON/Query est possible (mais privilégiez JSONAPI qui permettra plus de possibilités !(Par exemple la console ainsi que le système de grade temporaire seront impossible avec une connexion RCON/Query)). Pour vous</strong>
 	</div>
 
-	<div class="col-md-6">
+	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card  ">
 			<div class="card-header ">
-				<h3 class="panel-title"><strong>Création d'un serveur <span id="co-title">JSONAPI</span></strong></h3>
+				<h3 class="card-title"><strong>Création d'un serveur <span id="co-title">JSONAPI</span></strong></h3>
 			</div>
 			<div class="card-body" id="newServer">
                		<label class="control-label">Nom du serveur</label>
@@ -76,11 +76,11 @@ else
         </div>
    	</div>
 	<?php 
-	}if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) { ?> 
-   	<div class="col-md-6">
+	}if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) { ?> 
+   	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card  ">
 			<div class="card-header ">
-				<h3 class="panel-title"><strong>Edition du/des serveurs</strong></h3>
+				<h3 class="card-title"><strong>Edition du/des serveurs</strong></h3>
 			</div>
 			<div class="card-body" id="modifServer">
  				<?php if(isset($lecture['Json']) && !empty($lecture['Json']))  { ?>

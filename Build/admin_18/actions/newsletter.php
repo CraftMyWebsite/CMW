@@ -13,13 +13,13 @@ require('include/phpmailer/Exception.php');
 require('include/phpmailer/PHPMailer.php');
 require('include/phpmailer/SMTP.php');
 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'newsletter', 'actions', 'send')) { 
+if($_Permission_->verifPerm('PermsPanel', 'newsletter', 'actions', 'send')) { 
  
 
 
 echo '[DIV]'; // pour séparer les erreurs php des valeurs que l'on veut retourner
 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
+if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 	if($_POST['data'] == 0) {
 		$_Serveur_['Mail']['Memoire'] = $_POST['Memoire'];
 		$_Serveur_['Mail']['last'] = date_timestamp_get(date_create());
@@ -53,6 +53,7 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'addNew
 				$mail->Password = htmlspecialchars($_POST['password']);
 				$mail->SMTPSecure = $_POST['protocol'];
 				$mail->Port = $_POST['port'];
+				$mail->Timeout = 5;
 			}
 			else
 			{

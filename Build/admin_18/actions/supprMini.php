@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_GET['id']) && Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions','editMiniature'))
+if(isset($_GET['id']) && $_Permission_->verifPerm('PermsPanel', 'home', 'actions','editMiniature'))
 {
 	$id = intval(htmlentities($_GET['id']));
 	$tmp = array(

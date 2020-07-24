@@ -1,6 +1,12 @@
+
 body {
   font-size: .875rem;
 }
+
+.checkbox-inline {
+  margin-left:20px; margin-right:10px;
+}
+
 
 #loader-wrapper {
   position: fixed;
@@ -557,3 +563,282 @@ main {
 .hrvbig {
   cursor: not-allowed;
 }
+
+/* FORUM */
+.username .style16
+{
+  color: red;
+background-image: url('../img/etoile-anime.gif');
+}
+
+.username .style5
+{
+background-image: url('../img/spark-gold.gif');
+}
+
+.prefix
+{
+  background-color: transparent;
+padding: 0px 6px;
+margin: -1px 0;
+border: 1px solid transparent;
+-webkit-border-radius: 0px; -moz-border-radius: 0px; -khtml-border-radius: 0px; border-radius: 0px;
+display: inline-block;
+
+}
+
+a.prefixLink:hover
+{
+  text-decoration: none;
+}
+
+a.prefixLink:hover .prefix
+{
+  color: rgb(70,70,70);
+text-decoration: none;
+background-color: rgb(245,245,245);
+padding: 0 6px;
+border: 1px solid rgb(222,222,222);
+
+}
+
+.prefix a { color: inherit; }
+
+.prefix.prefixPrimary    { color: rgb(70,70,70); background-color: rgb(239,239,239); border-color: rgb(239,239,239); }
+.prefix.prefixSecondary  { color: rgb(73,73,73); background-color: rgb(203,203,203); border-color: rgb(203,203,203); }
+
+.prefix.prefixRed        { color: white; background-color: red; border-color: #F88; }
+.prefix.prefixGreen      { color: white; background-color: green; border-color: green; }
+.prefix.prefixOlive      { color: black; background-color: olive; border-color: olive; }
+.prefix.prefixLightGreen { color: black; background-color: lightgreen; border-color: lightgreen; }
+.prefix.prefixBlue       { color: white; background-color: blue; border-color: #88F; }
+.prefix.prefixRoyalBlue  { color: white; background-color: royalblue; border-color: #81A9E1;  }
+.prefix.prefixSkyBlue    { color: black; background-color: skyblue; border-color: skyblue; }
+.prefix.prefixGray       { color: black; background-color: gray; border-color: #AAA; }
+.prefix.prefixSilver     { color: black; background-color: silver; border-color: silver; }
+.prefix.prefixYellow     { color: black; background-color: yellow; border-color: #E0E000; }
+.prefix.prefixOrange     { color: black; background-color: orange; border-color: #FFC520; }
+.prefix.prefixCreateur   { color: red; }
+
+.well{
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.loader-wave-background { 
+ z-index:999; 
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color:rgba(255,255,255,0.65);
+}
+
+.loader-wave {
+  z-index:1000;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0 0 0 -25px;
+}
+
+
+
+.loader-wave:before, .loader-wave:after {
+  content: '';
+  border: 2px solid #7c0e78;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 0px;
+}
+
+.loader-wave:before {
+  -webkit-transform: scale(1, 1);
+      -ms-transform: scale(1, 1);
+          transform: scale(1, 1);
+  opacity: 1;
+  -webkit-animation: spWaveBe 0.6s infinite linear;
+          animation: spWaveBe 0.6s infinite linear;
+}
+
+.loader-wave:after {
+  -webkit-transform: scale(0, 0);
+      -ms-transform: scale(0, 0);
+          transform: scale(0, 0);
+  opacity: 0;
+  -webkit-animation: spWaveAf 0.6s infinite linear;
+          animation: spWaveAf 0.6s infinite linear;
+}
+
+@-webkit-keyframes spWaveAf {
+  from {
+    -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+@keyframes spWaveAf {
+  from {
+    -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+    -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes spWaveBe {
+  from {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: scale(1.5, 1.5);
+            transform: scale(1.5, 1.5);
+    opacity: 0;
+  }
+}
+@keyframes spWaveBe {
+  from {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: scale(1.5, 1.5);
+            transform: scale(1.5, 1.5);
+    opacity: 0;
+  }
+}
+
+.grade-ul  {
+  list-style: none;
+}
+
+.grade-li:last-child {
+  margin-bottom:10px;
+}
+
+
+.grade-switch::before {
+  height:30px;
+}
+
+.grade-switch::after {
+  height:30px;
+}
+
+.animate-top{
+  position:relative;
+  animation:animatetop 0.5s;
+}
+@keyframes animatetop{
+  from{
+    opacity:0;
+  } to {
+    opacity:1;
+  }
+}
+
+.circle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.circle-r-progress-bar > circle {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.25s ease;
+  stroke: #D3D3D3;
+  stroke-width: 20px;
+}
+
+.circle-r-progress-bar > .circle-bar {
+  stroke: #28a745;
+  stroke-linecap: round;
+}
+
+.circle-btn {
+  display: inline-block;
+  padding: 0 10px;
+  height: 25px;
+  line-height: 23px;
+  color: #a2b5bf;
+  font-size: 11px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid #a2b5bf;
+  border-radius: 3px;
+  transition: 0.3s all;
+  outline: 0;
+  cursor: pointer;
+}
+
+.circle-btn:hover,
+.circle-btn:focus {
+  color: #e60000;
+  border-color: #e60000;
+}
+
+.circle-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.circle-parent {
+  -webkit-box-align:center;
+    -webkit-box-pack:center;
+    display:-webkit-box;
+}
+
+.circle-wrapper > .circle-inner-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  transform: translateY(30%);
+}
+
+
+.circle-wrapper .circle-text {
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #a2b5bf;
+}
+
+
+/* 
+ (c) CraftMyWebsite,
+  Css by: guedesite & PinglsDzn
+*/

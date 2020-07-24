@@ -5,15 +5,15 @@
 </div>
 
 
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'showPage', 'addCategorie') AND !Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre') AND !Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'shop', 'showPage', 'addCategorie') AND !$_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre') AND !$_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { ?>
 
 	<div class="alert alert-danger">
         <strong>Vous avez aucune permission pour accéder aux réglages du slider et des miniatures.</strong>
     </div>
 <?php } ?>
 <div class="row">
-<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'addCategorie')) {?>
-    <div class="col-xs-12 col-md-6">
+<?php if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addCategorie')) {?>
+    <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -55,8 +55,8 @@
             </div>
         </div>
     </div>
-    <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre')) {  ?>
-    <div class="col-xs-12 col-md-6">
+    <?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre')) {  ?>
+    <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -96,8 +96,8 @@
             </div>
         </div>
     </div>
-<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'createCoupon')) { ?>
-	<div class="col-xs-12 col-md-6">
+<?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'createCoupon')) { ?>
+	<div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -202,7 +202,7 @@
             </div>
         </div>
     </div>
-<?php }if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'modifCoupon')) { ?> 
+<?php }if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'modifCoupon')) { ?> 
 	<div class="col-xs-12 col-md-6">
         <div class="card">
             <div class="card-header">
@@ -250,9 +250,9 @@
             </div>
         </div>
     </div>
-<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { ?>
+<?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { ?>
 
-	<div class="col-xs-12 col-md-12" id="card-minia" <?php if(empty($categories)) { echo 'style="display:none;"'; } ?>>
+	<div class="col-md-12 col-xl-12 col-12" id="card-minia" <?php if(empty($categories)) { echo 'style="display:none;"'; } ?>>
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -263,10 +263,7 @@
                 <div class="col-md-12" id="allcategorie">
                 	<ul class="nav nav-tabs" id="list-minia">
                         <?php for($i = 0;$i < count($categories);$i++) {?>
-                        <li class="nav-item" id="tabnavRap<?=$i?>"><a
-                            class="<?php if($i == 0) echo 'active'; ?> nav-link"
-                            href="#navRap<?=$i?>" data-toggle="tab"
-                            style="color: black !important"><?php echo $categories[$i]['titre']; ?></a></li>
+                        <li class="nav-item" id="tabnavRap<?=$i?>"><a class="<?php if($i == 0) echo 'active'; ?> nav-link" href="#navRap<?=$i?>" data-toggle="tab" style="color: black !important"><?php echo $categories[$i]['titre']; ?></a></li>
                         <?php }?>
                     </ul>
                         
@@ -420,7 +417,7 @@
                                                               <?php $itemps = $i;?>
                                                             <select class="form-control" name="grade_site">
                                                                     <option value="0">Joueur</option>
-                                                                    <?php require('./admin/donnees/grades.php'); 
+                                                                    <?php 
                                                                     for($z = 2; $z <= end($lastGrade); $z++) {
                                                                         if(file_exists($dirGrades.$z.'.yml') && $idGrade[$z]['Grade']) { ?>
                                                                                 <option value="<?php echo $z; ?>"><?= $idGrade[$z]['Grade']?></option>

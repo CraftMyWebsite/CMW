@@ -19,10 +19,10 @@
     </footer>
     <script src="./admin/assets/js/popper.min.js"></script>
     <script src="./admin/assets/js/main.js"></script>
-    <script src="./admin/assets/js/ckeditor.js"></script>
+    <script src="./admin/assets/js/ckeditorManager.js"></script>
     <script src="./admin/assets/js/bootstrap.js"></script>
     <script src="./admin/assets/js/dark.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.13.1/js/all.js"></script>
     <script>
     function coffin(){
         var audioElement = document.createElement('audio');

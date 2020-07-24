@@ -3,7 +3,7 @@
 		Gestion des grades du site
 	</h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm("createur"))
+<?php if(!$_Permission_->verifPerm("createur"))
 {
 	echo '
 	<div class="row">
@@ -26,10 +26,10 @@ else
 
 	 <div class="row">
 
-		<div class="col-md-6 col-12">
+		<div class="col-md-12 col-xl-6 col-12">
 			<div class="card  ">
 				<div class="card-header ">
-					<h3 class="panel-title"><strong>Création d'une nouvelle page</strong></h3>
+					<h3 class="card-title"><strong>Création d'un grade</strong></h3>
 				</div>
 				<div class="card-body" id="addGrade">
 				<?php if(isset($_GET['gradeCreated']))
@@ -67,7 +67,7 @@ else
 			         ?>
 
                 <label class="control-label">Nom du grade</label>
-                <input type="text" name="gradeName" class="form-control" placeholder="Support" required/>
+                <input type="text" maxlength="32" minlength="3" name="gradeName" class="form-control" placeholder="Support" required/>
 	            </div>
 
 	            <script>initPost("addGrade", "admin.php?&action=addGrade",null);</script>
@@ -81,10 +81,10 @@ else
 	        </div>
 	   	</div>
 
-	   	<div class="col-md-6 col-12">
+	   	<div class="col-md-12 col-xl-6 col-12">
 			<div class="card  ">
 				<div class="card-header ">
-					<h3 class="panel-title"><strong>Création d'une nouvelle page</strong></h3>
+					<h3 class="card-title"><strong>Édition des grades</strong></h3>
 				</div>
 				<div class="card-body" id="allGrade">
 					<ul class="nav nav-tabs">
@@ -104,7 +104,7 @@ else
                                 </div>
                             </div>
 	                        <label class="control-label">Nom du grade</label>
-	                        <input onkeyup="get('default-name-joueur-1').innerText = get('default-name-joueur-2').innerText = this.value;" class="form-control" name="nom" type="text" value="<?=$_Serveur_['General']['joueur'];?>" required/>
+	                        <input maxlength="32" minlength="3" onkeyup="get('default-name-joueur-1').innerText = get('default-name-joueur-2').innerText = this.value;" class="form-control" name="nom" type="text" value="<?=$_Serveur_['General']['joueur'];?>" required/>
 	                    </div>
 
 	                    <div class="tab-pane active well" id="gradeCreateur">
@@ -115,7 +115,7 @@ else
                             </div>
 
                             <label class="control-label">Nom du grade</label>
-                            <input class="form-control" onkeyup="get('default-name-createur-1').innerText = get('default-name-createur-2').innerText = this.value;" name="nomCreateur" type="text"  value="<?=$_Serveur_['General']['createur']['nom'];?>" />
+                            <input maxlength="32" minlength="3" class="form-control" onkeyup="get('default-name-createur-1').innerText = get('default-name-createur-2').innerText = this.value;" name="nomCreateur" type="text"  value="<?=$_Serveur_['General']['createur']['nom'];?>" />
 
                             <label class="control-label">Couleur du Grade</label>
                             <?php for($a = 0; $a < count($prefixs); $a++) {  ?>
@@ -135,7 +135,6 @@ else
 						</div>
 						<?php for($i = 2; $i <= max($lastGrade); $i++) { if(file_exists($dirGrades.$i.'.yml')) { ?>
 							<div class="tab-pane well" id="grade<?php echo $i; ?>">
-								<input type="hidden" name="oldGradeName-<?php echo $i; ?>" value="<?php echo $idGrade[$i]['Grade']; ?>"/>
 								<div style="width: 100%;display: inline-block">
                                     <div class="float-left">
                                         <h3 id="grade-name2-<?php echo $i; ?>"><?php echo $idGrade[$i]['Grade']; ?></h3>
@@ -172,8 +171,9 @@ else
                                 </div>
 
 
-								<?php $allPerm = Permission::getInstance()->readPerm($i);
-								writePerm($allPerm, 20, "", $i); ?>
+								<?php $allPerm = $_Permission_->readPerm($i);
+								//showForFormatage($allPerm, ""); ne pas toucher ...
+								writePerm($allPerm, 20, "", $i, $idGrade, $PermissionFormat); ?>
 							</div>
 						<?php } } ?>
 	                </div>
@@ -191,32 +191,42 @@ else
 
 	</div>
 <?php }
-function writePerm($perm, $nb, $id, $other) {
+function writePerm($perm, $nb, $id, $other, $idGrade, $PermissionFormat) {
 	if(isset($perm) && is_array($perm)) {
-		echo '<ul '.($nb == 20 ? 'style="margin-left:-30px;"':'style="display:none;"').'class="grade-ul" id="cont-'.$id.'">';
+		echo '<ul '.($nb == 20 ? 'style="margin-left:-30px;"':'style="display:none;"').'class="grade-ul" id="cont'.($nb== 20 ? '' : '-').''.$id.'-'.$other.'">';
 		foreach($perm as $key => $value)
 		{
+
+
+
 			if($key != "Grade" & $key != "prefix" & $key != "effets")
 			{
-				if(isset($value) && is_array($value)) {  ?>
-
-					<div class="custom-control custom-switch"> 
-						<li class="grade-li" onclick="switchGrade(this,'cont-<?php echo $id ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key ?>', '<?php echo $key ?>');" value="0" style="cursor:pointer;font-size:<?php echo $nb; ?>px;display:inline;" id="tab-<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>" ><i class="far fa-plus-square"></i> <?php echo $key; ?>
+				if( is_array($value)) {  ?>
+					<div class="custom-control custom-switch" id="grade-div"> 
+						<li class="grade-li" onclick="switchGrade(this,'cont-<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>', '<?php echo $PermissionFormat[$id."".($nb== 20 ? '' : '-')."".$key]; ?>');" value="0" style="cursor:pointer;font-size:<?php echo $nb; ?>px;display:inline;" id="tab-<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>" ><i class="far fa-plus-square"></i> <?php echo $PermissionFormat[$id."".($nb== 20 ? '' : '-')."".$key]; ?>
 
 						</li>
-							<input type="checkbox" class="custom-control-input" id="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>" name="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"> 
+						<?php if($id."-".$key != "PermsDefault-forum") { ?>
+							<input type="checkbox" onclick="CheckUnder(get('cont-<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>'),this.checked);updateGradeUl(this);" class="custom-control-input" id="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>" <?php  if(hasPermArray($other,$id.''.($nb== 20 ? '' : '-').''.$key, $idGrade)) { echo 'checked'; } ?>> 
 							<label  style="margin-left:40px;margin-top:-30px;" class="custom-control-label " for="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"></label>
+						<?php } ?>
 						</div> 
 
-				<?php writePerm($value, $nb == 20 ? 17 : ($nb == 17 ? 15 : 13), $id."".($nb== 20 ? '' : '-')."".$key,$other);
+				<?php writePerm($value, $nb == 20 ? 17 : ($nb == 17 ? 15 : 13), $id."".($nb== 20 ? '' : '-')."".$key,$other, $idGrade, $PermissionFormat);
 
 			} else { ?>
-						<div class="custom-control custom-switch"> 
-						<li style="font-size:<?php echo $nb; ?>px;display:inline;" class="grade-li" ><?php echo $key; ?>
+						<div class="custom-control custom-switch" id="grade-div"> 
+						<li style="font-size:<?php echo $nb; ?>px;display:inline;" class="grade-li" ><?php echo $PermissionFormat[$id."".($nb== 20 ? '' : '-')."".$key]; ?>
 
 						</li>
-							<input type="checkbox" class="custom-control-input" id="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>" name="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"> 
+							<?php if($id."-".$key == "PermsDefault-forum-perms") { ?>
+								<input value="<?php echo $idGrade[$other]["PermsDefault"]["forum"]["perms"]; ?>" type="number" min="0" max="99" class="form-control" name="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"> 
+
+							<?php } else { ?>
+							<input value="true" type="checkbox" onclick="updateGradeUl(this);" class="custom-control-input" id="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>" name="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"
+							 <?php if(hasPerm($other,$id.''.($nb== 20 ? '' : '-').''.$key, $idGrade)) { echo 'checked'; } ?>> 
 							<label  style="margin-left:40px;margin-top:-30px;" class="custom-control-label " for="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"></label>
+							<?php } ?>
 						</div> 
 
 					

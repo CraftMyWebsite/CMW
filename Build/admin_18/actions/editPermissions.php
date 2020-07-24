@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm("createur") {
+if($_Permission_->verifPerm("createur") {
 	$lectureStats = new Lire('modele/config/config.yml');
 	$lectureStats = $lectureStats->getTableau();
 

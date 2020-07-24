@@ -1,9 +1,14 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'addServer')) {
+if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'addServer')) {
 	$lecture = new Lire('modele/config/configServeur.yml');
 	$lecture = $lecture->GetTableau();
 
-	$i = count($lecture['Json']);
+	$i = 0;
+
+	if(!empty($lecture['Json']))
+	{
+		$i = count($lecture['Json']);
+	}
 
 	$lecture['Json'][$i]['adresse'] = $_POST['JsonAddr'];
 
@@ -11,7 +16,7 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'addS
 		$lecture['Json'][$i]['localhost'] = true;
 	else
 		$lecture['Json'][$i]['localhost'] = false;
-	if(!empty($_POST['JsonPort']))
+	if($_POST['type'] == 1)
 	{
 		$lecture['Json'][$i]['port'] = $_POST['JsonPort'];
 		$lecture['Json'][$i]['utilisateur'] = $_POST['JsonUser'];
@@ -24,6 +29,7 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'addS
 	$lecture['Json'][$i]['mdp'] = $_POST['JsonMdp'];
 	$lecture['Json'][$i]['salt'] = $_POST['JsonSalt'];
 	$lecture['Json'][$i]['nom'] = $_POST['JsonNom'];
+	$lecture['Json'][$i]['protocole'] = $_POST['type'];
 
 
 	$ecriture = new Ecrire('modele/config/configServeur.yml', $lecture);

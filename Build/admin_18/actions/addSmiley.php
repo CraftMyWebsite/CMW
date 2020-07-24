@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley'))
+if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley'))
 {
 	if(isset($_FILES['image']) && $_FILES['image']['error'] == 0 && isset($_POST['symbole']))
 	{

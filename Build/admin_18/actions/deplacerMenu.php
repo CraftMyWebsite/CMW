@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu')) { 
+if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu')) { 
 	$id = $_GET['id'];
 
 	$menuLecture = new Lire('modele/config/configMenu.yml');

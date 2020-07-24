@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'tickets', 'actions', 'deleteTicket')) {
+if($_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'actions', 'deleteTicket')) {
 	$req1 = $bddConnection->prepare('DELETE FROM cmw_support WHERE id = :id');
 	$req1->execute(array(':id' => $_GET['id']));
 

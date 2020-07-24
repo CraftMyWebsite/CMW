@@ -18,7 +18,7 @@ function initPost(idform, url, callBack) {
 
 function loopChild(form, idform) {
     for (let i = 0; i < form.children.length; i++) {
-        if(isset(form.children[i].name))
+        if(isset(form.children[i].name) && form.children[i].name != "")
         {
             if(form.children[i].type == "radio") {
                 if(allForm[idform].has(form.children[i].name))

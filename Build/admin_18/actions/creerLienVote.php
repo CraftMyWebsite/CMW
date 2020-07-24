@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'addVote')) {
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'addVote')) {
 	$lectureServs = new Lire('modele/config/configServeur.yml');
 	$lectureServs = $lectureServs->GetTableau();
 
@@ -35,20 +35,38 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'addVot
 	$titre = htmlspecialchars($_POST['titre']);
 	$temps = htmlspecialchars($_POST['temps']);
 	$methode = htmlspecialchars($_POST['methode']);
-	$idCustom =htmlspecialchars($_POST['idCustom']);
+	$idCustom =$_POST['idCustom'];
 	$enligne = $_POST['enligne'];
+	if(!isset($idCustom) || empty($idCustom)) {
+		$req = $bddConnection->prepare('INSERT INTO cmw_votes_config(message, methode, action, serveur, lien, temps, titre) VALUES (:message, :methode, :action, :serveur, :lien, :temps, :titre) ');
+		$req->execute(array(
+			'message' => $message,
+			'methode' => $methode,
+			'action' => $action,
+			'serveur' => $serveur,
+			'lien' => $lien,
+			'temps' => $temps,
+			'titre' => $titre
 
-	$req = $bddConnection->prepare('INSERT INTO cmw_votes_config(message, methode, action, serveur, lien, temps, titre, idCustom, enligne) VALUES (:message, :methode, :action, :serveur, :lien, :temps, :titre, :idCustom, :enligne) ');
-	$req->execute(array(
-		'message' => $message,
-		'methode' => $methode,
-		'action' => $action,
-		'serveur' => $serveur,
-		'lien' => $lien,
-		'temps' => $temps,
-		'titre' => $titre,
-		'idCustom' => $idCustom,
-		'enligne' => $enligne
-	));
+		));
+
+	} else {
+
+
+		$req = $bddConnection->prepare('INSERT INTO cmw_votes_config(message, methode, action, serveur, lien, temps, titre, idCustom, enligne) VALUES (:message, :methode, :action, :serveur, :lien, :temps, :titre, :idCustom, :enligne) ');
+		$req->execute(array(
+			'message' => $message,
+			'methode' => $methode,
+			'action' => $action,
+			'serveur' => $serveur,
+			'lien' => $lien,
+			'temps' => $temps,
+			'titre' => $titre,
+			'idCustom' => $idCustom,
+			'enligne' => $enligne
+		));
+
+	}
+
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
+if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
 	for($i = 1;$i < count($lectureAccueil['Infos']) + 1;$i++)
 	{
 		$lectureAccueil['Infos'][$_POST["ordre". $i]]['message'] = $_POST['message' . $i];

@@ -3,7 +3,7 @@
         Miniatures & Slider
     </h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'uploadSlider') AND !Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'uploadSlider') AND !$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !$_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { ?>
     <div class="alert alert-danger">
         <strong>Vous n'avez pas la permission pour accéder aux réglages du slider et des miniatures.</strong>
     </div>
@@ -11,7 +11,7 @@
 <?php } else {?>
 <div class="row">
 
-    <div class="col-xs-12 col-md-6">
+    <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -35,18 +35,18 @@
                         </div>
                         <div class="col-sm-3">
                             <label class="control-label">Ordre</label>
-                            <input type="number" onchange="document.getElementById('miniature-id').innerText='Miniature #'+this.value" name="ordre" class="form-control" value="<?= count($lectureAccueil['Infos']) + 1 ?>" max="<?= count($lectureAccueil['Infos']) + 1 ?>" min="1" required>
+                            <input type="number" onchange="get('miniature-id').innerText='Miniature #'+this.value" name="ordre" class="form-control" value="<?= count($lectureAccueil['Infos']) + 1 ?>" max="<?= count($lectureAccueil['Infos']) + 1 ?>" min="1" required>
                         </div>
                     </div>
                     <br></br>   
 
                     <div class="custom-control custom-radio">
-                        <input type="radio"  name="typeLien" value="page" id="radiopage" class="custom-control-input" onclick="document.getElementById('lienpage').style.display='block';document.getElementById('lienurl').style.display='none';" checked>
+                        <input type="radio"  name="typeLien" value="page" id="radiopage" class="custom-control-input" onclick="show('lienpage');hide('lienurl');" checked>
                         <label class="custom-control-label" for="radiopage">Je souhaite rediriger vers une page existante</label>
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio"  name="typeLien" value="lien" id="radiolien" onclick="document.getElementById('lienpage').style.display='none';document.getElementById('lienurl').style.display='block';" class="custom-control-input" >
+                        <input type="radio"  name="typeLien" value="lien" id="radiolien" onclick="hide('lienpage');show('lienurl');" class="custom-control-input" >
                         <label class="custom-control-label" for="radiolien">Je souhaite rediriger vers un lien personnalisé</label>
                     </div>
 
@@ -62,7 +62,7 @@
                     <input type="text" class="form-control" id="lienurl" name="lien" placeholder="URL ex: https://google.com" style="display:none;" >
 
                     <script>initPost("changeInfo", "admin.php?action=addRapNav",function (data) { if(data) { 
-                    document.getElementById('card-minia').style.display='block';updateCont('admin.php?action=getMiniaList', document.getElementById('editRapNav'));clearAllInput('changeInfo');initPost("editRapNav", "admin.php?action=editRapNav",null);
+                    show('card-minia');updateCont('admin.php?action=getMiniaList', get('editRapNav'));clearAllInput('changeInfo');initPost("editRapNav", "admin.php?action=editRapNav",null);
                     }});</script>
 
             </div>
@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-md-6" id="card-minia" <?php if(empty($lectureAccueil['Infos'])) { echo 'style="display:none;"'; } ?>>
+    <div class="col-md-12 col-xl-6 col-12" id="card-minia" <?php if(empty($lectureAccueil['Infos'])) { echo 'style="display:none;"'; } ?>>
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -124,12 +124,12 @@
                                 <br></br>   
     
                                 <div class="custom-control custom-radio">
-                                    <input type="radio"  name="typeLien<?=$i?>" value="page" id="radiopage<?=$i?>" class="custom-control-input" onclick="document.getElementById('lienpage<?=$i?>').style.display='block';document.getElementById('lienurl<?=$i?>').style.display='none';" <?php if($lectureAccueil['Infos'][$i]['type'] == "page") { echo 'checked'; } ?>>
+                                    <input type="radio"  name="typeLien<?=$i?>" value="page" id="radiopage<?=$i?>" class="custom-control-input" onclick="show('lienpage<?=$i?>');hide('lienurl<?=$i?>');" <?php if($lectureAccueil['Infos'][$i]['type'] == "page") { echo 'checked'; } ?>>
                                     <label class="custom-control-label" for="radiopage<?=$i?>">Je souhaite rediriger vers une page existante</label>
                                 </div>
 
                                 <div class="custom-control custom-radio">
-                                    <input type="radio"  name="typeLien<?=$i?>" value="lien" id="radiolien<?=$i?>" onclick="document.getElementById('lienpage<?=$i?>').style.display='none';document.getElementById('lienurl<?=$i?>').style.display='block';" class="custom-control-input" <?php if($lectureAccueil['Infos'][$i]['type'] == "lien") { echo 'checked'; } ?>>
+                                    <input type="radio"  name="typeLien<?=$i?>" value="lien" id="radiolien<?=$i?>" onclick="hide('lienpage<?=$i?>');show('lienurl<?=$i?>');" class="custom-control-input" <?php if($lectureAccueil['Infos'][$i]['type'] == "lien") { echo 'checked'; } ?>>
                                     <label class="custom-control-label" for="radiolien<?=$i?>">Je souhaite rediriger vers un lien personnalisé</label>
                                 </div>
 
@@ -147,8 +147,8 @@
                                
                             </div>
 
-                            <script>initPost("suppnavRap<?=$i?>", "admin.php?action=supprMini&id=<?=$i;?>",function (data) { if(data) { document.getElementById('navRap<?=$i?>').style.display='none';
-                                document.getElementById('tabnavRap<?=$i?>').style.display='none';  } });</script>
+                            <script>initPost("suppnavRap<?=$i?>", "admin.php?action=supprMini&id=<?=$i;?>",function (data) { if(data) { hide('navRap<?=$i?>');
+                                hide('tabnavRap<?=$i?>');  } });</script>
                         <?php } ?>
                         </div>
                      </div>
@@ -161,7 +161,7 @@
         
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -178,8 +178,8 @@
                       </div>
                     </div>
                     <script>
-                      const fileInput = document.getElementById('File');
-                      const label = document.getElementById('file-text');
+                      const fileInput = get('File');
+                      const label = get('file-text');
                       
                       fileInput.onchange =
                       fileInput.onmouseout = function () {

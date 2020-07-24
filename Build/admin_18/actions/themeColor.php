@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) 
+if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) 
 {
 	if(isset($_POST['color_theme_main'], $_POST['color_theme_hover'], $_POST['color_theme_focus'], $_POST['color_panel_main'], $_POST['color_panel_hover'], $_POST['color_panel_focus'])) {
 		$configTheme = new Lire('modele/config/config.yml');

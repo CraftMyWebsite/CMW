@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'seePrefix'))
+if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'seePrefix'))
 {
 	$id = htmlspecialchars($_GET['id']);
 	$req = $bddConnection->prepare('DELETE FROM cmw_forum_prefix WHERE id = :id');

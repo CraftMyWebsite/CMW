@@ -1,4 +1,4 @@
-<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) { 
+<?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) { 
 
 	$_Serveur_['VoteCron']['sendtoall'] = isset($_POST['sendtoall']) ? 1:0;
 	$_Serveur_['VoteCron']['msgdeny'] = $_POST['msgdeny'];

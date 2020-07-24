@@ -19,7 +19,7 @@ if(isset($_GET['paypal'])){
 	</h2>
 </div>
 <div class="row">
-    <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment') AND !Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND !Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal')) { ?>
+    <?php if(!$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment') AND !$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND !$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal')) { ?>
     <div class="col-md-12 text-center">
         <div class="alert alert-danger">
             <strong>Vous avez aucune permission pour accéder aux réglages des paiements.</strong>
@@ -32,10 +32,10 @@ if(isset($_GET['paypal'])){
         </div>
     </div>
     <?php }
-    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment')){ 
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment')){ 
         ?>
     
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 col-xl-12 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
                 <h3 class="card-title"><?php if($affichage == "paypal"){ echo 'PayPal'; }elseif($affichage == "dedipass"){echo 'Dedipass';}else{echo 'PaySafeCard';}?></h3>
@@ -111,8 +111,8 @@ if(isset($_GET['paypal'])){
     </div>
 </div>
     <?php }
-    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal') AND ($affichage == "paypal")) { ?>
-    <div class="col-md-6 text-center">
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal') AND ($affichage == "paypal")) { ?>
+    <div class="col-md-12 col-xl-6 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
                 <h3 class="card-title">Création d'une offre Paypal</h3>
@@ -152,8 +152,8 @@ if(isset($_GET['paypal'])){
         </div>
     </div>
     <?php }
-    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND $affichage == "paypal") { ?>
-    <div class="col-md-6 text-center">
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND $affichage == "paypal") { ?>
+    <div class="col-md-12 col-xl-6 col-12 text-center">
         <div class="card  " >
             <div class="card-header ">
                 <h3 class="card-title">Mes offres PayPal</h3>
@@ -217,8 +217,8 @@ if(isset($_GET['paypal'])){
         </div>
     </div>
     <?php } 
-    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaysafeCard') AND $affichage != "paypal" AND $affichage != "dedipass") { ?>
-    <div class="col-md-12 text-center">
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaysafeCard') AND $affichage != "paypal" AND $affichage != "dedipass") { ?>
+    <div class="col-md-12 col-xl-12 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
                 <h3 class="card-title">Mes offres PaySafeCard</h3>
@@ -268,8 +268,8 @@ if(isset($_GET['paypal'])){
         </div>
     </div>
     <?php } 
-    if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'verifPaysafecard') && !empty($tabPaysafe) AND $affichage != "paypal" AND $affichage != "dedipass") { ?>
-    <div class="col-md-12 text-center">
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'verifPaysafecard') && !empty($tabPaysafe) AND $affichage != "paypal" AND $affichage != "dedipass") { ?>
+    <div class="col-md-12 col-xl-12 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
                 <h3 class="card-title">Liste des achats PaySafeCard</h3>
