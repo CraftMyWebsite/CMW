@@ -168,14 +168,14 @@ class Messagerie
 			$return.='<div class="card">
 		    	<div class="card-header card-header-messagerie" id="messageHead'.$value['id'].'">
 		      		<h5 class="mb-0">
-		        		<button class="btn btn-link btn-message" type="button" data-toggle="modal" data-target="#modalMessage" data-backdrop="static"  data-id="'.$value['id'].'" data-with="'.$value['from'].'"><p class="text-left">';
+		        		<button class="btn btn-link btn-message" type="button" data-toggle="modal" data-target="#modalMessage" data-backdrop="static"  data-id="'.$value['id'].'" data-with="'.$value['from'].'" style="width: 100%;"><p class="text-left">';
 		    if($value['lu']== 0)
 		    	$return.='<i style="font-size: 18px;margin-right: 8px;" class="fas fa-envelope" id="i'.$value['id'].'"></i>';
 		    else
 		    	$return.= '<i style="font-size: 18px;margin-right: 8px;" class="far fa-envelope-open" id="i'.$value['id'].'"></i>';
-		    	$return.=' <img src="'.$_ImgProfil_->getUrlHeadByPseudo($value['from']).'" style="width: 24px; height: 24px;" alt="none" /> <strong>'.$value['from'].'</strong>
+		    	$return.=' <img src="https://api.craftmywebsite.fr/skin/face.php?u='.$value['from'].'&s=24" style="width: 24px; height: 24px;" alt="none" /> <strong>'.$value['from'].'</strong>
 		          			<span style="float: right;">le '.$value['date'].'</span></p>
-		          			<p class="text-message">'.$value['message'].'</p>
+		          			<p class="text-message" style="margin-bottom: 0px;">'.$value['message'].'</p>
 		        		</button>
 		      		</h5>
 		    	</div>

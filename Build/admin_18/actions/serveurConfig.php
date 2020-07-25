@@ -1,39 +1,39 @@
 <?php
-if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
-	$lecture = new Lire('modele/config/configServeur.yml');
-	$lecture = $lecture->GetTableau();
+if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
 
-	for($i = 0; $i < count($lecture['Json']); $i++)
+	$reqRecup = $bddConnection->query('SELECT * FROM cmw_serveur');
+
+	$lecture = $reqRecup->fetchAll(PDO::FETCH_ASSOC);
+
+	foreach($lecture as $key => $serveur)
 	{
-		$lecture['Json'][$i]['adresse'] = $_POST['JsonAddr' . $i];
-
-		if(isset($_POST['localhost' . $i]) AND $_POST['localhost' . $i] == 'on')
+		unset($info);
+		$info['addr'] = $_POST['JsonAddr' . $key];
+		if(isset($_POST['JsonPort'.$key]))
 		{
-			$lecture['Json'][$i]['localhost'] = true;
+			$info['port'] = $_POST['JsonPort'.$key];
+			$info['user'] = $_POST['JsonUser'.$key];
+			$protocole = 0; //JSONAPI
 		}
 		else
 		{
-			$lecture['Json'][$i]['localhost'] = false;
+			$protocole = 1; //RCON/QUERY
+			$info['rcon'] = $_POST['RconPort'.$key]; //port2
+			$info['query'] = $_POST['QueryPort'.$key]; //port
 		}
-
-		if($_POST['protocole'.$i] == 1)
+		$info['mdp'] = $_POST['JsonMdp'.$key];
+		$info['nom'] = $_POST['JsonNom'.$key];
+		$info['id'] = $_POST['id'.$key];
+		if($protocole == 0)
 		{
-			$lecture['Json'][$i]['port'] = $_POST['JsonPort' . $i];
-			$lecture['Json'][$i]['utilisateur'] = $_POST['JsonUser' . $i];
+			$req = $bddConnection->prepare('UPDATE cmw_serveur SET nom = :nom, adresse = :addr, port = :port, utilisateur = :user, mdp = :mdp WHERE id = :id');
+			$req->execute($info);
 		}
 		else
 		{
-			$lecture['Json'][$i]['port']['rcon'] = $_POST['RconPort'. $i];
-			$lecture['Json'][$i]['port']['query'] = $_POST['QueryPort'. $i];
+			$req = $bddConnection->prepare('UPDATE cmw_serveur SET nom = :nom, adresse = :addr, port = :query, port2 = :rcon, mdp = :mdp WHERE id = :id');
+			$req->execute($info);
 		}
-		$lecture['Json'][$i]['mdp'] = $_POST['JsonMdp' . $i];
-		$lecture['Json'][$i]['salt'] = $_POST['JsonSalt' . $i];
-		$lecture['Json'][$i]['nom'] = $_POST['JsonNom' . $i];
-		$lecture['Json'][$i]['protocole'] = $_POST['protocole'.$i];
 	}
-
-
-
-	$ecriture = new Ecrire('modele/config/configServeur.yml', $lecture);
 }
 ?>

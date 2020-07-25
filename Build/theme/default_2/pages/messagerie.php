@@ -12,16 +12,16 @@
         <div class="row">
             <!-- Création d'un nouveau message -->
             <div class="col-12 ml-auto">
-                <a class="btn btn-reverse" href="#modalRep" data-toggle="modal">Nouveau Message</a>
+                <a class="btn btn-reverse" style="width: 100%" href="#modalRep" data-toggle="modal">Nouveau Message</a>
             </div>
 
-            <div class="tab-pane active" style="margin-top: 10px;" id="infos">
+            <div class="tab-pane active" style="margin-top: 10px; width: 100%" id="infos">
                 <?php
                 $Messagerie = new Messagerie($bddConnection, $_Joueur_['pseudo']);
                 $messages = $Messagerie->getConversations();
                 if (!empty($messages['conv'])) {
                 ?>
-                    <h3 class="text-center" style="margin-bottom: 15px;">Vous avez <?= $messages['nbConversations']; ?> conversations</h3>
+                    <h3 class="text-right" style="margin-bottom: 15px;">Vous avez <?= $messages['nbConversations']; ?> conversations</h3>
                     <div id="accordion">
                         <?php echo $messages['conv']; ?>
                     </div>

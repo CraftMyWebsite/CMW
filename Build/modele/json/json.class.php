@@ -74,9 +74,20 @@ class JsonCon
 			}
 			else
 			{
-				$this->api['query']->Connect($this->api['data']['adresse'], $this->api['data']['portQ']);
-				$this->api['rcon']->Connect($this->api['data']['adresse'], $this->api['data']['portR'], 1, SourceQuery::SOURCE);
-				$this->api['rcon']->SetRconPassword($this->api['data']['mdp']);
+				try{
+					$this->api['query']->Connect($this->api['data']['adresse'], $this->api['data']['portQ']);
+					$this->api['rcon']->Connect($this->api['data']['adresse'], $this->api['data']['portR'], 1, SourceQuery::SOURCE);
+					$this->api['rcon']->SetRconPassword($this->api['data']['mdp']);
+				}
+				catch(MinecraftQueryException $e)
+				{
+					$this->api['query'] = null;
+				}
+				catch(SocketException $e)
+				{
+					$this->api['rcon'] = null;
+				}
+				
 				unset($this->api['data']);
 			}
 			$this->connected = true;
@@ -91,7 +102,7 @@ class JsonCon
 			$c =  $key;
 		elseif($this->TryMode())
 			$c = $this->api->call("server.version");
-		elseif($this->api != null)
+		elseif($this->api != null && $this->api['query'] != null)
 			$c = $this->api['query']->GetInfo();
 		$this->updateReq("server.version", $c);
 		if(!isset($c))
@@ -361,7 +372,7 @@ class JsonCon
 		}
 		else
 		{
-			if($this->api != null)
+			if($this->api != null && $this->api['query'] != null)
 			{
 				$key = $this->verifyReq("query.getInfo");
 				if($key !== false)
