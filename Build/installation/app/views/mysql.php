@@ -1,11 +1,11 @@
 <h4 class="mb-3"> <i class="fas fa-database"></i> Configuration MySQL</h4>
 <?php if($installEtape == 1) { 
-	    if(isset($erreur))
-		{
-			if($erreur['type'] == 'sql_mode')
-		    	echo '<div class="alert alert-danger text-center">ATTENTION ! Votre base de donnée est mal configurée ! La configuration MySQL ne doit pas contenir de STRICT_ALL_TABLES dans son sql_mode. Si vous ne savez pas résoudre ce problème, contactez-nous sur <a href="https://discord.gg/wMVAeug" target="_blank">discord</a> en envoyant l\'information suivante : <pre>'.$erreur['data'].'</pre></div>';
-		    elseif($erreur['type'] == 'pass')
-				echo '<div class="alert alert-danger text-center">ATTENTION ! Vos identifiants sont incorrects.</div>';
+      if(isset($erreur))
+    {
+      if($erreur['type'] == 'sql_mode')
+          echo '<div class="alert alert-danger text-center">ATTENTION ! Votre base de donnée est mal configurée ! La configuration MySQL ne doit pas contenir de STRICT_ALL_TABLES dans son sql_mode. Si vous ne savez pas résoudre ce problème, contactez-nous sur <a href="https://discord.gg/wMVAeug" target="_blank">discord</a> en envoyant l\'information suivante : <pre>'.$erreur['data'].'</pre></div>';
+        elseif($erreur['type'] == 'pass')
+        echo '<div class="alert alert-danger text-center">ATTENTION ! Vos identifiants sont incorrects.</div>';
         }
      } ?>
           <form class="" method="POST" action="?&action=sql">

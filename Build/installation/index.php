@@ -14,15 +14,15 @@ require_once ('app/controller/action.php');
 
 include '../include/version.php';
 
-	?>
-	<!DOCTYPE html>
-	<html lang="fr">
+    ?>
+    <!DOCTYPE html>
+    <html lang="fr">
         <head>
         <?php include ('app/views/header.php');
         ?>
         </head>
 
-	<body class="bg-light2">
+    <body class="bg-light2">
 
         <div class="container">
     
@@ -61,7 +61,7 @@ include '../include/version.php';
                     $retourchmod = VerifieChmod();
                     DrawChmod($retourchmod);
                 }
-                if($extensionok != "true") { 		
+                if($extensionok != "true") {        
                     echo AfficherExtension($retour);
                 }
 
@@ -69,17 +69,28 @@ include '../include/version.php';
 
             </div>
         <?php 
-        if(!array_key_exists('ENV_HTACCESS_READING', $_SERVER))
+        if(!array_key_exists('ENV_HTACCESS_READING', $_SERVER) && empty($_COOKIE['forceInstallHtaccess']) && $_COOKIE['forceInstallHtaccess'] != true && !isset($forceInstall))
         {
             $htaccess = false;
             ?>
             <div class="pt-3">
-            <div class="alert alert-danger"><strong>ATTENTION</strong> : Erreur Critique, votre serveur est soumis aux failles htaccess. Veuillez les activer, en suivant <a href="https://www.aidoweb.com/tutoriaux/fichier-htaccess-qui-ne-fonctionne-pas-solutions-configuration-apache-648" target="_blank">ce tuto</a> ou nous contacter sur <a href="https://discord.gg/wMVAeug" target="_blank">Discord</a> <br/><a href="index.php" class="btn btn-primary btn-block minecrafter">Relancer la verification</a></div>
+                <div class="alert alert-danger">
+                        <strong>ATTENTION</strong> : Erreur Critique, votre serveur est soumis aux failles htaccess. Veuillez les activer, en suivant <a href="https://www.aidoweb.com/tutoriaux/fichier-htaccess-qui-ne-fonctionne-pas-solutions-configuration-apache-648" target="_blank">ce tuto</a> ou nous contacter sur <a href="https://discord.gg/wMVAeug" target="_blank">Discord</a> 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="index.php" class="btn btn-primary btn-block minecrafter">Relancer la verification</a>
+                            </div>
+                            <div class="col-md-6">
+                                <btn onclick="$('#htaccessModal').modal('show')" class="btn btn-danger btn-block minecrafter">Forcer l'installation</a>
+                            </div>
+                        </div>
+                </div>
             </div>
         <?php
         }
-            if($chmodok == "true" && $extensionok == "true" && (empty($htaccess) OR $htaccess = true)){
-		?>
+            if($chmodok == "true" && $extensionok == "true" && (!isset($htaccess) OR $htaccess == true))
+            {
+        ?>
         
         <div class="block border shadow bg-texture" style="border-radius: 2% !important;">
 
@@ -96,7 +107,9 @@ include '../include/version.php';
                         <small class="text-muted">
                         <?php 
                         if ($return['nginx']){
-                            echo '<b>NGINX <a href="#port" class="btn-outline-info" data-toggle="popover" data-placement="top" title="Aide > Nginx / Apache" data-content="Nous avons détecté que vous utilisez NGINX, CraftMyWebsite ne fonctionne pas sous NGINX. <br/> Si vous êtes sur Apache vous pouvez continuez l\'installation"> <i class="fas fa-info-circle"></i></a></b>';
+                            ?>
+                            <b>NGINX <a href="#nginx" class="btn-outline-info" data-toggle="popover" data-placement="top" title="Aide > Nginx / Apache" data-content="Nous avons détecté que vous utilisez NGINX, CraftMyWebsite ne fonctionne pas sous NGINX ou difficilement. Si vous êtes sur Apache vous pouvez continuez l'installation"><i class="fas fa-info-circle"></i></a></b>
+                            <?php
                             echo $serveurweb;
                         }else{
                             echo $serveurweb;
@@ -156,7 +169,7 @@ include '../include/version.php';
                     <h6 class="my-0"> <i class="fas fa-wrench"></i> Configuration Web</h6>
                     <small class="text-muted">
                     <?php 
-                    if (isset($htaccess) AND $htaccess == true){
+                    if (isset($htaccess) AND $htaccess == false){
                         echo 'AllowOverride None';
                     }else{
                         echo 'AllowOverride All';
@@ -164,7 +177,7 @@ include '../include/version.php';
                     ?></small>
                     </div>
                     <?php
-                    if (isset($htaccess) AND $htaccess == true){ ?>
+                    if (isset($htaccess) AND $htaccess == false){ ?>
                         <span class="text-danger">
                             <i class="fas fa-exclamation-circle anim-wow"></i>
                         </span>
@@ -203,7 +216,7 @@ include '../include/version.php';
                         <span class="bold">Interface:</span> <?=$_SERVER['GATEWAY_INTERFACE'];?>
                     </small><br />
                     <small class="text-muted">
-                        <span class="bold">Protocol:</span> <?=$_SERVER['SERVER_PROTOCOL'];?>
+                        <span class="bold">Protocole:</span> <?=$_SERVER['SERVER_PROTOCOL'];?>
                     </small><br />
                     <small class="text-muted">
                         <span class="bold">Chemin:</span> <code><?=$_SERVER['DOCUMENT_ROOT'];?></code>
@@ -212,7 +225,7 @@ include '../include/version.php';
                         <span class="bold">Version CMS:</span> <?=$versioncms;?>
                     </small><br />
                     <small class="text-muted">
-                        <span class="bold">Théme:</span> <?=$_Serveur_['General']['theme'];?>
+                        <span class="bold">Thème:</span> <?=$_Serveur_['General']['theme'];?>
                     </small><br />
                     <small class="text-muted">
                         <span class="bold">Tables:</span> 
@@ -289,80 +302,53 @@ include '../include/version.php';
       </ul>
     </footer>
   </div>
-
-      <?php
-    //   if($tables = true){ ?>
-        <!-- <div class="modal fade" tabindex="-1" id="sqlmodal" style="" data-keyboard="false" data-backdrop="true">
-            <div class="modal-dialog bg-light modal-xl" role="document">
-                <div class="modal-body">
-
-                        <?php 
-                        // if($dejainstaller = true){
-                        //     include('app/views/modal-body_cms45.html');
-                        // }
-                        // else
-                        // {
-                        //     include('app/views/modal-body_cms.html');
-                        // }
-                        ?>
-
-                    <h3 class="modal-title text-center center">Que voulez-vous faire ?</h3>
-                </div>
-                <div class="modal-footer">
-                    <button onclick="forceinstallsql()"class="btn btn-danger">Forcer l'installation</button>
-                    <button onclick="dropsql()" class="btn btn-success">Vider la base et forcer l'installation (Recommandé) <strong>[Irréversible]</strong></button>
-                </div>
-            </div>
-        </div> -->
     <?php
-    //  if(isset($tables)){ ?>
-         <!-- $('#sqlmodal').modal('show') -->
-       <?php 
-    //   } 
-        ?>
-      <?php // } ?>
+    include('app/views/modalHtaccess.php'); ?>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="app/ressources/js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+  <script src="app/ressources/js/main.js"></script>
+  <script>$(function () {
+          $('[data-toggle="popover"]').popover()
+        })</script>
 </body>
 </html>
 <?php
 function verifyPDO($hote, $nomBase, $utilisateur, $mdp, $port)
 {
-	try
-	{
-		$sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
-		$sql->exec("SET CHARACTER SET utf8");
-		$req = $sql->query('SELECT @@GLOBAL.sql_mode AS sql_mode_global, @@SESSION.sql_mode AS sql_mode_session');
-		$data = $req->fetch(PDO::FETCH_ASSOC);
-		if((!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_TRANS_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_TRANS_TABLES') === FALSE))
+    try
+    {
+        $sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
+        $sql->exec("SET CHARACTER SET utf8");
+        $req = $sql->query('SELECT @@GLOBAL.sql_mode AS sql_mode_global, @@SESSION.sql_mode AS sql_mode_session');
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+        if((!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_TRANS_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_TRANS_TABLES') === FALSE))
         {   
             return true;    
         }else
         {    
             return '([GLOBAL.sql_mode: '.$data['sql_mode_globall'].'],[SESSION.sql_mode:'.$data['sql_mode_session'].'])';
         }
-	}
-	catch(Exception $e)
-	{
-		return 3;
-	}
+    }
+    catch(Exception $e)
+    {
+        return 3;
+    }
 }
 
 
 function getPDO($hote, $nomBase, $utilisateur, $mdp, $port)
 {
-	try
-	{
-		$sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
-		$sql->exec("SET CHARACTER SET utf8");
-		return $sql;
-	}
-	catch(Exception $e)
-	{
-	}
+    try
+    {
+        $sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
+        $sql->exec("SET CHARACTER SET utf8");
+        return $sql;
+    }
+    catch(Exception $e)
+    {
+    }
 }
 
 function verifTables($hote, $nomBase, $utilisateur, $mdp, $port){
@@ -376,7 +362,7 @@ function verifTables($hote, $nomBase, $utilisateur, $mdp, $port){
 
         if(isset($data['tables'])){
             echo $data['tables'];
-            $dejainstaller = true;
+            return true;
         }else{
             echo 'Inconnues';
         }

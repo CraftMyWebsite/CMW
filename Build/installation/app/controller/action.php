@@ -61,6 +61,11 @@ if(isset($_GET['action']) AND $_GET['action'] == 'compte' AND isset($_POST['pseu
 		
 	header('Location: index.php');
 }
+if(isset($_GET['forceHtaccess']) && $_GET['forceHtaccess'] == true)
+{
+	setcookie('forceInstallHtaccess', true, time()+3600);
+	$forceInstall = true;
+}
 
 function rchmod($dir) {
    if (is_dir($dir)) {
@@ -74,8 +79,3 @@ function rchmod($dir) {
      chmod($dir, 0777);
    }
  }
-
-
-// if(isset($_GET['action']) AND $_GET['action'] == "sqlforce"){
-// 	if(isset($_POST['']))
-// }
