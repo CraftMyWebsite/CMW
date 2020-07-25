@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre')) {
+if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre')) {
 	$j = 1;
 	if($offres != null){
 		for($i = 0; $i < count($offres); $i++)

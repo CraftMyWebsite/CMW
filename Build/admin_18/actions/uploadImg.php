@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'upload', 'manage')) {
+if($_Permission_->verifPerm('PermsPanel', 'upload', 'manage')) {
 	$dossier = './theme/upload/panel/';
 	$taille_maxi = 10000000;
 

@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaysafeCard'))
+if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaysafeCard'))
 {
 	$req = $bddConnection->prepare('UPDATE cmw_paysafecard_offres SET jetons = :jetons, description = :description, statut = :statut WHERE id = :id');
 	$req->execute(array(

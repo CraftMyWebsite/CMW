@@ -1,4 +1,4 @@
-<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { 
+<?php echo '[DIV]'; if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { 
 	require_once('./admin/donnees/boutique.php'); ?> 
 					<ul class="nav nav-tabs" id="list-minia">
                         <?php for($i = 0;$i < count($categories);$i++) {?>

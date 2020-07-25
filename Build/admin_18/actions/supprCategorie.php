@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) {
+if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) {
 	$query = $bddConnection->prepare('SELECT id FROM cmw_boutique_offres WHERE id = :id');
 	$query->execute(array( ':id' => $_GET['id']));
 

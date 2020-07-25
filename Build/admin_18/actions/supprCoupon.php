@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'action', 'modifCoupon'))
+if($_Permission_->verifPerm('PermsPanel', 'shop', 'action', 'modifCoupon'))
 {
 	if(isset($_GET['id']))
 	{

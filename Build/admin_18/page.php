@@ -74,6 +74,7 @@ if(isset($_GET['page']))
 		break;
 
 		case 'boutique':
+		require('./admin/donnees/grades.php');
 		require_once('./admin/donnees/boutique.php'); 
 		include('./admin/pages/boutique.php');
 		break;
@@ -114,7 +115,7 @@ if(isset($_GET['page']))
 		break;
 
 		case 'newsletter':
-		// require_once('./admin/donnees/newsletter.php'); 
+		require_once('./admin/donnees/newsletter.php'); 
 		include('./admin/pages/newsletter.php');
 		break;
 

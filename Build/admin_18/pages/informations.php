@@ -18,7 +18,7 @@
                                 </a>
                                 <script>initPost("dropVisits", "admin.php?action=dropVisits",  
                                             function (data) { if(data) { 
-                                                var ctx = document.getElementById('visitsChart')
+                                                var ctx = get('visitsChart')
                                                 var myChart = new Chart(ctx, {
                                                     type: 'line',
                                                     data: {
@@ -68,7 +68,7 @@
                                    $get_TotalVisitsPerDay = $req_TotalVisitsPerDay->fetchAll();
                                    ?>
 
-                                        var ctx = document.getElementById('visitsChart')
+                                        var ctx = get('visitsChart')
                                         var myChart = new Chart(ctx, {
                                             type: 'line',
                                             data: {
@@ -178,7 +178,7 @@
                 </div>
                 <br/>
                 <div class="card-columns">
-                    <?php
+                    <?php if(!empty($lecture['Json'])) {
                     for($j = 0; $j < count($lecture['Json']); $j++)
                     {
                     if($conEtablie[$j] == true)
@@ -391,7 +391,7 @@
                             </a>
                         </div>
                    <?php } ?>
-                <?php } ?>
+                <?php } } ?>
                 </div>
                 <br/>
                 <div class="row">
@@ -453,7 +453,7 @@
                                     <div class="float-right">
                                         <button type="submit"  class="btn btn-sm btn-outline-secondary" onClick="sendPost('clearStaffMessage')" title="Cliquer ici pour supprimer à jamais tous les messages"><i class="fas fa-trash" style="color: #bf0a0a;"></i></button>
                                          <script>initPost("clearStaffMessage", "admin.php?action=clearPostit",  
-                                            function (data) { if(data) { document.getElementById('allStaffMessage').innerHTML = "";} });</script>
+                                            function (data) { if(data) { get('allStaffMessage').innerHTML = "";} });</script>
                                     </div>
                                 </h4>
                             </div>
@@ -468,7 +468,7 @@
                                                 <input type="number" style="display:none;" value="<?=$message_postit['id'];?>" name="id">
                                             </a>
                                             <script>initPost("suppStaffMessage-<?=$message_postit['id'];?>", "admin.php?action=supprPostit",  
-                                            function (data) { if(data) { document.getElementById("suppStaffMessage-<?=$message_postit['id'];?>").style.display = "none";} });</script>
+                                            function (data) { if(data) { hide("StaffMessage-<?=$message_postit['id'];?>")} });</script>
                                         </p>
                                    <?php } ?>
                             </div>
@@ -476,7 +476,7 @@
                                     <input type="text" name="message" id="message" placeholder="Message (max 50 caractères)" class="form-control" maxlength="50">
                                     <button type="submit" class="btn btn-success w-100" onClick="sendPost('sendStaffMessage')">Envoyer !</button>
                                     <script>initPost("sendStaffMessage", "admin.php?action=creerPostit",  
-                                            function (data) { if(data) { console.log('message envoyé'); document.getElementById('allStaffMessage').innerHTML = "<p>[<strong><?php echo $_Joueur_['pseudo']?></strong>]: "+getValueByName('sendStaffMessage', 'message')+"</p>"+document.getElementById('allStaffMessage').innerHTML; clearAllInput('sendStaffMessage');}})</script>
+                                            function (data) { if(data) { console.log('message envoyé'); get('allStaffMessage').innerHTML = "<p>[<strong><?php echo $_Joueur_['pseudo']?></strong>]: "+getValueByName('sendStaffMessage', 'message')+"</p>"+get('allStaffMessage').innerHTML; clearAllInput('sendStaffMessage');}})</script>
                             </div>
                         </div>
                     </div>

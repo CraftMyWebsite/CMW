@@ -8,14 +8,14 @@ $(function () {
 		Thèmes
 	</h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme') AND !Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTypeBackground')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme') AND !$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTypeBackground')) { ?>
 
 <div class="alert alert-danger">
 	<strong>Vous avez aucune permission pour accéder aux thèmes.</strong>
 </div>
 <div class="row">
-<?php } else { echo '<div class="row">'; if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) { ?>
-	<div class="col-xs-12 col-md-6">
+<?php } else { echo '<div class="row">'; if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) { ?>
+	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card">
 		    <div class="card-header">
 		        <h4 class="card-title">
@@ -41,8 +41,8 @@ $(function () {
 		    </div>
 		</div>
 	</div>
-<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground')) { ?>
-	<div class="col-xs-12 col-md-6">
+<?php } if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground')) { ?>
+	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card">
 		    <div class="card-header">
 		        <h4 class="card-title">
@@ -63,8 +63,8 @@ $(function () {
 					</div>
 
 			        <script>
-					  const fileInput = document.getElementById('File');
-					  const label = document.getElementById('file-text');
+					  const fileInput = get('File');
+					  const label = get('file-text');
 					  
 					  fileInput.onchange =
 					  fileInput.onmouseout = function () {
@@ -85,7 +85,7 @@ $(function () {
 	</div>
 
 
-<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) { ?>
+<?php } if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) { ?>
 	<div class="col-md-12"  >
 		<?php include('theme/'.$_Serveur_['General']['theme'].'/config/configAdminVue.php');  ?>
 	</div>

@@ -1,6 +1,6 @@
 <?php
 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense'))
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense'))
 {
 	if(isset($_GET['id']))
 	{

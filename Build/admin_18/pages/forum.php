@@ -3,7 +3,7 @@
 		Réglages Forum
 	</h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'showPage') AND !Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley'))
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'forum', 'showPage') AND !$_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley'))
 {
 	echo '<div class="col-lg-6 col-lg-offset-3 text-center">
 		<div class="alert alert-danger">
@@ -18,11 +18,11 @@ else { ?>
 
 <?php } ?>
 <div class="row">
-<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley')) { ?>
-	<div class="col-md-6 col-12">
+<?php if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley')) { ?>
+	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card">
 			<div class="card-header ">
-				<h3 class="panel-title"><strong>Ajout de Smiley</strong></h3>
+				<h3 class="card-title"><strong>Ajout de Smiley</strong></h3>
 			</div>
 			<div class="card-body">
 				<form method="POST" action="?action=addSmiley" enctype="multipart/form-data">
@@ -36,8 +36,8 @@ else { ?>
                       </div>
                     </div>
                     <script>
-                      const fileInput = document.getElementById('File');
-                      const label = document.getElementById('file-text');
+                      const fileInput = get('File');
+                      const label = get('file-text');
                       
                       fileInput.onchange =
                       fileInput.onmouseout = function () {
@@ -51,11 +51,11 @@ else { ?>
             </div>
         </div>
    	</div>
-<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix')) { ?>
-	<div class="col-md-6 col-12">
+<?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix')) { ?>
+	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card">
 			<div class="card-header ">
-				<h3 class="panel-title"><strong>Ajout de préfixe</strong></h3>
+				<h3 class="card-title"><strong>Ajout de préfixe</strong></h3>
 			</div>
 			<div class="card-body" id="addPref">
 				<label class="control-label">Nom du préfix (Important, Acceptée, Refusée, ...)</label>
@@ -131,11 +131,11 @@ else { ?>
 			</div>
         </div>
    	</div>
-<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'seeSmileys')) { ?>
-	<div class="col-md-6 col-12">
+<?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'seeSmileys')) { ?>
+	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card">
 			<div class="card-header ">
-				<h3 class="panel-title"><strong>Edition des Smiley</strong></h3>
+				<h3 class="card-title"><strong>Edition des Smiley</strong></h3>
 			</div>
 			<div class="card-body">
 				<table class="table table-striped table-hover">
@@ -164,11 +164,11 @@ else { ?>
             </div>
         </div>
    	</div>
-<?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'seePrefix')) { ?>
-	<div class="col-md-6 col-12">
+<?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'seePrefix')) { ?>
+	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card">
 			<div class="card-header ">
-				<h3 class="panel-title"><strong>Edition des préfixes</strong></h3>
+				<h3 class="card-title"><strong>Edition des préfixes</strong></h3>
 			</div>
 			<div class="card-body">
 				<table class="table table-striped table-hover">

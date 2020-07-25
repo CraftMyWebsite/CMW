@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground')) {
+if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground')) {
 	if(isset($_FILES['img']) and !empty($_FILES['img']))
 	{
 		include_once('controleur/upload.class.php');
@@ -15,7 +15,7 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editB
 			$copie->Copie();
 	}
 }
-if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTypeBackground')) {
+if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTypeBackground')) {
 	if(isset($_POST['bgType']))
 	{
 		$lectureAccueil = new Lire('modele/config/config.yml');

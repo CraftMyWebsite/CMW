@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) {
+if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) {
 	if(isset($_POST['adresse']) AND isset($_POST['dbNom']) AND isset($_POST['dbUtilisateur']) AND isset($_POST['dbMdp']))
 	{
 		$_Serveur_['DataBase']['dbAdress'] = $_POST['adresse'];

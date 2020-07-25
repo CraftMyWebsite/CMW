@@ -5,15 +5,15 @@
 </div>
 <!-- Page Heading -->
 <div class="row" style="margin-top:10px;">
-	<div class="col-lg-12">
-        <?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings') AND Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'addVote')) { ?>
+	<div class="col-md-12 col-xl-12 col-12">
+        <?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings') AND $_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'addVote')) { ?>
             <div class="col-lg-12 text-center">
                 <div class="alert alert-danger">
                     <strong>Vous avez aucune permission pour accéder aux votes.</strong>
                 </div>
             </div>
         <?php }
-        if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) { ?>
+        if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) { ?>
         <div class="col-lg-12 text-justify">
             <div class="alert alert-success">
                 <strong>Dans cette section vous pourrez configurer vos votes.</strong><br/>
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-        <div class="col-xs-12">
+        <div class="col-md-12 col-xl-12 col-12">
             <div class="card  ">
                 <div class="card-header ">
                     <h3 class="card-title">Configuration des votes</h3>
@@ -163,7 +163,7 @@
                     </div>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-md-12 col-xl-12 col-12">
             <div class="card  ">
                 <div class="card-header ">
                     <h3 class="card-title">Configuration tâche cron</h3>
@@ -203,7 +203,7 @@
                         </div>
 						 <div class="row" style="margin-top:10px;">
                             <label class="control-label">Mot de passe de la tâche cron, laisser vide pour désactivé l'accès à la tâche cron.</label>
-                          <input type="text" name="mdp" id="mdpurlCron" onkeyup="document.getElementById('urlCron').innerText = '<?php echo $_Serveur_['General']['url'].'/?action=voteCron&mdp='; ?>' + document.getElementById('mdpurlCron').value" value="<?php if(isset($_Serveur_['VoteCron']['mdp'])) { echo $_Serveur_['VoteCron']['mdp']; }  ?>" placeholder="ex: CMW123" class="form-control"/>
+                          <input type="text" name="mdp" id="mdpurlCron" onkeyup="get('urlCron').innerText = '<?php echo $_Serveur_['General']['url'].'/?action=voteCron&mdp='; ?>' + get('mdpurlCron').value" value="<?php if(isset($_Serveur_['VoteCron']['mdp'])) { echo $_Serveur_['VoteCron']['mdp']; }  ?>" placeholder="ex: CMW123" class="form-control"/>
                       
                         </div>
 						
@@ -241,18 +241,18 @@
 		
 		<script>
 			function tryCron() {
-				document.getElementById('trycron').disabled = true;
-				$.post("index.php?action=voteCron&mdp=" + document.getElementById('mdpurlCron').value,{
+				get('trycron').disabled = true;
+				$.post("index.php?action=voteCron&mdp=" + get('mdpurlCron').value,{
 				},function(data, status){
 					console.log(data);
 					alert("Envoyé ! Si vous n'avez rien reçu sur votre serveur, vérifiez la connexion jsonapi et confirmez les changements !");
-					document.getElementById('trycron').disabled = false;
+					get('trycron').disabled = false;
 				});
 			}
 		</script>
     <?php }
-    if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote') OR Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
-        <div class="col-xs-12">
+    if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote') OR $_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
+        <div class="col-md-12 col-xl-12 col-12">
             <div class="card  ">
                 <div class="card-header ">
                     <div class="float-left">
@@ -265,7 +265,7 @@
                 <div class="card-body" id="all-vote">
                   
                     <?php 
-                    if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
+                    if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
                         <!-- <div class="row"> -->
                             <?php $donnees = $req_donnees->fetchAll();
                             for($o=0; $o < count($donnees); $o++)

@@ -6,7 +6,7 @@
                         <!-- Petite carte profil (afficher sur pc only)-->
                         <div class="row" id="profiladmin">
                             <div class="col-4">
-                                <img src="<?php echo $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo']); ?>" alt="<?php echo $_Joueur_['pseudo']; ?>" class="rounded-circle imageusercard"
+                                <img src="https://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_Joueur_['pseudo']; ?>&s=64" class="rounded-circle imageusercard"
                                     style="max-width: 64px;max-height: 64px;margin-left: 15px;">
                             </div>
                             <div class="col-5">
@@ -168,7 +168,7 @@
                                     <i class="fas fa-screwdriver"></i>
                                     Réglages des champs personnalisées
                                 </a>
-                                <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showTable') && (Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editLimitIp') || Permission::getInstance()->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail'))) { ?>
+                                <?php } if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showTable') && ($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editLimitIp') || $_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail'))) { ?>
                                 <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='modifIP'){echo 'active';}?>" href="?page=modifIP">
                                     <i class="fas fa-toolbox"></i>
                                     Limitations IP/Email
@@ -197,7 +197,7 @@
                         </li>
                          <?php } if($_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'showPage')) { ?>
                         <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='support'){echo 'active';}?>">
-                            <a class="nav-link" href="?page=supports">
+                            <a class="nav-link" href="?page=support">
                                 <i class="fas fa-life-ring"></i>
                                 Support
                             </a>

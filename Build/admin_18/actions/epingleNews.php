@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'news', 'actions', 'editNews'))
+if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'editNews'))
 {
 	if(isset($_GET['newsId'], $_GET['epingle']))
 	{

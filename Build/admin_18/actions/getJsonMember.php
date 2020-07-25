@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'members', 'showPage')) { 
+if($_Permission_->verifPerm('PermsPanel', 'members', 'showPage')) { 
 
 
 	if($_POST['axe'] == 'rang') {

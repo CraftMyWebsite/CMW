@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'members', 'showPage')) { 
+if($_Permission_->verifPerm('PermsPanel', 'members', 'showPage')) { 
 	$membresReq = $bddConnection->query('SELECT * FROM cmw_users ORDER BY pseudo');
 
 	$i = 0;

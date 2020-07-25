@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
+if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
 	$lecture = new Lire('modele/config/configServeur.yml');
 	$lecture = $lecture->GetTableau();
 
@@ -8,11 +8,15 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'edit
 		$lecture['Json'][$i]['adresse'] = $_POST['JsonAddr' . $i];
 
 		if(isset($_POST['localhost' . $i]) AND $_POST['localhost' . $i] == 'on')
+		{
 			$lecture['Json'][$i]['localhost'] = true;
+		}
 		else
+		{
 			$lecture['Json'][$i]['localhost'] = false;
+		}
 
-		if(isset($_POST['JsonPort'.$i]))
+		if($_POST['protocole'.$i] == 1)
 		{
 			$lecture['Json'][$i]['port'] = $_POST['JsonPort' . $i];
 			$lecture['Json'][$i]['utilisateur'] = $_POST['JsonUser' . $i];
@@ -25,6 +29,7 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'edit
 		$lecture['Json'][$i]['mdp'] = $_POST['JsonMdp' . $i];
 		$lecture['Json'][$i]['salt'] = $_POST['JsonSalt' . $i];
 		$lecture['Json'][$i]['nom'] = $_POST['JsonNom' . $i];
+		$lecture['Json'][$i]['protocole'] = $_POST['protocole'.$i];
 	}
 
 

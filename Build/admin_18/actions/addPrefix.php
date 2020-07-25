@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix'))
+if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix'))
 {
 	if(isset($_POST['nom'], $_POST['prefix']))
 	{

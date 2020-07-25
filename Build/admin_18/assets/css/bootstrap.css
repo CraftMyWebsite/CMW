@@ -3812,7 +3812,7 @@ input[type="button"].btn-block {
 .custom-control-label {
   position: relative;
   margin-bottom: 0;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .custom-control-label::before {

@@ -3,7 +3,7 @@
 		Réglages site
 	</h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) { ?>
 <div class="text-center">
     <div class="alert alert-danger">
         <strong>Vous avez aucune permission pour accéder aux réglages généraux.</strong>
@@ -91,7 +91,7 @@
 		        	<div class="float-right">
 		        		<label class="switch">
 		        			<input type="checkbox" value="true" name="enable"
-		        				onClick="if(document.getElementById('panel-mail').style.display == 'none') { document.getElementById('panel-mail').style.display = 'block'; } else { document.getElementById('panel-mail').style.display = 'none'; }sendPost('changeEnableSmtp');"
+		        				onClick="if(get('panel-mail').style.display == 'none') { show('panel-mail'); } else { hide('panel-mail'); }sendPost('changeEnableSmtp');"
 		        				<?=(isset($_Serveur_['SMTP'])) ? 'checked': '';?>>
 		        			<span class="slider round"></span>
 		        		</label>
@@ -152,7 +152,7 @@
 				initPost("changeSmtp", "admin.php?action=editMail",null);
 				initPost("changeEnableSmtp", "admin.php?action=editMail",null);
 				function testMail() {
-					document.getElementById('btn-mail').disabled = true;
+					get('btn-mail').disabled = true;
 					$.post("admin.php?action=testMail",{
 					},function(data, status){
 						if(data == "1") {
@@ -160,7 +160,7 @@
 						} else {
 							alert("Le mail n'a pas été envoyé, avez vous mis à jour les informations ? ou avez vous bien rentré les informations ?");
 						}
-						document.getElementById('btn-mail').disabled = false;
+						get('btn-mail').disabled = false;
 					});
 				}
 			</script>
@@ -185,8 +185,8 @@
 				</div>
 
 		        <script>
-				  const fileInput = document.getElementById('File');
-				  const label = document.getElementById('file-text');
+				  const fileInput = get('File');
+				  const label = get('file-text');
 				  
 				  fileInput.onchange =
 				  fileInput.onmouseout = function () {

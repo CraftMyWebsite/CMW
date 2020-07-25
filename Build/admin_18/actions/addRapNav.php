@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
+if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
 	    $lectureAccueil = new Lire('modele/config/accueil.yml');
   		$lectureAccueil = $lectureAccueil->GetTableau();
   		if(isset($lectureAccueil['Infos'][$_POST["ordre"]]))

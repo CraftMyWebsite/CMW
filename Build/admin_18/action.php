@@ -4,12 +4,18 @@
 */
 
 unset($_SESSION['referrerAdmin']);
-if(isset($_GET['action']) AND Permission::getInstance()->verifPerm("PermsPanel", "access"))
+if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
+		case 'getPagesList':
+			require('admin/actions/getPagesList.php');
+			exit();
 		case 'getJsonMember':
 			require('admin/actions/getJsonMember.php');
+			exit();
+		case 'getLienVote':
+			require('admin/actions/getLienVote.php');
 			exit();
 		case 'getJsonAchat':
 			require('admin/actions/getJsonAchat.php');
@@ -17,11 +23,29 @@ if(isset($_GET['action']) AND Permission::getInstance()->verifPerm("PermsPanel",
 		case 'getOffreBoutique':
 			require('admin/actions/getOffreBoutique.php');
 			exit();
+		case 'getServerList':
+			require('admin/actions/getServerList.php');
+			exit();
+		case 'getOffrePaypal':
+			require('admin/actions/getOffrePaypal.php');
+			exit();
+		case 'getWidgetsList':
+			require('admin/actions/getWidgetsList.php');
+			exit();
+		case 'getRecompenseList':
+			require('admin/actions/getRecompenseList.php');
+			exit();
+		case 'getMenuLien':
+			require('admin/actions/getMenuLien.php');
+			exit();
+		case 'getMenuListe':
+			require('admin/actions/getMenuListe.php');
+			exit();
 		case 'changeVoteCron':
 			require('admin/actions/changeVoteCron.php');
 		break;
 		case 'dropVisits':
-			if(Permission::getInstance()->verifPerm("PermsPanel", "info", "stats", "visitors", "showTable"))
+			if($_Permission_->verifPerm("PermsPanel", "info", "stats", "visitors", "showTable"))
 				$bddConnection->exec('TRUNCATE cmw_visits');
 		break;
 
@@ -86,7 +110,7 @@ if(isset($_GET['action']) AND Permission::getInstance()->verifPerm("PermsPanel",
 		break;
 
 		case 'removeSocial':
-			if(Permission::getInstance()->verifPerm('PermsPanel', 'social', 'showPage'))
+			if($_Permission_->verifPerm('PermsPanel', 'social', 'showPage'))
 				$bddConnection->exec('ALTER TABLE cmw_reseaux DROP '.$_POST['nom']);
 		break;
 
@@ -370,7 +394,7 @@ if(isset($_GET['action']) AND Permission::getInstance()->verifPerm("PermsPanel",
 		break;
 
 		case 'resetVotes':
-			if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote'))
+			if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote'))
 			{
 				$bddConnection->exec('DELETE FROM cmw_votes');
 			}
@@ -429,18 +453,8 @@ if(isset($_GET['action']) AND Permission::getInstance()->verifPerm("PermsPanel",
 		break;
 
 		case 'editGrade': 
-			if(isset($_POST['Createur']))
-			{
-				require_once('admin/actions/nom.php');
-			}
-			elseif(isset($_POST['Joueur']))
-			{
-				require_once('admin/actions/nomJoueur.php');
-			}
-			else
-			{
-				require_once('admin/actions/editGrade.php');
-			}
+			require_once('admin/donnees/grades.php');
+			require_once('admin/actions/editGrade.php');
 		break;
 
 		case 'newsletter': 

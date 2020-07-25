@@ -1,4 +1,4 @@
-<?php if(Permission::getInstance()->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) { 
+<?php if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) { 
 	if(isset($_POST['enable']))
 	{
 		if(isset($_POST['host']))

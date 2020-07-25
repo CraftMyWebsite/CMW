@@ -3,7 +3,7 @@
 		Gestion des pages personnalisées de votre site
 	</h2>
 </div>
-<?php if(!Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'actions', 'addPage') AND !Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'actions', 'editPage'))
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'pages', 'actions', 'addPage') AND !$_Permission_->verifPerm('PermsPanel', 'pages', 'actions', 'editPage'))
 {
 	echo '
 	<div class="row">
@@ -21,12 +21,12 @@ else
 		<strong>En plus des pages de base du CMS, vous pouvez créer des pages personnalisées, ces pages peuvent être découpées en plusieurs "sections". Une fois la page créée vous pouvez faire un lien vers cette dernière dans la section "menus" de votre panel.</strong>
 	</div>
 
-	 <div class="row"> <?php if(Permission::getInstance()->verifPerm('PermsPanel','pages', 'actions', 'addPage')) { ?>
+	 <div class="row"> <?php if($_Permission_->verifPerm('PermsPanel','pages', 'actions', 'addPage')) { ?>
 
-		<div class="col-md-6">
+		<div class="col-md-12 col-xl-6 col-12">
 			<div class="card  ">
 				<div class="card-header ">
-					<h3 class="panel-title"><strong>Création d'une nouvelle page</strong></h3>
+					<h3 class="card-title"><strong>Création d'une nouvelle page</strong></h3>
 				</div>
 				<div class="card-body" id="addPage">
                     <label class="control-label">Titre de la page</label>
@@ -49,11 +49,11 @@ else
 	            </div>
 	        </div>
 	   	</div>
-	   <?php } if(Permission::getInstance()->verifPerm('PermsPanel', 'pages', 'actions', 'editPage')) { ?>
-		<div class="col-md-6">
+	   <?php } if($_Permission_->verifPerm('PermsPanel', 'pages', 'actions', 'editPage')) { ?>
+		<div class="col-md-12 col-xl-6 col-12">
 			<div class="card  ">
 				<div class="card-header ">
-					<h3 class="panel-title"><strong>Edition des pages</strong></h3>
+					<h3 class="card-title"><strong>Edition des pages</strong></h3>
 				</div>
 				<div class="card-body" id="allPage">
 				  <?php if(empty($pages)) { ?>

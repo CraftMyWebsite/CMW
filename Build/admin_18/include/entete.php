@@ -22,7 +22,9 @@
     <script src="./admin/assets/js/jquery.js"></script>
     <script src="./admin/assets/js/toastr.min.js"></script>
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
+    <script src="./admin/assets/js/ckeditor.js"></script>
+
+
     <title>Administration | <?php echo $_Serveur_['General']['name']; ?></title>
 
     <style>

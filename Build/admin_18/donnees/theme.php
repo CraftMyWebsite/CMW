@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'showPage')) {
+if($_Permission_->verifPerm('PermsPanel', 'theme', 'showPage')) {
 	$themes = scandir('theme/');
 	for($i = 2; $i < count($themes); $i++)
 	{

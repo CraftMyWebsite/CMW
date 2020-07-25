@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) {
+if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) {
 	$lecture = new Lire('modele/config/config.yml');
 	$configLecture = new Lire('modele/config/config.yml');
 	$_Serveur_ = $configLecture->GetTableau();
