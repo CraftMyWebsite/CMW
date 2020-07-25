@@ -217,7 +217,7 @@
                                         </div>
                                         <div class="modal-body" style="height: 500px;overflow-y:scroll!important">
                                            
-                                        <?php if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['console'] == true) { ?>
+                                        <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console')) { ?>
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h4 class="card-title">
@@ -304,7 +304,7 @@
                                         <br/>
 
                                         <?php }
-                                        if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['plugins'] == true) { ?>
+                                        if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins')) { ?>
                                         
                                             <div class="card">
                                                 <div class="card-header">
@@ -335,7 +335,7 @@
                                                 </div>
                                                 <div class="card-footer">
                                                 <?php 
-                                               if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['info']['details']['server'] == true) { ?>
+                                               if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) { ?>
                                                     <div class="row">
                                                         <div class="col-md-4 text-center">
                                                             <button type="button" class="btn btn-warning"

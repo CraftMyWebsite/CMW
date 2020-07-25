@@ -1,5 +1,5 @@
 <?php
-	require_once('controleur/json/json.class.php');
+	require_once('modele/json/json.class.php');
 
 $reqRecup = $bddConnection->query('SELECT * FROM cmw_serveur');
 
