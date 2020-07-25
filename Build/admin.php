@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+error_reporting();
 date_default_timezone_set('Europe/Paris');
 ini_set('display_errors', 1);
 	// On appelle les classes du controleur qui instancies les objets principaux (BDD, config, JSONAPI...).
@@ -41,12 +41,9 @@ ini_set('display_errors', 1);
 		$admin = true;
 
 		if(isset($_GET['action'])){
-			include('admin/donnees.php');
 			include('admin/action.php');
 		}else {
-			if(isset($_GET['page']))
-				$pageadmin = $_GET['page'];
-			include('admin/page.php');
+			include('admin/index.php');
 		}
 	}
 	else
