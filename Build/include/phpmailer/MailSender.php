@@ -22,7 +22,7 @@ class MailSender
 				$mail->Password = htmlspecialchars($arrayData['SMTP']['Password']);
 				$mail->SMTPSecure = $arrayData['SMTP']['Protocol'];
 				$mail->Port = $arrayData['SMTP']['Port'];
-			
+				$mail->Timeout = 5;
 				$mail->From = $arrayData['SMTP']['From'];
 				$mail->FromName = $arrayData['General']['name'];
 				$mail->addAddress($to);   
