@@ -165,44 +165,48 @@
 				}
 			</script>
 	<!-- <div class="col-xs-12 col-md-6" style="margin-top: 20px;"> -->
-		<form action="?action=ajout_favicon" method="POST" enctype="multipart/form-data">
-		<div class="card">
-		    <div class="card-header">
-		        <h4 class="card-title">
-		            <i class="fas fa-database"></i> Configuration du favicon
-		 		</h4>
-		    </div>
-		    <div class="card-body" id="changeFavicon">
+		<?php if($_Permission_->verifPerm('PermsPanel', 'general', 'actiions', 'editFavicon'))
+		{
+			?>
+			<form action="?action=ajout_favicon" method="POST" enctype="multipart/form-data">
+				<div class="card">
+				    <div class="card-header">
+				        <h4 class="card-title">
+				            <i class="fas fa-database"></i> Configuration du favicon
+				 		</h4>
+				    </div>
+				    <div class="card-body" id="changeFavicon">
 
-		      	<label class="control-label">Fichier favicon (le précédent sera écrasé)</label>
+				      	<label class="control-label">Fichier favicon (le précédent sera écrasé)</label>
 
-				<div class="input-group file-input-group" style="margin-top:10px;">
-				  <input class="form-control" id="file-text" type="text" placeholder="No file selected" readonly>
-				  <input type="file" name="favicon" id="File" style="display:none;" required>
-				  <div class="input-group-append">
-				    <label class="btn btn-secondary mb-0" for="File">Choisir un fichier</label>
-				  </div>
+						<div class="input-group file-input-group" style="margin-top:10px;">
+						  <input class="form-control" id="file-text" type="text" placeholder="No file selected" readonly>
+						  <input type="file" name="favicon" id="File" style="display:none;" required>
+						  <div class="input-group-append">
+						    <label class="btn btn-secondary mb-0" for="File">Choisir un fichier</label>
+						  </div>
+						</div>
+
+				        <script>
+						  const fileInput = get('File');
+						  const label = get('file-text');
+						  
+						  fileInput.onchange =
+						  fileInput.onmouseout = function () {
+						    if (!fileInput.value) return
+						    
+						    var value = fileInput.value.replace(/^.*[\\\/]/, '')
+						    label.value = value
+						  }
+
+				   		</script>
+				    </div>
+				    <div class="card-footer">
+				        <button type="submit" class="btn btn-success w-100">Envoyer!</button>
+				    </div>
 				</div>
-
-		        <script>
-				  const fileInput = get('File');
-				  const label = get('file-text');
-				  
-				  fileInput.onchange =
-				  fileInput.onmouseout = function () {
-				    if (!fileInput.value) return
-				    
-				    var value = fileInput.value.replace(/^.*[\\\/]/, '')
-				    label.value = value
-				  }
-
-		   		</script>
-		    </div>
-		    <div class="card-footer">
-		        <button type="submit" class="btn btn-success w-100">Envoyer!</button>
-		    </div>
-		</div>
-		</form>
+			</form>
+		<?php } ?>
 	<!-- </div> -->
 </div>
 <?php } ?>
