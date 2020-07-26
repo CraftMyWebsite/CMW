@@ -4,3 +4,4 @@ Build/modele/.htpasswd
 Build/controleur/.htpasswd
 Build/admin/actions/.htpasswd
 *.xml
+*.yml
