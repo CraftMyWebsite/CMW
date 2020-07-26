@@ -66,7 +66,6 @@ $PermissionFormat["PermsForum"]="Permissions Forums";
     $PermissionFormat["PermsForum-general"]="Général";
     $PermissionFormat["PermsForum-moderation"]="Modération";
 
-var_dump($PermissionFormat);
 $dirGrades = './modele/grades/';
 $initGrades = glob($dirGrades.'*.yml');
 
