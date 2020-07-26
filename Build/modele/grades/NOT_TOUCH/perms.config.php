@@ -28,9 +28,9 @@ const PERMS = array(
 	"PermsPanel" => array(
 		"access" => "Accès au panel",
 		"info" => array(
-			"page" => "Informations",
-			"showPage" => "Accès à la page <strong>informations</strong>",
+			"showPage" => "Accès à la page informations",
 			"details" => array(
+				"showModal" => "Accès aux modals",
 				"player" => "Voir les joueurs en ligne",
 				"console" => "Voir la console",
 				"command" => "Accès aux commandes",
@@ -56,16 +56,14 @@ const PERMS = array(
 			)
 		),
 		"general" => array(
-			"page" => "Réglage site",
-			"showPage" => "Accès à la page <strong>Réglage Site</strong>",
+			"showPage" => "Accès à la page Réglage Site",
 			"actions" => array(
 				"editGeneral" => "Edition des réglages sites (base de donnée, IP minecraft ...)",
 				"editFavicon" => "Edition du favicon"
 			)
 		),
 		"theme" => array(
-			"page" => "Thème",
-			"showPage" => "Accès à la page <strong>Thème</strong>",
+			"showPage" => "Accès à la page Thème",
 			"actions" => array(
 				"editTheme" => "Edition du thème",
 				"editBackground" => "Edition du fond d'écran",
@@ -73,12 +71,10 @@ const PERMS = array(
 			)
 		),
 		"sliderMini" => array(
-			"page" => "Slider & Miniature",
-			"showPage" => "Accès à la page <strong>Slider & Miniatures</strong>"
+			"showPage" => "Accès à la page Slider & Miniatures"
 		),
 		"home" => array(
-			"page" => "Accueils & Stats",
-			"showPage" => "Accès à la page <strong>Accueil</strong>",
+			"showPage" => "Accès à la page Accueil",
 			"actions" => array(
 				"uploadSlider" => "Uploader un slider",
 				"editSlider" => "Edition des sliders",
@@ -88,47 +84,42 @@ const PERMS = array(
 			)
 		),
 		"server" => array(
-			"page" => "Réglage JSONAPI",
-			"showPage" => "Accès à la page <strong>Réglage Serveur</strong>",
+			"showPage" => "Accès à la page Réglage Serveur",
 			"actions" => array(
 				"addServer" => "Ajouter un serveur",
 				"editServer" => "Edition d'un serveur"
 			)
 		),
 		"pages" => array(
-			"page" => "Pages personnalisées",
-			"showPage" => "Accès à la page <strong>Pages Personnalisées</strong>",
+			"showPage" => "Accès à la page Pages Personnalisées",
 			"actions" => array(
 				"editPage" => "Edition des pages",
 				"addPage" => "Ajouter une page"
 			)
 		),
 		"news" => array(
-			"page" => "News",
-			"showPage" => "Accès à la page <strong>Nouveautés</strong>",
+			"showPage" => "Accès à la page Nouveautés",
 			"actions" => array(
 				"addNews" => "Ajouter une nouveauté",
 				"editNews" => "Edition des nouveautés"
 			)
 		),
 		"shop" => array(
-			"page" => "Boutique",
-			"showPage" => "Accès à la page <strong>Réglage Boutique</strong>",
+			"showPage" => "Accès à la page Réglage Boutique",
 			"actions" => array(
 				"addCategorie" => "Ajouter une catégorie",
 				"addOffre" => "Ajouter une offre",
 				"editCategorieOffre" => "Edition des offres/catégories"
 			),
 			"achatEvo" => array(
-				"showPage" => "Accès à la page <strong>Réglage des achats évolutifs</strong>"
+				"showPage" => "Accès à la page Réglage des achats évolutifs"
 			),
 			"boutiqueList" => array(
-				"showPage" => "Accès à la page <strong>Historique des achats</strong>"
+				"showPage" => "Accès à la page Historique des achats"
 			)
 		),
 		"payment" => array(
-			"page" => "Paiements",
-			"showPage" => "Accès à la page <strong>Payement</strong>",
+			"showPage" => "Accès à la page Payement",
 			"actions" => array(
 				"editPayment" => "Edition des paiements",
 				"addOffrePaypal" => "Ajouter une offre PayPal",
@@ -138,8 +129,7 @@ const PERMS = array(
 			)
 		),
 		"menus" => array(
-			"page" => "Menus Personnalisées",
-			"showPage" => "Accès à la page <strong>Menus</strong>",
+			"showPage" => "Accès à la page Menus",
 			"actions" => array(
 				"addLinkMenu" => "Ajouter un lien menu",
 				"addDropLinkMenu" => "Ajouter un menu déroulant",
@@ -147,8 +137,7 @@ const PERMS = array(
 			)
 		),
 		"vote" => array(
-			"page" => "Vote",
-			"showPage" => "Accès à la page <strong>Voter</strong>",
+			"showPage" => "Accès à la page Voter",
 			"actions" => array(
 				"editSettings" => "Edition des réglages",
 				"addVote" => "Ajouter un lien de vote",
@@ -157,7 +146,7 @@ const PERMS = array(
 			),
 			"recompenseAuto" => array(
 				"page" => "Récompenses Automatique",
-				"showPage" => "Accès à la page <strong>Réglage des récompenses auto</strong>",
+				"showPage" => "Accès à la page Réglage des récompenses auto",
 				"actions" => array(
 					"resetRecompense" => "Supprimer une récompense auto",
 					"addRecompense" => "Créer une récompense auto"
@@ -165,15 +154,13 @@ const PERMS = array(
 			)
 		),
 		"members" => array(
-			"page" => "Membres",
-			"showPage" => "Accès à la page <strong>Membres=>Informations</strong>",
+			"showPage" => "Accès à la page Membres=>Informations",
 			"actions" => array(
 				"editMember" => "Edition des membres"
 			)
 		),
 		"forum" => array(
-			"page" => "Forum",
-			"showPage" => "Accès à la page <strong>Forum</strong>",
+			"showPage" => "Accès à la page Forum",
 			"actions" => array(
 				"addSmiley" => "Ajout de smileys",
 				"seeSmileys" => "Voir/Supprimer les smileys",
@@ -182,8 +169,7 @@ const PERMS = array(
 			)
 		),
 		"widgets" => array(
-			"page" => "Widgets",
-			"showPage" => "Accès à la page <strong>Widgets</strong>",
+			"showPage" => "Accès à la page Widgets",
 			"actions" => array(
 				"addWidgets" => "Ajouter un Widget",
 				"editWidgets" => "Edition des Widgets"
@@ -191,8 +177,7 @@ const PERMS = array(
 		),
 		"support" => array(
 			"tickets" => array(
-				"page" => "tickets",
-				"showPage" => "Accès à la page <strong>Tickets</strong>",
+				"showPage" => "Accès à la page Tickets",
 				"actions" => array(
 					"editEtatTicket" => "Changer l'état des tickets",
 					"deleteTicket" => "Supprimer un ticket",
@@ -201,8 +186,7 @@ const PERMS = array(
 			)
 		),
 		"maintenance" => array(
-			"page" => "Maintenance",
-			"showPage" => "Accès à la page <strong>Maintenance</strong>",
+			"showPage" => "Accès à la page Maintenance",
 			"actions" => array(
 				"editDefaultMessage" => "Edition du message par défaut",
 				"editAdminMessage" => "Edition du message adressé aux admins",
@@ -212,23 +196,19 @@ const PERMS = array(
 			)
 		),
 		"update" => array(
-			"page" => "Mise à jours",
-			"showPage" => "Accès à la page <strong>Mise à jours</strong>"
+			"showPage" => "Accès à la page Mise à jours"
 		),
 		"social" => array(
-			"page" => "Réseaux",
-			"showPage" => "Accès à la page <strong>Membres=>Social</strong>"
+			"showPage" => "Accès à la page Membres=>Social"
 		),
 		"newsletter" => array(
-			"page" => "Newsletter",
-			"showPage" => "Accès à la page <strong>Newsletter</strong>",
+			"showPage" => "Accès à la page Newsletter",
 			"actions" => array(
 				"send" => "Peut envoyer une newsletter"
 			)
 		),
 		"ban" => array(
-			"page" => "Bannissement",
-			"showPage" => "Accès à la page <strong>Bannissement</strong>",
+			"showPage" => "Accès à la page Bannissement",
 			"actions" => array(
 				"removeBan" => "Permet de supprimer un utilisateur banni",
 				"addBan" => "Permet d'ajouter un utilisateur à la banlist",
@@ -236,8 +216,7 @@ const PERMS = array(
 			)
 		),
 		"upload" => array(
-			"page" => "Upload",
-			"showPage" => "Accès à la page <strong>Upload</strong>",
+			"showPage" => "Accès à la page Upload",
 			"manager" => "Peut gérer l'upload d'images"
 		)
 	),

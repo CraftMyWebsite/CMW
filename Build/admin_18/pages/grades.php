@@ -197,8 +197,6 @@ function writePerm($perm, $nb, $id, $other, $idGrade, $PermissionFormat) {
 		foreach($perm as $key => $value)
 		{
 
-
-
 			if($key != "Grade" & $key != "prefix" & $key != "effets")
 			{
 				if( is_array($value)) {  ?>
