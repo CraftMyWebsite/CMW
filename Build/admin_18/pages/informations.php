@@ -178,8 +178,8 @@
                 </div>
                 <br/>
                 <div class="card-columns">
-                    <?php if(!empty($lecture['Json'])) {
-                    for($j = 0; $j < count($lecture['Json']); $j++)
+                    <?php
+                    foreach($lectureJSON as $j => $serveur)
                     {
                     if($conEtablie[$j] == true)
                         { ?>
@@ -189,7 +189,7 @@
                                     <div class="col-md-8 offset-col-md-4">
                                         <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$conEtablie[$j]?></h4>
                                         <p class="card-category"> 
-                                            En ligne - <?=$lecture['Json'][$j]['nom'];?>
+                                            En ligne - <?=$serveur['nom'];?>
                                         </p>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                                 </div>
                             </a>
                         </div>
-                        <?php if($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['info']['details']['player'] == true OR $_PGrades_['PermsPanel']['info']['details']['console'] == true OR $_PGrades_['PermsPanel']['info']['details']['command'] == true OR $_PGrades_['PermsPanel']['info']['details']['plugins'] == true OR $_PGrades_['PermsPanel']['info']['details']['server'] == true)) { 
+                        <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'player') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'command') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins') OR $_Permission_('PermsPanel', 'info', 'details', 'server')) { 
                             ?>
 
                             <div class="modal fade" id="infoServeur<?=$conEtablie[$j]?>" tabindex="-1" role="dialog"
@@ -378,7 +378,7 @@
                                     <div class="col-md-8 offset-col-md-4">
                                         <h4 class="card-title"><i class="fas fa-server"></i> Serveur</h4>
                                         <p class="card-category"> 
-                                            Hors Ligne - <?=$lecture['Json'][$j]['nom'];?>
+                                            Hors Ligne - <?=$serveur['nom'];?>
                                         </p>
                                     </div>
                                 </div>
@@ -391,7 +391,7 @@
                             </a>
                         </div>
                    <?php } ?>
-                <?php } } ?>
+                <?php } ?>
                 </div>
                 <br/>
                 <div class="row">
