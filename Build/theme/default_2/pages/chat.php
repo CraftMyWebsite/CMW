@@ -40,7 +40,7 @@
 
                 <div class="col-md-12 col-lg-9 col-sm-12 mb-3">
                     <!-- Affichage du Chat -->
-                    <div class="tab-content" id="messages">
+                    <div class="tab-content">
                         <?php for ($i = 0; $i < count($jsonCon); $i++) :
                             $messages = $Chat->getMessages($i); ?>
                             <div id="server-<?= $i ?>" class="tab-pane fade <?php if ($i == 0) echo 'in active show'; ?>" aria-expanded="false">
@@ -48,9 +48,10 @@
                                     <div class="card-header">
                                         <h4> Chat : </h4>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body" id="msgChat">
                                         <!-- Affichage du message -->
                                         <?php if ($messages != false && $messages != "erreur" && $messages != "query") :
+                                            $messages = array_slice($messages, -10, 10);
                                             foreach ($messages as $value) : ?>
 
                                                 <div class="media">

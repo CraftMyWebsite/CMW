@@ -37,7 +37,7 @@ class Chat extends JsonCon
 	public function sendMessageChat($message, $i, $pseudo)
 	{
 		$data = $this->json[$i]->SendBroadcast('[§cSite§r] §5'.$pseudo.'§r : '.$message);
-		return $data[0]['success'];
+		return true;
 	}
 
 	public function formattage($message)

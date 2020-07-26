@@ -7,7 +7,7 @@ if(Permission::getInstance()->verifPerm("connect") && isset($_POST['i']) && isse
 	else
 		$message = str_replace('§', '', $_POST['message']);
 	$message = htmlspecialchars($message);
-	if(strlen($message) <= 100)
+	if(strlen($message) <= 100 && strlen($message) > 1)
 	{
 		$i = htmlentities($_POST['i']);
 		$Chat = new Chat($jsonCon);
@@ -18,7 +18,7 @@ if(Permission::getInstance()->verifPerm("connect") && isset($_POST['i']) && isse
 	}
 	else
 	{
-		header('Location: ?page=erreur&erreur=19&type='+urlencode("Erreur Chat")+"&titre="+urlencode("Erreur Message")+"&contenue="+urlencode("Message trop long :/"));
+		header('Location: ?page=erreur&erreur=19&type='+urlencode("Erreur Chat")+"&titre="+urlencode("Erreur Message")+"&contenue="+urlencode("Message trop long ou trop court :/"));
 	}
 }
 else
