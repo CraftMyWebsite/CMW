@@ -140,7 +140,7 @@ else
                                         <h3 id="grade-name2-<?php echo $i; ?>"><?php echo $idGrade[$i]['Grade']; ?></h3>
                                     </div>
                                     <div class="float-right">
-                                        <button  onclick="sendDirectPost('admin.php?action=supprPage&id=<?php echo $pages[$i]['id']; ?>', function(data) { if(data) { hide('grade<?php echo $i; ?>'); hide('tabgrade<?php echo $i; ?>'); } });" class="btn btn-sm btn-outline-secondary">Supprimer</button>
+                                        <button  onclick="sendDirectPost('admin.php?action=supprGrade&id=<?php echo $i; ?>', function(data) { if(data) { hide('grade<?php echo $i; ?>'); hide('tabgrade<?php echo $i; ?>'); } });" class="btn btn-sm btn-outline-secondary">Supprimer</button>
                                     </div>
                                 </div>
                                 <label class="control-label">Nom du grade</label>
