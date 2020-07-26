@@ -1,151 +1,182 @@
 #Ce fichier contiens la config de base du serveur---
-0: Ce fichier contiens la config de base du serveur---
 Grade: Modérateur
+prefix: prefixRed
+effets: style5
 PermsDefault:
     news:
-        deleteMemberComm: null
-        editMemberComm: null
+        deleteMemberComm: false
+        editMemberComm: false
     support:
-        closeTicket: null
-        deleteMemberComm: null
-        editMemberComm: null
-        displayTicket: null
+        closeTicket: false
+        deleteMemberComm: false
+        editMemberComm: false
+        displayTicket: false
     chat:
-        color: null
+        color: false
     forum:
         perms: "0"
 PermsPanel:
-    access: null
+    access: false
     info:
-        showPage: null
+        showPage: false
         details:
-            showModal: ""
-            player: null
-            console: null
-            command: null
-            plugins: null
-            server: null
+            showModal: false
+            player: false
+            console: false
+            command: false
+            plugins: false
+            server: false
         stats:
             visitors:
-                showTable: null
+                showTable: false
             members:
-                showTable: null
-                editLimitIp: null
-                editEmail: null
+                showTable: false
+                editLimitIp: false
+                editEmail: false
+                showIP: false
             activity:
-                showTable: null
+                showTable: false
             shop:
-                showTable: null
+                showTable: false
     general:
-        showPage: null
+        showPage: false
         actions:
-            editGeneral: null
+            editGeneral: false
+            editFavicon: false
     theme:
-        showPage: null
+        showPage: false
         actions:
-            editTheme: null
-            editBackground: null
-            editTypeBackground: null
+            editTheme: false
+            editBackground: false
+            editTypeBackground: false
+    sliderMini:
+        showPage: false
     home:
-        showPage: null
+        showPage: false
         actions:
-            uploadSlider: null
-            editSlider: null
-            uploadMiniature: null
-            editMiniature: null
-            addSlider: null
+            uploadSlider: false
+            editSlider: false
+            uploadMiniature: false
+            editMiniature: false
+            addSlider: false
     server:
-        showPage: null
+        showPage: false
         actions:
-            addServer: null
-            editServer: null
+            addServer: false
+            editServer: false
     pages:
-        showPage: null
+        showPage: false
         actions:
-            editPage: null
-            addPage: null
+            editPage: false
+            addPage: false
     news:
-        showPage: null
+        showPage: false
         actions:
-            addNews: null
-            editNews: null
+            addNews: false
+            editNews: false
     shop:
-        showPage: null
+        showPage: false
         actions:
-            addCategorie: null
-            addOffre: null
-            editCategorieOffre: null
+            addCategorie: false
+            addOffre: false
+            editCategorieOffre: false
+        achatEvo:
+            showPage: false
+        boutiqueList:
+            showPage: false
     payment:
-        showPage: null
+        showPage: false
         actions:
-            editPayment: null
-            addOffrePaypal: null
-            editOffrePaypal: null
+            editPayment: false
+            addOffrePaypal: false
+            editOffrePaypal: false
+            editOffrePaysafeCard: false
+            verifPaysafecard: false
     menus:
-        showPage: null
+        showPage: false
         actions:
-            addLinkMenu: null
-            addDropLinkMenu: null
-            editDropAndLinkMenu: null
+            addLinkMenu: false
+            addDropLinkMenu: false
+            editDropAndLinkMenu: false
     vote:
-        showPage: null
+        showPage: false
         actions:
-            editSettings: null
-            addVote: null
-            resetVote: null
-            deleteVote: null
+            editSettings: false
+            addVote: false
+            resetVote: false
+            deleteVote: false
+        recompenseAuto:
+            page: false
+            showPage: false
+            actions:
+                resetRecompense: false
+                addRecompense: false
     members:
-        showPage: null
+        showPage: false
         actions:
-            editMember: null
+            editMember: false
     forum:
-        showPage: null
+        showPage: false
         actions:
-            addSmiley: null
-            seeSmileys: null
-            addPrefix: null
-            seePrefix: null
+            addSmiley: false
+            seeSmileys: false
+            addPrefix: false
+            seePrefix: false
     widgets:
-        showPage: null
+        showPage: false
         actions:
-            addWidgets: null
-            editWidgets: null
+            addWidgets: false
+            editWidgets: false
     support:
-        showPage: ""
         tickets:
-            showPage: null
+            showPage: false
             actions:
-                editEtatTicket: null
-                deleteTicket: null
-        maintenance:
-            showPage: null
-            actions:
-                editDefaultMessage: null
-                editAdminMessage: null
-                editEtatMaintenance: null
-                switchRedirectMode: null
+                editEtatTicket: false
+                deleteTicket: false
+                deleteAllTicket: false
+    maintenance:
+        showPage: false
+        actions:
+            editDefaultMessage: false
+            editAdminMessage: false
+            editEtatMaintenance: false
+            switchRedirectMode: false
+            connexionAdmin: false
     update:
-        showPage: null
+        showPage: false
+    social:
+        showPage: false
+    newsletter:
+        showPage: false
+        actions:
+            send: false
+    ban:
+        showPage: false
+        actions:
+            removeBan: false
+            addBan: false
+            editBanPage: false
+    upload:
+        showPage: false
+        manager: false
 PermsForum:
     general:
-        addCategorie: null
-        addForum: null
-        deleteForum: null
-        deleteCategorie: null
-        addSousForum: null
-        deleteSousForum: null
-        modeJoueuur: ""
-        modeJoueur: null
+        addCategorie: false
+        addForum: false
+        deleteForum: false
+        deleteCategorie: false
+        addSousForum: false
+        deleteSousForum: false
+        modeJoueur: false
     moderation:
-        editTopic: null
-        deleteMessage: null
-        deleteTopic: null
-        editMessage: null
-        closeTopic: null
-        mooveTopic: null
-        seeSignalement: null
-        addPrefix: null
-        epingle: null
-        selTopic: null
-prefix: prefixRed
-effets: style5
+        editTopic: false
+        deleteMessage: false
+        deleteTopic: false
+        editMessage: false
+        closeTopic: false
+        mooveTopic: false
+        seeSignalement: false
+        addPrefix: false
+        epingle: false
+        selTopic: false
+        

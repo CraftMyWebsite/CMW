@@ -66,6 +66,7 @@ if(Permission::getInstance()->verifPerm('createur')) {
 			$tabPerm['prefix'] = '';
 			$tabPerm['effets'] = '';
 			$tabPerm = createTab($tabPerm);
+			$tabPerm["PermsDefault"]["forum"]["perms"] = "0";
 			$grade = $dirGrades.$numGrade.'.yml';
 			$createGrade = new Ecrire($grade, $tabPerm);
 			echo('grade&gradeCreated');
