@@ -103,7 +103,7 @@ else
                                 <h3 class="card-title"><strong id="servName<?php echo $i; ?>"><?php echo $serveur['nom']; ?></strong><small><?php echo $serveur['protocole'] == 1 ? '(JSONAPI)' : '(RCON/Query)'; ?></small></h3>
                             </div>
                             <div class="float-right">
-                                <button onclick="sendDirectPost('?action=supprJson&nom=<?php echo $serveur['nome']; ?>', function(data) { if(data) { hide('jsonReg<?php echo $i; ?>'); hide('tab-jsonReg<?php echo $i; ?>')}})" class="btn btn-outline-secondary">Supprimer</button>
+                                <button onclick="sendDirectPost('?action=supprJson&nom=<?php echo $serveur['id']; ?>&key=<?php echo $i; ?>', function(data) { if(data) { hide('jsonReg<?php echo $i; ?>'); hide('tab-jsonReg<?php echo $i; ?>')}})" class="btn btn-outline-secondary">Supprimer</button>
                             </div>
                            </div>
                             
@@ -141,16 +141,12 @@ else
                 </div>
                  <?php } ?>
             </div>
-            <?php
-            if(count($lectureJSON) != 0) { ?>
-             <script>initPost('modifServer', 'admin.php?&action=serveurConfig', function(data) { if(data) {  }});</script>
-            }
+            <script>initPost('modifServer', 'admin.php?&action=serveurConfig', function(data) { if(data) {  }});</script>
             <div class="card-footer">
                 <div class="row text-center">
                     <input type="submit" onclick="sendPost('modifServer', null);" class="btn btn-success w-100" value="Valider les changements !" />
                 </div>
             </div>
-        <?php } ?>
         </div>
     </div>
 

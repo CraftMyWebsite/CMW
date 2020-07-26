@@ -34,6 +34,8 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'edit
 			$req = $bddConnection->prepare('UPDATE cmw_serveur SET nom = :nom, adresse = :addr, port = :query, port2 = :rcon, mdp = :mdp WHERE id = :id');
 			$req->execute($info);
 		}
+		$videCache = $bddConnection->prepare('DELETE FROM cmw_cache_json WHERE requete LIKE :id');
+		$videCache->execute(array('id' => '%.'.$key));
 	}
 }
 ?>
