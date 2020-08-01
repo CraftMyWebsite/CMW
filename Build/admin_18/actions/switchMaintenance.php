@@ -5,24 +5,33 @@ if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', '
 	$result_Etat = $get_Etat['maintenanceEtat'];
 	
 	if($result_Etat == "1") {
-			$req = $bddConnection->prepare('UPDATE cmw_maintenance SET maintenanceEtat = :maintenanceEtat WHERE maintenanceId = :maintenanceId');
-			$req->execute(array (
-				'maintenanceEtat' => 0,
-				'maintenanceId' => $_GET['maintenanceId'],
-				));
+		$req = $bddConnection->prepare('UPDATE cmw_maintenance SET maintenanceEtat = :maintenanceEtat WHERE maintenanceId = :maintenanceId');
+		$req->execute(array (
+			'maintenanceEtat' => 0,
+			'maintenanceId' => $_GET['maintenanceId'],
+		));
+		$retour = array('retour' => "OK", "etat" => 0);
 	} else {
 		$date = htmlspecialchars($_POST["date"]);
-		$dtime = DateTime::createFromFormat("d/m/Y H:i", $date);
+		$dtime = DateTime::createFromFormat("Y-m-d", $date);
 		$dateTime = "";
 		if($dtime != false)
 			$dateTime = $dtime->getTimestamp();
-		
-		$req = $bddConnection->prepare('UPDATE cmw_maintenance SET maintenanceEtat = :maintenanceEtat, maintenanceTime = UNIX_TIMESTAMP(), dateFin = :dateFin WHERE maintenanceId = :maintenanceId');
-		$req->execute(array (
-			'maintenanceEtat' => 1,
-			'dateFin' => $dateTime,
-			'maintenanceId' => $_GET['maintenanceId'],
-		));
+		if(time() > $dateTime)
+			$retour = array('retour' => "NOPE", "message" => "Date de fin avant le début");
+		else
+		{
+			$req = $bddConnection->prepare('UPDATE cmw_maintenance SET maintenanceEtat = :maintenanceEtat, maintenanceTime = UNIX_TIMESTAMP(), dateFin = :dateFin WHERE maintenanceId = :maintenanceId');
+			$req->execute(array (
+				'maintenanceEtat' => 1,
+				'dateFin' => $dateTime,
+				'maintenanceId' => $_GET['maintenanceId'],
+			));
+			$retour = array('retour' => "OK", "etat" => 1, "data" => $date);
+		}
 	}
 }
+else
+	$retour = array('retour' => "NOPE", 'message' => "Erreur de permission");
+echo json_encode($retour);
 ?>

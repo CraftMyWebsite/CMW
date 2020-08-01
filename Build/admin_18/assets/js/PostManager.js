@@ -67,7 +67,7 @@ function removePost(idform, del) {
     allForm[idform].delete(del);
 }
 
-function sendPost(idform, callback) {
+function sendPost(idform, callback, sendData) {
     let it = allForm[idform].keys();
     let postData = {};
     for (let key of it) {
@@ -127,19 +127,35 @@ function sendPost(idform, callback) {
         console.log("post: "+allUrl[idform]+" data:"+data)
         if (status == "success") {
             returnData = true;
-            notif("success", "Action effectué !","");
+            if(isset(sendData))
+            {
+                donneesRetour = JSON.parse(data);
+                if(donneesRetour['retour'] == "OK")
+                    notif("success", "Action effectué !","");
+                else
+                {
+                    notif("error", "Erreur !", donneesRetour['message']);
+                }
+            }
+            else
+                notif("success", "Action effectué !","");
         } else {
             notif("error", "Erreur", status);
         }
         if(isset(allCallBack[idform])) {
-            allCallBack[idform](returnData);
+            if(isset(sendData))
+                allCallBack[idform](returnData, data);
+            else
+                allCallBack[idform](returnData);
         }
     });
     it = allForm[idform].keys();
     for (let key of it) {
         allForm[idform].get(key).disabled = false;
     }
-    if(isset(callback)) {callback()};
+    if(isset(callback)) {
+        callback();
+    };
 }
 
 function clearAllInput(idform) {

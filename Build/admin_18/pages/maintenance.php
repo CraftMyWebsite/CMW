@@ -1,17 +1,17 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-	<h2 class="h2 gray">
+    <h2 class="h2 gray">
         Gestion Maintenance du site
-	</h2>
+    </h2>
 </div>
 <div class="row">
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editDefaultMessage') AND !$_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editAdminMessage') AND !$_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance') AND !$_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchRedirectMode')) { ?>
-     	<div class="col-md-12 text-center">
+        <div class="col-md-12 text-center">
             <div class="alert alert-danger">
                 <strong>Vous avez aucune permission pour accéder à la maintenance.</strong>
             </div>
         </div>
     <?php } else { ?>
-    	<div class="col-md-12 text-center">
+        <div class="col-md-12 text-center">
             <div class="alert alert-success">
                 <strong>Vous avez une panne sur votre site ? Un problème avec le design/script/news/tickets... Alors ceci permet de mettre votre site en mode maintenance, aucun membre n'y aura accès sauf les créateurs.</strong>
             </div>
@@ -19,13 +19,13 @@
         <?php
         for($i = 0; $i < count($maintenance); $i++) {
             if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editDefaultMessage') OR $_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editAdminMessage')) { ?>
-            	<div class="col-md-12 col-xl-6 col-12">
-				    <div class="card">
-				      <div class="card-header ">
-				        <h3 class="card-title"><strong>Édition des messages</strong></h3>
-				      </div>
-				      <div class="card-body" >
-				       <table class="table table-striped table-bordered">
+                <div class="col-md-12 col-xl-6 col-12">
+                    <div class="card">
+                      <div class="card-header ">
+                        <h3 class="card-title"><strong>Édition des messages</strong></h3>
+                      </div>
+                      <div class="card-body" >
+                       <table class="table table-striped table-bordered">
                                     <?php if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editDefaultMessage')) { ?>
                                         <tr>
                                             <th>Message :</th>
@@ -49,11 +49,11 @@
                                         <script>initPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageAdmin&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
                                     <?php } ?>
                                 </table>
-				      </div>
-				  	</div>
-				</div>
+                      </div>
+                    </div>
+                </div>
 
-          	<?php } if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance') OR $_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchRedirectMode')) { ?>
+            <?php } if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance') OR $_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchRedirectMode')) { ?>
                 <div class="col-md-12 col-xl-6 col-12">
                     <div class="card">
                         <div class="card-header">
@@ -88,18 +88,38 @@
                                             <div class="card-header">
                                                 <h5 class="card-title">Activer/désactiver la maintenance</h3>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body" id="maintenance">
                                                 <center>Vous souhaitez rendre le site accessible uniquement aux administrateurs ? Il vous suffit d'appuyer sur le bouton ci-dessous. Les visiteurs seront redirigés vers la page de maintenance.</center>
-               
-                                                <form method="post" action="?&action=switchMaintenance&maintenanceId=<?=$maintenance[$i]['maintenanceId']?>">
-													<label>Définir une date de fin de maintenance: <small>Laissez vide si aucune</small></label>
-													<input type="date" name="date" value="<?php if(!empty($maintenance[$i]['dateFin']) && $maintenance[$i]['dateFin'] > time()) echo date("d/m/Y H:i", $maintenance[$i]["dateFin"]);?>" class="form-control" placeholder="format: jj/mm/aaaa hh:mm">
-                                                    <?php if($maintenance[$i]['maintenanceEtat'] == 1) { 
-                                                        echo '<button type="submit" class="btn btn-danger btn-block" />Désactiver la maintenance</button>';
-                                                    } else {
-                                                        echo '<button type="submit" class="btn btn-success btn-block" />Activer la maintenance</button>';
-                                                    } ?> 
-                                                </form>
+                                                <label>Définir une date de fin de maintenance: <small>Laissez vide si aucune</small></label>
+                                                <input type="date" name="date" <?php if(!empty($maintenance[$i]['dateFin']) && $maintenance[$i]['dateFin'] > time()) echo 'value="'.date("Y-m-d", $maintenance[$i]["dateFin"]).'"';?> class="form-control" placeholder="format: jj/mm/aaaa">
+                                                <?php if($maintenance[$i]['maintenanceEtat'] == 1) { 
+                                                    ?>
+                                                    <button onclick="sendPost('maintenance', null, true);" type="submit" id="maintenanceBtn" class="btn btn-danger btn-block" />Désactiver la maintenance</button>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <button onclick="sendPost('maintenance', null, true);" id="maintenanceBtn" type="submit" class="btn btn-success btn-block" />Activer la maintenance</button>
+                                                    <?php
+                                                } ?> 
+                                                <script>initPost('maintenance', 'admin.php?action=switchMaintenance&maintenanceId=<?=$maintenance[$i]["maintenanceId"];?>', function(data, otherData){
+                                                    if(data) {
+                                                        update = JSON.parse(otherData);
+                                                        btn = document.getElementById('maintenanceBtn');
+                                                        if(update['etat'] == 1)
+                                                        {
+                                                            btn.classList.remove("btn-success");
+                                                            btn.classList.add("btn-danger");
+                                                            btn.innerHTML = 'Désactiver la maintenance';
+                                                        }
+                                                        else
+                                                        {
+                                                            btn.classList.add("btn-success");
+                                                            btn.classList.remove("btn-danger");
+                                                            btn.innerHTML = 'Activer la maintenance';
+                                                        }
+                                                        console.log(update['retour']);
+                                                    }
+                                                }); </script>
                                             </div>
                                         </div>
                                     </div>
@@ -108,18 +128,37 @@
                                     <div class="col-md-12">
                                         <div class="card"  style="text-align: center;">
                                             <div class="card-header">
-                                                <h5 class="card-title">Changer le type de redirection</h3>
+                                                <h5 class="card-title">Changer le type de redirection</h5>
+                                                <p class="text-success">Actuellement : <span id="maintenanceActu"><?=($maintenance[$i]['maintenancePref'] == 1) ? 'Panel Uniquement' : 'Panel + Site'; ?></span></p>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body" id="maintenancePref">
                                                 <center>Grâce à cette option, si la maintenance est activée vous pouvez choisir si les administrateurs peuvent accéder au panel + le site ou uniquement le panel.</center>
-                  
-                                                <form method="post" action="?&action=switchPreference&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>">
-                                                    <?php if($maintenance[$i]['maintenancePref'] == 1) { 
-                                                        echo '<button type="submit" name="maintenancePref" class="btn btn-warning" value="0" />Changer sur <strong>Panel + Site</strong></button>';
-                                                    } else {
-                                                        echo '<button type="submit" name="maintenancePref" class="btn btn-warning" value="1" />Changer sur <strong>Panel uniquement</strong></button>';
-                                                    } ?>
-                                                </form>
+                                                <?php if($maintenance[$i]['maintenancePref'] == 1) { 
+                                                    ?><button type="submit" onclick="sendPost('maintenancePref', null);" class="btn btn-warning" id="maintenancePrefBtn" value="1"/>Changer sur <strong>Panel + Site</strong></button>
+                                                <?php
+                                                } else {
+                                                    ?><button type="submit" id="maintenancePrefBtn" onclick="sendPost('maintenancePref', null);" class="btn btn-warning" value="0"/>Changer sur <strong>Panel uniquement</strong></button>
+                                                    <?php
+                                                } ?>
+                                                <script>initPost('maintenancePref', 'admin.php?&action=switchPreference&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>', function(data) {
+                                                    if(data)
+                                                    {
+                                                        btn = document.getElementById('maintenancePrefBtn');
+                                                        span = document.getElementById('maintenanceActu');
+                                                        if(btn.value == 0)
+                                                        {
+                                                            btn.value = 1;
+                                                            btn.innerHTML = 'Changer sur <strong>Panel + Site</strong>';
+                                                            span.innerHTML = "Panel Uniquement";
+                                                        }
+                                                        else
+                                                        {
+                                                            btn.value = 0;
+                                                            btn.innerHTML = 'Changer sur <strong>Panel uniquement</strong>';
+                                                            span.innerHTML = "Panel + Site";
+                                                        }
+                                                    }
+                                                }); </script>
                                             </div>
                                         </div>
                                     </div>
