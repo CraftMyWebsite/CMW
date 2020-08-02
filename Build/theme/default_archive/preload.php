@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // On inclut le fichier de contrôle de la maintenance
 include('controleur/maintenance.php');
 // Si la maintenance est activé

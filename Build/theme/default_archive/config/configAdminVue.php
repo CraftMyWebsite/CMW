@@ -12,23 +12,19 @@
                 -->
                 <div class="row">
                     <label class="control-label">Facebook (URL de votre page Facebook)</label>
-                    <input type="text" class="form-control" name="facebook" value="<?= $_Theme_['Pied']['facebook']; ?>">
+                    <input type="text" class="form-control" name="facebook" value="<?php echo $_Theme_['Pied']['facebook']; ?>">
                 </div>
                 <div class="row">
                     <label class="control-label">Twitter (URL de votre compte Twitter)</label>
-                    <input type="text" class="form-control" name="twitter" value="<?= $_Theme_['Pied']['twitter']; ?>">
+                    <input type="text" class="form-control" name="twitter" value="<?php echo $_Theme_['Pied']['twitter']; ?>">
                 </div>
                 <div class="row">
                     <label class="control-label">Youtube (URL de votre page Youtube)</label>
-                    <input type="text" class="form-control" name="youtube" value="<?= $_Theme_['Pied']['youtube']; ?>">
+                    <input type="text" class="form-control" name="youtube" value="<?php echo $_Theme_['Pied']['youtube']; ?>">
                 </div>
                 <div class="row">
                     <label class="control-label">Discord (URL de votre serveur Discord)</label>
-                    <input type="text" class="form-control" name="discord" value="<?= $_Theme_['Pied']['discord']; ?>">
-                </div>
-                <div class="row">
-                    <label class="control-label">À Propos</label>
-                    <input type="text" class="form-control" name="about" value="<?= $_Theme_['Pied']['about']; ?>">
+                    <input type="text" class="form-control" name="discord" value="<?php echo $_Theme_['Pied']['discord']; ?>">
                 </div>
                 <div class="form-group text-center">
                     <input type="submit" class="btn btn-success">

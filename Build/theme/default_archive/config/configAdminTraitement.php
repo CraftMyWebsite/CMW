@@ -5,7 +5,6 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editT
 	$ecritureTheme['Pied']['twitter'] = htmlspecialchars($_POST['twitter']);
 	$ecritureTheme['Pied']['youtube'] = htmlspecialchars($_POST['youtube']);
 	$ecritureTheme['Pied']['discord'] = htmlspecialchars($_POST['discord']);
-	$ecritureTheme['Pied']['about'] = htmlspecialchars($_POST['about']);
 	$ecriture = new Ecrire('theme/'.$_Serveur_['General']['theme'].'/config/config.yml', $ecritureTheme);
 }
 ?>
