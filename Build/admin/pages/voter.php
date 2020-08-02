@@ -158,7 +158,7 @@
                                             function (data) { if(data) {}})</script>
                 <div class="card-footer">
                         <div class="row text-center">
-                            <input type="submit" onclick="sendPost('new-vote', function(data) { if(data) { }});" class="btn btn-success w-100" value="Valider les changements !"/>
+                            <input type="submit" onclick="sendPost('new-vote', function(data) { if(data) { voteUpdate(); }});" class="btn btn-success w-100" value="Valider les changements !"/>
                         </div>
                     </div>
             </div>
@@ -399,9 +399,9 @@
                             <?php 
                             } ?>
                              <script>
-                                initPost("all-vote", "admin.php?action=modifierVote", null);</script>
+                                initPost("all-vote", "admin.php?action=modifierVote");</script>
                             <div class="card-footer">
-                                <input type="submit" onclick="sendPost('all-vote', function(data) { if(data) { }});" class="btn btn-success w-100" value="Valider les changements"/>
+                                <input type="submit" onclick="sendPost('all-vote');" class="btn btn-success w-100" value="Valider les changements"/>
                             </div>
                     <?php } ?>
                     </div>

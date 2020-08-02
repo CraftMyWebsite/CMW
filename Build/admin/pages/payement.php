@@ -83,6 +83,12 @@ if(isset($_GET['paypal'])){
                         <label class="control-label">Dedipass clé privée</label>
                         <input type="text" name="private_key" class="form-control" value="<?php echo $lectureP['private_key']; ?>" placeholder="Trouvez la sur votre panel Dedipass en suivant le tuto" >
                     </div>
+                    <script>initPost('payementinfo', 'admin.php?&action=editPayement');</script>
+                    <div class="card-footer">
+                        <div class="row">
+                            <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements !" />
+                        </div>
+                    </div>
                 <?php } elseif($affichage == "paypal")
                 { ?>
                 <!-- PayPal  -->
@@ -91,6 +97,12 @@ if(isset($_GET['paypal'])){
                     <input type="text" name="paypalEmail" class="form-control" value="<?php echo $lectureP['paypalEmail']; ?>" placeholder="L'email lié à votre compte paypal."/>
                 </div>
                 <input type="hidden" name="paypalpage" value="1">
+                <script>initPost('payementinfo', 'admin.php?&action=editPayement');</script>
+                <div class="card-footer">
+                    <div class="row">
+                        <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements !" />
+                    </div>
+                </div>
             <?php } else {
                 ?>
                 <input type="hidden" name="paysafecardpage" value="1">
@@ -101,12 +113,6 @@ if(isset($_GET['paypal'])){
                     </div>
                 </div>
             <?php } ?>
-            </div>
-        </div>
-        <script>initPost('payementinfo', 'admin.php?&action=editPayement', null);</script>
-        <div class="card-footer">
-            <div class="row">
-                <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements !" />
             </div>
         </div>
     </div>
