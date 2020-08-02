@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'home', 'actions', 'uploadMiniature')) {
+if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'uploadMiniature')) {
 	if(isset($_FILES['img']) and !empty($_FILES['img']))
 	{
 		include_once('controleur/upload.class.php');

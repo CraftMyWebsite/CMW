@@ -3,26 +3,37 @@ if(Permission::getInstance()->verifPerm('createur')) {
 
 	$nameGrade = htmlspecialchars($_POST['gradeName']);
 	$existGrade = false;
+	$dirGrades = './modele/grades/';
+	$initGrades = glob($dirGrades.'*.yml');
+
+	$lastGrade[] = array();
+	foreach($initGrades as $numGrade) {
+		$lastGrade[] = substr($numGrade, 16, -4);
+	}
+
+	$lastGrade = array_filter($lastGrade);
+	if(empty($lastGrade))
+		array_push($lastGrade, -1);
 
 	if(strlen($nameGrade) > 32) {
-		header('Location: admin.php?page=grade&nomGradeLong=true');
+		echo('nomGradeLong');
 		exit();
 	} if(strlen($nameGrade) < 3) {
-		header('Location: admin.php?page=grade&nomGradeCourt=true');
+		echo('nomGradeCourt');
 		exit();
 	}
 
 	if(!is_dir($dirGrades)) {
 		if(!mkdir($dirGrades, 0755)) {
-			header('Location: admin.php?page=grade&cdgi=true');
+			echo('cdgi');
 			exit();
 		} if(!mkdir($dirGrades.'NOT_TOUCH/', 0755)) {
-			header('Location: admin.php?page=grade&cdnti=true');
+			echo('cdnti');
 			exit();
 		}
 	} elseif(!is_dir($dirGrades.'NOT_TOUCH/')) {
 		if(!mkdir($dirGrades.'NOT_TOUCH/', 0755)) {
-			header('Location: admin.php?page=grade&cdnti=true');
+			echo('cdnti');
 			exit();
 		}
 	}
@@ -36,7 +47,7 @@ if(Permission::getInstance()->verifPerm('createur')) {
 	}
 
 	if($existGrade == true) {
-		header('Location: admin.php?page=grade&gradeNameAlreadyUsed=true');
+		echo('gradeNameAlreadyUsed');
 		exit();
 	} else {
 		if(max($lastGrade) == -1) {
@@ -45,7 +56,7 @@ if(Permission::getInstance()->verifPerm('createur')) {
 		    $numGrade = max($lastGrade) + 1;
 	    }
 		if(file_exists($dirGrades.$numGrade.'.yml')) {
-			header("Location: admin.php?page=grade&conflitGrade=true");
+			echo("conflitGrade");
 			exit();
 		}
 		if($fichier = fopen($dirGrades.$numGrade.'.yml', "w+"))
@@ -55,9 +66,10 @@ if(Permission::getInstance()->verifPerm('createur')) {
 			$tabPerm['prefix'] = '';
 			$tabPerm['effets'] = '';
 			$tabPerm = createTab($tabPerm);
+			$tabPerm["PermsDefault"]["forum"]["perms"] = "0";
 			$grade = $dirGrades.$numGrade.'.yml';
 			$createGrade = new Ecrire($grade, $tabPerm);
-			header('Location: admin.php?page=grade&gradeCreated=true');
+			echo('grade&gradeCreated');
 			exit();
 		}	
 	}

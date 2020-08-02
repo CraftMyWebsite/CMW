@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'support', 'maintenance', 'showPage')) {
+if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['support']['maintenance']['showPage'] == true) {
     $req = $bddConnection->query('SELECT * FROM cmw_maintenance WHERE maintenanceId');
 
     $i = 0;

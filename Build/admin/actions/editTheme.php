@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) {
+if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) {
 	$lecture = new Lire('modele/config/config.yml');
 	$lecture = $lecture->GetTableau();
 

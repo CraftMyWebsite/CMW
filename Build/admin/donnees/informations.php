@@ -1,22 +1,17 @@
 <?php
 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'showPage')) {
+if($_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) {
 
     /* Statistiques de la boutique 
-        -> $boutiqueStats = 12 dernièrs achats sur la boutique
-        -> $lastOffre = Dernière offre Boutique créé
-        -> lastOffresPaypal = Dernière offre Paypal créé
+        -> $lastachatreq = 10 derniers achats sur la boutique
+        -> $TotalOffre = nombre d'offre boutique
     */
+    $lastachatreq = $bddConnection->query('SELECT * FROM `cmw_boutique_stats` ORDER BY `id` DESC LIMIT 10');
 
-    $boutiquesStatsReq = $bddConnection->query('SELECT * FROM cmw_boutique_stats ORDER BY id DESC LIMIT 0, 12;'); //12 derniers achats
-    $boutiquesStats = $boutiquesStatsReq->fetchAll(PDO::FETCH_ASSOC);
-    
-    $lastOffreReq = $bddConnection->query('SELECT * FROM cmw_boutique_offres ORDER BY id DESC LIMIT 1;');
-    $lastOffre = $lastOffreReq->fetchAll(PDO::FETCH_ASSOC);
+    $nboffreboutique = $bddConnection->query('SELECT count(id) as nb FROM `cmw_boutique_offres`');
+    $nboffre = $nboffreboutique->fetch(PDO::FETCH_ASSOC);
+    $TotalOffre = $nboffre["nb"];
 
-    $lastOffrePaypalReq = $bddConnection->query('SELECT * FROM cmw_jetons_paypal_offres ORDER BY id DESC LIMIT 1;');
-    $lastOffrePaypal = $lastOffrePaypalReq->fetchAll(PDO::FETCH_ASSOC);
-    
     /*Récupération des données JSONAPI
         $serveurStats -> toutes les données utiles du serveur (RAM, DD, Joueurs MAX, Actuels et leurs noms ...)
         $console -> La console
@@ -34,43 +29,32 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'info', 'showPage')) {
             }
         }
     }
-    
 
     // <!-- Statistiques des membres -->
-    $membresStatsReq = $bddConnection->query('SELECT * FROM cmw_users ORDER BY id DESC LIMIT 0, 8;');
-    $membresStats = $membresStatsReq->fetchAll(PDO::FETCH_ASSOC);
-   
+    $lastRegisterMember = $bddConnection->query('SELECT id,pseudo,tokens,email,anciennete'.(($ShowMail)? ",ValidationMail":"").''.($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP') ? ",ip" : "").' FROM cmw_users ORDER BY id DESC LIMIT 0, 10;');
 
-    // Statistiques du dernier inscrit
-    $lastMembreReq = $bddConnection->query('SELECT * FROM cmw_users ORDER BY id DESC LIMIT 1;');
-    $lastMembre = $lastMembreReq->fetchAll(PDO::FETCH_ASSOC);
-    
+    // <!-- Statistiques support -->
+    $lastticketreq = $bddConnection->query('SELECT id,auteur,titre,etat FROM `cmw_support` ORDER BY `id` DESC LIMIT 1');
+    $LastTicket = $lastticketreq->fetch(PDO::FETCH_ASSOC);
 
-    // <!-- Statistiques du dernier Ticket -->
-    $lastTicketReq = $bddConnection->query('SELECT * FROM cmw_support ORDER BY id DESC LIMIT 1;');
-    $lastTicket = $lastTicketReq->fetchAll(PDO::FETCH_ASSOC);
-
-    // <!-- Statistiques du dernier Commentaire Support -->
-    $lastCommentaireSuppReq = $bddConnection->query('SELECT * FROM cmw_support_commentaires ORDER BY id DESC LIMIT 1;');
-    $lastCommentaireSupp = $lastCommentaireSuppReq->fetchAll(PDO::FETCH_ASSOC);
+    $nbsupport = $bddConnection->query('SELECT count(id) as nb FROM `cmw_support`');
+    $nbsupportwait = $nbsupport->fetch(PDO::FETCH_ASSOC);
+    $TotalSupport = $nbsupportwait["nb"];
 
     //  Statistiques des News
-    $lastCommentaireNewsReq = $bddConnection->query('SELECT * FROM cmw_news_commentaires ORDER BY id DESC LIMIT 1;');
-    $lastCommentaireNews = $lastCommentaireNewsReq->fetchAll(PDO::FETCH_ASSOC);
+    $lastnewsreq = $bddConnection->query('SELECT id,auteur,titre FROM `cmw_news` ORDER BY `id` DESC LIMIT 1');
+    $LastNews = $lastnewsreq->fetch(PDO::FETCH_ASSOC);
 
-    $lastNewsReq = $bddConnection->query('SELECT * FROM cmw_news ORDER BY id DESC LIMIT 1;');
-    $lastNews = $lastNewsReq->fetchAll(PDO::FETCH_ASSOC);
+    $nbnews = $bddConnection->query('SELECT count(id) as nb FROM `cmw_news`');
+    $nbne = $nbnews->fetch(PDO::FETCH_ASSOC);
+    $TotalNews = $nbne["nb"];
+    
+    //Vérification du système de confirmation par mail des inscriptions
+    $req_etatMail = $bddConnection->query("SELECT etatMail FROM cmw_sysmail WHERE idMail = 1");
+    $get_etatMail = $req_etatMail->fetch(PDO::FETCH_ASSOC);
+    $ShowMail = $get_etatMail['etatMail'] == 1;
 
-    //Stats des votes
-    $lastVoteReq = $bddConnection->query('SELECT * FROM cmw_votes ORDER BY date_dernier DESC LIMIT 1;');
-    $lastVote = $lastVoteReq->fetchAll(PDO::FETCH_ASSOC);
-
-    //Stats Maintenance
-    $lastMaintenanceReq = $bddConnection->query('SELECT * FROM cmw_maintenance WHERE maintenanceId = 1');
-    $lastMaintenance = $lastMaintenanceReq->fetchAll(PDO::FETCH_ASSOC);
-
-    //Stats échange Jetons
-    $req = $bddConnection->query('SELECT * FROM cmw_log_DealJeton ORDER BY date DESC LIMIT 10;');
-    $lastDealJeton = $req->fetchAll(PDO::FETCH_ASSOC);
+    //Récupération du staff chat
+    $all_message_staff = $bddConnection->query('SELECT id, auteur, message FROM cmw_postit ORDER BY id DESC');
 }
 ?>

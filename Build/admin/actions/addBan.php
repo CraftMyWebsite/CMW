@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'ban', 'actions', 'addBan'))
+if(isset($_Joueur_) && $_Joueur_['rang'] == 1)
 {
 	if(isset($_POST['pseudo']) OR isset($_POST['ip']))
 	{

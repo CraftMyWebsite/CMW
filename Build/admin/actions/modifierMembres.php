@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) { 
+if($_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) { 
 
 	$allChange= explode('_', $_POST['allid']);
 	

@@ -1,4 +1,4 @@
-<?php
+<?php 
 if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'addServer')) {
 
 	$infos['adresse'] = $_POST['JsonAddr'];

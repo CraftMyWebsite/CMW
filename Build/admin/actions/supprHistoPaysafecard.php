@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'payment', 'actions', 'verifPaysafecard'))
+if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'verifPaysafecard'))
 {
 	if(isset($_GET['offre']))
 	{

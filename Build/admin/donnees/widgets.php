@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'widgets', 'showPage')) {
+if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['widgets']['showPage'] == true) {
 	$lectureWidgets = new Lire('modele/config/configWidgets.yml');
 	$lectureWidgets = $lectureWidgets->GetTableau();
 

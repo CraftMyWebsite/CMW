@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) {
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) {
 	if(isset($_GET['id']))
 	{
 		$id = htmlspecialchars($_GET['id']);

@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) {
+if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) {
 $lectureMenu = new Lire('modele/config/configMenu.yml');
 $lectureMenu = $lectureMenu->GetTableau();
 

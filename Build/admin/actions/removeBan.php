@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm("PermsPanel", 'ban', 'actions', 'removeBan'))
+if($_Permission_->verifPerm("createur"))
 {
 	if(isset($_GET['id']))
 	{

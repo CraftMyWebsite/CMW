@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'showPage')) {
+if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['showPage'] == true) {
 	if(!isset($categories) AND !isset($offres) AND !isset($actions))
 	{
 		$categories = GetListeCategories($bddConnection);

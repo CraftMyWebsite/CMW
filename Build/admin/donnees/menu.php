@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'showPage')) {
+if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['showPage'] == true) {
 	$pagesReq = $bddConnection->query('SELECT titre FROM cmw_pages');
 
 	$i = 0;
@@ -18,6 +18,10 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'menus', 'showPage')) {
 	{
 		$lectureMenuA['MenuTexte'][$i] = str_replace('[glyph]', '<span style="display: none;" class="glyphicon glyphicon-', $lectureMenu['MenuTexte'][$i]);
 		$lectureMenuA['MenuTexte'][$i] = str_replace('[/glyph]', '"></span> ', $lectureMenuA['MenuTexte'][$i]);
+	}
+
+	function isPage($str, $pages) {
+		return strpos($str, "=") ? ( in_array(explode("=", $str)[1], $pages)) : null;
 	}
 }
 ?>

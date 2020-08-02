@@ -7,4 +7,5 @@ $data = $req->fetch(PDO::FETCH_ASSOC);
 $nbPage = ceil($data['count']/20);
 $listeOffreReq = $bddConnection->query('SELECT id, nom FROM cmw_boutique_offres');
 $listeOffreData = $listeOffreReq->fetchAll(PDO::FETCH_ASSOC);
-?>
+
+$req = $bddConnection->query('SELECT COUNT(id) AS count FROM cmw_boutique_stats'); $data = $req->fetch(PDO::FETCH_ASSOC);  ?>

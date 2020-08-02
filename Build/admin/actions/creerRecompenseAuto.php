@@ -1,6 +1,6 @@
 <?php 
 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'addRecompense'))
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings'))
 {
 	$type = intval(htmlspecialchars($_POST['type']));
 	if($type == 1)

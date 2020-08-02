@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote'))
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote'))
 {
 	$req_donnees = $bddConnection->query('SELECT * FROM cmw_votes_config');
 	$data = $req_donnees->fetchAll();

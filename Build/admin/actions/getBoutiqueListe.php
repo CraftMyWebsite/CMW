@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'showPage'))
+if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage'))
 {
 	if(isset($_POST['page']))
 	{

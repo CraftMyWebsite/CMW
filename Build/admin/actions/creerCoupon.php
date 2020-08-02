@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'creerCoupon'))
+if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'creerCoupon'))
 {
 	if(isset($_POST['code'], $_POST['titre'], $_POST['pourcent']))
 	{
@@ -34,6 +34,5 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'shop', 'actions', 'creerC
 							'fin' => $fin,
 							'expire' => $expire
 		));
-		header('Location: ?page=boutique');
 	}
 }
