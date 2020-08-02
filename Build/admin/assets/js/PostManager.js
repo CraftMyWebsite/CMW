@@ -93,7 +93,7 @@ function sendPost(idform, callback, sendData) {
             } 
             else if(allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
             {
-                 postData[key] = allForm[idform].get(key).innerHtml;
+                postData[key] = allForm[idform].get(key).value;
                 console.log(key+"-textarea-"+postData[key]);
             } else {
                 if((allForm[idform].get(key).type == "checkbox" && !allForm[idform].get(key).checked))

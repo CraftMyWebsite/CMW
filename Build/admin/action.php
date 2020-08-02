@@ -256,6 +256,18 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		case 'modifierOffrePaypal': 
 			require_once('admin/actions/modifierOffrePaypal.php');
 		break;
+
+		case 'validerPaysafecard':
+			require('admin/actions/validerPaysafecard.php');
+		break;
+
+		case 'supprHistoPaysafecard':
+			require('admin/actions/supprHistoPaysafecard.php');
+		break;
+
+		case 'modifierOffrePaysafecard':
+			require('admin/actions/paysafecard.php');
+		break;
 		
 		case 'supprimerPaypalOffre': 
 			require_once('admin/actions/supprimerPaypalOffre.php');
