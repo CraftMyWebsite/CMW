@@ -12,7 +12,7 @@
                             <div class="col-5">
                                 <p class="text-center text-white">
                                     <b><?php echo $_Joueur_['pseudo']; ?></b>
-                                    <span class="prefix prefixRed" id="grade" style="margin-top: 15px">Créateur</span>
+                                    <?php echo gradeJoueur($_Joueur_['pseudo'], $bddConnection); ?>
                                 </p>
                             </div>
                         </div>

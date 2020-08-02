@@ -115,7 +115,7 @@ else
                             </div>
 
                             <label class="control-label">Nom du grade</label>
-                            <input maxlength="32" minlength="3" class="form-control" onkeyup="get('default-name-createur-1').innerText = get('default-name-createur-2').innerText = this.value;" name="nomCreateur" type="text"  value="<?=$_Serveur_['General']['createur']['nom'];?>" />
+                            <input maxlength="32" minlength="3" class="form-control" onkeyup="get('default-name-createur-1').innerText = get('default-name-createur-2').innerText = get('grade').innerText = this.value;" name="nomCreateur" type="text"  value="<?=$_Serveur_['General']['createur']['nom'];?>" />
 
                             <label class="control-label">Couleur du Grade</label>
                             <?php for($a = 0; $a < count($prefixs); $a++) {  ?>

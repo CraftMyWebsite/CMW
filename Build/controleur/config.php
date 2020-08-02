@@ -58,17 +58,18 @@
 
 	function gradeJoueur($pseudo, $bdd)
 	{
+		global $_Serveur_;
 		$req = $bdd->prepare('SELECT rang FROM cmw_users WHERE pseudo = :pseudo');
 		$req->execute(array('pseudo' => $pseudo ));
 		$joueurDonnees = $req->fetch(PDO::FETCH_ASSOC);
 		if($joueurDonnees['rang'] == 0) {
 			$gradeSite = $_Serveur_['General']['joueur'];
 		} elseif($joueurDonnees['rang'] == 1) {
-			$gradeSite = "<span class='prefix ".$_Serveur_['General']['createur']['prefix']." ".$_Serveur_['General']['createur']['effets']." ''>".$_Serveur_['General']['createur']['nom']."</span></p>";
+			$gradeSite = "<span class='prefix ".$_Serveur_['General']['createur']['prefix']." ".$_Serveur_['General']['createur']['effets']."' id='grade'>".$_Serveur_['General']['createur']['nom']."</span>";
 		} elseif(fopen('./modele/grades/'.$joueurDonnees['rang'].'.yml', 'r')) {
 			$openGradeSite = new Lire('./modele/grades/'.$joueurDonnees['rang'].'.yml');
 			$readGradeSite = $openGradeSite->GetTableau();
-			$gradeSite = $readGradeSite['Grade'];
+			$gradeSite = "<span class='prefix ".$readGradeSite['prefix']." ".$readGradeSite['effets']."' id='grade'>".$readGradeSite['Grade']."</span>";
 			if(empty($readGradeSite['Grade']))
 				$gradeSite = $_Serveur_['General']['joueur'];
 		} else {

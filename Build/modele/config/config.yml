@@ -16,7 +16,7 @@ General:
     statut: 2
     createur: 
         nom: Créateur
-        prefix: prefixCreateur
+        prefix: prefixRed
         effets: style16
     joueur: Joueur
 DataBase:
