@@ -14,9 +14,9 @@ if(isset($_GET['paypal'])){
 }
 </style>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-	<h2 class="h2 gray">
+    <h2 class="h2 gray">
         Réglages des moyens de paiement
-	</h2>
+    </h2>
 </div>
 <div class="row">
     <?php if(!$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment') AND !$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND !$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal')) { ?>
@@ -41,66 +41,67 @@ if(isset($_GET['paypal'])){
                 <h3 class="card-title"><?php if($affichage == "paypal"){ echo 'PayPal'; }elseif($affichage == "dedipass"){echo 'Dedipass';}else{echo 'PaySafeCard';}?></h3>
             </div>
         <div class="card-body" id="payementinfo">
-                <div class="col-md-12">
-                    <div class="row">
-                    <?php if($affichage == "paypal"){ ?>
-                        <div class="offset-md-4 col-md-4">
-                            <label class="custom-control custom-switch">
-                                <input onclick="sendPost('payementinfo');" type="checkbox" class="custom-control-input" name="paypal" id="paypallabel" <?php if($lectureP['paypal'] == true) echo 'checked'; ?>/> 
-                                <label for="paypallabel" class="custom-control-label">Activé</label>
-                            </label>
-                        </div>
-                    <?php }elseif($affichage == "dedipass"){?>
-                        <div class="offset-md-4 col-md-4">
-                            <label class="custom-control custom-switch">
-                                <input onclick="sendPost('payementinfo');" type="checkbox" name="dedipass" id="dedipasslabel" class="custom-control-input" <?php if($lectureP['dedipass'] == true) echo 'checked'; ?>>
-                                <label for="dedipasslabel" class="custom-control-label">Activé</label>
-                            </label>
-                        </div>
-                    <?php }else{ ?>
-                        <div class="offset-md-4 col-md-4">
-                            <label class="custom-control custom-switch">
-                                <input onclick="sendPost('payementinfo');" type="checkbox" id="paysafecardlabel" class="custom-control-input" name="paysafecard" <?php if($lectureP['paysafecard'] == true) echo 'checked'; ?>>
-                                <label for="paysafecardlabel" class="custom-control-label">Activé</label>
-                            </label>
-                        </div>
-                    <?php } ?>
-                    <input style="visibility: hidden;display: inline;" type="text" value="<?=$affichage;?>" id="quelretour" />
+            <div class="col-md-12">
+                <div class="row">
+                <?php if($affichage == "paypal"){ ?>
+                    <div class="offset-md-4 col-md-4">
+                        <label class="custom-control custom-switch">
+                            <input onclick="sendPost('payementinfo');" type="checkbox" class="custom-control-input" name="paypal" id="paypallabel" <?php if($lectureP['paypal'] == true) echo 'checked'; ?>/> 
+                            <label for="paypallabel" class="custom-control-label">Activé</label>
+                        </label>
                     </div>
-                    <div style="<?php if($affichage == "dedipass"){ echo 'display: block;';}elseif($affichage == "paypal"){echo'display: none';}else{echo 'display: none;';}?>">
+                <?php }elseif($affichage == "dedipass"){?>
+                    <div class="offset-md-4 col-md-4">
+                        <label class="custom-control custom-switch">
+                            <input onclick="sendPost('payementinfo');" type="checkbox" name="dedipass" id="dedipasslabel" class="custom-control-input" <?php if($lectureP['dedipass'] == true) echo 'checked'; ?>>
+                            <label for="dedipasslabel" class="custom-control-label">Activé</label>
+                        </label>
+                    </div>
+                <?php }else{ ?>
+                    <div class="offset-md-4 col-md-4">
+                        <label class="custom-control custom-switch">
+                            <input onclick="sendPost('payementinfo');" type="checkbox" id="paysafecardlabel" class="custom-control-input" name="paysafecard" <?php if($lectureP['paysafecard'] == true) echo 'checked'; ?>>
+                            <label for="paysafecardlabel" class="custom-control-label">Activé</label>
+                        </label>
+                    </div>
+                <?php } ?>
+                <input style="visibility: hidden;display: inline;" type="text" value="<?=$affichage;?>" id="quelretour" />
+                </div>
+                <?php if($affichage == "dedipass") { ?>
                     <!-- Dedipass -->
                     <div class="alert alert-success">
                         <p class="text-center">
                             Vous avez du mal à crée / configurer la solution de paiement DediPass ? Consultez notre <a href="https://craftmywebsite.fr/forum/index.php?threads/tuto-configurer-le-paiement-par-d%C3%A9dipass.3184/" target="_blank" rel="noopener noreferrer">tutoriel complet</a> !
                         </p>
                     </div>
-                        <div class="row">
-                            <label class="control-label">Dedipass clé publique</label>
-                            <input type="text" name="public_key" class="form-control" value="<?php echo $lectureP['public_key']; ?>" placeholder="Trouvez la sur votre panel Dedipass en suivant le tuto" >
-                        </div>
-                        <input type="hidden" name="dedipasspage" value="1">
-                        <div class="row">
-                            <label class="control-label">Dedipass clé privée</label>
-                            <input type="text" name="private_key" class="form-control" value="<?php echo $lectureP['private_key']; ?>" placeholder="Trouvez la sur votre panel Dedipass en suivant le tuto" >
-                        </div>
+                    <div class="row">
+                        <label class="control-label">Dedipass clé publique</label>
+                        <input type="text" name="public_key" class="form-control" value="<?php echo $lectureP['public_key']; ?>" placeholder="Trouvez la sur votre panel Dedipass en suivant le tuto" >
                     </div>
-                    <div style="<?php if($affichage == "paypal"){ echo 'display: block;';}elseif($affichage == "dedipass"){echo'display: none';}else{echo 'display: none;';}?>">
-                     <!-- PayPal  -->
-                        <div class="row">
-                            <label class="control-label">Email paypal</label>
-                            <input type="text" name="paypalEmail" class="form-control" value="<?php echo $lectureP['paypalEmail']; ?>" placeholder="L'email lié à votre compte paypal."/>
-                        </div>
-                        <input type="hidden" name="paypalpage" value="1">
+                    <input type="hidden" name="dedipasspage" value="1">
+                    <div class="row">
+                        <label class="control-label">Dedipass clé privée</label>
+                        <input type="text" name="private_key" class="form-control" value="<?php echo $lectureP['private_key']; ?>" placeholder="Trouvez la sur votre panel Dedipass en suivant le tuto" >
                     </div>
-                    <div style="<?php if($affichage == "paypal"){ echo 'display: none;';}elseif($affichage == "dedipass"){echo'display: none';}else{echo 'display: block;';}?>">
-                        <div class="row">
-                            <div class="alert alert-danger">
-                                <p>Notre systéme "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuel ! Lorsqu'un joueur achéte des jetons via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livré les jetons à l'acheteur ! pour valider des code paysafecard / verifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
-                                Le saviez-vous: <strong>Vous pouvez payer l'hébergement de votre site web via code PaySafeCard <a href="https://webstrator.fr/" target="_blank" rel="noopener noreferrer">chez notre partenaire Webstrator.fr</a> !</strong>
-                            </div>
-                        </div>
+                <?php } elseif($affichage == "paypal")
+                { ?>
+                <!-- PayPal  -->
+                <div class="row">
+                    <label class="control-label">Email paypal</label>
+                    <input type="text" name="paypalEmail" class="form-control" value="<?php echo $lectureP['paypalEmail']; ?>" placeholder="L'email lié à votre compte paypal."/>
+                </div>
+                <input type="hidden" name="paypalpage" value="1">
+            <?php } else {
+                ?>
+                <input type="hidden" name="paysafecardpage" value="1">
+                <div class="row">
+                    <div class="alert alert-danger">
+                        <p>Notre systéme "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuel ! Lorsqu'un joueur achéte des jetons via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livré les jetons à l'acheteur ! pour valider des code paysafecard / verifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
+                        Le saviez-vous: <strong>Vous pouvez payer l'hébergement de votre site web via code PaySafeCard <a href="https://webstrator.fr/" target="_blank" rel="noopener noreferrer">chez notre partenaire Webstrator.fr</a> !</strong>
                     </div>
                 </div>
+            <?php } ?>
+            </div>
         </div>
         <script>initPost('payementinfo', 'admin.php?&action=editPayement', null);</script>
         <div class="card-footer">
