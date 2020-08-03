@@ -71,7 +71,7 @@ if(isset($_GET['paypal'])){
                     <!-- Dedipass -->
                     <div class="alert alert-success">
                         <p class="text-center">
-                            Vous avez du mal à crée / configurer la solution de paiement DediPass ? Consultez notre <a href="https://craftmywebsite.fr/forum/index.php?threads/tuto-configurer-le-paiement-par-d%C3%A9dipass.3184/" target="_blank" rel="noopener noreferrer">tutoriel complet</a> !
+                            Vous avez du mal à créer / configurer la solution de paiement DediPass ? Consultez notre <a href="https://craftmywebsite.fr/forum/index.php?threads/tuto-configurer-le-paiement-par-d%C3%A9dipass.3184/" target="_blank" rel="noopener noreferrer">tutoriel complet</a> !
                         </p>
                     </div>
                     <div class="row">
@@ -263,7 +263,7 @@ if(isset($_GET['paypal'])){
                                 </div><hr>
                                 <div class="row">
                                     <div class="offset-md-4 col-md-4">
-                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Modifier Les changements !"/>
+                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Valider Les changements !"/>
                                     </div>
                                 </div>
                                  <script>initPost('payementPaysafecard<?php echo $i; ?>', 'admin.php?&action=modifierOffrePaysafecard&id=<?php echo $paysafecard[$i]['id']; ?>',null);</script>
