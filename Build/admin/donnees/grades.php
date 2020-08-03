@@ -233,4 +233,50 @@ function array_to_unidim($array, $parent = '') {
     }
     return $result;
 }
+
+function writePerm($perm, $nb, $id, $other, $idGrade, $PermissionFormat) {
+    if(isset($perm) && is_array($perm)) {
+        echo '<ul '.($nb == 20 ? 'style="margin-left:-30px;"':'style="display:none;"').'class="grade-ul" id="cont'.($nb== 20 ? '' : '-').''.$id.'-'.$other.'">';
+        foreach($perm as $key => $value)
+        {
+
+            if($key != "Grade" & $key != "prefix" & $key != "effets")
+            {
+                if( is_array($value)) {  ?>
+                    <div class="custom-control custom-switch" id="grade-div"> 
+                        <li class="grade-li" onclick="switchGrade(this,'cont-<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>', '<?php echo $PermissionFormat[$id."".($nb== 20 ? '' : '-')."".$key]; ?>');" value="0" style="cursor:pointer;font-size:<?php echo $nb; ?>px;display:inline;" id="tab-<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>" ><i class="far fa-plus-square"></i> <?php echo $PermissionFormat[$id."".($nb== 20 ? '' : '-')."".$key]; ?>
+
+                        </li>
+                        <?php if($id."-".$key != "PermsDefault-forum") { ?>
+                            <input type="checkbox" onclick="CheckUnder(get('cont-<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>'),this.checked);updateGradeUl(this);" class="custom-control-input" id="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>" <?php  if(hasPermArray($other,$id.''.($nb== 20 ? '' : '-').''.$key, $idGrade)) { echo 'checked'; } ?>> 
+                            <label  style="margin-left:40px;margin-top:-30px;" class="custom-control-label " for="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"></label>
+                        <?php } ?>
+                        </div> 
+
+                <?php writePerm($value, $nb == 20 ? 17 : ($nb == 17 ? 15 : 13), $id."".($nb== 20 ? '' : '-')."".$key,$other, $idGrade, $PermissionFormat);
+
+            } else { ?>
+                        <div class="custom-control custom-switch" id="grade-div"> 
+                        <li style="font-size:<?php echo $nb; ?>px;display:inline;" class="grade-li" ><?php echo $PermissionFormat[$id."".($nb== 20 ? '' : '-')."".$key]; ?>
+
+                        </li>
+                            <?php if($id."-".$key == "PermsDefault-forum-perms") { ?>
+                                <input value="<?php echo $idGrade[$other]["PermsDefault"]["forum"]["perms"]; ?>" type="number" min="0" max="99" class="form-control" name="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"> 
+
+                            <?php } else { ?>
+                            <input value="true" type="checkbox" onclick="updateGradeUl(this);" class="custom-control-input" id="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>" name="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"
+                             <?php if(hasPerm($other,$id.''.($nb== 20 ? '' : '-').''.$key, $idGrade)) { echo 'checked'; } ?>> 
+                            <label  style="margin-left:40px;margin-top:-30px;" class="custom-control-label " for="<?php echo $id; ?><?php echo ($nb== 20 ? '' : '-'); ?><?php echo $key; ?>-<?php echo $other; ?>"></label>
+                            <?php } ?>
+                        </div> 
+
+                    
+                <?php }
+            }
+        }
+        echo '</ul>';
+    } else {
+
+    }
+}
 ?>

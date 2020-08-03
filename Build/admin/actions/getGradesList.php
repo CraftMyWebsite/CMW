@@ -1,93 +1,8 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-	<h2 class="h2 gray">
-		Gestion des grades du site
-	</h2>
-</div>
-<?php if(!$_Permission_->verifPerm("createur"))
+<?php echo '[DIV]';  if($_Permission_->verifPerm("createur"))
 {
-	echo '
-	<div class="row">
-		<div class="col-md-12 text-center">
-			<div class="alert alert-danger">
-				<strong>Vous avez aucune permission pour accéder aux réglages des grades.</strong>
-			</div>
-		</div>
-	</div>';
-}
-else
-	{
-		?>
-    <div class="alert alert-success">
-   		<strong>Vous pouvez ajouter autant de grades que vous le souhaitez pour votre site. Grâce à une toute nouvelle fonctionnalité vous pouvez dorénavant modifier/ajouter des permissions à tous vos grades créés. Cependant, les grades par défaut (Créateur et Joueur) ne peuvent pas être modifiés par sécurité.<br>L'accès à cette fonctionnalité est réservée aux Créateurs.</strong>
-    </div>
-    <div class="alert alert-warning">
-        <strong>ATTENTION<br>Certains hébergeurs bloquent la création automatique des grades.</strong>
-     </div>
+	require_once('./admin/donnees/grades.php'); ?>
 
-	 <div class="row">
-
-		<div class="col-md-12 col-xl-6 col-12">
-			<div class="card  ">
-				<div class="card-header ">
-					<h3 class="card-title"><strong>Création d'un grade</strong></h3>
-				</div>
-				<div class="card-body" id="addGrade">
-				<?php if(isset($_GET['gradeCreated']))
-			            {
-			                echo '<div class="alert alert-success text-center">Grade créé avec succès !</div>';
-			            }
-			            elseif(isset($_GET['nomGradeLong']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur !</strong><br>Le nom du grade entré est trop long !</div>';
-			            }
-			            elseif(isset($_GET['nomGradeCourt']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur !</strong><br>Le nom du grade entré est trop court !</div>';
-			            }
-			            elseif (isset($_GET['cdgi'])) 
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur Critique!</strong><br>Erreur interne, contacter le support de CraftMyWebsite code d\'erreur : cdgi</div>';
-			            }
-			            elseif(isset($_GET['cdnti']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur Critique!</strong><br>Erreur interne, contacter le support de CraftMyWebsite code d\'erreur : cdnti</div>';
-			            }
-			            elseif(isset($_GET['gradeNameAlreadyUsed']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur !</strong>Le nom du grade existe déjà !</div>';
-			            }
-			            elseif(isset($_GET['gradeDefaultInexistantRegen']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur Critique !</strong>Un fichier interne a été supprimé ! Réessayer l\'opération, en cas d\'échec contacter le support de CraftMyWebsite</div>';
-			            }
-			            elseif(isset($_GET['conflitGrade']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur Critique !</strong>Le ficheir existe déjà !</div>';
-			            }
-			         ?>
-
-                <label class="control-label">Nom du grade</label>
-                <input type="text" maxlength="32" minlength="3" name="gradeName" class="form-control" placeholder="Support" required/>
-	            </div>
-
-	            <script>initPost("addGrade", "admin.php?&action=addGrade",null);</script>
-
-	            <div class="card-footer">
-	                <div class="row text-center">
-	                    <input type="submit" onclick="sendPost('addGrade', null);" class="btn btn-success w-100"
-	                        value="Envoyer !" />
-	                </div>
-	            </div>
-	        </div>
-	   	</div>
-
-	   	<div class="col-md-12 col-xl-6 col-12">
-			<div class="card  ">
-				<div class="card-header ">
-					<h3 class="card-title"><strong>Édition des grades</strong></h3>
-				</div>
-				<div class="card-body" id="allGrade">
-					<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs">
 						<li class="nav-item"><a href="#gradeCreateur" id="default-name-createur-2" class="nav-link active" style="color: black !important" data-toggle="tab"><?php echo $_Serveur_['General']['createur']['nom']; ?></a></li>
 						<?php for($i = 2; $i <= max($lastGrade); $i++) { 
                             if(file_exists($dirGrades.$i.'.yml')) { ?>
@@ -177,17 +92,4 @@ else
 							</div>
 						<?php } } ?>
 	                </div>
-	            </div>
-	            <script>initPost("allGrade", "admin.php?&action=editGrade");</script>
-
-	            <div class="card-footer">
-	                <div class="row text-center">
-	                    <input type="submit" onclick="sendPost('allGrade');" class="btn btn-success w-100"
-	                        value="Valider les changements !" />
-	                </div>
-	            </div>
-	        </div>
-	   	</div>
-
-	</div>
 <?php } ?>
