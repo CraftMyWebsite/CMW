@@ -12,12 +12,7 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['showPage'] == tru
 	function getCouponsReduc($bdd)
 	{
 		$req = $bdd->query('SELECT * FROM cmw_boutique_reduction');
-		$i = 0;
-		while($fetch = $req->fetch(PDO::FETCH_ASSOC))
-		{
-			$coupons[$i] = $fetch;
-			$i++;
-		}
+		$coupons = $req->fetchAll(PDO::FETCH_ASSOC);
 		return $coupons;
 	}
 
@@ -25,16 +20,7 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['showPage'] == tru
 	{
 		$reponse = $bdd->query('SELECT * FROM cmw_boutique_categories');
 		
-		$i = 0;
-		$categories = null;
-		while($donnees = $reponse->fetch(PDO::FETCH_ASSOC))
-		{
-			$categories[$i]['titre'] = $donnees['titre'];
-			$categories[$i]['message'] = $donnees['message'];
-			$categories[$i]['id'] = $donnees['id'];
-			$categories[$i]['ordre'] = $donnees['ordre'];
-			$i++;
-		}
+		$categories = $reponse->fetchAll(PDO::FETCH_ASSOC);
 		return $categories;
 	}
 
@@ -42,18 +28,11 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['showPage'] == tru
 	{
 		$reponse = $bdd->query('SELECT * FROM cmw_boutique_offres ORDER BY id');
 		
-		$i = 0;
-		$offres = null;
-		while($donnees = $reponse->fetch(PDO::FETCH_ASSOC))
+		$offres = $reponse->fetchAll(PDO::FETCH_ASSOC);
+		foreach($offres as $key => $value)
 		{
-			$offres[$i]['id'] = $donnees['id'];
-			$offres[$i]['ordre'] = $donnees['ordre'];
-			$offres[$i]['nom'] = $donnees['nom'];
-			$offres[$i]['description'] = $donnees['description'];
-			$offres[$i]['prix'] = $donnees['prix'];
-			$offres[$i]['nbre_vente'] = $donnees['nbre_vente'];
-			$offres[$i]['categorie'] = $donnees['categorie_id'];
-			$i++;
+			$offres[$key]['categorie'] = $offres[$key]['categorie_id'];
+			unset($offres[$key]['categorie_id']);
 		}
 		return $offres;
 	}
