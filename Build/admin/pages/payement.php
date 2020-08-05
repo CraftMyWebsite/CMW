@@ -71,7 +71,7 @@ if(isset($_GET['paypal'])){
                     <!-- Dedipass -->
                     <div class="alert alert-success">
                         <p class="text-center">
-                            Vous avez du mal à créer / configurer la solution de paiement DediPass ? Consultez notre <a href="https://craftmywebsite.fr/forum/index.php?threads/tuto-configurer-le-paiement-par-d%C3%A9dipass.3184/" target="_blank" rel="noopener noreferrer">tutoriel complet</a> !
+                            Vous avez du mal à crée / configurer la solution de paiement DediPass ? Consultez notre <a href="https://craftmywebsite.fr/forum/index.php?threads/tuto-configurer-le-paiement-par-d%C3%A9dipass.3184/" target="_blank" rel="noopener noreferrer">tutoriel complet</a> !
                         </p>
                     </div>
                     <div class="row">
@@ -132,19 +132,19 @@ if(isset($_GET['paypal'])){
                         <h3>Créer une offre</h3>
                         <div class="row">
                             <label class="control-label">Titre de l'offre</label>
-                            <input type="text" name="nom" class="form-control" placeholder="ex: 5€ - 1500Jetons"/>
+                            <input type="text" name="nom" class="form-control" placeholder="ex: 5€ - 1500Jetons" required/>
                         </div>
                         <div class="row">
                             <label class="control-label">Message de l'offre</label>
-                            <input type="text" name="description" class="form-control" placeholder="ex: < img src=... / >"/>
+                            <input type="text" name="description" class="form-control" placeholder="ex: < img src=... / >" required/>
                         </div>
                         <div class="row">
                             <label class="control-label">Prix de l'offre</label>
-                            <input type="number" step="0.01" name="prix" class="form-control" placeholder="ex: 5" >
+                            <input type="number" step="0.01" name="prix" class="form-control" placeholder="ex: 5" required>
                         </div>
                         <div class="row">
                             <label class="control-label">Jetons donnés</label>
-                            <input type="number" name="jetons_donnes" class="form-control" placeholder="ex: 1500" >
+                            <input type="number" name="jetons_donnes" class="form-control" placeholder="ex: 1500" required>
                         </div>
                         <hr>
 
@@ -263,7 +263,7 @@ if(isset($_GET['paypal'])){
                                 </div><hr>
                                 <div class="row">
                                     <div class="offset-md-4 col-md-4">
-                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Valider Les changements !"/>
+                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Modifier Les changements !"/>
                                     </div>
                                 </div>
                                  <script>initPost('payementPaysafecard<?php echo $i; ?>', 'admin.php?&action=modifierOffrePaysafecard&id=<?php echo $paysafecard[$i]['id']; ?>',null);</script>

@@ -77,10 +77,14 @@ function sendPost(idform, callback, sendData) {
                 errorForm[idform] = [];
                 let it2 = allForm[idform].keys();
                 for (let op of it2) {
-                    if(allForm[idform].get(op).required && (allForm[idform].get(op).type=="text" |allForm[idform].get(op).type=="password"|allForm[idform].get(key).type=="number" |allForm[idform].get(op).type=="email" )&& (!isset(allForm[idform].get(op).value) | allForm[idform].get(op).value.replace(" ", "") == ""))
+                    if(allForm[idform].get(op).required && (allForm[idform].get(op).type=="text" | allForm[idform].get(op).type=="password"|allForm[idform].get(op).type=="number" |allForm[idform].get(op).type=="email" )&& (!isset(allForm[idform].get(op).value) | allForm[idform].get(op).value.replace(" ", "") == ""))
                     { 
                         errorForm[idform].push(allForm[idform].get(op));
-                        allForm[idform].get(op).className += " input-red";
+                        allForm[idform].get(op).classList.add("input-red");
+                    }
+                    else if(allForm[idform].get(op).className.includes("input-red") && isset(allForm[idform].get(op).value) && allForm[idform].get(op).value.replace(" ", "") != "")
+                    {
+                        allForm[idform].get(op).classList.remove("input-red");
                     }
                 }
                 notif("warning", "Erreur", "Formulaire incomplet");
