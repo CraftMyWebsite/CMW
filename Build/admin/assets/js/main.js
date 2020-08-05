@@ -47,7 +47,7 @@ function newsUpdate() {
 
 function serverUpdate() {
 	updateCont("admin.php?action=getServerList", get("modifServer"), function(data) { if(data) { 
-		initPost('modifServer', 'admin.php?&action=serveurConfig', function(data) { if(data) {  }});
+		initPost('modifServer', 'admin.php?&action=serveurConfig');
 	}});
 }
 
@@ -74,6 +74,12 @@ function menuLienUpdate() {
 function menuListeUpdate() {
 	updateCont("admin.php?action=getMenuListe", get("allListe"), function(data) { if(data) { 
 		initPostCallback( null);
+	}});
+}
+
+function gradesUpdate() {
+	updateCont("admin.php?action=getGradesList", get("allGrade"), function(data) { if(data) { 
+		initPost("allGrade", "admin.php?&action=editGrade");
 	}});
 }
 
