@@ -50,6 +50,7 @@ require('include/version.php');
 	?>
 
 	<?php
+	$maintenanceOn = true;
 	include('theme/' . $_Serveur_['General']['theme'] . '/entete.php'); //Header included
 	tempMess(); ?>
 
@@ -128,9 +129,20 @@ require('include/version.php');
 						<div class="card-body">
 							<h5><?= $donnees['maintenanceMsgAdmin']; ?></h5>
 						</div>
+						<?php if(Permission::getInstance()->verifPerm("PermsPanel", "maintenance", "actions", "connexionAdmin")) { ?>
+							<div class="card-footer">
+								<a href="index.php" class="btn btn-main w-100">Aller sur votre site</a>
+							</div>
+						<?php
+					} elseif(Permission::getInstance()->verifPerm("connect")) { ?>
+							<div class="card-footer">
+								<a class="btn btn-main w-100">Vous n'avez pas la permission d'accéder au site pendant la maintenance ! </a>
+							</div>
+					<?php }	else { ?>
 						<div class="card-footer">
 							<a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-main w-100">Se connecter</a>
 						</div>
+					<?php } ?>
 					</div>
 				</div>
 			</div>
