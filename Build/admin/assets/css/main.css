@@ -565,15 +565,14 @@ main {
 }
 
 /* FORUM */
-.username .style16
+.style16
 {
-  color: red;
-background-image: url('../img/etoile-anime.gif');
+  background-image: url('../images/etoile-anime.gif');
 }
 
-.username .style5
+.style5
 {
-background-image: url('../img/spark-gold.gif');
+background-image: url('../images/spark-gold.gif');
 }
 
 .prefix

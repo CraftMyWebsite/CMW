@@ -28,7 +28,7 @@
     --darkest-color-bg: #3f3f3f;
     --lightest-color-bg: #585858;
 
-    --header-image: url(https://i.pinimg.com/originals/67/19/84/671984c63217a05d2adf3a6591d29f2b.jpg)
+    --header-image: url(theme/default/assets/img/heading.jpg);
 }
 
 *:focus {
@@ -556,6 +556,63 @@ li.nav-item {
     color: white;
     cursor: pointer;
 }
+
+/* --- --- FORUM --- --- */
+
+.style16
+{
+    background-image: url('theme/default/assets/img/etoile-anime.gif');
+}
+
+.style5
+{
+    background-image: url('theme/default/assets/img/spark-gold.gif');
+}
+
+.prefix
+{
+  background-color: transparent;
+padding: 0px 6px;
+margin: -1px 0;
+border: 1px solid transparent;
+-webkit-border-radius: 0px; -moz-border-radius: 0px; -khtml-border-radius: 0px; border-radius: 0px;
+display: inline-block;
+
+}
+
+a.prefixLink:hover
+{
+  text-decoration: none;
+}
+
+a.prefixLink:hover .prefix
+{
+  color: rgb(70,70,70);
+text-decoration: none;
+background-color: rgb(245,245,245);
+padding: 0 6px;
+border: 1px solid rgb(222,222,222);
+
+}
+
+.prefix a { color: inherit; }
+
+.prefix.prefixPrimary    { color: rgb(70,70,70); background-color: rgb(239,239,239); border-color: rgb(239,239,239); }
+.prefix.prefixSecondary  { color: rgb(73,73,73); background-color: rgb(203,203,203); border-color: rgb(203,203,203); }
+
+.prefix.prefixRed        { color: white; background-color: red; border-color: #F88; }
+.prefix.prefixGreen      { color: white; background-color: green; border-color: green; }
+.prefix.prefixOlive      { color: black; background-color: olive; border-color: olive; }
+.prefix.prefixLightGreen { color: black; background-color: lightgreen; border-color: lightgreen; }
+.prefix.prefixBlue       { color: white; background-color: blue; border-color: #88F; }
+.prefix.prefixRoyalBlue  { color: white; background-color: royalblue; border-color: #81A9E1;  }
+.prefix.prefixSkyBlue    { color: black; background-color: skyblue; border-color: skyblue; }
+.prefix.prefixGray       { color: black; background-color: gray; border-color: #AAA; }
+.prefix.prefixSilver     { color: black; background-color: silver; border-color: silver; }
+.prefix.prefixYellow     { color: black; background-color: yellow; border-color: #E0E000; }
+.prefix.prefixOrange     { color: black; background-color: orange; border-color: #FFC520; }
+.prefix.prefixCreateur   { color: red; }
+
 
 /* --- --- FORMS --- --- */
 
