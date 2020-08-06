@@ -83,7 +83,6 @@ function gradesUpdate() {
 	}});
 }
 
-
 function switchGrade(el, id, key) {
 	if(parseInt(el.value) == 0) {
 		el.value=1;
