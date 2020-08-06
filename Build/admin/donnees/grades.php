@@ -84,26 +84,10 @@ for($i = 2;$i <= max($lastGrade); $i++) {
     $readGrade = $openGrade->GetTableau();
     $idGrade[$i] = $readGrade;
 }
-$prefixs = array(
-                             'prefixPrimary',
-                             'prefixSecondary',
-                             'prefixRed',
-                             'prefixGreen',
-                             'prefixOlive',
-                             'prefixLightGreen',
-                             'prefixBlue',
-                             'prefixRoyalBlue',
-                             'prefixSkyBlue',
-                             'prefixGray',
-                             'prefixSilver',
-                             'prefixYellow',
-                             'prefixOrange',
-                             'prefixCreateur'
-                         );
-                         $effets = array(
-                             'style5',
-                             'style16'
-                         );
+$effets = array(
+    'style5',
+    'style16'
+);
 }
 function hasPerm($i, $str, $grades) {
     $ar = explode("-", $str);
@@ -163,7 +147,7 @@ function hasPermArray2($perm, $suivi) {
 function editPerm($id, $edit, $perm, $str, $POST) {
     foreach($perm as $key => $value)
     {
-        if($key != "Grade" & $key != "prefix" & $key != "effets") {
+        if($key != "Grade" & $key != "prefix" & $key != "effets" & $key != "couleur") {
             if($str == "") {
                 $str2 = $key;
             } else {
@@ -207,7 +191,7 @@ function editPerm($id, $edit, $perm, $str, $POST) {
 function showForFormatage($perm, $suivi) {
     foreach($perm as $key => $value)
     {
-        if($key != "Grade" & $key != "prefix" & $key != "effets") 
+        if($key != "Grade" & $key != "prefix" & $key != "effets" & $key != "couleur") 
         {
             if($suivi == "") {
                 $suivi2 = $key;
@@ -240,7 +224,7 @@ function writePerm($perm, $nb, $id, $other, $idGrade, $PermissionFormat) {
         foreach($perm as $key => $value)
         {
 
-            if($key != "Grade" & $key != "prefix" & $key != "effets")
+            if($key != "Grade" & $key != "prefix" & $key != "effets" & $key != "couleur")
             {
                 if( is_array($value)) {  ?>
                     <div class="custom-control custom-switch" id="grade-div"> 

@@ -28,7 +28,7 @@
     --darkest-color-bg: #3f3f3f;
     --lightest-color-bg: #585858;
 
-    --header-image: url(theme/default/assets/img/heading.jpg);
+    --header-image: url(../img/heading.jpg);
 }
 
 *:focus {
@@ -561,12 +561,12 @@ li.nav-item {
 
 .style16
 {
-    background-image: url('theme/default/assets/img/etoile-anime.gif');
+    background-image: url(../img/etoile-anime.gif);
 }
 
 .style5
 {
-    background-image: url('theme/default/assets/img/spark-gold.gif');
+    background-image: url(../img/spark-gold.gif);
 }
 
 .prefix

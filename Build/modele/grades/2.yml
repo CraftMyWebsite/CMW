@@ -1,6 +1,7 @@
 #Ce fichier contiens la config de base du serveur---
 Grade: Administrateur
-prefix: prefixLightGreen
+prefix: '#90ee90'
+couleur: '#000000'
 effets: style16
 PermsDefault:
     news:

@@ -1,6 +1,7 @@
 #Ce fichier contiens la config de base du serveur---
 Grade: Modérateur
-prefix: prefixRed
+prefix: '#ff0000'
+couleur: '#ffffff'
 effets: style5
 PermsDefault:
     news:

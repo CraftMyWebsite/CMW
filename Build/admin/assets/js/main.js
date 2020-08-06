@@ -138,3 +138,19 @@ function isAllGradeChecked(el) {
 	}
 	return true;
 }
+
+//previsu grade
+function updatePrevisu(grade) {
+	let previsu = get('previsu'+grade);
+	if(!get('prefix'+grade+'-none').checked)
+		previsu.style.backgroundColor = get('prefix'+grade).value;
+	else
+		previsu.style.backgroundColor = "";
+	previsu.style.color = get('couleur'+grade).value;
+	previsu.className = '';
+	previsu.classList.add("prefix");
+	let effets = get('effets'+grade).getElementsByTagName("input");
+	for(let radio of effets)
+		if(radio.checked && radio.value != "")
+			previsu.classList.add(radio.value);
+}

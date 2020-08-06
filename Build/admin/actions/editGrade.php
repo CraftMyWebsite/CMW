@@ -9,8 +9,13 @@ if($_Permission_->verifPerm("createur")) {
 	unset($_POST['nomCreateur']);
 	$_Serveur_['General']['createur']['effets'] = htmlspecialchars($_POST['effetCreateur']);
 	unset($_POST['effetCreateur']);
-	$_Serveur_['General']['createur']['prefix'] = htmlspecialchars($_POST['prefixCreateur']);
+	if(isset($_POST['prefixCreateur-none']) && $_POST['prefixCreateur-none'] == "on")
+		$_Serveur_['General']['createur']['bg'] = "";
+	else
+		$_Serveur_['General']['createur']['bg'] = htmlspecialchars($_POST['prefixCreateur']);
 	unset($_POST['prefixCreateur']);
+	$_Serveur_['General']['createur']['couleur'] = htmlspecialchars($_POST['couleurCreateur']);
+	unset($_POST['couleurCreateur']);
 
 	$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
 
@@ -21,7 +26,14 @@ if($_Permission_->verifPerm("createur")) {
 		$editGrade = new Lire($grade);
 		$editGrade = $editGrade->GetTableau();
 		$editGrade["Grade"] = $_POST["gradeName".$i];
-		$editGrade["prefix"] = $_POST["prefix".$i];
+		if(isset($_POST['prefix'.$i."-none"]) && $_POST['prefix'.$i.'-none'] == "on")
+			$editGrade['prefix'] = "";
+		else
+			$editGrade["prefix"] = $_POST["prefix".$i];
+		if($_POST['couleur'.$i] == "000000" OR empty($_POST['couleur'.$i]))
+			$editGrade["couleur"] = "";
+		else
+			$editGrade["couleur"] = $_POST['couleur'.$i];
 		$editGrade["effets"] = $_POST["effet".$i];
         
         $editGrade = editPerm($i, $editGrade, $allPerm, "", $_POST);
