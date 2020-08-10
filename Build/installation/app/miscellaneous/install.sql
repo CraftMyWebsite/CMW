@@ -249,10 +249,12 @@ CREATE TABLE IF NOT EXISTS `cmw_maintenance` (
   `maintenanceId` int(1) NOT NULL AUTO_INCREMENT,
   `maintenanceMsg` text NOT NULL,
   `maintenanceMsgAdmin` text NOT NULL,
+  `maintenanceMsgInscr` text NOT NULL
   `maintenanceTime` int(11) NOT NULL,
   `maintenancePref` int(1) NOT NULL,
   `maintenanceEtat` int(1) NOT NULL,
   `dateFin` int(11) NOT NULL,
+  `inscription` tinyint(1) UNSIGNED NOT NULL DEFAULT '0', 
   PRIMARY KEY (`maintenanceId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

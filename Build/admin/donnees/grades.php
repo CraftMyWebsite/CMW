@@ -52,7 +52,7 @@ $PermissionFormat["PermsPanel"]="Permissions panel";
     $PermissionFormat["PermsPanel-support"]="Page Support";
         $PermissionFormat["PermsPanel-support-tickets"]="Tickets";
             $PermissionFormat["PermsPanel-support-tickets-actions"]="Actions";
-    $PermissionFormat["PermsPanel-maintenance"]="Maintenance";
+    $PermissionFormat["PermsPanel-maintenance"]="Page Maintenance";
         $PermissionFormat["PermsPanel-maintenance-actions"]="Actions";
     $PermissionFormat["PermsPanel-update"]="Page Mise à jour";
     $PermissionFormat["PermsPanel-social"]="Page Membres => Réseaux sociaux";

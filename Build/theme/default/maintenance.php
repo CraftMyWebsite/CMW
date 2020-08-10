@@ -146,6 +146,24 @@ require('include/version.php');
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<?php if($donnees['inscription'] && !Permission::getInstance()->verifPerm('connect')) { ?>
+				<!-- Inscription -->
+				<div class="col-9 mx-auto mt-3">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="text-center m-0">Inscription</h3>
+						</div>
+						<div class="card-body">
+							<h5><?= $donnees['maintenanceMsgInscr']; ?></h5>
+						</div>
+						<div class="card-footer">
+							<a data-toggle="modal" data-target="#InscriptionSlide" class="btn btn-main w-100">S'inscrire</a>
+						</div>
+					</div>
+				</div>
+				<?php } ?>
+			</div>
 
 
 		</div>

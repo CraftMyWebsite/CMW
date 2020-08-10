@@ -190,8 +190,10 @@ const PERMS = array(
 			"actions" => array(
 				"editDefaultMessage" => "Edition du message par défaut",
 				"editAdminMessage" => "Edition du message adressé aux admins",
+				"editInscrMessage" => "Edition du message pour les inscriptions",
 				"editEtatMaintenance" => "Changer l'état de la maintenance",
 				"switchRedirectMode" => "Changer le mode de redirection",
+				"switchInscription" => "Autoriser/Refuser les inscriptions lors d'une maintenance",
 				"connexionAdmin" => "Peut se connecter pendant une maintenance"
 			)
 		),

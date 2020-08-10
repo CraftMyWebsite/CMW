@@ -141,7 +141,9 @@ PermsPanel:
             editDefaultMessage: false
             editAdminMessage: false
             editEtatMaintenance: false
+            editInscrMessage: false
             switchRedirectMode: false
+            switchInscription: false
             connexionAdmin: false
     update:
         showPage: false
