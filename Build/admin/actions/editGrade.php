@@ -20,12 +20,11 @@ if($_Permission_->verifPerm("createur")) {
 	$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
 
 
-	for($i = 2; $i <= max($lastGrade); $i++) { if(file_exists($dirGrades.$i.'.yml')) {
-		$allPerm = $_Permission_->readPerm($i);
-		$grade = $dirGrades.$i.'.yml';
-		$editGrade = new Lire($grade);
-		$editGrade = $editGrade->GetTableau();
-		$editGrade["Grade"] = $_POST["gradeName".$i];
+	for($i = 1; $i <= count($idGrade); $i++) { 
+		$allPerm = $_Permission_->readPerm($idGrade[$i]['id']);
+		$editGrade = $idGrade[$i];
+		unset($editGrade['priorite']);
+		$editGrade["nom"] = $_POST["gradeName".$i];
 		if(isset($_POST['prefix'.$i."-none"]) && $_POST['prefix'.$i.'-none'] == "on")
 			$editGrade['prefix'] = "";
 		else
@@ -35,12 +34,18 @@ if($_Permission_->verifPerm("createur")) {
 		else
 			$editGrade["couleur"] = $_POST['couleur'.$i];
 		$editGrade["effets"] = $_POST["effet".$i];
-        
+
         $editGrade = editPerm($i, $editGrade, $allPerm, "", $_POST);
-
-
-		$updateGrade = new Ecrire($grade, $editGrade);
-	} }
+        $editGrade['permDefault'] = serialize($editGrade['PermsDefault']);
+        unset($editGrade['PermsDefault']);
+        $editGrade['permPanel'] = serialize($editGrade['PermsPanel']);
+        unset($editGrade['PermsPanel']);
+        $editGrade['permForum'] = serialize($editGrade['PermsForum']);
+        unset($editGrade['PermsForum']);
+		$updateGrade = $bddConnection->prepare('UPDATE cmw_grades SET nom = :nom, prefix = :prefix, couleur = :couleur, effets = :effets, permDefault = :permDefault, permPanel = :permPanel, permForum = :permForum WHERE id = :id');
+		$updateGrade->execute($editGrade);
+		unset($editGrade);
+	}
 
 
 

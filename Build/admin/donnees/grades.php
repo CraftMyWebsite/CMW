@@ -66,24 +66,16 @@ $PermissionFormat["PermsForum"]="Permissions Forums";
     $PermissionFormat["PermsForum-general"]="Général";
     $PermissionFormat["PermsForum-moderation"]="Modération";
 
-$dirGrades = './modele/grades/';
-$initGrades = glob($dirGrades.'*.yml');
-
-$lastGrade[] = array();
-foreach($initGrades as $numGrade) {
-    $lastGrade[] = substr($numGrade, 16, -4);
+$recup = $bddConnection->query('SELECT * FROM cmw_grades ORDER BY priorite');
+$idGrade = $recup->fetchAll(PDO::FETCH_ASSOC);
+foreach($idGrade as $key => $value)
+{
+    $idGrade[$key+1] = $value;
+    $idGrade[$key+1]['PermsDefault'] = unserialize($value['permDefault']);
+    $idGrade[$key+1]['PermsPanel'] = unserialize($value['permPanel']);
+    $idGrade[$key+1]['PermsForum'] = unserialize($value['permForum']);
 }
 
-$lastGrade = array_filter($lastGrade);
-if(empty($lastGrade))
-    array_push($lastGrade, -1);
-
-$idGrade[] = array();
-for($i = 2;$i <= max($lastGrade); $i++) {
-    $openGrade = new Lire($dirGrades.$i.'.yml');
-    $readGrade = $openGrade->GetTableau();
-    $idGrade[$i] = $readGrade;
-}
 $effets = array(
     'style5',
     'style16'
@@ -217,7 +209,6 @@ function array_to_unidim($array, $parent = '') {
     }
     return $result;
 }
-
 function writePerm($perm, $nb, $id, $other, $idGrade, $PermissionFormat) {
     if(isset($perm) && is_array($perm)) {
         echo '<ul '.($nb == 20 ? 'style="margin-left:-30px;"':'style="display:none;"').'class="grade-ul" id="cont'.($nb== 20 ? '' : '-').''.$id.'-'.$other.'">';
