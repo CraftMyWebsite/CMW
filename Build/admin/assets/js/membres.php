@@ -19,11 +19,12 @@ $(window).on('load', function () {
     index = 0;
     grade.set(0, "Joueur");
     <?php if($_Joueur_['rang'] == 1) { ?>grade.set(1, "Créateur");<?php }
-	for($j = 2; $j <= max($lastGrade); $j++) {
-		if(file_exists($dirGrades.$j.'.yml') && $idGrade[$j]['Grade']) { ?>
-		 grade.set(<?php echo $j; ?>, <?='"'.$idGrade[$j]['Grade'].'"'?>);
-		<?php }
-	} ?>
+    $j = 2;
+    foreach($idGrade as $key => $value) { ?>
+         grade.set(<?php echo $j; ?>, <?='"'.$value['nom'].'"'?>);
+        <?php
+        $j++;
+    } ?>
     updateIndex();
 });
 
@@ -36,7 +37,7 @@ function setIndex(){
     } else {
         valindex.value = index =  Math.trunc(PlayerTotal / maxShow) ;
     }
-	
+    
     updateIndex();
 }
 
@@ -59,30 +60,30 @@ function updateIndex() {
 }
 
 function lessIndex() {
-	index--;
+    index--;
     valindex.value = index;
     setIndex();
 }
 
 function moreIndex() {
-	index++;
+    index++;
     valindex.value = index;
     setIndex();
 }
 
 function updateState() {
-	document.getElementById("infoState").innerHTML="("+(axeType == "DESC" ? "Décroissant" : "Croissant")+" sur "+axe+")";
+    document.getElementById("infoState").innerHTML="("+(axeType == "DESC" ? "Décroissant" : "Croissant")+" sur "+axe+")";
 }
 
 function updateList()
 {
-	updateState();
+    updateState();
     $.post("admin.php?action=getJsonMember",
     {
         axe: axe,
         axeType: axeType,
         index: index,
-		search: document.getElementById("input-search").value,
+        search: document.getElementById("input-search").value,
         max: maxShow
     }, function(data, status){
         if(status != "success")
@@ -102,22 +103,22 @@ function notif(type, header, message, time)
 {
         toastr[type](message, header)
       toastr.options = {
-      				  "closeButton": true,
-      				  "debug": true,
-      				  "newestOnTop": false,
-      				  "progressBar": false,
-      				  "positionClass": "toast-top-right",
-      				  "preventDuplicates": false,
-      				  "onclick": null,
-      				  "showDuration": "500",
-      				  "hideDuration": "500",
-      				  "timeOut": time+"",
-      				  "extendedTimeOut": "1000",
-      				  "showEasing": "swing",
-      				  "hideEasing": "linear",
-      				  "showMethod": "fadeIn",
-      				  "hideMethod": "fadeOut"
-      				}
+                      "closeButton": true,
+                      "debug": true,
+                      "newestOnTop": false,
+                      "progressBar": false,
+                      "positionClass": "toast-top-right",
+                      "preventDuplicates": false,
+                      "onclick": null,
+                      "showDuration": "500",
+                      "hideDuration": "500",
+                      "timeOut": time+"",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    }
 }
 
 async function showAll(allPlayer) {
@@ -165,12 +166,12 @@ async function showAll(allPlayer) {
         all += '</tr>';
     }
     el.innerHTML = all;
-	block = document.querySelectorAll(".input-disabled");
+    block = document.querySelectorAll(".input-disabled");
 }
 
 function addChange(id) {
-	    ChangeButton.disabled = false;
-	     if (typeof allChange["id"+id] === 'undefined') {
+        ChangeButton.disabled = false;
+         if (typeof allChange["id"+id] === 'undefined') {
             if (typeof allChange["allid"] === 'undefined') {
                 allChange["allid"] = id+"_";
             } else {
@@ -197,10 +198,10 @@ function sendChange() {
             ChangeButton.disabled = false;
              notif("error", "Erreur", status, 5000);
         }else {
-			
+            
             allChange = {};
             ChangeButton.disabled = true;
-			notif("success", "Changement éffectué", "", 5000);
+            notif("success", "Changement éffectué", "", 5000);
         }
         block.forEach(function(input) {
             input.disabled=false;

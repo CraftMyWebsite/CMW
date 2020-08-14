@@ -237,19 +237,19 @@ CREATE TABLE IF NOT EXISTS `cmw_jetons_paypal_offres` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_log_DealJeton` ( 
-  `ID` INT NOT NULL AUTO_INCREMENT , 
-  `fromUser` VARCHAR(20) NOT NULL , 
-  `toUser` VARCHAR(20) NOT NULL , 
-  `amount` INT NOT NULL , 
-  `date` INT NOT NULL , 
-  PRIMARY KEY (`ID`)) 
-ENGINE = InnoDB;
+  `ID` INT NOT NULL AUTO_INCREMENT, 
+  `fromUser` VARCHAR(20) NOT NULL, 
+  `toUser` VARCHAR(20) NOT NULL, 
+  `amount` INT NOT NULL, 
+  `date` INT NOT NULL, 
+  PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `cmw_maintenance` (
   `maintenanceId` int(1) NOT NULL AUTO_INCREMENT,
   `maintenanceMsg` text NOT NULL,
   `maintenanceMsgAdmin` text NOT NULL,
-  `maintenanceMsgInscr` text NOT NULL
+  `maintenanceMsgInscr` text NOT NULL,
   `maintenanceTime` int(11) NOT NULL,
   `maintenancePref` int(1) NOT NULL,
   `maintenanceEtat` int(1) NOT NULL,
@@ -476,9 +476,9 @@ CREATE TABLE cmw_grades (
   id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nom VARCHAR(0) NOT NULL,
   priorite INT UNSIGNED NOT NULL DEFAULT 0,
-  prefix CHAR( NOT NULL DEFAULT '',
-  couleur CHAR) NOT NULL DEFAULT '',
-  effets VARCH(64) NOT NULL DEFAULT '',
+  prefix CHAR(9) NOT NULL DEFAULT '',
+  couleur CHAR(9) NOT NULL DEFAULT '',
+  effets VARCHAR(64) NOT NULL DEFAULT '',
   permDefault BLOB,
   permPanel LONGBLOB, 
   permForum BLOB
