@@ -298,7 +298,7 @@ include '../include/version.php';
       <ul class="list-inline">
         <li class="list-inline-item"><a href="https://craftmywebsite.fr/forum/index.php" target="_blank">Forum</a></li>
         <li class="list-inline-item"><a href="https://discord.gg/P94b7d5" target="_blank"> <i class="fab fa-discord"></i> Discord</a></li>
-        <li class="list-inline-item"><a href="https://github.com/Florentlife/CraftMyWebsite/" target="_blank"> <i class="fab fa-github"></i> GitHub</a></li>
+        <li class="list-inline-item"><a href="https://github.com/CraftMyWebsite" target="_blank"> <i class="fab fa-github"></i> GitHub</a></li>
       </ul>
     </footer>
   </div>
