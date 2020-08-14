@@ -70,10 +70,9 @@ $recup = $bddConnection->query('SELECT * FROM cmw_grades ORDER BY priorite');
 $idGrade = $recup->fetchAll(PDO::FETCH_ASSOC);
 foreach($idGrade as $key => $value)
 {
-    $idGrade[$key+1] = $value;
-    $idGrade[$key+1]['PermsDefault'] = unserialize($value['permDefault']);
-    $idGrade[$key+1]['PermsPanel'] = unserialize($value['permPanel']);
-    $idGrade[$key+1]['PermsForum'] = unserialize($value['permForum']);
+    $idGrade[$key]['PermsDefault'] = unserialize($value['permDefault']);
+    $idGrade[$key]['PermsPanel'] = unserialize($value['permPanel']);
+    $idGrade[$key]['PermsForum'] = unserialize($value['permForum']);
 }
 
 $effets = array(

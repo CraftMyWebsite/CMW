@@ -47,7 +47,7 @@ function newsUpdate() {
 
 function serverUpdate() {
 	updateCont("admin.php?action=getServerList", get("modifServer"), function(data) { if(data) { 
-		initPost('modifServer', 'admin.php?&action=serveurConfig');
+		initPost('modifServer', 'admin.php?&action=serveurConfig', function(data) { if(data) {  }});
 	}});
 }
 
@@ -77,11 +77,6 @@ function menuListeUpdate() {
 	}});
 }
 
-function gradesUpdate() {
-	updateCont("admin.php?action=getGradesList", get("allGrade"), function(data) { if(data) { 
-		initPost("allGrade", "admin.php?&action=editGrade");
-	}});
-}
 
 function switchGrade(el, id, key) {
 	if(parseInt(el.value) == 0) {
