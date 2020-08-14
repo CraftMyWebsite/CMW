@@ -487,8 +487,6 @@ ENGINE= INNODB;
 
 ALTER TABLE cmw_users ADD CONSTRAINT cle_grade FOREIGN KEY (rang) REFERENCES cmw_grades(id);
 
-ALTER TABLE cmw_grades ADD CONSTRAINT priorite_unique UNIQUE(priorite);
-
 INSERT INTO `cmw_paysafecard_offres` (`id`, `montant`, `jetons`, `description`, `statut`) VALUES
 (1, '10', '100', 'Offre 10€ = 10 jetons', 1),
 (2, '25', '25', 'Offre 25€ = 25 jetons', 1),

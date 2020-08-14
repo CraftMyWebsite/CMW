@@ -89,7 +89,7 @@ else
 				<div class="card-body" id="allGrade">
 					<ul class="nav nav-tabs">
 						<li class="nav-item"><a href="#gradeCreateur" id="default-name-createur-2" class="nav-link active" style="color: black !important" data-toggle="tab"><?php echo $_Serveur_['General']['createur']['nom']; ?></a></li>
-						<?php for($i = 1; $i < count($idGrade); $i++) { 
+						<?php for($i = 0; $i < count($idGrade); $i++) { 
                             ?>
                                 <li class="nav-item" id="tabgrade<?php echo $i; ?>"><a href="#grade<?php echo $i; ?>" class="nav-link"  id="grade-name-<?php echo $i; ?>" style="color: black !important"  data-toggle="tab"><?php echo $idGrade[$i]['nom']; ?></a></li>
                         <?php  } ?>
@@ -139,7 +139,8 @@ else
 								</label>
 							</div>
 						</div>
-						<?php for($i = 1; $i < count($idGrade); $i++) { ?>
+						<?php
+						for($i = 0; $i < count($idGrade); $i++) { ?>
 							<div class="tab-pane well" id="grade<?php echo $i; ?>">
 								<div style="width: 100%;display: inline-block">
                                     <div class="float-left">
@@ -186,18 +187,17 @@ else
 
 								<?php 
 								$allPerm = $_Permission_->readPerm($idGrade[$i]['id']);
-								var_dump($i);
 								//showForFormatage($allPerm, ""); ne pas toucher ...
 								writePerm($allPerm, 20, "", $i, $idGrade, $PermissionFormat); ?>
 							</div>
 						<?php } ?>
 	                </div>
 	            </div>
-	            <script>initPost("allGrade", "admin.php?&action=editGrade");</script>
+	            <script>initPost("allGrade", "admin.php?&action=editGrade",null);</script>
 
 	            <div class="card-footer">
 	                <div class="row text-center">
-	                    <input type="submit" onclick="sendPost('allGrade');" class="btn btn-success w-100"
+	                    <input type="submit" onclick="sendPost('allGrade', null);" class="btn btn-success w-100"
 	                        value="Valider les changements !" />
 	                </div>
 	            </div>
