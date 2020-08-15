@@ -23,7 +23,7 @@
                         <li class="nav-item <?php if((isset($_GET['page'])&&$_GET['page']=='accueil')|!isset($_GET['page'])){echo 'active';}?>">
                             <a class="nav-link"  href="?page=accueil">
                                 <i class="fas fa-home"></i>
-                                Accueil / Statistique
+                                Accueil / Statistiques
                             </a>
                         </li>
                        <?php } if($_Permission_->verifPerm('PermsPanel', 'general', 'showPage')) { ?>
@@ -108,7 +108,7 @@
                         <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='news'){echo 'active';}?>">
                             <a class="nav-link"  href="?page=news">
                                 <i class="far fa-newspaper"></i>
-                                Nouveautés
+                                Nouveautées
                             </a>
                         </li>
                         <?php } if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) { ?>
@@ -147,7 +147,7 @@
                                 <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'showPage')) { ?>
                                 <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='configVoter'){echo 'active';}?>" href="?page=configVoter">
                                     <i class="fas fa-ruler"></i>
-                                    Récompences automatique
+                                    Récompenses automatique
                                 </a>
                                 <?php } ?>
                             </div>
