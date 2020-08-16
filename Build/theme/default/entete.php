@@ -172,7 +172,7 @@ endif;
                                     <h5 class="card-title">
                                         État de votre serveur :
                                         <?php if ($_Serveur_['General']['statut'] == 0) : ?>
-                                            <span class="badge badge-danger">Hors-Ligne</span>';
+                                            <span class="badge badge-danger">Hors-Ligne</span>
                                         <?php elseif ($_Serveur_['General']['statut'] == 1) : ?>
                                             <span class="badge badge-success">En Ligne</span>
                                             <div class="card-text">Nombres de Joueurs : <strong><?= $playeronline ?></strong>/<?= $maxPlayers; ?></div>
