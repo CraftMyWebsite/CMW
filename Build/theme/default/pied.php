@@ -24,7 +24,7 @@ $_Theme_ = $_Theme_->GetTableau();
                             <span class="social-text"> Rejoingnez-nous sur Facebook !</span>
                         </a>
                         <a href="<?= $_Theme_['Pied']['youtube']; ?>" class="col-12 discord-social ml-3">
-                            <span class="fab fa-instagram social-logo"></span>
+                            <span class="fab fa-youtube social-logo"></span>
                             <span class="social-text"> Rejoingnez-nous sur Youtube !</span>
                         </a>
                         <a href="<?= $_Theme_['Pied']['discord']; ?>" class="col-12 discord-social ml-3">
