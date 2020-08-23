@@ -3,6 +3,7 @@
         Votes
     </h2>
 </div>
+
 <!-- Page Heading -->
 <div class="row" style="margin-top:10px;">
 	<div class="col-md-12 col-xl-12 col-12">
@@ -37,97 +38,55 @@
                 <div class="card-body" id="new-vote">
                     <div class="col-md-12">
                         <h3>Réglages des votes</h3>
-                        <div class="row" id="message-newvote" style="display:none;">
-                            <label class="control-label">Message affiché lors du vote</label>
-                            <input type="text" name="message"  class="form-control"/>
-                        </div>
-                        <div class="row">
-                            <label class="control-label" for="affichermessageid">Afficher le message ? &nbsp;</label>
-                            <div class="custom-control custom-switch" style="padding-top: 20px">
-                                <input type="checkbox" class="custom-control-input" id="affichermessageid" onClick="
-                                if(this.checked) {
-                                    show('message-newvote');
-                                } else {
-                                    hide('message-newvote');
-                                }"
-                                 name="display">
-                                
-                                <label class="custom-control-label" for="affichermessageid">Oui</label>
+
+
+
+                        <input type="hidden" name="action"  class="form-control" value="" id="vote-action-json"/>
+                        <hr/>
+                        <div class="dropdown ">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                              Ajouter une récompense
+                            </button>
+                            <div class="dropdown-menu">
+                              <button class="dropdown-item" onclick="addVoteRec('commande', 'all-new-rec-vote','list-new-rec-vote');">Commande</button>
+                              <button  class="dropdown-item" onclick="addVoteRec('message', 'all-new-rec-vote','list-new-rec-vote');">Message</button >
+                              <button  class="dropdown-item" onclick="addVoteRec('jeton', 'all-new-rec-vote','list-new-rec-vote');">jeton(s)</button >
+                              <button  class="dropdown-item" onclick="addVoteRec('item', 'all-new-rec-vote','list-new-rec-vote');">Item(s)</button >
+                            </div>
+                          </div>
+
+
+                        <div class="row" style="margin:30px;display:none;" id="all-new-rec-vote">
+                            <div class="col-md-12 row " id="list-new-rec-vote">
+
                             </div>
                         </div>
-                        <div class="row" style="margin-top:10px;">
-                            <label class="control-label">Executer une Commande/Give d'item</label>
-                            <select name="action" class="form-control" onchange="
-                            if(parseInt(this.value) == 1) {
-                                show('cmd-newvote');
-                                hide('id-newvote');
-                                hide('quantite-newvote');
-                            }else if(parseInt(this.value) ==2 ) {
-                                hide('cmd-newvote');
-                                show('id-newvote');
-                                show('quantite-newvote');
-                            } else if( parseInt(this.value) == 3) {
-                                hide('cmd-newvote');
-                                hide('id-newvote');
-                                show('quantite-newvote');
-                            }">
-                                <option value="1" selected> Executer une commande </option>
-                                <option value="2"> Give d'item </option>
-                                <option value="3"> Give de jetons site</option>
-                            </select>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
-                            <label class="control-label">Obtention de la récompense</label>
-                            <select name="methode" class="form-control">     
-                                <option value="1"> Le serveur où il est en ligne </option>
-                                <option value="2"> Le serveur de la catégorie </option>
-                            </select>
-                        </div>
-                        <div class="row" id="cmd-newvote" style="margin-top:10px;">
-                            <label class="control-label">Commande à éxecuter (SANS /)</label>
-                            <input type="text" name="cmd" class="form-control" />
-                        </div>
-                        <div class="row" id="id-newvote" style="margin-top:10px;display:none;">
-                            <label class="control-label">ID de l'item</label>
-                            <input type="text" name="id"  class="form-control" value="264" />
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row" id="quantite-newvote" style="margin-top:10px;display:none;">
-                            <label class="control-label">Quantité de l'item à donner <strong>OU</strong> quantité de jetons à donner</label>
-                            <input type="text" name="quantite" class="form-control" value="4" />
-                        </div>
-                        <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Lien de vote du serveur</label>
                             <select name="serveur" class="form-control">        
-                                <?php for($i = 0; $i < count($lectureServs); $i++) {        ?>
+                                <?php if(isset($lectureServs) && !empty($lectureServs)) { for($i = 0; $i < count($lectureServs); $i++) {        ?>
                                     <option value="<?php echo $i ?>"> <?php echo $lectureServs[$i]['nom']; ?> </option>
-                                <?php } ?>
+                                <?php } } ?>
                             </select>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Lien de vote</label>
                             <input type="url" name="lien" placeholder="ex: http://serveurs-minecraft.com/...../" class="form-control" required>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Titre du lien</label>
                             <input type="text" name="titre" placeholder="ex: Voter sur McServ !" class="form-control" required>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Temps de vote</label>
                             <input type="number" name="temps" placeholder="ex: 86400 pour 24h" class="form-control" required>
-                        </div>
-						 <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Id unique donné par le site web. *</label>
                             <input type="text" name="idCustom" placeholder="ex: 54748" value="" class="form-control" />
-                        </div>
-						<div class="row" style="margin-top:10px;">
+
                             <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
-                            <div class="custom-control custom-switch" style="padding-top: 20px">
-                                <input type="checkbox" class="custom-control-input" id="doisetreenligne" name="en ligne">
+                            <div class="custom-control custom-switch" >
+                                <input type="checkbox" class="custom-control-input" value="1" id="doisetreenligne" name="enligne">
                                 <label class="custom-control-label" for="doisetreenligne">Oui</label>
                             </div>
-    					</div>
+
                         <hr>
                         <div class="row">
                             <div class="alert alert-success">
@@ -154,11 +113,10 @@
                         </div>
                     </div>
                 </div>
-                 <script>initPost("new-vote", "admin.php?&action=creerLienVote",  
-                                            function (data) { if(data) {}})</script>
+                 <script>initPost("new-vote", "admin.php?&action=creerLienVote")</script>
                 <div class="card-footer">
                         <div class="row text-center">
-                            <input type="submit" onclick="sendPost('new-vote', function(data) { if(data) { voteUpdate(); }});" class="btn btn-success w-100" value="Valider les changements !"/>
+                            <input type="submit" onclick="genVoteJson('list-new-rec-vote','vote-action-json');sendPost('new-vote', function(data) { if(data) { voteUpdate(); }}); " class="btn btn-success w-100" value="Valider les changements !"/>
                         </div>
                     </div>
             </div>
@@ -171,7 +129,7 @@
                 <div class="card-body" id="vote-cron">
                     <div class="col-md-12">
                         <h3>Message</h3>
-                        <div class="row">
+
                             <div class="col-md-12">
                                 <div class="alert alert-success">
                                     <div id="usablephrase">
@@ -183,29 +141,23 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Entête du message (Premier de la liste envoyé)</label>
                             <input type="text" name="entete" value="<?php if(isset($_Serveur_['VoteCron']['entete'])) { echo $_Serveur_['VoteCron']['entete']; } else { echo '&3&m___________&r &b&l[> &b&l/Vote &b&l<] &3&m___________'; }  ?>" class="form-control"/>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Contenue du message SI le joueur peut voter (laisser vide pour désactiver)</label>
                             <input type="text" name="msgallow" value="<?php if(isset($_Serveur_['VoteCron']['msgallow'])) { echo $_Serveur_['VoteCron']['msgallow']; } else { echo '&3>> &b {LIEN} &3>> &b Voter ! &8/vote'; }  ?>" class="form-control"/>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Contenue du message SI le joueur ne peut pas voter</label>
                              <input type="text" name="msgdeny" value="<?php if(isset($_Serveur_['VoteCron']['msgdeny'])) { echo $_Serveur_['VoteCron']['msgdeny']; } else { echo '&3>> &b {LIEN}&3>> &b {TEMPS} '; }  ?>" class="form-control"/>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Footer du message (laisser vide pour désactiver / dernier message de la liste envoyé)</label>
                           <input type="text" name="footer" value="<?php if(isset($_Serveur_['VoteCron']['footer'])) { echo $_Serveur_['VoteCron']['footer']; } else { echo '&3&m_________________________________'; }  ?>" class="form-control"/>
                       
-                        </div>
-						 <div class="row" style="margin-top:10px;">
+
                             <label class="control-label">Mot de passe de la tâche cron, laisser vide pour désactivé l'accès à la tâche cron.</label>
                           <input type="text" name="mdp" id="mdpurlCron" onkeyup="get('urlCron').innerText = '<?php echo $_Serveur_['General']['url'].'/?action=voteCron&mdp='; ?>' + get('mdpurlCron').value" value="<?php if(isset($_Serveur_['VoteCron']['mdp'])) { echo $_Serveur_['VoteCron']['mdp']; }  ?>" placeholder="ex: CMW123" class="form-control"/>
                       
-                        </div>
 						
 						
                        
@@ -250,161 +202,150 @@
 				});
 			}
 		</script>
-    <?php }
-    if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote') OR $_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
+    <?php } // $_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote')
+    if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) { ?>
         <div class="col-md-12 col-xl-12 col-12">
             <div class="card  ">
                 <div class="card-header ">
                     <div class="float-left">
                         <h3 class="card-title"><strong>Edition des votes</strong></h3>
                     </div>
+                    <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
                     <div class="float-right">
-                        <button onclick="sendDirectPost('?action=resetVotes', function(data) { if(data) { get('all-vote').innerText = '';}})" class="btn btn-outline-secondary">Réinitialiser</button>
+                        <button onclick="sendDirectPost('admin.php?action=resetVotesConfig', function(data) { if(data) { get('all-vote').innerText = '';}})" class="btn btn-outline-secondary">Réinitialiser</button>
                     </div>
+                    <?php } ?>
                 </div>
                 <div class="card-body" id="all-vote">
-                  
-                    <?php 
-                    if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
-                        <!-- <div class="row"> -->
+
+
                             <?php $donnees = $req_donnees->fetchAll();
+                            $idsc = 0;
                             for($o=0; $o < count($donnees); $o++)
                             {
                             ?>
+                            <input type="hidden"  name="action<?=$o;?>" data-other="list-new-rec-<?=$o;?>vote" id="action<?=$o;?>" value="" />
                             <br/>
-                            <button class="btn btn-secondary btn-block w-100" type="button" data-toggle="collapse" data-target="#serveur<?=$o ?>" aria-expanded="false" aria-controls="serveur<?=$o ?>">
+                            <button class="btn btn-secondary btn-block w-100" id="btn-serveur<?=$o ?>" type="button" data-toggle="collapse" data-target="#serveur<?=$o ?>" aria-expanded="false" aria-controls="serveur<?=$o ?>">
                                 Lien de vote (#<?=$o+1 ?>)
                             </button>
                             <div class="collapse" id="serveur<?=$o ?>" >
                                 <div class="row">
                                     <div class="col-md-12">
-                                    <div class="card card-body">
 
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="nom<?=$o;?>">Nom :</label>
-                                                <input type="text" class="form-control" id="titre<?=$o;?>" name="titre<?=$o;?>" value="<?=$donnees[$o]['titre'];?>" />
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="nom<?=$o;?>" class="control-label">Nom :</label>
+                                                <input type="text" class="form-control" id="titre<?=$o;?>" name="titre<?=$o;?>" value="<?=$donnees[$o]['titre'];?>" required>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="lien<?=$o;?>">Lien :</label>
-                                                <input type="url" class="form-control" id="lien<?=$o;?>" name="lien<?=$o;?>" value="<?=$donnees[$o]['lien'];?>" />
+                                            <div class="col-md-6">
+                                                <label for="lien<?=$o;?>" class="control-label">Lien :</label>
+                                                <input type="url" class="form-control" id="lien<?=$o;?>" name="lien<?=$o;?>" value="<?=$donnees[$o]['lien'];?>" required>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="serveur<?=$o;?>">Dans la catégorie :</label>
-                                            <select name="serveur<?=$o;?>" id="serveur<?=$o;?>" class="form-control">
-                                                    <?php for($i = 0; $i < count($lectureServs); $i++) {        ?>
+
+                                            <label for="serveur<?=$o;?>" class="control-label">Dans la catégorie :</label>
+                                            <select name="serveur<?=$o;?>" id="serveur<?=$o;?>" class="form-control" required>
+                                                    <?php if(isset($lectureServs) && !empty($lectureServs)) { for($i = 0; $i < count($lectureServs); $i++) {        ?>
                                                     <option value="<?php echo $i ?>"
                                                         <?=($lectureServs[$i]['nom'] == $lectureServs[intval($donnees[$o]['serveur'])]['nom']) ? 'selected' : ''; ?>>
                                                         <?php echo $lectureServs[$i]['nom']; ?> </option>
-                                                    <?php } ?>
+                                                    <?php } } ?>
                                                 </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="methode<?=$o;?>">Sur :</label>
-                                            <select name="methode<?=$o;?>" id="methode<?=$o;?>" class="form-control">
-                                                    <option value="1"
-                                                        <?=($donnees[$o]['methode'] == 1) ? 'selected' : '';?>> Le
-                                                        serveur où le joueur est en ligne </option>
-                                                    <option value="2"
-                                                        <?=($donnees[$o]['methode'] == 2) ? 'selected' : '';?>> Le
-                                                        serveur de la catégorie </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-row"> 
-                                            <div class="form-group col-xs-12">
-                                                <label for="action<?=$o;?>">Action</label>
-                                                <?php $action = explode(':', $donnees[$o]['action'], 2); ?>
-                                                <select name="action<?=$o;?>" id="action<?=$o;?>" class="form-control"onchange="
-                                                if(parseInt(this.value) == 1) {
-                                                    show('cmd<?=$o;?>2');
-                                                    hide('iditem<?=$o;?>2');
-                                                    hide('quantite<?=$o;?>2');
-                                                }else if(parseInt(this.value) ==2 ) {
-                                                    hide('cmd<?=$o;?>2');
-                                                    show('iditem<?=$o;?>2');
-                                                    show('quantite<?=$o;?>2');
-                                                } else if(parseInt(this.value) ==2 || parseInt(this.value) == 3) {
-                                                    hide('cmd<?=$o;?>2');
-                                                    hide('iditem<?=$o;?>2');
-                                                    show('quantite<?=$o;?>2');
-                                                }">
-                                                        <option value="1" <?=($action[0] == 'cmd') ? 'selected' : '';?>>
-                                                            Executer une commande </option>
-                                                        <option value="2" <?=($action[0] == 'give') ? 'selected' : '';?>>
-                                                            Give d'item </option>
-                                                        <option value="3" <?=($action[0] == 'jeton') ? 'selected' : '';?>>
-                                                            Give de jetons site</option>
-                                                    </select>
+
+             
+                                             <hr/>
+                                            <div class="dropdown ">
+                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                  Ajouter une récompense
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                  <button class="dropdown-item" onclick="addVoteRec('commande','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Commande</button>
+                                                  <button  class="dropdown-item" onclick="addVoteRec('message','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Message</button >
+                                                  <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">jeton(s)</button >
+                                                  <button  class="dropdown-item" onclick="addVoteRec('item','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Item(s)</button >
+                                                </div>
+                                              </div>
+
+                                            <div class="row" style="margin:30px; <?php  if(str_replace(" ", "", $donnees[$o]['action']) == "[]") { echo 'display:none;'; } ?>" id="all-new-rec-<?=$o;?>vote">
+                                                <div class="col-md-12 row" id="list-new-rec-<?=$o;?>vote">
+                                                    <?php  $json = json_decode($donnees[$o]['action'], true); 
+                                                    foreach($json as $value) { $idcs++; ?>
+                                                    <div class="col-md-6 col-12" id="rec-vote-<?php echo $idcs; ?>" data-type="<?php echo $value['type']; ?>" style="margin-top:15px;">
+                                                        <div style="width: 100%;display: inline-block">
+                                                            <div class="float-left">
+                                                                <h5><?php echo ucfirst($value['type']); ?></h5>
+                                                            </div>
+                                                            <div class="float-right">'
+                                                                <button onclick="get('list-new-rec-<?=$o;?>vote').removeChild(get('rec-vote-<?php echo $idcs; ?>'));if(get('list-new-rec-<?=$o;?>vote').children.length == 0) { hide('all-new-rec-<?=$o;?>vote');}" class="btn btn-sm btn-outline-secondary">Supprimer</button>'
+                                                            </div>
+                                                        </div>
+
+                                                         <?php if($value['type'] == "commande") { ?>
+                                                                <label class="control-label">Commande à éxecuter (SANS /)</label>
+                                                                <input type="text" data-type="value" value="<?php echo $value['value']; ?>"class="form-control"/>
+                                                         <?php } else  if($value['type'] == "message") { ?>
+                                                                <label class="control-label">Message à afficher lors du vote</label>
+                                                                <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
+                                                         <?php } else  if($value['type'] == "jeton") { ?>
+                                                                <label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
+                                                                <input type="number" data-type="value" min="1" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
+                                                         <?php } else  if($value['type'] == "item") { ?>
+                                                                <label class="control-label">Id de l\'item à donner</label>
+                                                                <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
+
+                                                                <label class="control-label">Nombre d\'item à donner</label>
+                                                                <input type="number" data-type="value2" min="1" value="<?php echo $value['value2']; ?>" max="64"  class="form-control"/>
+                                                         <?php } ?>
+                                                            <label class="control-label" style="<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">Obtention de la récompense</label>
+                                                            <select data-type="methode" class="form-control" style="margin-bottom:20px">
+                                                                <option value="1"  <?php if($value['methode'] == "1") { echo 'checked'; }?>> Le serveur où il est en ligne </option>
+                                                                <option value="2" <?php if($value['methode'] == "2") { echo 'checked'; }?>> Le serveur de la catégorie </option>
+                                                                <option value="3" <?php if($value['methode'] == "3") { echo 'checked'; }?>> Tous les serveurs </option>
+                                                            </select> <hr/>
+                                                    </div>
+
+                                                    <?php } ?>
+                                                </div>
                                             </div>
-                                            <?php 
-                                            if($action[0] == "give")
-                                                    $item = explode(':', $action[1]);
-                                                    if($action[0] == "jeton")
-                                                        $quantite = $action[1];
-                                                    elseif($action[0] == "give")
-                                                        $quantite = $item[3];
-                                                    else
-                                                        $quantite = '';
-                                            ?>
-                                            <div class="form-group col-md-4 col-sm-12" id="cmd<?=$o;?>2" <?=($action[0] == 'cmd') ? '' : 'style="display:none;"';?>>
-                                                <label for="cmd<?=$o;?>">Commande à executer</label>
-                                                <input type="text" name="cmd<?=$o;?>" id="cmd<?=$o;?>" class="form-control"
-                                                    value="<?=($action[0] == 'cmd') ? $action[1] : '';?>" />
-                                            </div>
-                                            <div class="form-group col-md-2 col-sm-6" id="quantite<?=$o;?>2" <?=($action[0] == 'cmd') ? 'style="display:none;"' : '';?>>
-                                                <label for="quantite<?=$o;?>">Quantité</label>
-                                                <input type="text" name="quantite<?=$o;?>" id="quantite<?=$o;?>" class="form-control"
-                                                    value="<?=$quantite;?>" />
-                                            </div>
-                                            <div class="form-group col-md-2 col-sm-6" id="iditem<?=$o;?>2" <?=($action[0] == 'cmd') ? 'style="display:none;"' : '';?>>
-                                                <label for="iditem<?=$o;?>">ID de l'item</label>
-                                                <input type="text" name="id<?=$o;?>" name="iditem<?=$o;?>" class="form-control"
-                                                    value="<?=($action[0] == "give") ? $item[1] : '';?>" />
-                                            </div>
-                                           <div class="form-group col-md-12 col-sm-12" <?=(!isset($donnees[$o]['message'])||empty($donnees[$o]['message'])) ? '' : 'style="display:none;"';?>>
-                                                <label for="msg<?=$o;?>">Message</label>
-                                                <input type="text" name="message<?=$o;?>" id="msg<?=$o;?>" class="form-control"
-                                                    value="<?=$donnees[$o]['message'];?>" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="temps<?=$o;?>">Temps entre chaque vote</label>
+
+                                       
+                                            <label class="control-label" for="temps<?=$o;?>">Temps entre chaque vote</label>
                                             <input type="number" name="temps<?=$o;?>" id="temps<?=$o;?>" class="form-control"
-                                                    value="<?=$donnees[$o]['temps'];?>" />
-                                        </div> 
-                                        <div class="form-group">
-                                            <label for="idunique<?=$o;?>">ID Unique</label>
+                                                    value="<?=$donnees[$o]['temps'];?>" required>
+                                      
+                                            <label class="control-label" for="idunique<?=$o;?>">ID Unique</label>
                                             <input type="text" name="idCustom<?=$o;?>" id="idunique<?=$o;?>" class="form-control"
                                                     value="<?=$donnees[$o]['idCustom'];?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="enligne<?=$o;?>" id="enlignecb<?=$o;?>">
-                                                <label class="form-check-label" for="enlignecb<?=$o;?>" value="1" <? if($donnees[$o]['enligne']==1) { echo 'checked' ; } ?>>
-                                                    Doit être connecté sur le serveur ( Être en ligne pour confirmer le vote )
-                                                </label>
-                                            </div>
-                                        </div>
+                                       
+
+                                              <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
+                                                <div class="custom-control custom-switch" style="margin-bottom:15px;" >
+                                                    <input type="checkbox" class="custom-control-input" value="1" id="doisetreenligne<?=$o;?>" name="enligne<?=$o;?>" <? if($donnees[$o]['enligne']==1) { echo 'checked' ; } ?>>
+                                                    <label class="custom-control-label" for="doisetreenligne<?=$o;?>">Oui</label>
+                                                </div>
+
+                              
+                                        <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
                                         <button onclick="sendDirectPost('admin.php?action=supprVote&id=<?=$donnees[$o]['id'];?>',function(data) { if(data) {
                                             hide('serveur<?=$o ?>'); 
-                                            removePost('all-vote', 'titre<?=$o;?>'); removePost('all-vote', 'lien<?=$o;?>');  removePost('all-vote', 'message<?=$o;?>');  removePost('all-vote', 'serveur<?=$o;?>');  removePost('all-vote', 'methode<?=$o;?>'); removePost('all-vote', 'action<?=$o;?>');  removePost('all-vote', 'cmd<?=$o;?>');  removePost('all-vote', 'quantite<?=$o;?>');  removePost('all-vote', 'id<?=$o;?>');  removePost('all-vote', 'temps<?=$o;?>');  removePost('all-vote', 'idCustom<?=$o;?>');  removePost('all-vote', 'enligne<?=$o;?>'); }})"
+                                             hide('btn-serveur<?=$o ?>'); 
+                                            removePost('all-vote', 'titre<?=$o;?>'); removePost('all-vote', 'lien<?=$o;?>'); removePost('all-vote', 'temps<?=$o;?>');  removePost('all-vote', 'idCustom<?=$o;?>');  removePost('all-vote', 'enligne<?=$o;?>'); }})"
                                                     class="btn btn-danger btn-block w-100">Supprimer</button>
-
-                                    </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
 
                             <?php 
-                            } ?>
-                             <script>
+                            }  ?>
+                    </div>
+
+                        <script>var idvote = <?php echo $idcs; ?>;
                                 initPost("all-vote", "admin.php?action=modifierVote");</script>
                             <div class="card-footer">
-                                <input type="submit" onclick="sendPost('all-vote');" class="btn btn-success w-100" value="Valider les changements"/>
+                                <input type="submit" onclick="genVoteJson2();sendPost('all-vote');" class="btn btn-success w-100" value="Valider les changements"/>
                             </div>
-                    <?php } ?>
-                    </div>
                 <!-- </div> -->
             </div>
         </div>

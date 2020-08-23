@@ -411,7 +411,8 @@ CREATE TABLE IF NOT EXISTS `cmw_visits` (
 
 CREATE TABLE IF NOT EXISTS `cmw_votes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(20) NOT NULL,
+  `pseudo` varchar(50) NOT NULL,
+  `ip` varchar(20) NOT NULL,
   `nbre_votes` int(5) NOT NULL,
   `site` int(4) NOT NULL,
   `date_dernier` int(11) NOT NULL,
@@ -420,9 +421,7 @@ CREATE TABLE IF NOT EXISTS `cmw_votes` (
 
 CREATE TABLE IF NOT EXISTS `cmw_votes_config` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `message` text NOT NULL,
-  `methode` tinyint(3) UNSIGNED NOT NULL,
-  `action` varchar(100) NOT NULL,
+  `action` text NULL,
   `serveur` tinyint(3) UNSIGNED NOT NULL,
   `lien` varchar(255) NOT NULL,
   `temps` int(10) UNSIGNED NOT NULL,
@@ -435,8 +434,7 @@ CREATE TABLE IF NOT EXISTS `cmw_votes_config` (
 CREATE TABLE IF NOT EXISTS `cmw_votes_temp` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(16) NOT NULL,
-  `methode` tinyint(3) UNSIGNED NOT NULL,
-  `action` varchar(100) NOT NULL,
+  `action` text NOT NULL,
   `serveur` tinyint(3) UNSIGNED NOT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -445,8 +443,7 @@ CREATE TABLE IF NOT EXISTS `cmw_votes_recompense_auto_config` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `type` tinyint(3) UNSIGNED NOT NULL,
   `valueType` varchar(50) NOT NULL,
-  `message` varchar(255) DEFAULT NULL,
-  `commande` varchar(255) NOT NULL,
+  `action` text NULL,
   `serveur` smallint(5) UNSIGNED NOT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

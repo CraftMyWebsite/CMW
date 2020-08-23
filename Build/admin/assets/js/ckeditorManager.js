@@ -9,11 +9,11 @@ function initCK() {
 		.then(editor => { 
 			CK.set(el, editor); 
 			if(isset(el.getAttribute('data-UUID'))) {
-				editor.editing.view.document.on( 'keyup', ( evt, data ) => { localStorage['CKEDITOR-'+el.getAttribute('data-UUID')] = editor.getData();} );
-				if(isset(localStorage['CKEDITOR-'+el.getAttribute('data-UUID')])) {
+				editor.editing.view.document.on( 'keyup', ( evt, data ) => { localStorage.setItem('CKEDITOR-'+el.getAttribute('data-UUID'), editor.getData());} );
+				if(isset(localStorage.getItem('CKEDITOR-'+el.getAttribute('data-UUID')))) {
 					if(!isset(editor.getData()) || editor.getData() == "" ) 
 					{
-						editor.setData(localStorage['CKEDITOR-'+el.getAttribute('data-UUID')]);
+						editor.setData(localStorage.getItem('CKEDITOR-'+el.getAttribute('data-UUID')));
 					}
 				}
 			}
@@ -30,5 +30,5 @@ function destroyCK() {
 }
 
 function removeCK(el) {
-	localStorage.splice('CKEDITOR-'+el.getAttribute('data-UUID'), 1);
+	localStorage.removeItem('CKEDITOR-'+el.getAttribute('data-UUID'));
 }

@@ -45,7 +45,7 @@ if ((isset($_SESSION['Player']['pseudo']) AND !empty($_SESSION['Player']['pseudo
 }  else $connection = false;
 require_once ('modele/json/json.php');
 //le fichier controle des récompenses Auto
-require('controleur/recompenseAuto.php');
+require('controleur/recompenseAuto.php'); 
 // système de Get(tout le site passe par index.php).
 // Les deux types de Get pricipaux utilisés sont les "pages" et les "actions.
 // Les actions n'affichent aucun code html alors que les pages sont dans la theme.
