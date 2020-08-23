@@ -726,6 +726,11 @@ a.prefixLink:hover .prefix {
 
 /* --- --- MAINTENANCE PAGE --- --- */
 
+.countdown-circles {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 .content-clock {
     display: block;
     padding: .6rem;
@@ -733,7 +738,19 @@ a.prefixLink:hover .prefix {
     border-radius: 3px;
     text-align: center;
     font-weight: 900;
-    background-color: var(--secondary-color-bg);
+    background-color: var(--darkest-color-bg);
+}
+
+.countdown-circles span {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 32px;
+    background: var(--secondary-color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* --- --- FOOTER --- --- */
