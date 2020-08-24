@@ -8,14 +8,17 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
-		case 'getGradesList.php':
-			require('admin/actions/getGradesList.php');
-			exit();
 		case 'getPagesList':
 			require('admin/actions/getPagesList.php');
 			exit();
 		case 'getJsonMember':
 			require('admin/actions/getJsonMember.php');
+			exit();
+		case 'switchPreferenceInscription':
+			require('admin/actions/switchPreferenceInscription.php');
+			exit();
+		case 'editMessageInscr':
+			require('admin/actions/editMessageInscr.php');
 			exit();
 		case 'getLienVote':
 			require('admin/actions/getLienVote.php');

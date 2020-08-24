@@ -52,7 +52,7 @@ $PermissionFormat["PermsPanel"]="Permissions panel";
     $PermissionFormat["PermsPanel-support"]="Page Support";
         $PermissionFormat["PermsPanel-support-tickets"]="Tickets";
             $PermissionFormat["PermsPanel-support-tickets-actions"]="Actions";
-    $PermissionFormat["PermsPanel-maintenance"]="Maintenance";
+    $PermissionFormat["PermsPanel-maintenance"]="Page Maintenance";
         $PermissionFormat["PermsPanel-maintenance-actions"]="Actions";
     $PermissionFormat["PermsPanel-update"]="Page Mise à jour";
     $PermissionFormat["PermsPanel-social"]="Page Membres => Réseaux sociaux";
@@ -66,44 +66,19 @@ $PermissionFormat["PermsForum"]="Permissions Forums";
     $PermissionFormat["PermsForum-general"]="Général";
     $PermissionFormat["PermsForum-moderation"]="Modération";
 
-$dirGrades = './modele/grades/';
-$initGrades = glob($dirGrades.'*.yml');
-
-$lastGrade[] = array();
-foreach($initGrades as $numGrade) {
-    $lastGrade[] = substr($numGrade, 16, -4);
+$recup = $bddConnection->query('SELECT * FROM cmw_grades ORDER BY priorite');
+$idGrade = $recup->fetchAll(PDO::FETCH_ASSOC);
+foreach($idGrade as $key => $value)
+{
+    $idGrade[$key]['PermsDefault'] = unserialize($value['permDefault']);
+    $idGrade[$key]['PermsPanel'] = unserialize($value['permPanel']);
+    $idGrade[$key]['PermsForum'] = unserialize($value['permForum']);
 }
 
-$lastGrade = array_filter($lastGrade);
-if(empty($lastGrade))
-    array_push($lastGrade, -1);
-
-$idGrade[] = array();
-for($i = 2;$i <= max($lastGrade); $i++) {
-    $openGrade = new Lire($dirGrades.$i.'.yml');
-    $readGrade = $openGrade->GetTableau();
-    $idGrade[$i] = $readGrade;
-}
-$prefixs = array(
-                             'prefixPrimary',
-                             'prefixSecondary',
-                             'prefixRed',
-                             'prefixGreen',
-                             'prefixOlive',
-                             'prefixLightGreen',
-                             'prefixBlue',
-                             'prefixRoyalBlue',
-                             'prefixSkyBlue',
-                             'prefixGray',
-                             'prefixSilver',
-                             'prefixYellow',
-                             'prefixOrange',
-                             'prefixCreateur'
-                         );
-                         $effets = array(
-                             'style5',
-                             'style16'
-                         );
+$effets = array(
+    'style5',
+    'style16'
+);
 }
 function hasPerm($i, $str, $grades) {
     $ar = explode("-", $str);
@@ -163,7 +138,7 @@ function hasPermArray2($perm, $suivi) {
 function editPerm($id, $edit, $perm, $str, $POST) {
     foreach($perm as $key => $value)
     {
-        if($key != "Grade" & $key != "prefix" & $key != "effets") {
+        if($key != "Grade" & $key != "prefix" & $key != "effets" & $key != "couleur") {
             if($str == "") {
                 $str2 = $key;
             } else {
@@ -207,7 +182,7 @@ function editPerm($id, $edit, $perm, $str, $POST) {
 function showForFormatage($perm, $suivi) {
     foreach($perm as $key => $value)
     {
-        if($key != "Grade" & $key != "prefix" & $key != "effets") 
+        if($key != "Grade" & $key != "prefix" & $key != "effets" & $key != "couleur") 
         {
             if($suivi == "") {
                 $suivi2 = $key;
@@ -233,14 +208,13 @@ function array_to_unidim($array, $parent = '') {
     }
     return $result;
 }
-
 function writePerm($perm, $nb, $id, $other, $idGrade, $PermissionFormat) {
     if(isset($perm) && is_array($perm)) {
         echo '<ul '.($nb == 20 ? 'style="margin-left:-30px;"':'style="display:none;"').'class="grade-ul" id="cont'.($nb== 20 ? '' : '-').''.$id.'-'.$other.'">';
         foreach($perm as $key => $value)
         {
 
-            if($key != "Grade" & $key != "prefix" & $key != "effets")
+            if($key != "Grade" & $key != "prefix" & $key != "effets" & $key != "couleur")
             {
                 if( is_array($value)) {  ?>
                     <div class="custom-control custom-switch" id="grade-div"> 

@@ -24,7 +24,7 @@ $_Theme_ = $_Theme_->GetTableau();
                             <span class="social-text"> Rejoingnez-nous sur Facebook !</span>
                         </a>
                         <a href="<?= $_Theme_['Pied']['youtube']; ?>" class="col-12 discord-social ml-3">
-                            <span class="fab fa-instagram social-logo"></span>
+                            <span class="fab fa-youtube social-logo"></span>
                             <span class="social-text"> Rejoingnez-nous sur Youtube !</span>
                         </a>
                         <a href="<?= $_Theme_['Pied']['discord']; ?>" class="col-12 discord-social ml-3">
@@ -46,7 +46,7 @@ $_Theme_ = $_Theme_->GetTableau();
                 <div class="col-7">
                     <div class="copyright">
                         Tous droits réservés, site créé pour le serveur <?= $_Serveur_['General']['name']; ?> <br />
-                        <small>CraftMyWebsite.fr#<?= $versioncms; ?></small>
+                        <small><a href="https://craftmywebsite.fr" target="_blank">CraftMyWebsite.fr</a>#<?= $versioncms; ?></small>
                     </div>
                 </div>
                 <div class="col text-right">

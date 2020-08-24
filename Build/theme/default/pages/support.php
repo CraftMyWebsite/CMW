@@ -153,11 +153,6 @@
                                                             <?php if (isset($ticketCommentaires[$tickets['id']])) :
 
                                                                 for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) :
-                                                                    $get_idComm = $bddConnection->prepare('SELECT id FROM cmw_support_commentaires WHERE auteur LIKE :auteur AND id_ticket LIKE :id_ticket');
-                                                                    $get_idComm->bindParam(':auteur', $ticketCommentaires[$tickets['id']][$i]['auteur']);
-                                                                    $get_idComm->bindParam(':id_ticket', $tickets['id']);
-                                                                    $get_idComm->execute();
-                                                                    $req_idComm = $get_idComm->fetch(PDO::FETCH_ASSOC);
 
                                                                     unset($message);
                                                                     $message = espacement($ticketCommentaires[$tickets['id']][$i]['message']);
@@ -184,7 +179,7 @@
                                                                                             <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) : ?>
 
                                                                                                 <li>
-                                                                                                    <a href="?&action=delete_support_commentaire&id_comm=<?= $req_idComm['id'] ?>&id_ticket=<?= $tickets['id'] ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" class="dropdown-item">
+                                                                                                    <a href="?&action=delete_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>&id_ticket=<?= $tickets['id'] ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" class="dropdown-item">
                                                                                                         Supprimer
                                                                                                     </a>
                                                                                                 </li>
@@ -193,7 +188,7 @@
 
                                                                                             <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) : ?>
                                                                                                 <li>
-                                                                                                    <a href="#editComm-<?= $req_idComm['id'] ?>" data-toggle="modal" data-target="#editComm-<?= $req_idComm['id'] ?>" class="dropdown-item" data-dismiss="modal">Editer</a>
+                                                                                                    <a href="#editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>" data-toggle="modal" data-target="#editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>" class="dropdown-item" data-dismiss="modal">Editer</a>
                                                                                                 </li>
                                                                                             <?php endif; ?>
                                                                                         </ul>
@@ -289,16 +284,10 @@
 
                             <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) :
                                 if (!empty($ticketCommentaires[$tickets['id']])) :
-                                    for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) :
+                                    for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) : ?>
 
-                                        $get_idComm = $bddConnection->prepare('SELECT id FROM cmw_support_commentaires WHERE auteur LIKE :auteur AND id_ticket LIKE :id_ticket');
-                                        $get_idComm->bindParam(':auteur', $ticketCommentaires[$tickets['id']][$i]['auteur']);
-                                        $get_idComm->bindParam(':id_ticket', $tickets['id']);
-                                        $get_idComm->execute();
-                                        $req_idComm = $get_idComm->fetch(PDO::FETCH_ASSOC); ?>
-
-                                        <div class="modal fade" id="editComm-<?= $req_idComm['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editComm">
-                                            <form method="POST" action="?&action=edit_support_commentaire&id_comm=<?= $req_idComm['id']; ?>&id_ticket=<?= $tickets['id']; ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>">
+                                        <div class="modal fade" id="editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editComm">
+                                            <form method="POST" action="?&action=edit_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>&id_ticket=<?= $tickets['id']; ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
 

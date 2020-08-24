@@ -2,7 +2,7 @@
         <div class="row">
             <div class="col-md-4  offset-md-2">
                 <p class="text-muted footer-text" style="padding-left: 15px;">
-                    <a href="https://craftmywebsite.fr/" target="_blank">CraftMyWebsite #<?php echo $versioncms; ?></a> | <a href="https://discord.gg/P94b7d5" target="_blank">Discord</a> | <a href="https://github.com/Florentlife/CraftMyWebsite/master" target="_blank">GitHub</a>
+                    <a href="https://craftmywebsite.fr/" target="_blank">CraftMyWebsite #<?php echo $versioncms; ?></a> | <a href="https://discord.gg/P94b7d5" target="_blank">Discord</a> | <a href="https://github.com/CraftMyWebsite/CMW" target="_blank">GitHub</a>
                 </p>
             </div>
             <div class="col-md-6">

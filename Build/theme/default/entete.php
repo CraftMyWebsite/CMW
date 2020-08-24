@@ -41,6 +41,8 @@ endif;
         <div class="container-fluid col-9">
             <!-- Navigation : -->
             <!-- Navigation Left -->
+            <?php if(!isset($maintenanceOn) || Permission::getInstance()->verifPerm("PermsPanel", "maintenance", "actions", "connexionAdmin"))
+            { ?>
             <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
                 <?php
                 for ($i = 0; $i < count($_Menu_['MenuTexte']); $i++) :
@@ -136,7 +138,8 @@ endif;
                             </div>
                         </li>
                     <?php endif; ?>
-                <?php endif; ?>
+                <?php endif; 
+            } ?>
             </nav>
 
             <!-- Hero Section -->
@@ -169,7 +172,7 @@ endif;
                                     <h5 class="card-title">
                                         État de votre serveur :
                                         <?php if ($_Serveur_['General']['statut'] == 0) : ?>
-                                            <span class="badge badge-danger">Hors-Ligne</span>';
+                                            <span class="badge badge-danger">Hors-Ligne</span>
                                         <?php elseif ($_Serveur_['General']['statut'] == 1) : ?>
                                             <span class="badge badge-success">En Ligne</span>
                                             <div class="card-text">Nombres de Joueurs : <strong><?= $playeronline ?></strong>/<?= $maxPlayers; ?></div>
@@ -222,9 +225,8 @@ endif;
                             <?php endif; ?>
                         </div>
                     </div>
+                </section>
                 <?php endif; ?>
         </div>
     </div>
-    </section>
-
 </header>

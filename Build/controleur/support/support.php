@@ -16,5 +16,6 @@ while($a = $ticketCommentairesReq->fetch(PDO::FETCH_ASSOC))
 		
 	$ticketCommentaires[$i][$j] = $a;
 	$j++;
+	$ticketCommentaires[$i] = array_reverse($ticketCommentaires[$i]);
 }
 ?>

@@ -1,9 +1,12 @@
 /*!
-  Main CSS Page
-  Edited by BadiiiX
-  Twitter : @BadiiiX_IT
 
-  2020 ©
+  Main CSS Page
+
+  Created & Edited by CraftMyWebsite & BadiiiX
+
+  Twitter : @CraftMyWebsite & @BadiiiX_IT
+
+  Copyright 2020 ©
 */
 
 
@@ -13,7 +16,6 @@
 @charset "UTF-8";
 
 @import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
-
 
 
 :root {
@@ -28,7 +30,7 @@
     --darkest-color-bg: #3f3f3f;
     --lightest-color-bg: #585858;
 
-    --header-image: url(https://i.pinimg.com/originals/67/19/84/671984c63217a05d2adf3a6591d29f2b.jpg)
+    --header-image: url(../img/heading.jpg);
 }
 
 *:focus {
@@ -520,6 +522,10 @@ li.nav-item {
     margin-right: auto;
 }
 
+.media-body {
+    word-break: break-all;
+}
+
 /* ==> Profil */
 
 
@@ -536,10 +542,9 @@ li.nav-item {
 .hoverText {
     position: absolute;
     top: 0;
-    height: 100%;
     transition: .5s ease;
     opacity: 0;
-    width: 100%;
+    width: 128px;
     text-align: center;
 }
 
@@ -549,13 +554,134 @@ li.nav-item {
 
 .caption {
     background-color: rgba(226, 221, 221, .85);
-    min-width: 125px;
-    min-height: 125px;
+    max-width: 128px;
+    min-height: 128px;
     font-size: 30px;
-    padding-top: 50%;
+    padding-top: 52px;
     color: white;
     cursor: pointer;
 }
+
+/* --- --- FORUM --- --- */
+
+.style16 {
+    background-image: url(../img/etoile-anime.gif);
+}
+
+.style5 {
+    background-image: url(../img/spark-gold.gif);
+}
+
+.prefix {
+    background-color: transparent;
+    padding: 0px 6px;
+    margin: -1px 0;
+    border: 1px solid transparent;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -khtml-border-radius: 0px; 
+    border-radius: 0px;
+    display: inline-block;
+}
+
+a.prefixLink:hover {
+    text-decoration: none;
+}
+
+a.prefixLink:hover .prefix {
+    color: rgb(70,70,70);
+    text-decoration: none;
+    background-color: rgb(245,245,245);
+    padding: 0 6px;
+    border: 1px solid rgb(222,222,222);
+}
+
+.prefix a { 
+  color: inherit;
+}
+
+.prefix.prefixPrimary {
+    color: rgb(70, 70, 70);
+    background-color: rgb(239, 239, 239);
+    border-color: rgb(239, 239, 239);
+}
+
+.prefix.prefixSecondary {
+    color: rgb(73, 73, 73);
+    background-color: rgb(203, 203, 203);
+    border-color: rgb(203, 203, 203);
+}
+
+.prefix.prefixRed {
+    color: white;
+    background-color: red;
+    border-color: #F88;
+}
+
+.prefix.prefixGreen {
+    color: white;
+    background-color: green;
+    border-color: green;
+}
+
+.prefix.prefixOlive {
+    color: black;
+    background-color: olive;
+    border-color: olive;
+}
+
+.prefix.prefixLightGreen {
+    color: black;
+    background-color: lightgreen;
+    border-color: lightgreen;
+}
+
+.prefix.prefixBlue {
+    color: white;
+    background-color: blue;
+    border-color: #88F;
+}
+
+.prefix.prefixRoyalBlue {
+    color: white;
+    background-color: royalblue;
+    border-color: #81A9E1;
+}
+
+.prefix.prefixSkyBlue {
+    color: black;
+    background-color: skyblue;
+    border-color: skyblue;
+}
+
+.prefix.prefixGray {
+    color: black;
+    background-color: gray;
+    border-color: #AAA;
+}
+
+.prefix.prefixSilver {
+    color: black;
+    background-color: silver;
+    border-color: silver;
+}
+
+.prefix.prefixYellow {
+    color: black;
+    background-color: yellow;
+    border-color: #E0E000;
+}
+
+.prefix.prefixOrange {
+    color: black;
+    background-color: orange;
+    border-color: #FFC520;
+}
+
+.prefix.prefixCreateur {
+    color: red;
+}
+
 
 /* --- --- FORMS --- --- */
 
@@ -600,6 +726,11 @@ li.nav-item {
 
 /* --- --- MAINTENANCE PAGE --- --- */
 
+.countdown-circles {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 .content-clock {
     display: block;
     padding: .6rem;
@@ -607,7 +738,19 @@ li.nav-item {
     border-radius: 3px;
     text-align: center;
     font-weight: 900;
-    background-color: var(--secondary-color-bg);
+    background-color: var(--darkest-color-bg);
+}
+
+.countdown-circles span {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 32px;
+    background: var(--secondary-color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* --- --- FOOTER --- --- */

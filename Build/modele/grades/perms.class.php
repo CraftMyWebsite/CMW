@@ -5,8 +5,11 @@ class Permission {
 
 	private $joueur;
 	private $bdd;
-	private $_Perm_;
+	private $_PermDefault_;
+	private $_PermPanel_;
+	private $_PermForum_;
 	private $grade;
+	private $options;
 
 	private static $instance = null; //Instance de la classe singleton
 
@@ -50,13 +53,38 @@ class Permission {
 		{
 			if($perm[0] == "connect")
 				return true;
-			if(isset($this->_Perm_))
-				$TableauPerm = $this->_Perm_;
-			else
-			{
-				$TableauPerm = $this->readPerm($grade);
-				$this->_Perm_ = $TableauPerm;
+			switch($perm[0]) {
+				case 'PermsDefault':
+					if(isset($this->_PermDefault_))
+						$TableauPerm = $this->_PermDefault_;
+					else
+					{
+						$TableauPerm = $this->readPerm($grade, 0);
+						$this->_PermDefault_ = $TableauPerm;
+					}
+				break;
+
+				case 'PermsPanel':
+					if(isset($this->_PermPanel_))
+						$TableauPerm = $this->_PermPanel_;
+					else
+					{
+						$TableauPerm = $this->readPerm($grade, 1);
+						$this->_PermPanel_ = $TableauPerm;
+					}
+				break;
+
+				case 'PermsForum':
+					if(isset($this->_PermForum_))
+						$TableauPerm = $this->_PermForum_;
+					else
+					{
+						$TableauPerm = $this->readPerm($grade, 2);
+						$this->_PermForum_ = $TableauPerm;
+					}
+				break;
 			}
+			$perm = array_shift($perm);
 			$retour = false;
 			foreach($perm as $value)
 			{
@@ -97,10 +125,26 @@ class Permission {
 		}
 	}
 
-	public function readPerm($grade)
+	public function readPerm($grade, $ordre = 3) //0 : default, 1: panel, 2: forum, 3: tout
 	{
-		$lecture = new Lire('modele/grades/'.$grade.'.yml');
-		$lecture = $lecture->GetTableau();
+		if($ordre == 0)
+			$req = $this->bdd->prepare('SELECT permDefault AS result FROM cmw_grades WHERE id = :id');
+		elseif($ordre == 1)
+			$req = $this->bdd->prepare('SELECT permPanel AS result FROM cmw_grades WHERE id = :id');
+		elseif($ordre == 2)
+			$req = $this->bdd->prepare('SELECT permForum AS result FROM cmw_grades WHERE id = :id');
+		else
+			$req = $this->bdd->prepare('SELECT permDefault AS result, permForum AS result1, permPanel AS result2 FROM cmw_grades WHERE id = :id');
+		$req->execute(array('id' => $grade));
+		$data = $req->fetch(PDO::FETCH_ASSOC);
+		if(isset($data['result1']))
+		{
+			$lecture['PermsDefault'] = unserialize($data['result']);
+			$lecture['PermsPanel'] = unserialize($data['result2']);
+			$lecture['PermsForum'] = unserialize($data['result1']);
+		}
+		else
+			$lecture = unserialize($data['result']);
 		return $lecture;
 	}
 

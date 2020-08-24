@@ -1,5 +1,5 @@
 <?php
-if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'editEtatMaintenance')) {
+if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editEtatMaintenance')) {
 	$req_Etat = $bddConnection->query('SELECT maintenanceEtat FROM cmw_maintenance WHERE maintenanceId = 1');
 	$get_Etat = $req_Etat->fetch(PDO::FETCH_ASSOC);
 	$result_Etat = $get_Etat['maintenanceEtat'];
@@ -17,7 +17,7 @@ if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', '
 		$dateTime = "";
 		if($dtime != false)
 			$dateTime = $dtime->getTimestamp();
-		if(time() > $dateTime)
+		if(time() > $dateTime && $dtime != false)
 			$retour = array('retour' => "NOPE", "message" => "Date de fin avant le début");
 		else
 		{

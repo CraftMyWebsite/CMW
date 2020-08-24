@@ -108,7 +108,7 @@ if(isset($_GET['paypal'])){
                 <input type="hidden" name="paysafecardpage" value="1">
                 <div class="row">
                     <div class="alert alert-danger">
-                        <p>Notre systéme "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuel ! Lorsqu'un joueur achéte des jetons via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livré les jetons à l'acheteur ! pour valider des code paysafecard / verifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
+                        <p>Notre systéme "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuel ! Lorsqu'un joueur achéte des jetons via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livrer les jetons à l'acheteur ! pour valider des codes paysafecard / verifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
                         Le saviez-vous: <strong>Vous pouvez payer l'hébergement de votre site web via code PaySafeCard <a href="https://webstrator.fr/" target="_blank" rel="noopener noreferrer">chez notre partenaire Webstrator.fr</a> !</strong>
                     </div>
                 </div>
@@ -132,19 +132,19 @@ if(isset($_GET['paypal'])){
                         <h3>Créer une offre</h3>
                         <div class="row">
                             <label class="control-label">Titre de l'offre</label>
-                            <input type="text" name="nom" class="form-control" placeholder="ex: 5€ - 1500Jetons"/>
+                            <input type="text" name="nom" class="form-control" placeholder="ex: 5€ - 1500Jetons" required/>
                         </div>
                         <div class="row">
                             <label class="control-label">Message de l'offre</label>
-                            <input type="text" name="description" class="form-control" placeholder="ex: < img src=... / >"/>
+                            <input type="text" name="description" class="form-control" placeholder="ex: < img src=... / >" required/>
                         </div>
                         <div class="row">
                             <label class="control-label">Prix de l'offre</label>
-                            <input type="number" step="0.01" name="prix" class="form-control" placeholder="ex: 5" >
+                            <input type="number" step="0.01" name="prix" class="form-control" placeholder="ex: 5" required>
                         </div>
                         <div class="row">
                             <label class="control-label">Jetons donnés</label>
-                            <input type="number" name="jetons_donnes" class="form-control" placeholder="ex: 1500" >
+                            <input type="number" name="jetons_donnes" class="form-control" placeholder="ex: 1500" required>
                         </div>
                         <hr>
 

@@ -65,11 +65,11 @@
 		if($joueurDonnees['rang'] == 0) {
 			$gradeSite = $_Serveur_['General']['joueur'];
 		} elseif($joueurDonnees['rang'] == 1) {
-			$gradeSite = "<span class='prefix ".$_Serveur_['General']['createur']['prefix']." ".$_Serveur_['General']['createur']['effets']."' id='grade'>".$_Serveur_['General']['createur']['nom']."</span>";
+			$gradeSite = "<span class='prefix ".$_Serveur_['General']['createur']['effets']."' style='background-color: ".$_Serveur_['General']['createur']['bg']."; color: ".$_Serveur_['General']['createur']['couleur']."' id='grade'>".$_Serveur_['General']['createur']['nom']."</span>";
 		} elseif(fopen('./modele/grades/'.$joueurDonnees['rang'].'.yml', 'r')) {
 			$openGradeSite = new Lire('./modele/grades/'.$joueurDonnees['rang'].'.yml');
 			$readGradeSite = $openGradeSite->GetTableau();
-			$gradeSite = "<span class='prefix ".$readGradeSite['prefix']." ".$readGradeSite['effets']."' id='grade'>".$readGradeSite['Grade']."</span>";
+			$gradeSite = "<span class='prefix ".$readGradeSite['effets']."' style='background-color: ".$readGradeSite['prefix']."; color: ".$readGradeSite['couleur']."' id='grade'>".$readGradeSite['Grade']."</span>";
 			if(empty($readGradeSite['Grade']))
 				$gradeSite = $_Serveur_['General']['joueur'];
 		} else {

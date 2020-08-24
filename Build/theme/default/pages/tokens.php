@@ -72,7 +72,7 @@
                                 <!-- Affichage des offres Paypal -->
                                 <?php if (isset($tableauOffres)) : ?>
                                     <?php foreach ($tableauOffres as $tab) : ?>
-                                        <div class="col-md-12 col-lg-5 col-sm-12 mx-lg-4">
+                                        <div class="col-md-12 col-lg-4 col-sm-12 my-3">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5 class="titre-offre">

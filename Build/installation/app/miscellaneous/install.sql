@@ -237,22 +237,24 @@ CREATE TABLE IF NOT EXISTS `cmw_jetons_paypal_offres` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_log_DealJeton` ( 
-  `ID` INT NOT NULL AUTO_INCREMENT , 
-  `fromUser` VARCHAR(20) NOT NULL , 
-  `toUser` VARCHAR(20) NOT NULL , 
-  `amount` INT NOT NULL , 
-  `date` INT NOT NULL , 
-  PRIMARY KEY (`ID`)) 
-ENGINE = InnoDB;
+  `ID` INT NOT NULL AUTO_INCREMENT, 
+  `fromUser` VARCHAR(20) NOT NULL, 
+  `toUser` VARCHAR(20) NOT NULL, 
+  `amount` INT NOT NULL, 
+  `date` INT NOT NULL, 
+  PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `cmw_maintenance` (
   `maintenanceId` int(1) NOT NULL AUTO_INCREMENT,
   `maintenanceMsg` text NOT NULL,
   `maintenanceMsgAdmin` text NOT NULL,
+  `maintenanceMsgInscr` text NOT NULL,
   `maintenanceTime` int(11) NOT NULL,
   `maintenancePref` int(1) NOT NULL,
   `maintenanceEtat` int(1) NOT NULL,
   `dateFin` int(11) NOT NULL,
+  `inscription` tinyint(1) UNSIGNED NOT NULL DEFAULT '0', 
   PRIMARY KEY (`maintenanceId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -466,6 +468,21 @@ CREATE TABLE cmw_paysafecard_historique (
   FOREIGN KEY (offre) 
   REFERENCES cmw_paysafecard_offres(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE cmw_grades (
+  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(0) NOT NULL,
+  priorite INT UNSIGNED NOT NULL DEFAULT 0,
+  prefix CHAR(9) NOT NULL DEFAULT '',
+  couleur CHAR(9) NOT NULL DEFAULT '',
+  effets VARCHAR(64) NOT NULL DEFAULT '',
+  permDefault BLOB,
+  permPanel LONGBLOB, 
+  permForum BLOB
+)              
+ENGINE= INNODB;
+
+ALTER TABLE cmw_users ADD CONSTRAINT cle_grade FOREIGN KEY (rang) REFERENCES cmw_grades(id);
 
 INSERT INTO `cmw_paysafecard_offres` (`id`, `montant`, `jetons`, `description`, `statut`) VALUES
 (1, '10', '100', 'Offre 10€ = 10 jetons', 1),

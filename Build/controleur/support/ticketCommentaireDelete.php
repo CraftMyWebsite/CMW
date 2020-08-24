@@ -1,8 +1,9 @@
 <?php
-if(isset($_Joueur_) && ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) {
+if(isset($_Joueur_) && ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] OR Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm'))) {
     $id_ticket = urldecode($_GET['id_ticket']);
     $id_comm = urldecode($_GET['id_comm']);
     $auteur = urldecode($_GET['auteur']);
+    $pseudo = $_Joueur_['pseudo'];
     if(Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm'))
         $adminMode = true;
 
@@ -27,7 +28,7 @@ if(isset($_Joueur_) && ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_J
 			if($ExistCommentaire == "0") {
 				header('Location: index.php?&page=support&CommentaireNotExist=true');
 			} else {
-				if(!$AuteurCommentaire == $pseudo OR !$adminMode = true) {
+				if($AuteurCommentaire != $pseudo OR $adminMode != true) {
 					 header('Location: index.php?&page=support&SuppressionImpossible=true');
 				 } else {
 					$commentairesTickets->DeleteCommentaireTicket($id_comm, $id_ticket, $AuteurCommentaire);

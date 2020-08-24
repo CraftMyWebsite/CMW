@@ -16,8 +16,9 @@ General:
     statut: 2
     createur: 
         nom: Créateur
-        prefix: prefixRed
         effets: style16
+        couleur: '#ffffff'
+        bg: '#b83d3d'
     joueur: Joueur
 DataBase:
     dbAdress: 
