@@ -4,6 +4,7 @@ class vote {
     private $Player;
     private $lienData;
     private $exist;
+    private $Pseudo
     
     public function ___construc($bdd, $pseudo, $lienId) {
         $req = $bdd->prepare('SELECT * FROM cmw_votes_config WHERE id = :id');
@@ -16,7 +17,7 @@ class vote {
             'pseudo' => $pseudo,
             'site' => $lienId    ));
         $this->Player= $Player2->fetch(PDO::FETCH_ASSOC);
-
+        $this->Pseudo=$pseudo;
         $this->exist = isset($this->lienData) && !empty($this->lienData);
     }
 
@@ -26,19 +27,30 @@ class vote {
             'pseudo' => $pseudo,
             'site' => $lienId    ));
         $this->Player= $Player2->fetch(PDO::FETCH_ASSOC);
+
         $this->exist = false;
     }
     
     public function canVote() {
-        return $this->exist && $this->lienData['temps'] + $this->Player['date_dernier']  < time();
+        return empty($this->Player) || $this->exist && $this->lienData['temps'] + $this->Player['date_dernier']  < time();
     }
     
     public function confirmVote($bdd) {
-        $req = $bdd->prepare('UPDATE cmw_votes SET nbre_votes = nbre_votes + 1, date_dernier = :tmp WHERE pseudo = :pseudo AND site = :site');
-        $req->execute(array(
-            'tmp' => time(),
-            'pseudo' => $this->Player['pseudo'],
-            'site' => $this->lienData['id']));
+        if(!empty($this->Player)) {
+            $req = $bdd->prepare('UPDATE cmw_votes SET nbre_votes = nbre_votes + 1, date_dernier = :tmp, ip = :ip WHERE pseudo = :pseudo AND site = :site');
+            $req->execute(array(
+                'tmp' => time(),
+                'pseudo' => $this->Pseudo,
+                'ip' => $this->get_client_ip(),
+                'site' => $this->lienData['id']));
+        } else {
+             $req = $bdd->prepare('INSERT INTO cmw_votes (pseudo, ip, nbre_votes, site, date_dernier) VALUES (:pseudo, :ip, 1, :site, :tmp);');
+            $req->execute(array(
+                'tmp' => time(),
+                'pseudo' => $this->Pseudo,
+                'ip' => $this->get_client_ip(),
+                'site' => $this->lienData['id']));
+        }
     }
 
     public function stockVote($bdd, $action, $serveur) {
@@ -50,7 +62,7 @@ class vote {
         }
         $req = $bddConnection->prepare('INSERT INTO cmw_votes_temp (pseudo, action, serveur) VALUES (:pseudo, :action, :serveur)');
         $req->execute(array(
-        'pseudo' => $this->Player['pseudo'],
+        'pseudo' => $this->Pseudo,
         'action' =>  $action,
         'serveur' => $serveur
         ));
@@ -165,15 +177,15 @@ class vote {
             $url = $this->lienData['lien'];
             if(strpos($url, 'serveur-prive.net'))
             {
-                $API_call = @file_get_contents("https://serveur-prive.net/api/vote/".$id."/".get_client_ip());
+                $API_call = @file_get_contents("https://serveur-prive.net/api/vote/".$id."/". $this->get_client_ip());
                 return $API_call == 1;
             } else if(strpos($url, 'serveurs-minecraft.org'))
             {
-                $is_valid_vote = file_get_contents('https://www.serveurs-minecraft.org/api/is_valid_vote.php?id='.$id.'&ip='.get_client_ip().'&duration=5');
+                $is_valid_vote = file_get_contents('https://www.serveurs-minecraft.org/api/is_valid_vote.php?id='.$id.'&ip='. $this->get_client_ip().'&duration=5');
                 return $is_valid_vote > 0;
             } else if(strpos($url, 'serveurs-minecraft.com'))
             {
-                $apiaddr = 'https://serveurs-minecraft.com/api.php?Classement=' . $id .'&ip=' . get_client_ip();
+                $apiaddr = 'https://serveurs-minecraft.com/api.php?Classement=' . $id .'&ip=' .  $this->get_client_ip();
                 $apiResult = @file_get_contents($apiaddr);
                 if ($apiResult!==false) {
                     $apiResult = json_decode($apiResult, true);
@@ -188,7 +200,7 @@ class vote {
                 return false;
             } else if(strpos($url, 'serveursminecraft.fr'))
             {
-                $data = file_get_contents ( "https://serveursminecraft.fr/api/api.php?IDServeur=" . $id . "&IP=" . get_client_ip());
+                $data = file_get_contents ( "https://serveursminecraft.fr/api/api.php?IDServeur=" . $id . "&IP=" .  $this->get_client_ip());
                 if ( $data == false )
                 {
                     return false;
@@ -200,27 +212,27 @@ class vote {
                 }
             }else if(strpos($url, 'liste-minecraft-serveurs.com'))
             {
-                $api = json_decode(file_get_contents("https://www.liste-minecraft-serveurs.com/Api/Worker/id_server/".$id."/ip/".get_client_ip()));
+                $api = json_decode(file_get_contents("https://www.liste-minecraft-serveurs.com/Api/Worker/id_server/".$id."/ip/". $this->get_client_ip()));
                 if($api->result == 202){return true;}else{return false;}
             } else if(strpos($url, 'liste-serveurs.fr'))
             {
-                $api = json_decode(file_get_contents("https://www.liste-serveurs.fr/api/checkVote/".$id."/".get_client_ip()));
+                $api = json_decode(file_get_contents("https://www.liste-serveurs.fr/api/checkVote/".$id."/". $this->get_client_ip()));
                 if($api->success == true){return true;}else{return false;}
             }else if(strpos($url, 'liste-serveur.fr'))
             {
-                $api = json_decode(file_get_contents("https://www.liste-serveur.fr/api/hasVoted/".$id."/".get_client_ip()));
+                $api = json_decode(file_get_contents("https://www.liste-serveur.fr/api/hasVoted/".$id."/". $this->get_client_ip()));
                 if($api->hasVoted == true){return true;}else{return false;}
             }else if(strpos($url, 'top-serveurs.net'))  {
-                $api = json_decode(file_get_contents("https://api.top-serveurs.net/v1/votes/check-ip?server_token=".$id."&ip=".get_client_ip()));
+                $api = json_decode(file_get_contents("https://api.top-serveurs.net/v1/votes/check-ip?server_token=".$id."&ip=". $this->get_client_ip()));
                 if($api->success == true){return true;}else{return false;}
             }else if(strpos($url, 'serveursminecraft.org'))  {
-                $api =file_get_contents("https://www.serveursminecraft.org/sm_api/peutVoter.php?id=".$id."&ip=".get_client_ip());
+                $api =file_get_contents("https://www.serveursminecraft.org/sm_api/peutVoter.php?id=".$id."&ip=". $this->get_client_ip());
                 if($api == "true"){return true;}else{return false;}
             }else if(strpos($url, 'https://serveur-multigames.net'))  {
-                $api =file_get_contents("https://serveur-multigames.net/api/v2/vote/true/".$id."/".get_client_ip()));
+                $api =file_get_contents("https://serveur-multigames.net/api/v2/vote/true/".$id."/". $this->get_client_ip()));
                 if($api == "1"){return true;}else{return false;}
             }else if(strpos($url, 'https://minecraft-top.com'))  {
-                $api = json_decode(file_get_contents("https://api.minecraft-top.com/v1/vote/".get_client_ip()."/".$id));
+                $api = json_decode(file_get_contents("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
                 if($api->vote == 1){return true;}else{return false;}
             }else {
                 return true;

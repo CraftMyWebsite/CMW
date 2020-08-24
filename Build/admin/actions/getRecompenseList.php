@@ -6,10 +6,8 @@
               <tr>
                 <th>Type</th>
                 <th>Valeur</th>
-                <th>Message</th>
-                <th>Commande</th>
-                <th>Serveur</th>
                 <th>Action</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -35,21 +33,22 @@
                                 }
                                 ?>
                             </td>
-                            <td><?=(isset($donnees[$o]['message']) && $donnees[$o]['message'] != 'NULL' && !empty($donnees[$o]['message'])) ? $donnees[$o]['message'] : 'Pas de message';?></td>
-                            <td><?php $explode = explode(':', $donnees[$o]['commande'], 2);
-                            if($explode[0] == 'cmd')
-                                echo 'Commande : '.$explode[1];
-                            elseif($explode[0] == 'jeton')
-                                echo 'Give de '.$explode[1].' jetons';
-                            else
-                            {
-                                $action = explode(':', $explode[1]);
-                                echo 'Give de '.$action[3].' fois l\'item '.$action[1];
-                            }
-                            ?>
-                            </td>
-                            <td>
-                                Sur le serveur <strong><?=$lectureServs[$donnees[$o]['serveur']]['nom'];?></strong>
+                            <td><?php  $json = json_decode($donnees[$o]['action'], true); 
+                                $f = "";
+                                foreach($json as $value) { 
+                                  if($value['type'] == "item") {
+                                    $f= $f.'Give '.$value['value2'].' item ID '.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                  } else if($value['type'] == "commande") {
+                                    $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                  } else if($value['type'] == "jeton") {
+                                     $f= $f.'Give '.$value['value'].' jeton(s)<br/>';
+                                  } else if($value['type'] == "message") {
+                                    $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                  } 
+                                }  
+                                if($f != "" && !empty($f)) {
+                                   echo substr($f, 0, -5);
+                                } ?>
                             </td>
                             <td><button onclick="sendDirectPost('?action=supprRecAuto&id=<?=$donnees[$o]['id'];?>', function(data) { if(data) { hide('rec-<?php echo $o; ?>'); }});" class="btn btn-outline-secondary">Supprimer</button></td>
                         </tr>

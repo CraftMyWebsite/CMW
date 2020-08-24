@@ -8,17 +8,36 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
-		case 'getPagesList':
-			require('admin/actions/getPagesList.php');
-			exit();
-		case 'getJsonMember':
-			require('admin/actions/getJsonMember.php');
+		case 'suppVoteHistory':
+			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
+			{ 
+				$req = $bddConnection->prepare('DELETE FROM cmw_votes WHERE pseudo = :pseudo ');
+				$req->execute(array('pseudo' => $_GET['pseudo']));
+			}
 			exit();
 		case 'switchPreferenceInscription':
 			require('admin/actions/switchPreferenceInscription.php');
 			exit();
 		case 'editMessageInscr':
 			require('admin/actions/editMessageInscr.php');
+			exit();
+		case 'suppAllVoteHistory':
+			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
+			{ 
+				$req = $bddConnection->exec('TRUNCATE cmw_votes');
+			}
+			exit();
+		case 'getJsonVoteHistory':
+			require('admin/actions/getJsonVoteHistory.php');
+			exit();
+		case 'getGradesList':
+			require('admin/actions/getGradesList.php');
+			exit();
+		case 'getPagesList':
+			require('admin/actions/getPagesList.php');
+			exit();
+		case 'getJsonMember':
+			require('admin/actions/getJsonMember.php');
 			exit();
 		case 'getLienVote':
 			require('admin/actions/getLienVote.php');
@@ -53,6 +72,7 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		case 'dropVisits':
 			if($_Permission_->verifPerm("PermsPanel", "info", "stats", "visitors", "showTable"))
 				$bddConnection->exec('TRUNCATE cmw_visits');
+			exit();
 		break;
 
 		case 'removeSocial':
@@ -117,7 +137,10 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 
 		case 'removeSocial':
 			if($_Permission_->verifPerm('PermsPanel', 'social', 'showPage'))
-				$bddConnection->exec('ALTER TABLE cmw_reseaux DROP '.$_POST['nom']);
+			{
+				$req = $bddConnection->prepare('ALTER TABLE cmw_reseaux DROP :nom');
+				$req->execute(array('nom' => $_GET['nom']));
+			}
 		break;
 
 		case 'commande': 

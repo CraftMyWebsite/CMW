@@ -9,7 +9,7 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote'))
 		$action = $_POST['action'.$i];
 		$serveur = htmlspecialchars($_POST['serveur'.$i]);
 		$lien = htmlspecialchars($_POST['lien'.$i]);
-		$titre = htmlspecialchars($_POST['titre'.$i.$i]);
+		$titre = htmlspecialchars($_POST['titre'.$i]);
 		$temps = htmlspecialchars($_POST['temps'.$i]);
 		$idCustom = $_POST['idCustom'.$i];
 		$enligne = isset($_POST['enligne'.$i]) && !empty($_POST['enligne'.$i]) ? 1 : 0;

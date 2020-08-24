@@ -113,10 +113,10 @@
                         </div>
                     </div>
                 </div>
-                 <script>initPost("new-vote", "admin.php?&action=creerLienVote")</script>
+                 <script>initPost("new-vote", "admin.php?&action=creerLienVote", function(data) { if(data) {  voteUpdate(); }})</script>
                 <div class="card-footer">
                         <div class="row text-center">
-                            <input type="submit" onclick="genVoteJson('list-new-rec-vote','vote-action-json');sendPost('new-vote', function(data) { if(data) { voteUpdate(); }}); " class="btn btn-success w-100" value="Valider les changements !"/>
+                            <input type="submit" onclick="genVoteJson('list-new-rec-vote','vote-action-json');sendPost('new-vote'); " class="btn btn-success w-100" value="Valider les changements !"/>
                         </div>
                     </div>
             </div>
@@ -220,7 +220,7 @@
 
 
                             <?php $donnees = $req_donnees->fetchAll();
-                            $idsc = 0;
+                            $idcs = 0;
                             for($o=0; $o < count($donnees); $o++)
                             {
                             ?>
@@ -271,13 +271,13 @@
                                                 <div class="col-md-12 row" id="list-new-rec-<?=$o;?>vote">
                                                     <?php  $json = json_decode($donnees[$o]['action'], true); 
                                                     foreach($json as $value) { $idcs++; ?>
-                                                    <div class="col-md-6 col-12" id="rec-vote-<?php echo $idcs; ?>" data-type="<?php echo $value['type']; ?>" style="margin-top:15px;">
+                                                    <div class=" col-md-6 col-12" id="rec-vote-<?php echo $idcs; ?>" data-type="<?php echo $value['type']; ?>" style="margin-top:15px;"><div style="border: 1px solid #B0B0B0;border-radius: 24px;padding:20px;margin:7px;">
                                                         <div style="width: 100%;display: inline-block">
                                                             <div class="float-left">
                                                                 <h5><?php echo ucfirst($value['type']); ?></h5>
                                                             </div>
                                                             <div class="float-right">'
-                                                                <button onclick="get('list-new-rec-<?=$o;?>vote').removeChild(get('rec-vote-<?php echo $idcs; ?>'));if(get('list-new-rec-<?=$o;?>vote').children.length == 0) { hide('all-new-rec-<?=$o;?>vote');}" class="btn btn-sm btn-outline-secondary">Supprimer</button>'
+                                                                <button onclick="genVoteJson2();sendPost('all-vote');get('list-new-rec-<?=$o;?>vote').removeChild(get('rec-vote-<?php echo $idcs; ?>'));if(get('list-new-rec-<?=$o;?>vote').children.length == 0) { hide('all-new-rec-<?=$o;?>vote');}" class="btn btn-sm btn-outline-secondary">Supprimer</button>'
                                                             </div>
                                                         </div>
 
@@ -296,14 +296,14 @@
 
                                                                 <label class="control-label">Nombre d\'item à donner</label>
                                                                 <input type="number" data-type="value2" min="1" value="<?php echo $value['value2']; ?>" max="64"  class="form-control"/>
-                                                         <?php } ?>
+                                                         <?php }  ?>
                                                             <label class="control-label" style="<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">Obtention de la récompense</label>
-                                                            <select data-type="methode" class="form-control" style="margin-bottom:20px">
-                                                                <option value="1"  <?php if($value['methode'] == "1") { echo 'checked'; }?>> Le serveur où il est en ligne </option>
-                                                                <option value="2" <?php if($value['methode'] == "2") { echo 'checked'; }?>> Le serveur de la catégorie </option>
-                                                                <option value="3" <?php if($value['methode'] == "3") { echo 'checked'; }?>> Tous les serveurs </option>
-                                                            </select> <hr/>
-                                                    </div>
+                                                            <select data-type="methode" class="form-control" style="margin-bottom:20px;<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">
+                                                                <option value="1"  <?php if($value['methode'] == "1") { echo 'selected'; }?>> Le serveur où il est en ligne </option>
+                                                                <option value="2" <?php if($value['methode'] == "2") { echo 'selected'; }?>> Le serveur de la catégorie </option>
+                                                                <option value="3" <?php if($value['methode'] == "3") { echo 'selected'; }?>> Tous les serveurs </option>
+                                                            </select>
+                                                    </div></div>
 
                                                     <?php } ?>
                                                 </div>
@@ -340,9 +340,7 @@
                             <?php 
                             }  ?>
                     </div>
-
-                        <script>var idvote = <?php echo $idcs; ?>;
-                                initPost("all-vote", "admin.php?action=modifierVote");</script>
+                                 <script>initPost("all-vote", "admin.php?action=modifierVote"); var idvote = <?php echo $idcs; ?>;</script>
                             <div class="card-footer">
                                 <input type="submit" onclick="genVoteJson2();sendPost('all-vote');" class="btn btn-success w-100" value="Valider les changements"/>
                             </div>

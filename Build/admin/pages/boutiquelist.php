@@ -23,7 +23,7 @@ else
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    Liste des Achats <small id="infoState">(Croissant sur ID)</small>
+                    Configuration de la liste des Achats <small id="infoState">(Croissant sur id)</small>
                 </h4>
             </div>
             <div class="card-body">
@@ -40,6 +40,30 @@ else
                                 placeholder="ex: Vladimir"></h5>
                     </div>
                 </div>
+             </div>
+         </div>
+     </div>
+
+
+
+    <div class="col-md-12 col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">
+                    Liste des Achats <small id="infoState">(Croissant sur id)</small>
+                </h4>
+            </div>
+            <div class="card-body">
+                  <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <div class="text-center">
+                                <p>
+                                    <i class="fas fa-info-circle"></i> Vous pouvez cliquer sur les noms des colonnes pour obtenir une recherche plus avancé / conforme à vos attentes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
                    <table class="table table-striped table-hover">
 						<thead>
 							<tr>

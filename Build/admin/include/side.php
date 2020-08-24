@@ -147,7 +147,13 @@
                                 <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'showPage')) { ?>
                                 <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='configVoter'){echo 'active';}?>" href="?page=configVoter">
                                     <i class="fas fa-ruler"></i>
-                                    Récompenses automatique
+                                    Récompences automatique
+                                </a>
+                                <?php } ?>
+                                <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) { ?>
+                                <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='voteHistory'){echo 'active';}?>" href="?page=voteHistory">
+                                   <i class="fas fa-history"></i>
+                                    Historique des votes
                                 </a>
                                 <?php } ?>
                             </div>

@@ -14,40 +14,40 @@
 </style>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 	<h2 class="h2 gray">
-		Gestion - Gestion des Membres
+		Historique des votes
 	</h2>
 </div>
-        <?php if(!$_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) { ?>
+        <?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) { ?>
             <div class="text-center">
     <div class="alert alert-danger">
         <strong>Vous n'avez aucune permission pour accéder à cette page !</strong>
     </div>
 </div>
            <?php } else { ?>
-    <div class="text-center">
-        <div class="alert alert-success">
-            <strong>
-                Modifiez ici les informations concernant les membres de votre site.
-            </strong>
-        </div>
-    </div>
 <div class="row">
 
     <div class="col-xl-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title"><strong>Édition des membres</strong> <small id="infoState">(Croissant sur
-                        id)</small></h3>
+                <div style="width: 100%;display: inline-block">
+                    <div class="float-left">
+                        <h3 class="card-title"><strong>Configurer la liste des voteurs</strong> <small id="infoState">(Croissant sur
+                        nombre)</small></h3>
+                    </div>
+                    <div class="float-right">
+                        <button  onclick="sendDirectPost('admin.php?action=suppAllVoteHistory', function(data) { if(data) { hide('allUser'); } });" class="btn btn-sm btn-outline-secondary">Rénitialiser</button>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
-                        <h5>Nombre de membres/pages: <input style="margin-top:3px;" type="number"
+                        <h5>Nombre de voteurs/pages: <input style="margin-top:3px;" type="number"
                                 onchange="setMaxShow('input-changemax')" id="input-changemax" min="1"
-                                max="<?php echo count($membres); ?>" step="1" placeholder="2020 ?" class="input-disabled form-control"
-                                value="<?php echo count($membres)>50 ? '50':count($membres) ; ?>"> 
+                                max="<?php echo $data['count']; ?>" step="1" placeholder="2020 ?" class="input-disabled form-control"
+                                value="<?php echo $data['count']>50 ? '50':$data['count'] ; ?>"> 
                                 <button type="button" onclick="setMaxShow('input-changemax')" class="btn w-100 btn-success d-sm-block d-md-none">Mettre à jour</button></h5>
-                        <h5 style="margin-top:20px;">Rechercher un membre: <input style="margin-top:3px;" type="text"
+                        <h5 style="margin-top:20px;">Rechercher un voteur: <input style="margin-top:3px;" type="text"
                                 onkeyup="updateList();" id="input-search" class="input-disabled form-control"
                                 placeholder="ex: Vladimir"></h5>
                     </div>
@@ -59,38 +59,36 @@
     <div class="col-xl-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title"><strong>Membres de votre site</strong></h3>
+                <h3 class="card-title"><strong>Liste des voteurs</strong></h3>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-success">
-                            <div class="text-center">
-                                <p>
-                                    <i class="fas fa-info-circle"></i> Vous pouvez cliquer sur les noms des colonnes pour obtenir une recherche plus avancé / conforme à vos attentes.
-                                </p>
+
+                     <div class="col-md-12">
+                            <div class="alert alert-success">
+                                <div class="text-center">
+                                    <p>
+                                        <i class="fas fa-info-circle"></i> Vous pouvez cliquer sur les noms des colonnes pour obtenir une recherche plus avancé / conforme à vos attentes.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        <br/>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="cursor:pointer;" onclick="setAxe('pseudo');">Pseudo</th>
+                                    <th style="cursor:pointer;" onclick="setAxe('ip');">IP</th>
+                                    <th style="cursor:pointer;" onclick="setAxe('nombre');">Nombre</th>
+                                    <th style="cursor:pointer;" onclick="setAxe('date_dernier');">Date du dernier vote</th>
+                                    <th >Dernier sur le site:</th>
+                                    <th>Suppression</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allUser">
+
+                            </tbody>
+                        </table>
                     </div>
-                    <br/>
-                    <table class="table table-striped table-hover table-responsive">
-                        <thead>
-                            <tr>
-                                <th style="width:75px;cursor:pointer;" onclick="setAxe('id')">ID</th>
-                                <th style="cursor:pointer;" onclick="setAxe('pseudo');">Pseudo</th>
-                                <th style="cursor:pointer;" onclick="setAxe('email');">Email</th>
-                                <th style="cursor:pointer;" onclick="setAxe('tokens');">Jetons</th>
-                                <th style="cursor:pointer;" onclick="setAxe('rang');">Rang</th>
-                                <th>Mot de passe</th>
-                                <th style="cursor:pointer;" onclick="setAxe('ValidationMail');">Valid. manuelle</th>
-                                <th>Suppression</th>
-                            </tr>
-                        </thead>
-                        <tbody id="allUser">
-                        </tbody>
-                    </table>
-                </div> 
-                </div>
+             </div> 
                 <div class="card-footer">
 
                     <div class="row">
@@ -124,23 +122,14 @@
 
 
                             </div>
-                            <div class="from-group" style="display: block !important">
-                                <button class="btn btn-success w-100" id="confirm-change" onclick="sendChange()"
-                                    disabled>Modifier le / les comptes</button>
-                            </div>
                         </div>
-
-
-
-                    </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
-        </div>
-        <br/>
     </div>
 
-<?php  include('./admin/assets/js/membres.php');
+<?php  include('./admin/assets/js/voteHistory.php');
 
  } ?>

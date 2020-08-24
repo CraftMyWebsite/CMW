@@ -4,9 +4,13 @@ if(isset($_GET['page']))
 	switch ($_GET['page']) // on utilise ici un switch pour inclure telle ou telle page selon.
 	{ 		
 		
+		case 'voteHistory':
+			require_once('./admin/donnees/voteHistory.php'); 
+			include('./admin/pages/voteHistory.php');
+		break;
 		case 'accueil':
-		require_once('./admin/donnees/informations.php'); 
-		include('./admin/pages/informations.php');
+			require_once('./admin/donnees/informations.php'); 
+			include('./admin/pages/informations.php');
 		break;
 
 		case 'social':

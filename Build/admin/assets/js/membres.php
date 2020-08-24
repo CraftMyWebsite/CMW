@@ -2,11 +2,11 @@
 var maxShow;
 var oldmaxShow;
 var index;
-var ChangeButton = document.getElementById("confirm-change");
+var ChangeButton = get("confirm-change");
 var block;
-var right = document.getElementById("right");
-var left = document.getElementById("left");
-var valindex = document.getElementById("block");
+var right = get("right");
+var left = get("left");
+var valindex = get("block");
 var allChange = {};
 var PlayerTotal = <?php echo count($membres); ?>;
 var axe = "id";
@@ -19,12 +19,11 @@ $(window).on('load', function () {
     index = 0;
     grade.set(0, "Joueur");
     <?php if($_Joueur_['rang'] == 1) { ?>grade.set(1, "Créateur");<?php }
-    $j = 2;
-    foreach($idGrade as $key => $value) { ?>
-         grade.set(<?php echo $j; ?>, <?='"'.$value['nom'].'"'?>);
-        <?php
-        $j++;
-    } ?>
+	for($j = 2; $j <= max($lastGrade); $j++) {
+		if(file_exists($dirGrades.$j.'.yml') && $idGrade[$j]['Grade']) { ?>
+		 grade.set(<?php echo $j; ?>, <?='"'.$idGrade[$j]['Grade'].'"'?>);
+		<?php }
+	} ?>
     updateIndex();
 });
 
@@ -37,7 +36,7 @@ function setIndex(){
     } else {
         valindex.value = index =  Math.trunc(PlayerTotal / maxShow) ;
     }
-    
+	
     updateIndex();
 }
 
@@ -60,118 +59,103 @@ function updateIndex() {
 }
 
 function lessIndex() {
-    index--;
+	index--;
     valindex.value = index;
     setIndex();
 }
 
 function moreIndex() {
-    index++;
+	index++;
     valindex.value = index;
     setIndex();
 }
 
 function updateState() {
-    document.getElementById("infoState").innerHTML="("+(axeType == "DESC" ? "Décroissant" : "Croissant")+" sur "+axe+")";
+	get("infoState").innerHTML="("+(axeType == "DESC" ? "Décroissant" : "Croissant")+" sur "+axe+")";
 }
 
 function updateList()
 {
-    updateState();
+	updateState();
     $.post("admin.php?action=getJsonMember",
     {
         axe: axe,
         axeType: axeType,
         index: index,
-        search: document.getElementById("input-search").value,
+		search: get("input-search").value,
         max: maxShow
     }, function(data, status){
         if(status != "success")
         {
-              notif("error", "Erreur lors du chargement", status, 5000);
+              notif("error", "Erreur lors du chargement", status);
         } else {
             try {
-                showAll(JSON.parse(data.substring(data.indexOf('[DIV]')+5)));
+                if(data.includes('[DIV]')) {
+                    let cont = data.substring(data.indexOf('[DIV]')+5);
+                    if(isset(cont) && cont != "") {
+                         showAll(JSON.parse(cont));
+                    }
+                }
             } catch(e) {
-                notif("error", "Erreur lors du chargement", e, 5000);
+                notif("error", "Erreur lors du chargement", e);
             }
         }
     });
 }
 
-function notif(type, header, message, time)
-{
-        toastr[type](message, header)
-      toastr.options = {
-                      "closeButton": true,
-                      "debug": true,
-                      "newestOnTop": false,
-                      "progressBar": false,
-                      "positionClass": "toast-top-right",
-                      "preventDuplicates": false,
-                      "onclick": null,
-                      "showDuration": "500",
-                      "hideDuration": "500",
-                      "timeOut": time+"",
-                      "extendedTimeOut": "1000",
-                      "showEasing": "swing",
-                      "hideEasing": "linear",
-                      "showMethod": "fadeIn",
-                      "hideMethod": "fadeOut"
-                    }
-}
-
 async function showAll(allPlayer) {
-    let el = document.getElementById("allUser");
+    let el = get("allUser");
     var all = '';
-    for(let i = 0; i < allPlayer.length; i++) {
-        all += '<tr class="ligneMembres" id="user'+allPlayer[i].id2+'">';
-        all += '<td><input type="number"  class="form-control membres-form" style="padding:1px;text-align:center;"value="'+allPlayer[i].id2+'" disabled></td>';
-        if (typeof allChange["id"+allPlayer[i].id2] === 'undefined') {
-            all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-pseudo' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form"  value="' + allPlayer[i].pseudo + '" placeholder="Pseudo"></td>';
-            all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-email' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="' + allPlayer[i].email + '" placeholder="Email"></td>';
-            all += '<td><input type="number" onkeyup="addChange('+allPlayer[i].id2+')" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allPlayer[i].tokens + '" placeholder="Jetons"></td>';
+    if(isset(allPlayer)) {
+        for(let i = 0; i < allPlayer.length; i++) {
+            all += '<tr class="ligneMembres" id="user'+allPlayer[i].id2+'">';
+            all += '<td><input type="number"  class="form-control membres-form" style="padding:1px;text-align:center;"value="'+allPlayer[i].id2+'" disabled></td>';
+            if (typeof allChange["id"+allPlayer[i].id2] === 'undefined') {
+                all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-pseudo' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form"  value="' + allPlayer[i].pseudo + '" placeholder="Pseudo"></td>';
+                all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-email' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="' + allPlayer[i].email + '" placeholder="Email"></td>';
+                all += '<td><input type="number" onkeyup="addChange('+allPlayer[i].id2+')" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allPlayer[i].tokens + '" placeholder="Jetons"></td>';
 
-            all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabled form-control">';
-            let it = grade.keys();
-            for (let key of it) {
-                all += '<option value="' + key + '" ' + (key == allPlayer[i].rang ? 'selected' : '') + '>' + grade.get(key) + '</option>';
+                all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabled form-control">';
+                let it = grade.keys();
+                for (let key of it) {
+                    all += '<option value="' + key + '" ' + (key == allPlayer[i].rang ? 'selected' : '') + '>' + grade.get(key) + '</option>';
+                }
+                all += '</select></td>';
+
+                all += '<td><input type="password" onkeyup="addChange('+allPlayer[i].id2+')" name="input-password' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="" placeholder="Changer MDP"></td>';
+
+            } else {
+                all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-pseudo' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form"  value="' + allChange["pseudo"+allPlayer[i].id2] + '" placeholder="Pseudo"></td>';
+                all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-email' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="' + allChange["email"+allPlayer[i].id2] + '" placeholder="Email"></td>';
+                all += '<td><input type="number" onchange"addChange('+allPlayer[i].id2+')" onkeyup="addChange('+allPlayer[i].id2+')" min="0" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allChange["tokens"+allPlayer[i].id2] + '" placeholder="Jetons"></td>';
+
+                all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabledform-control">';
+                let it = grade.keys();
+                for (let key of it) {
+                    all += '<option value="' + key + '" ' + (key == allChange["rang"+allPlayer[i].id2] ? 'selected' : '') + '>' + grade.get(key) + '</option>';
+                }
+                all += '</select></td>';
+
+                all += '<td><input type="password" onkeyup="addChange('+allPlayer[i].id2+')" name="input-password' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="'+allChange["password"+allPlayer[i].id2]+'" placeholder="Changer MDP"></td>';
+
             }
-            all += '</select></td>';
-
-            all += '<td><input type="password" onkeyup="addChange('+allPlayer[i].id2+')" name="input-password' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="" placeholder="Changer MDP"></td>';
-
-        } else {
-            all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-pseudo' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form"  value="' + allChange["pseudo"+allPlayer[i].id2] + '" placeholder="Pseudo"></td>';
-            all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-email' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="' + allChange["email"+allPlayer[i].id2] + '" placeholder="Email"></td>';
-            all += '<td><input type="number" onchange"addChange('+allPlayer[i].id2+')" onkeyup="addChange('+allPlayer[i].id2+')" min="0" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allChange["tokens"+allPlayer[i].id2] + '" placeholder="Jetons"></td>';
-
-            all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabledform-control">';
-            let it = grade.keys();
-            for (let key of it) {
-                all += '<option value="' + key + '" ' + (key == allChange["rang"+allPlayer[i].id2] ? 'selected' : '') + '>' + grade.get(key) + '</option>';
+            if (allPlayer[i].ValidationMail == 0) {
+                all += '<td><button class="input-disabled btn btn-danger w-100" style="display: block !important" onclick="validMail(' + allPlayer[i].id2 + ')" id="validmail' + allPlayer[i].id2 + '" type="button" title="Cliquer pour valider l\'email de cette personne manuellement"><i class="fas fa-exclamation-triangle"></i></button>';
+                all += '<button class="input-disabled btn btn-block btn-success" style="display:block;" id="validmail2' + allPlayer[i].id22 + '" type="button" disabled>Validé</button></td>';
+            } else {
+                all += '<td><button class="input-disabled btn btn-block btn-success"  type="button" style="display: inline !important" disabled>Validé</button></td>';
             }
-            all += '</select></td>';
-
-            all += '<td><input type="password" onkeyup="addChange('+allPlayer[i].id2+')" name="input-password' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="'+allChange["password"+allPlayer[i].id2]+'" placeholder="Changer MDP"></td>';
-
+            all += '<td><button onclick="removePlayer('+allPlayer[i].id2+',\''+allPlayer[i].pseudo+'\')" id="suppplayer'+allPlayer[i].id2+'"class="input-disabled btn btn-danger">Supprimer</button></td>';
+            all += '</tr>';
         }
-        if (allPlayer[i].ValidationMail == 0) {
-            all += '<td><button class="input-disabled btn btn-danger w-100" style="display: block !important" onclick="validMail(' + allPlayer[i].id2 + ')" id="validmail' + allPlayer[i].id2 + '" type="button" title="Cliquer pour valider l\'email de cette personne manuellement"><i class="fas fa-exclamation-triangle"></i></button>';
-            all += '<button class="input-disabled btn btn-block btn-success" style="display:block;" id="validmail2' + allPlayer[i].id22 + '" type="button" disabled>Validé</button></td>';
-        } else {
-            all += '<td><button class="input-disabled btn btn-block btn-success"  type="button" style="display: inline !important" disabled>Validé</button></td>';
-        }
-        all += '<td><button onclick="removePlayer('+allPlayer[i].id2+',\''+allPlayer[i].pseudo+'\')" id="suppplayer'+allPlayer[i].id2+'"class="input-disabled btn btn-danger">Supprimer</button></td>';
-        all += '</tr>';
     }
     el.innerHTML = all;
-    block = document.querySelectorAll(".input-disabled");
+	block = document.querySelectorAll(".input-disabled");
 }
 
 function addChange(id) {
-        ChangeButton.disabled = false;
-         if (typeof allChange["id"+id] === 'undefined') {
+	    ChangeButton.disabled = false;
+	     if (typeof allChange["id"+id] === 'undefined') {
             if (typeof allChange["allid"] === 'undefined') {
                 allChange["allid"] = id+"_";
             } else {
@@ -196,12 +180,12 @@ function sendChange() {
     $.post("admin.php?action=modifierMembres", allChange, function(data, status){
         if(status != "success") {
             ChangeButton.disabled = false;
-             notif("error", "Erreur", status, 5000);
+             notif("error", "Erreur", status);
         }else {
-            
+			
             allChange = {};
             ChangeButton.disabled = true;
-            notif("success", "Changement éffectué", "", 5000);
+			notif("success", "Changement éffectué", "");
         }
         block.forEach(function(input) {
             input.disabled=false;
@@ -211,7 +195,7 @@ function sendChange() {
 
 function removePlayer(id, pseudo)
 {
-    document.getElementById("suppplayer"+id).disabled = true;
+    get("suppplayer"+id).disabled = true;
     let r = confirm("Vous êtes sur le point de supprimé le compte de "+pseudo+",\n Vous ne pourrez pas revenir en arrière.");
     if(r == true)
     {
@@ -220,39 +204,39 @@ function removePlayer(id, pseudo)
             id: id
         },async function(data, status){
             if(status != "success") {
-                document.getElementById("suppplayer" + id).disabled = false;
-                notif("error", "Erreur", status, 5000);
+                get("suppplayer" + id).disabled = false;
+                notif("error", "Erreur", status);
             }else {
-                document.getElementById("user"+id).style.display = "none";
-                notif("sucess", "Suppression éffectué", status, 5000);
+                get("user"+id).style.display = "none";
+                notif("sucess", "Suppression éffectué", status);
             }
         });
     }
     else {
-        document.getElementById("suppplayer" + id).disabled = false;
+        get("suppplayer" + id).disabled = false;
     }
 }
 
 function validMail(id)
 {
-    document.getElementById("validmail"+id).disabled = true;
+    get("validmail"+id).disabled = true;
     $.get("admin.php", {
         action: "validMail",
         id: id
     },async function(data, status){
         if(status != "success") {
-            document.getElementById("validmail"+id).disabled = false;
+            get("validmail"+id).disabled = false;
              notif("error", "Erreur", status, 5000);
         }else {
-            document.getElementById("validmail"+id).style.display = "none";
-            document.getElementById("validmail2"+id).style.display = "block";
-            notif("sucess", "Modification éffectué", status, 5000);
+            get("validmail"+id).style.display = "none";
+            get("validmail2"+id).style.display = "block";
+            notif("sucess", "Modification éffectué", status);
         }
     });
 }
 
 function setMaxShow(id) {
-    let doc = document.getElementById(id);
+    let doc = get(id);
     if( parseInt(doc.value) == 2020) { alert("Le Covid-19 ne nous aura pas eu !"); }
     doc.value = parseInt(doc.value) > PlayerTotal ? PlayerTotal : parseInt(doc.value) < 1 ? 1 : doc.value;
     if(oldmaxShow != doc.value){
