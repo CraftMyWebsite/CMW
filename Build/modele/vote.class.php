@@ -32,7 +32,7 @@ class vote {
     }
     
     public function canVote() {
-        return empty($this->Player) || $this->exist && $this->lienData['temps'] + $this->Player['date_dernier']  < time();
+        return !empty($this->Player) || $this->exist && $this->lienData['temps'] + $this->Player['date_dernier']  < time();
     }
     
     public function confirmVote($bdd) {
