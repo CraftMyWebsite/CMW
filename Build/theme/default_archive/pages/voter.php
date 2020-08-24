@@ -32,7 +32,7 @@
 			if(!empty($donneesVotesTemp))
 			{
 				echo '<div class="alert alert-success"><center><ul style="list-style-position: inside; padding-left: 0px;">';
-				$p=0;
+				/*$p=0;
 				$list = array();
 				$listNum = array();
 				foreach($donneesVotesTemp as $data)
@@ -80,8 +80,8 @@
 						echo $list[$y]."</li>";
 					}
 				}
-				
-				echo "<a class='btn btn-success' href='?action=recupVotesTemp' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</a></center></div>";
+				*/
+				echo "<a class='btn btn-success' href='?action=recupVotesTemp' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</a></center></div>"; 
 			}
 
 		}

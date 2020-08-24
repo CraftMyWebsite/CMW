@@ -32,8 +32,9 @@ function boutiqueUpdate() {
 }
 
 function voteUpdate() {
-	updateCont("admin.php?action=getLienVote", get("all-votee"), function(data) { if(data) { 
-		initPost("all-vote", "admin.php?action=modifierVote", function (data) { if(data) {  voteUpdate();}})
+	console.log("ye");
+	updateCont("admin.php?action=getLienVote", get("all-vote"), function(data) { if(data) { 
+		initPost("all-vote", "admin.php?action=modifierVote");
 	}});
 }
 
@@ -103,7 +104,7 @@ function CheckUnder(el, value) {
 		}
 	}
 }
-	//PermsPanel-home-actions-editSlider-2
+
 function updateGradeUl(el) {
 	let ar = el.id.split("-");
 	if(ar.lenght != 2) {
@@ -133,6 +134,81 @@ function isAllGradeChecked(el) {
 	return true;
 }
 
+function addVoteRec(type, id1, id2) {
+	show(id1);
+	let el = get(id2);
+	idvote++;
+	var ht = '<div class="col-md-6 col-12" id="rec-vote-'+idvote+'" data-type="'+type+'" style="margin-top:15px;">'
+			+'<div style="width: 100%;display: inline-block">'
+                +'<div class="float-left">'
+                    +'<h5>'+(type.charAt(0).toUpperCase() + type.slice(1))+'</h5>'
+                +'</div>'
+                +'<div class="float-right">'
+                    +'<button onclick="get(\'list-new-rec-vote\').removeChild(get(\'rec-vote-'+idvote+'\'));if(get(\''+id2+'\').children.length == 0) { hide(\''+id1+'\');}" class="btn btn-sm btn-outline-secondary">Supprimer</button>'
+                +'</div>'
+            +'</div>';
+
+    if(type == "commande") {
+    	ht += '<label class="control-label">Commande à éxecuter (SANS /)</label>'
+            		 +'<input type="text" data-type="value"class="form-control"/>';
+    } else  if(type == "message") {
+    	ht += '<label class="control-label">Message à afficher lors du vote</label>'
+            		 +'<input type="text" data-type="value" class="form-control"/>';
+    } else  if(type == "jeton") {
+    	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
+            		 +'<input type="number" data-type="value" min="1" value="1" max="99999999" class="form-control"/>';
+    } else  if(type == "item") {
+    	ht += '<label class="control-label">Id de l\'item à donner</label>'
+            		 +'<input type="text" data-type="value" class="form-control"/>'
+
+            		 +'<label class="control-label">Nombre d\'item à donner</label>'
+            		 +'<input type="number" data-type="value2" min="1" value="1" max="64"  class="form-control"/>';
+    } 
+    if(type != "jeton") {
+		ht += '<label class="control-label">Obtention de la récompense</label>'
+                        +'<select data-type="methode" class="form-control" style="margin-bottom:20px">'
+                            +'<option value="1"> Le serveur où il est en ligne </option>'
+                            +'<option value="2"> Le serveur de la catégorie </option>'
+                            +'<option value="3"> Tous les serveurs </option>'
+                        +'</select> <hr/>';
+    }
+   	ht +='</div>';
+    el.innerHTML += ht;
+
+}
+
+function genVoteJson(id1, id2) {
+	let el = get(id1);
+	var final = "[";
+	for (let i = 0; i < el.children.length; i++) {
+		if(isset(el.children[i].getAttribute('data-type'))) {
+			let el2 = el.children[i];
+			final += '{ "type":"'+el2.getAttribute('data-type')+'"';
+
+			for (let o = 0; o < el2.children.length; o++) {
+				if(isset(el2.children[o].getAttribute('data-type')))
+				{
+					final += ',"'+el2.children[o].getAttribute('data-type')+'":"'+el2.children[o].value+'"';
+				}
+			}
+			final += '},';
+		}
+	}
+	if(final != "[") {
+		final = final.slice(0,-1);
+	}
+	final += "]";
+		get(id2).value = final;
+}
+
+function genVoteJson2() {
+	let el = get('all-vote');
+	for (let i = 0; i < el.children.length; i++) {
+		if(isset(el.children[i].getAttribute('data-other'))) {
+			genVoteJson(el.children[i].getAttribute('data-other'), el.children[i].id);
+		}
+	}
+  
 //previsu grade
 function updatePrevisu(grade) {
 	let previsu = get('previsu'+grade);

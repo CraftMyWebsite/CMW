@@ -417,6 +417,14 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 				$bddConnection->exec('DELETE FROM cmw_votes');
 			}
 		break;
+
+		case 'resetVotesConfig':
+			if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote'))
+			{
+				$bddConnection->exec('DELETE FROM cmw_votes_config');
+			}
+		break;
+
 		
 		case 'etatTickets':
 			require_once('admin/actions/etatTickets.php');

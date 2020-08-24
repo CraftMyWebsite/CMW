@@ -1,24 +1,22 @@
 <?php echo '[DIV]'; 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['showPage'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings'))) {  {
 	$lectureServs = new Lire('modele/config/configServeur.yml');
 	$lectureServs = $lectureServs->GetTableau();
 
 	$lectureServs = $lectureServs['Json'];
 
 	$req_donnees = $bddConnection->query('SELECT * FROM cmw_votes_config'); 
-                    if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
-                        <!-- <div class="row"> -->
-                            <?php $donnees = $req_donnees->fetchAll();
+                             $donnees = $req_donnees->fetchAll();
                             for($o=0; $o < count($donnees); $o++)
                             {
                             ?>
                             <br/>
-                            <button class="btn btn-secondary btn-block w-100" type="button" data-toggle="collapse" data-target="#serveur<?=$o ?>" aria-expanded="false" aria-controls="serveur<?=$o ?>">
+                            <button class="btn btn-secondary btn-block w-100" id="btn-serveur<?=$o ?>" type="button" data-toggle="collapse" data-target="#serveur<?=$o ?>" aria-expanded="false" aria-controls="serveur<?=$o ?>">
                                 Lien de vote (#<?=$o+1 ?>)
                             </button>
                             <div class="collapse" id="serveur<?=$o ?>" >
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-md-12">
                                     <div class="card card-body">
 
                                         <div class="form-row">
@@ -103,7 +101,7 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['showPage'] == tru
                                                 <input type="text" name="id<?=$o;?>" name="iditem<?=$o;?>" class="form-control"
                                                     value="<?=($action[0] == "give") ? $item[1] : '';?>" />
                                             </div>
-                                           <div class="form-group col-md-4 col-sm-12" <?=(!isset($donnees[$o]['message'])||empty($donnees[$o]['message'])) ? '' : 'style="display:none;"';?>>
+                                           <div class="form-group col-md-12 col-sm-12" <?=(!isset($donnees[$o]['message'])||empty($donnees[$o]['message'])) ? '' : 'style="display:none;"';?>>
                                                 <label for="msg<?=$o;?>">Message</label>
                                                 <input type="text" name="message<?=$o;?>" id="msg<?=$o;?>" class="form-control"
                                                     value="<?=$donnees[$o]['message'];?>" />
@@ -127,22 +125,18 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['showPage'] == tru
                                                 </label>
                                             </div>
                                         </div>
+                                        <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
                                         <button onclick="sendDirectPost('admin.php?action=supprVote&id=<?=$donnees[$o]['id'];?>',function(data) { if(data) {
                                             hide('serveur<?=$o ?>'); 
+                                             hide('btn-serveur<?=$o ?>'); 
                                             removePost('all-vote', 'titre<?=$o;?>'); removePost('all-vote', 'lien<?=$o;?>');  removePost('all-vote', 'message<?=$o;?>');  removePost('all-vote', 'serveur<?=$o;?>');  removePost('all-vote', 'methode<?=$o;?>'); removePost('all-vote', 'action<?=$o;?>');  removePost('all-vote', 'cmd<?=$o;?>');  removePost('all-vote', 'quantite<?=$o;?>');  removePost('all-vote', 'id<?=$o;?>');  removePost('all-vote', 'temps<?=$o;?>');  removePost('all-vote', 'idCustom<?=$o;?>');  removePost('all-vote', 'enligne<?=$o;?>'); }})"
                                                     class="btn btn-danger btn-block w-100">Supprimer</button>
-
+                                        <?php } ?>
                                     </div>
                                     </div>
                                 </div>
                             </div>
-                            <?php 
-                            } ?>
-                          
-                            <div class="card-footer">
-                                <input type="submit" onclick="sendPost('all-vote', function(data) { if(data) { }});" class="btn btn-success w-100" value="Valider les changements"/>
-                            </div>
-                   } ?>
+                        <?php } ?>
 }
 
  ?>       
