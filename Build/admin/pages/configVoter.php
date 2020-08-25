@@ -35,8 +35,6 @@ else
         </div>
         <div class="card-body" id="new-rec">
 
-          <div class="row">
-            <div class="col-md-12 col-xl-6 col-12">
               <label class="control-label">Type de récompense</label>
               <select name="type" class="form-control" onChange="
               if(parseInt(this.value) == 1) {
@@ -72,65 +70,32 @@ else
                   <option value='3'>Troisième</option>
                 </select>
               </div>
+               <script>var idvote = 0;</script>
+               <input type="hidden" name="action"  class="form-control" value="" id="vote-action-json"/>
+                <div class="dropdown " style="margin-top:20px;">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                              Ajouter une récompense
+                            </button>
+                            <div class="dropdown-menu">
+                              <button class="dropdown-item" onclick="addVoteConfigRec('commande', 'all-new-rec-vote','list-new-rec-vote');">Commande</button>
+                              <button  class="dropdown-item" onclick="addVoteConfigRec('message', 'all-new-rec-vote','list-new-rec-vote');">Message</button >
+                              <button  class="dropdown-item" onclick="addVoteConfigRec('jeton', 'all-new-rec-vote','list-new-rec-vote');">jeton(s)</button >
+                              <button  class="dropdown-item" onclick="addVoteConfigRec('item', 'all-new-rec-vote','list-new-rec-vote');">Item(s)</button >
+                            </div>
+                          </div>
 
-              <label class="control-label">Message affiché (laissez vide si pas de message)</label>
-              <input type="text" name="message" class="form-control"/>
 
-            </div>
-            <div class="col-md-12 col-xl-6 col-12">
+                        <div class="row" style="margin:30px;display:none;" id="all-new-rec-vote">
+                            <div class="col-md-12 row " id="list-new-rec-vote">
 
-               <label class="control-label">Executer une Commande/Give d'item</label>
-              <select name="action" class="form-control" onclick="
-                hide('new-rec-item');
-                hide('new-rec-item-l');
-                hide('new-rec-item-l2');
-                hide('new-rec-cmd');
-                hide('new-rec-cmd-l');
-                hide('new-rec-id');
-                hide('new-rec-id-l');
-                if(parseInt(this.value) == 1) {
-                  show('new-rec-cmd');
-                  show('new-rec-cmd-l');
-                } else if(parseInt(this.value) == 2) { 
-                  show('new-rec-item');
-                  show('new-rec-item-l');
+                            </div>
+                        </div>
 
-                  show('new-rec-id');
-                  show('new-rec-id-l');
-                } else {
-                  show('new-rec-item');
-                  show('new-rec-item-l2');
-                }
-              " required>
-                <option value="1" selected> Executer une commande </option>
-                <option value="2"> Give d'item </option>
-                <option value="3"> Give de jetons site</option>
-              </select>
-
-              <label id="new-rec-item-l" style="display:none;" class="control-label">Quantité de l'item à donner</label>
-              <label id="new-rec-item-l2" style="display:none;" class="control-label">Quantité de jetons à donner</label>
-
-              <input id="new-rec-item" style="display:none;" type="text" name="quantite" class="form-control" value="4" />
-
-              <label id="new-rec-id-l" style="display:none;" class="control-label">ID de l'item</label>
-              <input id="new-rec-id" style="display:none;" type="text" name="id" class="form-control" value="264" />
-
-              <label id="new-rec-cmd-l" class="control-label">Commande à éxecuter (SANS /)</label>
-              <input id="new-rec-cmd" type="text" name="cmd" class="form-control" />
-
-              <label class="control-label">Récompense sur quel serveur ?</label>
-              <select name="serveur" class="form-control" required>        
-                <?php for($i = 0; $i < count($lectureServs); $i++) {        ?>
-                  <option value="<?php echo $i ?>"> <?php echo $lectureServs[$i]['nom']; ?> </option>
-                 <?php } ?>
-              </select>
-            </div>
-          </div>
         </div>
         <script>initPost("new-rec", "admin.php?action=creerRecompenseAuto",function(data) { if(data) { updateCont('admin.php?action=getRecompenseList', get('all-rec'), null); }});</script>
         <div class="card-footer">
           <div class="text-center">
-              <input type="submit" onclick="sendPost('new-rec');" class="btn btn-success btn-block w-100" value="Valider" />
+              <input type="submit" onclick="genVoteJson('list-new-rec-vote','vote-action-json');sendPost('new-rec');" class="btn btn-success btn-block w-100" value="Valider" />
           </div>
         </div>
     </div>
@@ -147,10 +112,8 @@ else
               <tr>
                 <th>Type</th>
                 <th>Valeur</th>
-                <th>Message</th>
-                <th>Commande</th>
-                <th>Serveur</th>
                 <th>Action</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -176,21 +139,22 @@ else
                                 }
                                 ?>
                             </td>
-                            <td><?=(isset($donnees[$o]['message']) && $donnees[$o]['message'] != 'NULL' && !empty($donnees[$o]['message'])) ? $donnees[$o]['message'] : 'Pas de message';?></td>
-                            <td><?php $explode = explode(':', $donnees[$o]['commande'], 2);
-                            if($explode[0] == 'cmd')
-                                echo 'Commande : '.$explode[1];
-                            elseif($explode[0] == 'jeton')
-                                echo 'Give de '.$explode[1].' jetons';
-                            else
-                            {
-                                $action = explode(':', $explode[1]);
-                                echo 'Give de '.$action[3].' fois l\'item '.$action[1];
-                            }
-                            ?>
-                            </td>
-                            <td>
-                                Sur le serveur <strong><?=$lectureServs[$donnees[$o]['serveur']]['nom'];?></strong>
+                            <td><?php  $json = json_decode($donnees[$o]['action'], true); 
+                                $f = "";
+                                foreach($json as $value) { 
+                                  if($value['type'] == "item") {
+                                    $f= $f.'Give '.$value['value2'].' item ID '.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                  } else if($value['type'] == "commande") {
+                                    $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                  } else if($value['type'] == "jeton") {
+                                     $f= $f.'Give '.$value['value'].' jeton(s)<br/>';
+                                  } else if($value['type'] == "message") {
+                                    $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                  } 
+                                }  
+                                if($f != "" && !empty($f)) {
+                                   echo substr($f, 0, -5);
+                                } ?>
                             </td>
                             <td><button onclick="sendDirectPost('?action=supprRecAuto&id=<?=$donnees[$o]['id'];?>', function(data) { if(data) { hide('rec-<?php echo $o; ?>'); }});" class="btn btn-outline-secondary">Supprimer</button></td>
                         </tr>

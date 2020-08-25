@@ -12,34 +12,13 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings'))
 		$rang = intval(htmlspecialchars($_POST['rang']));
 		$value = $date.':'.$reinit.':'.$rang;
 	}
-	if(empty($_POST['message']))
-		$message = NULL;
-	else
-		$message = htmlspecialchars($_POST['message']);
-	$action = intval(htmlspecialchars($_POST['action']));
-	if($action == 1)
-	{
-		$cmd = 'cmd:';
-		$cmd.= htmlspecialchars($_POST['cmd']);
-	}
-	elseif($action == 2)
-	{
-		$cmd = 'give:id:';
-		$cmd.= htmlspecialchars($_POST['id']).':quantite:';
-		$cmd.= htmlspecialchars($_POST['quantite']);
-	}
-	else
-	{
-		$cmd = 'jeton:';
-		$cmd.= htmlspecialchars($_POST['quantite']);
-	}
-	$serveur = intval(htmlspecialchars($_POST['serveur']));
-	$req = $bddConnection->prepare('INSERT INTO cmw_votes_recompense_auto_config (type, valueType, message, commande, serveur) VALUES (:type, :value, :message, :commande, :serveur)');
+	
+	$action = $_POST['action'];
+	
+	$req = $bddConnection->prepare('INSERT INTO cmw_votes_recompense_auto_config (type, valueType, action) VALUES (:type, :value, :action)');
 	$req->execute(array(
 		'type' => $type,
 		'value' => $value,
-		'message' => $message,
-		'commande' => $cmd,
-		'serveur' => $serveur
+		'action' => $action
 	));
 }

@@ -78,6 +78,9 @@ if($_Permission_->verifPerm('PermsPanel', 'members', 'showPage')) {
 			}
 		}
 	}
-	echo '[DIV]'.json_encode(array_values($allmembres));
+	echo '[DIV]';
+	if(isset($allmembres) && !empty($allmembres)) {
+		echo json_encode(array_values($allmembres));
+	}
 }
 ?>
