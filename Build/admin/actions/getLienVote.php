@@ -1,11 +1,7 @@
 <?php echo '[DIV]'; 
 if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {  
-	$lectureServs = new Lire('modele/config/configServeur.yml');
-	$lectureServs = $lectureServs->GetTableau();
-
-	$lectureServs = $lectureServs['Json'];
-
-	$req_donnees = $bddConnection->query('SELECT * FROM cmw_votes_config'); 
+    
+    require_once('./admin/donnees/voter.php'); 
                             $donnees = $req_donnees->fetchAll();
                             $idsc = 500;
                             for($o=0; $o < count($donnees); $o++)

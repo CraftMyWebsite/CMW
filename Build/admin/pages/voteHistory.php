@@ -75,6 +75,7 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th style="cursor:pointer;" onclick="setAxe('pseudo');">Pseudo</th>
                                     <th style="cursor:pointer;" onclick="setAxe('ip');">IP</th>
                                     <th style="cursor:pointer;" onclick="setAxe('nombre');">Nombre</th>

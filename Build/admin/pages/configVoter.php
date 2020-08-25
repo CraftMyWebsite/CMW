@@ -50,7 +50,7 @@ else
 
               <div id="type-1">
                 <label class='control-label'>Au bout de combien de vote ?</label>
-                <input type='number' min="1" max="9999999" name='nbreVote' class='form-control' />
+                <input type='number' min="1" max="9999999" name='nbreVote' class='form-control' required />
               </div>
 
               <div id="type-2" style="display:none;">
