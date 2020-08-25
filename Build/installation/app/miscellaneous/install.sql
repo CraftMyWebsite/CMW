@@ -446,7 +446,6 @@ CREATE TABLE IF NOT EXISTS `cmw_votes_recompense_auto_config` (
   `type` tinyint(3) UNSIGNED NOT NULL,
   `valueType` varchar(50) NOT NULL,
   `action` text NULL,
-  `serveur` smallint(5) UNSIGNED NOT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
