@@ -71,7 +71,7 @@ if(isset($_GET['paypal'])){
                     <!-- Dedipass -->
                     <div class="alert alert-success">
                         <p class="text-center">
-                            Vous avez du mal à crée / configurer la solution de paiement DediPass ? Consultez notre <a href="https://craftmywebsite.fr/forum/index.php?threads/tuto-configurer-le-paiement-par-d%C3%A9dipass.3184/" target="_blank" rel="noopener noreferrer">tutoriel complet</a> !
+                            Vous avez du mal à créer / configurer la solution de paiement DediPass ? Consultez notre <a href="https://craftmywebsite.fr/forum/index.php?threads/tuto-configurer-le-paiement-par-d%C3%A9dipass.3184/" target="_blank" rel="noopener noreferrer">tutoriel complet</a> !
                         </p>
                     </div>
                     <div class="row">
