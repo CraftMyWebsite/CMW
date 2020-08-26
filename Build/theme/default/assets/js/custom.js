@@ -128,35 +128,6 @@ function envoie_form() { // Fonction appelée par le bouton
 }
 
 
-//Vote page 
-
-function bouclevote(id2, pseudo2) {
-	$.post("index.php?action=voter", {
-		id: id2,
-		pseudo: pseudo2
-	}, function (data, status) {
-		console.log(data);
-		data = data.substring(data.indexOf('[DIV]') + 5);
-		if (data == "success") {
-			$("#vote-success").fadeIn(500);
-			setTimeout(function () {
-				$("#vote-success").fadeOut(500);
-			}, 5000);
-			$("#btn-verif-" + id2).fadeOut(500);
-			setTimeout(function () {
-				$("#btn-after-" + id2).fadeIn(500);
-			}, 500);
-			if (document.getElementById("nbr-vote-" + pseudo2)) {
-				document.getElementById("nbr-vote-" + pseudo2).innerHTML = (parseInt(document.getElementById("nbr-vote-" + pseudo2).innerHTML) + 1);
-			}
-		} else {
-			setTimeout(function () {
-				bouclevote(id2, pseudo2);
-			}, 500);
-		}
-	});
-}
-
 
 //Messagerie Page
 

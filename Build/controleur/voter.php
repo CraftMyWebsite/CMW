@@ -46,4 +46,5 @@ if(isset($_POST['id']) AND isset($_POST['pseudo']))
 } else {
 	echo 'erreur-4';
 }
+
 ?>

@@ -4,37 +4,55 @@ class vote {
     private $Player;
     private $lienData;
     private $exist;
-    private $Pseudo
+    private $Pseudo;
     
-    public function ___construc($bdd, $pseudo, $lienId) {
-        $req = $bdd->prepare('SELECT * FROM cmw_votes_config WHERE id = :id');
-        $req->execute(array('id' => $lienId));
-        $this->lienData=$req->fetch(PDO::FETCH_ASSOC);
-        
-        
+    public function __construct($bdd, $pseudo, $lienId) {
         $Player2 = $bdd->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo AND site = :site');
         $Player2->execute(array(
             'pseudo' => $pseudo,
             'site' => $lienId    ));
         $this->Player= $Player2->fetch(PDO::FETCH_ASSOC);
         $this->Pseudo=$pseudo;
-        $this->exist = isset($this->lienData) && !empty($this->lienData);
+
+
+
+        if(!isset($lienId)) {
+            $this->exist = false;
+        } else {
+             $req = $bdd->prepare('SELECT * FROM cmw_votes_config WHERE id = :id');
+            $req->execute(array('id' => $lienId));
+            $this->lienData=$req->fetch(PDO::FETCH_ASSOC);
+            $this->exist = isset($this->lienData) && !empty($this->lienData);
+        }
     }
 
-    public function ___construc($bdd, $pseudo) {
-        $Player2 = $bdd->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo AND site = :site');
-        $Player2->execute(array(
-            'pseudo' => $pseudo,
-            'site' => $lienId    ));
-        $this->Player= $Player2->fetch(PDO::FETCH_ASSOC);
-
-        $this->exist = false;
-    }
     
     public function canVote() {
-        return !empty($this->Player) || $this->exist && $this->lienData['temps'] + $this->Player['date_dernier']  < time();
+        return empty($this->Player) || $this->exist && $this->lienData['temps'] + $this->Player['date_dernier']  < time();
+    }
+
+    public function getAction() {
+         return  !$this->exist ? "" : $this->lienData['action'];
+    }
+
+
+
+    public function getLastVoteTimeMili() {
+        return empty($this->Player) ? 0 : $this->Player['date_dernier'];
+    }
+
+    public function getTimeVoteTimeMili() {
+        return  !$this->exist ? 0 : $this->lienData['temps'];
+    }
+
+    public function getUrl() {
+        return  !$this->exist ? "" : $this->lienData['lien'];
     }
     
+    public function getTitre() {
+        return  !$this->exist ? "" : $this->lienData['titre'];
+    }
+
     public function confirmVote($bdd) {
         if(!empty($this->Player)) {
             $req = $bdd->prepare('UPDATE cmw_votes SET nbre_votes = nbre_votes + 1, date_dernier = :tmp, ip = :ip WHERE pseudo = :pseudo AND site = :site');
@@ -60,7 +78,7 @@ class vote {
         if(!isset($serveur)) {
             $serveur = $this->lienData['serveur'];
         }
-        $req = $bddConnection->prepare('INSERT INTO cmw_votes_temp (pseudo, action, serveur) VALUES (:pseudo, :action, :serveur)');
+        $req = $bdd->prepare('INSERT INTO cmw_votes_temp (pseudo, action, serveur) VALUES (:pseudo, :action, :serveur)');
         $req->execute(array(
         'pseudo' => $this->Pseudo,
         'action' =>  $action,
@@ -77,8 +95,8 @@ class vote {
         $lastcmd = "non définie";
         $lastid = "non définie";
         $json = json_decode($action, true); 
-        foreach($action as $value) { 
-            if($value['type'] == "jeton") {
+        foreach($json as $value) { 
+            if($value['type'] == "jeton" && Permission::getInstance()->verifPerm("connect")) {
                 $lastquantite = $value['value'];
                 global $PlayerData, $joueurMaj, $_Joueur_;
                 $PlayerData['tokens'] = $PlayerData['tokens'] + ((int)$value['value']);
@@ -229,7 +247,7 @@ class vote {
                 $api =file_get_contents("https://www.serveursminecraft.org/sm_api/peutVoter.php?id=".$id."&ip=". $this->get_client_ip());
                 if($api == "true"){return true;}else{return false;}
             }else if(strpos($url, 'https://serveur-multigames.net'))  {
-                $api =file_get_contents("https://serveur-multigames.net/api/v2/vote/true/".$id."/". $this->get_client_ip()));
+                $api =file_get_contents("https://serveur-multigames.net/api/v2/vote/true/".$id."/". $this->get_client_ip());
                 if($api == "1"){return true;}else{return false;}
             }else if(strpos($url, 'https://minecraft-top.com'))  {
                 $api = json_decode(file_get_contents("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
