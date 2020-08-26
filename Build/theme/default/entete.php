@@ -44,11 +44,18 @@ endif;
             <?php if(!isset($maintenanceOn) || Permission::getInstance()->verifPerm("PermsPanel", "maintenance", "actions", "connexionAdmin"))
             { ?>
             <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-                <?php
-                for ($i = 0; $i < count($_Menu_['MenuTexte']); $i++) :
-                    // Affichage des dropdowns
-                    if (isset($_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]])) :
-                ?>
+                
+                <button class="navbar-toggler navbar-toggler-right ml-auto" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarMain"> 
+                
+                    <?php
+                    for ($i = 0; $i < count($_Menu_['MenuTexte']); $i++) :
+                        // Affichage des dropdowns
+                        if (isset($_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]])) :
+                    ?>
                         <li class="nav-item dropdown">
                             <a id="Listdefil<?php echo $i; ?>" class="nav-link dropdown-toggle" href="#" id="dropdown-tools" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_Menu_['MenuTexte'][$i]; ?></a>
                             <div class="dropdown-menu" aria-labelledby="Listdefil<?php echo $i; ?>">
@@ -140,6 +147,8 @@ endif;
                     <?php endif; ?>
                 <?php endif; 
             } ?>
+            
+                </div>
             </nav>
 
             <!-- Hero Section -->
