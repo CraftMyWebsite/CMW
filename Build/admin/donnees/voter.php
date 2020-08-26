@@ -1,11 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['showPage'] == true) {
-
-	if(isset($lectureServs['Json'])) {
-		$lectureServs = $lectureServs['Json'];
-	} else {
-		$lectureServs = null;
-	}
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
 
 	$req_donnees = $bddConnection->query('SELECT * FROM cmw_votes_config');
 }

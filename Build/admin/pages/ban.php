@@ -3,7 +3,7 @@
 		Gestion des bannissements utilisateurs du site web et configuration de la page de ban
 	</h2>
 </div>
-<?php if($_Joueur_['rang'] != 1 AND $_PGrades_['PermsPanel']['ban']['showPage'] == false)
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'ban', 'showPage'))
 {
 	echo '
 	<div class="row">

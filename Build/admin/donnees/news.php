@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['news']['showPage'] == true) { 
+if(!(!$_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews') AND !$_Permission_->verifPerm('PermsPane', 'news', 'actions', 'editNews'))) { 
 	$news = $bddConnection->query('SELECT * FROM cmw_news ORDER BY id');
 
 	$i = 0;

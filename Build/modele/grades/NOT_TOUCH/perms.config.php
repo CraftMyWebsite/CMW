@@ -151,6 +151,9 @@ const PERMS = array(
 					"resetRecompense" => "Supprimer une récompense auto",
 					"addRecompense" => "Créer une récompense auto"
 				)
+			),
+			"voteHistory" => array(
+				"showPage" => "Accès à la page des historique de vote",
 			)
 		),
 		"members" => array(
