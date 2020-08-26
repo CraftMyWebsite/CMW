@@ -121,19 +121,44 @@ async function showAll(allPlayer) {
     var all = " ";
     if(isset(allPlayer)) {
         for(let i = 0; i < allPlayer.length; i++) {
-            all += '<tr class="ligneMembres" id="histo'+i+'">';
-            all += '<td>'+allPlayer[i].pseudo+'</td>';
-            all += '<td>'+allPlayer[i].ip+'</td>';
-             all += '<td>'+allPlayer[i].nbre_votes+'</td>';
-              all += '<td>'+allPlayer[i].date_dernier+'</td>';
-               all += '<td>'+allPlayer[i].site+'</td>';
-                all += '<td><button onclick="sendDirectPost(\'admin.php?action=suppVoteHistory&pseudo='+allPlayer[i].pseudo+'\', function(data) { if(data) { hide(\'histo'+i+'\')}});" class="input-disabled btn btn-danger">Supprimer</button></td>';
+            all += '<tr class="ligneMembres" id="histo'+i+'">'; 
+                all += '<td onclick="switchMoreDisplay('+i+')" style="cursor:pointer;"><i id="faDisplayMore'+i+'" class="far fa-plus-square"></i><i style="display:none;" id="faDisplayMin'+i+'" class="far fa-minus-square"></i></td>';
+                all += '<td>'+allPlayer[i].pseudo+'</td>';
+                all += '<td>'+allPlayer[i].ip+'</td>';
+                all += '<td>'+allPlayer[i].nbre_votes+'</td>';
+                all += '<td>Dernier le '+allPlayer[i].date_dernier2+'</td>';
+                all += '<td>sur '+allPlayer[i].site+'</td>';
+                all += '<td><button onclick="sendDirectPost(\'admin.php?action=suppVoteHistory&pseudo='+allPlayer[i].pseudo+'\', function(data) { if(data) { hide(\'histo'+i+'\')}});" class="input-disabled btn-sm btn btn-danger">Supprimer</button></td>';
+            all += '</tr>';
 
+            let nb = Object.entries(allPlayer[i].all).length;
+
+            all += '<tr style="display:none;pointer-events: none;border:none;height:'+(nb*32)+'px;" class="col-md-12" id="moreDisplay'+i+'">'; 
+                all += '<td style="pointer-events: none;border:none;height:'+(nb*32)+'px;" ><div id="absoDisplay'+i+'" style="width:100%;z-index:999; display: block;position: absolute;top: 10;left: 0; height: auto; width: '+get('allUser').offsetWidth+'px"><ul >';
+                    for (let [key, value] of Object.entries(allPlayer[i].all)) {
+                        all += '<li>'+value.nbre_votes+' vote(s) sur '+value.site+', dernier le '+value.date_dernier+'</li>';
+                    }
+                all += '</ul></div></td>';
             all += '</tr>';
         }
     }
     el.innerHTML = all;
     block = document.querySelectorAll(".input-disabled");
+}
+
+
+function switchMoreDisplay(id) {
+    if(get('faDisplayMin'+id).style.display == "none") {
+        show('faDisplayMin'+id);
+        hide('faDisplayMore'+id);
+        show('moreDisplay'+id);
+    } else {
+        hide('faDisplayMin'+id);
+        show('faDisplayMore'+id);
+        hide('moreDisplay'+id);
+    }
+
+ 
 }
 
 function setMaxShow(id) {

@@ -18,12 +18,14 @@ $(window).on('load', function () {
     maxShow =oldmaxShow= <?php echo count($membres)>50 ? '50':count($membres) ; ?>;
     index = 0;
     grade.set(0, "Joueur");
-    <?php if($_Joueur_['rang'] == 1) { ?>grade.set(1, "Créateur");<?php }
-	for($j = 2; $j <= max($lastGrade); $j++) {
-		if(file_exists($dirGrades.$j.'.yml') && $idGrade[$j]['Grade']) { ?>
-		 grade.set(<?php echo $j; ?>, <?='"'.$idGrade[$j]['Grade'].'"'?>);
-		<?php }
-	} ?>
+    <?php if($_Joueur_['rang'] == 1) { echo 'grade.set(1, "Créateur");'; }
+	 $j = 2;
+    foreach($idGrade as $key => $value) { 
+        echo 'grade.set('.$j.', "'.$value['nom'].'");';
+
+        $j++;
+    } ?>
+
     updateIndex();
 });
 
@@ -85,6 +87,7 @@ function updateList()
 		search: get("input-search").value,
         max: maxShow
     }, function(data, status){
+        console.log(data);
         if(status != "success")
         {
               notif("error", "Erreur lors du chargement", status);
@@ -127,7 +130,7 @@ async function showAll(allPlayer) {
             } else {
                 all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-pseudo' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form"  value="' + allChange["pseudo"+allPlayer[i].id2] + '" placeholder="Pseudo"></td>';
                 all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-email' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="' + allChange["email"+allPlayer[i].id2] + '" placeholder="Email"></td>';
-                all += '<td><input type="number" onchange"addChange('+allPlayer[i].id2+')" onkeyup="addChange('+allPlayer[i].id2+')" min="0" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allChange["tokens"+allPlayer[i].id2] + '" placeholder="Jetons"></td>';
+                all += '<td><input type="number" onchange"if(parseInt(this.value) < 1 ) { this.value = 0;}addChange('+allPlayer[i].id2+')" onkeyup="if(parseInt(this.value) < 1 ) { this.value = 0;}addChange('+allPlayer[i].id2+')" min="0" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allChange["tokens"+allPlayer[i].id2] + '" placeholder="Jetons"></td>';
 
                 all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabledform-control">';
                 let it = grade.keys();
@@ -145,7 +148,7 @@ async function showAll(allPlayer) {
             } else {
                 all += '<td><button class="input-disabled btn btn-block btn-success"  type="button" style="display: inline !important" disabled>Validé</button></td>';
             }
-            all += '<td><button onclick="removePlayer('+allPlayer[i].id2+',\''+allPlayer[i].pseudo+'\')" id="suppplayer'+allPlayer[i].id2+'"class="input-disabled btn btn-danger">Supprimer</button></td>';
+            all += '<td><button onclick="removePlayer('+allPlayer[i].id2+',\''+allPlayer[i].pseudo+'\')" id="suppplayer'+allPlayer[i].id2+'"class="input-disabled btn-sm btn btn-danger">Supprimer</button></td>';
             all += '</tr>';
         }
     }
