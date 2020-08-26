@@ -152,6 +152,9 @@ const PERMS = array(
 					"addRecompense" => "Créer une récompense auto"
 				)
 			)
+			"voteHistory" => array(
+				"showPage" => "Accès à la page des historique de vote",
+			)
 		),
 		"members" => array(
 			"showPage" => "Accès à la page Membres=>Informations",

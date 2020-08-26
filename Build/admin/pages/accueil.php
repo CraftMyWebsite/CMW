@@ -3,14 +3,13 @@
         Miniatures & Slider
     </h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'uploadSlider') AND !$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !$_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'home', 'showPage') AND !$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !$_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { ?>
     <div class="alert alert-danger">
         <strong>Vous n'avez pas la permission pour accéder aux réglages du slider et des miniatures.</strong>
     </div>
 
 <?php } else {?>
 <div class="row">
-
     <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">

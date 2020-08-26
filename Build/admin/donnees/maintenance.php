@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['support']['maintenance']['showPage'] == true) {
+ if(!(!$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editDefaultMessage') AND !$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editAdminMessage') AND !$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editEtatMaintenance') AND !$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'switchRedirectMode') AND !$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editMessageInscr') AND !$_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchInscriptions'))) {
     $req = $bddConnection->query('SELECT * FROM cmw_maintenance WHERE maintenanceId');
 
     $i = 0;

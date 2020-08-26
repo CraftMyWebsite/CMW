@@ -1,5 +1,5 @@
 <?php echo '[DIV]'; 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['showPage'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
     $lectureAccueil = new Lire('modele/config/accueil.yml');
     $lectureAccueil = $lectureAccueil->GetTableau();
 

@@ -1,5 +1,4 @@
-<?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['showPage'] == true) {
+<?php if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'uploadSlider') || $_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground')|| $_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { 
     $lectureAccueil = new Lire('modele/config/accueil.yml');
     $lectureAccueil = $lectureAccueil->GetTableau();
 

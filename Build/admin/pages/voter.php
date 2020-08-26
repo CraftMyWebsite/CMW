@@ -63,9 +63,9 @@
                         </div>
 
                             <label class="control-label">Lien de vote du serveur</label>
-                            <select name="serveur" class="form-control">        
-                                <?php if(isset($lectureServs) && !empty($lectureServs)) { for($i = 0; $i < count($lectureServs); $i++) {        ?>
-                                    <option value="<?php echo $i ?>"> <?php echo $lectureServs[$i]['nom']; ?> </option>
+                            <select name="serveur" class="form-control" required>        
+                                <?php  if(count($lectureJSON) != 0) { foreach($lectureJSON as $serveur) {        ?>
+                                    <option value="<?php $serveur['id']; ?>"> <?php echo $serveur['nom']; ?> </option>
                                 <?php } } ?>
                             </select>
 
@@ -245,13 +245,11 @@
                                         </div>
 
                                             <label for="serveur<?=$o;?>" class="control-label">Dans la catégorie :</label>
-                                            <select name="serveur<?=$o;?>" id="serveur<?=$o;?>" class="form-control" required>
-                                                    <?php if(isset($lectureServs) && !empty($lectureServs)) { for($i = 0; $i < count($lectureServs); $i++) {        ?>
-                                                    <option value="<?php echo $i ?>"
-                                                        <?=($lectureServs[$i]['nom'] == $lectureServs[intval($donnees[$o]['serveur'])]['nom']) ? 'selected' : ''; ?>>
-                                                        <?php echo $lectureServs[$i]['nom']; ?> </option>
-                                                    <?php } } ?>
-                                                </select>
+                                            <select name="serveur<?=$o;?>" id="serveur<?=$o;?>" class="form-control" required>        
+                                                <?php  if(count($lectureJSON) != 0) { foreach($lectureJSON as $serveur) {        ?>
+                                                    <option value="<?php $serveur['id']; ?>"  <?php if($serveur['id'] == $donnees[$o]['serveur']) { echo 'selected'; } ?> > <?php echo $serveur['nom']; ?> </option>
+                                                <?php } } ?>
+                                            </select>
 
              
                                              <hr/>
