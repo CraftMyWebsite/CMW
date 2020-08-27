@@ -41,6 +41,12 @@ $(document).ready(function() {
 function boutiqueUpdate() {
 	updateCont("admin.php?action=getOffreBoutique", get("allcategorie"), function(data) { if(data) { 
 		initPostCallback( function(data) {  boutiqueUpdate(); });
+		var list = document.querySelectorAll('[data-boutique-callback]');
+		get("allcategorieupdate").innerText = "";
+	    for (var i = 0; i < list.length; ++i) {
+	        console.log("try callback "+list[i]);
+	        get("allcategorieupdate").innerHTML+='<option value="'+list[i].getAttribute("data-boutique-callback")+'">'+list[i].getAttribute("data-boutique-callback-name")+'</option>';
+	    }
 	}});
 }
 
