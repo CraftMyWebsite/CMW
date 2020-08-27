@@ -66,12 +66,11 @@ else
 
                     <label class="control-label" >Mot de passe</label>
                      <div class="input-group mb-3">
-                             <input type="password" name="JsonMdp" class="form-control" placeholder="Exemple: Truelle" required>
+                             <input type="password" name="JsonMdp" class="form-control" placeholder="Exemple: Truelle" required/>
                               <div class="input-group-append">
                                 <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
                               </div>
-                            </div>
-                        </div>
+                            </div>>
             </div>
             <script>initPost('newServer', 'admin.php?&action=serveurJsonNew', function(data) { if(data) {  clearAllInput('newServer'); serverUpdate(); }});</script>
             <div class="card-footer">
@@ -142,7 +141,7 @@ else
                             <label class="control-label" >Mot de passe</label>
 
                             <div class="input-group mb-3">
-                             <input type="password" name="JsonMdp<?php echo $i; ?>" class="form-control" placeholder="Exemple: Truelle" value="<?php echo $serveur['mdp']; ?>" required>
+                             <input type="password" name="JsonMdp<?php echo $i; ?>" class="form-control" placeholder="Exemple: Truelle" value="<?php echo $serveur['mdp']; ?>" required/>
                               <div class="input-group-append">
                                 <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
                               </div>
