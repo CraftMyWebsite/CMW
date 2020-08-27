@@ -53,6 +53,9 @@ require('theme/' . $_Serveur_['General']['theme'] . '/preload.php'); ?>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
     <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/toastr.min.css">
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/ckeditor.js"></script>
+    <?php if(isset($_GET['page']) && $_GET['page'] == "voter") {
+        echo '<script src="theme/'.$_Serveur_['General']['theme'].'/assets/js/voteControleur.js"></script>';
+    } ?>
 </head>
 
 <body>

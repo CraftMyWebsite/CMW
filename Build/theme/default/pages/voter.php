@@ -32,7 +32,6 @@
         </div>
 
         <!-- Gestion des information et doublons de vote -->
-        <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/voteControleur.js"></script>
         <div>
             <?php
             if (Permission::getInstance()->verifPerm("connect") and isset($_GET['player']) and $_Joueur_['pseudo'] == $_GET['player']) {  ?>
@@ -178,48 +177,11 @@
                 </div>
             <?php } ?>
         </div>
-        <script>setTimeout(function () {updateBaltop(true) }, 3000);</script>
         <!-- Top vote -->
         <div class="row">
 
             <table class="table table-dark table-striped table-hover" id="baltop">
-               <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Pseudo</th>
-                        <th>Votes</th>
-                    </tr>
-                </thead>
-
-                <?php
-                if (isset($topVoteurs)) {
-                    for ($i = 0; $i < count($topVoteurs) and $i < 10; $i++) {  ?>
-                        <tr>
-                            <td>
-                                <?= $i + 1 ?>
-                            </td>
-                            <td>
-                            
-                                <strong>
-                                    <a href="?page=profil&profil=<?= $topVoteurs[$i]['pseudo'] ?>">
-                                        <?= $topVoteurs[$i]['pseudo']; ?>
-                                    </a>
-                                </strong>
-                            </td>
-                            <td id="nbr-vote-<?= $topVoteurs[$i]['pseudo']; ?>">
-                                <?= $topVoteurs[$i]['nbre_votes']; ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                <?php } else { ?>
-                    <tr class="p-0 no-hover">
-                        <td colspan="3" class="p-0 no-hover">
-                            <div class="m-0 info-page bg-danger">
-                                <div class="text-center">Personne n'a encore voté !</div>
-                            </div>
-                        </td>
-                    </tr>
-                <?php } ?>
+               <!-- theme/default/assets/js/voteControleur.js::updateBaltop -->
             </table>
 
         </div>
