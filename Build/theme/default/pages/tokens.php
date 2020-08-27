@@ -80,7 +80,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <?= espacement($tab['description']); ?>
+                                                    <?= $tab['description']; ?>
                                                 </div>
                                                 <div class="card-footer">
                                                     <form action="<?= $lien; ?>" method="post">
@@ -146,7 +146,7 @@
                                                 </h5>
                                             </div>
                                             <div class="card-body">
-                                                <?= espacement($value['description']); ?>
+                                                <?= $value['description']; ?>
                                             </div>
                                             <div class="card-footer">
                                                 <a class="btn btn-main w-100" data-toggle="collapse" href="#paysafecard<?= $value['id']; ?>" role="button" aria-expanded="false" aria-controls="paysafecard<?= $value['id']; ?>">Acheter !</a>

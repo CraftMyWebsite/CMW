@@ -109,7 +109,6 @@ if(isset($_GET['page']))
 		
 		case 'support': 
 			require_once('controleur/support/support.php');
-			require_once('modele/forum/miseEnPage.php');
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/support.php');
 		break;	
 		
