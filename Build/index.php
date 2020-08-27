@@ -13,8 +13,6 @@ if (!$_Serveur_['installation']) header('Location: installation/');
 else $return = true;
 // On charge la connection à la base MySQL via l'extention PDO.
 require_once ('controleur/connection_base.php');
-//Les fonctions de mises en pages 
-require('modele/forum/miseEnPage.php'); 
 //la class Panier pour la boutique
 require('modele/joueur/imgProfil.class.php');
 $_ImgProfil_ = new ImgProfil($bddConnection);

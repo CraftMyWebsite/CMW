@@ -169,10 +169,14 @@ endif;
                     <!-- Alert + Info server -->
                     <div class="header-info">
                         <div class="row">
+                            <?php if (!empty($_Serveur_['General']['ipTexte'])) { ?>
                             <div class="py-3 mr-3 mb-3 col-md-12 col-sm-12 col-lg-7 d-flex align-self-center alert alert-main">
                                 <h5>Tu veux nous rejoindre ? Copie l'ip ! </h5>
-                                <button class="btn btn-light copy-ip ml-auto" id="iptexte">Copier l'ip !</button>
+                                <button class="btn btn-light copy-ip ml-auto" onclick="copierIP();" type="button" >Copier l'ip !</button>
+                                <input type="text" style="position:absolute;top:0;left:0;width:0;height:0;z-index:-9999;" id="iptexte" value="<?php echo $_Serveur_['General']['ipTexte']; ?>">
                             </div>
+                            <?php }
+                             ?>
                             <div class="card col-md-12 col-sm-12 col-lg-4">
                                 <div class="card-header">
                                     <h3 class="text-center main-color"><?= $_Serveur_['General']['name']; ?></h3>

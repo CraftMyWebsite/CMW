@@ -3,7 +3,9 @@ if(isset($_POST['destinataire'], $_POST['message'], $_Joueur_))
 {
 	$Messagerie = new Messagerie($bddConnection, $_Joueur_['pseudo']);
 	$destinataire = htmlspecialchars($_POST['destinataire']);
-	$message = htmlspecialchars($_POST['message']);
+
+	require('modele/app/ckeditor.class.php');
+	$message = ckeditor::verif($_POST['message']);
 	if($Messagerie->sendMessage($destinataire, $message))
 		header('Location: ?page=messagerie&send=true');
 	else

@@ -110,8 +110,7 @@
                                 $ticketstatus = $tickets['etat'];
 
                                 unset($message);
-                                $message = espacement($tickets['message']);
-                                $message = BBCode($message, $bddConnection);
+                                $message = $tickets['message'];
 
                                 $commentaires = 0; ?>
 
@@ -155,8 +154,7 @@
                                                                 for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) :
 
                                                                     unset($message);
-                                                                    $message = espacement($ticketCommentaires[$tickets['id']][$i]['message']);
-                                                                    $message = BBCode($message, $bddConnection);
+                                                                    $message = $ticketCommentaires[$tickets['id']][$i]['message'];
                                                             ?>
 
 
@@ -220,48 +218,10 @@
 
                                                     <form action="?&action=post_ticket_commentaire" method="post">
                                                         <input type="hidden" name="id" value="<?= $tickets['id'] ?>" />
-                                                        <div class="row">
-                                                            <div class="col-md-12 text-center">
-                                                                <div class="dropdown" style="display: inline">
-                                                                    <a href="#" role="button" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <i style="text-decoration:none;" class="fas fa-smile"></i>
-                                                                    </a>
-                                                                    <div class="dropdown-menu borderrond" aria-labelledby="font">
-                                                                        <div class="topheaderdante" style="width: 500px">
-                                                                            <p class="topheadertext">Clique pour ajouter un smiley!</p>
-                                                                        </div>
-                                                                        <?php
-                                                                        $smileys = getDonnees($bddConnection);
-                                                                        for ($i = 0; $i < count($smileys['symbole']); $i++) : ?>
-                                                                            <a class="dropdown-item" style="display: inline; padding: 0; white-space: normal;" href="javascript:insertAtCaret('ticket<?= $tickets['id'] ?>', '<?= $smileys['symbole'][$i] ?>')">
-                                                                                <img src="<?= $smileys['image'][$i] ?>" alt="<?= $smileys['symbole'][$i] ?>" title="<?= $smileys['symbole'][$i] ?>" />
-                                                                            </a>';
-                                                                        <?php endfor; ?>
-
-                                                                    </div>
-                                                                </div>
-                                                                <a href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en gras', 'ce texte sera en gras', 'b')" style="text-decoration: none;" title="gras"><i class="fas fa-bold" aria-hidden="true"></i></a>
-                                                                <a href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en italique', 'ce texte sera en italique', 'i')" style="text-decoration: none;" title="italique"><i class="fas fa-italic"></i></a>
-                                                                <a href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en souligné', 'ce texte sera en souligné', 'u')" style="text-decoration: none;" title="souligné"><i class="fas fa-underline"></i></a>
-                                                                <a href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en barré', 'ce texte sera barré', 's')" style="text-decoration: none;" title="barré"><i class="fas fa-strikethrough"></i></a>
-                                                                <a href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en aligné à gauche', 'ce texte sera aligné à gauche', 'left')" style="text-decoration: none" title="aligné à gauche"><i class="fas fa-align-left"></i></a>
-                                                                <a href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en centré', 'ce texte sera centré', 'center')" style="text-decoration: none" title="centré"><i class="fas fa-align-center"></i></a>
-                                                                <a href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en aligné à droite', 'ce texte sera aligné à droite', 'right')" style="text-decoration: none" title="aligné à droite"><i class="fas fa-align-right"></i></a>
-                                                                <a href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en justifié', 'ce texte sera justifié', 'justify')" style="text-decoration: none" title="justifié"><i class="fas fa-align-justify"></i></a>
-                                                                <div class="dropdown">
-                                                                    <a href="#" role="button" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <i class="fas fa-text-height"></i>
-                                                                    </a>
-                                                                    <div class="dropdown-menu" aria-labelledby="font">
-                                                                        <a class="dropdown-item" href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en taille 2', 'ce texte sera en taille 2', 'font=2')"><span style="font-size: 2em;">2</span></a>
-                                                                        <a class="dropdown-item" href="javascript:ajout_text('ticket<?= $tickets['id'] ?>', 'Ecrivez ici ce que vous voulez mettre en taille 5', 'ce texte sera en taille 5', 'font=5')"><span style="font-size: 5em;">5</span></a>
-                                                                    </div>
-                                                                </div>
+                                                            <div style="width:100%;">
+                                                            
+                                                                <textarea  data-UUID="0006" id="ckeditor" name="message" style="height: 275px;"></textarea>
                                                             </div>
-                                                            <div class="col-md-12">
-                                                                <textarea name="message" id="ticket<?= $tickets['id'] ?>" class="form-control custom-text-input bg-darkest" rows="3" cols="60"></textarea>
-                                                            </div>
-                                                        </div>
                                                         <button type="submit" class="btn btn-main mt-4 w-100">Commenter</button>
                                                     </form>
 
@@ -352,7 +312,7 @@
 
                     <div class="collapse" id="ticketCree">
                         <div class="card">
-                            <form action="" method="post" onSubmit="envoie_ticket();">
+                            <form action="index.php?action=post_ticket" method="post" >
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-8">
@@ -387,29 +347,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group mb-0">
-                                        <div class="col-md-12 text-center">
-                                            <div class="wys-elements">
-                                                <a href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en gras', 'ce texte sera en gras', 'b')" style="text-decoration: none;" title="gras"><i class="fas fa-bold" aria-hidden="true"></i></a>
-                                                <a href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en italique', 'ce texte sera en italique', 'i')" style="text-decoration: none;" title="italique"><i class="fas fa-italic"></i></a>
-                                                <a href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en souligné', 'ce texte sera en souligné', 'u')" style="text-decoration: none;" title="souligné"><i class="fas fa-underline"></i></a>
-                                                <a href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en barré', 'ce texte sera barré', 's')" style="text-decoration: none;" title="barré"><i class="fas fa-strikethrough"></i></a>
-                                                <a href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en aligné à gauche', 'ce texte sera aligné à gauche', 'left')" style="text-decoration: none" title="aligné à gauche"><i class="fas fa-align-left"></i></a>
-                                                <a href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en centré', 'ce texte sera centré', 'center')" style="text-decoration: none" title="centré"><i class="fas fa-align-center"></i></a>
-                                                <a href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en aligné à droite', 'ce texte sera aligné à droite', 'right')" style="text-decoration: none" title="aligné à droite"><i class="fas fa-align-right"></i></a>
-                                                <a href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en justifié', 'ce texte sera justifié', 'justify')" style="text-decoration: none" title="justifié"><i class="fas fa-align-justify"></i></a>
-                                                <div class="dropdown d-inline">
-                                                    <a href="#" role="button" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-text-height"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu" aria-labelledby="font">
-                                                        <a class="dropdown-item" href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en taille 2', 'ce texte sera en taille 2', 'font=2')"><span style="font-size: 2em;">2</span></a>
-                                                        <a class="dropdown-item" href="javascript:ajout_text('message_ticket', 'Ecrivez ici ce que vous voulez mettre en taille 5', 'ce texte sera en taille 5', 'font=5')"><span style="font-size: 5em;">5</span></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                         <label for="message_ticket">Description détaillée</label>
-                                        <textarea class="form-control custom-text-input" id="message_ticket" name="message" placeholder="Description détaillée de votre problème" rows="3"></textarea>
+                                        <textarea  data-UUID="0007" id="ckeditor" name="message" style="height: 275px; margin: 0px; width: 100%;"></textarea>
                                     </div>
                                 </div>
                                 <div class="card-footer text-center">

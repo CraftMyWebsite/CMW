@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addForum')) AND !empty($_POST['nom']))
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addForum') AND !empty($_POST['nom']))
 {
 	//Creation forum 
 	$nom = htmlspecialchars($_POST['nom']);

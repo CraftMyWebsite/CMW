@@ -214,26 +214,6 @@ a:hover:not(.no-hover) {
     right: 0
 }
 
-/* ==> Snarl */
-
-.snarl-notification {
-    color: var(--base-color) !important;
-    background-color: var(--lightest-color-bg) !important;
-}
-
-.snarl-close{
-    color: var(--base-color) !important;
-    background-color: var(--active-color) !important;
-    box-shadow: -30px 0 30px var(--main-color) !important;
-}
-
-.snarl-close svg {
-    fill: var(--base-color) !important;
-}
-
-.snarl-close:hover svg {
-    fill: var(--main-color);
-}
 /* --- --- HEADER --- --- */
 
 .header-content {

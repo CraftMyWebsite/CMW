@@ -79,7 +79,7 @@
 						<input type="number" class="form-control" name="prix" required>
 					
 						<label class="control-label">Catégorie</label>
-						<select name="categorie" class="form-control" required>
+						<select name="categorie" class="form-control" required id="allcategorieupdate">
 							<?php $k = 0;
 							while($k < count($categories)) { ?>
 							<option value="<?php echo $categories[$k]['id']; ?>"><?php echo $categories[$k]['titre']; ?></option>
@@ -263,7 +263,7 @@
                 <div class="col-md-12" id="allcategorie">
                 	<ul class="nav nav-tabs" id="list-minia">
                         <?php for($i = 0;$i < count($categories);$i++) {?>
-                        <li class="nav-item" id="tabnavRap<?=$i?>"><a class="<?php if($i == 0) echo 'active'; ?> nav-link" href="#navRap<?=$i?>" data-toggle="tab" style="color: black !important"><?php echo $categories[$i]['titre']; ?></a></li>
+                        <li class="nav-item" id="tabnavRap<?=$i?>"><a class="<?php if($i == 0) echo 'active'; ?> nav-link" href="#navRap<?=$i?>" data-toggle="tab" style="color: black !important" id="titlecat<?=$i?>"><?php echo $categories[$i]['titre']; ?></a></li>
                         <?php }?>
                     </ul>
                         
@@ -276,7 +276,7 @@
                                 	<input type="hidden" name="categorie" class="form-control" value="<?php echo $categories[$i]['id']; ?>" />
                                     <div class="float-left">
                                         <label class="control-label">Titre de la catégorie</label>
-										<input type="text" class="form-control" name="categorieNom" value="<?php echo $categories[$i]['titre']; ?>" placeholder="Remise spécial CMW V1.8" required maxlength="60">
+										<input type="text" class="form-control" onkeyup="get('titlecat<?=$i?>').innerText = this.value" name="categorieNom" value="<?php echo $categories[$i]['titre']; ?>" placeholder="Remise spécial CMW V1.8" required maxlength="60">
                                     </div>
                                     <div class="float-right" style="margin-top:15px;">
                                         <button  onclick="sendDirectPost('admin.php?action=supprCategorie&id=<?php echo $categories[$i]['id']; ?>', function(data) { if(data) { hide('navRap<?=$i?>');hide('tabnavRap<?=$i?>');}});" class="btn btn-sm btn-outline-secondary">Supprimer</button>
@@ -307,11 +307,12 @@
 												<td><input type="text" name="offresDescription<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($offres[$j]['description']); ?>" /></td>
 												<td><input type="text" name="offresPrix<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['prix']; ?>" /></td>
 												<td>
-													<select class="form-control" name="offresCategorie<?php echo $offres[$j]['id']; ?>">
-														<option value="<?php echo $offres[$j]['categorie']; ?>"><?php echo $offres[$j]['categorie']; ?></option>
-														<?php $k = 0; while($k < count($categories)) { 
-															if($categories[$k]['titre'] != $offres[$j]['categorie']) echo '<option value="' .$categories[$k]['id']. '">' .$categories[$k]['titre']. '</option>'; $k++; } ?>
-														</select>
+												<select class="form-control" name="offresCategorie<?php echo $offres[$j]['id']; ?>">
+                                                        <?php $k = 0; while($k < count($categories)) { 
+
+                                                             echo '<option value="' .$categories[$k]['id']. '" '.($categories[$k]['id'] == $offres[$j]['categorie'] ? 'selected' : '').'>' .$categories[$k]['titre']. '</option>'; $k++;
+                                                        } ?>
+                                                        </select>
 												</td>
 												<td><input type="number" name="nbre_vente_<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nbre_vente']; ?>" /></td>
 												<td><input type="number" name="offresOrdre<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['ordre']; ?>" /></td>
@@ -346,7 +347,6 @@
 
                                                         <label class="control-label">Type d'action <small>Utilisez {PLAYER} pour la variable joueur</small></select>
                                                         <select class="form-control" name="methode" onchange="
-                                                            console.log('yes'+this.value);
                                                             switch(parseInt(this.value)) {
                                                                 case 0:
                                                                     hide('grade-<?php echo $offres[$j]['id']; ?>');

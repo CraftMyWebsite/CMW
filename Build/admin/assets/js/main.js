@@ -17,6 +17,19 @@ toastr.options = {
 	"hideMethod"       : "fadeOut"
 }
 
+
+function switchTypePassword(el) {
+	for(i = 0; i < el.parentElement.parentElement.children.length; i++) {
+		if(isset(el.parentElement.parentElement.children[i].type) && el.parentElement.parentElement.children[i].type == "password" ) {
+			el.parentElement.parentElement.children[i].type = "text";
+			el.innerHTML = '<i class="far fa-eye-slash"></i>';
+		} else if(isset(el.parentElement.parentElement.children[i].type) && el.parentElement.parentElement.children[i].type == "text" ) { 
+			el.parentElement.parentElement.children[i].type = "password";
+			el.innerHTML = '<i class="far fa-eye"></i>';
+		}
+	}
+}
+
 // Loader
 $(document).ready(function() {
 	setTimeout(function(){
@@ -28,6 +41,12 @@ $(document).ready(function() {
 function boutiqueUpdate() {
 	updateCont("admin.php?action=getOffreBoutique", get("allcategorie"), function(data) { if(data) { 
 		initPostCallback( function(data) {  boutiqueUpdate(); });
+		var list = document.querySelectorAll('[data-boutique-callback]');
+		get("allcategorieupdate").innerText = "";
+	    for (var i = 0; i < list.length; ++i) {
+	        console.log("try callback "+list[i]);
+	        get("allcategorieupdate").innerHTML+='<option value="'+list[i].getAttribute("data-boutique-callback")+'">'+list[i].getAttribute("data-boutique-callback-name")+'</option>';
+	    }
 	}});
 }
 

@@ -49,7 +49,7 @@
                             <div id="categorie-<?= $j ?>" class="tab-pane fade <?= ($j == 0) ? ' in active show' : ''; ?>" aria-expanded="<?= ($j == 0) ? 'true' : 'false' ?>">
                                 <?php if (!empty($categories[$j]['message'])) : ?>
                                     <div class="info-page">
-                                        <div class="text-center"><span class="font-weight-bold">Description :</span> <?= espacement($categories[$j]['message']); ?></div>
+                                        <div class="text-center"><span class="font-weight-bold">Description :</span> <?= $categories[$j]['message']; ?></div>
                                     </div>
                                 <?php endif; ?>
 
@@ -75,7 +75,7 @@
                                                     </small>
                                                 </div>
                                                 <div class="card-body">
-                                                    <?= espacement($offresTableau[$i]['description']) ?>
+                                                    <?= $offresTableau[$i]['description'] ?>
                                                 </div>
                                                 <div class="card-footer">
                                                     <?php if (Permission::getInstance()->verifPerm("connect")) : ?>

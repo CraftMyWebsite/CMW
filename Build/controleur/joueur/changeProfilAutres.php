@@ -11,8 +11,8 @@ foreach($listeReseaux as $value)
 		$changementsReseaux += [ $value['nom'] => $temp ];
 	}
 }
-
-$signature = htmlspecialchars($_POST['signature']);
+require('modele/app/ckeditor.class.php');
+$signature = ckeditor::verif($_POST['signature']);
 
 $age = VerifieDonnee($_POST['age']);
 

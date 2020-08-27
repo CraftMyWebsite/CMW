@@ -51,9 +51,8 @@ require('theme/' . $_Serveur_['General']['theme'] . '/preload.php'); ?>
     <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/fa-all.min.css">
     <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/custom.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/snarl/0.3.4/snarl.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
+    <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/toastr.min.css">
+    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/ckeditor.js"></script>
 </head>
 
 <body>
@@ -98,12 +97,13 @@ require('theme/' . $_Serveur_['General']['theme'] . '/preload.php'); ?>
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/jquery.min.js"></script>
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/popper.min.js"></script>
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/snarl/0.3.4/snarl.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
 
     <!-- Scripts -->
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/zxcvbn.js"></script>
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/custom.js"></script>
+    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/ckeditorManager.js"></script>
+    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets//js/toastr.min.js"></script>
     <?php include "theme/" . $_Serveur_['General']['theme'] . "/assets/php/custom.php" ?>
     <?php if ($_Serveur_['Payement']['dedipass']) : //API DEDIPASS 
     ?>

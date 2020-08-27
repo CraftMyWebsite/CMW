@@ -165,11 +165,8 @@
 		document.getElementById("circle-text-2").innerHTML = document.getElementById("circle-text-1").innerHTML;
 		document.getElementById("circle-text-1").innerHTML = strg;
 		var val = i*100/max;
-		if(val == 0) {
 			$pourcent.style.color="#a2b5bf";
-		}else {
-			<?php echo '$pourcent.style.color="'.$configFile["color"]["panel"]["main"].'";'; ?>
-		}
+
 		var r = $circle.getAttribute('r');
 		var c = Math.PI * (r * 2);
 		var pct = ((100 - val) / 100) * c;

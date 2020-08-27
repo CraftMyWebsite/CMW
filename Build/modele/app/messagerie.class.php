@@ -46,7 +46,7 @@ class Messagerie
 			array_push($return['conv'], array(
 				'id' => $data['idConversation'],
 				'from' => $expediteur,
-				'message' => BBCode(espacement($data['message']), $this->bdd),
+				'message' => $data['message'],
 				'date' => $date,
 				'lu' => $lu
 			));
@@ -166,7 +166,7 @@ class Messagerie
 		foreach($conversations as $value)
 		{
 			$return.='<div class="card">
-		    	<div class="card-header card-header-messagerie" id="messageHead'.$value['id'].'">
+		    	<div class="card-header" id="messageHead'.$value['id'].'">
 		      		<h5 class="mb-0">
 		        		<button class="btn btn-link btn-message" type="button" data-toggle="modal" data-target="#modalMessage" data-backdrop="static"  data-id="'.$value['id'].'" data-with="'.$value['from'].'" style="width: 100%;"><p class="text-left">';
 		    if($value['lu']== 0)

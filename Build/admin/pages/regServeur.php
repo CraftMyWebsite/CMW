@@ -65,12 +65,17 @@ else
                     </div>
 
                     <label class="control-label" >Mot de passe</label>
-                    <input type="password" name="JsonMdp" class="form-control" placeholder="Exemple: Trampoline" required/>
+                     <div class="input-group mb-3">
+                             <input type="password" name="JsonMdp" class="form-control" placeholder="Exemple: Truelle" required/>
+                              <div class="input-group-append">
+                                <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
+                              </div>
+                            </div>>
             </div>
-            <script>initPost('newServer', 'admin.php?&action=serveurJsonNew', function(data) { if(data) { serverUpdate(); clearAllInput('newServer'); }});</script>
+            <script>initPost('newServer', 'admin.php?&action=serveurJsonNew', function(data) { if(data) {  clearAllInput('newServer'); serverUpdate(); }});</script>
             <div class="card-footer">
                 <div class="row text-center">
-                    <input type="submit" onclick="sendPost('newServer', null);" class="btn btn-success w-100" value="Envoyer !" />
+                    <input type="submit" onclick="sendPost('newServer');" class="btn btn-success w-100" value="Envoyer !" />
                 </div>
             </div>
         </div>
@@ -134,14 +139,20 @@ else
                             } ?>          
                                               
                             <label class="control-label" >Mot de passe</label>
-                            <input type="text" name="JsonMdp<?php echo $i; ?>" class="form-control" placeholder="Exemple: Truelle" value="<?php echo $serveur['mdp']; ?>" required>
+
+                            <div class="input-group mb-3">
+                             <input type="password" name="JsonMdp<?php echo $i; ?>" class="form-control" placeholder="Exemple: Truelle" value="<?php echo $serveur['mdp']; ?>" required/>
+                              <div class="input-group-append">
+                                <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
+                              </div>
+                            </div>
                         </div>
                         <?php } ?>
                     </div>
                 </div>
                  <?php } ?>
             </div>
-            <script>initPost('modifServer', 'admin.php?&action=serveurConfig', function(data) { if(data) {  }});</script>
+            <script>initPost('modifServer', 'admin.php?&action=serveurConfig');</script>
             <div class="card-footer">
                 <div class="row text-center">
                     <input type="submit" onclick="sendPost('modifServer', null);" class="btn btn-success w-100" value="Valider les changements !" />

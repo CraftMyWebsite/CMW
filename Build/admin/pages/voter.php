@@ -65,7 +65,7 @@
                             <label class="control-label">Lien de vote du serveur</label>
                             <select name="serveur" class="form-control" required>        
                                 <?php  if(count($lectureJSON) != 0) { foreach($lectureJSON as $serveur) {        ?>
-                                    <option value="<?php $serveur['id']; ?>"> <?php echo $serveur['nom']; ?> </option>
+                                    <option value="<?php echo $serveur['id']; ?>"> <?php echo $serveur['nom']; ?> </option>
                                 <?php } } ?>
                             </select>
 
@@ -246,8 +246,8 @@
 
                                             <label for="serveur<?=$o;?>" class="control-label">Dans la catégorie :</label>
                                             <select name="serveur<?=$o;?>" id="serveur<?=$o;?>" class="form-control" required>        
-                                                <?php  if(count($lectureJSON) != 0) { foreach($lectureJSON as $serveur) {        ?>
-                                                    <option value="<?php $serveur['id']; ?>"  <?php if($serveur['id'] == $donnees[$o]['serveur']) { echo 'selected'; } ?> > <?php echo $serveur['nom']; ?> </option>
+                                                <?php  if(count($lectureJSON) != 0) { foreach($lectureJSON as $serveur) {    ?>
+                                                    <option value="<?php echo $serveur["id"]; ?>"  <?php if($serveur["id"] == $donnees[$o]['serveur']) { echo 'selected'; } ?> > <?php echo $serveur['nom']; ?> </option>
                                                 <?php } } ?>
                                             </select>
 

@@ -1,26 +1,26 @@
 <?php echo '[DIV]';
 if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
-	require_once('./admin/donnees/regServeur.php');  if(isset($lecture['Json']) && !empty($lecture['Json']))  { ?>
+	require_once('./admin/donnees/regServeur.php');  if(count($lectureJSON) != 0)  { ?>
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
-                        <?php for($i = 0; $i < count($lecture['Json']); $i++)
+                        <?php foreach($lectureJSON as $i => $serveur)
                         { ?>
                          <li class="nav-item"  id="tab-jsonReg<?php echo $i; ?>"><a
                             class="<?php if($i == 0) echo 'active'; ?> nav-link"
                             href="#jsonReg<?php echo $i; ?>" id="servTabName<?php echo $i; ?>" data-toggle="tab"
-                            style="color: black !important"><?php echo $lecture['Json'][$i]['nom']; ?></a></li>
+                            style="color: black !important"><?php echo $serveur['nom']; ?></a></li>
                         <?php } ?>
                     </ul>
                     <div class="tab-content">
-                        <?php for($i = 0; $i < count($lecture['Json']); $i++)
-                        { $serveur = $lecture['Json'][$i]; ?>
+                        <?php foreach($lectureJSON as $i => $serveur)
+                        { ?>
                         <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="jsonReg<?php echo $i; ?>">
                             <div style="position:inline-block">
                             <div class="float-left">
                                 <h3 class="card-title"><strong id="servName<?php echo $i; ?>"><?php echo $serveur['nom']; ?></strong><small><?php echo $serveur['protocole'] == 1 ? '(JSONAPI)' : '(RCON/Query)'; ?></small></h3>
                             </div>
                             <div class="float-right">
-                                <button onclick="sendDirectPost('?action=supprJson&nom=<?php echo $serveur['nom']; ?>', function(data) { if(data) { hide('jsonReg<?php echo $i; ?>'); hide('tab-jsonReg<?php echo $i; ?>')}})" class="btn btn-outline-secondary">Supprimer</button>
+                                <button onclick="sendDirectPost('?action=supprJson&nom=<?php echo $serveur['id']; ?>&key=<?php echo $i; ?>', function(data) { if(data) { hide('jsonReg<?php echo $i; ?>'); hide('tab-jsonReg<?php echo $i; ?>')}})" class="btn btn-outline-secondary">Supprimer</button>
                             </div>
                            </div>
                             
@@ -51,9 +51,15 @@ if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
                             } ?>          
                                               
                             <label class="control-label" >Mot de passe</label>
-                            <input type="text" name="JsonMdp<?php echo $i; ?>" class="form-control" placeholder="Exemple: Truelle" value="<?php echo $serveur['mdp']; ?>" required>
+                             <div class="input-group mb-3">
+                             <input type="password" name="JsonMdp<?php echo $i; ?>" class="form-control" placeholder="Exemple: Truelle" value="<?php echo $serveur['mdp']; ?>" required>
+                              <div class="input-group-append">
+                                <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
+                              </div>
+                            </div>
+                        </div>
                         </div>
                         <?php } ?>
                     </div>
                 </div>
-                 <?php } } ?> 
+                 <?php } } ?>

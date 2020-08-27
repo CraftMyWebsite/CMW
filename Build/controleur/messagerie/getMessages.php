@@ -19,8 +19,8 @@ if(isset($_POST['id']))
 				echo '<div class="col-md-11" style="background: #f3f3f3; margin-bottom: 10px;">';
 			else
 				echo '<div class="col-md-11 offset-md-1" style="background-color: #e4e4e4; margin-bottom: 10px;">';
-			echo '<b><p style="margin-top: 10px; color: #000;"><img style="margin-right: 5px;" src="https://cravatar.eu/avatar/'.$value['expediteur'].'/20"></img>'.$value['expediteur'].'<span style="float: right;">'.$date.'</span></p></b>
-			<p class="text-message-conv">'.BBCode(espacement($value['message']), $bddConnection).'</p>
+			echo '<b><p style="margin-top: 10px; color: #000;"><img style="margin-right: 5px;height:20px;width:20px;" src="https://api.craftmywebsite.fr/skin/face.php?u='.$value['expediteur'].'&s=5"></img>'.$value['expediteur'].'<span style="float: right;">'.$date.'</span></p></b>
+			<p class="text-message-conv">'.$value['message'].'</p>
 			</div><br/>';
 			echo '</div>';
 		}

@@ -125,12 +125,12 @@ $fofo = $_Forum_->affichageForum();
 
                                         <td style="width: 3%;">
                                             <?php if ($categorie[$j]['img'] == NULL) : ?>
-                                                <a href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" class="d-flex align-self-center">
-                                                    <i class="material-icons">chat</i>
+                                                <a href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" style="font-size: 38px;" class="d-flex align-self-center text-center">
+                                                    <i class="far fa-comment-dots"></i>
                                                 </a>
                                             <?php else : ?>
-                                                <a href="?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" class="d-flex align-self-center">
-                                                    <i class="material-icons"><?= $categorie[$j]['img']; ?></i>
+                                                <a href="?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" style="font-size: 38px;" class="d-flex align-self-center text-center">
+                                                    <i class="<?php echo $categorie[$j]['img']; ?>"></i>
                                                 </a><?php endif; ?>
                                         </td>
 
@@ -313,9 +313,9 @@ $fofo = $_Forum_->affichageForum();
                                     <label for="img">
                                         Icône
                                     </label>
-                                    <input type="text" name="img" id="img" maxlength="300" class="form-control custom-text-input" />
+                                    <input type="text" name="img" id="img" maxlength="300" placeholder='<i class="far fa-comment-dots"></i>' class="form-control custom-text-input" />
                                     <small id="imgHelp" class="form-text text-muted">
-                                        disponible sur : <a href="https://design.google.com/icons/" target="_blank">https://design.google.com/icons/</a>
+                                        disponible sur : <a href="https://fontawesome.com/icons/" target="_blank">https://fontawesome.com/icons/</a>
                                     </small>
 
                                 </div>
