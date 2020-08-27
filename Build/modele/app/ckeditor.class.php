@@ -2,7 +2,8 @@
 
 class ckeditor
 {
-	public static function verif($content) {
+	public static function verif($content2) {
+		$content = htmlspecialchars_decode($content2);
 		while(($pos = stripos($content,"<script"))!==false){
 		    $end_pos = stripos($content,"</script>");
 		    $start = substr($content, 0, $pos);
