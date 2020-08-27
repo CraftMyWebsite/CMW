@@ -48,7 +48,7 @@ require('theme/' . $_Serveur_['General']['theme'] . '/preload.php'); ?>
 
     <!-- CSS links -->
     <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/fa-all.min.css">
     <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/custom.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/snarl/0.3.4/snarl.min.css">

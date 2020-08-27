@@ -2,7 +2,7 @@
 <section id="News">
     <div class="container-fluid col-md-12 col-lg-9 col-sm-10">
         <div class="row">
-            <div class="row news-articles col-md-12 col-lg-8 col-sm-12">
+            <div class="row news-articles col-md-12 col-lg-8 col-sm-12 mx-auto">
                 <!-- News Articles -->
                 <?php
                 if (isset($news) && count($news) > 0) :
@@ -63,7 +63,7 @@
                 <?php endif; ?>
             </div>
 
-            <div class="row info-articles col-md-12 col-lg-4 col-sm-12">
+            <div class="row info-articles col-md-12 col-lg-4 col-sm-12 mx-auto">
                 <!-- Informations Articles -->
                 <?php for ($i = 1; $i < count($lectureAccueil['Infos']) + 1; $i++) : ?>
                     <article class="col-12 info-content">
