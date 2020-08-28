@@ -96,7 +96,6 @@ function updateList()
         search: get("input-search").value,
         max: maxShow
     }, function(data, status){
-    	console.log(data);
         if(status != "success")
         {
               notif("error", "Erreur lors du chargement", status);

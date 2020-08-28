@@ -29,15 +29,8 @@
     <div class="col-xl-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <div style="width: 100%;display: inline-block">
-                    <div class="float-left">
-                        <h3 class="card-title"><strong>Configurer la liste des voteurs</strong> <small id="infoState">(Croissant sur
+                <h3 class="card-title"><strong>Configurer la liste des voteurs</strong> <small id="infoState">(Croissant sur
                         nombre)</small></h3>
-                    </div>
-                    <div class="float-right">
-                        <button  onclick="sendDirectPost('admin.php?action=suppAllVoteHistory', function(data) { if(data) { hide('allUser'); } });" class="btn btn-sm btn-outline-secondary">Rénitialiser</button>
-                    </div>
-                </div>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -59,7 +52,14 @@
     <div class="col-xl-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title"><strong>Liste des voteurs</strong></h3>
+                 <div style="width: 100%;display: inline-block">
+                    <div class="float-left">
+                        <h3 class="card-title"><strong>Liste des voteurs</strong></h3>
+                    </div>
+                    <div class="float-right">
+                        <button  onclick="sendDirectPost('admin.php?action=suppAllVoteHistory', function(data) { if(data) { hide('allUser'); } });" class="btn btn-sm btn-outline-secondary">Rénitialiser</button>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
 

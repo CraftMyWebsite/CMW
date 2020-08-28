@@ -3,7 +3,7 @@ var CK = {};
 initCK();
 function initCK() {
 	CK = new Map();
-	for (let el of document.querySelectorAll( '#ckeditor' )) {
+	for (let el of document.querySelectorAll( "[data-UUID]" )) {
 		ClassicEditor.create(el, {
 				
 				toolbar: {
@@ -62,4 +62,10 @@ function initCK() {
 
 function isset(obj) {
     return typeof obj !== 'undefined' && obj !== null;
+}
+
+function addBlockQuote(ck,ht, auteur) {
+
+	CK.get(document.getElementById(ck)).setData("<blockquote>"+auteur+",<br/>"+document.getElementById(ht).innerHTML+"</blockquote><br/>>>"+CK.get(document.getElementById(ck)).getData());
+
 }

@@ -10,7 +10,7 @@ class CommentairesTickets
 	
 	public function GetListTicketsCommentaires()
 	{
-		$tickets = $this->bdd->query('SELECT id, id_ticket, auteur, message, DATE_FORMAT(date_post, "%d") AS jour, DATE_FORMAT(date_post, "%m") AS mois, DATE_FORMAT(date_post, "%h") AS heure, DATE_FORMAT(date_post, "%i") AS minute FROM cmw_support_commentaires ORDER BY date_post DESC');
+		$tickets = $this->bdd->query('SELECT id, id_ticket, auteur, message, date_post FROM cmw_support_commentaires ORDER BY id ASC');
 		return $tickets;
 	}
 

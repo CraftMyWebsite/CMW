@@ -224,7 +224,7 @@ function addVoteRec(type, id1, id2) {
 
     if(type == "commande") {
     	ht += '<label class="control-label">Commande à éxecuter (SANS /)</label>'
-            		 +'<input type="text" data-type="value"class="form-control"/>';
+            		 +'<input type="text" data-type="value" class="form-control"/>';
     } else  if(type == "message") {
     	ht += '<label class="control-label">Message à afficher lors du vote</label>'
             		 +'<input type="text" data-type="value" class="form-control"/>';
