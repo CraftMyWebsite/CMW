@@ -61,10 +61,7 @@
                                         <?= $tickets['titre'] ?>​
                                     </td>
 
-                                    <td><?php
-                                            $tickets['date_post'] = substr_replace($tickets['date_post'],"h",strpos($tickets['date_post'],":"),strlen(":"));
-                                            $tickets['date_post'] = str_replace(" ", " à ", substr($tickets['date_post'], 0, strpos($tickets['date_post'],":")));
-                                         echo $tickets['date_post']; ?>
+                                    <td><?php echo $_Forum_->conversionDate($tickets['date_post']); ?>
                                     </td>
 
                                     <td>
@@ -144,7 +141,7 @@
                                                         <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur']); ?>" style="width: 32px; height: 32px;" alt="Avatar de <?= $tickets['auteur'] ?>" />
                                                         <div class="media-body">
                                                             <h6 class="mt-0 mb-2 font-weight-bold">
-                                                                <?= $tickets['auteur']; ?> | le <?= $tickets['date_post']; ?>
+                                                                <?= $tickets['auteur']; ?> | le <?= $_Forum_->conversionDate($tickets['date_post']); ?>
                                                             </h6>
                                                             <?= $message; ?>
                                                                
@@ -166,10 +163,7 @@
                                                                             <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($ticketCommentaires[$tickets['id']][$i]['auteur']); ?>" style="width:32px; height:32px;" alt="Avatar de <?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" />
                                                                             <div class="media-body">
                                                                                 <h6 class="mt-0 mb-2 font-weight-bold">
-                                                                                    <?php
-                                                                                        $ticketCommentaires[$tickets['id']][$i]['date_post'] = substr_replace($ticketCommentaires[$tickets['id']][$i]['date_post'],"h",strpos($ticketCommentaires[$tickets['id']][$i]['date_post'],":"),strlen(":"));
-                                                                                        $ticketCommentaires[$tickets['id']][$i]['date_post'] = str_replace(" ", " à ", substr($ticketCommentaires[$tickets['id']][$i]['date_post'], 0, strpos($ticketCommentaires[$tickets['id']][$i]['date_post'],":"))); ?>
-                                                                                    <?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?> | le <?= $ticketCommentaires[$tickets['id']][$i]['date_post']; ?>
+                                                                                    <?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?> | le <?= $_Forum_->conversionDate($ticketCommentaires[$tickets['id']][$i]['date_post']); ?>
                                                                                 </h6>
                                                                                 <div id="contenueCom<?= $tickets['id'] ?>-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>" style="margin-bottom:10px;"><?= $message; ?></div>
 

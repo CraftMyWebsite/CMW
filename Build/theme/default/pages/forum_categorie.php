@@ -96,12 +96,13 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
                                 <tr>
 
                                     <td>
+
                                         <?php if ($sousforumd[$a]['img'] == NULL) : ?>
-                                            <a href="?&page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
-                                                <i class="material-icons">chat</i>
+                                            <a style="font-size: 28px;" href="?&page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                               <i class="far fa-comment-dots"></i>
                                             </a>
                                         <?php else : ?>
-                                            <a href="?page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>"><i class="material-icons"><?= $sousforumd[$a]['img']; ?></i>
+                                            <a style="font-size: 28px;" href="?page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>"><i class="<?= $sousforumd[$a]['img']; ?>"></i>
                                             </a>
                                         <?php endif; ?>
                                     </td>
@@ -127,42 +128,54 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
                                     <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteSousForum') and !$_SESSION['mode']) : ?>
 
                                         <td>
-                                            <?php if ($sousforumd[$a]['close'] == 0) : ?>
-                                                <a href="?action=lock_sf&id_f=<?= $sousforumd[$a]['id_categorie']; ?>&id=<?= $sousforumd[$a]['id']; ?>&lock=1" title="Fermer le sous-forum">
-                                                    <i class="fa fa-unlock-alt" aria-hidden="true"> </i>
-                                                </a>
-                                            <?php else : ?>
-                                                <a href="?action=unlock_sf&id_f=<?= $sousforumd[$a]['id_categorie']; ?> &id=<?= $sousforumd[$a]['id']; ?>&lock=0" title="Ouvrir le sous-forum">
-                                                    <i class="fa fa-lock" aria-hidden="true"> </i>
-                                                </a>
-                                            <?php endif; ?>
+                                            <div class="mx-auto d-flex align-self-center">
 
-                                            <div class="dropdown" style="display: inline; text-align: center;">
-                                                <button type="button" class="btn btn-info dropdown-toggle" id="Perms<?= $sousforumd[$a]['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <form action="?action=modifPermsSousForum" method="POST">
-                                                        <input type="hidden" name="id" value="<?= $sousforumd[$a]['id']; ?>" />
-                                                        <a class="dropdown-item"><input type="number" name="perms" value="<?= $sousforumd[$a]['perms']; ?>" class="form-control"></a>
-                                                        <button type="submit" class="dropdown-item text-center">Modifier</button>
-                                                    </form>
+                                                    <div class="dropdown d-inline ml-1">
+                                                        <button type="button" class="btn btn-main dropdown-toggle" id="Perms<?= $categorie[$j]['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+
+                                                        <div class="dropdown-menu">
+                                                            <form action="?action=modifPermsSousForum" method="POST">
+                                                                <input type="hidden" name="id" value="<?= $sousforumd[$a]['id']; ?>" />
+                                                                <a class="dropdown-item"><input class="form-control custom-text-input" type="number" name="perms" value="<?= $sousforumd[$a]['perms']; ?>" class="form-control"></a>
+                                                                <button type="submit" class="dropdown-item text-center btn btn-reverse w-80 mx-auto mt-3">Modifier</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="dropdown d-inline ml-1">
+                                                        <button type="button" class="btn btn-main dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fas fa-list"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="?action=ordreSousForum&ordre=<?= $sousforumd[$a]['ordre']; ?>&id=<?= $sousforumd[$a]['id']; ?>&id_cat=<?= $sousforumd[$a]['id_categorie']; ?>&modif=monter"><i class="fas fa-arrow-up"></i> Monter d'un cran</a>
+                                                            <a class="dropdown-item" href="?action=ordreSousForum&ordre=<?= $sousforumd[$a]['ordre']; ?>&id=<?= $sousforumd[$a]['id']; ?>&id_cat=<?= $sousforumd[$a]['id_categorie']; ?>&modif=descendre"><i class="fas fa-arrow-down"></i> Descendre d'un cran</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <a class="btn btn-main ml-1" > 
+                                                        <i class="fas fa-font"></i>
+                                                    </a>
+
+                                                    <?php if ($sousforumd[$a]['close'] == 0) : ?>
+
+                                                        <a href="?action=lock_sf&id_f=<?= $sousforumd[$a]['id_categorie']; ?>&id=<?= $sousforumd[$a]['id']; ?>&lock=1" title="Fermer le sous-forum" class="btn btn-reverse ml-1 no-hover">
+                                                            <i class="fas fa-unlock-alt" aria-hidden="true"></i>
+                                                        </a>
+
+                                                    <?php else : ?>
+
+                                                        <a href="?action=unlock_sf&id_f=<?= $sousforumd[$a]['id_categorie']; ?> &id=<?= $sousforumd[$a]['id']; ?>&lock=0" title="Ouvrir le sous-forum" class="btn btn-reverse ml-1 no-hover">
+                                                            <i class="fas fa-lock" aria-hidden="true"></i>
+                                                        </a>
+
+                                                    <?php endif; ?>
+
+
+                                                    <a class="btn btn-danger no-hover ml-1" href="?action=remove_sf&id_cat=<?php echo $id; ?>&id_sf=<?php echo $sousforumd[$a]['id']; ?>"><i class="fas fa-trash-alt"></i></a>
+
                                                 </div>
-                                            </div>
-
-                                            <a class="btn btn-info" data-toggle="modal" href="#NomForum" data-entite="2" data-nom="<?= $sousforumd[$a]['nom']; ?>" data-icone="<?= ($sousforumd[$a]['img'] == NULL) ? 'chat' : $sousforumd[$a]['img']; ?>" data-id="<?= $sousforumd[$a]['id']; ?>"><i class="fas fa-font"></i></a>
-
-                                            <div class="dropdown" style="display: inline; text-align: center;">
-                                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-list"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="?action=ordreSousForum&ordre=<?= $sousforumd[$a]['ordre']; ?>&id=<?= $sousforumd[$a]['id']; ?>&id_cat=<?= $sousforumd[$a]['id_categorie']; ?>&modif=monter"><i class="fas fa-arrow-up"></i> Monter d'un cran</a>
-                                                    <a class="dropdown-item" href="?action=ordreSousForum&ordre=<?= $sousforumd[$a]['ordre']; ?>&id=<?= $sousforumd[$a]['id']; ?>&id_cat=<?= $sousforumd[$a]['id_categorie']; ?>&modif=descendre"><i class="fas fa-arrow-down"></i> Descendre d'un cran</a>
-                                                </div>
-                                            </div>
-
-                                            <a href="?action=remove_sf&id_cat=<?php echo $id; ?>&id_sf=<?php echo $sousforumd[$a]['id']; ?>"><i class="fas fa-trash-alt"></i></a>
 
                                         </td>
 
@@ -210,9 +223,9 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
 
                                 <div class="form-row py-2">
                                     <label class="control-label" for="img">Icône</label>
-                                    <input type="text" maxlength="300" name="img" id="img" class="form-control custom-text-input" />
+                                    <input type="text" maxlength="300" name="img" id="img" placeholder='<i class="far fa-comment-dots"></i>' class="form-control custom-text-input" />
                                     <small id="iconHelp" class="form-text text-muted">
-                                        Icônes disponible : <a href="https://design.google.com/icons" target="_blank">https://design.google.com/icons</a>
+                                        Icônes disponible : <a href="https://fontawesome.com/icons/" target="_blank">https://fontawesome.com/icons/</a>
                                     </small>
                                 </div>
 
@@ -297,7 +310,7 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
                                             <small>
                                                 <a href="?page=profil&profil=<?= $topicd[$i]['pseudo']; ?>">
                                                     <?= $topicd[$i]['pseudo']; ?>
-                                                </a>, le <?= $_Forum_->getDateConvert($topicd[$i]['date_creation']); ?>
+                                                </a>, le <?= $_Forum_->conversionDate($topicd[$i]['date_creation']); ?>
                                             </small>
                                         </p>
                                     </td>

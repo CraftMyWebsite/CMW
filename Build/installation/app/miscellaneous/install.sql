@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_reduction` (
 CREATE TABLE IF NOT EXISTS `cmw_boutique_stats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `offre_id` int(11) NOT NULL,
-  `date_achat` date NOT NULL,
+  `date_achat` datetime NOT NULL,
   `prix` int(11) NOT NULL,
   `pseudo` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `cmw_dedipass` (
   `rate` varchar(60) NOT NULL,
   `payout` float NOT NULL,
   `tokens` int(11) NOT NULL,
-  `date_achat` date NOT NULL,
+  `date_achat` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -100,8 +100,8 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_answer` (
   `id_topic` smallint(6) NOT NULL,
   `pseudo` varchar(40) NOT NULL,
   `contenue` varchar(10000) NOT NULL,
-  `date_post` date NOT NULL,
-  `d_edition` date DEFAULT NULL,
+  `date_post` datetime NOT NULL,
+  `d_edition` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -110,9 +110,9 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_answer_removed` (
   `id_answer` smallint(5) UNSIGNED NOT NULL,
   `id_topic` smallint(5) UNSIGNED NOT NULL,
   `auteur_answer` varchar(60) NOT NULL,
-  `date_creation` date DEFAULT NULL,
+  `date_creation` datetime DEFAULT NULL,
   `Raison` varchar(200) DEFAULT NULL,
-  `date_suppression` date NOT NULL,
+  `date_suppression` datetime NOT NULL,
   `auteur_suppression` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -154,11 +154,11 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_post` (
   `nom` varchar(40) NOT NULL,
   `pseudo` varchar(40) NOT NULL,
   `contenue` varchar(10000) NOT NULL,
-  `date_creation` date NOT NULL,
+  `date_creation` datetime NOT NULL,
   `last_answer` varchar(40) DEFAULT NULL,
   `sous_forum` smallint(6) DEFAULT NULL,
   `etat` int(11) NOT NULL,
-  `d_edition` date DEFAULT NULL,
+  `d_edition` datetime DEFAULT NULL,
   `prefix` tinyint(4) NOT NULL,
   `epingle` tinyint(3) UNSIGNED NOT NULL,
   `affichage` int(10) UNSIGNED NOT NULL,
@@ -220,9 +220,9 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_topic_removed` (
   `nom` varchar(80) NOT NULL,
   `nb_reponse` int(10) UNSIGNED NOT NULL,
   `auteur_topic` varchar(50) NOT NULL,
-  `date_creation` date NOT NULL,
+  `date_creation` datetime NOT NULL,
   `raison` varchar(300) NOT NULL,
-  `date_suppression` date NOT NULL,
+  `date_suppression` datetime NOT NULL,
   `auteur_suppression` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -407,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
 CREATE TABLE IF NOT EXISTS `cmw_visits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip` text NOT NULL,
-  `dates` date NOT NULL,
+  `dates` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

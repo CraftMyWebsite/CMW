@@ -142,7 +142,7 @@ class Forum {
 	//Page post.php récupération du topic
 	public function getTopic($id)
 	{
-		$topic = $this->bdd->prepare('SELECT cmw_forum_post.nom AS nom, d_edition, pseudo, contenue, DAY(date_creation) AS jour, MONTH(date_creation) AS mois, YEAR(date_creation) AS annee, id_categorie, sous_forum, last_answer, etat, cmw_forum_post.id AS id, cmw_forum_categorie.nom AS nom_categorie, cmw_forum_post.perms AS perms, cmw_forum_categorie.perms AS permsCat 
+		$topic = $this->bdd->prepare('SELECT cmw_forum_post.nom AS nom, d_edition, pseudo, contenue, date_creation, id_categorie, sous_forum, last_answer, etat, cmw_forum_post.id AS id, cmw_forum_categorie.nom AS nom_categorie, cmw_forum_post.perms AS perms, cmw_forum_categorie.perms AS permsCat 
 		FROM cmw_forum_post 
 			INNER JOIN cmw_forum_categorie 
 				ON cmw_forum_post.id_categorie = cmw_forum_categorie.id
@@ -151,6 +151,8 @@ class Forum {
 			'id' => $id
 		));
 		$donnees = $topic->fetch(PDO::FETCH_ASSOC);
+
+
 		if(isset($donnees['sous_forum']))
 		{
 			$nom = $this->bdd->prepare('SELECT nom FROM cmw_forum_sous_forum WHERE id = :id'); 
@@ -174,7 +176,7 @@ class Forum {
 	//Affichage réponse en fonction de la page :
 	public function affichageReponse($id, $count)
 	{
-		$answer = $this->bdd->prepare('SELECT id, id_topic, pseudo, contenue, d_edition, DAY(date_post) AS day, MONTH(date_post) AS mois, YEAR(date_post) AS annee FROM cmw_forum_answer WHERE id_topic LIKE :id_topic ORDER BY id ASC LIMIT '.$count.', 20');
+		$answer = $this->bdd->prepare('SELECT id, id_topic, pseudo, contenue, d_edition, date_post FROM cmw_forum_answer WHERE id_topic LIKE :id_topic ORDER BY id ASC LIMIT '.$count.', 20');
 		$answer->bindParam(':id_topic', $id);
 		$answer->execute();
 		return $answer->fetchAll();
@@ -300,6 +302,13 @@ class Forum {
 			return $last_answer;
 	}
 
+	public function conversionDate($last_answer)
+	{
+		$last_answer = substr_replace($last_answer,"h",strpos($last_answer,":"),strlen(":"));
+        $last_answer = str_replace(" ", " à ", substr($last_answer, 0, strpos($last_answer,":")));
+		return $last_answer;
+	}
+
 	public function getPrefixModeration()
 	{
 		$req = $this->bdd->query('SELECT id, nom FROM cmw_forum_prefix ORDER BY id ASC');
@@ -315,15 +324,6 @@ class Forum {
 		$req->execute(array('id' => $id));
 		$data = $req->fetch(PDO::FETCH_ASSOC);
 		return $data['count'];
-	}
-
-	public function getDateConvert($date)
-	{
-		$explode = explode('-', $date);
-		$jours = $explode[2];
-		$mois = $this->switch_date($explode[1]);
-		$annee = $explode[0];
-		return $jours.' '.$mois.' '.$annee;
 	}
 
 	public function getSignature($pseudo)

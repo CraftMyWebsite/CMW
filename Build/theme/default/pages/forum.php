@@ -236,13 +236,13 @@ $fofo = $_Forum_->affichageForum();
                                                     <?php if ($categorie[$j]['close'] == 0) : ?>
 
                                                         <a href="?action=lock_cat&id=<?= $categorie[$j]['id']; ?>&lock=1" title="Fermer le forum" class="btn btn-reverse ml-1 no-hover">
-                                                            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                                            <i class="fas fa-unlock-alt" aria-hidden="true"></i>
                                                         </a>
 
                                                     <?php else : ?>
 
                                                         <a href="?action=unlock_cat&id=<?= $categorie[$j]['id']; ?>&lock=0" title="Ouvrir le forum" class="btn btn-reverse ml-1 no-hover">
-                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                            <i class="fas fa-lock" aria-hidden="true"></i>
                                                         </a>
 
                                                     <?php endif; ?>
