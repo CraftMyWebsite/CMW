@@ -69,10 +69,6 @@ $fofo = $_Forum_->affichageForum();
 
                                     </div>
 
-                                    <a class="btn btn-reverse no-hover" data-toggle="modal" href="#NomForum" data-entite="0" data-nom="<?= $fofo[$i]['nom']; ?>" data-id="<?= $fofo[$i]['id']; ?>">
-                                        <i class="fas fa-font"></i>
-                                    </a>
-
                                     <a href="?action=remove_forum&id=<?php echo $fofo[$i]['id']; ?>" class="btn btn-danger no-hover">
                                         <i class="fas fa-trash"></i> Supprimer
                                     </a>
