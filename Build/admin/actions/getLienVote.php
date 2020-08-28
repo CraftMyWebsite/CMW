@@ -62,7 +62,7 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
                                                             </div>
                                                         </div>
 
-                                                         <?php if($value['type'] == "commande") { ?>
+                                                          <?php if($value['type'] == "commande") { ?>
                                                                 <label class="control-label">Commande à éxecuter (SANS /)</label>
                                                                 <input type="text" data-type="value" value="<?php echo $value['value']; ?>"class="form-control"/>
                                                          <?php } else  if($value['type'] == "message") { ?>
@@ -77,13 +77,17 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
 
                                                                 <label class="control-label">Nombre d\'item à donner</label>
                                                                 <input type="number" data-type="value2" min="1" value="<?php echo $value['value2']; ?>" max="64"  class="form-control"/>
-                                                         <?php }  ?>
-                                                            <label class="control-label" style="<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">Obtention de la récompense</label>
-                                                           <select data-type="methode" class="form-control" style="margin-bottom:20px;<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">
+                                                         <?php } if($value['type'] != "jeton" && $value['type'] != "jetonAlea") { ?>
+                                                            <label class="control-label">Obtention de la récompense</label>
+                                                            <select data-type="methode" class="form-control" style="margin-bottom:20px;<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">
                                                                 <option value="1"  <?php if($value['methode'] == "1") { echo 'selected'; }?>> Le serveur où il est en ligne </option>
                                                                 <option value="2" <?php if($value['methode'] == "2") { echo 'selected'; }?>> Le serveur de la catégorie </option>
                                                                 <option value="3" <?php if($value['methode'] == "3") { echo 'selected'; }?>> Tous les serveurs </option>
-                                                            </select> <hr/>
+                                                            </select>
+                                                            <?php } ?>
+
+                                                            <label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>
+                                                            <input type="number" min="1" max="100" value="<?php echo $value['pourcentage']; ?>" data-type="pourcentage" class="form-control"/>
                                                     </div></div>
 
                                                     <?php } ?>

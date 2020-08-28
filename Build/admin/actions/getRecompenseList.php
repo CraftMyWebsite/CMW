@@ -37,13 +37,15 @@
                                 $f = "";
                                 foreach($json as $value) { 
                                   if($value['type'] == "item") {
-                                    $f= $f.'Give '.$value['value2'].' item ID '.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                    $f= $f.'Give '.$value['value2'].' item ID '.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%)<br/>';
                                   } else if($value['type'] == "commande") {
-                                    $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                    $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%)<br/>';
                                   } else if($value['type'] == "jeton") {
-                                     $f= $f.'Give '.$value['value'].' jeton(s)<br/>';
+                                     $f= $f.'Give '.$value['value'].' jeton(s) ('.$value['pourcentage'].'%)<br/>';
+                                  } else if($value['type'] == "jetonAlea") {
+                                     $f= $f.'Give entre '.$value['value'].' et '.$value['value2'].' jeton(s) ('.$value['pourcentage'].'%)<br/>';
                                   } else if($value['type'] == "message") {
-                                    $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').'<br/>';
+                                    $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%)<br/>';
                                   } 
                                 }  
                                 if($f != "" && !empty($f)) {
