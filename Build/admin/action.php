@@ -15,7 +15,14 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		case 'suppVoteHistory':
 			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
 			{ 
-				$req = $bddConnection->prepare('DELETE FROM cmw_votes WHERE pseudo = :pseudo ');
+				$req = $bddConnection->prepare('UPDATE cmw_votes SET `isOld`=1 WHERE pseudo = :pseudo ');
+				$req->execute(array('pseudo' => $_GET['pseudo']));
+			}
+			exit();
+		case 'suppOldVoteHistory':
+			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
+			{ 
+				$req = $bddConnection->prepare('DELETE FROM cmw_votes WHERE pseudo = :pseudo and isOld=1');
 				$req->execute(array('pseudo' => $_GET['pseudo']));
 			}
 			exit();
@@ -28,7 +35,14 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		case 'suppAllVoteHistory':
 			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
 			{ 
-				$req = $bddConnection->exec('TRUNCATE cmw_votes');
+				$bddConnection->exec('DELETE FROM cmw_votes WHERE isOld=1');
+				$bddConnection->exec('UPDATE cmw_votes SET `isOld`=1');
+			}
+			exit();
+		case 'suppAllOldVoteHistory':
+			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
+			{ 
+				$bddConnection->exec('DELETE FROM cmw_votes WHERE isOld=1');
 			}
 			exit();
 		case 'getJsonVoteHistory':

@@ -503,4 +503,88 @@
         </div>
     </div>
 
-<?php endif; ?>
+<?php endif; if(isset($_GET['page']) && $_GET['page'] == "forum" && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) { ?>
+<div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-signin" role="form" method="post" action="?&action=editForum">
+                <div class="modal-header">
+                    <h5 class="modal-title">Édition du forum "<span id="editForumTitle" ></span>"</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: var(--base-color);">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" name="id" value="" id="editForumId"/>
+                    <div class="form-row my-2">
+                        <label for="nomForum">Nom du Forum <span class="star-required"></span></label>
+                        <input type="text" name="nom" id="editForumName" maxlength="40" class="form-control custom-text-input" required />
+                    </div>
+
+                    <div class="form-row my-2">
+                        <label for="img">Icône</label>
+                            <input type="text" name="img" id="editForumImg" maxlength="300" placeholder='<i class="far fa-comment-dots"></i>' class="form-control custom-text-input" />
+                            <small id="imgHelp" class="form-text text-muted">
+                                disponible sur : <a href="https://fontawesome.com/icons/" target="_blank">https://fontawesome.com/icons/</a>
+                            </small>
+                    </div>
+                    <div class="form-row my-2">
+                        <label for="forum">Catégorie <span class="star-required"></span></label>
+                        <select name="forum" class="form-control custom-text-input" required>
+                        <?php for ($z = 0; $z < count($fofo); $z++) : ?>
+                            <option id="editForumCat<?= $fofo[$z]['id']; ?>" value="<?= $fofo[$z]['id']; ?>">
+                                <?= $fofo[$z]['nom']; ?>
+                            </option>
+                        <?php endfor; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-main w-100">Valider les changements</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<?php } if(isset($_GET['page']) && $_GET['page'] == "forum_categorie") { ?>
+<div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-signin" role="form" method="post" action="?&action=editSousForum">
+                <div class="modal-header">
+                    <h5 class="modal-title">Édition du sous-forum "<span id="editForumTitle" ></span>"</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: var(--base-color);">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" name="id" value="" id="editForumId"/>
+                     <input type="hidden" name="idSF" value="" id="editForumSFId"/>
+                     <input type="hidden" name="index" value="" id="editForumIndex"/>
+                    <div class="form-row my-2">
+                        <label for="nomForum">Nom du sous-Forum <span class="star-required"></span></label>
+                        <input type="text" name="nom" id="editForumName" maxlength="40" class="form-control custom-text-input" required />
+                    </div>
+
+                    <div class="form-row my-2">
+                        <label for="img">Icône</label>
+                            <input type="text" name="img" id="editForumImg" maxlength="300" placeholder='<i class="far fa-comment-dots"></i>' class="form-control custom-text-input" />
+                            <small id="imgHelp" class="form-text text-muted">
+                                disponible sur : <a href="https://fontawesome.com/icons/" target="_blank">https://fontawesome.com/icons/</a>
+                            </small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-main w-100">Valider les changements</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<?php } ?>

@@ -85,8 +85,8 @@ $fofo = $_Forum_->affichageForum();
                         <thead>
                             <tr>
                                 <th colspan="5" style="width: <?= (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') and !$_SESSION['mode']) ? '75%' : '100%'; ?>;">
-                                    <h5 class="text-center">
-                                        <?= ucfirst($fofo[$i]['nom']); ?>
+                                    <h5 class="text-center" data-editforum-index="<?= $i; ?>" data-editforum="<?php echo $fofo[$i]['id']; ?>"  >
+                                        <span style="display:inline;"><?= ucfirst($fofo[$i]['nom']); ?></span> <input type="text" class="text-center no-hover" value="<?= ucfirst($fofo[$i]['nom']); ?>" style="width:auto;color:white;display:none;background: transparent;border: none;" > <i style="display:none;" class="fas fa-cog"></i>
                                     </h5>
                                 </th>
                                 <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') and !$_SESSION['mode']) : ?>
@@ -228,10 +228,9 @@ $fofo = $_Forum_->affichageForum();
                                                             </a>
                                                         </div>
                                                     </div>
-
-                                                    <a class="btn btn-main ml-1" data-toggle="modal" href="#NomForum" data-entite="1" data-nom="<?= $categorie[$j]['nom']; ?>" data-icone="<?= ($categorie[$j]['img'] == NULL) ? 'chat' : $categorie[$j]['img']; ?>" data-id="<?= $categorie[$j]['id']; ?>">
-                                                        <i class="fas fa-font"></i>
-                                                    </a>
+                                                    <button type="button" onclick="openModalEditForum(<?= $categorie[$j]['id']; ?>,'<?= $categorie[$j]['nom']; ?>',<?php echo $fofo[$i]['id']; ?>, <?php if ($categorie[$j]['img'] == NULL) { echo 'null'; }  else { echo "'".$categorie[$j]['img']."'";} ?> );" class="btn btn-main ml-1" >
+                                                        <i class="fas fa-cog"></i>
+                                                    </button>
 
                                                     <?php if ($categorie[$j]['close'] == 0) : ?>
 
@@ -301,14 +300,14 @@ $fofo = $_Forum_->affichageForum();
 
                             <div class="card-body">
 
-                                <div class="from-row my-2">
+                                <div class="form-row my-2">
 
                                     <label for="nomCat">Nom du Forum <span class="star-required"></span></label>
                                     <input type="text" name="nom" id="nomCat" maxlength="40" class="form-control custom-text-input" required />
 
                                 </div>
 
-                                <div class="froum-row my-2">
+                                <div class="form-row my-2">
 
                                     <label for="img">
                                         Icône

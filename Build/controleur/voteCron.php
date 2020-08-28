@@ -63,7 +63,7 @@ if(isset($_GET['mdp']) AND isset($_Serveur_['VoteCron']['mdp']) AND $_Serveur_['
 }
 	function RecupJoueur($pseudo, $id, $bddConnection)
 	{
-		$line = $bddConnection->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo AND site = :site');
+		$line = $bddConnection->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo AND site = :site and isOld=0');
 		$line->execute(array(
 			'pseudo' => $pseudo,
 			'site' => $id	));
@@ -83,7 +83,7 @@ if(isset($_GET['mdp']) AND isset($_Serveur_['VoteCron']['mdp']) AND $_Serveur_['
 	
 	function ExisteJoueur($pseudo, $id, $bddConnection)
 	{
-		$line = $bddConnection->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo AND site = :site');
+		$line = $bddConnection->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo AND site = :site and isOld=0');
 		$line->execute(array(
 			'pseudo' => $pseudo,
 			'site' => $id	));
@@ -98,7 +98,7 @@ if(isset($_GET['mdp']) AND isset($_Serveur_['VoteCron']['mdp']) AND $_Serveur_['
 	
 	function ExisteJoueur2($pseudo,$bddConnection)
 	{
-		$line = $bddConnection->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo');
+		$line = $bddConnection->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo and isOld=0');
 		$line->execute(array(
 			'pseudo' => $pseudo));
 			

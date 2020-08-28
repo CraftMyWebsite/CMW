@@ -154,9 +154,9 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
                                                         </div>
                                                     </div>
 
-                                                    <a class="btn btn-main ml-1" > 
-                                                        <i class="fas fa-font"></i>
-                                                    </a>
+                                                    <button type="button" onclick="openModalEditSousForum(<?= $id; ?>,<?= $sousforumd[$a]['id']; ?>, <?= $a; ?>, '<?= $sousforumd[$a]['nom']; ?>', <?php if ($sousforumd[$a]['img'] == NULL) { echo 'null';} else { echo "'".$sousforumd[$a]['img']."'"; } ?>);" class="btn btn-main ml-1" > 
+                                                        <i class="fas fa-cog"></i>
+                                                    </button>
 
                                                     <?php if ($sousforumd[$a]['close'] == 0) : ?>
 

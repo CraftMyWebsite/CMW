@@ -3,7 +3,7 @@
 	if($_POST['axe'] == 'nombre') {
 		$_POST['axe'] = "nbre_votes";
 	}
-	$VoteHistoryReq = $bddConnection->query('SELECT id as id, id AS \'id2\', ip, nbre_votes, site, date_dernier, pseudo FROM cmw_votes WHERE pseudo LIKE \'%'.$_POST['search'].'%\' ORDER BY \''.$_POST['axe'].'\' \''.$_POST['axeType'].'\'');
+	$VoteHistoryReq = $bddConnection->query('SELECT id as id, id AS \'id2\', ip, nbre_votes, site, date_dernier, pseudo FROM cmw_votes WHERE pseudo LIKE \'%'.$_POST['search'].'%\' AND isOld=0 ORDER BY \''.$_POST['axe'].'\' \''.$_POST['axeType'].'\'');
 
 
 	 $req = $bdd->query('SELECT id, lien FROM cmw_votes_config');

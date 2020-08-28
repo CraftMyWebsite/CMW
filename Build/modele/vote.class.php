@@ -7,7 +7,7 @@ class vote {
     private $Pseudo;
     
     public function __construct($bdd, $pseudo, $lienId) {
-        $Player2 = $bdd->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo AND site = :site');
+        $Player2 = $bdd->prepare('SELECT * FROM cmw_votes WHERE pseudo = :pseudo AND site = :site and isOld=0');
         $Player2->execute(array(
             'pseudo' => $pseudo,
             'site' => $lienId    ));

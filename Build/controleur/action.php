@@ -14,7 +14,15 @@ if(isset($_GET['action']))
 			setcookie('pass', 0, time(), '/', null, false, false);
 			header('Location: index.php');
 		break;
-		
+		case 'editForumCat':
+			include('controleur/forum/editForumCat.php');
+			exit();
+		case 'editForum':
+			include('controleur/forum/editForum.php');
+		break;
+		case  'editSousForum':
+			include('controleur/forum/editSousForum.php');
+		break;
 		case 'getBaltopVote':
 			include('controleur/BaltopVote.php');
 			exit();
