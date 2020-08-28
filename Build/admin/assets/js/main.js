@@ -204,7 +204,7 @@ function addVoteConfigRec(type, id1, id2) {
     ht += '<label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>'
             		 +'<input type="number" min="1" max="100" value="100" data-type="pourcentage" class="form-control"/>';
    	ht +='</div></div>';
-    el.innerHTML = el.innerHTML + ht;
+    el.insertAdjacentHTML("beforeend", ht);
 
 }
 
@@ -256,7 +256,7 @@ function addVoteRec(type, id1, id2) {
     ht += '<label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>'
             		 +'<input type="number" min="1" max="101" value="100" data-type="pourcentage" class="form-control"/>';
    	ht +='</div></div>';
-    el.innerHTML =  el.innerHTML + ht;
+    el.insertAdjacentHTML("beforeend", ht);
 
 }
 
