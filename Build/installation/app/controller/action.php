@@ -6,7 +6,6 @@ if (isset($_GET['action']) AND $_GET['action'] == 'setchmod'){
 	chmod("../modele/.htpasswd", 0777);
 	chmod("../controleur/.htpasswd", 0777);
 	chmod("../admin/actions/.htpasswd", 0777);
-	rchmod("../theme/smileys");
 	rchmod("../utilisateurs/");
 }
 // On essaie de se connecté et d'écrire les premiéres données histoire de voir si la base de données répond bien

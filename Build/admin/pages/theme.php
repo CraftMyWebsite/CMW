@@ -30,7 +30,7 @@ $(function () {
  				<label class="control-label"> <a data-toggle="popover" data-trigger="hover" title="Besoin d'un nouveau thème ?" data-content="Découvrez et Télécharger un thème sur la <a href='https://craftmywebsite.fr/forum/index.php?resources/featured' target='_blank'>page officiel de craftmywebsite</a>!">Thèmes <i class="fas fa-info-circle"></i></a></label>
                 <select class="form-control text-center" name="theme">
                     <option value="<?php echo $_Serveur_['General']['theme']; ?>" selected><?php echo $_Serveur_['General']['theme']; ?></option>
-                    <?php if(isset($themes)) { foreach($themes as $element){ if($element != 'upload' AND $element != $_Serveur_['General']['theme'] AND $element != '..' AND $element != 'smileys') { ?>
+                    <?php if(isset($themes)) { foreach($themes as $element){ if($element != 'upload' AND $element != $_Serveur_['General']['theme'] AND $element != '..') { ?>
                     <option value="<?php echo $element; ?>"><?php echo $element; ?></option><?php } } }?>
                 </select>
 

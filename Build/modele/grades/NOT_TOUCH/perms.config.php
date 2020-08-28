@@ -165,8 +165,6 @@ const PERMS = array(
 		"forum" => array(
 			"showPage" => "Accès à la page Forum",
 			"actions" => array(
-				"addSmiley" => "Ajout de smileys",
-				"seeSmileys" => "Voir/Supprimer les smileys",
 				"addPrefix" => "Ajouter des prefixes de discussion",
 				"seePrefix" => "Voir/supprimer les prefixes de discussion"
 			)

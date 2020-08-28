@@ -3,55 +3,22 @@
 		Réglages Forum
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'forum', 'showPage') AND !$_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley'))
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'forum', 'showPage'))
 {
 	echo '<div class="col-lg-6 col-lg-offset-3 text-center">
 		<div class="alert alert-danger">
-			<strong>Vous avez aucune permission pour accéder aux réglages de la boutique.</strong>
+			<strong>Vous avez aucune permission pour accéder aux réglages de cette page.</strong>
 		</div>
 	</div>';
 }
 else { ?>
 <div class="alert alert-success">
-	<strong>Sur cette section, vous pouvez gérer tout votre forum, créer des smileys unique.</strong>
+	<strong>Sur cette section, vous pouvez gérer tout votre forum.</strong>
 </div>
 
 <?php } ?>
 <div class="row">
-<?php if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addSmiley')) { ?>
-	<div class="col-md-12 col-xl-6 col-12">
-		<div class="card">
-			<div class="card-header ">
-				<h3 class="card-title"><strong>Ajout de Smiley</strong></h3>
-			</div>
-			<div class="card-body">
-				<form method="POST" action="?action=addSmiley" enctype="multipart/form-data">
-					<label class="control-label">Symbole à utiliser sur le forum : (exemple : :D, :), :p, :vladort qui dort: )</label>
-					<input type="text" name="symbole" class="form-control" maxlength="20">
-				 <div class="input-group file-input-group" style="margin-top:10px;">
-                      <input class="form-control" id="file-text" type="text" placeholder="Aucun fichier séléctioner" readonly>
-                      <input type="file" name="image" id="File" style="display:none;" required>
-                      <div class="input-group-append">
-                        <label class="btn btn-secondary mb-0" for="File">Choisir un fichier</label>
-                      </div>
-                    </div>
-                    <script>
-                      const fileInput = get('File');
-                      const label = get('file-text');
-                      
-                      fileInput.onchange =
-                      fileInput.onmouseout = function () {
-                        if (!fileInput.value) return
-                        
-                        var value = fileInput.value.replace(/^.*[\\\/]/, '')
-                        label.value = value
-                      }
-                    </script>
-                </form>
-            </div>
-        </div>
-   	</div>
-<?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix')) { ?>
+<?php if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix')) { ?>
 	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card">
 			<div class="card-header ">
@@ -118,8 +85,8 @@ else { ?>
             	let st = "";
             		st+= "<tr>";
             		st+= "<td>"+ getValueByName("addPref", "nom")+"</td>";
-            		st+= "<td><span class='"+getValueByName("addPref", "prefix")+"' style='height: 10px; width: 20px;'></span></td>";
-            		st+= "<td><span class='"+getValueByName("addPref", "prefix")+"'>"+ getValueByName("addPref", "nom")+"</span></td>";
+            		st+= "<td><span class='prefix "+getValueByName("addPref", "prefix")+"' style='height: 10px; width: 20px;'></span></td>";
+            		st+= "<td><span class='prefix "+getValueByName("addPref", "prefix")+"'>"+ getValueByName("addPref", "nom")+"</span></td>";
             		st+= "<td></td>";
             		st+= "</tr>";
             	get('allprefix').innerHTML += st;
@@ -129,39 +96,6 @@ else { ?>
 					<input type="submit" onclick="sendPost('addPref');"class="btn btn-success w-100" value="Modifier !" />
 				</div>
 			</div>
-        </div>
-   	</div>
-<?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'seeSmileys')) { ?>
-	<div class="col-md-12 col-xl-6 col-12">
-		<div class="card">
-			<div class="card-header ">
-				<h3 class="card-title"><strong>Edition des Smiley</strong></h3>
-			</div>
-			<div class="card-body">
-				<table class="table table-striped table-hover">
-					<thead>
-                        <tr>
-                            <th>Symbole</th>
-                            <th>Images</th>
-                            <th>Lien</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="allsmiley">
-                    <?php 
-                    while($data = $reqSmileys->fetch(PDO::FETCH_ASSOC))
-                    {
-                    	?><tr id="smiley<?=$data['id'];?>">
-                    		<td><?=$data['symbole'];?></td>
-                    		<td><img src="./<?=$data['image'];?>" /></td>
-                    		<td><?=$data['image'];?></td>
-                    		<td><button onclick="sendDirectPost('admin.php?action=supprSmiley&id=<?=$data['id'];?>&image=<?=$data['image'];?>', function(data) { if(data) { hide('smiley<?=$data['id'];?>')}});" class="btn btn-danger">Supprimer</button></td>
-                    	</tr><?php
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
         </div>
    	</div>
 <?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'seePrefix')) { ?>
@@ -184,11 +118,11 @@ else { ?>
                     <?php 
                     while($data = $reqPrefix->fetch(PDO::FETCH_ASSOC))
                     {
-                    	?><tr>
+                    	?><tr id="prefix<?=$data['id'];?>">
                     		<td><?=$data['nom'];?></td>
                     		<td><span class="<?php echo $data['span'];?>" style="height: 10px; width: 20px;"></span></td>
                     		<td><span class="<?=$data['span'];?>"><?=$data['nom'];?></span></td>
-                    		<td><button onclick="sendDirectPost('admin.php?action=supprPrefix&id=<?=$data['id'];?>', function(data) { if(data) { hide('smiley<?=$data['id'];?>')}});" class="btn btn-danger">Supprimer</button></td>
+                    		<td><button onclick="sendDirectPost('admin.php?action=supprPrefix&id=<?=$data['id'];?>', function(data) { if(data) { hide('prefix<?=$data['id'];?>')}});" class="btn btn-danger">Supprimer</button></td>
                     	</tr><?php
                     }
                     ?>
