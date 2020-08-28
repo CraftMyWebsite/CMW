@@ -181,6 +181,12 @@ function addVoteConfigRec(type, id1, id2) {
     } else  if(type == "jeton") {
     	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
             		 +'<input type="number" data-type="value" min="1" value="1" max="99999999" class="form-control"/>';
+    } else  if(type == "jetonAlea") {
+    	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
+    	ht += '<label class="control-label" style="margin-top:10px;">Quantité minimum:</label>'
+            		 +'<input type="number" data-type="value" min="0" value="1" max="99999999" class="form-control"/>'
+        ht += '<label class="control-label" style="margin-top:10px;">Quantité maximum:</label>'
+            		 +'<input type="number" data-type="value2" min="0" value="100" max="99999999" class="form-control"/>';
     } else  if(type == "item") {
     	ht += '<label class="control-label">Id de l\'item à donner</label>'
             		 +'<input type="text" data-type="value" class="form-control"/>'
@@ -188,15 +194,17 @@ function addVoteConfigRec(type, id1, id2) {
             		 +'<label class="control-label">Nombre d\'item à donner</label>'
             		 +'<input type="number" data-type="value2" min="1" value="1" max="64"  class="form-control"/>';
     } 
-    if(type != "jeton") {
+    if(type != "jeton" && type != "jetonAlea") {
 		ht += '<label class="control-label">Obtention de la récompense</label>'
                         +'<select data-type="methode" class="form-control" style="margin-bottom:20px">'
                             +'<option value="1"> Le serveur où il est en ligne </option>'
                             +'<option value="3"> Tous les serveurs </option>'
                         +'</select> <hr/>';
     }
+    ht += '<label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>'
+            		 +'<input type="number" min="1" max="100" value="100" data-type="pourcentage" class="form-control"/>';
    	ht +='</div></div>';
-    el.innerHTML += ht;
+    el.innerHTML = el.innerHTML + ht;
 
 }
 
@@ -223,6 +231,12 @@ function addVoteRec(type, id1, id2) {
     } else  if(type == "jeton") {
     	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
             		 +'<input type="number" data-type="value" min="1" value="1" max="99999999" class="form-control"/>';
+    }  else  if(type == "jetonAlea") {
+    	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
+    	ht += '<label class="control-label" style="margin-top:10px;">Quantité minimum:</label>'
+            		 +'<input type="number" data-type="value" min="0" value="1" max="99999999" class="form-control"/>'
+        ht += '<label class="control-label" style="margin-top:10px;">Quantité maximum:</label>'
+            		 +'<input type="number" data-type="value2" min="0" value="100" max="99999999" class="form-control"/>';
     } else  if(type == "item") {
     	ht += '<label class="control-label">Id de l\'item à donner</label>'
             		 +'<input type="text" data-type="value" class="form-control"/>'
@@ -230,7 +244,7 @@ function addVoteRec(type, id1, id2) {
             		 +'<label class="control-label">Nombre d\'item à donner</label>'
             		 +'<input type="number" data-type="value2" min="1" value="1" max="64"  class="form-control"/>';
     } 
-    if(type != "jeton") {
+    if(type != "jeton" && type != "jetonAlea") {
 		ht += '<label class="control-label">Obtention de la récompense</label>'
                         +'<select data-type="methode" class="form-control" style="margin-bottom:20px">'
                             +'<option value="1"> Le serveur où il est en ligne </option>'
@@ -238,8 +252,11 @@ function addVoteRec(type, id1, id2) {
                             +'<option value="3"> Tous les serveurs </option>'
                         +'</select> <hr/>';
     }
+
+    ht += '<label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>'
+            		 +'<input type="number" min="1" max="101" value="100" data-type="pourcentage" class="form-control"/>';
    	ht +='</div></div>';
-    el.innerHTML += ht;
+    el.innerHTML =  el.innerHTML + ht;
 
 }
 

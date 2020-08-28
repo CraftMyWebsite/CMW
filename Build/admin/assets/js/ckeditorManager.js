@@ -28,9 +28,7 @@ function initCK() {
 						'indent',
 						'outdent',
 						'|',
-						'imageUpload',
 						'blockQuote',
-						'insertTable',
 						'mediaEmbed',
 						'undo',
 						'redo'
