@@ -14,6 +14,7 @@ General:
     ip: 
     port: 
     statut: 2
+    moneyName: "jeton"
     createur: 
         nom: Créateur
         effets: style16
@@ -33,6 +34,8 @@ Payement:
     public_key: ""
     private_key: ""
     paypalEmail: 
+vote:
+    maxDisplay: 10
 color:
     theme:
     #New Theme

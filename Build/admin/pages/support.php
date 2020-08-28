@@ -20,7 +20,7 @@
     	<div class="col-md-6 col-xl-4 col-12">
 			<div class="card  " >
 				<div class="card-header ">
-					<h3 class="card-title"><strong></strong></h3>
+					<h3 class="card-title"><strong>visibilité du support</strong></h3>
 				</div>
 				<div class="card-body" id="change-support">
 					<select name="visibilite" class="form-control" required>
@@ -41,7 +41,7 @@
 			<div class="card  " >
 				<div class="card-header ">
 					<div class="float-left">
-		        		<strong>Édition des tickets</strong>
+		        		<h3 class="card-title"><strong>Édition des tickets</strong></h3>
 		        	</div>
 		        	<div class="float-right">
 		        		<button class="btn btn-sm btn-outline-secondary" onclick="sendDirectPost('admin.php?action=supprAllTickets', function(data) { if(data) { hide('all-ticket')}});">Tout supprimer</button>

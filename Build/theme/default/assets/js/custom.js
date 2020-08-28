@@ -20,6 +20,10 @@ window.addEventListener("load", function () {
 	})
 });
 
+function isset(obj) {
+    return typeof obj !== 'undefined' && obj !== null;
+}
+
 //Scroll to Top 
 window.onscroll = function () {
 	divScroll()

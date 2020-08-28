@@ -92,7 +92,45 @@ function clearRecompense() {
 function updateBaltop(loop = false) {
     $.post("index.php?action=getBaltopVote", {}, function (data, status) {
         data = data.substring(data.indexOf('[DIV]') + 5);
-        document.getElementById("baltop").innerHTML = data;
+
+        let f = " <thead>"
+                   + "<tr>"
+                       +"<th>#</th>"
+                        +"<th>Pseudo</th>"
+                        +"<th>Votes</th>"
+                   + "</tr>"
+                +"</thead><tbody>";
+
+        if(data != "") {
+            let json = JSON.parse(data);
+            json.forEach(function(ar, ar2) { 
+                    f+= '<tr>'
+                        +'<td>'
+                            +(ar2+1)
+                        +'</td>'
+                        +'<td>'
+                            +'<img alt="" src="https://api.craftmywebsite.fr/skin/face.php?u='+ar.pseudo+'&s=25" style="height:25px;width:25px" /> <strong>'
+                                +'<a href="?page=profil&profil='+ar.pseudo+'">'
+                                        +ar.pseudo
+                                +'</a>'
+                            +'</strong>'
+                        +'</td>'
+                        +'<td>'
+                            +ar.nombre
+                        +'</td>'
+                    +'</tr>';
+            });
+        } else {
+            f += '<tr class="p-0 no-hover">'
+                +'<td colspan="3" class="p-0 no-hover">'
+                    +'<div class="m-0 info-page bg-danger">'
+                        +'<div class="text-center">Personne n\'a encore voté !</div>'
+                            +'</div>'
+                        +'</td>'
+                    +'</tr>';    
+        }
+        f += "</tbody>";
+        document.getElementById("baltop").innerHTML = f;
         if(loop) {
             setTimeout(function () {
                 updateBaltop(true);
@@ -177,3 +215,4 @@ function pickupRecompense() {
         });
     }
 }
+setTimeout(function () {updateBaltop(true) }, 500);
