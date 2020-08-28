@@ -166,7 +166,7 @@ if (isset($_GET['erreur'])) {
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-main w-100">S'inscrire</button>
+                            <button type="submit" class="btn btn-main w-100">Envoyer</button>
                         </div>
 
                     </form>
