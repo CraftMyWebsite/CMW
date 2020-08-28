@@ -16,6 +16,7 @@ function initPost(idform, url, callBack) {
 
 
 
+
 function loopChild(form, idform) {
     for (let i = 0; i < form.children.length; i++) {
         if(isset(form.children[i].name) && form.children[i].name != "")
@@ -253,4 +254,8 @@ function initPostCallback(callback) {
         console.log("try callback "+list[i]);
         initPost(list[i].getAttribute("data-callback"), list[i].getAttribute("data-url"), callback);
     }
+}
+
+function registerEvent(el, type, fct) {
+    type.forEach(function(event) { console.log("add"+event); el.addEventListener(event, fct); });
 }

@@ -71,6 +71,10 @@ function initCK() {
 	}
 }
 
+function isset(obj) {
+    return typeof obj !== 'undefined' && obj !== null;
+}
+
 function destroyCK() {
 	for (let c of CK.keys()) {
 		CK.get(c).destroy();

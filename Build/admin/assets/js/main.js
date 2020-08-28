@@ -17,7 +17,6 @@ toastr.options = {
 	"hideMethod"       : "fadeOut"
 }
 
-
 function switchTypePassword(el) {
 	for(i = 0; i < el.parentElement.parentElement.children.length; i++) {
 		if(isset(el.parentElement.parentElement.children[i].type) && el.parentElement.parentElement.children[i].type == "password" ) {
