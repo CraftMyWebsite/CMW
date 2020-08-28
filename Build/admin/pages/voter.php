@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2 gray">
-        Votes
+        Configuration des votes
     </h2>
 </div>
 
@@ -27,22 +27,28 @@
                 <ul>
                     <li> {JOUEUR} qui correspond au nom du joueur qui vote. </li>
                 </ul>
+                Nombre maximum de top voteur affiché:
+                <div id="maxDisplayForm">
+                    <input class="form-control" required style="width:100px;" type="number" name="maxDisplay" data-oldvalue="<?php echo $_Serveur_['vote']['maxDisplay']; ?>" id="inputMaxDisplay" min ="1" max="99" value="<?php echo $_Serveur_['vote']['maxDisplay']; ?>" />
+                    <script>
+                    registerEvent(get('inputMaxDisplay'), ["click", "keyup", "keydown"], function(evt) {
+                        if(isset(evt.target.value) && parseInt(evt.target.value) >1 && parseInt(evt.target.getAttribute('data-oldvalue')) != parseInt(evt.target.value)) {
+                            evt.target.setAttribute('data-oldvalue', evt.target.value);
+                            sendPost('maxDisplayForm'); }
+                     });
+                    initPost("maxDisplayForm", "admin.php?&action=editTopVoteNumber");</script>
+                </div>
             </div>
         </div>
     </div>
         <div class="col-md-12 col-xl-12 col-12">
             <div class="card  ">
                 <div class="card-header ">
-                    <h3 class="card-title">Configuration des votes</h3>
+                    <h3 class="card-title">Nouveau site de vote</h3>
                 </div>
                 <div class="card-body" id="new-vote">
                     <div class="col-md-12">
-                        <h3>Réglages des votes</h3>
-
-
-
                         <input type="hidden" name="action"  class="form-control" value="" id="vote-action-json"/>
-                        <hr/>
                         <div class="dropdown ">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                               Ajouter une récompense

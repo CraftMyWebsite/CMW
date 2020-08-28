@@ -99,7 +99,7 @@ else
 			</div>
 			<div class="card-body">
 				<label class="control-label">Adresse e-mail de l'envoie</label>
-				<input id="from" type="text"  <?=(isset($_Serveur_['Mail']['from'])) ? 'value="'.$_Serveur_['Mail']['from'].'"': '';?> class="form-control" placeholder="Ex: contact@<? echo $_Serveur_['General']['name']; ?>.fr" />
+				<input id="from" type="text"  <?=(isset($_Serveur_['Mail']['from'])) ? 'value="'.$_Serveur_['Mail']['from'].'"': '';?> class="form-control" placeholder="Ex: contact@<?php echo $_Serveur_['General']['name']; ?>.fr" />
 				<div class="custom-control custom-switch" style="padding-top: 20px">
 					<input type="checkbox" class="custom-control-input" id="CheckSmtp" name="CheckSmtp" OnClick="if(get('CheckSmtp').checked) { show('BlockSmtp'); } else { hide('BlockSmtp'); }" <?=(isset($_Serveur_['SMTPNEWS']['CheckSmtp']) && $_Serveur_['SMTPNEWS']['CheckSmtp'] == 1) ? 'checked' : '' ;?>>
 					<label class="custom-control-label" for="CheckSmtp">Utiliser un serveur SMTP ?</label>
@@ -137,7 +137,7 @@ else
 						</div>
 
 						<label class="control-label">Adresse mail de réponse (laissez vide si même que celle d'envoi)</label>
-						<input id="reply" type="text" <?=(isset($_Serveur_['Mail']['reply'])) ? 'value='.$_Serveur_['Mail']['reply']: '';?> id="reply"  class="form-control" placeholder="Ex: contact@<? echo $_Serveur_['General']['name']; ?>.fr">
+						<input id="reply" type="text" <?=(isset($_Serveur_['Mail']['reply'])) ? 'value='.$_Serveur_['Mail']['reply']: '';?> id="reply"  class="form-control" placeholder="Ex: contact@<?php echo $_Serveur_['General']['name']; ?>.fr">
 
 						<label class="control-label">Le sujet de la newsletter</label>
 						<input id="sujet" style="margin-bottom:20px;" type="text" value="" id="sujet" class="form-control" />
