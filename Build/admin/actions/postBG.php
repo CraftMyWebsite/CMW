@@ -15,15 +15,5 @@ if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground'))
 			$copie->Copie();
 	}
 }
-if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTypeBackground')) {
-	if(isset($_POST['bgType']))
-	{
-		$lectureAccueil = new Lire('modele/config/config.yml');
-		$lectureAccueil = $lectureAccueil->GetTableau();
-
-		$lectureAccueil['General']['bgType'] = $_POST['bgType'];
-		
-		$ecriture = new Ecrire('modele/config/config.yml', $lectureAccueil);
-	}
-}
+header('Location: ?page=theme');
 ?>

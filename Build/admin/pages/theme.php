@@ -50,7 +50,7 @@ $(function () {
 		 		</h4>
 		    </div>
 		    <form method="POST" action="?&action=postBG" enctype="multipart/form-data">
-			    <div class="card-body" id="changeTheme">
+			    <div class="card-body">
 					<div class="alert alert-success" >
 	                    <strong>Si vous voulez mettre une image, l'image doit être en 1920*1080 minimum pour s'adapter aux écrans et pour avoir une qualité optimale ! Vouspouvez aussi mettre une petite image qui se répètera !</strong>
 	                </div>
@@ -75,7 +75,6 @@ $(function () {
 					  }
 
 			   		</script>
-	 			
 			    </div>
 			    <div class="card-footer">
 			        <button type="submit" class="btn btn-success w-100">Envoyer!</button>
