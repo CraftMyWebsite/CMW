@@ -260,8 +260,6 @@ if (isset($_GET['id'])) :
 
                             $signature = $_Forum_->getSignature($topicd['pseudo']);
 
-                            $mois = switch_date($topicd['mois']);
-
                             $d_edition = explode('-', $topicd['d_edition']);
 
                             $countlike = $_Forum_->compteLike($topicd['id'], $count1, 1);
@@ -270,13 +268,16 @@ if (isset($_GET['id'])) :
                             ?>
 
                             <p class="text-right h6 mt-3">
-                                Posté le <?= $topicd['jour']; ?> <?= $mois; ?> <?= $topicd['annee']; ?>
-                                <?= ($topicd['d_edition'] != NULL) ? "édité le $d_edition[2]/$d_edition[1]/$d_edition[0]" : "" ?>
+                                Posté le <?=  $_Forum_->conversionDate($topicd['date_creation']); 
+                                 if($topicd['d_edition'] != NULL) {
+                                       
+                                        echo " et édité le ".  $_Forum_->conversionDate($topicd['d_edition']);
+                                    }?>
                             </p>
 
                             <hr class="bg-darkest mt-0" style="border-top-style: dotted;">
 
-                            <div class="m-4 h5" style="text-overflow: clip; word-wrap: break-word;">
+                            <div class="m-4 h5" id="contenuePost" style="text-overflow: clip; word-wrap: break-word;">
 
                                 <?= $contenue; ?>
                             </div>
@@ -289,12 +290,11 @@ if (isset($_GET['id'])) :
                                 </div>
 
                                 <?php if (isset($_Joueur_)) : ?>
-                                    <div class="">
                                         <form action="?&action=signalement_topic" method="post">
                                             <input type="hidden" name="id_topic2" value='<?= $id; ?>' />
                                             <button type="submit" class="btn btn-danger float-right mb-5">Signaler !</button>
                                         </form>
-                                    </div>
+                                        <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost', '<?= $topicd['pseudo']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
                                 <?php endif; ?>
 
                             </div>
@@ -471,9 +471,6 @@ if (isset($_GET['id'])) :
 
                                 $signature = $_Forum_->getSignature($answerd[$i]['pseudo']);
 
-
-                                $mois = switch_date($answerd[$i]['mois']);
-
                                 $d_edition = explode('-', $answerd[$i]['d_edition']);
 
                                 $countlike = $_Forum_->compteLike($answerd[$i]['id'], $count3, 1);
@@ -484,13 +481,16 @@ if (isset($_GET['id'])) :
                                 ?>
 
                                 <p class="text-right h6 mt-3">
-                                    Posté le <?= $answerd[$i]['day']; ?> <?= $mois; ?> <?= $answerd[$i]['annee']; ?>
-                                    <?= ($answerd[$i]['d_edition'] != NULL) ? "édité le $d_edition[2]/$d_edition[1]/$d_edition[0]" : "" ?>
+                                    <?php 
+                                    echo 'Posté le  '.$_Forum_->conversionDate($answerd[$i]['date_post']); 
+                                    if($answerd[$i]['d_edition'] != NULL) {
+                                        echo " et édité le ". $_Forum_->conversionDate($answerd[$i]['d_edition']);
+                                    }?>
                                 </p>
 
                                 <hr class="bg-darkest mt-0" style="border-top-style: dotted;">
 
-                                <div class="m-4 h5" style="text-overflow: clip; word-wrap: break-word;">
+                                <div class="m-4 h5" id="contenuePost<?=$i?>" style="text-overflow: clip; word-wrap: break-word;">
                                     <?= $answere; ?>
                                 </div>
 
@@ -502,12 +502,11 @@ if (isset($_GET['id'])) :
                                     </div>
 
                                     <?php if (isset($_Joueur_)) : ?>
-                                        <div class="">
                                             <form action="?&action=signalement_topic" method="post">
                                                 <input type="hidden" name="id_topic2" value='<?= $answerd[$i]['id']; ?>' />
                                                 <button type="submit" class="btn btn-danger float-right mb-5">Signaler !</button>
                                             </form>
-                                        </div>
+                                            <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost<?=$i?>', '<?= $answerd[$i]['pseudo']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
                                     <?php endif; ?>
 
                                 </div>
@@ -620,7 +619,7 @@ if (isset($_GET['id'])) :
 
                         <hr class="my-2 bg-lightest w-80" />
 
-                        <div class="col-8 mx-auto">
+                        <div class="col-12 mx-auto">
 
                             <?php $data = $_Forum_->isLock($topicd['id_categorie']);
                             if ($data['close'] == 0 or Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide') and !$_SESSION['mode']) : ?>
@@ -634,7 +633,7 @@ if (isset($_GET['id'])) :
 
                                         <div class="col-md-12 text-center">
                                             
-                                            <textarea  data-UUID="0003" id="ckeditor" name="contenue" style="height: 350px; margin: 0px; width: 100%;"></textarea>
+                                            <textarea  data-UUID="0003" id="ckeditorPost" name="contenue" style="height: 750px; margin: 0px; width: 100%;"></textarea>
                                         </div>
 
                                     </div>

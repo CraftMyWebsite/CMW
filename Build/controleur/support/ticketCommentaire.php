@@ -1,6 +1,7 @@
 ﻿<?php
 $id = (int)htmlspecialchars($_POST['id']);
-$message = htmlspecialchars($_POST['message']);
+require('modele/app/ckeditor.class.php');
+	$message = ckeditor::verif($_POST['message']);
 
 require_once('modele/support/postCommentaire.class.php');
 $post = new PostCommentaireTicket($bddConnection);

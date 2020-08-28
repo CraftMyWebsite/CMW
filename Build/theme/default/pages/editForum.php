@@ -31,19 +31,13 @@ if (Permission::getInstance()->verifPerm("connect") and isset($_GET['id'], $_GET
                                 <input type="hidden" name="id" value="<?= $id; ?>" />
                                 <input type="hidden" name="objet" value="<?= $objet; ?>" />
 
-                                <div class="form-row py-3">
                                     <?php if ($objet == 1) : ?>
-                                        <label for="titre">Modifier le titre: </label>
-                                        <input type="text" name="titre" maxlength="40" id="titre" class="form-control custom-text-input" value="<?= $donnee['nom']; ?>" />
+                                        <div class="form-row py-3"><label for="titre">Modifier le titre: </label>
+                                        <input type="text" name="titre" maxlength="40" id="titre" class="form-control custom-text-input" value="<?= $donnee['nom']; ?>" /></div>
                                     <?php endif; ?>
-                                </div>
-
-                                <div class="form-row py-3">
-
 
                                     <label for="contenue">Editez votre <?= ($objet == 1) ? 'topic !' : 'réponse !'; ?></label>
                                     <textarea  data-UUID="0002" id="ckeditor" name="contenue" style="height: 275px; margin: 0px; width: 100%;"><?= $donnee['contenue']; ?></textarea>
-                                </div>
 
                             </div>
                         </div>

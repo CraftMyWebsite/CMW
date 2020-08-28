@@ -61,8 +61,7 @@
                                         <?= $tickets['titre'] ?>​
                                     </td>
 
-                                    <td>
-                                        <?= $tickets['jour'] . '/' . $tickets['mois'] . ' à ' . $tickets['heure'] . ':' . $tickets['minute']; ?>
+                                    <td><?php echo $_Forum_->conversionDate($tickets['date_post']); ?>
                                     </td>
 
                                     <td>
@@ -142,9 +141,10 @@
                                                         <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur']); ?>" style="width: 32px; height: 32px;" alt="Avatar de <?= $tickets['auteur'] ?>" />
                                                         <div class="media-body">
                                                             <h6 class="mt-0 mb-2 font-weight-bold">
-                                                                <?= $tickets['auteur']; ?>
+                                                                <?= $tickets['auteur']; ?> | le <?= $_Forum_->conversionDate($tickets['date_post']); ?>
                                                             </h6>
                                                             <?= $message; ?>
+                                                               
 
                                                             <hr class="bg-main w-100">
 
@@ -163,9 +163,9 @@
                                                                             <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($ticketCommentaires[$tickets['id']][$i]['auteur']); ?>" style="width:32px; height:32px;" alt="Avatar de <?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" />
                                                                             <div class="media-body">
                                                                                 <h6 class="mt-0 mb-2 font-weight-bold">
-                                                                                    <?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>
+                                                                                    <?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?> | le <?= $_Forum_->conversionDate($ticketCommentaires[$tickets['id']][$i]['date_post']); ?>
                                                                                 </h6>
-                                                                                <?= $message; ?>
+                                                                                <div id="contenueCom<?= $tickets['id'] ?>-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>" style="margin-bottom:10px;"><?= $message; ?></div>
 
                                                                                 <!-- Actions possible sur les commentaires -->
                                                                                 <?php if ((isset($_Joueur_))  &&  (($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] || Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) || ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] || Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')))) : ?>
@@ -192,7 +192,9 @@
                                                                                         </ul>
                                                                                     </div>
 
-                                                                                <?php endif; ?>
+                                                                                <?php endif; if($tickets['etat'] == "0") { ?>
+                                                                                <button type="button" onclick="addBlockQuote('ckeditorCom<?= $tickets['id'] ?>','contenueCom<?= $tickets['id'] ?>-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>', '<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
+                                                                                <?php } ?>
                                                                             </div>
                                                                         </p>
                                                                     </div>
@@ -220,7 +222,7 @@
                                                         <input type="hidden" name="id" value="<?= $tickets['id'] ?>" />
                                                             <div style="width:100%;">
                                                             
-                                                                <textarea  data-UUID="0006" id="ckeditor" name="message" style="height: 275px;"></textarea>
+                                                                <textarea  data-UUID="0006<?= $tickets['id'] ?>" id="ckeditorCom<?= $tickets['id'] ?>" name="message" style="height: 275px;"></textarea>
                                                             </div>
                                                         <button type="submit" class="btn btn-main mt-4 w-100">Commenter</button>
                                                     </form>

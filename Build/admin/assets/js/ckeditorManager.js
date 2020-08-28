@@ -3,7 +3,7 @@ var CK = {};
 initCK();
 function initCK() {
 	CK = new Map();
-	for (let el of document.querySelectorAll( '#ckeditor' )) {
+	for (let el of document.querySelectorAll("[data-UUID]" )) {
 		ClassicEditor.create(el, {
 				
 				toolbar: {
