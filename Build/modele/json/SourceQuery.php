@@ -527,9 +527,14 @@ use xPaw\SourceQuery\Exception\SocketException;
 					break;
 				}
 			}
-			
-			$this->Rcon->Open( );
-			$this->Rcon->Authorize( $Password );
+			try {
+				$this->Rcon->Open( );
+				$this->Rcon->Authorize( $Password );
+			}
+			catch(SocketException $e)
+			{
+				$this->Rcon = null;
+			}
 		}
 		
 		/**
