@@ -42,18 +42,21 @@
 	
 	require_once('controleur/tempMess.class.php');
 	
-	if(isset($_COOKIE['playeronline'], $_COOKIE['maxPlayers']))
+	if(isset($_COOKIE['playeronline'], $_COOKIE['maxPlayers'], $_COOKIE['servOnline']) && $_COOKIE['servOnline'] == true)
 	{
 		$playeronline = htmlspecialchars($_COOKIE['playeronline']);
 		$maxPlayers = htmlspecialchars($_COOKIE['maxPlayers']);
+		$servEnLigne = true;
 	}
 	else
 	{
 		$pingClass = new MinecraftPing($_Serveur_['General']['ip'], $_Serveur_['General']['port']);
 		$playeronline = $pingClass->Players;
 		$maxPlayers = $pingClass->MaxPlayer;
-		setcookie('playeronline', $playeronline, time() + 300);
-		setcookie('maxPlayers', $maxPlayers, time() + 300);
+		$servEnLigne = $pingClass->Online;
+		setcookie('playeronline', $playeronline, time() + 120, null, null, false, true);
+		setcookie('maxPlayers', $maxPlayers, time() + 120, null, null, false, true);
+		setcookie('servOnline', $servEnLigne, time() + 120, null, null, false, true);
 	}
 
 	function gradeJoueur($pseudo, $bdd)

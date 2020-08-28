@@ -148,9 +148,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         État de votre serveur :
-                                        <?php if ($_Serveur_['General']['statut'] == 0) : ?>
+                                        <?php if ($_Serveur_['General']['statut'] == 0 || $servEnLigne == false) : ?>
                                             <span class="badge badge-danger">Hors-Ligne</span>
-                                        <?php elseif ($_Serveur_['General']['statut'] == 1) : ?>
+                                        <?php elseif ($_Serveur_['General']['statut'] == 1 && $servEnLigne == true) : ?>
                                             <span class="badge badge-success">En Ligne</span>
                                             <div class="card-text">Nombres de Joueurs : <strong><?= $playeronline ?></strong>/<?= $maxPlayers; ?></div>
                                         <?php else : ?>
