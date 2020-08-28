@@ -3,7 +3,7 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote'))
 {
 	$req_donnees = $bddConnection->query('SELECT * FROM cmw_votes_config');
 	$data = $req_donnees->fetchAll();
-	for($i=0; $i <= count($data); $i++)
+	for($i=0; $i < count($data); $i++)
 	{
 
 		$action = $_POST['action'.$i];

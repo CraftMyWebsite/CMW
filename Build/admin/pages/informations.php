@@ -187,7 +187,7 @@
                             <div class="card-header bg-success">
                                 <div class="row">
                                     <div class="col-md-8 offset-col-md-4">
-                                        <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$conEtablie[$j]?></h4>
+                                        <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$j?></h4>
                                         <p class="card-category"> 
                                             En ligne - <?=$serveur['nom'];?>
                                         </p>
@@ -376,7 +376,7 @@
                             <div class="card-header bg-danger">
                                 <div class="row">
                                     <div class="col-md-8 offset-col-md-4">
-                                        <h4 class="card-title"><i class="fas fa-server"></i> Serveur</h4>
+                                        <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$j?></h4>
                                         <p class="card-category"> 
                                             Hors Ligne - <?=$serveur['nom'];?>
                                         </p>

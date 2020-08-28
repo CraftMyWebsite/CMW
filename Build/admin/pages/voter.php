@@ -57,6 +57,7 @@
                               <button class="dropdown-item" onclick="addVoteRec('commande', 'all-new-rec-vote','list-new-rec-vote');">Commande</button>
                               <button  class="dropdown-item" onclick="addVoteRec('message', 'all-new-rec-vote','list-new-rec-vote');">Message</button >
                               <button  class="dropdown-item" onclick="addVoteRec('jeton', 'all-new-rec-vote','list-new-rec-vote');">jeton(s)</button >
+                              <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-vote','list-new-rec-vote');">jeton(s) aléatoire</button >
                               <button  class="dropdown-item" onclick="addVoteRec('item', 'all-new-rec-vote','list-new-rec-vote');">Item(s)</button >
                             </div>
                           </div>
@@ -269,6 +270,7 @@
                                                   <button class="dropdown-item" onclick="addVoteRec('commande','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Commande</button>
                                                   <button  class="dropdown-item" onclick="addVoteRec('message','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Message</button >
                                                   <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">jeton(s)</button >
+                                                  <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">jeton(s) aléatoire</button >
                                                   <button  class="dropdown-item" onclick="addVoteRec('item','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Item(s)</button >
                                                 </div>
                                               </div>
@@ -283,7 +285,7 @@
                                                                 <h5><?php echo ucfirst($value['type']); ?></h5>
                                                             </div>
                                                             <div class="float-right">'
-                                                                <button onclick="genVoteJson2();sendPost('all-vote');get('list-new-rec-<?=$o;?>vote').removeChild(get('rec-vote-<?php echo $idcs; ?>'));if(get('list-new-rec-<?=$o;?>vote').children.length == 0) { hide('all-new-rec-<?=$o;?>vote');}" class="btn btn-sm btn-outline-secondary">Supprimer</button>'
+                                                                <button onclick="get('list-new-rec-<?=$o;?>vote').removeChild(get('rec-vote-<?php echo $idcs; ?>'));if(get('list-new-rec-<?=$o;?>vote').children.length == 0) { hide('all-new-rec-<?=$o;?>vote');} genVoteJson2();sendPost('all-vote');" class="btn btn-sm btn-outline-secondary">Supprimer</button>'
                                                             </div>
                                                         </div>
 
@@ -302,13 +304,17 @@
 
                                                                 <label class="control-label">Nombre d\'item à donner</label>
                                                                 <input type="number" data-type="value2" min="1" value="<?php echo $value['value2']; ?>" max="64"  class="form-control"/>
-                                                         <?php }  ?>
-                                                            <label class="control-label" style="<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">Obtention de la récompense</label>
+                                                         <?php } if($value['type'] != "jeton" && $value['type'] != "jetonAlea") { ?>
+                                                            <label class="control-label">Obtention de la récompense</label>
                                                             <select data-type="methode" class="form-control" style="margin-bottom:20px;<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">
                                                                 <option value="1"  <?php if($value['methode'] == "1") { echo 'selected'; }?>> Le serveur où il est en ligne </option>
                                                                 <option value="2" <?php if($value['methode'] == "2") { echo 'selected'; }?>> Le serveur de la catégorie </option>
                                                                 <option value="3" <?php if($value['methode'] == "3") { echo 'selected'; }?>> Tous les serveurs </option>
                                                             </select>
+                                                            <?php } ?>
+
+                                                            <label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>
+                                                            <input type="number" min="1" max="100" value="<?php echo $value['pourcentage']; ?>" data-type="pourcentage" class="form-control"/>
                                                     </div></div>
 
                                                     <?php } ?>

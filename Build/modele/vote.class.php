@@ -78,6 +78,24 @@ class vote {
         if(!isset($serveur)) {
             $serveur = $this->lienData['serveur'];
         }
+
+        $json = json_decode($action, true); 
+        foreach($json as $key => $value) { 
+            if(isset($value['pourcentage']) && ((int)$value['pourcentage']) != 100) {
+                if(rand(0, 100) > ((int)$value['pourcentage'])) {
+                    unset($json[$key]);
+                    continue;
+                }
+            }
+            if($value['type'] == "jetonAlea") {
+                $value['type'] = "jeton";
+                $value['value'] = rand($value['value'], $value['value2']);
+                unset($value['value2']);
+            }
+        }
+        $action = json_encode(array_values($json)); 
+
+
         $req = $bdd->prepare('INSERT INTO cmw_votes_temp (pseudo, action, serveur) VALUES (:pseudo, :action, :serveur)');
         $req->execute(array(
         'pseudo' => $this->Pseudo,
