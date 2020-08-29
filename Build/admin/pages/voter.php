@@ -120,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                 <script>initPost("new-vote", "admin.php?&action=creerLienVote", function(data) { if(data) {  voteUpdate(); }})</script>
+                 <script>initPost("new-vote", "admin.php?&action=creerLienVote", function(data) { if(data) {  voteUpdate(); }});</script>
                 <div class="card-footer">
                         <div class="row text-center">
                             <input type="submit" onclick="genVoteJson('list-new-rec-vote','vote-action-json');sendPost('new-vote'); " class="btn btn-success w-100" value="Valider les changements !"/>

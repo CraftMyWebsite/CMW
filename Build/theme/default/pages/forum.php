@@ -81,7 +81,7 @@ $fofo = $_Forum_->affichageForum();
                         <thead>
                             <tr>
                                 <th colspan="5" style="width: <?= (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') and !$_SESSION['mode']) ? '75%' : '100%'; ?>;">
-                                    <h5 class="text-center" data-editforum-index="<?= $i; ?>" data-editforum="<?php echo $fofo[$i]['id']; ?>"  >
+                                    <h5 class="text-center" <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') and !$_SESSION['mode']) { ?>data-editforum-index="<?= $i; ?>" data-editforum="<?php echo $fofo[$i]['id']; ?>" <?php } ?>>
                                         <span style="display:inline;"><?= ucfirst($fofo[$i]['nom']); ?></span> <input type="text" class="text-center no-hover" value="<?= ucfirst($fofo[$i]['nom']); ?>" style="width:auto;color:white;display:none;background: transparent;border: none;" > <i style="display:none;" class="fas fa-cog"></i>
                                     </h5>
                                 </th>

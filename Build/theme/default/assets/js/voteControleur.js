@@ -39,6 +39,7 @@ function putS(nb) {
 }
 
 var allBtn = new Map();
+var topRec = new Map();
 var runningBtn = new Array();
 var recompenseList = new Array();
 
@@ -88,12 +89,15 @@ function clearRecompense() {
     recompenseList = array();
     updateRecompenseList();
 }
+function is(obj) {
+    return typeof obj !== 'undefined' && obj !== null;
+}
 
 function updateBaltop(loop = false) {
     $.post("index.php?action=getBaltopVote", {}, function (data, status) {
         data = data.substring(data.indexOf('[DIV]') + 5);
 
-        let f = " <thead>"
+        var f = " <thead>"
                    + "<tr>"
                        +"<th>#</th>"
                         +"<th>Pseudo</th>"
@@ -104,10 +108,57 @@ function updateBaltop(loop = false) {
         if(data != "") {
             let json = JSON.parse(data);
             json.forEach(function(ar, ar2) { 
+                var rec = null;
+                if(is(topRec.get(ar2+1))) {
+                    rec = "<ul style='display:inline;'>";
+                    let item = new Map();
+                    let custom = 0;
+                    let jeton = 0;
+                           topRec.get(ar2+1).forEach(function(value, val2) {
+                               if(value.type == "item") {
+                                   if(item.has(value.value)) {
+                                       item.set(value.value, parseInt(item.get(value.value)) + parseInt(value.value2));
+                                   } else {
+                                       item.set(value.value, parseInt(value.value2));
+                                   }
+                               } else if(value.type == "commande") {
+                                    custom++;
+                               }else if(value.type == "jeton") {
+                                   jeton += parseInt(value.value);
+                               }/*else if(value.type == "message") {
+                                   custom++;
+                               }*/
+                        });
+
+                    if(item.size != 0) {
+                        item.forEach(function(value, val2) { 
+                            rec += "<li style='display:inline;'>"+value+" item"+putS(value)+" avec l'id "+val2+"</li>";
+                        });
+                    }
+                    if(custom != 0) {
+                        rec += "<li style='display:inline;'>"+custom+" récompense"+putS(custom)+" surprise !</li>";
+                    }
+                    if(jeton != 0) {
+                        rec += "<li style='display:inline;'>"+jeton+" jeton"+putS(jeton)+" boutique !</li>";
+                    } 
+                    rec += "</ul>";
+                }
+
                     f+= '<tr>'
                         +'<td>'
-                            +(ar2+1)
-                        +'</td>'
+                            +(ar2+1);
+                            if((ar2+1) == 1) {
+                                f += ' <i style="color:rgb(255, 215, 0);" class="fas fa-trophy"></i> ';
+                            }else if((ar2+1) == 2) {
+                                f += ' <i style="color:rgb(192, 192, 192);" class="fas fa-trophy"></i> ';
+                            } else if((ar2+1) == 3) {
+                                f += ' <i style="color:rgb(205, 127, 50);" class="fas fa-trophy"></i> ';
+                            }
+                            if(is(rec)) { 
+                                f += rec;
+                            }
+
+                        f+='</td>'
                         +'<td>'
                             +'<img alt="" src="https://api.craftmywebsite.fr/skin/face.php?u='+ar.pseudo+'&s=25" style="height:25px;width:25px" /> <strong>'
                                 +'<a href="?page=profil&profil='+ar.pseudo+'">'
@@ -201,7 +252,7 @@ function pickupRecompense() {
                 let el = document.getElementById("recompList");
                 el.innerText = "Récompenses envoyé !";
                 setTimeout(function () {
-                    document.getElementById("disprecompList").style.display="none";
+                    clearRecompense();
                 }, 3000);
             });
         }
@@ -210,7 +261,7 @@ function pickupRecompense() {
             let el = document.getElementById("recompList");
             el.innerText = "Récompenses envoyé !";
             setTimeout(function () {
-                document.getElementById("disprecompList").style.display="none";
+                clearRecompense();
             }, 3000);
         });
     }

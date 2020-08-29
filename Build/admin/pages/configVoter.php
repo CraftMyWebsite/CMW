@@ -3,7 +3,7 @@
                     Gestions des récompenses auto
                     </h2>
                 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'addRecompense') AND !$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense')) {
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'addRecompense') AND !$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'editReset') AND !$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense')) {
   echo '<div class="col-lg-6 col-lg-offset-3 text-center">
     <div class="alert alert-danger">
       <strong>Vous avez aucune permission pour accéder à cette page.</strong>
@@ -12,18 +12,52 @@
 }
 else
   {
-    ?><div class="alert alert-success">
-      <strong>
+    ?><div class="alert alert-success" id="resetVote">
+      <strong> 
 
         Dans cette section vous pourrez configurer vos récompenses auto.
         Il existe plusieurs types de récompenses auto que vous allez pouvoir configurer
         <ul>
           <li>Les récompenses lorsque le joueur vote X fois</li>
-          <li>Les récompenses pour les 1er, 2eme, 3eme meilleurs voteurs en fin de mois ou autre</li>
+          <li>Les récompenses pour les 1er, 2eme, 3eme ... meilleurs voteurs à la fin du cycle</li>
         </ul>
-        Pour le second type, vous devrez définir une date à PARTIR de laquelle les récompenses seront distribuées.
-        Pour éviter le fait de devoir faire plusieurs manipulations pas forcément très simple, nous avons choisit de lier ces récompenses aux chargements des pages du site, c'est à dire que si vous voulez envoyer une récompense le 04/08/2019, la récompense sera envoyé dès qu'une personne chargera la page ce jour là, si personne ne charge la page ce jour là, la récompense est reporté au 05/08 sur le même principe et ainsi de suite.
-        Bonne configuration ! NB: Pour les commandes, les mêmes raccourcis que pour les récompenses de vote sont utilisable !
+        Le cycle peut être définis ci dessous, il représente quand les votes vont être rénitialisé et par conséquent les récompenses enregistré pour les meilleurs voteurs vont être distribué. Le joueur pourra les récupérer comme n'importe quel récompense après un vote. 
+
+        <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'editReset')) { ?>
+         <select name="type" name="type" style="margin-top:10px;margin-bottom:10px;width:200px;" class="form-control form-control-sm" onChange="if(this.value==0) { hide('recsem');hide('recmoi');hide('recheur'); } else if(this.value==1) { show('recsem');hide('recmoi'); show('recheur');} else if(this.value==2) { hide('recsem');show('recmoi');show('recheur'); }" >
+                <option value="0" <?php if($dateRec['valueType'] == 0) { echo 'selected';} ?>> Désactivé</option>
+                <option value="1" <?php if($dateRec['valueType'] == 1) { echo 'selected';} ?>> Toutes les semaines</option>
+                <option value="2" <?php if($dateRec['valueType'] == 2) { echo 'selected';} ?>> Tous mois</option>
+              </select>
+          <div id="recsem" <?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 2) { echo 'style="display:none;"';} ?>>
+            <label class="control-label">Le jour de la semaine:</label>
+            <select style="width:175px;margin-bottom:10px;" name="jour" class="form-control form-control-sm">
+                <option value="1" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 1) { echo 'selected';}?> >lundi</option>
+                <option value="2" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 2) { echo 'selected';}?>>mardi</option>
+                <option value="3" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 3) { echo 'selected';}?>>mercredi</option>
+                <option value="4" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 4) { echo 'selected';}?>>jeudi</option>
+                <option value="5" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 5) { echo 'selected';}?>>vendredi</option>
+                <option value="6" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 6) { echo 'selected';}?>>samedi</option>
+                <option value="0" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 0) { echo 'selected';}?>>dimanche</option>
+              </select>
+          </div>
+          <div id="recmoi" <?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo 'style="display:none;"';} ?>>
+            <label class="control-label">le <input name="mois" style="width:auto;display:inline" type="number" min="1" max="31" class="form-control form-control-sm" value="<?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo '1';} else { echo $dateRec['mois']; } ?>"><span id="recmoi2"><?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo '1ier';} else { echo $dateRec['mois'] != 1 ? "ième" : "ier"; } ?></span> du mois</label>
+            
+          </div>
+           <div id="recheur" <?php if($dateRec['valueType'] == 0) { echo 'style="display:none;"';} ?>>
+            <label class="control-label">À <input name="heur" style="width:auto;display:inline;" type="number" min="0" max="23" class="form-control form-control-sm" value="<?php if($dateRec['valueType'] == 0) { echo '0';} else { echo $dateRec['heur'];} ?>">H<input name="min" style="width:auto;display:inline;" type="number" min="0" max="59" class="form-control form-control-sm" value="<?php if($dateRec['valueType'] == 0) { echo '0';} else { echo $dateRec['min'];} ?>"></label>
+            
+          </div>
+           <script>
+            initPost("resetVote", "admin.php?action=editResetVote");
+            registerEvent(getElementByName("resetVote", "mois"), ["keyup", "change"], function(evt) { if(isset(evt.target.value) && evt.target.value != '') {if(parseInt(evt.target.value) < 1) { evt.target.value = 1} else if(parseInt(evt.target.value) > 31){ evt.target.value = 31;} get('recmoi2').innerText = (parseInt(evt.target.value) != 1 ? "ième" : "ier"); sendPost('resetVote');} });
+            registerEvent(getElementByName("resetVote", "heur"), ["keyup", "change"], function(evt) { if(isset(evt.target.value) && evt.target.value != '') {if(parseInt(evt.target.value) < 0) { evt.target.value = 0} else if(parseInt(evt.target.value) == 24){ evt.target.value = 0;} else if(parseInt(evt.target.value) > 24){ evt.target.value = 23;}  sendPost('resetVote');}});
+            registerEvent(getElementByName("resetVote", "min"), ["keyup", "change"], function(evt) { if(isset(evt.target.value) && evt.target.value != '') {if(parseInt(evt.target.value) < 0) { evt.target.value = 0} else if(parseInt(evt.target.value) == 60){ evt.target.value = 0;} else if(parseInt(evt.target.value) > 60){ evt.target.value = 59;}  sendPost('resetVote');}});
+            registerEvent(getElementByName("resetVote", "type"), ["change"], function(evt) { sendPost('resetVote');});
+             registerEvent(getElementByName("resetVote", "jour"), ["change"], function(evt) { sendPost('resetVote');});
+          </script>
+        <?php } ?>
       </strong>
     </div>
   <?php } if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'addRecompense')) { ?>
@@ -45,31 +79,19 @@ else
                 hide('type-1');
               }" required>
                 <option value="1"> Récompense au bout de X vote</option>
-                <option value="2"> Récompense pour les meilleurs voteurs</option>
+                <option value="2"> Récompense pour les meilleurs voteurs lors de la rénitialisation des votes</option>
               </select>
 
               <div id="type-1">
                 <label class='control-label'>Au bout de combien de vote ?</label>
-                <input type='number' min="1" max="9999999" name='nbreVote' class='form-control' required />
+                <input type='number' min="1" max="9999999" name='nbreVote' class='form-control' />
               </div>
 
               <div id="type-2" style="display:none;">
-                <label class='control-label'>Quelle date ?</label>
-                <input type='date' name='date' class='form-control' />
-
-                <label class='control-label'>Réinitialiser les votes après ?</label>
-                <select name='reinit' class='form-control'>
-                  <option value='1'>Oui</option>
-                  <option value='0'>Non</option>
-                </select>
 
                 <label class='control-label'>Rang de la personne</label>
-                <select name='rang' class='form-control'>
-                  <option value='1'>Premier</option>
-                  <option value='2'>Second</option>
-                  <option value='3'>Troisième</option>
-                </select>
-              </div>
+                <input type="number" min="1" max="999"  name='rang' class='form-control' value="1">
+                </div>
                <script>var idvote = 0;</script>
                <input type="hidden" name="action"  class="form-control" value="" id="vote-action-json"/>
                 <div class="dropdown " style="margin-top:20px;">
@@ -93,7 +115,21 @@ else
                         </div>
 
         </div>
-        <script>initPost("new-rec", "admin.php?action=creerRecompenseAuto",function(data) { if(data) { updateCont('admin.php?action=getRecompenseList', get('all-rec'), null); }});</script>
+
+        <script>
+          var topRec = new Map();
+          <?php 
+            foreach($topRecompense as $key => $value) {
+              echo "topRec.set(".$key.",'".$value."');";
+            }
+
+          ?>
+        initPost("new-rec", "admin.php?action=creerRecompenseAuto",function(data) { if(data) { clearAllInput("new-rec"); updateCont('admin.php?action=getRecompenseList', get('all-rec'), null); }});
+
+        getElementByName("new-rec", "rang").value = configVoteGetMaxVal();
+        registerEvent(getElementByName("new-rec", "rang"), ["keyup", "click", "change"], function(evt) { if(isset(evt.target.value) && evt.target.value != '') {if(parseInt(evt.target.value) < 1) { evt.target.value = 1} else if(parseInt(evt.target.value) > 999){ evt.target.value = 999;} else if(isset(topRec.get(parseInt(evt.target.value)))) { notif('warning', 'Erreur', 'Rang '+evt.target.value+' déjà enregistré'); evt.target.value = configVoteGetMaxVal(); } }});
+      </script>
+
         <div class="card-footer">
           <div class="text-center">
               <input type="submit" onclick="genVoteJson('list-new-rec-vote','vote-action-json');sendPost('new-rec');" class="btn btn-success btn-block w-100" value="Valider" />
@@ -122,21 +158,18 @@ else
                     for($o=0; $o < count($donnees); $o++)
                     {
                         ?><tr id="rec-<?php echo $o; ?>">
-                            <td><?=($donnees[$o]['type'] == 1) ? 'Récompense tout les X votes' : 'Récompense pour les meilleurs voteurs'; ?></td>
+                            <td><?=($donnees[$o]['type'] == 1) ? 'Récompense tout les X votes' : 'Récompense pour les meilleurs voteurs lors de la rénitialisation des votes'; ?></td>
                             <td><?php if($donnees[$o]['type'] == 1)
                                     echo $donnees[$o]['valueType'].' votes';
                                 else
                                 {
-                                    $explode = explode(':', $donnees[$o]['valueType']);
-                                    if($explode[2] == 1)
-                                        $rang = "premier";
-                                    elseif($explode[2] == 2)
-                                        $rang = "second";
-                                    else
-                                        $rang = "troisième";
-                                    echo 'Pour le <strong>'.$rang.'</strong> ';
-                                    echo 'le '.date('d-m-Y', $explode[0]);
-                                    echo $string = ($explode[1] == 1) ? ' avec réinitialisation des votes' : '';
+                                   echo $donnees[$o]['valueType'];
+                                    if(((int)$donnees[$o]['valueType'])==1) {
+                                      echo 'ier';
+                                    } else {
+                                      echo 'ième';
+                                    }
+                                    echo ' du classement';
                                 }
                                 ?>
                             </td>

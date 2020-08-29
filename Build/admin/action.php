@@ -8,6 +8,9 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
+		case 'editResetVote':
+			require('admin/actions/editResetVote.php');
+			exit();
 		case 'editTopVoteNumber':
 			$_Serveur_['vote']['maxDisplay'] = $_POST['maxDisplay'];
 			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);

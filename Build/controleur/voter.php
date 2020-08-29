@@ -21,13 +21,18 @@ if(isset($_POST['id']) AND isset($_POST['pseudo']))
 				if(isset($_Joueur_) && $_Joueur_['pseudo'] == $pseudo)
 				{	
 					$vote->stockVote($bddConnection, null, null);
-					$key = array_search($pseudo, $voteurs['pseudo']);
-					$verif = $RecompenseAuto->verifRecVotes($voteurs['nbre_votes'][$key]+1);
-					if(!empty($verif))
-					{
-						foreach($verif as $value)
-						{
-							$vote->stockVote($bddConnection, $value['action'], $value['serveur']);
+					if(!empty($voteurs['pseudo']) && is_array($voteurs['pseudo'])) {
+						$key = array_search($pseudo, $voteurs['pseudo']);
+						if(isset($key)) {
+							$verif = $RecompenseAuto->verifRecVotes($voteurs['nbre_votes'][$key]+1);
+
+							if(!empty($verif))
+							{
+								foreach($verif as $action)
+								{
+									$vote->stockVote($bddConnection, $action, null);
+								}
+							}
 						}
 					}
 				} else {
