@@ -28,10 +28,22 @@
                             <ul class="categorie-content nav nav-tabs">
                                 <?php foreach ($lectureJSON as $i => $serveur) : ?>
                                     <li class="categorie-item nav-item<?= ($i == 0) ? ' active' : '' ?>">
-                                        <a href="#server-<?= $j ?>" class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>" data-toggle="tab">
+                                        <a href="#server-<?= $j ?>" onclick="if(get('joueur<?=$j;?>').style.display == 'none') show('joueur<?=$j;?>'); else hide('joueur<?=$j;?>');" class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>" data-toggle="tab">
                                             <?= $serveur['nom']; ?>
                                         </a>
-                                    </li>
+                                    <div style="<?= ($i == 0) ? '' : 'display: none;';?>" id="joueur<?=$j;?>">
+                                        <?php $joueurs = $jsonCon[$i]->GetPlayers(); 
+                                        if(empty($joueurs))
+                                            echo "Pas de joueurs connectés";
+                                        else
+                                            foreach($joueurs as $value)
+                                            {
+                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value);?>" style="width: 16px; height: 16px;"/><?=$_Forum_->gradeJoueur($value);?><br/>
+                                                <?php
+                                            }
+                                        ?>
+                                    </div>
+                                </li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
