@@ -3,7 +3,7 @@ var CK = {};
 initCK();
 function initCK() {
 	CK = new Map();
-	for (let el of document.querySelectorAll( "[data-UUID]" )) {
+	for (let el of document.querySelectorAll("[data-UUID]" )) {
 		ClassicEditor.create(el, {
 				
 				toolbar: {
@@ -19,15 +19,14 @@ function initCK() {
 						'bold',
 						'underline',
 						'italic',
+						'horizontalLine',
 						'|',
 						'link',
 						'bulletedList',
-						'numberedList',
 						'todoList',
+						'numberedList',
 						'|',
-						'indent',
-						'outdent',
-						'|',
+						'imageUpload',
 						'blockQuote',
 						'mediaEmbed',
 						'undo',
@@ -42,14 +41,15 @@ function initCK() {
 						'imageStyle:side'
 					]
 				},
-				table: {
-					contentToolbar: [
-						'tableColumn',
-						'tableRow',
-						'mergeTableCells'
-					]
-				},
 				licenseKey: '',
+				simpleUpload: {
+		            uploadUrl: 'index.php?action=uploadCKImg',
+		            withCredentials: false,
+		            headers: {
+		                'X-CSRF-TOKEN': 'CSFR-Token',
+		                Authorization: 'Bearer <JSON Web Token>'
+		            }
+		        }
 				
 			} )
 		.catch( error => {console.log( error );} )
