@@ -160,7 +160,13 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                <?php 
+                    foreach($topRecompense as $key => $value) {
+                        echo "topRec.set(".$key.",JSON.parse('".$value."'));";
+                    }
 
+                ?></script>
 
                 <div class="col-md-12 col-lg-3 col-sm-12 mb-5">
                     <!-- Affichage des informations du joueur -->

@@ -410,6 +410,7 @@ CREATE TABLE IF NOT EXISTS `cmw_votes` (
   `nbre_votes` int(5) NOT NULL,
   `site` int(4) NOT NULL,
   `date_dernier` int(11) NOT NULL,
+  `isOld` int(1) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

@@ -15,21 +15,18 @@
                     for($o=0; $o < count($donnees); $o++)
                     {
                         ?><tr id="rec-<?php echo $o; ?>">
-                            <td><?=($donnees[$o]['type'] == 1) ? 'Récompense tout les X votes' : 'Récompense pour les meilleurs voteurs'; ?></td>
+                            <td><?=($donnees[$o]['type'] == 1) ? 'Récompense tout les X votes' : 'Récompense pour les meilleurs voteurs lors de la rénitialisation des votes'; ?></td>
                             <td><?php if($donnees[$o]['type'] == 1)
                                     echo $donnees[$o]['valueType'].' votes';
                                 else
                                 {
-                                    $explode = explode(':', $donnees[$o]['valueType']);
-                                    if($explode[2] == 1)
-                                        $rang = "premier";
-                                    elseif($explode[2] == 2)
-                                        $rang = "second";
-                                    else
-                                        $rang = "troisième";
-                                    echo 'Pour le <strong>'.$rang.'</strong> ';
-                                    echo 'le '.date('d-m-Y', $explode[0]);
-                                    echo $string = ($explode[1] == 1) ? ' avec réinitialisation des votes' : '';
+                                    echo $donnees[$o]['valueType'];
+                                    if(((int)$donnees[$o]['valueType'])==1) {
+                                      echo 'ier';
+                                    } else {
+                                      echo 'ième';
+                                    }
+                                    echo ' du classement';
                                 }
                                 ?>
                             </td>

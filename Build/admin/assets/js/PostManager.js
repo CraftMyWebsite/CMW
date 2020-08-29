@@ -257,5 +257,14 @@ function initPostCallback(callback) {
 }
 
 function registerEvent(el, type, fct) {
-    type.forEach(function(event) { console.log("add"+event); el.addEventListener(event, fct); });
+    type.forEach(function(event) { el.addEventListener(event, fct); });
+}
+
+function configVoteGetMaxVal() {
+    for(i = 1; i <= 999; i++) {
+        if(!isset(topRec.get(i))) {
+            return i;
+        }
+    }
+    return 999;
 }

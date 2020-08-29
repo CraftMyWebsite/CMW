@@ -20,6 +20,78 @@ window.addEventListener("load", function () {
 	})
 });
 
+
+function openModalEditForum(id,name, cat, img) {
+	document.getElementById("editForumTitle").innerHTML = name;
+	document.getElementById("editForumId").value=id;
+	document.getElementById("editForumName").value=name;
+	if(isset(img)) {
+		document.getElementById("editForumImg").value = '<i class="'+img+'"></i>';
+	}
+	document.getElementById("editForumCat"+cat).selected = true;
+	$("#editForum").modal();
+}
+
+function openModalEditSousForum(id,SFid, index, name, img) {
+	document.getElementById("editForumTitle").innerHTML = name;
+	document.getElementById("editForumId").value=id;
+	document.getElementById("editForumSFId").value=SFid;
+	document.getElementById("editForumIndex").value=index;
+	document.getElementById("editForumName").value=name;
+	if(isset(img)) {
+		document.getElementById("editForumImg").value = '<i class="'+img+'"></i>';
+	}
+	$("#editSForum").modal();
+}
+for (let el of document.querySelectorAll( "[data-editforum]" )) {
+	initForumEdit(el, parseInt(el.getAttribute("data-editforum")),parseInt(el.getAttribute("data-editforum-index")));
+}
+
+function initForumEdit(el, id, index) {
+	var span;
+	var input;
+	var ic;
+	for(i = 0; i < el.children.length; i++) {
+		if(el.children[i].tagName == "INPUT") {
+			input = el.children[i];
+			input.addEventListener("keyup", function(event) {
+				if(isset(input.value) && input.value.replace(" ", "") != "") {
+					span.innerText = input.value;
+					$.post("index.php?action=editForumCat",{
+						id: id,
+						index:index,
+						nom: input.value
+					});
+				}
+			});
+		} else if(el.children[i].tagName == "SPAN") {
+			span = el.children[i];
+		} else if(el.children[i].tagName == "I") {
+			ic = el.children[i];
+		}
+	}
+
+	el.addEventListener("mouseleave", function(event) {
+		span.style.display="inline";
+		ic.style.display="none";
+		input.style.display="none";
+		input.blur();
+		document.getSelection().removeAllRanges();
+	});
+	el.addEventListener("mouseenter", function(event) {
+		span.style.display="inline";
+		ic.style.display="inline";
+		input.style.display="none";
+	});
+	el.addEventListener("click", function(event) {
+		span.style.display="none";
+		ic.style.display="inline";
+		input.style.display="inline";
+		input.focus();
+		input.select();
+	});
+}
+
 //Scroll to Top 
 window.onscroll = function () {
 	divScroll()

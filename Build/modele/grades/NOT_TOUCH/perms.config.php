@@ -147,6 +147,7 @@ const PERMS = array(
 			"recompenseAuto" => array(
 				"page" => "Récompenses Automatique",
 				"showPage" => "Accès à la page Réglage des récompenses auto",
+				"editReset" => "Éditer le cycle de reset",
 				"actions" => array(
 					"resetRecompense" => "Supprimer une récompense auto",
 					"addRecompense" => "Créer une récompense auto"

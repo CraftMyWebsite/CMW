@@ -4,13 +4,12 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings'))
 {
 	$type = intval(htmlspecialchars($_POST['type']));
 	if($type == 1)
+	{
 		$value = htmlspecialchars($_POST['nbreVote']);
+	}
 	else
 	{
-		$date = strtotime(htmlspecialchars($_POST['date']));
-		$reinit = intval(htmlspecialchars($_POST['reinit']));
-		$rang = intval(htmlspecialchars($_POST['rang']));
-		$value = $date.':'.$reinit.':'.$rang;
+		$value = intval(htmlspecialchars($_POST['rang']));
 	}
 	
 	$action = $_POST['action'];
