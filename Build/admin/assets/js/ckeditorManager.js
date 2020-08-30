@@ -19,15 +19,14 @@ function initCK() {
 						'bold',
 						'underline',
 						'italic',
+						'horizontalLine',
 						'|',
 						'link',
 						'bulletedList',
-						'numberedList',
 						'todoList',
+						'numberedList',
 						'|',
-						'indent',
-						'outdent',
-						'|',
+						'imageUpload',
 						'blockQuote',
 						'mediaEmbed',
 						'undo',
@@ -42,15 +41,16 @@ function initCK() {
 						'imageStyle:side'
 					]
 				},
-				table: {
-					contentToolbar: [
-						'tableColumn',
-						'tableRow',
-						'mergeTableCells'
-					]
-				},
 				licenseKey: '',
-				
+				simpleUpload: {
+		            uploadUrl: 'index.php?action=uploadCKImg',
+		            withCredentials: false,
+		            headers: {
+		                'X-CSRF-TOKEN': 'CSFR-Token',
+		                Authorization: 'Bearer <JSON Web Token>'
+		            }
+		        }
+						
 			} )
 		.catch( error => {console.log( error );} )
 		.then(editor => { 
