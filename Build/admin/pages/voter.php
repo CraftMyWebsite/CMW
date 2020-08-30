@@ -110,6 +110,8 @@
                                         <li> liste-serveurs.fr</li>
                                         <li> liste-serveur.fr</li>
                                         <li> minecraft-top.com</li>
+                                        <li> top-serveurs.net</li>
+                                        <li> serveursminecraft.org</li>
 
                                     </ul>
                                 <span>

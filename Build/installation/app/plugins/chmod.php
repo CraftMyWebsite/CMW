@@ -23,8 +23,7 @@ function VerifieChmod() {
     $dir[8] = 'admin/actions/.htpasswd';
 
     $dirDossier[0] = array('../theme/upload/', '../theme/upload/slider/', '../theme/upload/panel/');
-    $dirDossier[1] = array('../theme/smileys/');
-    $dirDossier[2] = array('../utilisateurs/');
+    $dirDossier[1] = array('../utilisateurs/');
 
     $err = null;
     for($i = 0; $i < count($dir); $i++)

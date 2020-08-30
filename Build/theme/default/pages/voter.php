@@ -55,7 +55,7 @@
             <?php if (!isset($_GET['player'])) { ?>
 
                 <!-- Demande du Pseudonyme -->
-                <div class="col col-md-12 col-lg-12 col-sm-12 mb-5">
+                <div class="col-md-12 col-lg-12 col-sm-12 mb-5">
                     <div class="card">
                         <div class="card-header">
                             <h4>Entrez votre pseudonyme</h4>
@@ -113,7 +113,7 @@
                 <?php
                 require("modele/vote.class.php");
                  $pseudo = htmlspecialchars($_GET['player']); ?>
-                <div class="col col-md-12 col-lg-6 col-sm-12 mb-5">
+                <div class="col-md-12 col-lg-6 col-sm-12 mb-5">
                     <!-- Affichage des sites de vote -->
                     <div class="card">
                         <div class="card-header">
@@ -168,7 +168,7 @@
 
                 ?></script>
 
-                <div class="col col-md-12 col-lg-3 col-sm-12 mb-5">
+                <div class="col-md-12 col-lg-3 col-sm-12 mb-5">
                     <!-- Affichage des informations du joueur -->
                     <div class="card">
                         <div class="card-header">

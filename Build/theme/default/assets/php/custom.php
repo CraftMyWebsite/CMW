@@ -85,63 +85,67 @@
                 success: function(code, statut) {
                     let data = JSON.parse(code);
                     let chat = "";
-                    if(data['success'] == "query")
+                    for(let j = 0; j < data.length; j++)
                     {
-                        chat = '<div class="tab-pane fade in show" aria-expanded="false">\
-                                    <div class="info-page bg-danger">\
-                                        <div class="text-center">\
-                                            La connexion au serveur ne peut pas être établie avec ce protocole.\
-                                        </div>\
-                                    </div>\
-                                </div>';
-                    }
-                    else if(data['success'] == "erreur")
-                    {
-                        chat = '<div class="tab-pane fade in show" aria-expanded="false">\
-                                    <div class="info-page bg-info">\
-                                        <div class="text-center">\
-                                            Aucun message n\'a été envoyé sur ce serveur !\
-                                        </div>\
-                                    </div>\
-                                </div>';
-                    }
-                    else if(data['success'] == "true")
-                    {
-                        data = data['msg'];
-                        for (var i = 0; i < data.length; i++)
+                        if(data[j]['success'] == "query")
                         {
-                            if(data[i]['pseudo'] == "" || data[i]['pseudo'] == 'undefined'  || !data[i]['pseudo'])
-                                pseudo ="Console";
-                            else
-                                pseudo =data[i]['pseudo'];
-                            chat+= '<div class="media"> \
-                                    <p class="username">\
-                                        <img class="mr-3" src="';
-                            if(pseudo == "Console")
-                                chat+= "https://craftmywebsite.fr/favicon.ico";
-                            else
-                                chat+='https://api.craftmywebsite.fr/skin/face.php?u='+data[i]["pseudo"]+'&s=32';
-                            chat+= '" style="width: 32px; height: 32px;" alt="avatar de l\'auteur" />\
-                                        <div class="media-body">\
-                                            <h5 class="mt-0">';
-                            chat+=pseudo;
-                            chat+='<small class="font-weight-light float-right text-muted">'+data[i]['date']+'</small>\
-                                    </h5>'+data[i]['message']+'</div>\
-                            </p>\
-                        </div>';
-                        }
-                    }
-                    else
-                    {
-                        chat = '<div class="tab-pane fade in show" aria-expanded="false">\
-                                    <div class="info-page bg-danger">\
-                                        <div class="text-center">\
-                                            La connexion au serveur n\'a pas pu être établie.\
+                            chat = '<div class="tab-pane fade in show" aria-expanded="false">\
+                                        <div class="info-page bg-danger">\
+                                            <div class="text-center">\
+                                                La connexion au serveur ne peut pas être établie avec ce protocole.\
+                                            </div>\
                                         </div>\
-                                    </div>\
-                                </div>';
+                                    </div>';
+                        }
+                        else if(data[j]['success'] == "erreur")
+                        {
+                            chat = '<div class="tab-pane fade in show" aria-expanded="false">\
+                                        <div class="info-page bg-info">\
+                                            <div class="text-center">\
+                                                Aucun message n\'a été envoyé sur ce serveur !\
+                                            </div>\
+                                        </div>\
+                                    </div>';
+                        }
+                        else if(data[j]['success'] == "true")
+                        {
+                            dataM = data[j]['msg'];
+                            for (var i = 0; i < dataM.length; i++)
+                            {
+                                if(dataM[i]['pseudo'] == "" || dataM[i]['pseudo'] == 'undefined'  || !dataM[i]['pseudo'])
+                                    pseudo ="Console";
+                                else
+                                    pseudo =dataM[i]['pseudo'];
+                                chat+= '<div class="media"> \
+                                        <p class="username">\
+                                            <img class="mr-3" src="';
+                                if(pseudo == "Console")
+                                    chat+= "https://craftmywebsite.fr/favicon.ico";
+                                else
+                                    chat+='https://api.craftmywebsite.fr/skin/face.php?u='+dataM[i]["pseudo"]+'&s=32';
+                                chat+= '" style="width: 32px; height: 32px;" alt="avatar de l\'auteur" />\
+                                            <div class="media-body">\
+                                                <h5 class="mt-0">';
+                                chat+=pseudo;
+                                chat+='<small class="font-weight-light float-right text-muted">'+dataM[i]['date']+'</small>\
+                                        </h5>'+dataM[i]['message']+'</div>\
+                                </p>\
+                            </div>';
+                            }
+                        }
+                        else
+                        {
+                            chat = '<div class="tab-pane fade in show" aria-expanded="false">\
+                                        <div class="info-page bg-danger">\
+                                            <div class="text-center">\
+                                                La connexion au serveur n\'a pas pu être établie.\
+                                            </div>\
+                                        </div>\
+                                    </div>';
+                        }
+                        $("#msgChat"+i).html(chat);
+                        chat = "";
                     }
-                    $("#msgChat").html(chat);
                 }
             });
         }

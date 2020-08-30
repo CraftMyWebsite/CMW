@@ -1,6 +1,6 @@
 <?php echo '[DIV]';
 if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
-	require_once('./admin/donnees/regServeur.php');  if(count($lectureJSON) != 0)  { ?>
+    require_once('./admin/donnees/regServeur.php');  if(count($lectureJSON) != 0)  { ?>
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
                         <?php foreach($lectureJSON as $i => $serveur)
@@ -17,7 +17,7 @@ if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
                         <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="jsonReg<?php echo $i; ?>">
                             <div style="position:inline-block">
                             <div class="float-left">
-                                <h3 class="card-title"><strong id="servName<?php echo $i; ?>"><?php echo $serveur['nom']; ?></strong><small><?php echo $serveur['protocole'] == 1 ? '(JSONAPI)' : '(RCON/Query)'; ?></small></h3>
+                                <h3 class="card-title"><strong id="servName<?php echo $i; ?>"><?php echo $serveur['nom']; ?></strong><small><?php echo $serveur['protocole'] == 0 ? '(JSONAPI)' : '(RCON/Query)'; ?></small></h3>
                             </div>
                             <div class="float-right">
                                 <button onclick="sendDirectPost('?action=supprJson&nom=<?php echo $serveur['id']; ?>&key=<?php echo $i; ?>', function(data) { if(data) { hide('jsonReg<?php echo $i; ?>'); hide('tab-jsonReg<?php echo $i; ?>')}})" class="btn btn-outline-secondary">Supprimer</button>
@@ -33,7 +33,7 @@ if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
                             <input type="text" name="JsonAddr<?php echo $i; ?>" class="form-control" placeholder="188.165.190.180 (pas d'ip en lettre)" value="<?php echo $serveur['adresse']; ?>" required>
 
                             <?php 
-                            if($serveur['protocole'] == 2)
+                            if($serveur['protocole'] == 1)
                             {
                                 ?><label class="control-label" >Port Query</label>
                                 <input type="text" name="QueryPort<?php echo $i; ?>" class="form-control" placeholder="Exemple: 12548" value="<?php echo $serveur['port']; ?>">
@@ -57,7 +57,6 @@ if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
                                 <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
                               </div>
                             </div>
-                        </div>
                         </div>
                         <?php } ?>
                     </div>

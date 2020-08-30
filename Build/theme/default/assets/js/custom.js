@@ -25,6 +25,15 @@ function imageModal(el) {
 	document.getElementById("modal-image-src").src = el.src
 }
 
+function get(id) { return document.getElementById(id);}
+
+function hide(el) {
+    get(el).style.display = 'none';
+}
+
+function show(el) {
+    get(el).style.display = 'block';
+}
 
 function openModalEditForum(id,name, cat, img) {
 	document.getElementById("editForumTitle").innerHTML = name;

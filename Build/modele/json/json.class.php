@@ -326,7 +326,32 @@ class JsonCon
 		}
 		return false;
 	}
-	
+
+	public function GetPlayers()
+	{
+		if($this->TryMode())
+		{
+			$key = $this->verifyReq("getPlayerNames");
+			if($key !== false)
+				return $key;
+			$req = $this->api->call($req);
+			$return = $req[0]['success'];
+			$this->updateReq("getPlayerNames", $return);
+			return $return;
+		}
+		else
+		{
+			$key = $this->verifyReq("query.getPlayers");
+			if($key !== false)
+			{
+				return $key;
+			}
+			$req = $this->api['query']->GetPlayers();
+			$this->updateReq("query.getPlayers", $req);
+			return $req;
+		}
+	}
+
 	// Récupère les pseudo des joueurs et le nombre de joueurs en ligne...
 	public function GetServeurInfos()
 	{

@@ -54,7 +54,7 @@ function sendDirectPost(url, callback) {
         console.log("post: "+url+" data:"+data)
         if (status == "success") {
             returnData = true;
-            notif("success", "Action effectué !","");
+            notif("success", "Action effectuée !","");
         } else {
             notif("error", "Erreur", status);
         }
@@ -136,14 +136,14 @@ function sendPost(idform, callback, sendData) {
             {
                 donneesRetour = JSON.parse(data);
                 if(donneesRetour['retour'] == "OK")
-                    notif("success", "Action effectué !","");
+                    notif("success", "Action effectuée !","");
                 else
                 {
                     notif("error", "Erreur !", donneesRetour['message']);
                 }
             }
             else
-                notif("success", "Action effectué !","");
+                notif("success", "Action effectuée !","");
         } else {
             notif("error", "Erreur", status);
         }

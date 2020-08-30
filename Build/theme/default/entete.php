@@ -1,40 +1,4 @@
-<?php
-//Vérification d'alerte ^^
-
-if (Permission::getInstance()->verifPerm("connect")) :
-
-    $req_topic = $bddConnection->prepare('SELECT cmw_forum_topic_followed.pseudo, vu, cmw_forum_post.last_answer AS last_answer_pseudo 
-    FROM cmw_forum_topic_followed
-    INNER JOIN cmw_forum_post WHERE id_topic = cmw_forum_post.id AND cmw_forum_topic_followed.pseudo = :pseudo');
-    $req_topic->execute(array(
-        'pseudo' => $_Joueur_['pseudo']
-    ));
-
-    $alerte = 0;
-
-    while ($td = $req_topic->fetch(PDO::FETCH_ASSOC)) {
-        if ($td['pseudo'] != $td['last_answer_pseudo'] and $td['last_answer_pseudo'] != NULL and $td['vu'] == 0) {
-            $alerte++;
-        }
-    }
-
-    $req_answer = $bddConnection->prepare('SELECT vu
-    FROM cmw_forum_like INNER JOIN cmw_forum_answer WHERE id_answer = cmw_forum_answer.id
-    AND cmw_forum_like.pseudo != :pseudo AND cmw_forum_answer.pseudo = :pseudo AND type = 2');
-    $req_answer->execute(array(
-        'pseudo' => $_Joueur_['pseudo'],
-    ));
-
-    while ($answer_liked = $req_answer->fetch(PDO::FETCH_ASSOC)) {
-        if ($answer_liked['vu'] == 0) {
-            $alerte++;
-        }
-    }
-
-endif;
-
-?>
-
+<?php require_once('theme/'. $_Serveur_['General']['theme'].'/assets/php/alerts.php'); ?>
 <!-- Header -->
 <header>
     <div class="header-content" style="background: linear-gradient(to bottom, rgba(77, 77, 77, 0.52), rgba(68, 68, 68, 0.73)), url('theme/upload/slider/<?= $_Accueil_['Slider']['image']; ?>') center;">
@@ -44,11 +8,18 @@ endif;
             <?php if(!isset($maintenanceOn) || Permission::getInstance()->verifPerm("PermsPanel", "maintenance", "actions", "connexionAdmin"))
             { ?>
             <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-                <?php
-                for ($i = 0; $i < count($_Menu_['MenuTexte']); $i++) :
-                    // Affichage des dropdowns
-                    if (isset($_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]])) :
-                ?>
+                
+                <button class="navbar-toggler navbar-toggler-right ml-auto" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarMain"> 
+                
+                    <?php
+                    for ($i = 0; $i < count($_Menu_['MenuTexte']); $i++) :
+                        // Affichage des dropdowns
+                        if (isset($_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]])) :
+                    ?>
                         <li class="nav-item dropdown">
                             <a id="Listdefil<?php echo $i; ?>" class="nav-link dropdown-toggle" href="#" id="dropdown-tools" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_Menu_['MenuTexte'][$i]; ?></a>
                             <div class="dropdown-menu" aria-labelledby="Listdefil<?php echo $i; ?>">
@@ -140,6 +111,8 @@ endif;
                     <?php endif; ?>
                 <?php endif; 
             } ?>
+            
+                </div>
             </nav>
 
             <!-- Hero Section -->
@@ -175,9 +148,9 @@ endif;
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         État de votre serveur :
-                                        <?php if ($_Serveur_['General']['statut'] == 0) : ?>
+                                        <?php if ($_Serveur_['General']['statut'] == 0 || $servEnLigne == false) : ?>
                                             <span class="badge badge-danger">Hors-Ligne</span>
-                                        <?php elseif ($_Serveur_['General']['statut'] == 1) : ?>
+                                        <?php elseif ($_Serveur_['General']['statut'] == 1 && $servEnLigne == true) : ?>
                                             <span class="badge badge-success">En Ligne</span>
                                             <div class="card-text">Nombres de Joueurs : <strong><?= $playeronline ?></strong>/<?= $maxPlayers; ?></div>
                                         <?php else : ?>

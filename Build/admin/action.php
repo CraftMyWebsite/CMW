@@ -218,14 +218,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			$_SESSION['referrerAdmin'] = 'theme';
 		break;
 
-		case 'addSmiley':
-			require_once('admin/actions/addSmiley.php');
-		break;
-
-		case 'supprSmiley':
-			require_once('admin/actions/supprSmiley.php');
-		break;
-
 		case 'creerCoupon':
 			require_once('admin/actions/creerCoupon.php');
 		break;

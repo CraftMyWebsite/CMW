@@ -42,9 +42,11 @@ function boutiqueUpdate() {
 		initPostCallback( function(data) {  boutiqueUpdate(); });
 		var list = document.querySelectorAll('[data-boutique-callback]');
 		get("allcategorieupdate").innerText = "";
+		get("allcategoriecoupon").innerText = "";
 	    for (var i = 0; i < list.length; ++i) {
 	        console.log("try callback "+list[i]);
 	        get("allcategorieupdate").innerHTML+='<option value="'+list[i].getAttribute("data-boutique-callback")+'">'+list[i].getAttribute("data-boutique-callback-name")+'</option>';
+	        get("allcategoriecoupon").innerHTML+='<option value="'+list[i].getAttribute("data-boutique-callback")+'">'+list[i].getAttribute("data-boutique-callback-name")+'</option';
 	    }
 	}});
 }
@@ -204,7 +206,7 @@ function addVoteConfigRec(type, id1, id2) {
     ht += '<label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>'
             		 +'<input type="number" min="1" max="100" value="100" data-type="pourcentage" class="form-control"/>';
    	ht +='</div></div>';
-    el.innerHTML = el.innerHTML + ht;
+    el.insertAdjacentHTML("beforeend", ht);
 
 }
 
@@ -252,11 +254,10 @@ function addVoteRec(type, id1, id2) {
                             +'<option value="3"> Tous les serveurs </option>'
                         +'</select> <hr/>';
     }
-
     ht += '<label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>'
             		 +'<input type="number" min="1" max="101" value="100" data-type="pourcentage" class="form-control"/>';
    	ht +='</div></div>';
-    el.innerHTML =  el.innerHTML + ht;
+    el.insertAdjacentHTML("beforeend", ht);
 
 }
 

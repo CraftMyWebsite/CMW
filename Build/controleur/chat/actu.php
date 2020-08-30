@@ -16,20 +16,20 @@ if($_POST['ajax'] == true)
 			{
 				if($key < 10)
 				{
-					$retour['msg'][$key]['pseudo'] = $value['player'];
-					$retour['msg'][$key]['date'] = date('H:i', $value['time']);
-					$retour['msg'][$key]['message'] = $Chat->formattage(htmlspecialchars($value['message']));
+					$retour[$i]['msg'][$key]['pseudo'] = $value['player'];
+					$retour[$i]['msg'][$key]['date'] = date('H:i', $value['time']);
+					$retour[$i]['msg'][$key]['message'] = $Chat->formattage(htmlspecialchars($value['message']));
 				}
 			}
-			$retour['success'] = "true";
+			$retour[$i]['success'] = "true";
 		}
 		elseif($messages == "query")
-			$retour['success'] = "query";
+			$retour[$i]['success'] = "query";
 		elseif($messages == "erreur")
-			$retour['success'] = "erreur";
+			$retour[$i]['success'] = "erreur";
 		else
-			$retour['success'] = 'false';
-		echo(json_encode($retour));
+			$retour[$i]['success'] = 'false';
 	}
+	echo(json_encode($retour));
 }
 ?>
