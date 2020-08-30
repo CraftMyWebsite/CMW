@@ -15,7 +15,7 @@ class UploadImage {
 						self::checkOlderFile($_Serveur_);
 						echo $path;
 					} else {
-						return "error Extension non règlementaire.";
+						return "error Extension non réglementaire.";
 					}
 				} else {
 					return "error Votre image est trop volumineuse.";
