@@ -8,6 +8,27 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
+		case 'editUploadImage':
+			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
+				$_Serveur_['uploadImage']['maxFileSize'] = intval($_POST['maxFileSize']);
+				$_Serveur_['uploadImage']['maxSize'] = intval($_POST['maxSize']);
+				$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+				exit();
+			}
+		case 'resetAllUploadImage':
+			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
+				$directory = 'include/UploadImage/';
+			    foreach (scandir($directory) as $file) {
+			        if ($file !== '.' && $file !== '..') {
+			           unlink($directory.$file);
+			        }
+			    }
+			}
+			exit();
+		case 'switchUploadImage':
+			unset($_Serveur_['uploadImage']);
+			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+			exit();
 		case 'editResetVote':
 			require('admin/actions/editResetVote.php');
 			exit();

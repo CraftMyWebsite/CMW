@@ -1,6 +1,22 @@
 <?php
-if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) {
-	$lecture = new Lire('modele/config/config.yml');
-	$lecture = $lecture->GetTableau();
+if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
+	$filetotal = 0;
+	$sizetotal = 0;
+	foreach (scandir("include/UploadImage/") as $file) {
+	    if ($file !== '.' && $file !== '..') {
+	    	$filetotal++;
+	        $sizetotal += filesize("include/UploadImage/".$file);
+	    }
+	}
+	$sizetotal /= 1000;
+	if($sizetotal > 1000) {
+		if($sizetotal > 1000000) {
+			$sizetotal = ($sizetotal/1000000)."GB";
+		} else {
+			$sizetotal = ($sizetotal/1000)."MB";
+		}
+	} else {
+		$sizetotal = $sizetotal."KB";
+	}
 }
 ?>

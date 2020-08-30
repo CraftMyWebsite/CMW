@@ -9,7 +9,6 @@ class ckeditor
 			$dom->removeChild($dom->doctype);           
 			$dom->replaceChild($dom->firstChild->firstChild->firstChild, $dom->firstChild);
 			$script = $dom->getElementsByTagName('script');
-
 			$remove = [];
 			foreach($script as $item)
 			{
@@ -18,6 +17,13 @@ class ckeditor
 			foreach ($remove as $item)
 			{
 			  $item->parentNode->removeChild($item); 
+			}
+
+			$img = $dom->getElementsByTagName('img');
+			foreach($img as $item)
+			{
+			  	$item->setAttribute("style", "max-width: 100%;height: auto;cursor:pointer;");
+			  	$item->setAttribute("onclick", "imageModal(this);");
 			}
 			$content = $dom->saveHTML(); 
 			return $content;

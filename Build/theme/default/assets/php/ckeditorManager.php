@@ -1,4 +1,4 @@
-
+<script>
 var CK = {};
 initCK();
 function initCK() {
@@ -26,7 +26,7 @@ function initCK() {
 						'todoList',
 						'numberedList',
 						'|',
-						'imageUpload',
+						<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'imageUpload',"; }  ?>
 						'blockQuote',
 						'mediaEmbed',
 						'undo',
@@ -50,32 +50,23 @@ function initCK() {
 		                Authorization: 'Bearer <JSON Web Token>'
 		            }
 		        }
-						
+				
 			} )
 		.catch( error => {console.log( error );} )
 		.then(editor => { 
 			CK.set(el, editor); 
-			if(isset(el.getAttribute('data-UUID'))) {
-				editor.editing.view.document.on( 'keyup', ( evt, data ) => { localStorage.setItem('CKEDITOR-'+el.getAttribute('data-UUID'), editor.getData());} );
-				if(isset(localStorage.getItem('CKEDITOR-'+el.getAttribute('data-UUID')))) {
-					if(!isset(editor.getData()) || editor.getData() == "" ) 
-					{
-						editor.setData(localStorage.getItem('CKEDITOR-'+el.getAttribute('data-UUID')));
-					}
-				}
-			}
 		});
 		
 	}
 }
 
-function destroyCK() {
-	for (let c of CK.keys()) {
-		CK.get(c).destroy();
-	}
-	CK = new Map();
+function isset(obj) {
+    return typeof obj !== 'undefined' && obj !== null;
 }
 
-function removeCK(el) {
-	localStorage.removeItem('CKEDITOR-'+el.getAttribute('data-UUID'));
+function addBlockQuote(ck,ht, auteur) {
+
+	CK.get(document.getElementById(ck)).setData("<blockquote>"+auteur+",<br/>"+document.getElementById(ht).innerHTML+"</blockquote><br/>>>"+CK.get(document.getElementById(ck)).getData());
+
 }
+</script>
