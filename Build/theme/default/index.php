@@ -105,7 +105,7 @@ require('theme/' . $_Serveur_['General']['theme'] . '/preload.php'); ?>
     <!-- Scripts -->
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/zxcvbn.js"></script>
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/custom.js"></script>
-    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/ckeditorManager.js"></script>
+    <?php include "theme/" . $_Serveur_['General']['theme'] . "/assets/php/ckeditorManager.php" ?>
     <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets//js/toastr.min.js"></script>
     <?php include "theme/" . $_Serveur_['General']['theme'] . "/assets/php/custom.php" ?>
     <?php if ($_Serveur_['Payement']['dedipass']) : //API DEDIPASS 

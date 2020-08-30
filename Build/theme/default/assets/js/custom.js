@@ -20,6 +20,11 @@ window.addEventListener("load", function () {
 	})
 });
 
+function imageModal(el) {
+	document.getElementById("modal-image").style.display = "block";
+	document.getElementById("modal-image-src").src = el.src
+}
+
 
 function openModalEditForum(id,name, cat, img) {
 	document.getElementById("editForumTitle").innerHTML = name;

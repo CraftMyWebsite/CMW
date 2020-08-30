@@ -14,6 +14,11 @@ if(isset($_GET['action']))
 			setcookie('pass', 0, time(), '/', null, false, false);
 			header('Location: index.php');
 		break;
+		case 'uploadCKImg':
+			echo '[DIV]';
+			require('modele/UploadImage.class.php');
+			echo UploadImage::upload($_FILES['upload'], $_Serveur_);
+			exit();
 		case 'editForumCat':
 			include('controleur/forum/editForumCat.php');
 			exit();

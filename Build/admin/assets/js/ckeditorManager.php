@@ -1,4 +1,4 @@
-
+<script>
 var CK = {};
 initCK();
 function initCK() {
@@ -26,7 +26,7 @@ function initCK() {
 						'todoList',
 						'numberedList',
 						'|',
-						'imageUpload',
+						<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'imageUpload',"; }  ?>
 						'blockQuote',
 						'mediaEmbed',
 						'undo',
@@ -69,3 +69,4 @@ function addBlockQuote(ck,ht, auteur) {
 	CK.get(document.getElementById(ck)).setData("<blockquote>"+auteur+",<br/>"+document.getElementById(ht).innerHTML+"</blockquote><br/>>>"+CK.get(document.getElementById(ck)).getData());
 
 }
+</script>

@@ -41,9 +41,10 @@ if(isset($_GET['page']))
 
 		case 'forum':
 			require_once('./admin/donnees/forum.php');
-			require_once('./admin/pages/forum.php');
+			include('./admin/pages/forum.php');
 		break;
 		case 'configsite':  
+			require_once('./admin/donnees/general.php');
 			include('./admin/pages/general.php');
 		break;
 

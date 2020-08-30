@@ -177,10 +177,16 @@
                                 <h5>Bonjour, <?= $pseudo ?></h5>
 
                                 <h6>Merci d'avance pour votre vote !</h6>
+
+                                <?php  if(isset($dateRec) && $dateRec['valueType'] != 0 && $dateRec['etat'] != 0)
+                                { 
+                                   
+                                    ?><h6> Les votes se rénitialiseront le <?= str_replace(array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'), date('l', $dateRec['etat'])).date(" j \à G\hi", $dateRec['etat']); ?>.</h6><?php } ?>
                             </div>
                         </div>
                     </div>
                 </div>
+
             <?php } ?>
         </div>
         <!-- Top vote -->
@@ -191,6 +197,7 @@
             </table>
 
         </div>
+
 
     </div>
 </section>

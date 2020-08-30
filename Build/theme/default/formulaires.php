@@ -588,3 +588,8 @@
     </div>
 </div>
 <?php } ?>
+
+<div id="modal-image" class="img-modal">
+  <div class="modal-img-close" onclick="this.parentElement.style.display='none';"><i class="fas fa-times"  ></i></div>
+  <img class="modal-img-content" id="modal-image-src" />
+</div>

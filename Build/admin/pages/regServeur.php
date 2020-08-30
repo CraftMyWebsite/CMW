@@ -70,7 +70,7 @@ else
                               <div class="input-group-append">
                                 <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
                               </div>
-                            </div>>
+                            </div>
             </div>
             <script>initPost('newServer', 'admin.php?&action=serveurJsonNew', function(data) { if(data) {  clearAllInput('newServer'); serverUpdate(); }});</script>
             <div class="card-footer">

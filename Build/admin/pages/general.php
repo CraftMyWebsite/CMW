@@ -4,13 +4,13 @@
 	</h2>
 </div>
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) { ?>
-<div class="text-center">
+ <div class="col-lg-12 text-justify">
     <div class="alert alert-danger">
         <strong>Vous avez aucune permission pour accéder aux réglages généraux.</strong>
     </div>
 </div>
 <?php } else { ?>
-<div class="text-center">
+ <div class="col-lg-12 text-justify">
     <div class="alert alert-success">
         <strong>Modifiez ici les informations principales de votre serveur. La plupart des autres données du site dépendent de la base de données, qui est donc essentielle, changez les identifiants de la base seulement si vous savez ce que vous faites ! </strong>
     </div>
@@ -25,25 +25,25 @@
 		    </div>
 		    <div class="card-body" id="changeInfo">
 				<label class="control-label">Adresse du site</label>
-		        <input type="url" name="adresseWeb" class="form-control text-center" placeholder="http://monsiteminecraft.fr/" value="<?php echo $_Serveur_['General']['url']; ?>">
+		        <input type="url" name="adresseWeb" class="form-control" placeholder="http://monsiteminecraft.fr/" value="<?php echo $_Serveur_['General']['url']; ?>">
 		                    
 		        <label class="control-label">Nom du serveur</label>
-		        <input type="text" name="nom" class="form-control text-center" placeholder="MineServeur" value="<?php echo $_Serveur_['General']['name']; ?>">
+		        <input type="text" name="nom" class="form-control" placeholder="MineServeur" value="<?php echo $_Serveur_['General']['name']; ?>">
 
 		        <label class="control-label">Description</label>
-		        <input type="text" name="description" class="form-control text-center" placeholder="Mon super serveur minecraft !" value="<?php echo $_Serveur_['General']['description']; ?>">
+		        <input type="text" name="description" class="form-control" placeholder="Mon super serveur minecraft !" value="<?php echo $_Serveur_['General']['description']; ?>">
 
 		        <label class="control-label">Adresse de votre serveur Minecraft (textuel)</label>
-		        <input type="text" name="ipTexte" class="form-control text-center" placeholder="cmw.minesr.com" value="<?php echo $_Serveur_['General']['ipTexte']; ?>">
+		        <input type="text" name="ipTexte" class="form-control" placeholder="cmw.minesr.com" value="<?php echo $_Serveur_['General']['ipTexte']; ?>">
 
 		        <label class="control-label">Adresse de votre serveur Minecraft (sous forme d'IP, sans le port !)</label>
-		        <input type="text" name="ip" class="form-control text-center" placeholder="172.16.254.1" value="<?php echo $_Serveur_['General']['ip']; ?>">
+		        <input type="text" name="ip" class="form-control" placeholder="172.16.254.1" value="<?php echo $_Serveur_['General']['ip']; ?>">
 
 		        <label class="control-label">Port de votre serveur Minecraft</label>
-		        <input type="number" name="port" class="form-control text-center" placeholder="25565" value="<?php echo $_Serveur_['General']['port']; ?>">
+		        <input type="number" name="port" class="form-control" placeholder="25565" value="<?php echo $_Serveur_['General']['port']; ?>">
 
 		        <label class="control-label">Statut de votre serveur</label>
-		        <select name="statut" class="form-control text-center" style="text-align-last: center;">
+		        <select name="statut" class="form-control" style="text-align-last: center;">
 		            <option value="0" class="text-center" <?=($_Serveur_['General']['statut'] == 0) ? 'selected' : '';?>>Hors-Ligne</option>
 		            <option value="1" class="text-center" <?=($_Serveur_['General']['statut'] == 1) ? 'selected' : '';?>>En Ligne</option>
 		            <option value="2" class="test-center" <?=($_Serveur_['General']['statut'] == 2) ? 'selected' : '';?>>En Maintenance</option>
@@ -64,16 +64,22 @@
 		    </div>
 		    <div class="card-body" id="changeBdd">
 		        <label class="control-label">Adresse</label>
-		        <input type="text" name="adresse" class="form-control text-center" placeholder="localhost" value="<?php echo $_Serveur_['DataBase']['dbAdress']; ?>">
+		        <input type="text" name="adresse" class="form-control" placeholder="localhost" value="<?php echo $_Serveur_['DataBase']['dbAdress']; ?>">
 
 		        <label class="control-label">Nom de la base</label>
-		        <input type="text" name="dbNom" class="form-control text-center" placeholder="BaseSite" value="<?php echo $_Serveur_['DataBase']['dbName']; ?>">
+		        <input type="text" name="dbNom" class="form-control" placeholder="BaseSite" value="<?php echo $_Serveur_['DataBase']['dbName']; ?>">
 
 		        <label class="control-label">Nom d'utilisateur</label>
-		        <input type="text" name="dbUtilisateur" class="form-control text-center" placeholder="root" value="<?php echo $_Serveur_['DataBase']['dbUser']; ?>">
+		        <input type="text" name="dbUtilisateur" class="form-control" placeholder="root" value="<?php echo $_Serveur_['DataBase']['dbUser']; ?>">
 
 		        <label class="control-label">Mot de passe</label>
-		        <input type="password" name="dbMdp" class="form-control text-center" placeholder="Balançoire" value="<?php echo $_Serveur_['DataBase']['dbPassword']; ?>">
+
+		        			<div class="input-group mb-3">
+                             <input type="password" name="dbMdp" class="form-control" placeholder="Balançoire" value="<?php echo $_Serveur_['DataBase']['dbPassword']; ?>">
+                              <div class="input-group-append">
+                                <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
+                              </div>
+                            </div>
 		        <script>initPost("changeBdd", "admin.php?action=editBdd",null);</script>
 		    </div>
 		    <div class="card-footer">
@@ -86,7 +92,9 @@
 		    <div class="card-header" id="changeEnableSmtp" style="width: 100%;display: inline-block">
 		        <h4 class="card-title">
 		        	<div class="float-left">
-		        		<i class="fas fa-envelope"></i> Mail SMTP
+		        		<h4 class="card-title">
+		        			<i class="fas fa-envelope"></i> Mail SMTP
+		        		</h4>
 		        	</div>
 		        	<div class="float-right">
 		        		<label class="switch">
@@ -116,7 +124,13 @@
 					<input type="text" name="username" class="form-control" placeholder="adressemail@gmail.com" <?=(isset($_Serveur_['SMTP']['Username'])) ? 'value="'.$_Serveur_['SMTP']['Username'].'"': '';?> required> 
 
 					<label class="control-label">Mot de passe SMTP</label>
-					<input type="password" name="password" class="form-control" placeholder="votremdpSMTP" <?=(isset($_Serveur_['SMTP']['Password'])) ? 'value="'.$_Serveur_['SMTP']['Password'].'"': '';?> required>
+
+					<div class="input-group mb-3">
+                             <input type="password" name="password" class="form-control" placeholder="votremdpSMTP" <?=(isset($_Serveur_['SMTP']['Password'])) ? 'value="'.$_Serveur_['SMTP']['Password'].'"': '';?> required>
+                              <div class="input-group-append">
+                                <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
+                              </div>
+                            </div>
 
 					<label class="control-label">Port SMTP</label>
 					<input type="number" class="form-control" name="port" placeholder="587" <?=(isset($_Serveur_['SMTP']['Port'])) ? 'value="'.$_Serveur_['SMTP']['Port'].'"': '';?> required>
@@ -165,14 +179,14 @@
 				}
 			</script>
 	<!-- <div class="col-xs-12 col-md-6" style="margin-top: 20px;"> -->
-		<?php if($_Permission_->verifPerm('PermsPanel', 'general', 'actiions', 'editFavicon'))
+		<?php if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editFavicon'))
 		{
 			?>
 			<form action="?action=ajout_favicon" method="POST" enctype="multipart/form-data">
 				<div class="card">
 				    <div class="card-header">
 				        <h4 class="card-title">
-				            <i class="fas fa-database"></i> Configuration du favicon
+				            <i class="fas fa-icons"></i> Configuration du favicon
 				 		</h4>
 				    </div>
 				    <div class="card-body" id="changeFavicon">
@@ -206,7 +220,63 @@
 				    </div>
 				</div>
 			</form>
-		<?php } ?>
+		<?php } if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) { ?>
+
+				<div class="card" >
+				    <div class="card-header" style="width: 100%;display: inline-block">
+				        <h4 class="card-title">
+				        	<div class="float-left"><h4 class="card-title">
+				        		<i class="fas fa-cloud-upload-alt"></i> Upload d'image sur l'éditeur de texte
+				        	</h4></div>
+				        	<div class="float-right">
+				        		<label class="switch">
+				        			<input type="checkbox" 
+				        				onClick="if(get('panel-upload').style.display == 'none') { show('panel-upload');sendPost('panel-upload'); } else { hide('panel-upload'); sendDirectPost('admin.php?action=switchUploadImage'); }"
+				        				<?=(isset($_Serveur_['uploadImage'])) ? 'checked': '';?>>
+				        			<span class="slider round"></span>
+				        		</label>
+
+				        	</div>
+
+				 		</h4>
+
+				    </div>
+				    <div id="panel-upload" <?=(isset($_Serveur_['uploadImage'])) ? '': 'style="display:none;"';?>>
+				    	<div class="card-body" >
+					    	 <div class="col-lg-12 text-justify">
+							    <div class="alert alert-success">
+							    	<strong>
+							    		CraftMyWebSite a d'intégré un système d'upload d'image dans son éditeur de texte, vous pouvez éditer ces paramètre ici. Sachez que lorsque la taille total des fichiers dépasses la taille maximal de l'espace de stockage les plus anciennes images sont supprimé <u>à jamais</u> jusqu'a rétablir l'équilibre.
+							    	</strong><br/>
+							        <ul>
+					                    <li> Nombre total de fichier: <span id="allf"><?=$filetotal;?></span></li>
+					                    <li> Taille total des fichiers: <span id="alls"><?=$sizetotal;?></span></li>
+					                </ul>
+					                <button type="button" class="btn btn-danger" onclick="sendDirectPost('admin.php?action=resetAllUploadImage', 
+					                	function(data) { if(data) { get('allf').innerText = '0';get('alls').innerText = '0'; }});
+					               ">Supprimer tous les fichiers (iréversible)</button>
+							    </div>
+							</div>
+
+					    	<label class="control-label">Taille maximal des images: <span  id="rangValue1"><?=(isset($_Serveur_['uploadImage']['maxFileSize'])) ? ($_Serveur_['uploadImage']['maxFileSize'] >=1000 ? ($_Serveur_['uploadImage']['maxFileSize'] >=1000000 ? ($_Serveur_['uploadImage']['maxFileSize'] / 1000000).'GB' : ($_Serveur_['uploadImage']['maxFileSize'] / 1000).'MB') : $_Serveur_['uploadImage']['maxFileSize'].'KB'): '1MB';?></span></label>
+							<input name="maxFileSize" id="rangeInput1" class="border-0" type="range" value="<?=(isset($_Serveur_['uploadImage']['maxFileSize'])) ? $_Serveur_['uploadImage']['maxFileSize']: '1000';?>" step="50" min="50" max="5000" />
+
+
+							<label class="control-label">Taille maximal de l'espace de stockage: <span  id="rangValue2"><?=(isset($_Serveur_['uploadImage']['maxSize'])) ? ($_Serveur_['uploadImage']['maxSize'] >=1000 ? ($_Serveur_['uploadImage']['maxSize'] >=1000000 ? ($_Serveur_['uploadImage']['maxSize'] / 1000000).'GB' : ($_Serveur_['uploadImage']['maxSize'] / 1000).'MB') : $_Serveur_['uploadImage']['maxSize'].'KB'): '1MB';?></span></label>
+							<input name="maxSize" id="rangeInput2" step="1000" value="<?=(isset($_Serveur_['uploadImage']['maxSize'])) ? $_Serveur_['uploadImage']['maxSize']: '1000';?>" type="range" min="1000" max="5000000" />
+
+
+					    </div>
+					    <script>
+					    registerEvent(get('rangeInput1'), ["change", "keyup", "input"], function(evt) { let nb = parseInt(evt.target.value);if(nb>=1000) { if(nb>=1000000){get('rangValue1').innerText = (nb / 1000000)+"GB";} else {get('rangValue1').innerText = (nb / 1000)+"MB";}} else {get('rangValue1').innerText = nb+"KB";}});
+					    registerEvent(get('rangeInput2'), ["change", "keyup", "input"], function(evt) { let nb = parseInt(evt.target.value);if(nb>=1000) { if(nb>=1000000){get('rangValue2').innerText = (nb / 1000000)+"GB";} else {get('rangValue2').innerText = (nb / 1000)+"MB";}} else {get('rangValue2').innerText = nb+"KB";}});
+					    initPost("panel-upload", "admin.php?action=editUploadImage");</script>
+					    <div class="card-footer">
+					        <button type="submit" onclick="sendPost('panel-upload');"  class="btn btn-success w-100">Envoyer!</button>
+					    </div>
+				    </div>
+				</div>
+			<?php } ?>
 	<!-- </div> -->
 </div>
 <?php } ?>
