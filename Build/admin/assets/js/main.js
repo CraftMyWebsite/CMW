@@ -17,6 +17,7 @@ toastr.options = {
 	"hideMethod"       : "fadeOut"
 }
 
+
 function switchTypePassword(el) {
 	for(i = 0; i < el.parentElement.parentElement.children.length; i++) {
 		if(isset(el.parentElement.parentElement.children[i].type) && el.parentElement.parentElement.children[i].type == "password" ) {
@@ -34,6 +35,14 @@ $(document).ready(function() {
 	setTimeout(function(){
 		document.getElementsByTagName('body')[0].className = 'loaded';
 	}, 100);
+	$('.popover').each(function () {
+                    var $this = $(this);
+                    $this.popover({
+                        trigger: 'hover',
+                        content: 'Content Here',
+                        container: $this
+                    })
+                });
 	
 });
 
