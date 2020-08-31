@@ -1,7 +1,7 @@
              <nav class="col-md-2 col-sm-12 col-xs-12 bg-img sidebar collapse show navbar-collapse"
                 id="navbarSupportedContent">
                 <div class="sidebar-sticky filter-opacity" style="background-color: rgba('0, 0, 0, 0.7')">
-                    <ul class="nav flex-column" id="scrollnav">
+                    <ul class="nav flex-column" id="scrollnav" data-navbar="leftside">
 
                         <!-- Petite carte profil (afficher sur pc only)-->
                         <div class="row pb-2 pt-2" id="profiladmin">
