@@ -4,14 +4,15 @@
                     <ul class="nav flex-column" id="scrollnav">
 
                         <!-- Petite carte profil (afficher sur pc only)-->
-                        <div class="row" id="profiladmin">
+                        <div class="row pb-2 pt-2" id="profiladmin">
                             <div class="col-4">
                                 <img src="https://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_Joueur_['pseudo']; ?>&s=64" class="rounded-circle imageusercard"
                                     style="max-width: 64px;max-height: 64px;margin-left: 15px;">
                             </div>
                             <div class="col-5">
-                                <p class="text-center text-white">
+                                <p class="text-left text-white">
                                     <b><?php echo $_Joueur_['pseudo']; ?></b>
+                                    <small><i><?=$_Joueur_['email']?></i></small>
                                     <?php echo gradeJoueur($_Joueur_['pseudo'], $bddConnection); ?>
                                 </p>
                             </div>

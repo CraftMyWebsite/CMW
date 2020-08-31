@@ -2,6 +2,7 @@
     background-color: #111 !important;
     color: rgb(165, 167, 196);
 }
+
 [data-theme="dark"] main {
     background-color: #111 !important;
     color: rgb(165, 167, 196);
@@ -11,28 +12,102 @@
     background-color: #333 !important;
 }
 
-[data-theme="dark"] .bg-white {
-    background-color: #000 !important;
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .ck-toolbar__separator {
+    background-color: #333 !important;
 }
 
 [data-theme="dark"] .bg-black {
     color: rgb(165, 167, 196);
 }
 
-[data-theme="dark"] .card-header ,
-[data-theme="dark"] .card-footer ,
-[data-theme="dark"] .card-body ,
-[data-theme="dark"] .card ,
-[data-theme="dark"] .list-group-item ,
-[data-theme="dark"] .form-control ,
-[data-theme="dark"] input ,
-[data-theme="dark"] footer ,
+[data-theme="dark"] .card-header,
+[data-theme="dark"] .card-footer,
+[data-theme="dark"] .card-body,
+[data-theme="dark"] .card,
+[data-theme="dark"] .list-group-item,
+[data-theme="dark"] .form-control,
+[data-theme="dark"] input,
+[data-theme="dark"] footer,
 [data-theme="dark"] table {
     background-color: #333 !important;
     color: rgb(165, 167, 196);
     border-color: #000;
     border-radius: 4px;
 }
+
 [data-theme="dark"] .gray {
+    color: rgb(165, 167, 196) !important;
+}
+
+[data-theme="dark"] .well {
+    background-color: #333 !important;
+    color: rgb(165, 167, 196);
+    border: none;
+}
+
+[data-theme="dark"] .ck-toolbar {
+    background-color: rgb(73, 73, 73) !important;
+    color: rgb(165, 167, 196);
+    border-color: rgb(75, 75, 75) !important;
+    border-bottom: none;
+}
+
+[data-theme="dark"] .ck-dropdown,
+[data-theme="dark"] .ck-button {
+    color: rgb(209, 210, 226) !important;
+}
+
+[data-theme="dark"] .ck-dropdown:hover,
+[data-theme="dark"] .ck-button:hover,
+[data-theme="dark"] .ck-dropdown__panel {
+    transition: 50ms;
+    background-color: rgb(65, 65, 65) !important;
+    border-color: rgb(65, 65, 65) !important;
+}
+
+[data-theme="dark"] .ck-button_icon,
+[data-theme="dark"] .ck-button__label,
+[data-theme="dark"] .ck-icon {
+    fill: rgb(165, 167, 196) !important;
+    color: rgb(165, 167, 196) !important;
+}
+
+[data-theme="dark"] .ck-content {
+    background-color: #333 !important;
+    border-top: none !important;
+    border-color: rgb(75, 75, 75) !important;
+    color: unset;
+}
+
+[data-theme='dark'] .ck-media-form,
+[data-theme='dark'] .ck-link-form,
+[data-theme='dark'] .ck-media-form input,
+[data-theme='dark'] .ck-link-form input {
+    background-color: #b6b6b6 !important;
+}
+
+[data-theme='dark'] .ck-media-form button.ck-button-save,
+[data-theme='dark'] .ck-link-form button.ck-button-save {
+    background-color: rgba(85, 107, 47, 0.8) !important;
+}
+
+[data-theme='dark'] .ck-media-form button.ck-button-cancel,
+[data-theme='dark'] .ck-link-form button.ck-button-cancel {
+    background-color: rgba(139, 0, 0, 0.8) !important;
+}
+
+[data-theme="dark"] .ck-list {
+    background-color: #333333 !important;
+}
+
+[data-theme="dark"] .ck-list .ck-on {
+    background-color: #000000 !important;
+}
+
+[data-theme="dark"] .nav-tabs li.nav-item .active,
+[data-theme="dark"] .nav-tabs li.nav-item a.nav-link .active {
+    background-color: rgb(73, 73, 73) !important;
+    border-color: rgb(73, 73, 73) !important;
     color: rgb(165, 167, 196) !important;
 }
