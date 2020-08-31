@@ -483,7 +483,7 @@ if (isset($_GET['erreur'])) {
 
 
                     <div class="alert alert-main p-1 w-80"><span class=> Image Choisie : </span><span
-                            id="file-name">Aucune image sélectionné !</span></div>
+                            id="file-name">Aucune image sélectionnée !</span></div>
                     <div class="form-group">
 
                         <button type="submit" class="btn btn-main">Modifier</button>

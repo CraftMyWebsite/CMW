@@ -17,7 +17,7 @@
                     <thead>
                         <tr>
                             <?php if (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) : ?>
-                                <th scope="col">Visuel</th>
+                                <th scope="col">Visibilité</th>
                             <?php endif; ?>
                             <th scope="col">Pseudo</th>
                             <th scope="col">Titre</th>
@@ -40,11 +40,11 @@
                                         <td>
                                             <?php if ($tickets['ticketDisplay'] == "0") : ?>
                                                 <span>
-                                                    <i class="glyphicon glyphicon-eye-open"></i> Public
+                                                    <i class="glyphicon glyphicon-eye-open"></i> Publique
                                                 </span>
                                             <?php else : ?>
                                                 <span>
-                                                    <i class="glyphicon glyphicon-eye-close"></i> Privé
+                                                    <i class="glyphicon glyphicon-eye-close"></i> Privée
                                                 </span>
                                             <?php endif; ?>
                                         </td>

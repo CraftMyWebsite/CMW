@@ -21,19 +21,19 @@ $_Theme_ = $_Theme_->GetTableau();
                     <div class="social-content">
                         <a href="<?= $_Theme_['Pied']['facebook']; ?>" class="col-12 discord-social ml-3">
                             <span class="fab fa-facebook social-logo"></span>
-                            <span class="social-text"> Rejoingnez-nous sur Facebook !</span>
+                            <span class="social-text"> Rejoignez-nous sur Facebook !</span>
                         </a>
                         <a href="<?= $_Theme_['Pied']['youtube']; ?>" class="col-12 discord-social ml-3">
                             <span class="fab fa-youtube social-logo"></span>
-                            <span class="social-text"> Rejoingnez-nous sur Youtube !</span>
+                            <span class="social-text"> Rejoignez-nous sur Youtube !</span>
                         </a>
                         <a href="<?= $_Theme_['Pied']['discord']; ?>" class="col-12 discord-social ml-3">
                             <span class="fab fa-discord social-logo"></span>
-                            <span class="social-text"> Rejoingnez-nous sur Discord !</span>
+                            <span class="social-text"> Rejoignez-nous sur Discord !</span>
                         </a>
                         <a href="<?= $_Theme_['Pied']['twitter']; ?>" class="col-12 discord-social ml-3">
                             <span class="fab fa-twitter social-logo"></span>
-                            <span class="social-text"> Rejoingnez-nous sur Twitter !</span>
+                            <span class="social-text"> Rejoignez-nous sur Twitter !</span>
                         </a>
                     </div>
                 </div>
