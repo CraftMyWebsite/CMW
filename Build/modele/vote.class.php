@@ -104,7 +104,7 @@ class vote {
         ));
     }
 
-    public function giveRecompense($action, $jsonCon) {
+    public function giveRecompense($bdd, $action, $jsonCon) {
         if(!isset($action)) {
             $action = $this->lienData['action'];
         }
@@ -116,18 +116,14 @@ class vote {
         foreach($json as $value) { 
             if($value['type'] == "jeton" && Permission::getInstance()->verifPerm("connect")) {
                 $lastquantite = $value['value'];
-                global $PlayerData, $joueurMaj, $_Joueur_;
-                $PlayerData['tokens'] = $PlayerData['tokens'] + ((int)$value['value']);
-                $joueurMaj->setReponseConnection($PlayerData);
-                $joueurMaj->setNouvellesDonneesTokens($PlayerData);
-                $_Joueur_['tokens'] = $_Joueur_['tokens'] + $number;
-                $_SESSION['Player']['tokens'] = $_Joueur_['tokens']; 
+                global $_Joueur_;
+                $_SESSION['Player']['tokens'] = $_Joueur_['tokens'] = $_Joueur_['tokens'] + ((int)$value['value']);
             } else if($value['type'] == "message") {
                 $message = str_replace('{JOUEUR}', $pseudo, str_replace('{CMD}', $lastcmd, str_replace('{QUANTITE}', $lastquantite, str_replace('{ID}', $lastid, str_replace('&amp;', '§', $value['$value'])))));
                 if($value['methode'] == "1") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
-                        if(in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
+                        if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
                         {
                             $jsonCon[$j]->SendBroadcast($message);
                             break;
@@ -146,7 +142,7 @@ class vote {
                 if($value['methode'] == "1") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
-                        if(in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
+                        if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
                         {
                             $jsonCon[$j]->runConsoleCommand($cmd);
                             break;
@@ -164,7 +160,7 @@ class vote {
                 if($value['methode'] == "1") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
-                        if(in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
+                        if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
                         {
                             $jsonCon[$j]->GivePlayerItem($Player['pseudo'].' '.$value['value'] . ' ' .$value['value2']);
                             break;
@@ -179,6 +175,14 @@ class vote {
                     }
                 } 
             }
+        }
+        if($lastquantite != "non définie" && Permission::getInstance()->verifPerm("connect")) {
+            global $_Joueur_;
+            $reqMaj = $bdd->prepare('UPDATE cmw_users SET tokens = :tokens WHERE pseudo = :pseudo');
+            $reqMaj->execute(array(
+                'tokens' => $_Joueur_['tokens'],
+                'pseudo' => $_Joueur_['pseudo']
+                ));
         }
     }
     

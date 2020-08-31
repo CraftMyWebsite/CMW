@@ -86,7 +86,7 @@ function startLoopCheckBtn(event, open = true) {
 }
 
 function clearRecompense() {
-    recompenseList = array();
+    recompenseList = [];
     updateRecompenseList();
 }
 function is(obj) {
@@ -261,6 +261,7 @@ function pickupRecompense() {
     } else {
         $.post("index.php?action=recupVotesTemp", {}, function (data, status) {
             let el = document.getElementById("recompList");
+            console.log(data);
             el.innerText = "Récompenses envoyé !";
             setTimeout(function () {
                 clearRecompense();

@@ -36,7 +36,7 @@ if(isset($_POST['id']) AND isset($_POST['pseudo']))
 						}
 					}
 				} else {
-					$vote->giveRecompense(null, $jsonCon);
+					$vote->giveRecompense($bddConnection, null, $jsonCon);
 				}
 				echo 'success';
 			} else {
