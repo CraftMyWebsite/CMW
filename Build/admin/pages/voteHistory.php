@@ -78,9 +78,9 @@
                                     <th>#</th>
                                     <th style="cursor:pointer;" onclick="setAxe('pseudo');">Pseudo</th>
                                     <th style="cursor:pointer;" onclick="setAxe('ip');">IP</th>
-                                    <th style="cursor:pointer;" onclick="setAxe('nombre');">Nombre</th>
+                                    <th style="cursor:pointer;" onclick="setAxe('nombre');">Nombre de votes</th>
                                     <th style="cursor:pointer;" onclick="setAxe('date_dernier');">Date du dernier vote</th>
-                                    <th >Dernier sur le site:</th>
+                                    <th >Dernier vote sur le site:</th>
                                     <th>Suppression</th>
                                 </tr>
                             </thead>

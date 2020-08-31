@@ -38,7 +38,7 @@
                                         <!-- Suppression d'un topic -->
 
                                         <div class="alert alert-danger w-100 text-center font-weight-bold">
-                                            <i class="fas fa-exclamation-triangle"></i> Si vous supprimez cette discussion elle ne sera plus jamais accéssible !
+                                            <i class="fas fa-exclamation-triangle"></i> Si vous supprimez cette discussion elle ne sera plus jamais accessible !
                                         </div>
                                         <div class="card w-100">
                                             <form action="<?= $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?= $id; ?>&choix=2&confirmation=true" method="post">

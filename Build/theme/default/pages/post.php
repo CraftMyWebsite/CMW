@@ -81,7 +81,7 @@ if (isset($_GET['id'])) :
 
                                         <li class="categorie-item nav-item">
                                             <a class="nav-link categorie-link" href="?&page=forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
-                                                Revenir à l'acceuil de la catégorie
+                                                Revenir à l'accueil de la catégorie
                                             </a>
                                         </li>
 
@@ -230,8 +230,8 @@ if (isset($_GET['id'])) :
                                                         </div>
 
                                                         <div class="modal-body bg-danger rounded py-4">
-                                                            <h5>Voulez-vous vraiement <span class="font-weight-bolder">Supprimer</span> ce topic ?</h5>
-                                                            <h6>Plus aucune donnée de ce topic ne pourra être récupéré.</h6>
+                                                            <h5>Voulez-vous vraiment <span class="font-weight-bolder">Supprimer</span> ce topic ?</h5>
+                                                            <h6>Plus aucune données de ce topic ne pourra être récupérés.</h6>
                                                         </div>
 
                                                         <div class="modal-footer bg-danger">

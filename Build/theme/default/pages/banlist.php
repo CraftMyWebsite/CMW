@@ -11,7 +11,7 @@
             <div class="d-flex col-12 info-page">
                 <i class="fas fa-info-circle notification-icon"></i>
                 <div class="info-content">
-                    Voici la liste des joueurs banni de nos serveurs de jeu.
+                    Voici la liste des joueurs bannis de nos serveurs de jeu.
                 </div>
             </div>
         </div>
