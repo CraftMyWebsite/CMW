@@ -10,7 +10,7 @@
         <?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings') AND $_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'addVote')) { ?>
             <div class="col-lg-12 text-center">
                 <div class="alert alert-danger">
-                    <strong>Vous avez aucune permission pour accéder aux votes.</strong>
+                    <strong>Vous n'avez aucune permission pour accéder aux votes.</strong>
                 </div>
             </div>
         <?php }
@@ -115,7 +115,7 @@
 
                                     </ul>
                                 <span>
-                                    À noter que certains service de recherche du serveur n'ont pas une API utilisable ! Pour que celle-ci fonctionne sur le cms vous devez remplir le champ "Id unique" par l'id donner par le site web ( généralement dans les onglets API). Laisser vide pour le désactiver. Si l'id venait â être incorrecte, ne vous étonnez pas que les votes ne se valident pas
+                                    À noter que certains service de recherche du serveur n'ont pas une API utilisable ! Pour que celle-ci fonctionne sur le cms vous devez remplir le champ "Id unique" par l'id donner par le site web ( généralement dans les onglets API). Laisser vide pour le désactiver. Si l'id venait â être incorrecte, ne vous étonnez pas que les votes ne se valident pas !
                                 </span>
                                 </p>
                             </div>
