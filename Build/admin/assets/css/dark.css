@@ -8,6 +8,20 @@
     color: rgb(165, 167, 196);
 }
 
+[data-theme="dark"] .bg-img {
+    background: url("../images/bg3.jpg") no-repeat scroll right top transparent !important;
+    background-size: cover !important;
+}
+
+@media screen and (min-width: 768px) {
+    [data-theme="dark"] main {
+        background-image: url('../images/bg1.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: rgb(165, 167, 196);
+    }
+}
 [data-theme="dark"] .bg-light {
     background-color: #333 !important;
 }
