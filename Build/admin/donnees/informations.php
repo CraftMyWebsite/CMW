@@ -30,8 +30,6 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) {
         }
     }
 
-    // <!-- Statistiques des membres -->
-    $lastRegisterMember = $bddConnection->query('SELECT id,pseudo,tokens,email,anciennete'.(($ShowMail)? ",ValidationMail":"").''.($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP') ? ",ip" : "").' FROM cmw_users ORDER BY id DESC LIMIT 0, 10;');
 
     // <!-- Statistiques support -->
     $lastticketreq = $bddConnection->query('SELECT id,auteur,titre,etat FROM `cmw_support` ORDER BY `id` DESC LIMIT 1');
@@ -54,6 +52,8 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) {
     $get_etatMail = $req_etatMail->fetch(PDO::FETCH_ASSOC);
     $ShowMail = $get_etatMail['etatMail'] == 1;
 
+    // <!-- Statistiques des membres -->
+    $lastRegisterMember = $bddConnection->query('SELECT id,pseudo,tokens,email,anciennete'.(($ShowMail)? ",ValidationMail":"").''.($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP') ? ",ip" : "").' FROM cmw_users ORDER BY id DESC LIMIT 0, 10;');
     //Récupération du staff chat
     $all_message_staff = $bddConnection->query('SELECT id, auteur, message FROM cmw_postit ORDER BY id DESC');
 }

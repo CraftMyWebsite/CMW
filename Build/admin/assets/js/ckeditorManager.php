@@ -55,6 +55,9 @@ function initCK() {
 		.catch( error => {console.log( error );} )
 		.then(editor => { 
 			CK.set(el, editor); 
+			if(isset(el.innerText) && el.innerText.replace(" ", "") != "") {
+				editor.setData(el.innerText);
+			}
 		});
 		
 	}

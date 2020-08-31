@@ -263,15 +263,12 @@
                                                         <div class="modal-body">
                                                             <div class="col-lg-12 text-center">
 
-                                                                <div class="row">
-                                                                    <h5>Ancien commentaire : </h5>
-                                                                    <textarea class="form-control custom-text-input" rows="3" style="resize: none;" disabled><?= $ticketCommentaires[$tickets['id']][$i]['message']; ?></textarea>
-                                                                </div>
 
                                                                 <div class="row mt-4">
-                                                                    <h5>Commentaire édité : </h5>
-                                                                    <textarea name="editMessage" class="form-control custom-text-input" rows="3" style="resize: none;">
-                                                                    <?= $ticketCommentaires[$tickets['id']][$i]['message']; ?></textarea>
+                                                                    <div style="width:100%;">
+                                                                        <textarea data-UUID="0015" name="editMessage" class="form-control custom-text-input" style="height: 275px; ">
+                                                                        <?= $ticketCommentaires[$tickets['id']][$i]['message']; ?></textarea>
+                                                                    </div>
                                                                 </div>
 
                                                             </div>

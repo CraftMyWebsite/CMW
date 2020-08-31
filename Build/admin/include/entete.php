@@ -50,7 +50,7 @@
 <body>
     <?php
     if(!isset($_GET['page']) OR $_GET['page'] == "accueil") {
-            if($_SESSION['loader'] != true){
+            if(!isset($_SESSION['loader']) || $_SESSION['loader'] != true){
                 $arr = json_decode(fetch('https://pastebin.com/raw/FXhFjgCh'));
                 echo '<div id="loader-wrapper">
                         <div id="loader"></div>
