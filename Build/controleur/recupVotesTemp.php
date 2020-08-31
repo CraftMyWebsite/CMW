@@ -17,13 +17,12 @@ if(Permission::getInstance()->verifPerm("connect"))
 	$datas = $req_recup->fetchAll(PDO::FETCH_ASSOC);
 
 	foreach ($datas as $data) {
-		$vote->giveRecompense($data['action'],$jsonCon);
+		echo $data['action'].'----';
+		$vote->giveRecompense($bddConnection, $data['action'],$jsonCon);
 	}
 
 	$req_suppr = $bddConnection->prepare('DELETE FROM cmw_votes_temp WHERE pseudo = :pseudo');
 	$req_suppr->execute(array(
 		'pseudo' => $_Joueur_['pseudo']
 	));
-	
-	header('Location: ?page=voter&success=recupTemp');
 }

@@ -57,6 +57,7 @@ if(isset($_GET['action']))
 
 		case 'recupVotesTemp':
 			include('controleur/recupVotesTemp.php');
+			exit();
 		break;
 
 		case 'messageLu':
