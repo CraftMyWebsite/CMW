@@ -233,12 +233,17 @@ function Switch(el, el1, el2 )
     }
 }
 
-function hide(el) {
-    get(el).style.display = 'none';
+function hide(el, remove = false) {
+    $("#"+el).hide(300);
+    if(remove) {
+        setTimeout(function () {
+            get('el').parentElement.removeChild(get('el'));
+        }, 301);
+    }
 }
 
 function show(el) {
-    get(el).style.display = 'block';
+    $("#"+el).show(300);
 }
 function notif(type, header, message)
 {
