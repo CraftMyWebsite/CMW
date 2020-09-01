@@ -231,7 +231,7 @@ if (isset($_GET['id'])) :
 
                                                         <div class="modal-body bg-danger rounded py-4">
                                                             <h5>Voulez-vous vraiment <span class="font-weight-bolder">Supprimer</span> ce topic ?</h5>
-                                                            <h6>Plus aucune données de ce topic ne pourra être récupérés.</h6>
+                                                            <h6>Plus aucune données de ce topic ne pourra être récupérées.</h6>
                                                         </div>
 
                                                         <div class="modal-footer bg-danger">
