@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h2 class="h2 gray">
-                    Gestions des récompenses automatique
+                    Gestion des récompenses automatiques
                     </h2>
                 </div>
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'addRecompense') AND !$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'editReset') AND !$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense')) {
@@ -15,13 +15,13 @@ else
     ?><div class="alert alert-success" id="resetVote">
       <strong> 
 
-        Dans cette section vous pourrez configurer vos récompenses automatique.
+        Dans cette section vous pourrez configurer vos récompenses automatiques.
         Il existe plusieurs types de récompenses automatique que vous allez pouvoir configurer
         <ul>
           <li>Les récompenses lorsque le joueur vote X fois</li>
           <li>Les récompenses pour les 1er, 2eme, 3eme ... meilleurs voteurs à la fin du cycle</li>
         </ul>
-        Le cycle peut être définis ci dessous, il représente quand les votes vont être rénitialisé et par conséquent les récompenses enregistrés pour les meilleurs voteurs vont être distribué. Le joueur pourra les récupérer comme n'importe quel récompense après un vote. 
+        Le cycle peut être définis ci dessous, il représente quand les votes vont être rénitialisé et par conséquent les récompenses enregistrés pour les meilleurs voteurs vont être distribué. Le joueur pourra les récupérer comme n'importe quelles récompense après un vote. 
 
         <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'editReset')) { ?>
          <select name="type" name="type" style="margin-top:10px;margin-bottom:10px;width:200px;" class="form-control form-control-sm" onChange="if(this.value==0) { hide('recsem');hide('recmoi');hide('recheur'); } else if(this.value==1) { show('recsem');hide('recmoi'); show('recheur');} else if(this.value==2) { hide('recsem');show('recmoi');show('recheur'); }" >
