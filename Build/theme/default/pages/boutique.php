@@ -6,7 +6,7 @@
                 <i class="fas fa-info-circle notification-icon"></i>
                 <div class="info-content">
                     La boutique permet d'acheter du contenu In-Game depuis le site grâce à de l'argent réel, cela sert à payer l'hébergement du serveur. <br>
-                    La monnaie virtuelle utilisée sur la boutique est le "Jeton", vous pouvez obtenir des jetons en échange de dons sur <a href="/?&page=token"> cette page</a>.
+                    La monnaie virtuelle utilisée sur la boutique est le "<?=$_Serveur['General']['moneyName'];?>", vous pouvez obtenir des <?=$_Serveur['General']['moneyName'];?> en échange de dons sur <a href="/?&page=token"> cette page</a>.
                 </div>
             </div>
         </div>

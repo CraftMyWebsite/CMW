@@ -139,7 +139,7 @@ function updateBaltop(loop = false) {
                         rec += "<li style='display:inline;'>"+custom+" récompense"+putS(custom)+" surprise !</li>";
                     }
                     if(jeton != 0) {
-                        rec += "<li style='display:inline;'>"+jeton+" jeton"+putS(jeton)+" boutique !</li>";
+                        rec += "<li style='display:inline;'>"+jeton+" "+_Jetons_+""+putS(jeton)+" boutique !</li>";
                     } 
                     rec += "</ul>";
                 }
@@ -247,7 +247,7 @@ var hasJeton = false;
 var isConnect = false;
 function pickupRecompense() {
     if(hasJeton && !isConnect) {
-        var r = confirm("Les jetons peuvent être obtenue seulement si vous êtes connecté sur le compte '"+ps+"' sur le site web, sinon ils seront perdu, voulez vous quand même continuer ?");
+        var r = confirm("Les "+_Jetons_+" peuvent être obtenue seulement si vous êtes connecté sur le compte '"+ps+"' sur le site web, sinon ils seront perdu, voulez vous quand même continuer ?");
         if (r == true) 
         {
             $.post("index.php?action=recupVotesTemp", {}, function (data, status) {

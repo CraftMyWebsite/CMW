@@ -14,7 +14,7 @@ General:
     ip: 
     port: 
     statut: 2
-    moneyName: "jeton"
+    moneyName: "Jeton"
     createur: 
         nom: Créateur
         effets: style16

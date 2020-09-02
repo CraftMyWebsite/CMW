@@ -21,7 +21,7 @@
                         <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="payementPaypal<?php echo $i; ?>">
                                 <div class="row">
                                     <label class="control-label">Titre de l'offre</label>
-                                    <input type="text" name="nom" value="<?php echo $paypalOffres[$i]['nom']; ?>" class="form-control" placeholder="ex: 5€ - 1500Jetons"/>
+                                    <input type="text" name="nom" value="<?php echo $paypalOffres[$i]['nom']; ?>" class="form-control" placeholder="ex: 5€ - 1500 <?=$_Serveur_['General']['moneyName'];?>"/>
                                 </div>
                                 <div class="row">
                                     <label class="control-label">Message de l'offre</label>
@@ -32,7 +32,7 @@
                                     <input type="number" step="0.01" name="prix" value="<?php echo $paypalOffres[$i]['prix']; ?>" class="form-control" placeholder="ex: 5"/>
                                 </div>
                                 <div class="row">
-                                    <label class="control-label">Jetons donnés</label>
+                                    <label class="control-label"><?=$_Serveur_['General']['moneyName'];?> donnés</label>
                                     <input type="number" name="jetons_donnes" value="<?php echo $paypalOffres[$i]['jetons_donnes']; ?>" class="form-control" placeholder="ex: 1500"/>
                                 </div>
                                 <hr>

@@ -64,7 +64,7 @@ if (isset($_GET['erreur'])) {
             if (!isset($_GET['pseudo'])) {
                 $_GET['pseudo'] = 'NOT_FOUND';
             }
-            $successContent = 'Vous venez d\'envoyer ' . htmlspecialchars($_GET['montant']) . ' jetons à ' . htmlspecialchars($_GET['pseudo']) . ' !';
+            $successContent = 'Vous venez d\'envoyer ' . htmlspecialchars($_GET['montant']) . ' '.$_Serveur_['General']['moneyName'].' à ' . htmlspecialchars($_GET['pseudo']) . ' !';
             break;
 
         case 'image':
@@ -108,7 +108,7 @@ if (isset($_GET['erreur'])) {
             <div class="d-flex flex-row-reverse">
                 <a class="btn btn-main p-2 my-3 mr-3" data-toggle="collapse" href="#collapseGiveJetons" role="button"
                     aria-expanded="false" aria-controls="collapseGiveJetons">
-                    <i class="fas fa-gift mr-1"></i> Offrir des jetons
+                    <i class="fas fa-gift mr-1"></i> Offrir des <?=$_Serveur['General']['moneyName'];?>
                 </a>
                 <a class="btn btn-main p-2 my-3 mx-3" data-toggle="collapse" href="#collapseEditSettings" role="button"
                     aria-expanded="false" aria-controls="collapseEditSettings">
@@ -127,7 +127,7 @@ if (isset($_GET['erreur'])) {
                     <form class="form-horizontal" method="post" action="?&action=give_jetons" role="form">
 
                         <div class="card-header">
-                            <h4> Envoyer des jetons à un joueur </h4>
+                            <h4> Envoyer des <?=$_Serveur['General']['moneyName'];?> à un joueur </h4>
                         </div>
 
                         <div class="card-body">

@@ -20,7 +20,7 @@
                 <strong>Dans cette section vous pourrez configurer vos votes.</strong><br/>
                 Pour le message vous pouvez utiliser les tags:<ul>
                     <li> {JOUEUR} qui sera remplacé par le nom du joueur qui a voté</li>
-                    <li> {QUANTITE} qui sera remplacé par la quantité de jetons site, ou d'item IG give</li>
+                    <li> {QUANTITE} qui sera remplacé par la quantité de <?=$_Serveur['General']['moneyName'];?> site, ou d'item IG give</li>
                     <li> {ID} qui sera remplacé par l'id de l'item give IG </li>
                 </ul>
                 Pour la commande vous pourrez utiliser : 
@@ -56,8 +56,8 @@
                             <div class="dropdown-menu">
                               <button class="dropdown-item" onclick="addVoteRec('commande', 'all-new-rec-vote','list-new-rec-vote');">Commande</button>
                               <button  class="dropdown-item" onclick="addVoteRec('message', 'all-new-rec-vote','list-new-rec-vote');">Message</button >
-                              <button  class="dropdown-item" onclick="addVoteRec('jeton', 'all-new-rec-vote','list-new-rec-vote');">jeton(s)</button >
-                              <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-vote','list-new-rec-vote');">jeton(s) aléatoire</button >
+                              <button  class="dropdown-item" onclick="addVoteRec('jeton', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
+                              <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s) aléatoire</button >
                               <button  class="dropdown-item" onclick="addVoteRec('item', 'all-new-rec-vote','list-new-rec-vote');">Item(s)</button >
                             </div>
                           </div>
@@ -269,8 +269,8 @@
                                                 <div class="dropdown-menu">
                                                   <button class="dropdown-item" onclick="addVoteRec('commande','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Commande</button>
                                                   <button  class="dropdown-item" onclick="addVoteRec('message','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Message</button >
-                                                  <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">jeton(s)</button >
-                                                  <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">jeton(s) aléatoire</button >
+                                                  <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
+                                                  <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur['General']['moneyName'];?>(s) aléatoire</button >
                                                   <button  class="dropdown-item" onclick="addVoteRec('item','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Item(s)</button >
                                                 </div>
                                               </div>
@@ -296,7 +296,7 @@
                                                                 <label class="control-label">Message à afficher lors du vote</label>
                                                                 <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
                                                          <?php } else  if($value['type'] == "jeton") { ?>
-                                                                <label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
+                                                                <label class="control-label">Quantité de <?=$_Serveur['General']['moneyName'];?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
                                                                 <input type="number" data-type="value" min="1" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
                                                          <?php } else  if($value['type'] == "item") { ?>
                                                                 <label class="control-label">Id de l\'item à donner</label>

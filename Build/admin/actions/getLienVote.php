@@ -43,7 +43,7 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
                                                 <div class="dropdown-menu">
                                                   <button class="dropdown-item" onclick="addVoteRec('commande','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Commande</button>
                                                   <button  class="dropdown-item" onclick="addVoteRec('message','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Message</button >
-                                                  <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">jeton(s)</button >
+                                                  <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur_['General']['moneyName'];?>(s)</button >
                                                   <button  class="dropdown-item" onclick="addVoteRec('item','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Item(s)</button >
                                                 </div>
                                               </div>
@@ -69,7 +69,7 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
                                                                 <label class="control-label">Message à afficher lors du vote</label>
                                                                 <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
                                                          <?php } else  if($value['type'] == "jeton") { ?>
-                                                                <label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
+                                                                <label class="control-label">Quantité de <?=$_Serveur_['General']['moneyName'];?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
                                                                 <input type="number" data-type="value" min="1" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
                                                          <?php } else  if($value['type'] == "item") { ?>
                                                                 <label class="control-label">Id de l\'item à donner</label>

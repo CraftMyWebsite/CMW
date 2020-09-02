@@ -120,7 +120,7 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '18':
 			$type = "Erreur Boutique";
 			$titre = "Solde insuffisant";
-			$contenue = "Votre solde n'est pas suffisant pour acheter ces items. <br/> Merci de renouvelle votre solde ici : <a href='?page=token' class='btn btn-primary link'>Acheter des jetons</a>";
+			$contenue = "Votre solde n'est pas suffisant pour acheter ces items. <br/> Merci de renouvelle votre solde ici : <a href='?page=token' class='btn btn-primary link'>Acheter des ".$_Serveur_['General']['moneyName']."</a>";
 		break;
 
 		case '19':

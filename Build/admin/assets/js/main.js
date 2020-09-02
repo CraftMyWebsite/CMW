@@ -190,10 +190,10 @@ function addVoteConfigRec(type, id1, id2) {
     	ht += '<label class="control-label">Message à afficher lors du vote</label>'
             		 +'<input type="text" data-type="value" class="form-control"/>';
     } else  if(type == "jeton") {
-    	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
+    	ht += '<label class="control-label">Quantité de '+_Jetons_+' à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
             		 +'<input type="number" data-type="value" min="1" value="1" max="99999999" class="form-control"/>';
     } else  if(type == "jetonAlea") {
-    	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
+    	ht += '<label class="control-label">Quantité de '+_Jetons_+' à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
     	ht += '<label class="control-label" style="margin-top:10px;">Quantité minimum:</label>'
             		 +'<input type="number" data-type="value" min="0" value="1" max="99999999" class="form-control"/>'
         ht += '<label class="control-label" style="margin-top:10px;">Quantité maximum:</label>'
@@ -240,10 +240,10 @@ function addVoteRec(type, id1, id2) {
     	ht += '<label class="control-label">Message à afficher lors du vote</label>'
             		 +'<input type="text" data-type="value" class="form-control"/>';
     } else  if(type == "jeton") {
-    	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
+    	ht += '<label class="control-label">Quantité de '+_Jetons_+' à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
             		 +'<input type="number" data-type="value" min="1" value="1" max="99999999" class="form-control"/>';
     }  else  if(type == "jetonAlea") {
-    	ht += '<label class="control-label">Quantité de jetons à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
+    	ht += '<label class="control-label">Quantité de '+_Jetons_+' à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>'
     	ht += '<label class="control-label" style="margin-top:10px;">Quantité minimum:</label>'
             		 +'<input type="number" data-type="value" min="0" value="1" max="99999999" class="form-control"/>'
         ht += '<label class="control-label" style="margin-top:10px;">Quantité maximum:</label>'
