@@ -155,7 +155,7 @@ else
 } ?>
 					</div>
 
-					<?php if (!$donnees['inscription'] && !Permission::getInstance()->verifPerm('connect'))
+					<?php if ($donnees['inscription'] && !Permission::getInstance()->verifPerm('connect'))
 { ?>
 						<!-- Inscription -->
 						<div class="card mt-3">
