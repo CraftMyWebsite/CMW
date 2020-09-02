@@ -87,6 +87,10 @@ class JsonCon
 				{
 					$this->api['rcon'] = null;
 				}
+				catch(InvalidPacketException $e)
+				{
+					$this->api['rcon'] == null;
+				}
 				
 				unset($this->api['data']);
 			}
@@ -334,7 +338,7 @@ class JsonCon
 			$key = $this->verifyReq("getPlayerNames");
 			if($key !== false)
 				return $key;
-			$req = $this->api->call($req);
+			$req = $this->api->call("getPlayerNames");
 			$return = $req[0]['success'];
 			$this->updateReq("getPlayerNames", $return);
 			return $return;

@@ -38,7 +38,7 @@
                                         else
                                             foreach($joueurs as $value)
                                             {
-                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value);?>" style="width: 16px; height: 16px;"/><?=$_Forum_->gradeJoueur($value);?><br/>
+                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=$_Forum_->gradeJoueur($value);?><br/>
                                                 <?php
                                             }
                                         ?>

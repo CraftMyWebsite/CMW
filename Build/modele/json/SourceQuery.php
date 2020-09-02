@@ -535,6 +535,10 @@ use xPaw\SourceQuery\Exception\SocketException;
 			{
 				$this->Rcon = null;
 			}
+			catch(InvalidPacketException $e)
+			{
+				$this->Rcon = null;
+			}
 		}
 		
 		/**
