@@ -112,6 +112,7 @@ if(isset($_GET['paypal'])){
                         Le saviez-vous: <strong>Vous pouvez payer l'hébergement de votre site web via code PaySafeCard <a href="https://webstrator.fr/" target="_blank" rel="noopener noreferrer">chez notre partenaire Webstrator.fr</a> !</strong>
                     </div>
                 </div>
+                <script>initPost('payementinfo', 'admin.php?&action=editPayement');</script>
             <?php } ?>
             </div>
         </div>
