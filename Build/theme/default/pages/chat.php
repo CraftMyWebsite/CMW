@@ -25,10 +25,10 @@
                             <h4>Serveurs :</h4>
                         </div>
                         <div class="card-body categories">
-                            <ul class="categorie-content nav nav-tabs">
+                            <ul class="categorie-content nav nav-tabs" id="servEnLigne">
                                 <?php foreach ($lectureJSON as $i => $serveur) : ?>
                                     <li class="categorie-item nav-item<?= ($i == 0) ? ' active' : '' ?>">
-                                        <a href="#server-<?= $i ?>" onclick="if(get('joueur<?=$i;?>').style.display == 'none') show('joueur<?=$i;?>'); else hide('joueur<?=$i;?>');" class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>" data-toggle="tab">
+                                        <a href="#server-<?= $i ?>" onclick="setTimeout(switchEnLigne, 500);" class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>" data-toggle="tab" data-id="<?=$i;?>">
                                             <?= $serveur['nom']; ?>
                                         </a>
                                     <div style="<?= ($i == 0) ? '' : 'display: none;';?>" id="joueur<?=$i;?>">

@@ -28,7 +28,7 @@ function imageModal(el) {
 function get(id) { return document.getElementById(id);}
 
 function hide(el) {
-    get(el).style.display = 'none';
+    $("#"+el).hide(300);
 }
 
 function show(el) {
@@ -282,6 +282,26 @@ function getMessages(id, page) {
 	}).done(function (donnees) {
 		$("#Conversation").html(donnees);
 	});
+}
+
+function switchEnLigne() {
+	let ul = get('servEnLigne');
+	let a = ul.getElementsByTagName("a");
+	var id;
+	for(let el of a)
+	{
+		if(el.className.includes("active"))
+		{
+			id = el.dataset.id;
+		}
+	}
+	let div = ul.getElementsByTagName("div");
+	for(let el of div)
+	{
+		hide(el.getAttribute('id'));
+	}
+	console.log("joueur"+id);
+	show("joueur"+id);
 }
 
 
