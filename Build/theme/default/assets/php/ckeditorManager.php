@@ -68,8 +68,15 @@ function isset(obj) {
 }
 
 function addBlockQuote(ck,ht, auteur) {
-
 	CK.get(document.getElementById(ck)).setData("<blockquote>"+auteur+",<br/>"+document.getElementById(ht).innerHTML+"</blockquote><br/>>>"+CK.get(document.getElementById(ck)).getData());
-
 }
+
+
+//fix ck link dans les modals
+$( "modal" ).each(function() {
+	$( this ).modal( {
+		focus: false,
+		show: false
+	});
+});
 </script>
