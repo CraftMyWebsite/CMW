@@ -5,12 +5,12 @@
 </div>
 
 
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'shop', 'showPage', 'addCategorie') AND !$_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre') AND !$_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) { ?>
 
     <div class="alert alert-danger">
         <strong>Vous avez aucune permission pour accéder aux réglages du slider et des miniatures.</strong>
     </div>
-<?php } ?>
+<?php } else {?>
 <div class="row">
 <?php if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addCategorie')) {?>
     <div class="col-md-12 col-xl-6 col-12">
@@ -47,7 +47,7 @@
                         </select>
                     
                         <label class="control-label">Description de la catégorie</label>
-                        <textarea name="message" id="ckeditor" data-UUID="CATBOUTIQUENEW0"></textarea>
+                        <textarea class="form-control" name="message"></textarea>
             </div>
              <script>initPost("createCate", "admin.php?action=creerCategorie",function (data) { if(data) { show('card-minia'); boutiqueUpdate();}});</script>
             <div class="card-footer">
@@ -73,7 +73,7 @@
                         <input type="text" class="form-control" name="nom" placeholder="ex: 64 x Diamants" required> 
                 
                         <label class="control-label">Description</label>
-                        <textarea name="description" placeholder="Ex: Cette offre contient ...." data-UUID="OFFREBOUTIQUENEW0" id="ckeditor"></textarea>
+                        <input type="text" class="form-control" name="description" placeholder="ex: <img src=... />"> 
                 
                         <label class="control-label">Prix</label>
                         <input type="number" class="form-control" name="prix" required>
@@ -202,7 +202,7 @@
             </div>
         </div>
     </div>
-<?php }if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'modifCoupon')) { ?> 
+<?php }if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCoupon')) { ?> 
     <div class="col-xs-12 col-md-6">
         <div class="card">
             <div class="card-header">
@@ -253,7 +253,7 @@
 <?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { ?>
 
     <div class="col-md-12 col-xl-12 col-12" id="card-minia" <?php if(empty($categories)) { echo 'style="display:none;"'; } ?>>
-        <div class="card mb-3">
+        <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
                    Edition des offres/catégories
@@ -283,9 +283,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-
                                     <label class="control-label">Description de la catégorie</label>
-                                    <textarea name="categorieInfo" id="ckeditor" data-UUID="CATINFO<?=$categories[$i]['id']?>"><?php echo $categories[$i]['message']; ?></textarea>
+                                    <textarea class="form-control" name="categorieInfo" class="col-sm-12"><?php echo $categories[$i]['message']; ?></textarea>
 
                                     <table class="table">
                                         <thead>
@@ -293,7 +292,7 @@
                                                 <th>Nom</th>
                                                 <th>Description</th>
                                                 <th>Prix</th>
-                                                <th>Catégorie</th>
+                                                <th>catégorie</th>
                                                 <th>Nombre de ventes restantes</th>
                                                 <th>Ordre</th>
                                                 <th>Supprimer</th>
@@ -305,33 +304,7 @@
                                                 if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                                     <tr id="ligneoffre-<?php echo $offres[$j]['id']; ?>">
                                                 <td><input type="text" name="offresNom<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nom']; ?>" /></td>
-                                                <td>
-                                                    <button class="btn btn-primary" data-toggle="modal" type="button" data-target="#description_offre<?php echo $offres[$j]['id']; ?>">
-                                                    <i class="fas fa-pen"></i> / <i class="far fa-eye"></i>
-                                                    </button>
-                                                    <div class="modal fade" id="description_offre<?=$offres[$j]['id'];?>" tabindex="-1"
-                                                        role="dialog" aria-labelledby="description_offre<?=$offres[$j]['id'];?>Label"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="description_offre<?=$offres[$j]['id'];?>Label">Description de l'offre - <?php echo $offres[$j]['nom']; ?></h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <textarea name="offresDescription<?php echo $offres[$j]['id']; ?>" data-UUID="descoffre<?php echo $offres[$j]['id']; ?>" id="ckeditor"><?php echo $offres[$j]['description']; ?></textarea>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-success btn-block"
-                                                                        data-dismiss="modal"><strong>Fermer</strong> (sauvegarde les modifications)</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td><input type="text" name="offresDescription<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($offres[$j]['description']); ?>" /></td>
                                                 <td><input type="text" name="offresPrix<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['prix']; ?>" /></td>
                                                 <td>
                                                 <select class="form-control" name="offresCategorie<?php echo $offres[$j]['id']; ?>">
@@ -528,3 +501,4 @@
     </div>
 <?php } ?>
 </div>
+<?php } ?>

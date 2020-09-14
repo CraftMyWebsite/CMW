@@ -8,7 +8,7 @@ $(function () {
 		Thèmes
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme') AND !$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTypeBackground')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'theme', 'showPage')) { ?>
 
 <div class="alert alert-danger">
 	<strong>Vous avez aucune permission pour accéder aux thèmes.</strong>

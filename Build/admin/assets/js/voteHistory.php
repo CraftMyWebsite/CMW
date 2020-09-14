@@ -127,7 +127,7 @@ async function showAll(allPlayer) {
                 all += '<td>'+allPlayer[i].nbre_votes+'</td>';
                 all += '<td>Dernier le '+allPlayer[i].date_dernier2+'</td>';
                 all += '<td>sur '+allPlayer[i].site+'</td>';
-                all += '<td><button onclick="sendDirectPost(\'admin.php?action=suppVoteHistory&pseudo='+allPlayer[i].pseudo+'\', function(data) { if(data) { hide(\'histo'+i+'\')}});" class="input-disabled btn-sm btn btn-danger">Supprimer</button></td>';
+                <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'actions', 'removeVote')) { ?> all += '<td><button onclick="sendDirectPost(\'admin.php?action=suppVoteHistory&pseudo='+allPlayer[i].pseudo+'\', function(data) { if(data) { hide(\'histo'+i+'\')}});" class="input-disabled btn-sm btn btn-danger">Supprimer</button></td>'; <?php } ?>
             all += '</tr>';
 
             let nb = Object.entries(allPlayer[i].all).length;

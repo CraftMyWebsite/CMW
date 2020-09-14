@@ -1,10 +1,11 @@
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2 gray">
         Gestion Maintenance du site
     </h2>
 </div>
 <div class="row">
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editDefaultMessage') AND !$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editAdminMessage') AND !$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editEtatMaintenance') AND !$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'switchRedirectMode') AND !$_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editMessageInscr') AND !$_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'actions', 'switchInscriptions')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel',"maintenance","showPage")) { ?>
         <div class="col-md-12 text-center">
             <div class="alert alert-danger">
                 <strong>Vous avez aucune permission pour accéder à la maintenance.</strong>

@@ -1,8 +1,17 @@
+
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h2 class="h2 gray">
                         Informations Générales
                     </h2>
                 </div>
+
+                <?php if(!$_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) { ?>
+                  <div class="col-lg-6 col-lg-offset-3 text-center">
+                    <div class="alert alert-danger">
+                      <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+                    </div>
+                  </div>
+                <?php } else { if($_Permission_->verifPerm('PermsPanel', 'info', "stats","visitor","showTable")) { ?>
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
@@ -108,6 +117,7 @@
 
                 </div>
                 <br/>
+            <?php  }  ?>
 
                 <div class="card-columns">
                     <div class="card">
@@ -412,7 +422,7 @@
                                                 <th>#</th>
                                                 <th>Pseudo</th>
                                                 <th>Email</th>
-                                                <th><?=$_Serveur['General']['moneyName'];?></th>
+                                                <th>Jetons</th>
                                                 <th>Inscrit le</th>
                                                 <?php if($ShowMail) { echo '<th>Etat</th>'; } ?>
                                                 <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) { echo '<th>IP</th>'; } ?>
@@ -483,6 +493,7 @@
                 </div>
                 <br/>
                 <div class="row">
+                    <?php if($_Permission_->verifPerm('PermsPanel', 'info', "stats","activity","showTable")) { ?>
                     <div class="col-md-4">
                         <div class="card end">
                             <div class="card-header">
@@ -524,7 +535,7 @@
                             </div>
                         </div>
                     </div>
-
+                <?php } if($_Permission_->verifPerm('PermsPanel', 'info', "stats","shop","showTable")) { ?>
 
                     <div class="col-md-8">
                         <div class="card end">
@@ -568,5 +579,7 @@
                             </div>
                         </div>
                     </div>
+                <?php } ?>
                 </div>
                 <br/>
+                 <?php } ?>

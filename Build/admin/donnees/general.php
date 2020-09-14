@@ -1,5 +1,5 @@
 <?php
-if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
+if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg') && $_Permission_->verifPerm('PermsPanel', 'general', 'showPage')) {
 	$filetotal = 0;
 	$sizetotal = 0;
 	foreach (scandir("include/UploadImage/") as $file) {

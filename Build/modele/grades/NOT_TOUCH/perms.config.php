@@ -42,6 +42,7 @@ const PERMS = array(
 					"showTable" => "Voir les stats des visiteurs"
 				),
 				"members" => array(
+					"showPage" => "Accès à la page de gestion de l'API email et des limites d'inscription par Adresse IP",
 					"showTable" => "Voir les stats des inscriptions",
 					"editLimitIp" => "Edition de la limite d'inscription par IP",
 					"editEmail" => "Edition de la limite d'inscription par email",
@@ -77,11 +78,9 @@ const PERMS = array(
 		"home" => array(
 			"showPage" => "Accès à la page Accueil",
 			"actions" => array(
-				"uploadSlider" => "Uploader un slider",
-				"editSlider" => "Edition des sliders",
 				"uploadMiniature" => "Uploader une miniature",
 				"editMiniature" => "Edition des miniatures",
-				"addSlider" => "Ajouter un slider"
+				"addMiniature" => "Ajouter une miniature"
 			)
 		),
 		"server" => array(
@@ -110,7 +109,9 @@ const PERMS = array(
 			"actions" => array(
 				"addCategorie" => "Ajouter une catégorie",
 				"addOffre" => "Ajouter une offre",
-				"editCategorieOffre" => "Edition des offres/catégories"
+				"editCategorieOffre" => "Edition des offres/catégories",
+				"createCoupon" => "Ajouter un coupon de réduction",
+				"editCoupon" => "Edition des coupons"
 			),
 			"achatEvo" => array(
 				"showPage" => "Accès à la page Réglage des achats évolutifs"
@@ -134,7 +135,8 @@ const PERMS = array(
 			"actions" => array(
 				"addLinkMenu" => "Ajouter un lien menu",
 				"addDropLinkMenu" => "Ajouter un menu déroulant",
-				"editDropAndLinkMenu" => "Edition des lien menus/déroulants"
+				"editLinkMenu" => "Edition des liens menus",
+				"editDropAndLinkMenu" => "Edition des liens menus/déroulants"
 			)
 		),
 		"vote" => array(
@@ -143,14 +145,15 @@ const PERMS = array(
 				"editSettings" => "Edition des réglages",
 				"addVote" => "Ajouter un lien de vote",
 				"resetVote" => "Réinitialiser les votes",
+				"editTacheCron" => "Edition de la tâche cron",
 				"deleteVote" => "Supprimer un lien de vote"
 			),
 			"recompenseAuto" => array(
 				"page" => "Récompenses Automatique",
 				"showPage" => "Accès à la page Réglage des récompenses auto",
-				"editReset" => "Éditer le cycle de reset",
 				"actions" => array(
-					"resetRecompense" => "Supprimer une récompense auto",
+					"editRecompense" => "Editer les récompenses auto",
+					"editReset" => "Éditer le cycle de reset",
 					"addRecompense" => "Créer une récompense auto"
 				)
 			),
@@ -215,6 +218,7 @@ const PERMS = array(
 		"ban" => array(
 			"showPage" => "Accès à la page Bannissement",
 			"actions" => array(
+				"showBan" => "Permet de voir la liste des joueurs banni",
 				"removeBan" => "Permet de supprimer un utilisateur banni",
 				"addBan" => "Permet d'ajouter un utilisateur à la banlist",
 				"editBanPage" => "Permet l'édition de la page des bannis"

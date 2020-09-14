@@ -3,7 +3,7 @@
 		NewsLetter
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'newsletter', 'actions', 'send')) 
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'newsletter', 'showPage')) 
 {
 	echo '
 	<div class="row">
@@ -92,6 +92,7 @@ else
 			</div>
         </div>
    	</div>
+   	<?php if(!$_Permission_->verifPerm('PermsPanel', 'newsletter', 'actions', 'send'))  { ?>
    	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card  ">
 			<div class="card-header ">
@@ -150,9 +151,11 @@ else
 	        </div>
 	    </div>
 	</div>
+	</div>
+<?php } ?>
 </div>
 
 <br/>
-	<?php  include('./admin/assets/js/newsletter.php');
+	<?php if($_Permission_->verifPerm('PermsPanel', 'newsletter', 'showPage')) { include('./admin/assets/js/newsletter.php'); }
 	}
 ?>

@@ -1,4 +1,4 @@
-<?php if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'uploadSlider') || $_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground')|| $_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { 
+<?php if($_Permission_->verifPerm('PermsPanel', 'home', 'showPage' )) { 
     $lectureAccueil = new Lire('modele/config/accueil.yml');
     $lectureAccueil = $lectureAccueil->GetTableau();
 

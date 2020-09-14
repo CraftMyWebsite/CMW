@@ -4,16 +4,15 @@
 	</h2>
 </div>
 <?php if(!$_Permission_->verifPerm("createur"))
-{
-	echo '
+{ ?>
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
 				<strong>Vous avez aucune permission pour accéder aux réglages des grades.</strong>
 			</div>
 		</div>
-	</div>';
-}
+	</div>
+<?php }
 else
 	{
 		?>

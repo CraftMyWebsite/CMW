@@ -1,15 +1,16 @@
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h2 class="h2 gray">
                     Gestion des récompenses automatiques
                     </h2>
                 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'addRecompense') AND !$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'editReset') AND !$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense')) {
-  echo '<div class="col-lg-6 col-lg-offset-3 text-center">
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'showPage')) { ?>
+  <div class="col-lg-6 col-lg-offset-3 text-center">
     <div class="alert alert-danger">
       <strong>Vous avez aucune permission pour accéder à cette page.</strong>
     </div>
-  </div>';
-}
+  </div>
+<?php }
 else
   {
     ?><div class="alert alert-success" id="resetVote">
@@ -101,8 +102,8 @@ else
                             <div class="dropdown-menu">
                               <button class="dropdown-item" onclick="addVoteConfigRec('commande', 'all-new-rec-vote','list-new-rec-vote');">Commande</button>
                               <button  class="dropdown-item" onclick="addVoteConfigRec('message', 'all-new-rec-vote','list-new-rec-vote');">Message</button >
-                              <button  class="dropdown-item" onclick="addVoteConfigRec('jeton', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
-                              <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s) aléatoire</button >
+                              <button  class="dropdown-item" onclick="addVoteConfigRec('jeton', 'all-new-rec-vote','list-new-rec-vote');">jeton(s)</button >
+                              <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-vote','list-new-rec-vote');">jeton(s) aléatoire</button >
                               <button  class="dropdown-item" onclick="addVoteConfigRec('item', 'all-new-rec-vote','list-new-rec-vote');">Item(s)</button >
                             </div>
                           </div>
@@ -137,7 +138,7 @@ else
         </div>
     </div>
    </div>
- <?php } if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense')) { ?>
+ <?php } if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'editRecompense')) { ?>
    <div class="col-md-12 col-xl-12 col-12">
       <div class="card">
         <div class="card-header ">
@@ -181,9 +182,9 @@ else
                                   } else if($value['type'] == "commande") {
                                     $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%)<br/>';
                                   } else if($value['type'] == "jeton") {
-                                     $f= $f.'Give '.$value['value'].' '.$_Serveur['General']['moneyName'].'(s) ('.$value['pourcentage'].'%)<br/>';
+                                     $f= $f.'Give '.$value['value'].' jeton(s) ('.$value['pourcentage'].'%)<br/>';
                                   } else if($value['type'] == "jetonAlea") {
-                                     $f= $f.'Give entre '.$value['value'].' et '.$value['value2'].' '.$_Serveur['General']['moneyName'].'(s) ('.$value['pourcentage'].'%)<br/>';
+                                     $f= $f.'Give entre '.$value['value'].' et '.$value['value2'].' jeton(s) ('.$value['pourcentage'].'%)<br/>';
                                   } else if($value['type'] == "message") {
                                     $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%)<br/>';
                                   } 

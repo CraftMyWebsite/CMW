@@ -1,3 +1,6 @@
+
++"actions", "removeVote" ajouter dans le js
+
 <style>
 :disabled{
     cursor: not-allowed;
@@ -81,7 +84,9 @@
                                     <th style="cursor:pointer;" onclick="setAxe('nombre');">Nombre de votes</th>
                                     <th style="cursor:pointer;" onclick="setAxe('date_dernier');">Date du dernier vote</th>
                                     <th >Dernier vote sur le site:</th>
-                                    <th>Suppression</th>
+                                     <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'actions', 'removeVote')) { ?>
+                                         <th>Suppression</th>
+                                <?php } ?>
                                 </tr>
                             </thead>
                             <tbody id="allUser">

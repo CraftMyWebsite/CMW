@@ -3,6 +3,16 @@
         Upload - Gestion des images
 	</h2>
 </div>
+<?php if(!$_Permission_->verifPerm('PermsPanel', "upload","showPage")) { ?>
+    
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="alert alert-danger">
+                <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+            </div>
+        </div>
+    </div>
+<?php } else {?>
 <div class="row">
 
     <div class="col-md-12">
@@ -26,7 +36,7 @@
 	}
 }?>
     </div>
-
+    <?php if($_Permission_->verifPerm('PermsPanel', "upload","manager")) { ?>
     <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
@@ -75,7 +85,7 @@
             </div>
         </div>
     </div>
-
+<?php } ?>
     <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
@@ -122,3 +132,4 @@
     </div>
 
 </div>
+<?php } ?>

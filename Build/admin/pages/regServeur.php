@@ -3,7 +3,7 @@
         Gestion de la liaison de vos/votre serveur(s)
     </h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'addServer') AND !$_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) { 
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'server', 'showPage')) { 
 
     echo '
     <div class="row">
@@ -105,8 +105,7 @@ else
                         <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="jsonReg<?php echo $i; ?>">
                             <div style="position:inline-block">
                             <div class="float-left">
-                                <h3 class="card-title"><strong id="servName<?php echo $i; ?>"><?php echo $serveur['nom']; ?></strong><small><?=($serveur['protocole'] == 0) ? '(JSONAPI)' : '(RCON/Query)'; ?></small>
-                                <?php if($conEtablie[$i]) { ?> <span class="badge badge-success">En Ligne</span> <?php } else { ?><span class="badge badge-danger">Hors Ligne</span> <?php } ?></h3>
+                                <h3 class="card-title"><strong id="servName<?php echo $i; ?>"><?php echo $serveur['nom']; ?></strong><small><?=($serveur['protocole'] == 0) ? '(JSONAPI)' : '(RCON/Query)'; ?></small></h3>
                             </div>
                             <div class="float-right">
                                 <button onclick="sendDirectPost('?action=supprJson&nom=<?php echo $serveur['id']; ?>&key=<?php echo $i; ?>', function(data) { if(data) { hide('jsonReg<?php echo $i; ?>'); hide('tab-jsonReg<?php echo $i; ?>')}})" class="btn btn-outline-secondary">Supprimer</button>

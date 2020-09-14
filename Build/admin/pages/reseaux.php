@@ -3,7 +3,7 @@
 		Gestion - Champs personnalisable
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('Permscard', 'social', 'showPage'))
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'social', 'showPage'))
 {
 	echo '
 		<div class="row">
@@ -51,6 +51,7 @@ else
             </div>
         </div>
    	</div>
+   	<?php if(!$_Permission_->verifPerm('PermsPanel', 'social', 'actions', 'addSocial')) { ?>
    	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card   ">
 			<div class="card-header">
@@ -75,6 +76,7 @@ else
         </div>
    	</div>
 </div>
+<?php } ?>
 <div class="row">
 	<div class="col-md-12 col-xl-12 col-12">
 		<div class="card   ">

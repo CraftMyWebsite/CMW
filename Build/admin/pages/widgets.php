@@ -3,7 +3,7 @@
 		Gestion des grades du site
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'widgets', 'actions', 'addWidgets') AND !$_Permission_->verifPerm('PermsPanel', 'widgets', 'actions', 'editWidgets')) {
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'widgets', 'showPage')) {
 	echo '
 	<div class="row">
 		<div class="col-md-12 text-center">

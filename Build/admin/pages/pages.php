@@ -3,7 +3,7 @@
 		Gestion des pages personnalisées de votre site
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'pages', 'actions', 'addPage') AND !$_Permission_->verifPerm('PermsPanel', 'pages', 'actions', 'editPage'))
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'pages', 'showPage'))
 {
 	echo '
 	<div class="row">

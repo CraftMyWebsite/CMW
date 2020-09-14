@@ -3,7 +3,7 @@
                     Gestions de l'API email et des limites d'inscription par Adresse IP
                     </h2>
                 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showTable') AND !$_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editLimitIp') && !$_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail'))
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showPage'))
 {
   echo '<div class="col-lg-6 col-lg-offset-3 text-center">
     <div class="alert alert-danger">
@@ -16,10 +16,7 @@ else
     ?><div class="alert alert-success">
       <strong>Sur cette section, vous pouvez gérer les système de limitation de comptes par IP, et la vérification lors de l'inscription de l'email</strong>
     </div>
-  <?php 
-  }
-
-?><div class="row"><?php 
+  <div class="row"><?php 
 if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editLimitIp')) {
   for($i = 0; $i < count($nbrPerIP); $i++) { 
 ?>
@@ -169,3 +166,7 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail
 }
 ?>
 </div>
+<?php 
+  }
+
+?>

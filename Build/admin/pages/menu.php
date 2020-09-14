@@ -3,20 +3,20 @@
                       Gestion des Menus
                     </h2>
                 </div>
- <?php if(!$_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu') AND !$_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addDropLinkMenu') AND !$_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu'))
-{
-  echo '<div class="col-md-12 text-center">
+ <?php if(!$_Permission_->verifPerm('PermsPanel', 'menus', 'showPage'))
+{ ?>
+  <div class="col-md-12 text-center">
             <div class="alert alert-danger">
                 <strong>Vous avez aucune permission pour accéder aux menus.</strong>
             </div>
-        </div>';
-}
+        </div>
+<?php }
 else
   {
     ?><div class="alert alert-success">
       <strong>Vous pouvez créer et modifier des liens qui seront visibles sur la barre du menu principal. Vous pouvez aussi éditer des listes déroulantes. Ces dernières sont plus compliquées à créer. Ce lien basique contient juste un nom et une adresse, vous pouvez choisir parmis 2 catégories pour l'adresse: une page du site (par exemple une page "nous rejoindre !") ou un lien direct(comme un lien "faire un don"). Vous devez créer la page avant de la mettre sur le menu ! Pour gérer une liste déroulante, vous y attribuez au départ un nom et un premier élément de la liste, vous pourrez rajouter une infinité de liens sur votre liste par la suite!</strong>
     </div>
-<?php } ?><div class="row"><?php if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) { ?>
+<div class="row"><?php if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) { ?>
   <div class="col-md-12 col-xl-6 col-12">
     <div class="card">
       <div class="card-header ">
@@ -110,7 +110,7 @@ else
       </div>
     </div>
   </div>
-<?php } if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu')) { ?>
+<?php } if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'editLinkMenu')) { ?>
   <div class="col-md-12 col-xl-6 col-12">
     <div class="card">
       <div class="card-header ">
@@ -183,6 +183,7 @@ else
       </div>
     </div>
   </div>
+  <?php } if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu')) { ?>
   <div class="col-md-12 col-xl-6 col-12">
     <div class="card">
       <div class="card-header ">
@@ -331,3 +332,4 @@ else
   </div>
 <?php } ?>
 </div>
+<?php } ?>
