@@ -6,11 +6,17 @@
 
 
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) { ?>
-
+<div class="col-lg-12 text-justify">
     <div class="alert alert-danger">
         <strong>Vous avez aucune permission pour accéder aux réglages du slider et des miniatures.</strong>
     </div>
+</div>
 <?php } else {?>
+    <div class="col-lg-12 text-justify">
+            <div class="alert alert-success">
+                <strong>Dans cette section vous pourrez configurer les offres proposé dans votre boutique</strong><br/>
+            </div>
+        </div>
 <div class="row">
 <?php if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addCategorie')) {?>
     <div class="col-md-12 col-xl-6 col-12">
@@ -30,6 +36,9 @@
 
                         <label class="control-label">Ordre d'affichage</label>
                         <input type="number" class="form-control" name="ordre" value="<?php echo $categorieNum; ?>" placeholder="L'ordre dans lequel va s'afficher la catégorie !" required> 
+
+                        <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
+                        <input class="form-control" required style="width:100px;" type="number" name="number"  min ="1" max="4" value="3" />
                     
                         <label class="control-label">Connexion In-Game</label>
                         <select name="connection"class="form-control" required>
@@ -283,6 +292,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+
+                                    <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
+                                     <input class="form-control" required style="width:100px;" type="number" name="number"  min ="1" max="4" value="<?php echo $categories[$i]['showNumber']; ?>" />
+
                                     <label class="control-label">Description de la catégorie</label>
                                     <textarea class="form-control" name="categorieInfo" class="col-sm-12"><?php echo $categories[$i]['message']; ?></textarea>
 

@@ -6,11 +6,13 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre
 	require_once('modele/base.php');
 	$base = new base($_Serveur_['DataBase']);
 	$bddConnection = $base->getConnection();
-	$req = $bddConnection->prepare('UPDATE cmw_boutique_categories SET titre = :titre, message = :message WHERE id = :id');
+	$_POST['number'] = intval($_POST['number']);
+	$req = $bddConnection->prepare('UPDATE cmw_boutique_categories SET titre = :titre, message = :message, showNumber = :show WHERE id = :id');
 	$req->execute(Array (
 		'titre' => $_POST['categorieNom'],
 		'message' => $_POST['categorieInfo'],
-		'id' => $_POST['categorie'] ));
+		'id' => $_POST['categorie'],
+		'show' => $_POST['number']  ));
 	
 	$boutiqueData = GetTableau($_POST);
 	UpdatePourTableau($bddConnection, $boutiqueData);

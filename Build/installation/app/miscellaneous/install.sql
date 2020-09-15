@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_categories` (
   `ordre` int(11) NOT NULL,
   `serveur` int(11) NOT NULL,
   `connection` int(1) NOT NULL,
+  `showNumber` int(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
