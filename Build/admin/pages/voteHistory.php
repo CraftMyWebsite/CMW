@@ -134,6 +134,50 @@
 
                 </div>
             </div>
+<?php if(!empty($oldHistory)) { ?>
+    <div class="col-xl-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                 <div style="width: 100%;display: inline-block">
+                    <div class="float-left">
+                        <h3 class="card-title"><strong>Liste des voteurs</strong></h3>
+                    </div>
+                    <div class="float-right">
+                        <button  onclick="sendDirectPost('admin.php?action=suppAllOldVoteHistory', function(data) { if(data) { hide('allUser'); } });" class="btn btn-sm btn-outline-secondary">Rénitialiser</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+
+                     <div class="col-md-12">
+                           
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th >Pseudo</th>
+                                    <th >IP</th>
+                                    <th >Nombre de votes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 0; foreach($oldHistory as $value) { if($i < $_Serveur_['vote']['maxDisplay']) { ?>
+                                    <tr>
+                                        <td><?php echo $i; ?></td>
+                                        <td ><?php echo $value['pseudo']; ?></td>
+                                        <td ><?php echo $value['ip']; ?></td>
+                                        <td ><?php echo $value['nbre_votes']; ?></td>
+                                    </tr>
+
+                                <?php $i++; } else { break;} } ?>
+
+                            </tbody>
+                        </table>
+                    </div>
+             </div> 
+                </div>
+            </div>
+        <?php } ?>
     </div>
 
 <?php  include('./admin/assets/js/voteHistory.php');
