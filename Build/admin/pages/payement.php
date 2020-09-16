@@ -28,7 +28,7 @@ if(isset($_GET['paypal'])){
     <?php } else { ?>
     <div class="col-md-12 text-center">
         <div class="alert alert-success">
-            <strong>Les <?=$_Serveur_['General']['moneyName'];?> sont la monnaie virtuelle du site. Les joueurs achètent des <?=$_Serveur['General']['moneyName'];?> avec leurs dons, et les utilisent dans la boutique.</strong>
+            <strong>Les <?=$_Serveur_['General']['moneyName'];?> sont la monnaie virtuelle du site. Les joueurs achètent des <?=$_Serveur_['General']['moneyName'];?> avec leurs dons, et les utilisent dans la boutique.</strong>
         </div>
     </div><?php
     if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment')){ 
