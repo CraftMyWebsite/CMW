@@ -3,7 +3,7 @@
         Gestion de la liaison de vos/votre serveur(s)
     </h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'addServer') AND !$_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) { 
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'server', 'showPage')) { 
 
     echo '
     <div class="row">

@@ -3,25 +3,22 @@
 		Gestion des bannissements utilisateurs du site web et configuration de la page de ban
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'ban', 'showPage'))
-{
-	echo '
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'ban', 'showPage')) { ?>
+	
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
 				<strong>Vous avez aucune permission pour accéder aux bannissements.</strong>
 			</div>
 		</div>
-	</div>';
-}
-else
-	{
-		?>
+	</div>
+<?php } else {?>
 	<div class="alert alert-success">
 		<strong>Sur cette section, vous pouvez gérer les bannissements de votre site. (Cette page n'est visible que par les Créateurs)</strong>
 	</div>
 
 <div class="row">
+	<?php if($_Permission_->verifPerm('PermsPanel', 'ban', 'actions','showBan')) { ?>
 	<div class="col-md-12 col-xl-6 col-126">
 		<div class="card  ">
 			<div class="card-header ">
@@ -33,7 +30,7 @@ else
 						<tr>
 							<th style="width: 40%;">Membre</th>
 							<th style="width: 40%;">IP</th>
-							<th>Supprimer</th>
+							<?php  if($_Permission_->verifPerm('PermsPanel', 'ban', 'actions','removeBan')) { ?><th>Supprimer</th> <?php } ?>
 						</tr>
 					</thead>
 					<tbody id="list-ban">
@@ -42,8 +39,9 @@ else
 						?><tr id="Ban<?=$value['id'];?>">
 							<td><?=ucfirst($value['pseudo']);?></td>
 							<td><?=$value['ip'];?></td>
+							<?php  if($_Permission_->verifPerm('PermsPanel', 'ban', 'actions','removeBan')) { ?>
 							<td><button type="button" onclick="sendPost('removeBan&id=<?=$value['id'];?>')" class="btn btn-danger">Débannir</button></td>
-							 <script>initPost("removeBan&id=<?=$value['id'];?>", "admin.php?action=removeBan&id=<?=$value['id'];?>",function(data) { if(data) {hide('Ban<?=$value['id'];?>'); }});</script>
+							 <script>initPost("removeBan&id=<?=$value['id'];?>", "admin.php?action=removeBan&id=<?=$value['id'];?>",function(data) { if(data) {hide('Ban<?=$value['id'];?>'); }});</script> <?php } ?>
 						</tr><?php 
 					}
 					?>
@@ -52,6 +50,7 @@ else
             </div>
         </div>
    	</div>
+   <?php }  if($_Permission_->verifPerm('PermsPanel', 'ban', 'actions','addBan')) { ?>
    	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card  ">
 			<div class="card-header ">
@@ -81,8 +80,7 @@ else
 			</div>
         </div>
    	</div>
-</div>
-<div class="row">
+	<?php } if($_Permission_->verifPerm('PermsPanel', 'ban', 'actions','editBanPage')) { ?>
 	<div class="col-md-12 col-xl-12 col-12">
 		<div class="card  ">
 			<div class="card-header ">
@@ -104,6 +102,7 @@ else
 			</div>
         </div>
     </div>
+	<?php } ?>
 </div>
 <br/>
 	<?php 

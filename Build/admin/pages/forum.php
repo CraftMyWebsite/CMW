@@ -1,22 +1,22 @@
+
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 	<h2 class="h2 gray">
 		Réglages Forum
 	</h2>
 </div>
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'forum', 'showPage'))
-{
-	echo '<div class="col-lg-6 col-lg-offset-3 text-center">
+{ ?>
+	<div class="col-lg-6 col-lg-offset-3 text-center">
 		<div class="alert alert-danger">
 			<strong>Vous avez aucune permission pour accéder aux réglages de cette page.</strong>
 		</div>
-	</div>';
-}
-else { ?>
+	</div>
+<?php }  else { ?>
 <div class="alert alert-success">
 	<strong>Sur cette section, vous pouvez gérer tout votre forum.</strong>
 </div>
 
-<?php } ?>
 <div class="row">
 <?php if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix')) { ?>
 	<div class="col-md-12 col-xl-6 col-12">
@@ -133,3 +133,4 @@ else { ?>
    	</div>
 <?php }  ?>
 </div>
+<?php } ?>

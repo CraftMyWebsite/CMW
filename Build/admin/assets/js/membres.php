@@ -12,6 +12,7 @@ var PlayerTotal = <?php echo count($membres); ?>;
 var axe = "id";
 var grade = new Map();
 var axeType = "ASC"; /* ASC = croissant && DESC = !ASC */
+var canEdit = <?php echo $_Permission_->verifPerm('PermsPanel', 'members', "actions","editMember") ? 'true' : 'false'; ?>
 
 
 $(window).on('load', function () {
@@ -142,13 +143,15 @@ async function showAll(allPlayer) {
                 all += '<td><input type="password" onkeyup="addChange('+allPlayer[i].id2+')" name="input-password' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="'+allChange["password"+allPlayer[i].id2]+'" placeholder="Changer MDP"></td>';
 
             }
-            if (allPlayer[i].ValidationMail == 0) {
-                all += '<td><button class="input-disabled btn btn-danger w-100" style="display: block !important" onclick="validMail(' + allPlayer[i].id2 + ')" id="validmail' + allPlayer[i].id2 + '" type="button" title="Cliquer pour valider l\'email de cette personne manuellement"><i class="fas fa-exclamation-triangle"></i></button>';
-                all += '<button class="input-disabled btn btn-block btn-success" style="display:block;" id="validmail2' + allPlayer[i].id22 + '" type="button" disabled>Validé</button></td>';
-            } else {
-                all += '<td><button class="input-disabled btn btn-block btn-success"  type="button" style="display: inline !important" disabled>Validé</button></td>';
+            if(canEdit) {
+                if (allPlayer[i].ValidationMail == 0) {
+                    all += '<td><button class="input-disabled btn btn-danger w-100" style="display: block !important" onclick="validMail(' + allPlayer[i].id2 + ')" id="validmail' + allPlayer[i].id2 + '" type="button" title="Cliquer pour valider l\'email de cette personne manuellement"><i class="fas fa-exclamation-triangle"></i></button>';
+                    all += '<button class="input-disabled btn btn-block btn-success" style="display:block;" id="validmail2' + allPlayer[i].id22 + '" type="button" disabled>Validé</button></td>';
+                } else {
+                    all += '<td><button class="input-disabled btn btn-block btn-success"  type="button" style="display: inline !important" disabled>Validé</button></td>';
+                }
+                all += '<td><button onclick="removePlayer('+allPlayer[i].id2+',\''+allPlayer[i].pseudo+'\')" id="suppplayer'+allPlayer[i].id2+'"class="input-disabled btn-sm btn btn-danger">Supprimer</button></td>';
             }
-            all += '<td><button onclick="removePlayer('+allPlayer[i].id2+',\''+allPlayer[i].pseudo+'\')" id="suppplayer'+allPlayer[i].id2+'"class="input-disabled btn-sm btn btn-danger">Supprimer</button></td>';
             all += '</tr>';
         }
     }
@@ -157,6 +160,7 @@ async function showAll(allPlayer) {
 }
 
 function addChange(id) {
+    if(canEdit) {
 	    ChangeButton.disabled = false;
 	     if (typeof allChange["id"+id] === 'undefined') {
             if (typeof allChange["allid"] === 'undefined') {
@@ -171,7 +175,7 @@ function addChange(id) {
         allChange["tokens"+id] = document.getElementsByName("input-tokens"+id)[0].value;
         allChange["rang"+id] = document.getElementsByName("input-rang"+id)[0].value;
         allChange["password"+id] = document.getElementsByName("input-password"+id)[0].value;
-
+    }
 }
 
 function sendChange() {

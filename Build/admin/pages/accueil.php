@@ -3,13 +3,14 @@
         Miniatures & Slider
     </h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'home', 'showPage') AND !$_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground') AND !$_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'home', 'showPage')) { ?>
     <div class="alert alert-danger">
         <strong>Vous n'avez pas la permission pour accéder aux réglages du slider et des miniatures.</strong>
     </div>
 
 <?php } else {?>
 <div class="row">
+    <?php if($_Permission_->verifPerm('PermsPanel', 'home', 'actions','addMiniature')) { ?>
     <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
@@ -70,6 +71,7 @@
             </div>
         </div>
     </div>
+<?php  } if($_Permission_->verifPerm('PermsPanel', 'home', 'actions','editMiniature')) { ?>
     <div class="col-md-12 col-xl-6 col-12" id="card-minia" <?php if(empty($lectureAccueil['Infos'])) { echo 'style="display:none;"'; } ?>>
         <div class="card">
             <div class="card-header">
@@ -159,7 +161,7 @@
         </div>
         
     </div>
-
+    <?php } if($_Permission_->verifPerm('PermsPanel', 'home','actions', 'uploadMiniature')) { ?>
     <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
@@ -196,7 +198,7 @@
             </form>
         </div>
         <br/><br/>
-
+    <?php } ?>
     </div>
 
 <?php } // Else tout en haut ?>

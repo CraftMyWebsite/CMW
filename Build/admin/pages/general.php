@@ -3,7 +3,7 @@
 		Réglages site
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'general', 'showPage')) { ?>
  <div class="col-lg-12 text-justify">
     <div class="alert alert-danger">
         <strong>Vous avez aucune permission pour accéder aux réglages généraux.</strong>
@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="card-columns">
-	<!-- <div class="col-xs-12 col-md-6"> -->
+	<?php if($_Permission_->verifPerm('PermsPanel', 'general', 'actions','editGeneral')) { ?>
 		<div class="card">
 		    <div class="card-header">
 		        <h4 class="card-title">
@@ -54,8 +54,6 @@
 		        <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeInfo')">Envoyer!</button>
 		    </div>
 		</div>
-	<!-- </div> -->
-	<!-- <div class="col-xs-12 col-md-6"> -->
 		<div class="card">
 		    <div class="card-header">
 		        <h4 class="card-title">
@@ -86,8 +84,7 @@
 		        <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeBdd')">Envoyer!</button>
 		    </div>
 		</div>
-	<!-- </div> -->
-	<!-- <div class="col-xs-12 col-md-6" style="margin-top: 20px;"> -->
+
 		<div class="card" id="changeSmtp">
 		    <div class="card-header" id="changeEnableSmtp" style="width: 100%;display: inline-block">
 		        <h4 class="card-title">
@@ -179,7 +176,7 @@
 				}
 			</script>
 	<!-- <div class="col-xs-12 col-md-6" style="margin-top: 20px;"> -->
-		<?php if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editFavicon'))
+		<?php } if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editFavicon'))
 		{
 			?>
 			<form action="?action=ajout_favicon" method="POST" enctype="multipart/form-data">

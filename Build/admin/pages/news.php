@@ -3,7 +3,7 @@
         Gestion de vos nouveautés
     </h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews') AND !$_Permission_->verifPerm('PermsPane', 'news', 'actions', 'editNews')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPane', 'news', 'showPage')) { ?>
 
 <div class="row">
     <div class="col-md-12 text-center">
@@ -18,7 +18,6 @@
         communauté, pensez à rédiger des news souvent, cela prouve votre activité, ça fait toujours plaisir à un joueur
         de voir un nouveau message!</strong>
 </div>
-<?php }?>
 <div class="row">
     <?php if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'editNews')) { ?>
     <div class="col-md-12 col-xl-12 col-12">
@@ -113,3 +112,5 @@
     <?php } ?>
 </div>
 <br>
+
+<?php }?>

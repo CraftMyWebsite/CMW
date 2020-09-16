@@ -1,16 +1,21 @@
+"support","tickets","showPage"
+"support","tickets","actions","editEtatTicket"
+"support","tickets","actions","deleteTicket"
+"support","tickets","actions","deleteAllTicket"
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 	<h2 class="h2 gray">
         Gestion des tickets support
 	</h2>
 </div>
 <div class="row">
-	<?php if(!$_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'actions', 'editEtatTicket') AND !$_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'actions', 'deleteTicket')) { ?>
+	<?php if(!$_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'showPage')) { ?>
 	    <div class="col-md-12 text-center">
 	    	<div class="alert alert-danger">
 	            <strong>Vous avez aucune permission pour accéder aux tickets.</strong>
 	        </div>
 	    </div>
-	<?php } if($aucunTicket) { ?>
+	<?php }else {  if($aucunTicket) { ?>
         <div class="col-md-12 text-center">
             <div class="alert alert-warning">
                 <strong>Aucun ticket n'a été créé par les membres jusqu'à présent !</strong>
@@ -43,9 +48,9 @@
 					<div class="float-left">
 		        		<h3 class="card-title"><strong>Édition des tickets</strong></h3>
 		        	</div>
-		        	<div class="float-right">
+		        	<?php if($_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'actions', 'supprAllTickets')) { ?><div class="float-right">
 		        		<button class="btn btn-sm btn-outline-secondary" onclick="sendDirectPost('admin.php?action=supprAllTickets', function(data) { if(data) { hide('all-ticket')}});">Tout supprimer</button>
-		        	</div>
+		        	</div><?php } ?>
 				</div>
 				<div class="card-body" >
 						<table class="table table-striped table-hover">
@@ -96,3 +101,4 @@
 
    	<?php } ?>
 </div>
+<?php } ?>

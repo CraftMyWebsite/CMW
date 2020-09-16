@@ -4,16 +4,14 @@
     </h2>
 </div>
 
-<!-- Page Heading -->
-<div class="row" style="margin-top:10px;">
-	<div class="col-md-12 col-xl-12 col-12">
-        <?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings') AND $_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'addVote')) { ?>
+
+        <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'showPage')) { ?>
             <div class="col-lg-12 text-center">
                 <div class="alert alert-danger">
                     <strong>Vous n'avez aucune permission pour accéder aux votes.</strong>
                 </div>
             </div>
-        <?php }
+        <?php } else {
         if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) { ?>
         <div class="col-lg-12 text-justify">
             <div class="alert alert-success">
@@ -40,7 +38,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
+<div class="row">
+   <?php  if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'addVote')) { ?>
         <div class="col-md-12 col-xl-12 col-12">
             <div class="card  ">
                 <div class="card-header ">
@@ -56,7 +56,7 @@
                             <div class="dropdown-menu">
                               <button class="dropdown-item" onclick="addVoteRec('commande', 'all-new-rec-vote','list-new-rec-vote');">Commande</button>
                               <button  class="dropdown-item" onclick="addVoteRec('message', 'all-new-rec-vote','list-new-rec-vote');">Message</button >
-                              <button  class="dropdown-item" onclick="addVoteRec('jeton', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
+                                <button  class="dropdown-item" onclick="addVoteRec('jeton', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
                               <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s) aléatoire</button >
                               <button  class="dropdown-item" onclick="addVoteRec('item', 'all-new-rec-vote','list-new-rec-vote');">Item(s)</button >
                             </div>
@@ -130,6 +130,7 @@
                     </div>
             </div>
         </div>
+    <?php } if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editTacheCron')) { ?>
         <div class="col-md-12 col-xl-12 col-12">
             <div class="card  ">
                 <div class="card-header ">
@@ -199,7 +200,7 @@
                     <input type="submit" onclick="sendPost('vote-cron', function(data) { if(data) { }});" class="btn btn-success w-100" value="Valider les changements"/>
                 </div>
             </div>
-		
+        </div>
 		<script>
 			function tryCron() {
 				get('trycron').disabled = true;
@@ -211,7 +212,7 @@
 				});
 			}
 		</script>
-    <?php } // $_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote')
+    <?php } 
     if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) { ?>
         <div class="col-md-12 col-xl-12 col-12">
             <div class="card  ">
@@ -219,7 +220,7 @@
                     <div class="float-left">
                         <h3 class="card-title"><strong>Edition des votes</strong></h3>
                     </div>
-                    <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) { ?>
+                    <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote')) { ?>
                     <div class="float-right">
                         <button onclick="sendDirectPost('admin.php?action=resetVotesConfig', function(data) { if(data) { get('all-vote').innerText = '';}})" class="btn btn-outline-secondary">Réinitialiser</button>
                     </div>
@@ -269,7 +270,7 @@
                                                 <div class="dropdown-menu">
                                                   <button class="dropdown-item" onclick="addVoteRec('commande','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Commande</button>
                                                   <button  class="dropdown-item" onclick="addVoteRec('message','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Message</button >
-                                                  <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
+                                                   <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
                                                   <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur['General']['moneyName'];?>(s) aléatoire</button >
                                                   <button  class="dropdown-item" onclick="addVoteRec('item','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Item(s)</button >
                                                 </div>
@@ -282,7 +283,7 @@
                                                     <div class=" col-md-6 col-12" id="rec-vote-<?php echo $idcs; ?>" data-type="<?php echo $value['type']; ?>" style="margin-top:15px;"><div style="border: 1px solid #B0B0B0;border-radius: 24px;padding:20px;margin:7px;">
                                                         <div style="width: 100%;display: inline-block">
                                                             <div class="float-left">
-                                                                <h5><?php echo ucfirst($value['type']); ?></h5>
+                                                                <h5><?php echo ucfirst($value['type']) == "Jeton" ? $_Serveur['General']['moneyName'] : (ucfirst($value['type']) == "JetonAlea" ? $_Serveur['General']['moneyName']." aléatoire" : ucfirst($value['type']) ) ; ?></h5>
                                                             </div>
                                                             <div class="float-right">'
                                                                 <button onclick="get('list-new-rec-<?=$o;?>vote').removeChild(get('rec-vote-<?php echo $idcs; ?>'));if(get('list-new-rec-<?=$o;?>vote').children.length == 0) { hide('all-new-rec-<?=$o;?>vote');} genVoteJson2();sendPost('all-vote');" class="btn btn-sm btn-outline-secondary">Supprimer</button>'
@@ -296,7 +297,7 @@
                                                                 <label class="control-label">Message à afficher lors du vote</label>
                                                                 <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
                                                          <?php } else  if($value['type'] == "jeton") { ?>
-                                                                <label class="control-label">Quantité de <?=$_Serveur['General']['moneyName'];?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
+                                                                <label class="control-label">Quantité de <?=$_Serveur_['General']['moneyName'];?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
                                                                 <input type="number" data-type="value" min="1" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
                                                          <?php } else  if($value['type'] == "item") { ?>
                                                                 <label class="control-label">Id de l\'item à donner</label>
@@ -304,6 +305,14 @@
 
                                                                 <label class="control-label">Nombre d\'item à donner</label>
                                                                 <input type="number" data-type="value2" min="1" value="<?php echo $value['value2']; ?>" max="64"  class="form-control"/>
+                                                         <?php } else if($value['type'] == "jetonAlea") { ?>
+                                                                <label class="control-label">Quantité de  <?php echo $_Serveur['General']['moneyName']; ?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
+                                                                <label class="control-label" style="margin-top:10px;">Quantité minimum:</label>
+                                                                <input type="number" data-type="value" min="0" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
+
+                                                                <label class="control-label" style="margin-top:10px;">Quantité maximum:</label>
+                                                                <input type="number" data-type="value2" min="0" value="<?php echo $value['value2']; ?>" max="99999999" class="form-control"/>
+
                                                          <?php } if($value['type'] != "jeton" && $value['type'] != "jetonAlea") { ?>
                                                             <label class="control-label">Obtention de la récompense</label>
                                                             <select data-type="methode" class="form-control" style="margin-bottom:20px;<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">
@@ -361,4 +370,4 @@
         </div>
     <?php } ?>
 </div>
-<!-- /.row -->
+<?php } ?>

@@ -17,7 +17,7 @@
 		Gestion - Gestion des Membres
 	</h2>
 </div>
-        <?php if(!$_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) { ?>
+        <?php if(!$_Permission_->verifPerm('PermsPanel', 'members', 'showPage')) { ?>
             <div class="text-center">
     <div class="alert alert-danger">
         <strong>Vous n'avez aucune permission pour accéder à cette page !</strong>
@@ -82,8 +82,10 @@
                                 <th style="cursor:pointer;" onclick="setAxe('tokens');"><?=$_Serveur['General']['moneyName'];?></th>
                                 <th style="cursor:pointer;" onclick="setAxe('rang');">Rang</th>
                                 <th>Mot de passe</th>
-                                <th style="cursor:pointer;" onclick="setAxe('ValidationMail');">Valid. manuelle</th>
-                                <th>Suppression</th>
+                                <?php if($_Permission_->verifPerm('PermsPanel', 'members', "actions","editMember")) { ?>
+                                    <th style="cursor:pointer;" onclick="setAxe('ValidationMail');">Valid. manuelle</th>    
+                                    <th>Suppression</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody id="allUser">

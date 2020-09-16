@@ -19,7 +19,7 @@ if(isset($_GET['paypal'])){
     </h2>
 </div>
 <div class="row">
-    <?php if(!$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment') AND !$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND !$_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal')) { ?>
+    <?php if(!$_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) { ?>
     <div class="col-md-12 text-center">
         <div class="alert alert-danger">
             <strong>Vous avez aucune permission pour accéder aux réglages des paiements.</strong>
@@ -28,10 +28,9 @@ if(isset($_GET['paypal'])){
     <?php } else { ?>
     <div class="col-md-12 text-center">
         <div class="alert alert-success">
-            <strong>Les <?=$_Serveur['General']['moneyName'];?> sont la monnaie virtuelle du site. Les joueurs achètent des <?=$_Serveur['General']['moneyName'];?> avec leurs dons, et les utilisent dans la boutique.</strong>
+            <strong>Les <?=$_Serveur_['General']['moneyName'];?> sont la monnaie virtuelle du site. Les joueurs achètent des <?=$_Serveur_['General']['moneyName'];?> avec leurs dons, et les utilisent dans la boutique.</strong>
         </div>
-    </div>
-    <?php }
+    </div><?php
     if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment')){ 
         ?>
     
@@ -108,11 +107,10 @@ if(isset($_GET['paypal'])){
                 <input type="hidden" name="paysafecardpage" value="1">
                 <div class="row">
                     <div class="alert alert-danger">
-                        <p>Notre systéme "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuelle ! Lorsqu'un joueur achète des <?=$_Serveur['General']['moneyName'];?> via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livrer les <?=$_Serveur['General']['moneyName'];?> à l'acheteur ! Pour valider des codes paysafecard / vérifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
+                        <p>Notre systéme "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuelle ! Lorsqu'un joueur achète des <?=$_Serveur_['General']['moneyName'];?> via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livrer les <?=$_Serveur_['General']['moneyName'];?> à l'acheteur ! Pour valider des codes paysafecard / vérifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
                         Le saviez-vous: <strong>Vous pouvez payer l'hébergement de votre site web via code PaySafeCard <a href="https://webstrator.fr/" target="_blank" rel="noopener noreferrer">chez notre partenaire Webstrator.fr</a> !</strong>
                     </div>
                 </div>
-                <script>initPost('payementinfo', 'admin.php?&action=editPayement');</script>
             <?php } ?>
             </div>
         </div>
@@ -133,7 +131,7 @@ if(isset($_GET['paypal'])){
                         <h3>Créer une offre</h3>
                         <div class="row">
                             <label class="control-label">Titre de l'offre</label>
-                            <input type="text" name="nom" class="form-control" placeholder="ex: 5€ - 1500<?=$_Serveur['General']['moneyName'];?>" required/>
+                            <input type="text" name="nom" class="form-control" placeholder="ex: 5€ - 1500 <?=$_Serveur_['General']['moneyName'];?>" required/>
                         </div>
                         <div class="row">
                             <label class="control-label">Message de l'offre</label>
@@ -144,7 +142,7 @@ if(isset($_GET['paypal'])){
                             <input type="number" step="0.01" name="prix" class="form-control" placeholder="ex: 5" required>
                         </div>
                         <div class="row">
-                            <label class="control-label"><?=$_Serveur['General']['moneyName'];?> donnés</label>
+                            <label class="control-label"><?=$_Serveur_['General']['moneyName'];?> donnés</label>
                             <input type="number" name="jetons_donnes" class="form-control" placeholder="ex: 1500" required>
                         </div>
                         <hr>
@@ -188,7 +186,7 @@ if(isset($_GET['paypal'])){
                         <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="payementPaypal<?php echo $i; ?>">
                                 <div class="row">
                                     <label class="control-label">Titre de l'offre</label>
-                                    <input type="text" name="nom" value="<?php echo $paypalOffres[$i]['nom']; ?>" class="form-control" placeholder="ex: 5€ - 1500<?=$_Serveur['General']['moneyName'];?>" required/>
+                                    <input type="text" name="nom" value="<?php echo $paypalOffres[$i]['nom']; ?>" class="form-control" placeholder="ex: 5€ - 1500 <?=$_Serveur_['General']['moneyName'];?>" required/>
                                 </div>
                                 <div class="row">
                                     <label class="control-label">Message de l'offre</label>
@@ -199,7 +197,7 @@ if(isset($_GET['paypal'])){
                                     <input type="number" step="0.01" name="prix" value="<?php echo $paypalOffres[$i]['prix']; ?>" class="form-control" placeholder="ex: 5" required/>
                                 </div>
                                 <div class="row">
-                                    <label class="control-label"><?=$_Serveur['General']['moneyName'];?> donnés</label>
+                                    <label class="control-label"><?=$_Serveur_['General']['moneyName'];?> donnés</label>
                                     <input type="number" name="jetons_donnes" value="<?php echo $paypalOffres[$i]['jetons_donnes']; ?>" class="form-control" placeholder="ex: 1500" required/>
                                 </div>
                                 <hr>
@@ -258,7 +256,7 @@ if(isset($_GET['paypal'])){
                                         <input type="number" step="0.01" value="<?php echo $paysafecard[$i]['montant']; ?>" class="form-control" disabled />
                                     </div>
                                     <div class="col-md-2">
-                                        <label class="control-label"><?=$_Serveur['General']['moneyName'];?> donnés</label>
+                                        <label class="control-label"><?=$_Serveur_['General']['moneyName'];?> donnés</label>
                                         <input type="number" name="jetons" value="<?php echo $paysafecard[$i]['jetons']; ?>" class="form-control" placeholder="ex: 1500"/>
                                     </div>
                                 </div><hr>
@@ -288,7 +286,7 @@ if(isset($_GET['paypal'])){
                         <th>Pseudo</th>
                         <th>Code</th>
                         <th>Montant</th>
-                        <th><?=$_Serveur['General']['moneyName'];?></th>
+                        <th><?=$_Serveur_['General']['moneyName'];?></th>
                         <th>Traité ?</th>
                         <th>Actions</th>
                     </tr>
@@ -317,3 +315,4 @@ if(isset($_GET['paypal'])){
     <?php } ?> 
 </div>
 <br/>
+<?php } ?>
