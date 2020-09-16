@@ -131,7 +131,7 @@ if(isset($_GET['paypal'])){
                         <h3>Créer une offre</h3>
                         <div class="row">
                             <label class="control-label">Titre de l'offre</label>
-                            <input type="text" name="nom" class="form-control" placeholder="ex: 5€ - 1500Jetons" required/>
+                            <input type="text" name="nom" class="form-control" placeholder="ex: 5€ - 1500 <?=$_Serveur_['General']['moneyName'];?>" required/>
                         </div>
                         <div class="row">
                             <label class="control-label">Message de l'offre</label>
@@ -142,7 +142,7 @@ if(isset($_GET['paypal'])){
                             <input type="number" step="0.01" name="prix" class="form-control" placeholder="ex: 5" required>
                         </div>
                         <div class="row">
-                            <label class="control-label">Jetons donnés</label>
+                            <label class="control-label"><?=$_Serveur_['General']['moneyName'];?> donnés</label>
                             <input type="number" name="jetons_donnes" class="form-control" placeholder="ex: 1500" required>
                         </div>
                         <hr>
@@ -186,7 +186,7 @@ if(isset($_GET['paypal'])){
                         <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="payementPaypal<?php echo $i; ?>">
                                 <div class="row">
                                     <label class="control-label">Titre de l'offre</label>
-                                    <input type="text" name="nom" value="<?php echo $paypalOffres[$i]['nom']; ?>" class="form-control" placeholder="ex: 5€ - 1500Jetons" required/>
+                                    <input type="text" name="nom" value="<?php echo $paypalOffres[$i]['nom']; ?>" class="form-control" placeholder="ex: 5€ - 1500 <?=$_Serveur_['General']['moneyName'];?>" required/>
                                 </div>
                                 <div class="row">
                                     <label class="control-label">Message de l'offre</label>
@@ -197,7 +197,7 @@ if(isset($_GET['paypal'])){
                                     <input type="number" step="0.01" name="prix" value="<?php echo $paypalOffres[$i]['prix']; ?>" class="form-control" placeholder="ex: 5" required/>
                                 </div>
                                 <div class="row">
-                                    <label class="control-label">Jetons donnés</label>
+                                    <label class="control-label"><?=$_Serveur_['General']['moneyName'];?> donnés</label>
                                     <input type="number" name="jetons_donnes" value="<?php echo $paypalOffres[$i]['jetons_donnes']; ?>" class="form-control" placeholder="ex: 1500" required/>
                                 </div>
                                 <hr>
@@ -256,7 +256,7 @@ if(isset($_GET['paypal'])){
                                         <input type="number" step="0.01" value="<?php echo $paysafecard[$i]['montant']; ?>" class="form-control" disabled />
                                     </div>
                                     <div class="col-md-2">
-                                        <label class="control-label">Jetons donnés</label>
+                                        <label class="control-label"><?=$_Serveur_['General']['moneyName'];?> donnés</label>
                                         <input type="number" name="jetons" value="<?php echo $paysafecard[$i]['jetons']; ?>" class="form-control" placeholder="ex: 1500"/>
                                     </div>
                                 </div><hr>
@@ -286,7 +286,7 @@ if(isset($_GET['paypal'])){
                         <th>Pseudo</th>
                         <th>Code</th>
                         <th>Montant</th>
-                        <th>Jetons</th>
+                        <th><?=$_Serveur_['General']['moneyName'];?></th>
                         <th>Traité ?</th>
                         <th>Actions</th>
                     </tr>
