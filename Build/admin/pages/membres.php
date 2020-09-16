@@ -79,7 +79,7 @@
                                 <th style="width:75px;cursor:pointer;" onclick="setAxe('id')">ID</th>
                                 <th style="cursor:pointer;" onclick="setAxe('pseudo');">Pseudo</th>
                                 <th style="cursor:pointer;" onclick="setAxe('email');">Email</th>
-                                <th style="cursor:pointer;" onclick="setAxe('tokens');">Jetons</th>
+                                <th style="cursor:pointer;" onclick="setAxe('tokens');"><?=$_Serveur['General']['moneyName'];?></th>
                                 <th style="cursor:pointer;" onclick="setAxe('rang');">Rang</th>
                                 <th>Mot de passe</th>
                                 <?php if($_Permission_->verifPerm('PermsPanel', 'members', "actions","editMember")) { ?>

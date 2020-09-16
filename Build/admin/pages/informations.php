@@ -422,7 +422,7 @@
                                                 <th>#</th>
                                                 <th>Pseudo</th>
                                                 <th>Email</th>
-                                                <th>Jetons</th>
+                                                <th><?=$_Serveur['General']['moneyName'];?></th>
                                                 <th>Inscrit le</th>
                                                 <?php if($ShowMail) { echo '<th>Etat</th>'; } ?>
                                                 <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) { echo '<th>IP</th>'; } ?>
