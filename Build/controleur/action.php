@@ -31,7 +31,9 @@ if(isset($_GET['action']))
 		case 'getBaltopVote':
 			include('controleur/BaltopVote.php');
 			exit();
-
+		case 'getRecompenseList':
+			include('controleur/recompenseList.php');
+			exit();
 		case 'voteCron':
 			include('controleur/voteCron.php');
 			exit();

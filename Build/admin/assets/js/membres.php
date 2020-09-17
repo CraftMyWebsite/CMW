@@ -117,7 +117,7 @@ async function showAll(allPlayer) {
             if (typeof allChange["id"+allPlayer[i].id2] === 'undefined') {
                 all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-pseudo' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form"  value="' + allPlayer[i].pseudo + '" placeholder="Pseudo"></td>';
                 all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-email' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="' + allPlayer[i].email + '" placeholder="Email"></td>';
-                all += '<td><input type="number" onkeyup="addChange('+allPlayer[i].id2+')" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allPlayer[i].tokens + '" placeholder="<?=$_Serveur['General']['moneyName'];?>"></td>';
+                all += '<td><input type="number" onkeyup="addChange('+allPlayer[i].id2+')" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allPlayer[i].tokens + '" placeholder="<?=$_Serveur_['General']['moneyName'];?>"></td>';
 
                 all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabled form-control">';
                 let it = grade.keys();
@@ -131,7 +131,7 @@ async function showAll(allPlayer) {
             } else {
                 all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-pseudo' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form"  value="' + allChange["pseudo"+allPlayer[i].id2] + '" placeholder="Pseudo"></td>';
                 all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-email' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="' + allChange["email"+allPlayer[i].id2] + '" placeholder="Email"></td>';
-                all += '<td><input type="number" onchange"if(parseInt(this.value) < 1 ) { this.value = 0;}addChange('+allPlayer[i].id2+')" onkeyup="if(parseInt(this.value) < 1 ) { this.value = 0;}addChange('+allPlayer[i].id2+')" min="0" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allChange["tokens"+allPlayer[i].id2] + '" placeholder="<?=$_Serveur['General']['moneyName'];?>"></td>';
+                all += '<td><input type="number" onchange"if(parseInt(this.value) < 1 ) { this.value = 0;}addChange('+allPlayer[i].id2+')" onkeyup="if(parseInt(this.value) < 1 ) { this.value = 0;}addChange('+allPlayer[i].id2+')" min="0" name="input-tokens' + allPlayer[i].id2 + '"class="input-disabled form-control membres-form" value="' + allChange["tokens"+allPlayer[i].id2] + '" placeholder="<?=$_Serveur_['General']['moneyName'];?>"></td>';
 
                 all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabledform-control">';
                 let it = grade.keys();

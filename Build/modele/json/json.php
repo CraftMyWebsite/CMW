@@ -3,6 +3,8 @@
 
 $reqRecup = $bddConnection->query('SELECT * FROM cmw_serveur');
 
+$jsonCon = array();
+
 $lectureJSON = $reqRecup->fetchAll(PDO::FETCH_ASSOC);
 
 	foreach($lectureJSON as $key => $serveur)

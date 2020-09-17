@@ -1,7 +1,7 @@
 var ps = "";
-function initVoteBouton(el, pseudo, id, timePlayer, timeLien, url, name, actionJson) {
+function initVoteBouton(el, pseudo, id, timePlayer, timeLien, url, name) {
     ps = pseudo;
-    allBtn.set(el, [pseudo, id, timePlayer, timeLien, url, name, actionJson]);
+    allBtn.set(el, [pseudo, id, timePlayer, timeLien, url, name]);
     if(timePlayer + timeLien < Math.round(Date.now() / 1000)) {
       el.addEventListener("click", startLoopCheckBtn);
       el.className = "btn btn-secondary";
@@ -41,7 +41,6 @@ function putS(nb) {
 var allBtn = new Map();
 var topRec = new Map();
 var runningBtn = new Array();
-var recompenseList = new Array();
 
 function startLoopCheckBtn(event, open = true) {
     let btn = allBtn.get(event.target);
@@ -63,13 +62,11 @@ function startLoopCheckBtn(event, open = true) {
             "id": btn[1],
             "pseudo": btn[0]
         }, function (data, status) {
-            console.log(data);
             data = data.substring(data.indexOf('[DIV]') + 5);
             if (data == "success") {
                 event.target.removeEventListener("click", startLoopCheckBtn, false);
                 runningBtn.splice(runningBtn.indexOf(event.target), 1);
                 btn[2] = Math.round(Date.now() / 1000)  ;
-                recompenseList.push(btn[6]);
                 updateRecompenseList();
                 updateBaltop();
                 event.target.className = "btn btn-danger";
@@ -86,7 +83,6 @@ function startLoopCheckBtn(event, open = true) {
 }
 
 function clearRecompense() {
-    recompenseList = [];
     updateRecompenseList();
 }
 function is(obj) {
@@ -96,7 +92,6 @@ function is(obj) {
 function updateBaltop(loop = false) {
     $.post("index.php?action=getBaltopVote", {}, function (data, status) {
         data = data.substring(data.indexOf('[DIV]') + 5);
-
         var f = " <thead>"
                    + "<tr>"
                        +"<th>#</th>"
@@ -107,14 +102,15 @@ function updateBaltop(loop = false) {
 
         if(data != "") {
             let json = JSON.parse(data);
+
             json.forEach(function(ar, ar2) { 
                 var rec = null;
-                if(is(topRec.get(ar2+1))) {
+                if(is(topRec.get(parseInt(ar2)+1))) {
                     rec = "<ul style='display:inline;'>";
                     let item = new Map();
                     let custom = 0;
                     let jeton = 0;
-                           topRec.get(ar2+1).forEach(function(value, val2) {
+                           topRec.get(parseInt(ar2)+1).forEach(function(value, val2) {
                                if(value.type == "item") {
                                    if(item.has(value.value)) {
                                        item.set(value.value, parseInt(item.get(value.value)) + parseInt(value.value2));
@@ -146,12 +142,12 @@ function updateBaltop(loop = false) {
 
                     f+= '<tr>'
                         +'<td>'
-                            +(ar2+1);
-                            if((ar2+1) == 1) {
+                            +(parseInt(ar2)+1);
+                            if((parseInt(ar2)+1) == 1) {
                                 f += ' <i style="color:rgb(255, 215, 0);" class="fas fa-trophy"></i> ';
-                            }else if((ar2+1) == 2) {
+                            }else if((parseInt(ar2)+1) == 2) {
                                 f += ' <i style="color:rgb(192, 192, 192);" class="fas fa-trophy"></i> ';
-                            } else if((ar2+1) == 3) {
+                            } else if((parseInt(ar2)+1) == 3) {
                                 f += ' <i style="color:rgb(205, 127, 50);" class="fas fa-trophy"></i> ';
                             }
                             if(is(rec)) { 
@@ -190,56 +186,65 @@ function updateBaltop(loop = false) {
     });
 }
 
-function addRecompense(action) {
-    recompenseList.push(action);
-}
 
 function updateRecompenseList() {
     let el = document.getElementById("recompList");
     if(is(el)) {
-        el.innerText = "";
-        let item = new Map();
-        let custom = 0;
-        let jeton = 0;
-        recompenseList.forEach(function(i, val) {
-               i.forEach(function(value, val2) {
-                   if(value.type == "item") {
-                       if(item.has(value.value)) {
-                           item.set(value.value, parseInt(item.get(value.value)) + parseInt(value.value2));
-                       } else {
-                           item.set(value.value, parseInt(value.value2));
-                       }
-                   } else if(value.type == "commande") {
-                        custom++;
-                   }else if(value.type == "jeton") {
-                       jeton += parseInt(value.value);
-                   }/*else if(value.type == "message") {
-                       custom++;
-                   }*/
-            });
+        $.post("index.php?action=getRecompenseList", {}, function (data, status) {
+            data = data.substring(data.indexOf('[DIV]') + 5);
+            if(data != "") {
+                el.innerText = "";
+                let item = new Map();
+                let custom = 0;
+                let jeton = 0;
+                let json = JSON.parse(data);
+                json.forEach(function(i, val) {
+                   JSON.parse(i).forEach(function(value, val2) {
+                       if(value.type == "item") {
+                           if(item.has(value.value)) {
+                               item.set(value.value, parseInt(item.get(value.value)) + parseInt(value.value2));
+                           } else {
+                               item.set(value.value, parseInt(value.value2));
+                           }
+                       } else if(value.type == "commande") {
+                            custom++;
+                       }else if(value.type == "jeton") {
+                           jeton += parseInt(value.value);
+                       }/*else if(value.type == "message") {
+                           custom++;
+                       }*/
+                    });
+                });
+                if(item.size != 0) {
+                    item.forEach(function(value, val2) { 
+                        el.innerHTML += "<li>"+value+" item"+putS(value)+" avec l'id "+val2+"</li>";
+                    });
+                }
+                if(custom != 0) {
+                    el.innerHTML += "<li>"+custom+" récompense"+putS(custom)+" surprise !</li>";
+                }
+                if(jeton != 0) {
+                    el.innerHTML += "<li>"+jeton+" jeton"+putS(jeton)+" boutique !</li>";
+                    hasJeton = true;
+                } else {
+                    hasJeton = false
+                }
+                if(item.size == 0 && jeton == 0 && custom == 0) {
+                    if(document.getElementById("disprecompList").style.display == "block") {
+                         $("#disprecompList").hide(300);
+                    }
+                } else {
+                    if(document.getElementById("disprecompList").style.display == "none") {
+                        $("#disprecompList").show(300);
+                    }
+                    el.innerHTML += "<button type='button' class='btn btn-success' onclick='pickupRecompense();' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</button>";
+                }
+            } else {
+                if(document.getElementById("disprecompList").style.display == "block") {
+                     $("#disprecompList").hide(300);
+                }
+            }
         });
-
-        if(item.size != 0) {
-            item.forEach(function(value, val2) { 
-                el.innerHTML += "<li>"+value+" item"+putS(value)+" avec l'id "+val2+"</li>";
-            });
-        }
-        if(custom != 0) {
-            el.innerHTML += "<li>"+custom+" récompense"+putS(custom)+" surprise !</li>";
-        }
-        if(jeton != 0) {
-            el.innerHTML += "<li>"+jeton+" jeton"+putS(jeton)+" boutique !</li>";
-            hasJeton = true;
-        } else {
-            hasJeton = false
-        }
-
-        if(item.size == 0 && jeton == 0 && custom == 0) {
-            document.getElementById("disprecompList").style.display="none";
-        } else {
-             document.getElementById("disprecompList").style.display="block";
-            el.innerHTML += "<button type='button' class='btn btn-success' onclick='pickupRecompense();' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</button>";
-        }
     }
 }
 
@@ -268,4 +273,7 @@ function pickupRecompense() {
         });
     }
 }
-setTimeout(function () {updateBaltop(true) }, 500);
+window.addEventListener("load", function () {
+    updateBaltop(true);
+    updateRecompenseList();
+});

@@ -8,7 +8,7 @@ function initPost(idform, url, callBack) {
     allForm[idform] = new Map();
     allUrl[idform] = url;
     allCallBack[idform] = callBack;
-    console.log('init: '+idform);
+    log('init: '+idform);
     if(isset(form)) {
         loopChild(form, idform);
     } 
@@ -25,14 +25,14 @@ function loopChild(form, idform) {
                 if(allForm[idform].has(form.children[i].name))
                 {
                     allForm[idform].get(form.children[i].name).push(form.children[i]);
-                    console.log('add: '+form.children[i].name+' as radio value:'+form.children[i].value );
+                    log('add: '+form.children[i].name+' as radio value:'+form.children[i].value );
                 } else {
                     allForm[idform].set(form.children[i].name, [ form.children[i] ]);
-                    console.log('add: '+form.children[i].name+' as first radio value:'+form.children[i].value );
+                    log('add: '+form.children[i].name+' as first radio value:'+form.children[i].value );
                 }
             } else {
                 allForm[idform].set(form.children[i].name, form.children[i]);
-                console.log('add: '+form.children[i].name);
+                log('add: '+form.children[i].name);
             }
 
         }
@@ -51,7 +51,7 @@ function getEach(element, callBack) {
 function sendDirectPost(url, callback) {
     var returnData = false;
     $.post(url, {}, function(data, status) {
-        console.log("post: "+url+" data:"+data)
+        log("post: "+url+" data:"+data)
         if (status == "success") {
             returnData = true;
             notif("success", "Action effectuée !","");
@@ -94,18 +94,18 @@ function sendPost(idform, callback, sendData) {
             if(allForm[idform].get(key).id == "ckeditor" && allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
             {
                 postData[key] = CK.get(allForm[idform].get(key)).getData();
-                console.log(key+"-ckeditor-"+postData[key]);
+                log(key+"-ckeditor-"+postData[key]);
             } 
             else if(allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
             {
                 postData[key] = allForm[idform].get(key).value;
-                console.log(key+"-textarea-"+postData[key]);
+                log(key+"-textarea-"+postData[key]);
             } else {
                 if((allForm[idform].get(key).type == "checkbox" && !allForm[idform].get(key).checked))
                 {
 
                 } else if(isset(allForm[idform].get(key).value)){
-                    console.log(key+"-"+allForm[idform].get(key).value);
+                    log(key+"-"+allForm[idform].get(key).value);
                     postData[key] = allForm[idform].get(key).value;
                 }
             }
@@ -113,7 +113,7 @@ function sendPost(idform, callback, sendData) {
             for (let rad of allForm[idform].get(key)) {
                 if(rad.checked) {
                     postData[key] = rad.value;
-                    console.log(key+"-radio-"+rad.value);
+                    log(key+"-radio-"+rad.value);
                 }
             }
         }
@@ -129,7 +129,7 @@ function sendPost(idform, callback, sendData) {
     }
     var returnData = false;
     $.post(allUrl[idform], postData, function(data, status) {
-        console.log("post: "+allUrl[idform]+" data:"+data)
+        log("post: "+allUrl[idform]+" data:"+data)
         if (status == "success") {
             returnData = true;
             if(isset(sendData))
@@ -256,7 +256,7 @@ function isset(obj) {
 function initPostCallback(callback) {
     var list = document.querySelectorAll('[data-callback]');
     for (var i = 0; i < list.length; ++i) {
-        console.log("try callback "+list[i]);
+        log("try callback "+list[i]);
         initPost(list[i].getAttribute("data-callback"), list[i].getAttribute("data-url"), callback);
     }
 }
@@ -272,4 +272,12 @@ function configVoteGetMaxVal() {
         }
     }
     return 999;
+}
+
+var log = false;
+
+function log(s) {
+    if(log) {
+        console.log(s);
+    }
 }

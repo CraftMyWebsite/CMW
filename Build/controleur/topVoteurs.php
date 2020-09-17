@@ -47,12 +47,5 @@ if(isset($voteurs))
 $req_vote = $bddConnection->prepare('SELECT id, lien, titre FROM cmw_votes_config WHERE serveur = :serveur');
 $count_req = $bddConnection->prepare('SELECT COUNT(id) as count FROM cmw_votes_config WHERE serveur = :serveur');
 
-if(Permission::getInstance()->verifPerm("connect"))
-{
-	$req_vote_temp = $bddConnection->prepare('SELECT * FROM cmw_votes_temp WHERE pseudo = :pseudo');
-	$req_vote_temp->execute(array(
-		'pseudo' => $_Joueur_['pseudo']
-	));
-	$donneesVotesTemp = $req_vote_temp->fetchAll(PDO::FETCH_ASSOC);
-}
+
 ?>

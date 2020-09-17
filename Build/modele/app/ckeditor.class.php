@@ -8,15 +8,17 @@ class ckeditor
 			$dom->loadHTML($content2);
 			$dom->removeChild($dom->doctype);           
 			$dom->replaceChild($dom->firstChild->firstChild->firstChild, $dom->firstChild);
+
 			$script = $dom->getElementsByTagName('script');
-			$remove = [];
 			foreach($script as $item)
 			{
-			  	$remove[] = $item;
+			  	$item->parentNode->removeChild($item); 
 			}
-			foreach ($remove as $item)
+
+			$script = $dom->getElementsByTagName('form');
+			foreach($script as $item)
 			{
-			  $item->parentNode->removeChild($item); 
+			  	$item->parentNode->removeChild($item); 
 			}
 
 			$img = $dom->getElementsByTagName('img');
@@ -24,11 +26,19 @@ class ckeditor
 			{
 			  	$item->setAttribute("style", "max-width: 100%;height: auto;cursor:pointer;");
 			  	$item->setAttribute("onclick", "imageModal(this);");
+			  	$str = str_replace(" ", "",$item->getAttribute("src"));
+			  	if(isset($str) && !empty($str)) {
+			  		if(strpos($str, "?action=") strpos($str, "&action="))
+			  		{
+			  			$item->parentNode->removeChild($item); 
+			  		}
+			  	}
 			}
 			$content = $dom->saveHTML(); 
 			return $content;
 		}
 		return "";
 	}
+
 }
 ?>
