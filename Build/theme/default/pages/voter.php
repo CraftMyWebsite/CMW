@@ -38,9 +38,7 @@
                     <!-- Gestion des Récompenses -->
                     <div class="alert alert-success text-center" id="disprecompList" style="display:none;">
                         <ul style="list-style-position: inside; padding-left: 0px;" id="recompList">
-                            <script>
-                            updateRecompenseList();
-                            </script>
+                        </ul>
                     </div>
             <?php } ?>
         </div>

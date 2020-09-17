@@ -12,8 +12,8 @@ if(Permission::getInstance()->verifPerm("connect"))
 		$i = 0;
 		foreach ($donneesVotesTemp as $data) {
 			$tojs[$i] = $data['action'];
-			i++;
+			$i++;
 		}
 		 echo json_encode(array_values($tojs)); 
-	}
+	} 
 }?>
