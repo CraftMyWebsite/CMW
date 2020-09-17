@@ -18,7 +18,7 @@
                 <strong>Dans cette section vous pourrez configurer vos votes.</strong><br/>
                 Pour le message vous pouvez utiliser les tags:<ul>
                     <li> {JOUEUR} qui sera remplacé par le nom du joueur qui a voté</li>
-                    <li> {QUANTITE} qui sera remplacé par la quantité de <?=$_Serveur['General']['moneyName'];?> site, ou d'item IG give</li>
+                    <li> {QUANTITE} qui sera remplacé par la quantité de <?=$_Serveur_['General']['moneyName'];?> site, ou d'item IG give</li>
                     <li> {ID} qui sera remplacé par l'id de l'item give IG </li>
                 </ul>
                 Pour la commande vous pourrez utiliser : 
@@ -56,8 +56,8 @@
                             <div class="dropdown-menu">
                               <button class="dropdown-item" onclick="addVoteRec('commande', 'all-new-rec-vote','list-new-rec-vote');">Commande</button>
                               <button  class="dropdown-item" onclick="addVoteRec('message', 'all-new-rec-vote','list-new-rec-vote');">Message</button >
-                                <button  class="dropdown-item" onclick="addVoteRec('jeton', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
-                              <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur['General']['moneyName'];?>(s) aléatoire</button >
+                                <button  class="dropdown-item" onclick="addVoteRec('jeton', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur_['General']['moneyName'];?>(s)</button >
+                              <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-vote','list-new-rec-vote');"><?=$_Serveur_['General']['moneyName'];?>(s) aléatoire</button >
                               <button  class="dropdown-item" onclick="addVoteRec('item', 'all-new-rec-vote','list-new-rec-vote');">Item(s)</button >
                             </div>
                           </div>
@@ -270,8 +270,8 @@
                                                 <div class="dropdown-menu">
                                                   <button class="dropdown-item" onclick="addVoteRec('commande','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Commande</button>
                                                   <button  class="dropdown-item" onclick="addVoteRec('message','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Message</button >
-                                                   <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur['General']['moneyName'];?>(s)</button >
-                                                  <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur['General']['moneyName'];?>(s) aléatoire</button >
+                                                   <button  class="dropdown-item" onclick="addVoteRec('jeton','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur_['General']['moneyName'];?>(s)</button >
+                                                  <button  class="dropdown-item" onclick="addVoteRec('jetonAlea', 'all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');"><?=$_Serveur_['General']['moneyName'];?>(s) aléatoire</button >
                                                   <button  class="dropdown-item" onclick="addVoteRec('item','all-new-rec-<?=$o;?>vote','list-new-rec-<?=$o;?>vote');">Item(s)</button >
                                                 </div>
                                               </div>
@@ -283,7 +283,7 @@
                                                     <div class=" col-md-6 col-12" id="rec-vote-<?php echo $idcs; ?>" data-type="<?php echo $value['type']; ?>" style="margin-top:15px;"><div style="border: 1px solid #B0B0B0;border-radius: 24px;padding:20px;margin:7px;">
                                                         <div style="width: 100%;display: inline-block">
                                                             <div class="float-left">
-                                                                <h5><?php echo ucfirst($value['type']) == "Jeton" ? $_Serveur['General']['moneyName'] : (ucfirst($value['type']) == "JetonAlea" ? $_Serveur['General']['moneyName']." aléatoire" : ucfirst($value['type']) ) ; ?></h5>
+                                                                <h5><?php echo ucfirst($value['type']) == "Jeton" ? $_Serveur_['General']['moneyName'] : (ucfirst($value['type']) == "JetonAlea" ? $_Serveur_['General']['moneyName']." aléatoire" : ucfirst($value['type']) ) ; ?></h5>
                                                             </div>
                                                             <div class="float-right">'
                                                                 <button onclick="get('list-new-rec-<?=$o;?>vote').removeChild(get('rec-vote-<?php echo $idcs; ?>'));if(get('list-new-rec-<?=$o;?>vote').children.length == 0) { hide('all-new-rec-<?=$o;?>vote');} genVoteJson2();sendPost('all-vote');" class="btn btn-sm btn-outline-secondary">Supprimer</button>'
@@ -306,7 +306,7 @@
                                                                 <label class="control-label">Nombre d\'item à donner</label>
                                                                 <input type="number" data-type="value2" min="1" value="<?php echo $value['value2']; ?>" max="64"  class="form-control"/>
                                                          <?php } else if($value['type'] == "jetonAlea") { ?>
-                                                                <label class="control-label">Quantité de  <?php echo $_Serveur['General']['moneyName']; ?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
+                                                                <label class="control-label">Quantité de  <?php echo $_Serveur_['General']['moneyName']; ?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
                                                                 <label class="control-label" style="margin-top:10px;">Quantité minimum:</label>
                                                                 <input type="number" data-type="value" min="0" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
 

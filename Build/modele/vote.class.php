@@ -201,7 +201,7 @@ class vote {
                 ));
         }
         if($save) {
-            if(empty($action) | !isset($action)) {
+            if(empty($json) | !isset($json)) {
                 $req_suppr = $bddConnection->prepare('DELETE FROM cmw_votes_temp WHERE id = :id');
                 $req_suppr->execute(array(
                     'id' => $data['id']

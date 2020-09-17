@@ -59,7 +59,7 @@ require('theme/' . $_Serveur_['General']['theme'] . '/preload.php'); ?>
 </head>
 
 <body>
-    <script type="text/javascript">var _Jetons_ = "<?=$_Serveur['General']['moneyName'];?>";</script>
+    <script type="text/javascript">var _Jetons_ = "<?=$_Serveur_['General']['moneyName'];?>";</script>
     <?php
     //Verif Version
     include("./include/version.php");

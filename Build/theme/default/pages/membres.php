@@ -40,7 +40,7 @@ if (isset($_GET['page_membre'])) {
                             <th scope="col">#</th>
                             <th scope="col">Pseudo</th>
                             <th scope="col">Grade Site</th>
-                            <th scope="col"><?=$_Serveur['General']['moneyName'];?></th>
+                            <th scope="col"><?=$_Serveur_['General']['moneyName'];?></th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>

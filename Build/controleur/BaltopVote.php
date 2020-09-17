@@ -1,10 +1,11 @@
 [DIV]
 <?php
 if (isset($topVoteurs)) { 
-    $tojs = array();
-    for ($i = 0; $i < count($topVoteurs) and $i < $_Serveur_['vote']['maxDisplay']; $i++) {  
-        $tojs[$i]['pseudo'] = $topVoteurs[$i]['pseudo'];
-        $tojs[$i]['nombre'] = $topVoteurs[$i]['nbre_votes'];
+	$i = 0;
+	$tojs = array();
+	foreach ($donneesVotesTemp as $data) { 
+		$tojs[$i]=$data['action'];
+    	$i++;
     }
     echo json_encode(array_values($tojs)); 
 } ?>

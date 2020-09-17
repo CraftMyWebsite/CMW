@@ -36,14 +36,9 @@
             <?php
             if (Permission::getInstance()->verifPerm("connect") and isset($_GET['player']) and $_Joueur_['pseudo'] == $_GET['player']) {  ?>
                     <!-- Gestion des Récompenses -->
-                    <div class="alert alert-success text-center"  id="disprecompList" <?php if (!empty($donneesVotesTemp)) { ?> style="display:none;" <?php } ?>>
+                    <div class="alert alert-success text-center" id="disprecompList" style="display:none;">
                         <ul style="list-style-position: inside; padding-left: 0px;" id="recompList">
-
                             <script>
-                            <?php foreach ($donneesVotesTemp as $data) { ?>
-                                addRecompense(JSON.parse('<?php echo $data['action']; ?>'));
-                            <?php }
-                            ?>
                             updateRecompenseList();
                             </script>
                     </div>
@@ -149,7 +144,7 @@
                                                   ?>
 
                                                  <button type="button" id="votebtn-<?php echo $allvote['id']; ?>" ></button>
-                                                 <script>initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>', JSON.parse('<?php echo $vote->getAction(); ?>'));</script>
+                                                 <script>initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>');</script>
                                             <?php } ?>
                                          </div>
 

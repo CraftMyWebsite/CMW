@@ -1,7 +1,7 @@
 var ps = "";
-function initVoteBouton(el, pseudo, id, timePlayer, timeLien, url, name, actionJson) {
+function initVoteBouton(el, pseudo, id, timePlayer, timeLien, url, name) {
     ps = pseudo;
-    allBtn.set(el, [pseudo, id, timePlayer, timeLien, url, name, actionJson]);
+    allBtn.set(el, [pseudo, id, timePlayer, timeLien, url, name]);
     if(timePlayer + timeLien < Math.round(Date.now() / 1000)) {
       el.addEventListener("click", startLoopCheckBtn);
       el.className = "btn btn-secondary";
@@ -41,7 +41,6 @@ function putS(nb) {
 var allBtn = new Map();
 var topRec = new Map();
 var runningBtn = new Array();
-var recompenseList = new Array();
 
 function startLoopCheckBtn(event, open = true) {
     let btn = allBtn.get(event.target);
@@ -69,7 +68,6 @@ function startLoopCheckBtn(event, open = true) {
                 event.target.removeEventListener("click", startLoopCheckBtn, false);
                 runningBtn.splice(runningBtn.indexOf(event.target), 1);
                 btn[2] = Math.round(Date.now() / 1000)  ;
-                recompenseList.push(btn[6]);
                 updateRecompenseList();
                 updateBaltop();
                 event.target.className = "btn btn-danger";
@@ -86,7 +84,6 @@ function startLoopCheckBtn(event, open = true) {
 }
 
 function clearRecompense() {
-    recompenseList = [];
     updateRecompenseList();
 }
 function is(obj) {
@@ -190,18 +187,21 @@ function updateBaltop(loop = false) {
     });
 }
 
-function addRecompense(action) {
-    recompenseList.push(action);
-}
 
 function updateRecompenseList() {
     let el = document.getElementById("recompList");
     if(is(el)) {
-        el.innerText = "";
-        let item = new Map();
-        let custom = 0;
-        let jeton = 0;
-        recompenseList.forEach(function(i, val) {
+        $.post("index.php?action=getRecompenseListe", {}, function (data, status) {
+        data = data.substring(data.indexOf('[DIV]') + 5);
+
+
+        if(data != "") {
+            el.innerText = "";
+            let item = new Map();
+            let custom = 0;
+            let jeton = 0;
+            let json = JSON.parse(data);
+            json.forEach(function(i, val) {
                i.forEach(function(value, val2) {
                    if(value.type == "item") {
                        if(item.has(value.value)) {
@@ -216,31 +216,38 @@ function updateRecompenseList() {
                    }/*else if(value.type == "message") {
                        custom++;
                    }*/
+                });
             });
-        });
-
-        if(item.size != 0) {
-            item.forEach(function(value, val2) { 
-                el.innerHTML += "<li>"+value+" item"+putS(value)+" avec l'id "+val2+"</li>";
-            });
-        }
-        if(custom != 0) {
-            el.innerHTML += "<li>"+custom+" récompense"+putS(custom)+" surprise !</li>";
-        }
-        if(jeton != 0) {
-            el.innerHTML += "<li>"+jeton+" jeton"+putS(jeton)+" boutique !</li>";
-            hasJeton = true;
+            if(item.size != 0) {
+                item.forEach(function(value, val2) { 
+                    el.innerHTML += "<li>"+value+" item"+putS(value)+" avec l'id "+val2+"</li>";
+                });
+            }
+            if(custom != 0) {
+                el.innerHTML += "<li>"+custom+" récompense"+putS(custom)+" surprise !</li>";
+            }
+            if(jeton != 0) {
+                el.innerHTML += "<li>"+jeton+" jeton"+putS(jeton)+" boutique !</li>";
+                hasJeton = true;
+            } else {
+                hasJeton = false
+            }
+            if(item.size == 0 && jeton == 0 && custom == 0) {
+                if(document.getElementById("disprecompList").style.display == "block") {
+                     $("#disprecompList").hide(300);
+                }
+            } else {
+                if(document.getElementById("disprecompList").style.display == "none") {
+                    $("#disprecompList").show(300);
+                }
+                el.innerHTML += "<button type='button' class='btn btn-success' onclick='pickupRecompense();' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</button>";
+            }
         } else {
-            hasJeton = false
+            if(document.getElementById("disprecompList").style.display == "block") {
+                 $("#disprecompList").hide(300);
+            }
         }
-
-        if(item.size == 0 && jeton == 0 && custom == 0) {
-            document.getElementById("disprecompList").style.display="none";
-        } else {
-             document.getElementById("disprecompList").style.display="block";
-            el.innerHTML += "<button type='button' class='btn btn-success' onclick='pickupRecompense();' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</button>";
-        }
-    }
+    });
 }
 
 var hasJeton = false;
