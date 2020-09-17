@@ -395,7 +395,8 @@ li.nav-item {
     border: none;
 }
 
-.news-content {
+.news-content,
+.info-content {
     margin: 1.1rem 0;
 }
 
