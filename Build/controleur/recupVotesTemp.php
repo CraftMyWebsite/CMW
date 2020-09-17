@@ -17,12 +17,11 @@ if(Permission::getInstance()->verifPerm("connect"))
 	$datas = $req_recup->fetchAll(PDO::FETCH_ASSOC);
 
 	foreach ($datas as $data) {
-		echo $data['action'].'----';
-		$vote->giveRecompense($bddConnection, $data['action'],$jsonCon);
+		$vote->giveRecompense($bddConnection, $data,$jsonCon, true);
 	}
 
-	$req_suppr = $bddConnection->prepare('DELETE FROM cmw_votes_temp WHERE pseudo = :pseudo');
+/*	$req_suppr = $bddConnection->prepare('DELETE FROM cmw_votes_temp WHERE pseudo = :pseudo');
 	$req_suppr->execute(array(
 		'pseudo' => $_Joueur_['pseudo']
-	));
+	)); */
 }

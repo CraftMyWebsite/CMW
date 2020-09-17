@@ -104,20 +104,24 @@ class vote {
         ));
     }
 
-    public function giveRecompense($bdd, $action, $jsonCon) {
-        if(!isset($action)) {
+    public function giveRecompense($bdd, $data, $jsonCon, $save = false) {
+        if(!isset($data)) {
             $action = $this->lienData['action'];
+        }else {
+            $action = $data['action'];
         }
 
         $lastquantite = "non définie";
         $lastcmd = "non définie";
         $lastid = "non définie";
         $json = json_decode($action, true); 
-        foreach($json as $value) { 
+        foreach($json as $k => $value) { 
+            $flag = false;
             if($value['type'] == "jeton" && Permission::getInstance()->verifPerm("connect")) {
                 $lastquantite = $value['value'];
                 global $_Joueur_;
                 $_SESSION['Player']['tokens'] = $_Joueur_['tokens'] = $_Joueur_['tokens'] + ((int)$value['value']);
+                $flag = true;
             } else if($value['type'] == "message") {
                 $message = str_replace('{JOUEUR}', $pseudo, str_replace('{CMD}', $lastcmd, str_replace('{QUANTITE}', $lastquantite, str_replace('{ID}', $lastid, str_replace('&amp;', '§', $value['$value'])))));
                 if($value['methode'] == "1") {
@@ -126,15 +130,18 @@ class vote {
                         if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
                         {
                             $jsonCon[$j]->SendBroadcast($message);
+                            $flag = true;
                             break;
                         }
                     }
                 } else if($value['methode'] == "2") {
                     $jsonCon[$this->lienData['serveur']]->SendBroadcast($message);
+                    $flag = true;
                 } else if($value['methode'] == "3") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
                         $jsonCon[$j]->SendBroadcast($message);
+                        $flag = true;
                     }
                 } 
             } else if($value['type'] == "commande") {
@@ -145,15 +152,18 @@ class vote {
                         if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
                         {
                             $jsonCon[$j]->runConsoleCommand($cmd);
+                            $flag = true;
                             break;
                         }
                     }
                 } else if($value['methode'] == "2") {
                     $jsonCon[$this->lienData['serveur']]->runConsoleCommand($cmd);
+                    $flag = true;
                 } else if($value['methode'] == "3") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
                         $jsonCon[$j]->runConsoleCommand($cmd);
+                        $flag = true;
                     }
                 } 
             } else if($value['type'] == "item") {
@@ -163,17 +173,23 @@ class vote {
                         if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
                         {
                             $jsonCon[$j]->GivePlayerItem($Player['pseudo'].' '.$value['value'] . ' ' .$value['value2']);
+                            $flag = true;
                             break;
                         }
                     }
                 } else if($value['methode'] == "2") {
                     $jsonCon[$this->lienData['serveur']]->GivePlayerItem($Player['pseudo'].' '.$value['value'] . ' ' .$value['value2']);
+                    $flag = true;
                 } else if($value['methode'] == "3") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
                         $jsonCon[$j]->GivePlayerItem($Player['pseudo'].' '.$value['value'] . ' ' .$value['value2']);
+                        $flag = true;
                     }
                 } 
+            }
+            if($flag && $save) {
+                unset($json[$k]);
             }
         }
         if($lastquantite != "non définie" && Permission::getInstance()->verifPerm("connect")) {
@@ -183,6 +199,20 @@ class vote {
                 'tokens' => $_Joueur_['tokens'],
                 'pseudo' => $_Joueur_['pseudo']
                 ));
+        }
+        if($save) {
+            if(empty($action) | !isset($action)) {
+                $req_suppr = $bddConnection->prepare('DELETE FROM cmw_votes_temp WHERE id = :id');
+                $req_suppr->execute(array(
+                    'id' => $data['id']
+                )); 
+            } else {
+                 $reqMaj = $bdd->prepare('UPDATE cmw_votes_temp SET action = :action WHERE id = :id');
+                $reqMaj->execute(array(
+                    'id' => $data['id'],
+                    'action' => json_encode(array_values($json))
+                    ));
+            }
         }
     }
     
