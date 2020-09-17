@@ -33,6 +33,55 @@
     --header-image: url(../img/heading.jpg);
 }
 
+/* °==> CKEditor :root */
+
+:root {
+    --ck-color-media-embed-placeholder-url-text: var(--base-color) !important;
+    --ck-color-media-embed-placeholder-url-text-hover: var(--active-color) !important;
+
+    --ck-color-upload-placeholder-loader: var(--base-color) !important;
+
+    --ck-color-image-upload-icon: var(--base-color) !important;
+
+    --ck-color-resizer-tooltip-background: var(--darkest-color-bg) !important;
+    --ck-color-resizer-tooltip-text: var(--base-color) !important;
+
+    --ck-color-split-button-hover-background: var(--darkest-color-bg) !important;
+    --ck-color-split-button-hover-border: var(--darkest-color-bg) !important;
+
+    --ck-color-color-grid-check-icon: var(--base-color) !important;
+
+    --ck-color-base-foreground: var(--secondary-color-bg) !important;
+    --ck-color-base-background: var(--lightest-color-bg) !important;
+    --ck-color-base-border: var(--darkest-color-bg) !important;
+    --ck-color-base-text: var(--base-color) !important;
+    --ck-color-base-active: var(--active-color) !important;
+    --ck-color-base-active-focus: var(--active-color) !important;
+    --ck-color-text: var(--ck-color-base-text) !important;
+    --ck-color-button-default-hover-background: var(--active-color) !important;
+    --ck-color-button-default-active-background: var(--active-color) !important;
+    --ck-color-button-default-active-shadow: transparent !important;
+    --ck-color-button-default-disabled-background: transparent !important;
+    --ck-color-button-on-background: var(--active-color) !important;
+    --ck-color-button-on-hover-background: var(--active-color) !important;
+    --ck-color-button-on-active-background: var(--active-color) !important;
+    --ck-color-button-on-active-shadow: transparent !important;
+    --ck-color-button-on-disabled-background: #adadad !important;
+    --ck-color-input-border: transparent !important;
+    --ck-color-input-error-border: var(--ck-color-base-error) !important;
+    --ck-color-input-text: var(--ck-color-base-text) !important;
+    --ck-color-input-disabled-background: #adadad !important;
+    --ck-color-input-disabled-border: none !important;
+    --ck-color-upload-bar-background: var(--main-color) !important;
+    --ck-color-link-default: var(--main-color) !important;
+    --ck-color-link-selected-background: var(--active-color) !important;
+    --ck-color-link-fake-selection:  var(--main-color) !important;
+    --ck-color-focus-border: var(--main-color) !important;
+
+}
+
+/* °==> Reset Style */
+
 *:focus {
     box-shadow: none !important;
 }
@@ -65,7 +114,11 @@ a:hover:not(.no-hover) {
     text-decoration: none;
 }
 
-blockquote{border-right:0;border-left:5px solid #ccc;padding-left:20px;}
+blockquote{
+  border-right:0;
+  border-left:5px solid #ccc;
+  padding-left:20px;
+}
 
 .badge {
     text-shadow: none;
@@ -77,6 +130,12 @@ blockquote{border-right:0;border-left:5px solid #ccc;padding-left:20px;}
 
 .w-80 {
     width: 80% !important;
+}
+
+/* ==> CKEditor */
+
+.ck-editor strong {
+  color: unset !important;
 }
 
 /* ==> Background & Textes */
