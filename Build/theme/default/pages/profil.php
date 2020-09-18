@@ -468,7 +468,7 @@ if (isset($_GET['erreur'])) {
                             <input type="file" class="form-control-file d-none" name="img_profil" id="img_profil"
                                 onchange='getUploadFileName(this)' required />
                             <img class="profile-image"
-                                src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo']); ?>"
+                                src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo'], 128); ?>"
                                 style="height:128px; width:128px;"
                                 alt="Image de profil de <?= htmlspecialchars($joueurDonnees['pseudo']) ?>" />
                             <div class="hoverText">
@@ -497,7 +497,7 @@ if (isset($_GET['erreur'])) {
 
             <?php else : ?>
             <div class="col-lg-4 col-sm-12 col-md-12">
-                <img class="profile-image" src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo']); ?>"
+                <img class="profile-image" src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo'], 128); ?>"
                     style="height:128px; width:128px;"
                     alt="Image de profil de <?= htmlspecialchars($joueurDonnees['pseudo']) ?>" />
             </div>

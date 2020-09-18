@@ -38,7 +38,7 @@
                                         else
                                             foreach($joueurs as $value)
                                             {
-                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=$_Forum_->gradeJoueur($value);?><br/>
+                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=$_Forum_->gradeJoueur($value);?><br/>
                                                 <?php
                                             }
                                         ?>
@@ -68,7 +68,7 @@
 
                                                 <div class="media">
                                                     <p class="username">
-                                                        <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($value['player']); ?>" style="width: 32px; height: 32px;" alt="avatar de l'auteur" />
+                                                        <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($value['player'], 32); ?>" style="width: 32px; height: 32px;" alt="avatar de l'auteur" />
                                                         <div class="media-body">
                                                             <h5 class="mt-0">
                                                                 <?= (empty($value['player'])) ? 'Console' : $value['player'] . ', ' . $_Forum_->gradeJoueur($value['player']); ?>

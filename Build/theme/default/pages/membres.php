@@ -50,7 +50,7 @@ if (isset($_GET['page_membre'])) {
                                 <td scope="row">
                                     <?= $value['id']; ?></td>
                                 <td>
-                                    <img src='<?= $_ImgProfil_->getUrlHeadByPseudo($value['pseudo']); ?>' style='width: 32px; height: 32px;' alt='image de profile de <?= $value["pseudo"] ?>' /> <?= $value["pseudo"]; ?>
+                                    <img src='<?= $_ImgProfil_->getUrlHeadByPseudo($value['pseudo'], 32); ?>' style='width: 32px; height: 32px;' alt='image de profile de <?= $value["pseudo"] ?>' /> <?= $value["pseudo"]; ?>
                                 </td>
 
                                 <td>
