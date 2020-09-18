@@ -88,15 +88,18 @@
 			</div>
 			<div class="card-body" id="pageBan">
 
-							<label class="control-label">Titre</label>
-							<input type="text" name="titre" class="form-control" value="<?=$donneesPageBan['titre'];?>">
+				<label class="control-label">Titre</label>
+				<input type="text" name="titre" class="form-control" value="<?=$donneesPageBan['titre'];?>">
 
-							<label class="control-label">Texte</label>
-							<textarea data-UUID="0008" id="ckeditor" name="texte" ><?php echo $donneesPageBan['texte'];?></textarea>
+				<label class="control-label">Texte</label>
+				<textarea data-UUID="0008" id="ckeditor" name="texte" ><?php echo $donneesPageBan['texte'];?></textarea>
+
+				<iframe id="iframeBan" style="width:100%;height:900px;display:none;margin-top:20px;border:1px #d4dadf;cursor:pointer;" title=""  src="./index.php?banPreview"></iframe>
             </div>
-            <script>initPost("pageBan", "admin.php?action=pageBan",null); </script>
+            <script>initPost("pageBan", "admin.php?action=pageBan",function(data) { if(data) { get('iframeBan').src = get('iframeBan').src;}});</script>
 			<div class="card-footer">
 				<div class="row text-center">
+					<input type="button" onclick="SwitchDisplay(get('iframeBan'));"class="btn btn-secondary w-100" value="Prévisualisation" />
 					<input type="submit" onclick="sendPost('pageBan');"class="btn btn-success w-100" value="Modifier !" />
 				</div>
 			</div>

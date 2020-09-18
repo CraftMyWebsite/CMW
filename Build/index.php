@@ -56,7 +56,7 @@ if(!isset($_Serveur_['General']['createur']))
     $ecriture = new Ecrire('modele/config/config.yml', $tmp);
 }
 $banned = false;
-if(Ban::isBanned($bddConnection))
+if(Ban::isBanned($bddConnection) | isset($_GET['banPreview']))
 {
     require_once('theme/'. $_Serveur_['General']['theme'] .'/ban.php');
 }

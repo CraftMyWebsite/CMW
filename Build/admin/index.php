@@ -30,7 +30,7 @@ if(isset($_GET['page']) AND $_GET['page'] != "accueil"){
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="btn nav-item text-white" id="voirsite" style="float: left" href="../index.php" target="_blank"
+            <a class="btn nav-item text-white" id="voirsite" style="float: left" href="./index.php" target="_blank"
                 title="Voir votre site"><i class="fas fa-desktop"></i></a>
         </div>
         <ul class="navbar-nav px-3">
