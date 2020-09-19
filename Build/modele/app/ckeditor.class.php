@@ -28,7 +28,7 @@ class ckeditor
 			  	$item->setAttribute("onclick", "imageModal(this);");
 			  	$str = str_replace(" ", "",$item->getAttribute("src"));
 			  	if(isset($str) && !empty($str)) {
-			  		if(strpos($str, "?action=") strpos($str, "&action="))
+			  		if(strpos($str, "?action=") | strpos($str, "&action="))
 			  		{
 			  			$item->parentNode->removeChild($item); 
 			  		}
