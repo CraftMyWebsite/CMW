@@ -52,7 +52,7 @@
 
                                     <td>
                                         <a href="index.php?&page=profil&profil=<?= $tickets['auteur'] ?>">
-                                            <img class="icon-player-topbar" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur']) ?>" style="width: 32px; height: 32px" />
+                                            <img class="icon-player-topbar" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32) ?>" style="width: 32px; height: 32px" />
                                             <?= $tickets['auteur'] ?>
                                         </a>
                                     </td>
@@ -138,7 +138,7 @@
 
                                                 <div class="media">
                                                     <p class="username">
-                                                        <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur']); ?>" style="width: 32px; height: 32px;" alt="Avatar de <?= $tickets['auteur'] ?>" />
+                                                        <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32); ?>" style="width: 32px; height: 32px;" alt="Avatar de <?= $tickets['auteur'] ?>" />
                                                         <div class="media-body">
                                                             <h6 class="mt-0 mb-2 font-weight-bold">
                                                                 <?= $tickets['auteur']; ?> | le <?= $_Forum_->conversionDate($tickets['date_post']); ?>
@@ -160,7 +160,7 @@
 
                                                                     <div class="media mt-4">
                                                                         <p class="username">
-                                                                            <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($ticketCommentaires[$tickets['id']][$i]['auteur']); ?>" style="width:32px; height:32px;" alt="Avatar de <?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" />
+                                                                            <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($ticketCommentaires[$tickets['id']][$i]['auteur'], 32); ?>" style="width:32px; height:32px;" alt="Avatar de <?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" />
                                                                             <div class="media-body">
                                                                                 <h6 class="mt-0 mb-2 font-weight-bold">
                                                                                     <?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?> | le <?= $_Forum_->conversionDate($ticketCommentaires[$tickets['id']][$i]['date_post']); ?>

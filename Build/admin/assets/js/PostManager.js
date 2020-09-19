@@ -3,12 +3,21 @@ var allUrl = {};
 var allCallBack = {};
 var errorForm ={};
 
+
+var log = false;
+
+function clog(s) {
+    if(log) {
+        console.clog(s);
+    }
+}
+
 function initPost(idform, url, callBack) {
     let form = document.getElementById(idform);
     allForm[idform] = new Map();
     allUrl[idform] = url;
     allCallBack[idform] = callBack;
-    log('init: '+idform);
+    clog('init: '+idform);
     if(isset(form)) {
         loopChild(form, idform);
     } 
@@ -25,14 +34,14 @@ function loopChild(form, idform) {
                 if(allForm[idform].has(form.children[i].name))
                 {
                     allForm[idform].get(form.children[i].name).push(form.children[i]);
-                    log('add: '+form.children[i].name+' as radio value:'+form.children[i].value );
+                    clog('add: '+form.children[i].name+' as radio value:'+form.children[i].value );
                 } else {
                     allForm[idform].set(form.children[i].name, [ form.children[i] ]);
-                    log('add: '+form.children[i].name+' as first radio value:'+form.children[i].value );
+                    clog('add: '+form.children[i].name+' as first radio value:'+form.children[i].value );
                 }
             } else {
                 allForm[idform].set(form.children[i].name, form.children[i]);
-                log('add: '+form.children[i].name);
+                clog('add: '+form.children[i].name);
             }
 
         }
@@ -51,7 +60,7 @@ function getEach(element, callBack) {
 function sendDirectPost(url, callback) {
     var returnData = false;
     $.post(url, {}, function(data, status) {
-        log("post: "+url+" data:"+data)
+        clog("post: "+url+" data:"+data)
         if (status == "success") {
             returnData = true;
             notif("success", "Action effectuée !","");
@@ -94,18 +103,18 @@ function sendPost(idform, callback, sendData) {
             if(allForm[idform].get(key).id == "ckeditor" && allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
             {
                 postData[key] = CK.get(allForm[idform].get(key)).getData();
-                log(key+"-ckeditor-"+postData[key]);
+                clog(key+"-ckeditor-"+postData[key]);
             } 
             else if(allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
             {
                 postData[key] = allForm[idform].get(key).value;
-                log(key+"-textarea-"+postData[key]);
+                clog(key+"-textarea-"+postData[key]);
             } else {
                 if((allForm[idform].get(key).type == "checkbox" && !allForm[idform].get(key).checked))
                 {
 
                 } else if(isset(allForm[idform].get(key).value)){
-                    log(key+"-"+allForm[idform].get(key).value);
+                    clog(key+"-"+allForm[idform].get(key).value);
                     postData[key] = allForm[idform].get(key).value;
                 }
             }
@@ -113,7 +122,7 @@ function sendPost(idform, callback, sendData) {
             for (let rad of allForm[idform].get(key)) {
                 if(rad.checked) {
                     postData[key] = rad.value;
-                    log(key+"-radio-"+rad.value);
+                    clog(key+"-radio-"+rad.value);
                 }
             }
         }
@@ -129,7 +138,7 @@ function sendPost(idform, callback, sendData) {
     }
     var returnData = false;
     $.post(allUrl[idform], postData, function(data, status) {
-        log("post: "+allUrl[idform]+" data:"+data)
+        clog("post: "+allUrl[idform]+" data:"+data)
         if (status == "success") {
             returnData = true;
             if(isset(sendData))
@@ -219,9 +228,9 @@ function updateCont(action, el, callback) {
 
 function SwitchDisplay(el) {
     if(el.style.display == 'none') {
-        el.style.display ='block';
+        show(el.id);
     } else {
-        el.style.display ='none';
+         hide(el.id);
     }
 }
 function Switch(el, el1, el2 )
@@ -256,7 +265,7 @@ function isset(obj) {
 function initPostCallback(callback) {
     var list = document.querySelectorAll('[data-callback]');
     for (var i = 0; i < list.length; ++i) {
-        log("try callback "+list[i]);
+        clog("try callback "+list[i]);
         initPost(list[i].getAttribute("data-callback"), list[i].getAttribute("data-url"), callback);
     }
 }
@@ -272,12 +281,4 @@ function configVoteGetMaxVal() {
         }
     }
     return 999;
-}
-
-var log = false;
-
-function log(s) {
-    if(log) {
-        console.log(s);
-    }
 }

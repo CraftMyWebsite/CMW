@@ -301,7 +301,7 @@
 
                                     <div class="media m-2 pb-4">
                                         <p class="username">
-                                            <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($newsComments['pseudo']); ?>" style="width: 32px; height: 32px;" alt="avatar de <?= $newsComments['pseudo'] ?>" />
+                                            <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($newsComments['pseudo'], 32); ?>" style="width: 32px; height: 32px;" alt="avatar de <?= $newsComments['pseudo'] ?>" />
                                             <div class="media-body">
                                                 <h5 class="mt-0">
                                                     <?= $newsComments['pseudo'] ?>

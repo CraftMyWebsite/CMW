@@ -295,7 +295,7 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
 
                                     <td>
                                         <a href="?page=profil&profil=<?= $topicd[$i]['pseudo']; ?>">
-                                            <img src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd[$i]['pseudo']); ?>" style="width: 42px; height: 42px;" alt="avatar de l'auteur" title="<?= $topicd[$i]['pseudo']; ?>" />
+                                            <img src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd[$i]['pseudo'], 42); ?>" style="width: 42px; height: 42px;" alt="avatar de l'auteur" title="<?= $topicd[$i]['pseudo']; ?>" />
                                         </a>
                                     </td>
 

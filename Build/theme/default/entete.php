@@ -67,7 +67,7 @@
                         <li class="nav-item dropdown ml-auto">
 
                             <a id="profil-<?= $_Joueur_['pseudo']; ?>" class="nav-link dropdown-toggle btn btn-main" href="#" id="dropdown-tools" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo']); ?>" style="margin-left: -10px; width: 24px; height: 24"> <?= $_Joueur_['pseudo']; ?>
+                                <img src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo'], 24); ?>" style="margin-left: -10px; width: 24px; height: 24px"> <?= $_Joueur_['pseudo']; ?>
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="profil-<?= $_Joueur_['pseudo']; ?>">
