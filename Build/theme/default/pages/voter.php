@@ -31,14 +31,21 @@
             </div>
         </div>
 
-        <!-- Gestion des information et doublons de vote -->
+        <!-- Gestion des informations de vote -->
         <div>
             <?php
             if (Permission::getInstance()->verifPerm("connect") and isset($_GET['player']) and $_Joueur_['pseudo'] == $_GET['player']) {  ?>
                     <!-- Gestion des Récompenses -->
-                    <div class="alert alert-success text-center" id="disprecompList" style="display:none;">
-                        <ul style="list-style-position: inside; padding-left: 0px;" id="recompList">
+                    <div class="alert alert-main w-80 mx-auto" id="disprecompList" style="display:none;">
+                        
+                        <h4 class="alert-heading h4">
+                            Réception de récompense(s) !
+                        </h4>
+                        <hr>
+
+                        <ul id="recompList" class="list-unstyled container">
                         </ul>
+                        
                     </div>
             <?php } ?>
         </div>
