@@ -553,6 +553,13 @@ li.nav-item {
     margin: 0 10px;
 }
 
+#disprecompList #recompList>li>.plusFont{
+
+    color: #95b82f;
+    margin-right: 2rem;
+
+}
+
 /* ==> Chat */
 
 #Chat .btn.btn-main {

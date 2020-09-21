@@ -221,10 +221,10 @@ function updateRecompenseList() {
                     });
                 }
                 if(custom != 0) {
-                    el.innerHTML += "<li>"+custom+" récompense"+putS(custom)+" surprise !</li>";
+                    el.innerHTML += "<li class='h5'> <i class='fas fa-plus plusFont mt-2'></i>"+custom+" récompense"+putS(custom)+" surprise !</li>";
                 }
                 if(jeton != 0) {
-                    el.innerHTML += "<li>"+jeton+" jeton"+putS(jeton)+" boutique !</li>";
+                    el.innerHTML += "<li class='h5'> <i class='fas fa-plus plusFont mt-2'></i>"+jeton+" jeton"+putS(jeton)+" boutique !</li>";
                     hasJeton = true;
                 } else {
                     hasJeton = false
@@ -237,7 +237,9 @@ function updateRecompenseList() {
                     if(document.getElementById("disprecompList").style.display == "none") {
                         $("#disprecompList").show(300);
                     }
-                    el.innerHTML += "<button type='button' class='btn btn-success' onclick='pickupRecompense();' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</button>";
+                    el.innerHTML += "<div class='d-block mx-auto text-center mt-3 mb-2">"
+                    el.innerHTML += "<button type='button' class='btn btn-lg btn-reverse' onclick='pickupRecompense();' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</button>";
+                    el.innerHTML += "</div>"
                 }
             } else {
                 if(document.getElementById("disprecompList").style.display == "block") {
