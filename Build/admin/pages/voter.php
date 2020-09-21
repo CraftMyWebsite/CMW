@@ -27,15 +27,35 @@
                 </ul>
                 Nombre maximum de top voteur affiché:
                 <div id="maxDisplayForm">
-                    <input class="form-control" required style="width:100px;" type="number" name="maxDisplay" data-oldvalue="<?php echo $_Serveur_['vote']['maxDisplay']; ?>" id="inputMaxDisplay" min ="1" max="99" value="<?php echo $_Serveur_['vote']['maxDisplay']; ?>" />
+                    <input class="form-control" required style="width:100px;" type="number" name="maxDisplay" data-oldvalue="<?php echo $_Serveur_['vote']['maxDisplay']; ?>" id="inputMaxDisplay" min ="1" max="99" value="<?php echo $_Serveur_['vote']['maxDisplay']; ?>" required />
                     <script>
                     registerEvent(get('inputMaxDisplay'), ["click", "keyup", "keydown"], function(evt) {
-                        if(isset(evt.target.value) && parseInt(evt.target.value) >1 && parseInt(evt.target.getAttribute('data-oldvalue')) != parseInt(evt.target.value)) {
+                        if(isset(evt.target.value) && parseInt(evt.target.value) >0 && parseInt(evt.target.getAttribute('data-oldvalue')) != parseInt(evt.target.value)) {
                             evt.target.setAttribute('data-oldvalue', evt.target.value);
                             sendPost('maxDisplayForm'); }
                      });
                     initPost("maxDisplayForm", "admin.php?&action=editTopVoteNumber");</script>
                 </div>
+
+               	Afficher les anciens top voteurs:
+                            <div class="custom-control custom-switch" style="padding-top: 20px">
+                                <input type="checkbox" class="custom-control-input" onclick="SwitchDisplay(get('OuiTempsTab')); if(!this.checked) { sendDirectPost('admin.php?&action=DisableShowTopVote'); } else { sendPost('OuiTempsTab'); }" id="OuiTemps" name="OuiTemps" >
+                                <label class="custom-control-label" for="OuiTemps">Oui</label>
+                            </div>
+                            <div style="margin:10px;<?php if(isset($_Serveur_['vote']['oldDisplay'])) { echo 'display:none;'; } ?>" id="OuiTempsTab">
+                                <label class="control-label" > Nombre d'ancien top voteur à afficher:</label>
+                                <input type="text" id="ouiTempsInput" class="form-control" value="<?php if(isset($_Serveur_['vote']['oldDisplay'])) { echo $_Serveur_['vote']['oldDisplay']; } else { echo '3'; } ?>" name="number" required/>
+
+                            </div>
+
+                            <script>
+                    registerEvent(get('ouiTempsInput'), ["click", "keyup", "keydown"], function(evt) {
+                        if(isset(evt.target.value) && parseInt(evt.target.value) >0 && parseInt(evt.target.getAttribute('data-oldvalue')) != parseInt(evt.target.value)) {
+                            evt.target.setAttribute('data-oldvalue', evt.target.value);
+                            sendPost('OuiTempsTab'); }
+                     });
+                    initPost("OuiTempsTab", "admin.php?&action=EnableShowTopVote");</script>
+                
             </div>
         </div>
     <?php } ?>

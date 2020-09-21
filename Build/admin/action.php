@@ -25,6 +25,14 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			    }
 			}
 			exit();
+		case 'EnableShowTopVote':
+			$_Serveur_['vote']['oldDisplay'] = intval($_Post['number']);
+			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+			exit();
+		case 'DisableShowTopVote':
+			unset($_Serveur_['vote']['oldDisplay']);
+			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+			exit();
 		case 'switchUploadImage':
 			unset($_Serveur_['uploadImage']);
 			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
