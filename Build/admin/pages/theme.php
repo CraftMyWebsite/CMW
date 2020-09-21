@@ -52,7 +52,7 @@ $(function () {
 		    <form method="POST" action="?&action=postBG" enctype="multipart/form-data">
 			    <div class="card-body">
 					<div class="alert alert-success" >
-	                    <strong>Si vous voulez mettre une image, l'image doit être en 1920*1080 minimum pour s'adapter aux écrans et pour avoir une qualité optimale ! Vouspouvez aussi mettre une petite image qui se répètera !</strong>
+	                    <strong>Si vous voulez mettre une image, l'image doit être en 1920*1080 minimum pour s'adapter aux écrans et pour avoir une qualité optimale ! Vous pouvez aussi mettre une petite image qui se répètera !</strong>
 	                </div>
 	                <div class="input-group file-input-group"  >
 					  <input class="form-control" id="file-text" type="text" placeholder="No file selected" readonly>
