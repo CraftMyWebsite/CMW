@@ -26,7 +26,7 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			}
 			exit();
 		case 'EnableShowTopVote':
-			$_Serveur_['vote']['oldDisplay'] = intval($_Post['number']);
+			$_Serveur_['vote']['oldDisplay'] = intval($_POST['number']);
 			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
 			exit();
 		case 'DisableShowTopVote':

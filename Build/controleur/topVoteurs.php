@@ -46,6 +46,8 @@ if(isset($voteurs))
 }
 $req_vote = $bddConnection->prepare('SELECT id, lien, titre FROM cmw_votes_config WHERE serveur = :serveur');
 $count_req = $bddConnection->prepare('SELECT COUNT(id) as count FROM cmw_votes_config WHERE serveur = :serveur');
-
+if(isset($_Serveur_['vote']['oldDisplay'])) {
+	$oldvote_req = $bddConnection->query('SELECT pseudo, nbre_votes FROM cmw_votes WHERE 1 ORDER BY nbre_votes DESC');
+}
 
 ?>
