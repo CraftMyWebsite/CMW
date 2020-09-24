@@ -1,6 +1,3 @@
-
-+"actions", "removeVote" ajouter dans le js
-
 <style>
 :disabled{
     cursor: not-allowed;
@@ -140,7 +137,7 @@
             <div class="card-header">
                  <div style="width: 100%;display: inline-block">
                     <div class="float-left">
-                        <h3 class="card-title"><strong>Liste des voteurs</strong></h3>
+                        <h3 class="card-title"><strong>Liste des anciens voteurs</strong></h3>
                     </div>
                     <div class="float-right">
                         <button  onclick="sendDirectPost('admin.php?action=suppAllOldVoteHistory', function(data) { if(data) { hide('allUser'); } });" class="btn btn-sm btn-outline-secondary">Rénitialiser</button>
@@ -161,7 +158,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 0; foreach($oldHistory as $value) { if($i < $_Serveur_['vote']['maxDisplay']) { ?>
+                                <?php $i = 0; foreach($oldHistory as $value) {  if(isset($_Serveur_['vote']['oldDisplay']) && $i < $_Serveur_['vote']['oldDisplay'] || !isset($_Serveur_['vote']['oldDisplay']) && $i < 20) {?>
                                     <tr>
                                         <td><?php echo $i; ?></td>
                                         <td ><?php echo $value['pseudo']; ?></td>
@@ -169,7 +166,7 @@
                                         <td ><?php echo $value['nbre_votes']; ?></td>
                                     </tr>
 
-                                <?php $i++; } else { break;} } ?>
+                                <?php $i++;}else { break;} }  ?>
 
                             </tbody>
                         </table>

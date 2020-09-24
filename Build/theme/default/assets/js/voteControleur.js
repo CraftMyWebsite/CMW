@@ -100,7 +100,7 @@ function updateBaltop(loop = false) {
                    + "</tr>"
                 +"</thead><tbody>";
 
-        if(data != "") {
+        if(data != "" && is(data)) {
             let json = JSON.parse(data);
 
             json.forEach(function(ar, ar2) { 
@@ -110,6 +110,7 @@ function updateBaltop(loop = false) {
                     let item = new Map();
                     let custom = 0;
                     let jeton = 0;
+
                            topRec.get(parseInt(ar2)+1).forEach(function(value, val2) {
                                if(value.type == "item") {
                                    if(item.has(value.value)) {
@@ -119,11 +120,11 @@ function updateBaltop(loop = false) {
                                    }
                                } else if(value.type == "commande") {
                                     custom++;
-                               }else if(value.type == "jeton") {
+                               }else if(value.type == "jeton" || value.type == "jetonAlea") {
                                    jeton += parseInt(value.value);
-                               }/*else if(value.type == "message") {
+                               }else if(value.type == "message") {
                                    custom++;
-                               }*/
+                               }
                         });
 
                     if(item.size != 0) {
@@ -156,7 +157,7 @@ function updateBaltop(loop = false) {
 
                         f+='</td>'
                         +'<td>'
-                            +'<img alt="" src="https://api.craftmywebsite.fr/skin/face.php?u='+ar.pseudo+'&s=25" style="height:25px;width:25px" /> <strong>'
+                            +'<img alt="" src="'+ar.url+'" style="height:25px;width:25px" /> <strong>'
                                 +'<a href="?page=profil&profil='+ar.pseudo+'">'
                                         +ar.pseudo
                                 +'</a>'

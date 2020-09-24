@@ -176,12 +176,31 @@
                                    
                                     ?><h6> Les votes se rénitialiseront le <?= str_replace(array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'), date('l', $dateRec['etat'])).date(" j \à G\hi", $dateRec['etat']); ?>.</h6>
                                 <?php } if(isset($_Serveur_['vote']['oldDisplay'])) {
-                                    for($i = 1; $oldVote = $oldvote_req->fetch(PDO::FETCH_ASSOC); $i++)
-                                    {
+                                    $a = 1; ?>
+                                    <br/>
+                                    <h6>Liste des précédents meilleurs voteurs:</h6>
+                                    <table class="table table-dark table-striped table-hover table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th><h6>#</h6></th>
+                                                <th><h6>Pseudo</h6></th>
+                                                <th><h6>Votes</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <body>
+                                        <?php while($oldVote = $oldvote_req->fetch(PDO::FETCH_ASSOC))
+                                        { if($a < $_Serveur_['vote']['oldDisplay']) { ?>
+                                            <tr>
+                                                <td><h6><?php echo $a; ?></h6></td>
+                                                <td><h6><?php echo $oldVote['pseudo']; ?></h6></td>
+                                                <td><h6><?php echo $oldVote['nbre_votes']; ?></h6></td>
+                                            </tr>
 
-                                    }
-                                }
-                                ?>
+                                        <?php $a++; } else { break; } } 
+                                        ?>
+                                        </body>
+                                    </table>
+                                <?php } ?>
 
 
                             </div>
@@ -194,7 +213,7 @@
         <!-- Top vote -->
         <div class="row">
 
-            <table class="table table-dark table-striped table-hover" id="baltop">
+            <table class="table table-dark table-striped table-hover " id="baltop">
                <!-- theme/default/assets/js/voteControleur.js::updateBaltop -->
             </table>
 

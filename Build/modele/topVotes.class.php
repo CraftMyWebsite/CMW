@@ -10,7 +10,7 @@ class TopVotes
 	
 	public function GetTopVoteurs()
 	{
-		$top = $this->bdd->query('SELECT * FROM cmw_votes WHERE isOld=0 ORDER BY nbre_votes DESC');
+		$top = $this->bdd->query('SELECT pseudo, SUM(nbre_votes) as nbre_votes FROM cmw_votes WHERE isOld=0 group by pseudo ORDER BY nbre_votes DESC');
 		return $top;
 	}
 	
