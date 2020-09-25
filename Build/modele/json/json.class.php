@@ -108,9 +108,9 @@ class JsonCon
 			$c = $this->api->call("server.version");
 		elseif($this->api != null && $this->api['query'] != null)
 			$c = $this->api['query']->GetInfo();
-		$this->updateReq("server.version", $c);
 		if(!isset($c))
 			return false;
+		$this->updateReq("server.version", $c);
 		if(isset($c[0]['result']) && $c[0]['result'] == "success")
 			return true;
 		if(isset($c['HostName']) && !empty($c['HostName']))

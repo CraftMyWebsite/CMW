@@ -58,21 +58,39 @@
 			</div>
 			<div class="card-body" id="addBan">
 
-							<label class="control-label">Pseudo (Si existant)</label>
-							<input type="text" name="pseudo" class="form-control" maxlength="30" >
-
 							<label class="control-label">IP (Si connue)</label>
 							<input type="text" name="ip" class="form-control" maxlength="30">
 
+							<label class="control-label">Pseudo (Si existant)</label>
+							<input type="text" name="pseudo" class="form-control" maxlength="30" >
+
+							<br>
+								<ul class="list-group" id="list-membre" style="display:none;overflow-y: auto;max-height:150px;">
+									<?php foreach($membres as $value)
+									{ ?>
+								    	<li class="list-group-item" style="cursor:pointer;" onclick="var el = this; setTimeout(function () { isUpdate=true;getElementByName('addBan', 'pseudo').value = el.innerText; }, 100);"><?php echo $value['pseudo']; ?></li>
+								    <?php } ?>
+								</ul>
+
             </div>
-             <script>initPost("addBan", "admin.php?action=addBan", function(data) { if(data) {
+             <script>
+             	initPost("addBan", "admin.php?action=addBan", function(data) { if(data) {
              		get('list-ban').innerHTML += 
              		"<tr ><td>"+getValueByName('addBan','pseudo')
              		+"</td><td>"+getValueByName('addBan','ip')
              		+"</td><td><button type='button' class='btn btn-danger' disabled>Débannir</button></td></tr>";clearAllInput('addBan'); 
              	}
-             }
-         );</script>
+             });
+             var isUpdate = false;
+             getElementByName("addBan", "pseudo").addEventListener("focusin", function(evt) { show("list-membre"); });
+             getElementByName("addBan", "pseudo").addEventListener("focusout", function(evt) { isUpdate = false; setTimeout(function () { if(!isUpdate) { hide("list-membre"); } }, 1000); });
+             getElementByName("addBan", "pseudo").addEventListener("keyup", function(evt) {
+             	var value = $(this).val().toLowerCase();
+			    $("#list-membre li").filter(function() {
+			      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			    }); 
+			});
+     	</script>
 			<div class="card-footer">
 				<div class="row text-center">
 					<input type="submit" onclick="sendPost('addBan')" class="btn btn-success w-100" value="Bannir !" />
