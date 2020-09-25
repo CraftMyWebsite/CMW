@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_offres` (
   `nbre_vente` int(11) NOT NULL,
   `categorie_id` int(11) NOT NULL,
   `ordre` int(11) NOT NULL,
-  `evo` smallint(5) UNSIGNED NOT NULL,
+  `evo` text NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -393,6 +393,7 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
   `ValidationMail` int(1) NOT NULL,
   `img_extension` char(4) NULL,
   `show_email` tinyint(1) UNSIGNED NOT NULL,
+  `achats` text NULL,
   `signature` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

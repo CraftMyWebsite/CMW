@@ -452,7 +452,7 @@
 
                                                 
                                                 <div class="row"  id="allaction-<?php echo $offres[$j]['id']; ?>">
-                                                    <?php for($k = 0;$k < count($actions);$k++) {
+                                                    <?php if(!empty($actions)) { for($k = 0;$k < count($actions);$k++) {
                                                         if($actions[$k]['id_offre'] == $offres[$j]['id']) {?>
               
                                                             <div class="col-md-12 col-lg-5" style="margin-top:10px;">
@@ -490,7 +490,7 @@
                                                                     }
                                                                  });" class="btn btn-danger"><i class="fas fa-times"></i></button>
                                                             </div>
-                                                    <?php } } ?>
+                                                    <?php } } } ?>
                                                 </div>
                                                 
                                                 <script>initPost("allaction-<?php echo $offres[$j]['id']; ?>", "admin.php?action=editerAction",function (data) { if(data) { boutiqueUpdate(); }});</script>
