@@ -2,7 +2,7 @@
 if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote'))
 {
 	$req_donnees = $bddConnection->query('SELECT * FROM cmw_votes_config');
-	$data = $req_donnees->fetchAll();
+	$data = $req_donnees->fetchAll(PDO::FETCH_ASSOC);
 	for($i=0; $i < count($data); $i++)
 	{
 

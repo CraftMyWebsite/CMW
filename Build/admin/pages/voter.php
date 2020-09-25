@@ -249,7 +249,7 @@
                 <div class="card-body" id="all-vote">
 
 
-                            <?php $donnees = $req_donnees->fetchAll();
+                            <?php $donnees = $req_donnees->fetchAll(PDO::FETCH_ASSOC);
                             $idcs = 0;
                             for($o=0; $o < count($donnees); $o++)
                             {

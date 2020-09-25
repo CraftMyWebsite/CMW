@@ -70,11 +70,11 @@
 
                                    $req_NumberOfDay = $bddConnection->prepare('SELECT dates AS dates FROM cmw_visits GROUP BY dates LIMIT 0, 7;');
                                    $req_NumberOfDay->execute();
-                                   $get_NumberOfDay = $req_NumberOfDay->fetchAll();
+                                   $get_NumberOfDay = $req_NumberOfDay->fetchAll(PDO::FETCH_ASSOC);
 
                                    $req_TotalVisitsPerDay = $bddConnection->prepare('SELECT count(dates) AS visits FROM cmw_visits GROUP BY dates LIMIT 0, 7;');
                                    $req_TotalVisitsPerDay->execute();
-                                   $get_TotalVisitsPerDay = $req_TotalVisitsPerDay->fetchAll();
+                                   $get_TotalVisitsPerDay = $req_TotalVisitsPerDay->fetchAll(PDO::FETCH_ASSOC);
                                    ?>
 
                                         var ctx = get('visitsChart')

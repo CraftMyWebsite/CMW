@@ -2,6 +2,7 @@
 if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement')) :
     $req = $bddConnection->query('SELECT * FROM cmw_forum_report WHERE vu = 0');
     $nbr_signalement = 0 //COmpter le nombre de signalement
+    
 ?>
     <section id="Signalement">
         <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
@@ -58,7 +59,7 @@ if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignale
                                             $req_page->execute(array(
                                                 'id' => $id['id_topic']
                                             ));
-                                            $d_page = $req_page->fetchAll();
+                                            $d_page = $req_page->fetchAll(PDO::FETCH_ASSOC);
 
 
                                             foreach ($d_page as $key => $value) :

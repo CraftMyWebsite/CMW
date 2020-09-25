@@ -15,7 +15,7 @@ class Forum {
 	public function affichageForum() 
 	{
 		$forum = $this->bdd->query('SELECT * FROM cmw_forum ORDER BY ordre ASC');
-		$donnees = $forum->fetchAll();
+		$donnees = $forum->fetchAll(PDO::FETCH_ASSOC);
 		return $donnees;
 	}
 	
@@ -26,7 +26,7 @@ class Forum {
 		$requete->execute(array(
 			'forum' => htmlspecialchars($id)
 		));
-		$donnees = $requete->fetchAll();
+		$donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
 		return $donnees;
 	}
 	
@@ -89,7 +89,7 @@ class Forum {
 		if($fetch == 0)
 			$donnees = $sousForum->fetch(PDO::FETCH_ASSOC);
 		else
-			$donnees = $sousForum->fetchAll();
+			$donnees = $sousForum->fetchAll(PDO::FETCH_ASSOC);
 		return $donnees;
 	}
 	
@@ -108,7 +108,7 @@ class Forum {
 		$topic = $this->bdd->prepare('SELECT * FROM cmw_forum_post WHERE id_categorie = :id_categorie AND sous_forum IS NULL ORDER BY epingle DESC, last_answer_temps DESC LIMIT '.$count.', 20');
 		$topic->bindParam(':id_categorie', htmlspecialchars($id));
 		$topic->execute();
-		return $topic->fetchAll();
+		return $topic->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//récupération de la table cmw_sous_forum pour le fofo si on se trouve dans un sousForum
@@ -136,7 +136,7 @@ class Forum {
 		$topic = $this->bdd->prepare('SELECT * FROM cmw_forum_post WHERE sous_forum LIKE :sous_forum ORDER BY epingle DESC, last_answer_temps DESC LIMIT '.$count.', 20');
 		$topic->bindParam(':sous_forum', htmlspecialchars($id));
         $topic->execute();
-		return $topic->fetchAll();
+		return $topic->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//Page post.php récupération du topic
@@ -179,7 +179,7 @@ class Forum {
 		$answer = $this->bdd->prepare('SELECT id, id_topic, pseudo, contenue, d_edition, date_post FROM cmw_forum_answer WHERE id_topic LIKE :id_topic ORDER BY id ASC LIMIT '.$count.', 20');
 		$answer->bindParam(':id_topic', $id);
 		$answer->execute();
-		return $answer->fetchAll();
+		return $answer->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//compte les Like des answer 
@@ -190,7 +190,7 @@ class Forum {
 		$like->bindParam(':type', $type, PDO::PARAM_INT);
 		$like->execute();
 		$count = $like->rowCount();
-		return $like->fetchAll();
+		return $like->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//Pareil pour DisLike :
@@ -201,7 +201,7 @@ class Forum {
 		$dislike->bindParam(':type', $type, PDO::PARAM_INT);
 		$dislike->execute();
 		$count = $dislike->rowCount();
-		return $dislike->fetchAll();
+		return $dislike->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//Vérifie si la personne a déjà réagit 

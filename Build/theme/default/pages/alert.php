@@ -37,7 +37,7 @@
                                         $a->execute(array(
                                             'id' => $answer_liked['id_topic']
                                         ));
-                                        $da = $a->fetchAll();
+                                        $da = $a->fetchAll(PDO::FETCH_ASSOC);
 
                                         foreach ($da as $key => $value) {
                                             if ($da[$key]['id'] == $answer_liked['id_answer']) {
