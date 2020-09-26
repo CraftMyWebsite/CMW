@@ -289,7 +289,10 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
                                 <tr>
                                     <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic') && !$_SESSION['mode']) : ?>
                                         <td>
-                                            <input name="selection" type="checkbox" value="<?= $topicd[$i]['id']; ?>" />
+                                            <div class="custom-control custom-checkbox">
+                                                <input name="selection" id="selection-<?= $topicd[$i]['id']; ?>" type="checkbox" class="custom-control-input" value="<?= $topicd[$i]['id']; ?>" />
+                                                <label for="selection-<?= $topicd[$i]['id']; ?>" class="custom-control-label"></label>
+                                            </div>
                                         </td>
                                     <?php endif; ?>
 
@@ -332,49 +335,108 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
                 </table>
 
                 <?php if ((Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic') or Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic')) and !$_SESSION['mode']) : ?>
-                    <div id="popover" style="display: none;">
+                    <div id="popover" class="w-100 container mb-3" style="display: none;">
                         <hr />
 
-                        <form id="sel-form" method='POST' action='?action=selTopic' class="inline">
+                        <form id="sel-form" method='POST' action='?action=selTopic'>
 
-                            <input type='hidden' name='idCat' value='<?= $id; ?>'>
-                            <?php if (isset($id_sous_forum)) echo "<input type='hidden' name='idSF' value='$id_sous_forum'>";
+                            <div class="card">
 
-                            if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'addPrefix')) : ?>
-                                <label for='prefix'>Appliquer un préfix de discussion : </label>
-                                <select name='prefix' id='prefix'>
-                                    <option value="NULL">Ne pas changer le préfixe</option>
-                                    <option value='0'>Aucun</option>
-                                    <?php
-                                    $reqPrefix = $_Forum_->getPrefixModeration();
-                                    while ($donnees_prefix = $reqPrefix->fetch(PDO::FETCH_ASSOC)) : ?>
-                                        <option value="<?= $donnees_prefix['id']; ?>">
-                                            <?= $donnees_prefix['nom']; ?>
-                                        </option>
-                                    <?php endwhile; ?>
-                                </select>
-                            <?php endif; ?>
+                                <div class="card-header">
+                                    <h4>Edition d'un topic</h4>
+                                </div>
 
-                            <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'epingle')) : ?>
-                                <label for='epingle'>Epingler une discussion : </label> <input type='radio' name='epingle' value='1' id='ouiEp' /> <label for='ouiEp'>Oui</label>
-                                <input type='radio' name='epingle' value='0' id='nonEp' /> <label for='nonEp'>Non</label>
-                            <?php endif; ?>
+                                <div class="card-body">
+                                    <input type='hidden' name='idCat' value='<?= $id; ?>'>
+                                    <?php if (isset($id_sous_forum)) echo "<input type='hidden' name='idSF' value='$id_sous_forum'>";
 
-                            <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic')) : ?>
-                                <label for='close'>Fermer une discussion : </label> <input type='radio' name='close' value='1' id='yes' /> <label for='yes'>Oui</label>
-                                <input type='radio' name='close' value='0' id='no' /> <label for='no'>Non</label>
-                            <?php endif; ?>
+                                    if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'addPrefix')) : ?>
 
-                            <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic')) : ?>
-                                <label for='remove'>Supprimer les discussions : </label> <input type='radio' name='remove' value='1' id='ouiSP' /> <label for='ouiSP'>Oui</label>
-                                <input type='radio' name='remove' value='0' id='nonSp' checked /> <label for='nonSp'>Non</label>
-                            <?php endif; ?>
+                                        <div class="row">
+                                            <div class="col-12 my-2">
+                                                <label for='prefix'>Appliquer un préfix de discussion : </label>
+                                                <select name='prefix' id='prefix' class="form-control custom-text-input">
+                                                    <option value="NULL">Ne pas changer le préfix</option>
+                                                    <option value='0'>Aucun</option>
+                                                    <?php
+                                                    $reqPrefix = $_Forum_->getPrefixModeration();
+                                                    while ($donnees_prefix = $reqPrefix->fetch(PDO::FETCH_ASSOC)) : ?>
+                                                        <option value="<?= $donnees_prefix['id']; ?>">
+                                                            <?= $donnees_prefix['nom']; ?>
+                                                        </option>
+                                                    <?php endwhile; ?>
+                                                </select>
+                                            </div>
+                                        </div>
 
-                            <button type='submit' class='btn btn-lg btn-primary btn-block'>Valider</button>
+                                    <?php endif; ?>
+
+                                    <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'epingle')) : ?>
+
+                                        <div class="row my-2">
+                                            <div class="col-12">
+                                                    <label for='epingle' class="d-block">Epingler la discussion : </label> 
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="ouiEp" name="epingle" value="1">
+                                                        <label class="custom-control-label" for="ouiEp">Oui</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="nonEp" name="epingle" value="0">
+                                                        <label class="custom-control-label" for="nonEp">Non</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                    <?php endif; ?>
+
+                                    <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic')) : ?>
+
+                                        <div class="row my-2">
+                                            <div class="col-12">
+                                                <label for='close'>Fermer la discussion : </label>
+                                                <div class="custom-control custom-radio"> 
+                                                    <input type='radio' class="custom-control-input" name='close' value='1' id='yes' />
+                                                    <label for='yes' class="custom-control-label">Oui</label>
+                                                </div>
+                                                <div class="custom-control custom-radio">
+                                                    <input type='radio' class="custom-control-input" name='close' value='0' id='no' />
+                                                    <label for='no' class="custom-control-label">Non</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <?php endif; ?>
+
+                                    <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic')) : ?>
+
+                                        <div class="row my-2">
+                                            <div class="col-12">
+                                                <label for='remove'>Supprimer les discussions : </label>
+                                                <div class="custom-control custom-radio">
+                                                        <input type='radio' class="custom-control-input" name='remove' value='1' id='ouiSP' />
+                                                        <label for='ouiSP' class="custom-control-label">Oui</label>
+                                                </div>
+                                                <div class="custom-control custom-radio">
+                                                        <input type='radio' class="custom-control-input" name='remove' value='0' id='nonSp' checked />
+                                                        <label for='nonSp' class="custom-control-label">Non</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <?php endif; ?>
+
+                                </div>
+
+                                <div class="card-footer">
+                                    <button type='submit' class='btn btn-main w-100'>Valider</button>
+                                </div>
+
+                            </div>
+
                         </form>
                     </div>
                 <?php endif; ?>
-
+            
                 <nav aria-label="Page forum catégorie">
                     <ul class="pagination">
                         <?php
