@@ -19,7 +19,7 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
 				$directory = 'include/UploadImage/';
 			    foreach (scandir($directory) as $file) {
-			        if ($file !== '.' && $file !== '..') {
+			        if ($file !== '.' && $file !== '..' && $file != "index.php") {
 			           unlink($directory.$file);
 			        }
 			    }
@@ -97,6 +97,9 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			exit();
 		case 'getOffreBoutique':
 			require('admin/actions/getOffreBoutique.php');
+			exit();
+		case 'getOffreActionBoutique':
+			require('admin/actions/getOffreActionBoutique.php');
 			exit();
 		case 'getServerList':
 			require('admin/actions/getServerList.php');
@@ -284,8 +287,8 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/supprPage.php');
 		break;
 		
-		case 'boutique': 
-			require_once('admin/actions/boutique.php');
+		case 'editBoutique': 
+			require_once('admin/actions/editBoutique.php');
 		break;
 		
 		case 'supprCategorie': 

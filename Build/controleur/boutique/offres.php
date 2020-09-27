@@ -1,7 +1,7 @@
 <?php
 require_once('controleur/connection_base.php'); 
 require_once('modele/boutique/offres.class.php'); 
-$offres = new OffresList($bddConnection, $jsonCon);
+$offres = new OffresList($bddConnection, $jsonCon, $_Joueur_);
 $offresTableau = $offres->GetTableauOffres();
 $offresByGet = $offres->GetOffresGet();
 

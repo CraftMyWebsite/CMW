@@ -23,19 +23,43 @@
 					}
 					else
 					{
-						$problème[$a] = 1;
+						$probleme[$a] = 1;
 					}
 				}
 				if($probleme[$a] != 1)
 				{
+					$req = $bddConnection->prepare('SELECT `achats` FROM `cmw_users` WHERE pseudo=:pseudo');
+					$req->execute(array('pseudo' => $_Joueur_['pseudo']));
+					$data = $req->fetch(PDO::FETCH_ASSOC);
+					if(isset($data['achats'])) {
+						$tachat = json_decode($data['achats'], true);
+						$flag = false;
+						foreach($tachat as $key => $value) {
+							if(intval($value['id2']) == intval($_SESSION['panier']['id'][$a]))
+							{
+								$tachat[$key]['nombre'] = intval($tachat[$key]['nombre'])+1;
+								$flag = true;
+								break;
+							}
+						}
+						if(!$flag) {
+							array_push($tachat, [ 'id2' => intval($_SESSION['panier']['id'][$a]), 'nombre' => 1 ]);
+						}
+					} else {
+						$tachat[] = array('id2' => intval($_SESSION['panier']['id'][$a]), 'nombre' => 1);
+					}
+					$tachat = json_encode(array_values($tachat));
+
+					$req = $bddConnection->prepare('UPDATE `cmw_users` SET`achats`=:achats WHERE pseudo=:pseudo');
+					$req->execute(array('pseudo' => $_Joueur_['pseudo'], 'achats' => $tachat ));
+
+
 					$recupActions = $bddConnection->prepare('SELECT * FROM cmw_boutique_action WHERE id_offre = :id_offre');
 					$recupActions->execute(array('id_offre' => $_SESSION['panier']['id'][$a]));
 					$offre = $_SESSION['panier']['id'][$a];
 					require_once('modele/boutique/offres.class.php'); 
-					$offres = new OffresList($bddConnection, $jsonCon);
+					$offres = new OffresList($bddConnection, $jsonCon, $_Joueur_);
 					$offresTableau = $offres->GetTableauOffres();
-					$offresByGet = $offres->GetOffresGet();
-
 					require_once('modele/boutique/categories.class.php');
 					$categoriesObj = new CategoriesList($bddConnection);
 					$categories = $categoriesObj->GetTableauCategories();

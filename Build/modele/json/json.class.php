@@ -133,7 +133,7 @@ class JsonCon
 		}
 		else
 		{
-			if($this->api != null)
+			if($this->api != null && $this->api['rcon']->isConnected())
 				$this->api['rcon']->Rcon("say ".$message);
 		}
 	}
@@ -222,7 +222,7 @@ class JsonCon
 			$this->api->call("players.name.send_message", $donnees);
 		}
 		else {
-			if($this->api != null)	
+			if($this->api != null && $this->api['rcon']->isConnected())	
 				$data = $this->api['rcon']->Rcon('msg '.$donnees[0].' '.$donnees[1]);
 		}
 	}
@@ -251,7 +251,7 @@ class JsonCon
 		}
 		else
 		{
-			if($this->api != null)
+			if($this->api != null && $this->api['rcon']->isConnected())
 				$this->api['rcon']->Rcon($message);
 		}		
 	}
@@ -300,7 +300,7 @@ class JsonCon
 		}
 		else
 		{
-			if($this->api != null)
+			if($this->api != null && $this->api['rcon']->isConnected())
 				$this->api['rcon']->Rcon('give '.$this->pseudo.' '.$commande);
 		}
 	}

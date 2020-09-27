@@ -5,42 +5,86 @@ class OffresList
     private $jsonCon;
 	private $bddConnection;
 	
-    public function __construct($bddConnection, $jsonCon = null)
+    public function __construct($bddConnection, $jsonCon = null, $_Joueur_ = null)
     {	
+
+		$this->jsonCon = $jsonCon;
+		$this->bddConnection = $bddConnection;
+
 		$recupOffres = $bddConnection->query('SELECT * FROM cmw_boutique_offres ORDER BY ordre');
-		
+		if(isset($_Joueur_)) {
+
+			$req = $this->bddConnection->prepare('SELECT achats FROM cmw_users WHERE id = :id');
+			$req->execute(Array ('id' => $_Joueur_['id']));
+			$data = $req->fetch(PDO::FETCH_ASSOC);
+			if(isset($data['achats'])) {
+				$info = json_decode($data['achats'], true); 
+			}
+		}
 		$i = 1;
 		while($tableauOffres = $recupOffres->fetch(PDO::FETCH_ASSOC))
 		{
-			$offresByGet[$tableauOffres['id']] = array(
-				'id' => $tableauOffres['id'],
-				'nom' => $tableauOffres['nom'],
-				'description' => $tableauOffres['description'],
-				'nbre_vente' => $tableauOffres['nbre_vente'],
-				'prix' => $tableauOffres['prix'],
-				'categorie' => $tableauOffres['categorie_id'] );
+			$offresByGet[$tableauOffres['id']] = $tableauOffres['nom'];
+
 			$offres[$i] = array(
 				'id' => $tableauOffres['id'],
 				'nom' => $tableauOffres['nom'],
 				'description' => $tableauOffres['description'],
 				'nbre_vente' => $tableauOffres['nbre_vente'],
 				'prix' => $tableauOffres['prix'],
-				'categorie' => $tableauOffres['categorie_id'] );
+				'categorie' => $tableauOffres['categorie_id'],
+				'max_vente' => $tableauOffres['max_vente'],
+				'ordre' => $tableauOffres['ordre'],
+				'evo' => isset($tableauOffres['evo']) && empty($tableauOffres['evo']) ? null : $tableauOffres['evo'] );
+
+			if(isset($info)) {
+				$temp = array();
+				if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != "" ) {
+					foreach(explode(",",$tableauOffres['evo']) as $value)
+					{
+						$temp[$value] = false;
+					} 
+				}
+       			foreach($info as $key => $value) { 
+       				$temp[intval($value['id2'])] = true;
+       				if(intval($value['id2']) == $tableauOffres['id']) {
+       					if($tableauOffres['max_vente'] != -1 && intval($value['nombre']) >= $tableauOffres['max_vente']) {
+       						$offres[$i]['maxbuy'] = true;
+       						break;
+       					}
+       				}
+       			}
+       			if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != "" ) {
+	       			foreach($temp as $key => $value)
+					{
+						if(!$value) {
+							if(!isset($offres[$i]['buy'])) {
+								$offres[$i]['buy'] = array($key);
+							} else {
+								array_push($offres[$i]['buy'], $key);
+							}
+						}
+					}
+				}
+
+			} else if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != "" ) {
+				$offres[$i]['buy'] = explode(",",$tableauOffres['evo']);
+			}
+
 			$i++;
 		}
 		if(isset($offres))
         {
-            $this->offresByGet = $offresByGet;
 			$this->offres = $offres;
+			$this->offresByGet = $offresByGet;
         }	    
-
-        $this->jsonCon = $jsonCon;
-		$this->bddConnection = $bddConnection;
 	}		
+
 	public function GetTableauOffres()
 	{
 		return $this->offres;
 	}	
+
 	public function GetOffresGet()
 	{
 		return $this->offresByGet;

@@ -20,6 +20,7 @@
     <script src="./admin/assets/js/Chart.min.js"></script>
     <script src="./admin/assets/js/PostManager.js"></script>
     <script src="./admin/assets/js/jquery.js"></script>
+    <script src="./admin/assets/js/tagsinput.js"></script>
     <script src="./admin/assets/js/toastr.min.js"></script>
 
     <script src="./admin/assets/js/ckeditor.js"></script>

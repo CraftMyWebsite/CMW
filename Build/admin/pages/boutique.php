@@ -38,7 +38,7 @@
                         <input type="number" class="form-control" name="ordre" value="<?php echo $categorieNum; ?>" placeholder="L'ordre dans lequel va s'afficher la catégorie !" required> 
 
                         <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
-                        <input class="form-control" required style="width:100px;" type="number" name="number"  min ="1" max="4" value="3" />
+                        <input class="form-control" required type="number" name="number"  min ="1" max="4" value="3" />
                     
                         <label class="control-label">Connexion In-Game</label>
                         <select name="connection"class="form-control" required>
@@ -56,7 +56,7 @@
                         </select>
                     
                         <label class="control-label">Description de la catégorie</label>
-                        <textarea class="form-control" name="message"></textarea>
+                        <textarea class="form-control" id="ckeditor" data-UUID="CATBOUTIQUENEW1" name="message"></textarea>
             </div>
              <script>initPost("createCate", "admin.php?action=creerCategorie",function (data) { if(data) { show('card-minia'); boutiqueUpdate();}});</script>
             <div class="card-footer">
@@ -82,7 +82,7 @@
                         <input type="text" class="form-control" name="nom" placeholder="ex: 64 x Diamants" required> 
                 
                         <label class="control-label">Description</label>
-                        <input type="text" class="form-control" name="description" placeholder="ex: <img src=... />"> 
+                         <textarea class="form-control" id="ckeditor" data-UUID="CATBOUTIQUENEW2" name="description"></textarea>
                 
                         <label class="control-label">Prix</label>
                         <input type="number" class="form-control" name="prix" required>
@@ -95,11 +95,23 @@
                             <?php $k++; } ?>
                         </select>
                 
-                        <label class="control-label">Nombre de ventes possibles <small>(-1 si aucune limite, max 9999)</small></label><br>
+                        <label class="control-label">Nombre de ventes possibles au total <small>(-1 si aucune limite, max 9999)</small></label><br>
                         <input class="form-control" type="number" name="nbre_vente" value="-1" min="-1" max="9999" required />
+
+                        <label class="control-label">Nombre de ventes possibles par joueur <small>(-1 si aucune limite, max 9999)</small></label><br>
+                        <input class="form-control" type="number" name="max_vente" value="-1" min="-1" max="9999" required />
+
+                        <label class="control-label">Dépendance de l'offre (devra avoir acheter les offres suivante avant celle-ci)</label>
+                        <input type="text"  value="" id="dep-tag" name="dep"  data-role="tagsinput">
+                        <select style="margin-top:10px;" id="dep-tag-sel" onfocus="this.selectedIndex = -1;" class="form-control" onchange="$('#dep-tag').tagsinput('add', { 'value': parseInt(this.value.split('|')[0]) , 'text': this.value.split('|')[1]});">
+                            <?php for($j = 1;$j < count($offres);$j++) { ?>
+                                <option value="<?php echo $offres[$j]['id']; ?>|<?php echo $offres[$j]['nom']; ?>"><?php echo $offres[$j]['nom']; ?></option>
+                            <?php } ?> 
+                        </select>
                     
             </div>
-             <script>initPost("createOffre", "admin.php?action=creerOffre",function (data) { if(data) { boutiqueUpdate();}});</script>
+             <script>
+             initPost("createOffre", "admin.php?action=creerOffre",function (data) { if(data) { boutiqueUpdate();}});</script>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success w-100" onClick="sendPost('createOffre');">Envoyer!</button>
             </div>
@@ -212,7 +224,7 @@
         </div>
     </div>
 <?php }if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCoupon')) { ?> 
-    <div class="col-xs-12 col-md-6">
+    <div class="col-md-12 col-xl-12 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
@@ -275,7 +287,6 @@
                         <li class="nav-item" id="tabnavRap<?=$i?>"><a class="<?php if($i == 0) echo 'active'; ?> nav-link" href="#navRap<?=$i?>" data-toggle="tab" style="color: black !important" id="titlecat<?=$i?>"><?php echo $categories[$i]['titre']; ?></a></li>
                         <?php }?>
                     </ul>
-                        
                     <div class="tab-content" id="speccategorie">
                      
                         <?php for($i = 0;$i < count($categories);$i++) {?>
@@ -283,9 +294,17 @@
                             <div class="tab-pane <?php if($i == 0) echo 'active'; ?>" id="navRap<?=$i?>" >
                                 <div style="width: 100%;display: inline-block">
                                     <input type="hidden" name="categorie" class="form-control" value="<?php echo $categories[$i]['id']; ?>" />
-                                    <div class="float-left">
-                                        <label class="control-label">Titre de la catégorie</label>
-                                        <input type="text" class="form-control" onkeyup="get('titlecat<?=$i?>').innerText = this.value" name="categorieNom" value="<?php echo $categories[$i]['titre']; ?>" placeholder="Remise spécial CMW V1.8" required maxlength="60">
+                                    <div class="float-left col-md-8" >
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <label class="control-label">Titre de la catégorie</label>
+                                                <input type="text" class="form-control" onkeyup="get('titlecat<?=$i?>').innerText = this.value" name="categorieNom" value="<?php echo $categories[$i]['titre']; ?>" placeholder="Remise spécial CMW V1.8" required maxlength="60">
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
+                                                 <input class="form-control" required type="number" name="number"  min ="1" max="4" value="<?php echo $categories[$i]['showNumber']; ?>" />
+                                             </div>
+                                        </div>
                                     </div>
                                     <div class="float-right" style="margin-top:15px;">
                                         <button  onclick="sendDirectPost('admin.php?action=supprCategorie&id=<?php echo $categories[$i]['id']; ?>', function(data) { if(data) { hide('navRap<?=$i?>');hide('tabnavRap<?=$i?>');}});" class="btn btn-sm btn-outline-secondary">Supprimer</button>
@@ -293,11 +312,9 @@
                                 </div>
                                 <div class="col-md-12">
 
-                                    <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
-                                     <input class="form-control" required style="width:100px;" type="number" name="number"  min ="1" max="4" value="<?php echo $categories[$i]['showNumber']; ?>" />
 
                                     <label class="control-label">Description de la catégorie</label>
-                                    <textarea class="form-control" name="categorieInfo" class="col-sm-12"><?php echo $categories[$i]['message']; ?></textarea>
+                                    <textarea class="form-control" id="ckeditor" data-UUID="CATBOUTIQUENEW0" name="categorieInfo" class="col-sm-12"><?php echo $categories[$i]['message']; ?></textarea>
 
                                     <table class="table">
                                         <thead>
@@ -305,7 +322,7 @@
                                                 <th>Nom</th>
                                                 <th>Description</th>
                                                 <th>Prix</th>
-                                                <th>catégorie</th>
+                                                <th>Catégorie</th>
                                                 <th>Nombre de ventes restantes</th>
                                                 <th>Ordre</th>
                                                 <th>Supprimer</th>
@@ -313,11 +330,37 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for($j = 0;$j < count($offres);$j++) {
+                                            <?php for($j = 1;$j <= count($offres);$j++) {
                                                 if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                                     <tr id="ligneoffre-<?php echo $offres[$j]['id']; ?>">
                                                 <td><input type="text" name="offresNom<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nom']; ?>" /></td>
-                                                <td><input type="text" name="offresDescription<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($offres[$j]['description']); ?>" /></td>
+                                                <td>
+                                                    <button class="btn btn-primary" data-toggle="modal" type="button" data-target="#description_offre<?php echo $offres[$j]['id']; ?>">
+                                                    <i class="fas fa-pen"></i> / <i class="far fa-eye"></i>
+                                                    </button>
+                                                    <div class="modal fade" id="description_offre<?=$offres[$j]['id'];?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="description_offre<?=$offres[$j]['id'];?>Label"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-light">
+                                                                    <h5 class="modal-title" id="description_offre<?=$offres[$j]['id'];?>Label">Description de l'offre - <?php echo $offres[$j]['nom']; ?></h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body bg-light">
+                                                                    <textarea name="offresDescription<?php echo $offres[$j]['id']; ?>" data-UUID="descoffre<?php echo $offres[$j]['id']; ?>" id="ckeditor"><?php echo $offres[$j]['description']; ?></textarea>
+                                                                </div>
+                                                                <div class="modal-footer bg-light">
+                                                                    <button type="button" class="btn btn-success btn-block"
+                                                                        data-dismiss="modal"><strong>Fermer</strong> (sauvegarde les modifications)</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                                 <td><input type="text" name="offresPrix<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['prix']; ?>" /></td>
                                                 <td>
                                                 <select class="form-control" name="offresCategorie<?php echo $offres[$j]['id']; ?>">
@@ -327,37 +370,63 @@
                                                         } ?>
                                                         </select>
                                                 </td>
-                                                <td><input type="number" name="nbre_vente_<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nbre_vente']; ?>" /></td>
+                                                <td><input type="number" name="nbre_vente<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nbre_vente']; ?>" /></td>
                                                 <td><input type="number" name="offresOrdre<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['ordre']; ?>" /></td>
-                                                <td>
+                                                <td data-boutique-switchsupp >
                                                     <label class="switch">
                                                         <input type="checkbox" value="true" id="suppr<?php echo $offres[$j]['id']; ?>" name="suppr<?php echo $offres[$j]['id']; ?>">
                                                         <span class="slider round"></span>
                                                     </label>
 
                                                 </td>
-                                                <td><a class="btn btn-success" data-toggle="modal" data-target="#OffreAction<?php echo $offres[$j]['id']; ?>">Modifier</a></td>
+                                                <td><a class="btn btn-success" data-toggle="modal"  data-target="#OffreAction<?php echo $offres[$j]['id']; ?>">Modifier</a></td>
                                                 <input type="hidden" name="offresId<?php echo $offres[$j]['id']; ?>" value="<?php echo $offres[$j]['id']; ?>" />
                                             </tr>
                                             <?php } }?>
                                         </tbody>
                                     </table>
-                                    <script>initPost("navRap<?=$i?>", "admin.php?action=boutique",function (data) { if(data) {
-                                     }});</script>
+                                    <script>initPost("navRap<?=$i?>", "admin.php?action=editBoutique", function(data) { if(data) { boutiqueCheck(); } } );</script>
                                     <button type="submit" class="btn btn-success w-100" style="margin-top:10px;" onClick="sendPost('navRap<?=$i?>');">Envoyer!</button>
-                                    <?php for($j = 0;$j < count($offres);$j++) { ?>
+                                    <?php for($j = 1;$j <= count($offres);$j++) { ?>
                                     <div class="modal fade" id="OffreAction<?php echo $offres[$j]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Modal-<?php echo $offres[$j]['id']; ?>" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content" style="padding:15px;">
-                                                <div class="modal-header">
+                                        <div class="modal-dialog " role="document">
+                                            <div class="modal-content" >
+                                                <div class="modal-header bg-light">
                                                     <h5 class="modal-title" id="Modal-<?php echo $offres[$j]['id']; ?>"><?php echo $offres[$j]['nom']; ?></h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body" style="border-bottom: solid 1px rgba(0,0,0,0.25);">
-                                                    <div id="new-action-<?php echo $offres[$j]['id']; ?>">
+                                                <div class="modal-body bg-light" >
 
+                                                    <div id="new-edit-<?php echo $offres[$j]['id']; ?>">
+
+                                                            <label class="control-label">Nombre de ventes possibles par joueur <small>(-1 si aucune limite, max 9999)</small></label><br>
+                                                            <input class="form-control" type="number" name="max_vente<?php echo $offres[$j]['id']; ?>" value="<?php echo $offres[$j]['max_vente']; ?>" min="-1" max="9999" required />
+
+                                                            <label class="control-label">Dépendance de l'offre (devra avoir acheter les offres suivante avant celle-ci)</label>
+                                                            <input type="text"  value="<?php echo isset($offres[$j]['evo']) ? $offres[$j]['evo'] : ''; ?>" id="dep-tag<?=$j.$offres[$j]['id']?>" name="dep<?php echo $offres[$j]['id']; ?>"  data-role="tagsinput">
+                                                            <select style="margin-top:10px;" onfocus="this.selectedIndex = -1;" class="form-control" onchange="$('#dep-tag<?=$j.$offres[$j]['id']?>').tagsinput('add', { 'value': parseInt(this.value.split('|')[0]) , 'text': this.value.split('|')[1]});">
+                                                                <?php for($z = 1;$z <= count($offres);$z++) { if($offres[$z]['id'] != $offres[$j]['id']) { ?>
+                                                                    <option value="<?php echo $offres[$z]['id']; ?>|<?php echo $offres[$z]['nom']; ?>"><?php echo $offres[$z]['nom']; ?></option>
+                                                                <?php } }?> 
+                                                            </select>
+                                                            <?php if(isset($offres[$j]['evo'])) { ?> 
+                                                                <script>
+                                                                    $(document).ready(function() { <?php
+                                                                        $tp = explode(",",$offres[$j]['evo']);
+                                                                        foreach($tp as $value)
+                                                                        {
+                                                                            echo "$('#dep-tag".$j.$offres[$j]['id']."').tagsinput('add', { 'value': ".$value." ,'text':'".$offresByGet[$value]."' });";
+                                                                        } ?> 
+                                                                    });
+                                                                </script>
+                                                            <?php } ?> 
+                                                    </div>
+                                                    <script>loopChild(get("new-edit-<?php echo $offres[$j]['id']; ?>"),"navRap<?=$i?>");</script>
+                                                    <hr/>
+                                                    <div id="new-action-<?php echo $offres[$j]['id']; ?>">
+                                                        <h5 style="margin-top:10px;">Configurer les actions:</h4>
                                                         <label class="control-label">Type d'action <small>Utilisez {PLAYER} pour la variable joueur</small></select>
                                                         <select class="form-control" name="methode" onchange="
                                                             switch(parseInt(this.value)) {
@@ -430,11 +499,8 @@
                                                               <?php $itemps = $i;?>
                                                             <select class="form-control" name="grade_site">
                                                                     <option value="0">Joueur</option>
-                                                                    <?php 
-                                                                    for($z = 2; $z <= end($lastGrade); $z++) {
-                                                                        if(file_exists($dirGrades.$z.'.yml') && $idGrade[$z]['Grade']) { ?>
-                                                                                <option value="<?php echo $z; ?>"><?= $idGrade[$z]['Grade']?></option>
-                                                                        <?php }?>
+                                                                    <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
+                                                                            <option value="<?php echo $idGrade[$i]['id']; ?>"><?= $idGrade[$z]['Grade']?></option>
                                                                     <?php }?>
                                                                     <option value="1">Créateur</option>
                                                             </select>
@@ -446,57 +512,55 @@
                                                         </div>
                                                         <input type="hidden" name="id_offre" value="<?php echo $offres[$j]['id']; ?>" />
                                                     </div>
-                                                    <script>initPost("new-action-<?php echo $offres[$j]['id']; ?>", "admin.php?action=creerAction",function (data) { if(data) { boutiqueUpdate(); }});</script>
-                                                    <button type="button" onclick="sendPost('new-action-<?php echo $offres[$j]['id']; ?>', function(data) {if(data) { boutiqueUpdate();}});"class="btn btn-secondary w-100">Envoyer!</button>
-                                                </div>
+                                                    <script>initPost("new-action-<?php echo $offres[$j]['id']; ?>", "admin.php?action=creerAction");</script>
+                                                    <button type="button" onclick="sendPost('new-action-<?php echo $offres[$j]['id']; ?>', function() { boutiqueActionUpdate('<?php echo $offres[$j]['id']; ?>'); });" class="btn btn-secondary w-100">Envoyer!</button>
+
+                                                     <button type="button" style="margin-top:15px;" onclick="SwitchDisplay(get('allaction-<?php echo $offres[$j]['id']; ?>'))" class="btn btn-danger w-100">Editer actions</button>
 
                                                 
-                                                <div class="row"  id="allaction-<?php echo $offres[$j]['id']; ?>">
-                                                    <?php if(!empty($actions)) { for($k = 0;$k < count($actions);$k++) {
-                                                        if($actions[$k]['id_offre'] == $offres[$j]['id']) {?>
-              
-                                                            <div class="col-md-12 col-lg-5" style="margin-top:10px;">
-                                                                <?php if($actions[$k]['methode'] == 6){?>
-                                                                <select class="form-control" name="commandeValeur-<?php echo $actions[$k]['id']; ?>">
-                                                                    <option value="0" <?php if($actions[$k]['grade'] == 0) echo 'selected'; ?>> Joueur </option>
-                                                                    <?php for($z = 2; $z <= end($lastGrade); $z++) {
-                                                                        if(file_exists($dirGrades.$z.'.yml') && $idGrade[$z]['Grade']) { ?>
-                                                                            <option value="<?php echo $z; ?>" <?php if($actions[$k]['grade'] == $z) echo 'selected';?>><?php echo $idGrade[$z]['Grade'];?></option>
-                                                                        <?php }
-                                                                    }?>
-                                                                    <option value="1" <?php if($actions[$k]['grade'] == 1) echo 'selected'; ?>>Créateur</option>
-                                                                </select>
-                                                                <?php } else {?>
-                                                                <input name="commandeValeur-<?php echo $actions[$k]['id']; ?>" class="form-control" value="<?php echo $actions[$k]['commande_valeur']; ?>"/>
-                                                                <?php }?>
-                                                            </div>
-                                                            <div class="col-md-12 col-lg-5" style="margin-top:10px;">
-                                                                <select class="form-control" name="methode-<?php echo $actions[$k]['id']; ?>">
-                                                                    <option value="<?php echo $actions[$k]['methode']; ?>"><?php echo $actions[$k]['methodeTxt']; ?></option><?php
-                                                                        if($actions[$k]['methode'] != 0) echo '<option value="0">Commande(sans /)</option>';
-                                                                        if($actions[$k]['methode'] != 1) echo '<option value="1">Message Serveur</option>';
-                                                                        if($actions[$k]['methode'] != 2) echo '<option value="2">Changer de grade</option>';
-                                                                        if($actions[$k]['methode'] != 3) echo '<option value="3">Give un item</option>';
-                                                                        if($actions[$k]['methode'] != 4) echo '<option value="4">Envoyer de l\'argent iConomy</option>';
-                                                                        if($actions[$k]['methode'] != 5) echo '<option value="5">Give d\'xp</option>'; 
-                                                                        if($actions[$k]['methode'] != 6) echo '<option value="6">Grade site</option>'; ?>
-                                                                </select>
-                                                            </div>
-                                                            
-                                                            <div class="col-md-12 col-lg-2" style="margin-top:10px;">
-                                                                 <button type="button" data-dismiss="modal" aria-label="Close" style="width:100%"onclick="sendDirectPost('admin.php?action=supprAction&id=<?php echo $actions[$k]['id']; ?>', function(data) {
-                                                                    if(data) {
-                                                                        hide('allaction-<?php echo $offres[$j]['id']; ?>');
-                                                                    }
-                                                                 });" class="btn btn-danger"><i class="fas fa-times"></i></button>
-                                                            </div>
-                                                    <?php } } } ?>
-                                                </div>
+                                                    <div class="row" style="display:none;"  id="allaction-<?php echo $offres[$j]['id']; ?>">
+                                                        <?php if(!empty($actions)) { for($k = 0;$k < count($actions);$k++) {
+                                                            if($actions[$k]['id_offre'] == $offres[$j]['id']) {?>
+                  
+                                                                <div class="col-md-12 col-lg-5" style="margin-top:10px;">
+                                                                    <?php if($actions[$k]['methode'] == 6){?>
+                                                                    <select class="form-control" name="commandeValeur-<?php echo $actions[$k]['id']; ?>">
+                                                                        <option value="0" <?php if($actions[$k]['grade'] == 0) echo 'selected'; ?>> Joueur </option>
+                                                                        <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
+                                                                                <option value="<?php echo $idGrade[$i]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i]['id']) echo 'selected';?>><?= $idGrade[$z]['Grade']?></option>
+                                                                        <?php }?>
+                                                                        <option value="1" <?php if($actions[$k]['grade'] == 1) echo 'selected'; ?>>Créateur</option>
+                                                                    </select>
+                                                                    <?php } else {?>
+                                                                    <input name="commandeValeur-<?php echo $actions[$k]['id']; ?>" class="form-control" value="<?php echo $actions[$k]['commande_valeur']; ?>"/>
+                                                                    <?php }?>
+                                                                </div>
+                                                                <div class="col-md-12 col-lg-5" style="margin-top:10px;">
+                                                                    <select class="form-control" name="methode-<?php echo $actions[$k]['id']; ?>">
+                                                                        <option value="<?php echo $actions[$k]['methode']; ?>"><?php echo $actions[$k]['methodeTxt']; ?></option><?php
+                                                                            if($actions[$k]['methode'] != 0) echo '<option value="0">Commande(sans /)</option>';
+                                                                            if($actions[$k]['methode'] != 1) echo '<option value="1">Message Serveur</option>';
+                                                                            if($actions[$k]['methode'] != 2) echo '<option value="2">Changer de grade</option>';
+                                                                            if($actions[$k]['methode'] != 3) echo '<option value="3">Give un item</option>';
+                                                                            if($actions[$k]['methode'] != 4) echo '<option value="4">Envoyer de l\'argent iConomy</option>';
+                                                                            if($actions[$k]['methode'] != 5) echo '<option value="5">Give d\'xp</option>'; 
+                                                                            if($actions[$k]['methode'] != 6) echo '<option value="6">Grade site</option>'; ?>
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-12 col-lg-2" style="margin-top:10px;">
+                                                                     <button type="button" style="width:100%"onclick="sendDirectPost('admin.php?action=supprAction&id=<?php echo $actions[$k]['id']; ?>', function() {
+                                                                            hide('allaction-<?php echo $offres[$j]['id']; ?>');
+                                                                     });" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                                </div>
+                                                        <?php } } } ?>
+                                                    </div>
+                                   
                                                 
-                                                <script>initPost("allaction-<?php echo $offres[$j]['id']; ?>", "admin.php?action=editerAction",function (data) { if(data) { boutiqueUpdate(); }});</script>
-                                                <button type="button" style="margin-top:15px;" onclick="sendPost('allaction-<?php echo $offres[$j]['id']; ?>');" data-dismiss="modal" aria-label="Close" class="btn btn-primary w-100">Valider les changements</button>
-                                                <div class="modal-footer">
-                                                    
+                                                    <script>initPost("allaction-<?php echo $offres[$j]['id']; ?>", "admin.php?action=editerAction");</script>
+                                                    <div class="modal-footer bg-light" style="padding-top:20px;">
+                                                            <button type="button" style="margin-top:15px;" onclick="sendPost('navRap<?=$i?>');sendPost('allaction-<?php echo $offres[$j]['id']; ?>');" data-dismiss="modal" aria-label="Close" class="btn btn-primary w-100">Valider les changements</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -508,6 +572,7 @@
                             </div>
                         <?php }?>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -3,10 +3,17 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) {
 	if(!isset($categories) AND !isset($offres) AND !isset($actions))
 	{
 		$categories = GetListeCategories($bddConnection);
-		$offres = GetListeOffres($bddConnection);
+
+		require_once('modele/boutique/offres.class.php'); 
+		$offre = new OffresList($bddConnection, $jsonCon, $_Joueur_);
+		$offres = $offre->GetTableauOffres();
+		$offresByGet = $offre->GetOffresGet();
 		$actions = GetListeActions($bddConnection);
 
 		$categorieNum = count($categories) + 1;
+
+		$recup = $bddConnection->query('SELECT * FROM cmw_grades ORDER BY priorite');
+		$idGrade = $recup->fetchAll(PDO::FETCH_ASSOC);
 	}
 }
 	function getCouponsReduc($bdd)
@@ -22,19 +29,6 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) {
 		
 		$categories = $reponse->fetchAll(PDO::FETCH_ASSOC);
 		return $categories;
-	}
-
-	function GetListeOffres($bdd)
-	{
-		$reponse = $bdd->query('SELECT * FROM cmw_boutique_offres ORDER BY id');
-		
-		$offres = $reponse->fetchAll(PDO::FETCH_ASSOC);
-		foreach($offres as $key => $value)
-		{
-			$offres[$key]['categorie'] = $offres[$key]['categorie_id'];
-			unset($offres[$key]['categorie_id']);
-		}
-		return $offres;
 	}
 
 	function GetListeActions($bdd)

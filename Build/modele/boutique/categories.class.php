@@ -15,7 +15,9 @@ class CategoriesList
 				'id' => $tableauCategories['id'],
 				'titre' => $tableauCategories['titre'],
 				'message' => $tableauCategories['message'],
-				'serveur' => $tableauCategories['serveur'] );
+				'serveur' => $tableauCategories['serveur'],
+				'showNumber' => $tableauCategories['showNumber']
+				 );
 			$i++;
 		}
 		if(isset($categories))

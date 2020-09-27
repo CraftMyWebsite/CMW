@@ -47,8 +47,9 @@ $(document).ready(function() {
 });
 
 function boutiqueUpdate() {
+	destroyCK();
 	updateCont("admin.php?action=getOffreBoutique", get("allcategorie"), function(data) { if(data) { 
-		initPostCallback( function(data) {  boutiqueUpdate(); });
+		initPostCallback();
 		var list = document.querySelectorAll('[data-boutique-callback]');
 		get("allcategorieupdate").innerText = "";
 		get("allcategoriecoupon").innerText = "";
@@ -57,7 +58,38 @@ function boutiqueUpdate() {
 	        get("allcategorieupdate").innerHTML+='<option value="'+list[i].getAttribute("data-boutique-callback")+'">'+list[i].getAttribute("data-boutique-callback-name")+'</option>';
 	        get("allcategoriecoupon").innerHTML+='<option value="'+list[i].getAttribute("data-boutique-callback")+'">'+list[i].getAttribute("data-boutique-callback-name")+'</option';
 	    }
+
+	    list = document.querySelectorAll('[data-callback-tagsinput]');
+	    for (var i = 0; i < list.length; ++i) {
+
+	    	$(list[i]).tagsinput();
+	    }
+
+	    list = document.querySelectorAll('[data-boutique-tagsinput]');
+	    for (var i = 0; i < list.length; ++i) {
+
+	    	$('#'+list[i].getAttribute("data-boutique-tagsinput")).tagsinput('add', { 'value': parseInt(list[i].getAttribute("data-boutique-tagsinput-value")) ,'text': list[i].getAttribute("data-boutique-tagsinput-text") });
+	    }
+
+
+
+	    initCK();
 	}});
+}
+
+function boutiqueActionUpdate(id) {
+	updateCont("admin.php?action=getOffreActionBoutique&id="+id, get("allaction-"+id), function(data) { if(data) { 
+		initPostCallback();
+	}});
+}
+
+function boutiqueCheck() {
+	var list = document.querySelectorAll('[data-boutique-switchsupp]');
+	for (var i = 0; i < list.length; ++i) {
+		if(list[i].children[0].children[0].checked) {
+			hide(list[i].parentElement.id, true);
+		}
+	}
 }
 
 function voteUpdate() {

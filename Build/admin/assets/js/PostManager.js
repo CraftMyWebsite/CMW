@@ -4,11 +4,11 @@ var allCallBack = {};
 var errorForm ={};
 
 
-var log = false;
+var log = true;
 
 function clog(s) {
     if(log) {
-        console.clog(s);
+        console.log(s);
     }
 }
 
@@ -100,7 +100,12 @@ function sendPost(idform, callback, sendData) {
                 notif("warning", "Erreur", "Formulaire incomplet");
                 return;
             }
-            if(allForm[idform].get(key).id == "ckeditor" && allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
+           /* if(isset(allForm[idform].get(key).getAttribute("data-role")) && allForm[idform].get(key).getAttribute("data-role")=="tagsinput") 
+            {
+                postData[key] = $(allForm[idform].get(key)).tagsinput('items');
+                clog(key+"-taginput-"+postData[key]);
+            } 
+            else */ if(allForm[idform].get(key).id == "ckeditor" && allForm[idform].get(key).tagName.toLowerCase() == "textarea") 
             {
                 postData[key] = CK.get(allForm[idform].get(key)).getData();
                 clog(key+"-ckeditor-"+postData[key]);
@@ -216,10 +221,12 @@ function updateCont(action, el, callback) {
     $.post(action, {}, function(data, status) {
         if (status == "success") {
             data = data.substring(data.indexOf('[DIV]')+5);
-            el.innerHTML = data;
+            el.innerHTML = "";
+            el.insertAdjacentHTML("afterbegin", data);
            if(isset(callback)) {callback(true)};
         } else {
-            el.innerHTML = el.innerHTML.substring(73);
+            el.innerHTML = "";
+            el.insertAdjacentHTML("afterbegin", el.innerHTML.substring(73));
             notif("error", "Erreur", status);
              if(isset(callback)) {callback(false)};
         }
@@ -246,7 +253,7 @@ function hide(el, remove = false) {
     $("#"+el).hide(300);
     if(remove) {
         setTimeout(function () {
-            get('el').parentElement.removeChild(get('el'));
+            get(el).parentElement.removeChild(get('el'));
         }, 301);
     }
 }
@@ -266,7 +273,16 @@ function initPostCallback(callback) {
     var list = document.querySelectorAll('[data-callback]');
     for (var i = 0; i < list.length; ++i) {
         clog("try callback "+list[i]);
+        if(isset(list[i].getAttribute("data-js"))) {
+            callback = window[list[i].getAttribute("data-js")];
+        }
         initPost(list[i].getAttribute("data-callback"), list[i].getAttribute("data-url"), callback);
+    }
+
+    list = document.querySelectorAll('[data-callback-loop]');
+    for (var i = 0; i < list.length; ++i) {
+        clog("try callback loop "+list[i]);
+        loopChild(get(list[i].getAttribute("data-callback-loop")),list[i].getAttribute("data-idform"));
     }
 }
 

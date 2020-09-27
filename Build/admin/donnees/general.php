@@ -3,7 +3,7 @@ if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')
 	$filetotal = 0;
 	$sizetotal = 0;
 	foreach (scandir("include/UploadImage/") as $file) {
-	    if ($file !== '.' && $file !== '..') {
+	    if ($file !== '.' && $file !== '..' && $file != "index.php") {
 	    	$filetotal++;
 	        $sizetotal += filesize("include/UploadImage/".$file);
 	    }
