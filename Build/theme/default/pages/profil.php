@@ -577,7 +577,7 @@ if (isset($_GET['erreur'])) {
             <?php if (!empty($joueurDonnees['signature'])) : ?>
 
             <blockquote class="blockquote about-content col-8 mx-auto">
-                <p class="ml-4 mb-0 h5"> <?= BBCode($joueurDonnees['signature'], $bddConnection); ?> </p>
+                <p class="ml-4 mb-0 h5"> <?= $joueurDonnees['signature'] ?> </p>
             </blockquote>
 
             <?php else : ?>
