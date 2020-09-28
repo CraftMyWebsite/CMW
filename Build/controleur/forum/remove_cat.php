@@ -7,7 +7,7 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategori
 	$select->execute(array(
 		'id' => $id
 	));
-	$data = $select->fetchAll();
+	$data = $select->fetchAll(PDO::FETCH_ASSOC);
 	foreach($data as $key => $value)
 	{
 		unset($delete);

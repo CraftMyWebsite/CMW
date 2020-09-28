@@ -155,7 +155,7 @@ else
               </tr>
             </thead>
             <tbody>
-                    <?php $donnees = $reqConfig->fetchAll();
+                    <?php $donnees = $reqConfig->fetchAll(PDO::FETCH_ASSOC);
                     for($o=0; $o < count($donnees); $o++)
                     {
                         ?><tr id="rec-<?php echo $o; ?>">

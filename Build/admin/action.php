@@ -19,11 +19,19 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
 				$directory = 'include/UploadImage/';
 			    foreach (scandir($directory) as $file) {
-			        if ($file !== '.' && $file !== '..') {
+			        if ($file !== '.' && $file !== '..' && $file != "index.php") {
 			           unlink($directory.$file);
 			        }
 			    }
 			}
+			exit();
+		case 'EnableShowTopVote':
+			$_Serveur_['vote']['oldDisplay'] = intval($_POST['number']);
+			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+			exit();
+		case 'DisableShowTopVote':
+			unset($_Serveur_['vote']['oldDisplay']);
+			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
 			exit();
 		case 'switchUploadImage':
 			unset($_Serveur_['uploadImage']);
@@ -89,6 +97,9 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			exit();
 		case 'getOffreBoutique':
 			require('admin/actions/getOffreBoutique.php');
+			exit();
+		case 'getOffreActionBoutique':
+			require('admin/actions/getOffreActionBoutique.php');
 			exit();
 		case 'getServerList':
 			require('admin/actions/getServerList.php');
@@ -276,8 +287,8 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/supprPage.php');
 		break;
 		
-		case 'boutique': 
-			require_once('admin/actions/boutique.php');
+		case 'editBoutique': 
+			require_once('admin/actions/editBoutique.php');
 		break;
 		
 		case 'supprCategorie': 

@@ -108,9 +108,9 @@ class JsonCon
 			$c = $this->api->call("server.version");
 		elseif($this->api != null && $this->api['query'] != null)
 			$c = $this->api['query']->GetInfo();
-		$this->updateReq("server.version", $c);
 		if(!isset($c))
 			return false;
+		$this->updateReq("server.version", $c);
 		if(isset($c[0]['result']) && $c[0]['result'] == "success")
 			return true;
 		if(isset($c['HostName']) && !empty($c['HostName']))
@@ -133,7 +133,7 @@ class JsonCon
 		}
 		else
 		{
-			if($this->api != null)
+			if($this->api != null && $this->api['rcon']->isConnected())
 				$this->api['rcon']->Rcon("say ".$message);
 		}
 	}
@@ -222,7 +222,7 @@ class JsonCon
 			$this->api->call("players.name.send_message", $donnees);
 		}
 		else {
-			if($this->api != null)	
+			if($this->api != null && $this->api['rcon']->isConnected())	
 				$data = $this->api['rcon']->Rcon('msg '.$donnees[0].' '.$donnees[1]);
 		}
 	}
@@ -251,7 +251,7 @@ class JsonCon
 		}
 		else
 		{
-			if($this->api != null)
+			if($this->api != null && $this->api['rcon']->isConnected())
 				$this->api['rcon']->Rcon($message);
 		}		
 	}
@@ -300,7 +300,7 @@ class JsonCon
 		}
 		else
 		{
-			if($this->api != null)
+			if($this->api != null && $this->api['rcon']->isConnected())
 				$this->api['rcon']->Rcon('give '.$this->pseudo.' '.$commande);
 		}
 	}

@@ -107,7 +107,7 @@ $fofo = $_Forum_->affichageForum();
                                         'id_categorie' => $categorie[$j]['id'],
                                         'perms' => $perms
                                     ));
-                                    $sousforum = $sousforum->fetchAll();
+                                    $sousforum = $sousforum->fetchAll(PDO::FETCH_ASSOC);
 
                                     if (Permission::getInstance()->verifPerm("createur") and !$_SESSION['mode'])
                                         $perms = 100;

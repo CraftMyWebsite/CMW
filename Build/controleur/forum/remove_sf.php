@@ -10,7 +10,7 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteSousForu
 		'id_cat' => $id_cat,
 		'id_sf' => $id_sf
 	));
-	$data = $select->fetchAll();
+	$data = $select->fetchAll(PDO::FETCH_ASSOC);
 	foreach($data as $key => $value)
 	{
 		unset($delete);

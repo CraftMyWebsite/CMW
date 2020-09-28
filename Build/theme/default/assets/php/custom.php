@@ -22,6 +22,9 @@
          toastr[type](message, header);
     }
 
+    function notif2(header, message, type) {
+        toastr[type](message, header);
+    }
 
     $('#NomForum').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
@@ -189,14 +192,14 @@
     <?php } ?>
 
 
-    <?php if (isset($_GET['setTemp']) && $_GET['setTemp'] == 1) : //Envoie d'un mot de passe nouveau 
+    <?php if (isset($_GET['setTemp']) && $_GET['setTemp'] == 1) { //Envoie d'un mot de passe nouveau 
     ?>
         window.onload = function() {
             notif("success", "Votre nouveau mot de passe vous a été envoyé par mail!");
         }
-    <?php endif; ?>
+    <?php } ?>
 
-    <?php if (isset($_Joueur_)) : //Système d'alerte 
+    <?php if (isset($_Joueur_)) { //Système d'alerte 
     ?>
         setInterval(ajax_alerts, 10000);
 
@@ -214,14 +217,14 @@
                 if (donnees > 0) {
                     window.onload = function() {
                         var message = "Vous avez " + donnees + " nouvelles alertes.";
-                        notif("Message Système", message);
+                        notif2("Message Système", message, "info");
                     }
                 }
             });
         }
-    <?php endif; ?>
+    <?php } ?>
 
-    <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement')) : //Système de signalement 
+    <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement')) { //Système de signalement 
     ?>
         setInterval(ajax_signalement, 10000);
 
@@ -232,43 +235,48 @@
                     window.onload = function() {
                         signalement.innerHTML = signalement;
                         var message = "Il y'a " + signalement + " nouveaux signalements !";
-                         notif("Message Système",message);
+                         notif2("Message Système",message,"info");
                     }
                 }
             });
         }
-    <?php endif; ?>
+    <?php } ?>
 
-    <?php if (isset($_GET['envoieMail']) && $_GET['envoieMail'] == true) : //Récupération de compte 
+    <?php if (isset($_GET['envoieMail']) && $_GET['envoieMail'] == true) { //Récupération de compte 
     ?>
         window.onload = function() {
-            notif("Message Système", "Un mail de récupération a bien été envoyé !");
+            notif2("Message Système", "Un mail de récupération a bien été envoyé !", "success");
         }
-    <?php endif; ?>
+    <?php } ?>
 
-    <?php if (isset($_GET['send'])) : //Envoie de message 
+    <?php if (isset($_GET['send'])) { //Envoie de message 
     ?>
         $(document).ready(function() {
-            notif("Messagerie", "Votre message a bien été envoyé !");
+            notif2("Messagerie", "Votre message a bien été envoyé !", "success");
         });
-    <?php endif; ?>
+    <?php } ?>
 
-    <?php if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['notif']) && $_GET['notif'] == 0) : //Achat par Paypal 
+    <?php if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['notif']) && $_GET['notif'] == 0) { //Achat par Paypal 
     ?>
         $(document).ready(function() {
-            notif("Paypal", "Votre paiement a bien été effectué !");
+            notif2("Paypal", "Votre paiement a bien été effectué !", "success");
         });
 
-    <?php elseif (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['notif']) && $_GET['notif'] == 1) : //Achat par Paypal annulé 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['notif']) && $_GET['notif'] == 1) { //Achat par Paypal annulé 
     ?>
         $(document).ready(function() {
-            notif("Paypal", "Vous avez annulé votre paiement !");
+            notif2("Paypal", "Vous avez annulé votre paiement !", "success");
         });
 
-    <?php elseif ($_GET['page'] == "token" && $_GET['notif'] == 2) :  //Achat par PaySafeCard 
+    <?php } if ($_GET['page'] == "token" && $_GET['notif'] == 2) {  //Achat par PaySafeCard 
     ?>
         $(document).ready(function() {
-            notif("Paysafecard", "Votre paiement est en attente ! Il sera traité par un admin prochainement.");
+            notif2("Paysafecard", "Votre paiement est en attente ! Il sera traité par un admin prochainement.", "success");
         });
-    <?php endif; ?>
+    <?php } if ($_GET['page'] == "panier" && $_GET['success'] == true) {  //Achat par PaySafeCard 
+    ?>
+        $(document).ready(function() {
+            notif2("Boutique", "Vos achats ont été validé.", "success");
+        });
+    <?php } ?>
 </script>

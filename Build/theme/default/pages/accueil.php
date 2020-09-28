@@ -13,7 +13,7 @@
 
                             $getcountLikesPlayers = $accueilNews->countLikesPlayers($news[$i]['id']);
                             $countLikesPlayers = $getcountLikesPlayers->rowCount();
-                            $namesOfPlayers = $getcountLikesPlayers->fetchAll();
+                            $namesOfPlayers = $getcountLikesPlayers->fetchAll(PDO::FETCH_ASSOC);
 
                             $getNewsCommentaires = $accueilNews->newsCommentaires($news[$i]['id']);
                 ?>

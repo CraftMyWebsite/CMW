@@ -2,7 +2,7 @@
 if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {  
     
     require_once('./admin/donnees/voter.php'); 
-                            $donnees = $req_donnees->fetchAll();
+                            $donnees = $req_donnees->fetchAll(PDO::FETCH_ASSOC);
                             $idsc = 500;
                             for($o=0; $o < count($donnees); $o++)
                             {

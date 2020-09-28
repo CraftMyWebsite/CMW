@@ -566,4 +566,8 @@ use xPaw\SourceQuery\Exception\SocketException;
 			
 			return $this->Rcon->Command( $Command );
 		}
+
+		public function isConnected() {
+			return $this->Connected;
+		}
 	}

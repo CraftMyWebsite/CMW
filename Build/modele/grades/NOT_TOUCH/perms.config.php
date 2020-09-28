@@ -159,6 +159,9 @@ const PERMS = array(
 			),
 			"voteHistory" => array(
 				"showPage" => "Accès à la page des historique de vote",
+				"actions" => array(
+					"removeVote" => "Supprimer les votes d'un joueur"
+				)
 			)
 		),
 		"members" => array(
