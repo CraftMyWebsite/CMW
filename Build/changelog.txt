@@ -40,6 +40,12 @@ Ajouts ([+]), modifications ([=]) et suppression ([-])
 [+] : Ajout d'une toplist sur la page de vote 
 (|) : Fix d'un bug qui permettez de ce give des jetons
 [+] : Nouveau Thème défaut
+[+] : Ajout d'un éditeur de texte complet
+[+] : Option pour les images sur l'éditeur de texte
+[+] : Ajout d'une info Hors-Ligne/En ligne au niveau de rcon et jsonapi
+[+] : Pouvoir citer une réponse sur le forum
+[+] : Barre de recherche sur le forum
+[=] : Heure sur les réponses du forum
 
 [=] : Corrections orthographiques et de tournures de phrases
 
