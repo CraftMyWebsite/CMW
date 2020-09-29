@@ -24,8 +24,11 @@ if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInsta
     header('Location: ?page=erreur&erreur=7');
 }
 
+$titleHTML = $categoried['nom'];
+if(isset($id_sous_forum))
+    $titleHTML .= " > ".$sousforumd['nom'];
 ?>
-
+<script>  document.title = "<?=$_Serveur_['General']['name'] . " | " . $titleHTML;?>"; </script>
 <section id="ForumCategorie">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
         <div class="row">

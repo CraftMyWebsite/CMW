@@ -8,9 +8,10 @@ if (isset($_GET['id'])) :
     if (isset($_Joueur_))
         $_JoueurForum_->topic_lu($id, $bddConnection);
     $topicd = $_Forum_->getTopic($id);
+    $titleHTML = $topicd['nom'];
     if (!empty($topicd['id'])) :
         if ((Permission::getInstance()->verifPerm("createur") or (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['perms'] and Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['permsCat']) and !$_SESSION['mode']) or ($topicd['perms'] == 0 and $topicd['permsCat'] == 0)) : ?>
-
+            <script>  document.title = "<?=$_Serveur_['General']['name'] . " | " . $titleHTML;?>"; </script>
             <section id="Post">
                 <div class="container-fluid col-md-9 col-lg-9 col-sm-10 mt-4">
 
