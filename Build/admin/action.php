@@ -77,6 +77,12 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 				$bddConnection->exec('DELETE FROM cmw_votes WHERE isOld=1');
 			}
 			exit();
+		case 'supprHistoPaypal':
+			if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'seePaypalHisto') && isset($_GET['id'])) {
+				$bddConnection->prepare('DELETE FROM `cmw_paypal_historique` WHERE id=:id');
+				$req->execute(array('id' => $_GET['id']));
+			}
+			exit();
 		case 'getJsonVoteHistory':
 			require('admin/actions/getJsonVoteHistory.php');
 			exit();

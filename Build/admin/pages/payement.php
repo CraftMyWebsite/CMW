@@ -293,7 +293,7 @@ if(isset($_GET['paypal'])){
                 <?php
                     foreach($tabPaysafe as $value)
                     {
-                        ?><tr>
+                        ?><tr id="row-ps-<?=$value['id'];?>">
                             <td><?=$value['pseudo'];?></td>
                             <td><?=$value['code'];?></td>
                             <td><?=$value['montant'];?></td>
@@ -301,10 +301,42 @@ if(isset($_GET['paypal'])){
                             <td><?=($value['statut']) ? '<span class="badge badge-success">Traité !</span>' : 'En attente';?></td>
                             <td>
                             <?php if(!$value['statut'])
-                                echo '<a href="?action=validerPaysafecard&offre='.$value['id'].'" class="btn btn-success">Valider l\'achat</a>';
+                            { ?>
+                                <button stype="button" onclick="var el = this; sendDirectPost('admin.php?action=validerPaysafecard&offre=<?php echo $value['id']; ?>', function() { el.innerHTML = '<span class=\'badge badge-success\'>Traité !</span>'; });" class="btn btn-success">Valider l\'achat</button>
+                           <?php }
                             ?>
-                            <a href="?action=supprHistoPaysafecard&offre=<?=$value['id'];?>" class="btn btn-danger">Supprimer de l'historique</a>
+                            <button type="button" onclick="sendDirectPost('admin.php?action=supprHistoPaysafecard&offre=<?=$value['id'];?>', function() { hide('row-ps-<?=$value['id'];?>');});" class="btn btn-danger">Supprimer de l'historique</button>
                             </td>
+                        </tr><?php
+                    }
+                ?>
+                </table>
+            </div>
+        </div>
+    </div>
+    <?php } if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'seePaypalHisto') && $affichage == "paypal" && !empty($paypalHistorique) ) {  ?> 
+
+    <div class="col-md-12 col-xl-12 col-12 text-center">
+        <div class="card  ">
+            <div class="card-header ">
+                <h3 class="card-title">Liste des achats Paypal</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Montant</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                <?php
+                    foreach($paypalHistorique as $value)
+                    {
+                        ?><tr id="row-p-<?=$value['id'];?>">
+                            <td><?=$value['pseudo'];?></td>
+                            <td><?=$value['montant'];?></td>
+                            <td><?=conversionDate($value['date']);?></td>
+                            <td><button type="button" onclick="sendDirectPost('admin.php?action=supprHistoPaypal&id=<?=$value['id'];?>', function() { hide('row-p-<?=$value['id'];?>'); })" class="btn btn-danger">Supprimer de l'historique</button></td>
                         </tr><?php
                     }
                 ?>

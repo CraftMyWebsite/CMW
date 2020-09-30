@@ -127,7 +127,8 @@ const PERMS = array(
 				"addOffrePaypal" => "Ajouter une offre PayPal",
 				"editOffrePaypal" => "Edition des offres PayPal",
 				"editOffrePaysafeCard" => "Edition des offres Paysafecard",
-				"verifPaysafecard" => "Vérifier les transactions Paysafecard"
+				"verifPaysafecard" => "Vérifier les transactions Paysafecard",
+				"seePaypalHisto" => "Voir l'historique des achâts paypal"
 			)
 		),
 		"menus" => array(
