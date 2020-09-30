@@ -6,8 +6,11 @@ if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) {
 
 	$query = $bddConnection->query('SELECT * FROM cmw_jetons_paypal_offres');
 
-	$i = 0;
 	$paypalOffres = $query->fetchAll(PDO::FETCH_ASSOC);
+
+	$query = $bddConnection->query('SELECT * FROM cmw_paypal_historique WHERE 1 ORDER BY date DESC LIMIT 10');
+	
+	$paypalHistorique = $query->fetchAll(PDO::FETCH_ASSOC);
 
 	$req = $bddConnection->query("SELECT * FROM cmw_paysafecard_offres");
 
@@ -18,4 +21,11 @@ if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) {
 	$tabPaysafe = $req->fetchAll(PDO::FETCH_ASSOC);
 
 }
+
+public function conversionDate($last_answer)
+	{
+		$last_answer = substr_replace($last_answer,"h",strpos($last_answer,":"),strlen(":"));
+        $last_answer = str_replace(" ", " à ", substr($last_answer, 0, strpos($last_answer,":")));
+		return $last_answer;
+	}
 ?>

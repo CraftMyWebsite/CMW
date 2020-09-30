@@ -463,6 +463,14 @@ CREATE TABLE cmw_paysafecard_historique (
   REFERENCES cmw_paysafecard_offres(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `cmw_paypal_historique` (
+  `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `montant` double(5, 2) UNSIGNED NOT NULL,
+  `pseudo` varchar(32) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 CREATE TABLE cmw_grades (
   id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nom VARCHAR(200) NOT NULL,
