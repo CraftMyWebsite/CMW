@@ -5,6 +5,7 @@ class ckeditor
 	public static function verif($content2) {
 		if(isset($content2) && !empty($content2)) {
 			$dom = new DOMDocument('1.0');
+			$content=str_replace("[hr]Contenu fusionné[hr]", "",$content);
 			$dom->loadHTML($content2);
 			$dom->removeChild($dom->doctype);           
 			$dom->replaceChild($dom->firstChild->firstChild->firstChild, $dom->firstChild);

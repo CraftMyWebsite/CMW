@@ -20,6 +20,79 @@ window.addEventListener("load", function () {
 	})
 });
 
+function searchForum(value, el, table, title) {
+	if( typeof value === 'undefined' || value === null || value.replace(" ", "") == "")
+	{
+		 $(el).hide(300);
+	} else {
+		$.post('index.php?action=searchTopic', {'recherche':value}, function(data, status) {
+			 if (status == "success") {
+	            data = data.substring(data.indexOf('[DIV]')+5);
+	            title.innerText = 'Recherche "'+value+'":';
+	            let f = "";
+	            let json = JSON.parse(data);
+	            let i = 0;
+            	json.forEach(function(ar, ar2) {
+            		i++;
+            		f += ""
+
+            		f += "<tr>"
+							+"<td>"
+                                +"<a href='?page=profil&profil="+ar.pseudo+"'>"
+                                    +"<img src='"+ar.img+"' style='width: 42px; height: 42px;' alt='avatar de l\'auteur' title='ar.pseudo' />"
+                                +"</a>"
+                            +"</td>"
+							+"<td>"
+                        		+"<a href='?&page=post&id="+ar.id2+"'>";
+	                        		if(typeof ar.prefix !== 'undefined' && ar.prefix !== null)
+	                        		{
+	                        			f += ar.prefix+ " ";
+	                        		}
+
+	                                f+= ar.nom
+                                +"</a>"
+                                +"<p>"
+                                	+"<small>"
+                                        +"<a href='?page=profil&profil="+ar.pseudo+"'>"
+                                            +ar.pseudo
+                                        +"</a>, le "+ar.date_creation
+                                    +"</small>"
+                                +"</p>"
+                            +"</td>"
+							+"<td>"
+                                +"<p>Réponses : "+ar.compte
+                            +"</td>"
+							+"<td>"
+                           		+"<a href='?&page=post&id="+ar.id2+"'>"
+                                    +ar.last_answer
+                                +"</a>"
+                            +"</td>"
+                        +"</tr>";
+            	});
+            	if(el.style.display == "none") {
+				 	$(el).show(300);
+				 }
+            	table.innerHTML = "";
+            	if(typeof document.getElementById('alert-search') !== 'undefined' && document.getElementById('alert-search') !== null)
+            	{
+            		el.removeChild(document.getElementById('alert-search'));
+            	}
+            	if(i == 0) {
+            		$(table.parentElement).hide(0);
+            		el.insertAdjacentHTML("afterbegin", '<div id="alert-search" class="alert alert-warning w-80 mx-auto mt-3" role="alert"><p style="margin-bottom: 0;" class="text-center">Aucune occurrence trouvé.</p></div>');
+            	} else {
+            		if(table.parentElement.style.display == "none") {
+				 		$(table.parentElement).show(300);
+				 	}
+		           table.insertAdjacentHTML("afterbegin", f);
+		        }
+	        } else {
+	            notif("error", statue, "Fatal erreur");
+	        }
+		});
+	}
+}
+
 function imageModal(el) {
 	document.getElementById("modal-image").style.display = "block";
 	document.getElementById("modal-image-src").src = el.src
