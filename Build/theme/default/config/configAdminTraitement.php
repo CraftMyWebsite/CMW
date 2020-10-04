@@ -48,7 +48,7 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editT
 	
 	}else {
 
-		$ecritureTheme['Main']['theme']['light']['main-color-bg'] = $_Theme_['Main']['theme']['light']['main-color-bg'];
+	    $ecritureTheme['Main']['theme']['light']['main-color-bg'] = $_Theme_['Main']['theme']['light']['main-color-bg'];
 	    $ecritureTheme['Main']['theme']['light']['secondary-color-bg'] = $_Theme_['Main']['theme']['light']['secondary-color-bg'];
 	    $ecritureTheme['Main']['theme']['light']['base-color'] = $_Theme_['Main']['theme']['light']['base-color'];
 	    $ecritureTheme['Main']['theme']['light']['main-color'] = $_Theme_['Main']['theme']['light']['main-color'];
