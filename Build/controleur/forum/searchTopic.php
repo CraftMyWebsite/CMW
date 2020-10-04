@@ -7,7 +7,7 @@
         $recherche = htmlspecialchars($_POST['recherche']);
 
         echo '[DIV]';
-        $req = $bddConnection->prepare('SELECT id as id2, nom, pseudo, date_creation, perms, last_answer FROM cmw_forum_post WHERE cmw_forum_post.nom LIKE :nom OR cmw_forum_post.contenue LIKE :contenue OR cmw_forum_post.last_answer LIKE :last LIMIT 20');
+        $req = $bddConnection->prepare('SELECT id as id2, nom, pseudo, date_creation, perms, last_answer FROM cmw_forum_post WHERE nom LIKE :nom OR contenue LIKE :contenue OR last_answer LIKE :last LIMIT 20');
         $req->execute(array(
             'nom' => "%".$recherche.'%',
             'contenue' => '%'.$recherche.'%',
