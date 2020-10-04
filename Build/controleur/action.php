@@ -14,6 +14,9 @@ if(isset($_GET['action']))
 			setcookie('pass', 0, time(), '/', null, false, false);
 			header('Location: index.php');
 		break;
+		case 'searchTopic':
+			include('controleur/forum/searchTopic.php');
+			exit();
 		case 'uploadCKImg':
 			echo '[DIV]';
 			require('modele/UploadImage.class.php');

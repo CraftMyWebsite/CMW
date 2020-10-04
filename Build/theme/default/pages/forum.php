@@ -6,15 +6,52 @@ $fofo = $_Forum_->affichageForum();
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
         <div class="row">
             <!-- Présentation -->
-            <div class="d-flex col-12 info-page">
-                <i class="fas fa-info-circle notification-icon"></i>
-                <div class="info-content">
-                    Bienvenue sur le forum de <?= $_Serveur_['General']['name']; ?>, <br>
-                    Ici vous pourrez échanger et partager avec toute la communauté du serveur !
+            <div class="info-page col-12">
+                <div class="d-flex">
+                    <i class="fas fa-info-circle notification-icon"></i>
+                    <div class="info-content">
+                        Bienvenue sur le forum de <?= $_Serveur_['General']['name']; ?>, <br>
+                        Ici vous pourrez échanger et partager avec toute la communauté du serveur !
+                    </div>
                 </div>
-            </div>
+                <div class="d-flex col-12 col-sm-6 col-lg-4" style="margin:auto;">
+                     <div class="input-group" >
+                        <input type="text" id="search-topic" class="form-control" placeholder="Rechercher un topic ou un message" />
+                            <div class="input-group-append" >
+                                 <span onclick="searchForum(document.getElementById('search-topic').value, document.getElementById('all-search'), document.getElementById('table-search'),document.getElementById('title-search'))" style="border: none;" class="input-group-text btn btn-main" style="cursor:pointer;"><i class="fas fa-search"></i>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+             </div>
         </div>
+        <div class="row" style="display:none;" id="all-search">
+            <table class="table table-dark table-striped" style="display:none;">
+                <thead>
+                    <tr>
+                     <th colspan="5" style="width: <?= (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') and !$_SESSION['mode']) ? '75%' : '100%'; ?>;">
+                        <h5 class="text-center" id="title-search"></h5>
+                    </tr>
+                    <tr>
+                        <th style="width: 5%">
+                        </th>
+                        <th class="w-50">
+                            Nom du topic
+                        </th>
+                        <th>
+                            Réponses
+                        </th>
+                        <th>
+                            Dernière réponse
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="table-search">
 
+                </tbody>
+            </table>
+            </hr>
+        </div>
         <div class="row">
             <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur')) : ?>
                 <p class="text-center">
@@ -82,7 +119,7 @@ $fofo = $_Forum_->affichageForum();
                             <tr>
                                 <th colspan="5" style="width: <?= (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') and !$_SESSION['mode']) ? '75%' : '100%'; ?>;">
                                     <h5 class="text-center" <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') and !$_SESSION['mode']) { ?>data-editforum-index="<?= $i; ?>" data-editforum="<?php echo $fofo[$i]['id']; ?>" <?php } ?>>
-                                        <span style="display:inline;"><?= ucfirst($fofo[$i]['nom']); ?></span> <input type="text" class="text-center no-hover" value="<?= ucfirst($fofo[$i]['nom']); ?>" style="width:auto;color:white;display:none;background: transparent;border: none;" > <i style="display:none;" class="fas fa-cog"></i>
+                                        <span style="display:inline;"><?= ucfirst($fofo[$i]['nom']); ?></span> <input type="text" class="text-center no-hover" value="<?= ucfirst($fofo[$i]['nom']); ?>" style="width:auto;color:white;display:none;background: transparent;border: none;" > <i style="display:none;" style="cursor:pointer" class="fas fa-cog"></i>
                                     </h5>
                                 </th>
                                 <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') and !$_SESSION['mode']) : ?>
