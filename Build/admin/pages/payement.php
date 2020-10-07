@@ -88,7 +88,7 @@ if(isset($_GET['paypal'])){
                             <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements !" />
                         </div>
                     </div>
-                <?php } elseif($affichage == "paypal")
+                <?php } else if($affichage == "paypal")
                 { ?>
                 <!-- PayPal  -->
                 <div class="row">
@@ -117,7 +117,7 @@ if(isset($_GET['paypal'])){
     </div>
 </div>
     <?php }
-    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal') AND ($affichage == "paypal")) { ?>
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal') AND $affichage == "paypal") { ?>
     <div class="col-md-12 col-xl-6 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
