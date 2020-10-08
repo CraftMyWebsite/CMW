@@ -36,7 +36,7 @@ Ajouts ([+]), modifications ([=]) et suppression ([-])
 (|) : Fix erreur 500 à la récupération du mot de passe par email
 [+] : Ajout des têtes des joueurs en ligne sur la page chat
 [=] : Refonte de la page vote
-[+] : Ajout sur la page vote de pouvoir envoyer plusieurs récompenses
+[+] : Ajout sur la page vote de pouvoir envoyer plusieurs récompenses avec pourcentage de l'obtenir
 [+] : Ajout d'une toplist sur la page de vote 
 (|) : Fix d'un bug qui permettez de ce give des jetons
 [+] : Nouveau Thème défaut
@@ -46,6 +46,9 @@ Ajouts ([+]), modifications ([=]) et suppression ([-])
 [+] : Pouvoir citer une réponse sur le forum
 [+] : Barre de recherche sur le forum
 [=] : Heure sur les réponses du forum
+[+] : Ajout d'un mode nuit sur le panel
+[+] : Ajout d'une option pour acheter une offre avant une autre sur la boutique
+[=] : Amélioration de l'éditeur des offres sur la boutique
 
 [=] : Corrections orthographiques et de tournures de phrases
 
