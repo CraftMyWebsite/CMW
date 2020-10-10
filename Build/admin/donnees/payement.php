@@ -22,10 +22,10 @@ if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) {
 
 }
 
-public function conversionDate($last_answer)
-	{
-		$last_answer = substr_replace($last_answer,"h",strpos($last_answer,":"),strlen(":"));
-        $last_answer = str_replace(" ", " à ", substr($last_answer, 0, strpos($last_answer,":")));
-		return $last_answer;
-	}
+function conversionDate($last_answer)
+{
+	$last_answer = substr_replace($last_answer,"h",strpos($last_answer,":"),strlen(":"));
+    $last_answer = str_replace(" ", " à ", substr($last_answer, 0, strpos($last_answer,":")));
+	return $last_answer;
+}
 ?>

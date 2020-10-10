@@ -51,7 +51,7 @@ else
             </div>
         </div>
    	</div>
-   	<?php if(!$_Permission_->verifPerm('PermsPanel', 'social', 'actions', 'addSocial')) { ?>
+   	<?php if($_Permission_->verifPerm('PermsPanel', 'social', 'actions', 'addSocial')) { ?>
    	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card   ">
 			<div class="card-header">
