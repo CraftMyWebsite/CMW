@@ -238,9 +238,9 @@ function updateRecompenseList() {
                     if(document.getElementById("disprecompList").style.display == "none") {
                         $("#disprecompList").show(300);
                     }
-                    el.innerHTML += "<div class='d-block mx-auto text-center mt-3 mb-2">"
+                    el.innerHTML += "<div class='d-block mx-auto text-center mt-3 mb-2'>";
                     el.innerHTML += "<button type='button' class='btn btn-lg btn-reverse' onclick='pickupRecompense();' title='Récupérer mes récompenses'>Récupérer mes récompenses (Connectez-vous sur le serveur)</button>";
-                    el.innerHTML += "</div>"
+                    el.innerHTML += "</div>";
                 }
             } else {
                 if(document.getElementById("disprecompList").style.display == "block") {
