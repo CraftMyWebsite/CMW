@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
-				<strong>Vous avez aucune permission pour accéder aux bannissements.</strong>
+				<strong>Vous avez aucune permission pour accéder à cette page.</strong>
 			</div>
 		</div>
 	</div>
