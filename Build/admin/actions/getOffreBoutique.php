@@ -1,6 +1,5 @@
 <?php echo '[DIV]'; if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) { 
 	require_once('./admin/donnees/boutique.php'); ?> 
-					<div class="col-md-12" id="allcategorie">
                     <ul class="nav nav-tabs" id="list-minia">
                         <?php for($i = 0;$i < count($categories);$i++) {?>
                         <li class="nav-item" id="tabnavRap<?=$i?>"><a class="<?php if($i == 0) echo 'active'; ?> nav-link" href="#navRap<?=$i?>" data-toggle="tab" style="color: black !important" id="titlecat<?=$i?>"><?php echo $categories[$i]['titre']; ?></a></li>
