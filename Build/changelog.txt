@@ -29,7 +29,7 @@ Ajouts ([+]), modifications ([=]) et suppression ([-])
 [=] : Amélioration de la fonction récursive pour les chmod automatique
 [+] : Ajout de l'affichage de plusieurs informations de base sur l'installateur
 [=] : Réglages d'incohérences graphique sur le panel administrateur
-(|) : Réglage de bugs sur la page de chat isntantanné avec le serveur depuis le site
+(|) : Réglage de bugs sur la page de chat instantanné avec le serveur depuis le site
 [=] : Refonte du système de stats sur le panel administrateur
 (|) : Fix d'un bug qui ne prenait pas en compte le choix de la Newsletter à l'inscription
 [=] : L'exemple d'IP pour les serveurs JSONAPI est désormais en chiffre comme le demande le système
@@ -49,7 +49,7 @@ Ajouts ([+]), modifications ([=]) et suppression ([-])
 [+] : Ajout d'un mode nuit sur le panel
 [+] : Ajout d'une option pour acheter une offre avant une autre sur la boutique
 [=] : Amélioration de l'éditeur des offres sur la boutique
-
+[-] : Suppression de la messagerie qui n'est pas utilisé 
 [=] : Corrections orthographiques et de tournures de phrases
 
 
