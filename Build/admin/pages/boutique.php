@@ -75,7 +75,7 @@
             <div class="card-body" id="createOffre">
 
                 <div class="alert alert-success">
-                    <strong>Après avoir créé une catégorie, vous pouvez y insérer une offre. L'offre est dans un premier temps composée d'un titre, d'un message(ou image) et appartient à une catégorie, vous pourrez par la suite attribuer à une offre une "action"(=commande). Pour mettre une image rien de plus simple, il vous suffit d'activer l'option dans Réglages du site et d'utiliser l'éditeur de texte. ; ?></strong>
+                    <strong>Après avoir créé une catégorie, vous pouvez y insérer une offre. L'offre est dans un premier temps composée d'un titre, d'un message(ou image) et appartient à une catégorie, vous pourrez par la suite attribuer à une offre une "action"(=commande). Pour mettre une image rien de plus simple, il vous suffit d'activer l'option dans Réglages du site et d'utiliser l'éditeur de texte.</strong>
                 </div>
 
                         <label class="control-label">Titre de l'offre</label>
