@@ -104,7 +104,7 @@
                         <label class="control-label">Dépendance de l'offre (devra avoir acheter les offres suivante avant celle-ci)</label>
                         <input type="text"  value="" id="dep-tag" name="dep"  data-role="tagsinput">
                         <select style="margin-top:10px;" id="dep-tag-sel" onfocus="this.selectedIndex = -1;" class="form-control" onchange="$('#dep-tag').tagsinput('add', { 'value': parseInt(this.value.split('|')[0]) , 'text': this.value.split('|')[1]});">
-                            <?php for($j = 1;$j < count($offres);$j++) { ?>
+                            <?php for($j = 1;$j <= count($offres);$j++) { ?>
                                 <option value="<?php echo $offres[$j]['id']; ?>|<?php echo $offres[$j]['nom']; ?>"><?php echo $offres[$j]['nom']; ?></option>
                             <?php } ?> 
                         </select>
@@ -354,7 +354,7 @@
                                                                     <textarea name="offresDescription<?php echo $offres[$j]['id']; ?>" data-UUID="descoffre<?php echo $offres[$j]['id']; ?>" id="ckeditor"><?php echo $offres[$j]['description']; ?></textarea>
                                                                 </div>
                                                                 <div class="modal-footer bg-light">
-                                                                    <button type="button" class="btn btn-success btn-block"
+                                                                    <button type="button" onclick="sendPost('navRap<?=$i?>');" class="btn btn-success btn-block"
                                                                         data-dismiss="modal"><strong>Fermer</strong> (sauvegarde les modifications)</button>
                                                                 </div>
                                                             </div>
@@ -578,5 +578,6 @@
         </div>
     </div>
 <?php } ?>
+</br>
 </div>
 <?php } ?>

@@ -16,7 +16,7 @@
                 <strong>Aucun ticket n'a été créé par les membres jusqu'à présent !</strong>
             </div>
         </div>
-    <?php } else { ?>
+    <?php } ?>
     	<div class="col-md-6 col-xl-4 col-12">
 			<div class="card  " >
 				<div class="card-header ">
@@ -37,6 +37,7 @@
 				</div>
 	        </div>
    		</div>
+   		<?php if(!$aucunTicket) { ?>
    		<div class="col-md-6 col-xl-8 col-12" id="all-ticket">
 			<div class="card  " >
 				<div class="card-header ">
@@ -94,6 +95,5 @@
 	        </div>
    		</div>
 
-   	<?php } ?>
+   	<?php } } ?>
 </div>
-<?php } ?>

@@ -135,11 +135,11 @@ else
                             <input type="text" class="form-control" name="sousTitre">
 
 							<label class="control-label">Contenu</label>
-							 <textarea data-UUID="0007-<?php echo $i; ?>" id="ckeditor" name="message" style="height: 275px; margin: 0px; width: 50%;"><?php echo $pageContenu[$i][$j][1]; ?></textarea>
+							 <textarea data-UUID="0007-<?php echo $i; ?>" id="ckeditor" name="message" style="height: 275px; margin: 0px; width: 50%;"></textarea>
 
-                        	<script> initPost('newSection<?php echo $pages[$i]['id']; ?>', 'admin.php?&action=creerSection&id=<?php echo $pages[$i]['id']; ?>', null); </script>
+                        	<script> initPost('newSection<?php echo $pages[$i]['id']; ?>', 'admin.php?&action=creerSection&id=<?php echo $pages[$i]['id']; ?>', function(data) { if(data) { pagesUpdate(); } }); </script>
                         	 <div class="row text-center" style="margin-top:20px;">
-	                            <input type="submit" onclick="sendPost('newSection<?php echo $pages[$i]['id']; ?>', function(data) { if(data) { }});" class="btn btn-success w-100" value="Créer"/>
+	                            <input type="submit" onclick="sendPost('newSection<?php echo $pages[$i]['id']; ?>');" class="btn btn-success w-100" value="Créer"/>
 	                        </div>
                         </div>
                        </div>

@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_offres` (
   `categorie_id` int(11) NOT NULL,
   `ordre` int(11) NOT NULL,
   `evo` text NULL,
+  `max_vente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

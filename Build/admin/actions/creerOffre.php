@@ -1,11 +1,14 @@
 <?php
 if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre')) {
+	require_once('./admin/donnees/boutique.php');
 	$j = 1;
 	if($offres != null){
 		for($i = 0; $i < count($offres); $i++)
 		{
 			if($offres[$i]['categorie'] == $_POST['categorie'])
+			{
 				$j++;
+			}
 		}
 	}
 

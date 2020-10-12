@@ -7,6 +7,9 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) {
 		require_once('modele/boutique/offres.class.php'); 
 		$offre = new OffresList($bddConnection, $jsonCon, $_Joueur_);
 		$offres = $offre->GetTableauOffres();
+		if(!isset($offres) or empty($offres)) {
+			$offres = array();
+		}
 		$offresByGet = $offre->GetOffresGet();
 		$actions = GetListeActions($bddConnection);
 
