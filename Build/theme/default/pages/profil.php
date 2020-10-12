@@ -96,7 +96,7 @@ if (isset($_GET['erreur'])) {
         </div>
         <?php endif; ?>
 
-        <?php if (isset($_Joueur_) and $_GET['profil'] == $_Joueur_['pseudo']) :
+        <?php if (isset($_Joueur_) and $_GET['profil'] === $_Joueur_['pseudo']) :
             $isMyAccount = true ?>
 
         <!-- Edition du profil -->
@@ -232,7 +232,7 @@ if (isset($_GET['erreur'])) {
                                                         </span>
                                                         <input type="text" name="pseudo"
                                                             class="form-control custom-text-input" id="namePseudo"
-                                                            value="<?= $_Joueur_['pseudo']; ?>" disabled
+                                                            value="<?= $joueurDonnees['pseudo']; ?>" disabled
                                                             style="cursor: not-allowed">
                                                     </div>
                                                 </div>
@@ -368,6 +368,7 @@ if (isset($_GET['erreur'])) {
                                                         name="changeNewsletter" value="subscribeNewsletter"
                                                         style="margin-top: 1.9rem">S'inscrire
                                                     </button>
+                                                    
                                                     <?php endif; ?>
                                                 </div>
 
@@ -398,7 +399,7 @@ if (isset($_GET['erreur'])) {
                                                 <input type="text" class="form-control custom-text-input"
                                                     name="<?= $value['nom']; ?>"
                                                     placeholder="Votre nom d'utilisateur <?= $value['nom']; ?>"
-                                                    value="<?php if ($joueurDonnees[$value['nom']] != 'inconnu') echo $joueurDonnees[$value['nom']]; ?>">
+                                                    value="<?php if ($joueurDonnees[$value['nom']] !== 'inconnu') echo $joueurDonnees[$value['nom']]; ?>">
                                             </div>
 
                                             <?php endforeach; ?>
@@ -410,7 +411,7 @@ if (isset($_GET['erreur'])) {
                                                 </label>
                                                 <input type="number" name="age" class="form-control custom-text-input "
                                                     min="0" max="99" placeholder="17"
-                                                    value="<?php if ($joueurDonnees['age'] != 'inconnu') echo $joueurDonnees['age']; ?>">
+                                                    value="<?php if ($joueurDonnees['age'] !== 'inconnu') echo $joueurDonnees['age']; ?>">
 
                                             </div>
 
@@ -497,7 +498,7 @@ if (isset($_GET['erreur'])) {
 
             <?php else : ?>
             <div class="col-lg-4 col-sm-12 col-md-12">
-                <img class="profile-image" src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo'], 128); ?>"
+                <img class="profile-image" src="<?= $_ImgProfil_->getUrlHeadByPseudo($joueurDonnees['pseudo'], 128); ?>"
                     style="height:128px; width:128px;"
                     alt="Image de profil de <?= htmlspecialchars($joueurDonnees['pseudo']) ?>" />
             </div>
@@ -531,7 +532,7 @@ if (isset($_GET['erreur'])) {
                 <div class="card">
 
                     <div class="card-header">
-                        Comptes de <?= $_Joueur_['pseudo'] ?>
+                        Comptes de <?= $joueurDonnees['pseudo'] ?>
                     </div>
 
                     <div class="card-body">
