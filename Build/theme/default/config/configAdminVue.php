@@ -60,7 +60,7 @@
                                             <h4> Présentation du thème :</h4>
 
                                             <div class="col-9 mx-auto mt-5">
-                                                <table class="table table-striped table-hover">
+                                                <table class="table table-responsive table-striped table-hover">
                                                     <thead>
                                                         <th></th>
                                                         <th>Fond principal</th>
