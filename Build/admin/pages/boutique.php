@@ -8,7 +8,7 @@
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) { ?>
 <div class="col-lg-12 text-justify">
     <div class="alert alert-danger">
-        <strong>Vous avez aucune permission pour accéder aux réglages du slider et des miniatures.</strong>
+        <strong>Vous n'avez aucune permission pour accéder aux réglages de la boutique</strong>
     </div>
 </div>
 <?php } else {?>
@@ -75,7 +75,7 @@
             <div class="card-body" id="createOffre">
 
                 <div class="alert alert-success">
-                    <strong>Après avoir créé une catégorie, vous pouvez y insérer une offre. L'offre est dans un premier temps composée d'un titre, d'un message(ou image) et appartient à une catégorie, vous pourrez par la suite attribuer à une offre une "action"(=commande). Pour mettre une image rien de plus simple, vous pouvez le faire via le code suivant: </strong><br><strong><?php echo htmlspecialchars('<img src="http://lien_vers_mon_image.fr/" alt="Image Boutique" />'); ?></strong>
+                    <strong>Après avoir créé une catégorie, vous pouvez y insérer une offre. L'offre est dans un premier temps composée d'un titre, d'un message(ou image) et appartient à une catégorie, vous pourrez par la suite attribuer à une offre une "action"(=commande). Pour mettre une image rien de plus simple, il vous suffit d'activer l'option dans Réglages du site et d'utiliser l'éditeur de texte.</strong>
                 </div>
 
                         <label class="control-label">Titre de l'offre</label>
