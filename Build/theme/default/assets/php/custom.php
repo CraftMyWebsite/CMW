@@ -48,7 +48,7 @@
             var copyText = document.getElementById("iptexte");
             copyText.select();
             document.execCommand("copy");
-            notif("success", "Vous avez copier l\'adresse IP du serveur !");
+            notif("success", "Vous avez copié l\'adresse IP du serveur !");
         }
 
     <?php endif; ?>

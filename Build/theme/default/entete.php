@@ -137,7 +137,7 @@
                             <div class="py-3 mr-3 mb-3 col-md-12 col-sm-12 col-lg-7 d-flex align-self-center alert alert-main">
                                 <h5>Tu veux nous rejoindre ? Copie l'ip ! </h5>
                                 <button class="btn btn-light copy-ip ml-auto" onclick="copierIP();" type="button" >Copier l'ip !</button>
-                                <input type="text" style="position:absolute;top:0;left:0;width:0;height:0;z-index:-9999;" id="iptexte" value="<?php echo $_Serveur_['General']['ipTexte']; ?>">
+                                <input type="text" style="position:absolute;top:0;left:0;z-index:-9999;" id="iptexte" value="<?= $_Serveur_['General']['ipTexte']; ?>">
                             </div>
                             <?php }
                              ?>
