@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
 
   Main CSS Page
@@ -12,8 +13,6 @@
 
 
 /* --- --- GLOBAL --- --- */
-
-@charset "UTF-8";
 
 @import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
 
@@ -91,6 +90,8 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     max-width: 100%;
     background: var(--main-color-bg);
@@ -800,6 +801,10 @@ a.prefixLink:hover .prefix {
 }
 
 /* --- --- FOOTER --- --- */
+
+footer {
+  margin-top: auto;
+}
 
 .footer-body {
     padding: 1.9rem;
