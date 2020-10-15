@@ -10,6 +10,18 @@
     .theme .nav-item>.nav-link {
         color: black !important;
     }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+    .btn-success {
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+    }
 </style>
 
 <div class="row theme">
@@ -52,7 +64,7 @@
 
                                             <?php $actualTheme = (isset($_Theme_['Main']['theme']['choosed-theme']) && $_Theme_['Main']['theme']['choosed-theme'] === 1) ? "light" : "dark"; ?>
 
-                                            <div class="jumbotron 3">
+                                            <div class="well 3">
                                                 <h4>Thème actuel : </h4>
                                                 <h5 class="p-1 bg-secondary w-100 rounded d-block text-center" style="color: white;"><b> Thème <?= ($actualTheme === "light") ? "clair" : "sombre" ?></b></h5>
                                             </div>
@@ -101,7 +113,7 @@
                                                     </tbody>
                                                 </table>
 
-                                                <button type='submit' class="btn btn-primary w-100 m-2" name="changeTheme" onClick="genJsonReseau(); sendPost('configThemeAdmin');" value="<?= $actualTheme ?>" >Passer en thème <?= ($actualTheme === "light") ? "sombre" : "clair" ?>
+                                                <button type='submit' class="btn btn-primary w-100 m-2" name="changeTheme" onClick="genJsonReseau(); sendPost('configThemeAdmin');" value="<?= $actualTheme ?>">Passer en thème <?= ($actualTheme === "light") ? "sombre" : "clair" ?>
                                                 </button>
 
                                             </div>
@@ -124,21 +136,25 @@
                                                 <?php if (isset($_Theme_['Pied']['social']) && !empty($_Theme_['Pied']['social'])) foreach ($_Theme_['Pied']['social'] as $value) : ?>
 
                                                     <div class="form-row jumbotron py-1" data-reseau>
-                                                        <div class="col-md-8 col-lg-4 col-sm-10">
+                                                        <div class="col-md-7 col-lg-3 col-sm-9">
                                                             <label class="control-label">Icone du réseau</label>
                                                             <input type="text" data-type="icon" class="form-control" placeholder='<i class="fab fa-discord"></i>' value="<?= str_replace('"', "'", $value['icon']); ?>">
                                                             <small>Disponible sur : <a href="https://fontawesome.com/icons/">
                                                                     https://fontawesome.com/icons/</a></small>
                                                         </div>
 
-                                                        <div class="col-md-8 col-lg-4 col-sm-10">
+                                                        <div class="col-md-7 col-lg-3 col-sm-9">
                                                             <label class="control-label">Lien vers le réseau</label>
                                                             <input type="text" data-type="link" class="form-control" value="<?= str_replace('"', "'", $value['link']) ?>">
                                                         </div>
 
-                                                        <div class="col-md-8 col-lg-4 col-sm-10">
+                                                        <div class="col-md-7 col-lg-3 col-sm-9">
                                                             <label class="control-label">Message à mettre à côté</label>
                                                             <input type="text" data-type="message" class="form-control" placeholder="Rejoingnez-nous sur Discord !" value="<?= str_replace('"', "'", $value['message']) ?>">
+                                                        </div>
+
+                                                        <div class="col-md-2 col-lg-2 col-sm-2 offset-1 my-auto">
+                                                            <button class="btn btn-danger form-control" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement); genJsonReseau(); sendPost('configThemeAdmin');">Supprimer</button>
                                                         </div>
 
                                                     </div>
@@ -146,23 +162,27 @@
                                                 <?php endforeach ?>
                                             </div>
 
-                                            <div class="form-row jumbotron py-1">
+                                            <div class="form-row well py-1">
                                                 <h5 class="col-12 my-1">Réseau social personnalisé</h5>
-                                                <div class="col-md-8 col-lg-4 col-sm-10">
+                                                <div class="col-md-7 col-lg-3 col-sm-9">
                                                     <label class="control-label">Icone du réseau</label>
                                                     <input type="text" class="form-control" id="new-s-icone" placeholder='<i class="fab fa-discord"></i>'>
                                                     <small>Disponible sur : <a href="https://fontawesome.com/icons/">
                                                             https://fontawesome.com/icons/</a></small>
                                                 </div>
 
-                                                <div class="col-md-8 col-lg-4 col-sm-10">
+                                                <div class="col-md-7 col-lg-3 col-sm-9">
                                                     <label class="control-label">Lien vers le réseau</label>
                                                     <input type="text" id="new-s-link" class="form-control" />
                                                 </div>
 
-                                                <div class="col-md-8 col-lg-4 col-sm-10">
+                                                <div class="col-md-7 col-lg-3 col-sm-9">
                                                     <label class="control-label">Message à mettre à côté</label>
                                                     <input type="text" class="form-control" id="new-s-message" placeholder="Rejoingnez-nous sur Discord !">
+                                                </div>
+
+                                                <div class="col-md-2 col-lg-2 col-sm-2 offset-1 my-auto">
+                                                    <button class="btn btn-danger form-control">Supprimer</button>
                                                 </div>
 
 
@@ -182,8 +202,8 @@
 
                                             <div class="col-10 mx-auto">
 
-                                                <textarea class="form-control" name="about">
-                                                    <?= trim($_Theme_['Pied']['about']) ?>
+                                                <textarea class="form-control" name="about" id="aboutTheme">
+                                                    <?= $_Theme_['Pied']['about'] ?>
                                                 </textarea>
 
                                             </div>
@@ -229,29 +249,35 @@
             var ht =
                 '<div class="form-row jumbotron py-1" data-reseau>' +
                 '<h5 class="col-12 my-1">Réseau <small> <div class="badge badge-warning">Non sauvegardé si pas cliqué sur sauvegarder !</div></small></h5>' +
-                '<div class="col-md-8 col-lg-4 col-sm-10">' +
+                '<div class="col-md-7 col-lg-3 col-sm-9">' +
                 '<label class="control-label">Icone du réseau</label>' +
                 '<input type="text" data-type="icon" class="form-control" id="" placeholder=\'<i class="fab fa-discord"></i>\' value="' +
                 ico.value.replace(/"/g, '\'') + '">' +
                 '<small>Disponible sur : <a href="https://fontawesome.com/icons/"> https://fontawesome.com/icons/</a></small>' +
                 '</div>' +
 
-                '<div class="col-md-8 col-lg-4 col-sm-10">' +
+                '<div class="col-md-7 col-lg-3 col-sm-9">' +
                 '<label class="control-label">Lien vers le réseau</label>' +
                 '<input type="text" id="" class="form-control" data-type="link" value="' + link.value.replace(/"/g, '\'') + '">' +
                 '</div>' +
 
-                '<div class="col-md-8 col-lg-4 col-sm-10">' +
+                '<div class="col-md-7 col-lg-3 col-sm-9">' +
                 '<label class="control-label">Message à mettre à côté</label>' +
                 '<input type="text" class="form-control" id="" data-type="message" placeholder="Rejoingnez-nous sur Discord !" value="' +
                 msg.value.replace(/"/g, '\'') + '">' +
+                '</div>' +
+
+                '<div class="col-md-2 col-lg-2 col-sm-2 offset-1 my-auto">' +
+                '<button class="btn btn-danger form-control" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement); genJsonReseau(); sendPost(\'configThemeAdmin\');">Supprimer</button>' +
                 '</div>' +
 
                 '</div>'
 
             get('all-reseau').insertAdjacentHTML("beforeend", ht);
             ico.value = msg.value = link.value = null
-
+            delete ico;
+            delete msg;
+            delete value;
         } else {
             notif("warning", "Erreur", "Formulaire incomplet");
         }
@@ -274,4 +300,6 @@
         get('jsonReseau').value = JSON.stringify(final);
     }
     genJsonReseau();
+
+    $("#aboutTheme").val((i, v) => v.replace(/\s{2,}/g, ''));
 </script>
