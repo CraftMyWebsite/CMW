@@ -252,15 +252,6 @@ CREATE TABLE IF NOT EXISTS `cmw_maintenance` (
   PRIMARY KEY (`maintenanceId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `cmw_messages` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `idConversation` smallint(5) UNSIGNED NOT NULL,
-  `expediteur` varchar(20) NOT NULL,
-  `message` text NOT NULL,
-  `date_envoie` datetime NOT NULL,
-  `lu` tinyint(1) UNSIGNED NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
 CREATE TABLE IF NOT EXISTS `cmw_news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(100) NOT NULL,

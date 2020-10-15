@@ -79,7 +79,6 @@
                                 <?php endif; ?>
 
                                 <a class="dropdown-item" href="?page=profil&profil=<?= $_Joueur_['pseudo']; ?>"><i class="fas fa-user"></i> Mon profil</a>
-                                <a class="dropdown-item" href="?page=messagerie"><i class="fa fa-envelope"></i> Messagerie</a>
                                 <div class="dropdown-divider"></div>
 
                                 <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement')) :
