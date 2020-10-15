@@ -244,8 +244,6 @@
         var link = get('new-s-link');
         var msg = get('new-s-message');
 
-        console.log("TEST 1 " + ico.value + " " + link.value + " " + msg.value)
-        console.log("TEST 2 " + ico + " " + link + " " + msg)
         if (isset(ico.value) && ico.value.replace(" ", "") != "" && isset(link.value) && link.value.replace(" ", "") !=
             "" && isset(msg.value) && msg.value.replace(" ", "") != "") {
             var ht =
@@ -282,7 +280,6 @@
             delete value;
         } else {
             notif("warning", "Erreur", "Formulaire incomplet");
-            console.log("TEST " + ico.value + " " + link.value + " " + msg.value)
         }
 
     }
@@ -305,5 +302,4 @@
     genJsonReseau();
 
     $("#aboutTheme").val((i, v) => v.replace(/\s{2,}/g, ''));
-    console.log(">" + $("#aboutTheme").val() + "<")
 </script>
