@@ -86,14 +86,6 @@ if (isset($_GET['erreur'])) {
 
         <?php if (isset($_Joueur_["pseudo"]) && $_Joueur_['pseudo'] != $_GET['profil']) :
             $isMyAccount = false; ?>
-        <!-- Envoie d'un message à l'utilisateur -->
-
-        <div class="row">
-            <button type="button" data-toggle="modal" data-target="#modalRep"
-                data-to="<?= htmlspecialchars($getprofil); ?>" class="btn btn-main ml-auto my-3">
-                Envoyer un message à <?= htmlspecialchars($getprofil); ?>
-            </button>
-        </div>
         <?php endif; ?>
 
         <?php if (isset($_Joueur_) and $_GET['profil'] == $_Joueur_['pseudo']) :

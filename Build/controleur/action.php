@@ -50,11 +50,6 @@ if(isset($_GET['action']))
 			include('controleur/tokens/paysafecard.php');
 		break;
 
-		case  'getConversations':
-			require('modele/app/messagerie.class.php');
-			include('controleur/messagerie/getConversations.php');
-		break;
-
 		case 'changeNomForum':
 			require('modele/forum/adminForum.class.php');
 			include('controleur/forum/changeNomForum.php');
@@ -64,22 +59,6 @@ if(isset($_GET['action']))
 			include('controleur/recupVotesTemp.php');
 			exit();
 		break;
-
-		case 'messageLu':
-			require('modele/app/messagerie.class.php');
-			include('controleur/messagerie/lu.php');
-		break;
-
-		case 'getConversationMessage':
-			require('modele/app/messagerie.class.php');
-			include('controleur/messagerie/getMessages.php');
-		break;
-
-		case 'sendMessage':
-			require('modele/app/messagerie.class.php');
-			include('controleur/messagerie/send.php');
-		break;
-		
 
 		case 'rechercheMembre':
 			require('modele/app/membres.class.php');
