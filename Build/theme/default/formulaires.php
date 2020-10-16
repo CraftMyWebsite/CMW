@@ -426,7 +426,7 @@
     <?php endif; ?>
 <?php endif; ?>
 
-<?php endif; if(isset($_GET['page']) && $_GET['page'] == "forum" && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) { ?>
+<?php if(isset($_GET['page']) && $_GET['page'] == "forum" && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) : ?>
 <div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -455,7 +455,7 @@
                     <div class="form-row my-2">
                         <label for="forum">Catégorie <span class="star-required"></span></label>
                         <select name="forum" class="form-control custom-text-input" required>
-                        <?php for ($z = 0; $z < count($fofo); $z++) : ?>
+                        <?php for ($z = 0, $zMax = count($fofo); $z < $zMax; $z++) : ?>
                             <option id="editForumCat<?= $fofo[$z]['id']; ?>" value="<?= $fofo[$z]['id']; ?>">
                                 <?= $fofo[$z]['nom']; ?>
                             </option>
@@ -472,7 +472,8 @@
         </div>
     </div>
 </div>
-<?php } if(isset($_GET['page']) && $_GET['page'] == "forum_categorie") { ?>
+<?php endif ?>
+<?php if(isset($_GET['page']) && $_GET['page'] == "forum_categorie") : ?>
 <div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -510,7 +511,7 @@
         </div>
     </div>
 </div>
-<?php } ?>
+<?php endif; ?>
 
 <div id="modal-image" class="img-modal">
   <div class="modal-img-close" onclick="this.parentElement.style.display='none';"><i class="fas fa-times"  ></i></div>
