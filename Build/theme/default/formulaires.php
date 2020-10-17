@@ -361,7 +361,7 @@
                                         <textarea name="commentaire" class="form-control w-100 mb-3" required></textarea>
                                         <small>
                                             <span class="float-left"><b>Min : </b> 6 charactères. </span>
-                                            <span class="float-right"><b>Max : </b> 255 caractères.</span>
+                                            <span class="float-right"><b>Max : </b> 255 charactères.</span>
                                         </small>
                                         <button type="submit" class="btn btn-main w-100 mt-3">Commenter</button>
                                     </form>
