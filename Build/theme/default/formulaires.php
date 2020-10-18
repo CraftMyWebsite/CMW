@@ -426,7 +426,7 @@
     <?php endif; ?>
 <?php endif; ?>
 
-<?php endif; if(isset($_GET['page']) && $_GET['page'] == "forum" && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) { ?>
+<?php if(isset($_GET['page']) && $_GET['page'] == "forum" && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) { ?>
 <div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
