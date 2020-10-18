@@ -45,7 +45,7 @@ var runningBtn = new Array();
 function startLoopCheckBtn(event, open = true) {
     let btn = allBtn.get(event.target);
     if(open) {
-        window.open(btn[4], btn[5], "menubar=no,location=yes,resizable=yes,scrollbars=yes,status=yes");
+        window.open(btn[4], '_blank').focus();
     }
     event.target.className = "btn btn-reverse";
     event.target.innerHTML = "<span class=\"spinner-border spinner-border-sm mr-2\" role=\"status\" aria-hidden=\"true\"></span>Vérification en cours";
