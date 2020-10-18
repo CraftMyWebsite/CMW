@@ -1,6 +1,6 @@
 <?php echo '[DIV]';
 if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
-    require_once('./admin/donnees/regServeur.php');  if(count($lectureJSON) != 0)  { ?>
+    if(count($lectureJSON) != 0)  { ?>
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
                         <?php foreach($lectureJSON as $i => $serveur)

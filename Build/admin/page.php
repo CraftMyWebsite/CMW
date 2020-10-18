@@ -64,7 +64,6 @@ if(isset($_GET['page']))
 		break;
 
 		case 'reglagejsonapi':
-		require_once('./admin/donnees/regServeur.php'); 
 		include('./admin/pages/regServeur.php');
 		break;
 
