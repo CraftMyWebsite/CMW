@@ -4,12 +4,9 @@ class ckeditor
 {
 	public static function verif($content2) {
 		if(isset($content2) && !empty($content2)) {
-			$dom = new DOMDocument('1.0');
-			$content=str_replace("[hr]Contenu fusionné[hr]", "",$content);
-			$dom->loadHTML($content2);
+			$dom = new DOMDocument('1.0', 'utf-8');
+			$dom->loadHTML(str_replace("[hr]Contenu fusionné[hr]", "",'<?xml encoding="utf-8" ?>'.$content2));
 			$dom->removeChild($dom->doctype);           
-			$dom->replaceChild($dom->firstChild->firstChild->firstChild, $dom->firstChild);
-
 			$script = $dom->getElementsByTagName('script');
 			foreach($script as $item)
 			{
@@ -35,8 +32,7 @@ class ckeditor
 			  		}
 			  	}
 			}
-			$content = $dom->saveHTML(); 
-			return $content;
+			return $dom->saveHTML($dom->documentElement);
 		}
 		return "";
 	}
