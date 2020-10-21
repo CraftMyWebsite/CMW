@@ -206,8 +206,8 @@
                                 <div class="card-block">
                                     <div class="card-body">
                                         <p>
-                                            Pour faire fonctionnez ce système vous devez avoir accès au tâche cron sur votre hébergeur, créez en une nouvelle et configurez la sur "récupérer une url", sélectionnez le temps que vous désirez et rentrez comme url: <br/><br/> 
-                                            <em id="urlCron"><?php echo $_Serveur_['General']['url'].'/?action=voteCron&mdp='; if(isset($_Serveur_['VoteCron']['mdp'])) { echo $_Serveur_['VoteCron']['mdp']; } ?> </em>
+                                            Pour faire fonctionner ce système vous devez avoir accès au tâche cron sur votre hébergeur, créez-en une nouvelle et configurez la sur "récupérer une url", sélectionnez le temps que vous désirez et rentrez comme url: <br/><br/> 
+                                            <em id="urlCron"><?php echo $_Serveur_['General']['url'].'?action=voteCron&mdp='; if(isset($_Serveur_['VoteCron']['mdp'])) { echo $_Serveur_['VoteCron']['mdp']; } ?> </em>
                                         </p>
                                     </div>
                                 </div>
