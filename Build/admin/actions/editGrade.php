@@ -19,8 +19,7 @@ if($_Permission_->verifPerm("createur")) {
 
 	$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
 
-
-	for($i = 1; $i <= count($idGrade); $i++) { 
+	for($i = 0; $i < count($idGrade); $i++) { 
 		$allPerm = $_Permission_->readPerm($idGrade[$i]['id']);
 		$editGrade = $idGrade[$i];
 		unset($editGrade['priorite']);

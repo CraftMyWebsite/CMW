@@ -139,10 +139,32 @@ function menuListeUpdate() {
 	}});
 }
 
+function checkGrade() {
+	let text = getElementByName("addGrade","gradeName").value;
+	if(text.length < 3) {
+		notif("error", "Erreur", "Nom du grade trop court !");
+	} else if(text.length > 32) {
+		notif("error", "Erreur", "Nom du grade trop long !");
+	} else if(gradeExist(text)) {
+		notif("error", "Erreur", "Grade déjà éxistant !");
+	} else {
+		return true;
+	}
+	return false;
+}
 function gradesUpdate() {
 	updateCont("admin.php?action=getGradesList", get("allGrade"), function(data) { if(data) { 
 		initPost("allGrade", "admin.php?&action=editGrade");
 	}});
+}
+
+function gradeExist(str) {
+	for (let el of document.querySelectorAll("[data-grade]" )) {
+		if(el.innerText.toLowerCase() == str.toLowerCase()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 

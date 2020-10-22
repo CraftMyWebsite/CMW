@@ -366,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `cmw_tempgrades` (
   `grade_temps` int(11) NOT NULL,
   `grade_vie` varchar(100) NOT NULL,
   `is_active` int(2) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`) 
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_users` (
@@ -464,7 +464,7 @@ CREATE TABLE IF NOT EXISTS `cmw_paypal_historique` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE cmw_grades (
-  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT=2 PRIMARY KEY,
   nom VARCHAR(200) NOT NULL,
   priorite INT UNSIGNED NOT NULL DEFAULT 0,
   prefix CHAR(9) NOT NULL DEFAULT '',
@@ -475,6 +475,8 @@ CREATE TABLE cmw_grades (
   permForum BLOB
 )              
 ENGINE= INNODB;
+
+ALTER TABLE cmw_grades AUTO_INCREMENT=2;
 
 ALTER TABLE cmw_users ADD CONSTRAINT cle_grade FOREIGN KEY (rang) REFERENCES cmw_grades(id);
 

@@ -31,49 +31,17 @@ else
 					<h3 class="card-title"><strong>Création d'un grade</strong></h3>
 				</div>
 				<div class="card-body" id="addGrade">
-				<?php if(isset($_GET['gradeCreated']))
-			            {
-			                echo '<div class="alert alert-success text-center">Grade créé avec succès !</div>';
-			            }
-			            elseif(isset($_GET['nomGradeLong']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur !</strong><br>Le nom du grade entré est trop long !</div>';
-			            }
-			            elseif(isset($_GET['nomGradeCourt']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur !</strong><br>Le nom du grade entré est trop court !</div>';
-			            }
-			            elseif (isset($_GET['cdgi'])) 
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur Critique!</strong><br>Erreur interne, contacter le support de CraftMyWebsite code d\'erreur : cdgi</div>';
-			            }
-			            elseif(isset($_GET['cdnti']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur Critique!</strong><br>Erreur interne, contacter le support de CraftMyWebsite code d\'erreur : cdnti</div>';
-			            }
-			            elseif(isset($_GET['gradeNameAlreadyUsed']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur !</strong>Le nom du grade existe déjà !</div>';
-			            }
-			            elseif(isset($_GET['gradeDefaultInexistantRegen']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur Critique !</strong>Un fichier interne a été supprimé ! Réessayer l\'opération, en cas d\'échec contacter le support de CraftMyWebsite</div>';
-			            }
-			            elseif(isset($_GET['conflitGrade']))
-			            {
-			                echo '<div class="alert alert-danger text-center"><strong>Erreur Critique !</strong>Le ficheir existe déjà !</div>';
-			            }
-			         ?>
+
 
                 <label class="control-label">Nom du grade</label>
                 <input type="text" maxlength="32" minlength="3" name="gradeName" class="form-control" placeholder="Support" required/>
 	            </div>
 
-	            <script>initPost("addGrade", "admin.php?&action=addGrade",null);</script>
+	            <script>initPost("addGrade", "admin.php?&action=addGrade",function(data) { if(data) { gradesUpdate(); }});</script>
 
 	            <div class="card-footer">
 	                <div class="row text-center">
-	                    <input type="submit" onclick="sendPost('addGrade', null);" class="btn btn-success w-100"
+	                    <input type="submit" onclick="if(checkGrade()){ sendPost('addGrade', null);}" class="btn btn-success w-100"
 	                        value="Envoyer !" />
 	                </div>
 	            </div>
@@ -87,12 +55,12 @@ else
 				</div>
 				<div class="card-body" id="allGrade">
 					<ul class="nav nav-tabs">
-						<li class="nav-item"><a href="#gradeCreateur" id="default-name-createur-2" class="nav-link active" style="color: black !important" data-toggle="tab"><?php echo $_Serveur_['General']['createur']['nom']; ?></a></li>
+						<li class="nav-item"><a href="#gradeCreateur" data-grade id="default-name-createur-2" class="nav-link active" style="color: black !important" data-toggle="tab"><?php echo $_Serveur_['General']['createur']['nom']; ?></a></li>
 						<?php for($i = 0; $i < count($idGrade); $i++) { 
                             ?>
-                                <li class="nav-item" id="tabgrade<?php echo $i; ?>"><a href="#grade<?php echo $i; ?>" class="nav-link"  id="grade-name-<?php echo $i; ?>" style="color: black !important"  data-toggle="tab"><?php echo $idGrade[$i]['nom']; ?></a></li>
+                                <li class="nav-item" id="tabgrade<?php echo $i; ?>"><a href="#grade<?php echo $i; ?>" class="nav-link"  id="grade-name-<?php echo $i; ?>" style="color: black !important"  data-grade data-toggle="tab"><?php echo $idGrade[$i]['nom']; ?></a></li>
                         <?php  } ?>
-						<li class="nav-item"><a href="#gradeJoueur" id="default-name-joueur-2" class="nav-link"  style="color: black !important" data-toggle="tab"><?php echo $_Serveur_['General']['joueur']; ?></a></li>
+						<li class="nav-item"><a href="#gradeJoueur" id="default-name-joueur-2" class="nav-link"  style="color: black !important" data-grade data-toggle="tab"><?php echo $_Serveur_['General']['joueur']; ?></a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane well" id="gradeJoueur">
@@ -192,11 +160,11 @@ else
 						<?php } ?>
 	                </div>
 	            </div>
-	            <script>initPost("allGrade", "admin.php?&action=editGrade",null);</script>
+	            <script>initPost("allGrade", "admin.php?&action=editGrade");</script>
 
 	            <div class="card-footer">
 	                <div class="row text-center">
-	                    <input type="submit" onclick="sendPost('allGrade', null);" class="btn btn-success w-100"
+	                    <input type="submit" onclick="sendPost('allGrade'); " class="btn btn-success w-100"
 	                        value="Valider les changements !" />
 	                </div>
 	            </div>

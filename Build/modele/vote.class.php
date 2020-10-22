@@ -308,6 +308,20 @@ class vote {
             }else if(strpos($url, 'https://minecraft-top.com'))  {
                 $api = json_decode(file_get_contents("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
                 if($api->vote == 1){return true;}else{return false;}
+            }else if(strpos($url, 'https://api.liste-serveurs-minecraft.org'))  {
+                $api = file_get_contents("https://api.liste-serveurs-minecraft.org/vote/vote_verification.php?server_id=".$id."&ip=".$this->get_client_ip()."&duration=360");
+                if($api == "1"){return true;}else{return false;}
+            }else if(strpos($url, 'https://liste-serv-minecraft.fr'))  {
+                $api = son_decode(file_get_contents("https://liste-serv-minecraft.fr/api/check?server=".$id."&ip=".$this->get_client_ip()));
+                if($api['status'] == 200) {
+                    if(strtotime($api["datetime_vote_end"]) < time() - 360 ) {
+                        return true
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             }else {
                 return true;
             }
