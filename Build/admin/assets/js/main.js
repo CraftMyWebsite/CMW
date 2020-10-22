@@ -93,7 +93,7 @@ function boutiqueCheck() {
 }
 
 function voteUpdate() {
-	updateCont("admin.php?action=getLienVote", get("all-vote"), function(data) { if(data) { 
+	updateCont("admin.php?action=getLienVote&id="+idvote, get("all-vote"), function(data) { if(data) { 
 		idvote+=1000;
 		initPost("all-vote", "admin.php?action=modifierVote");
 	}});
