@@ -30,10 +30,20 @@
                             <label class="control-label">Nom du grade</label>
                             <input maxlength="32" minlength="3" class="form-control" onkeyup="get('default-name-createur-1').innerText = get('default-name-createur-2').innerText = get('grade').innerText = get('previsuCrea').innerText = this.value;" name="nomCreateur" type="text"  value="<?=$_Serveur_['General']['createur']['nom'];?>" />
 
-                            <label class="control-label">Couleur d'arrière plan du grade</label>
-                            <input type="color" name="prefixCreateur" id="prefixCrea" onchange="updatePrevisu('Crea');" value="<?=$_Serveur_['General']['createur']['bg'];?>" />
-                            <input type="checkbox" <?=(empty($_Serveur_['General']['createur']['bg'])) ? "checked" : "";?> name="prefixCreateur-none" id="prefixCrea-none" onchange="updatePrevisu('Crea');" />Pas d'arrière plan
                             <br/>
+
+                            <div class="custom-control custom-switch"> 
+		                        	<input value="on" type="checkbox" class="custom-control-input" name="prefixCreateur-none" id="prefixCrea-none" <?=(empty($_Serveur_['General']['createur']['bg'])) ? "checked" : "";?> onchange="updatePrevisu('Crea');SwitchDisplay(get('prefix-div-crea'));"> 
+		                            <label class="custom-control-label" for="prefixCrea-none">Pas d'arrière plan</label>
+		                        </div> 
+
+
+                                <div id="prefix-div-crea" <?=(empty($_Serveur_['General']['createur']['bg'])) ? "style='display:none;'" : "";?>>
+	                                <label class="control-label">Couleur d'arrière plan du grade</label>
+		                            <input type="color" name="prefixCreateur" id="prefixCrea" onchange="updatePrevisu('Crea');" value="<?=(empty($_Serveur_['General']['createur']['bg'])) ? "#000000" : $_Serveur_['General']['createur']['bg'];?>" />
+		                            <br/>
+		                        </div>
+
 
                             <label class="control-label">Couleur d'écriture du grade</label>
                             <input type="color" name="couleurCreateur" id="couleurCrea" onchange="updatePrevisu('Crea');" value="<?=(empty($_Serveur_['General']['createur']['couleur'])) ? "#000000" : $_Serveur_['General']['createur']['couleur'];?>" />
@@ -67,10 +77,19 @@
                                 <label class="control-label">Nom du grade</label>
                                 <input class="form-control"  onkeyup="get('grade-name2-<?php echo $i; ?>').innerText = get('grade-name-<?php echo $i; ?>').innerText = get('previsu<?=$i;?>').innerText = this.value;" name="gradeName<?php echo $i; ?>" type="text"  value="<?php echo $idGrade[$i]['nom']; ?>" placeholder="Modérateur"/>
 
-                                <label class="control-label">Couleur d'arrière plan du grade</label>
-	                            <input type="color" name="prefix<?=$i;?>" id="prefix<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=(empty($idGrade[$i]['prefix'])) ? "#000000" : $idGrade[$i]['prefix'];?>" />
-	                            <input type="checkbox" name="prefix<?=$i;?>-none" <?=(empty($idGrade[$i]['prefix'])) ? "checked" : "";?> id="prefix<?=$i;?>-none" onchange="updatePrevisu('<?=$i;?>');" />Pas d'arrière plan
-	                            <br/>
+                                <br/>
+
+                                <div class="custom-control custom-switch"> 
+		                        	<input value="on" type="checkbox" class="custom-control-input" id="prefix<?=$i;?>-none" name="prefix<?=$i;?>-none" <?=(empty($idGrade[$i]['prefix'])) ? "checked" : "";?> onchange="updatePrevisu('<?=$i;?>');SwitchDisplay(get('prefix-div-<?=$i;?>'));"> 
+		                            <label class="custom-control-label" for="prefix<?=$i;?>-none">Pas d'arrière plan</label>
+		                        </div> 
+
+
+                                <div id="prefix-div-<?=$i;?>" <?=(empty($idGrade[$i]['prefix'])) ? "style='display:none;'" : "";?>>
+	                                <label class="control-label">Couleur d'arrière plan du grade</label>
+		                            <input type="color" name="prefix<?=$i;?>" id="prefix<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=(empty($idGrade[$i]['prefix'])) ? "#000000" : $idGrade[$i]['prefix'];?>" />
+		                            <br/>
+		                        </div>
 
 	                            <label class="control-label">Couleur d'écriture du grade</label>
 	                            <input type="color" name="couleur<?=$i;?>" id="couleur<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=(empty($idGrade[$i]['couleur'])) ? "#000000" : $idGrade[$i]['couleur'];?>" />
