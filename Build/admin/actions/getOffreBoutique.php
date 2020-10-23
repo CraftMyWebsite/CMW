@@ -110,7 +110,7 @@
                                         </tbody>
                                     </table>
                                     <button type="submit" class="btn btn-success w-100" style="margin-top:10px;" onClick="sendPost('navRap<?=$i?>');">Envoyer!</button>
-                                    <?php for($j = 1;$j <= count($offres);$j++) { ?>
+                                    <?php for($j = 1;$j <= count($offres);$j++) { if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                     <div class="modal fade" id="OffreAction<?php echo $offres[$j]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Modal-<?php echo $offres[$j]['id']; ?>" aria-hidden="true">
                                         <div class="modal-dialog " role="document">
                                             <div class="modal-content" >
@@ -219,7 +219,7 @@
                                                             <select class="form-control" name="grade_site">
                                                                     <option value="0">Joueur</option>
                                                                     <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                                                            <option value="<?php echo $idGrade[$i]['id']; ?>"><?= $idGrade[$z]['Grade']?></option>
+                                                                            <option value="<?php echo $idGrade[$i]['id']; ?>"><?= $idGrade[$i]['nom']?></option>
                                                                     <?php }?>
                                                                     <option value="1">Créateur</option>
                                                             </select>
@@ -245,7 +245,7 @@
                                                                     <select class="form-control" name="commandeValeur-<?php echo $actions[$k]['id']; ?>">
                                                                         <option value="0" <?php if($actions[$k]['grade'] == 0) echo 'selected'; ?>> Joueur </option>
                                                                         <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                                                                <option value="<?php echo $idGrade[$i]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i]['id']) echo 'selected';?>><?= $idGrade[$z]['Grade']?></option>
+                                                                                <option value="<?php echo $idGrade[$i]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i]['id']) echo 'selected';?>><?= $idGrade[$i]['nom']?></option>
                                                                         <?php }?>
                                                                         <option value="1" <?php if($actions[$k]['grade'] == 1) echo 'selected'; ?>>Créateur</option>
                                                                     </select>
@@ -282,10 +282,10 @@
                                         </div>
                                     </div>
                                     
-                                    <?php } ?>
+                                    <?php } } ?>
 
                                 </div>
                             </div>
-                        <?php }?>
+                        <?php } ?>
                     </div>
 <?php } ?>

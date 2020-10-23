@@ -134,6 +134,8 @@
                                         <li> serveursminecraft.org</li>
                                         <li> liste-serveurs-minecraft.org</li>
                                         <li> Liste-serv-minecraft.fr</li>
+                                        <li> minecraft-mp.com</li>
+                                        <li> minecraft-top.com</li>
 
                                     </ul>
                                 <span>

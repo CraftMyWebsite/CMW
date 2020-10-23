@@ -9,7 +9,7 @@
                         <select class="form-control" name="commandeValeur-<?php echo $actions[$k]['id']; ?>">
                             <option value="0" <?php if($actions[$k]['grade'] == 0) echo 'selected'; ?>> Joueur </option>
                             <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                <option value="<?php echo $idGrade[$i]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i]['id']) echo 'selected';?>><?= $idGrade[$z]['Grade']?></option>
+                                <option value="<?php echo $idGrade[$i]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i]['id']) echo 'selected';?>><?= $idGrade[$i]['nom']?></option>
                             <?php }?>
                                 <option value="1" <?php if($actions[$k]['grade'] == 1) echo 'selected'; ?>>Créateur</option>
                         </select>
