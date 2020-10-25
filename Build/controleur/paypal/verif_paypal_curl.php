@@ -58,7 +58,7 @@ if (strcmp ($res, "VERIFIED") == 0) {
 		$joueurMaj->setReponseConnection($playerData);
 		$joueurMaj->setNouvellesDonneesTokens($playerData);
 
-		$bddConnection->prepare('INSERT INTO `cmw_paypal_historique`(`montant`, `pseudo`, `date`) VALUES (:prix,:pseudo,NOW())');
+		$bddConnection->prepare('INSERT INTO cmw_paypal_historique (montant, pseudo, date) VALUES (:prix, :pseudo, NOW())');
 		$req->execute(array(
 			'prix' => doubleval($donneesActions['prix']),
 			'pseudo' => $_Joueur_['pseudo']

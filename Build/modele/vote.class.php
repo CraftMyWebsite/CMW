@@ -251,16 +251,16 @@ class vote {
             $url = $this->lienData['lien'];
             if(strpos($url, 'serveur-prive.net'))
             {
-                $API_call = @file_get_contents("https://serveur-prive.net/api/vote/".$id."/". $this->get_client_ip());
+                $API_call = $this->fetch("https://serveur-prive.net/api/vote/".$id."/". $this->get_client_ip());
                 return $API_call == 1;
             } else if(strpos($url, 'serveurs-minecraft.org'))
             {
-                $is_valid_vote = file_get_contents('https://www.serveurs-minecraft.org/api/is_valid_vote.php?id='.$id.'&ip='. $this->get_client_ip().'&duration=5');
+                $is_valid_vote = $this->fetch('https://www.serveurs-minecraft.org/api/is_valid_vote.php?id='.$id.'&ip='. $this->get_client_ip().'&duration=5');
                 return $is_valid_vote > 0;
             } else if(strpos($url, 'serveurs-minecraft.com'))
             {
                 $apiaddr = 'https://serveurs-minecraft.com/api.php?Classement=' . $id .'&ip=' .  $this->get_client_ip();
-                $apiResult = @file_get_contents($apiaddr);
+                $apiResult = $this->fetch($apiaddr);
                 if ($apiResult!==false) {
                     $apiResult = json_decode($apiResult, true);
                     $currentDate = new DateTime($apiResult['reqVote']['date']);
@@ -286,33 +286,33 @@ class vote {
                 }
             }else if(strpos($url, 'liste-minecraft-serveurs.com'))
             {
-                $api = json_decode(file_get_contents("https://www.liste-minecraft-serveurs.com/Api/Worker/id_server/".$id."/ip/". $this->get_client_ip()));
+                $api = json_decode($this->fetch("https://www.liste-minecraft-serveurs.com/Api/Worker/id_server/".$id."/ip/". $this->get_client_ip()));
                 if($api->result == 202){return true;}else{return false;}
             } else if(strpos($url, 'liste-serveurs.fr'))
             {
-                $api = json_decode(file_get_contents("https://www.liste-serveurs.fr/api/checkVote/".$id."/". $this->get_client_ip()));
+                $api = json_decode($this->fetch("https://www.liste-serveurs.fr/api/checkVote/".$id."/". $this->get_client_ip()));
                 if($api->success == true){return true;}else{return false;}
             }else if(strpos($url, 'liste-serveur.fr'))
             {
-                $api = json_decode(file_get_contents("https://www.liste-serveur.fr/api/hasVoted/".$id."/". $this->get_client_ip()));
+                $api = json_decode($this->fetch("https://www.liste-serveur.fr/api/hasVoted/".$id."/". $this->get_client_ip()));
                 if($api->hasVoted == true){return true;}else{return false;}
             }else if(strpos($url, 'top-serveurs.net'))  {
-                $api = json_decode(file_get_contents("https://api.top-serveurs.net/v1/votes/check-ip?server_token=".$id."&ip=". $this->get_client_ip()));
+                $api = json_decode($this->fetch("https://api.top-serveurs.net/v1/votes/check-ip?server_token=".$id."&ip=". $this->get_client_ip()));
                 if($api->success == true){return true;}else{return false;}
             }else if(strpos($url, 'serveursminecraft.org'))  {
-                $api =file_get_contents("https://www.serveursminecraft.org/sm_api/peutVoter.php?id=".$id."&ip=". $this->get_client_ip());
+                $api =$this->fetch("https://www.serveursminecraft.org/sm_api/peutVoter.php?id=".$id."&ip=". $this->get_client_ip());
                 if($api == "true"){return true;}else{return false;}
             }else if(strpos($url, 'serveur-multigames.net'))  {
-                $api =file_get_contents("https://serveur-multigames.net/api/v2/vote/true/".$id."/". $this->get_client_ip());
+                $api =$this->fetch("https://serveur-multigames.net/api/v2/vote/true/".$id."/". $this->get_client_ip());
                 if($api == "1"){return true;}else{return false;}
             }else if(strpos($url, 'minecraft-top.com'))  {
-                $api = json_decode(file_get_contents("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
+                $api = json_decode($this->fetch("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
                 if($api->vote == 1){return true;}else{return false;}
             }else if(strpos($url, 'api.liste-serveurs-minecraft.org'))  {
-                $api = file_get_contents("https://api.liste-serveurs-minecraft.org/vote/vote_verification.php?server_id=".$id."&ip=".$this->get_client_ip()."&duration=360");
+                $api = $this->fetch("https://api.liste-serveurs-minecraft.org/vote/vote_verification.php?server_id=".$id."&ip=".$this->get_client_ip()."&duration=360");
                 if($api == "1"){return true;}else{return false;}
             }else if(strpos($url, 'liste-serv-minecraft.fr'))  {
-                $api = json_decode(file_get_contents("https://liste-serv-minecraft.fr/api/check?server=".$id."&ip=".$this->get_client_ip()));
+                $api = json_decode($this->fetch("https://liste-serv-minecraft.fr/api/check?server=".$id."&ip=".$this->get_client_ip()));
                 if($api['status'] == 200) {
                     if(strtotime($api["datetime_vote_end"]) < time() - 360 ) {
                         return true
@@ -323,10 +323,10 @@ class vote {
                     return false;
                 }
             }else if(strpos($url, 'minecraft-mp.com'))  {
-                $api = file_get_contents("https://minecraft-mp.com/api/?object=votes&element=claim&key=".$id."&username=".$this->Pseudo);
+                $api = $this->fetch("https://minecraft-mp.com/api/?object=votes&element=claim&key=".$id."&username=".$this->Pseudo);
                 if($api == "2"){return true;}else{return false;}
             }else if(strpos($url, 'minecraft-top.com'))  {
-                $api = json_decode(file_get_contents("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
+                $api = json_decode($this->fetch("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
                 if($api->vote == 1){return true;}else{return false;}
             }else {
                 return true;
@@ -334,6 +334,28 @@ class vote {
         } else {
             return true;
         }
+    }
+
+    private function fetch($url)    
+    {   
+        if (function_exists('curl_init') and extension_loaded('curl')) {    
+            $ch = curl_init();  
+
+            curl_setopt($ch, CURLOPT_URL, $url);    
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);    
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);   
+
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); 
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);    
+
+            $output = curl_exec($ch);   
+            curl_close($ch);    
+
+            return $output; 
+        } else {    
+            return @file_get_contents($url);    
+        }   
     }
 }
 ?>
