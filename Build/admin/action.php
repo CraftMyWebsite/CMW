@@ -79,7 +79,7 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			exit();
 		case 'supprHistoPaypal':
 			if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'seePaypalHisto') && isset($_GET['id'])) {
-				$bddConnection->prepare('DELETE FROM `cmw_paypal_historique` WHERE id=:id');
+				$req = $bddConnection->prepare('DELETE FROM `cmw_paypal_historique` WHERE id=:id');
 				$req->execute(array('id' => $_GET['id']));
 			}
 			exit();
@@ -156,10 +156,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		
 		case 'epingle':
 			require('admin/actions/epingleNews.php');
-		break;
-
-		case 'getBoutiqueListe':
-			require('admin/actions/getBoutiqueListe.php');
 		break;
 
 		case 'supprMini':

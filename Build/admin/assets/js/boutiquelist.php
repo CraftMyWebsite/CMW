@@ -105,7 +105,7 @@ async function showAll(allPlayer) {
             all += '<tr class="ligneMembres">';
             all += '<td>'+allPlayer[i].id2+'</td>';
              all += '<td>'+allPlayer[i].pseudo+'</td>';
-              all += '<td>'+allPlayer[i].offre_id+'</td>';
+              all += '<td>'+allPlayer[i].titre+'</td>';
                all += '<td>'+allPlayer[i].prix+'</td>';
                 all += '<td>'+allPlayer[i].quantite+'</td>';
                  all += '<td>'+allPlayer[i].prixTotal+'</td>';

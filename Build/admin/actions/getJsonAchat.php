@@ -14,6 +14,7 @@
 					break;
 				} else {
 					$boutiqueListeData['id'] = $i;
+					$boutiqueListeData['date_achat'] = str_replace(":", "H", str_replace(" ", " à ", substr($boutiqueListeData['date_achat'], 0,-3)));
 					$boutiqueListeData['quantite'] = ($boutiqueListeData['prixTotal'] > 0) ? ceil($boutiqueListeData['prixTotal']/$boutiqueListeData['prix']) : 'Non renseigné';
 					$allachat[$i] =$boutiqueListeData;
 				}
