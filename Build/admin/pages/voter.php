@@ -315,10 +315,10 @@
 
                                                          <?php if($value['type'] == "commande") { ?>
                                                                 <label class="control-label">Commande à éxecuter (SANS /)</label>
-                                                                <input type="text" data-type="value" value="<?php echo $value['value']; ?>"class="form-control"/>
+                                                                <input type="text" data-type="value" value="<?php echo htmlentities($value['value'], ENT_QUOTES | ENT_HTML401 | ENT_SUBSTITUTE | ENT_DISALLOWED, 'UTF-8', true); ?>"class="form-control"/>
                                                          <?php } else  if($value['type'] == "message") { ?>
                                                                 <label class="control-label">Message à afficher lors du vote</label>
-                                                                <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
+                                                                <input type="text" data-type="value" value="<?php echo htmlentities($value['value'], ENT_QUOTES | ENT_HTML401 | ENT_SUBSTITUTE | ENT_DISALLOWED, 'UTF-8', true); ?>" class="form-control"/>
                                                          <?php } else  if($value['type'] == "jeton") { ?>
                                                                 <label class="control-label">Quantité de <?=$_Serveur_['General']['moneyName'];?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
                                                                 <input type="number" data-type="value" min="1" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
