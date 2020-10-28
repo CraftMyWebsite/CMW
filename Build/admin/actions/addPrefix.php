@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['forum']['actions']['addPrefix'] == true)
+if($_Permission_->verifPerm('PermsPanel', 'forum', 'actions', 'addPrefix'))
 {
 	if(isset($_POST['nom'], $_POST['prefix']))
 	{

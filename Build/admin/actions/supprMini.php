@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_Joueur_, $_PGrades_, $_GET['id']) && ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['actions']['editMiniature']))
+if(isset($_GET['id']) && $_Permission_->verifPerm('PermsPanel', 'home', 'actions','editMiniature'))
 {
 	$id = intval(htmlentities($_GET['id']));
 	$tmp = array(

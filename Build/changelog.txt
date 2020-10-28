@@ -1,37 +1,56 @@
-Changelog CraftMyWebsite 1.7.3
+Changelog CraftMyWebsite 1.8.0
 
 Ajouts ([+]), modifications ([=]) et suppression ([-]) 
 (|) Bug Fix
 
-[+]	: Ajout de la possibilité d'obliger la connexion du joueur lors du vote (le joueur devra être connecté au serveur pour voter)
-(|)	: Fix de l'impossibilité de mettre des caractères dans les ids uniques des sites de votes
-[+]	: Ajout du site liste-serveurs.fr dans notre base de donnée des sites de votes compatible
-[+] : Ajout du site liste-serveur.fr dans notre base de donnée des sites de votes compatible
-(|)	: Fix d'un bug sur l'inscription qui amenait une page blanche
-(|)	: Fix d'une memory leak
-(|)	: Fix d'un bug lié au panier qui était accessible même déconnecté
-(|)	: Fix d'un bug lié à une page blanche lors de l'édition d'un topic
-(|)	: Fix d'un bug lié à une page blanche lors de la suppression d'un topic
-[+]	: Ajout d'un skin par défaut sur l'API interne de skin
-[=]	: Renforcement de l'API interne de skin
-[+]	: Ajout d'un regroupement des mêmes récompenses sur la page vote
-[+]	: Le top vote est mis à jours en temps réel
-(|)	: Fix d'un bug mineur sur la partie vote
-(|)	: Fix d'un bug mineur sur la newsletter
-(|)	: Fix d'un bug de connexion sur la page maintenance
-[+] : Ajout d'une permission pour la page de bannissement
-(|) : Fix d'un bug sur une page d'erreur d'accès
-(|)	: Mise à jours de PHPMailer
-(|)	: Fix des icones qui n'apparaissaient plus dans le panel
-[+]	: Ajout de fonctionnalités lors de l'envoie de newsletter
-(|)	: Fix de bugs sur la page de vote
-(|)	: Fin de suppression de MCGPass
-(|)	: Fix du non envoie de jetons lors d'un paiement paypal
-[+]	: Ajout de la notification de réception d'un paiement Paypal pour le client
-[+]	: Ajout d'une notification lors de l'annulation d'un paiement Paypal pour le client
-[=] : Modification de la page d'accueil si l'adresse du serveur n'est pas renseigné, le site affichera "Adresse Introuvable"
-(|) : Fix d'un bug sur les récompenses auto
-(|) : Fix d'un bug sur les votes
-(|) : Fix d'un bug qui empêchait l'affichement des liens de réseaux sociaux sur la page de maintenance
+[+] : Ajouter un événement (envoyé sur le serveur) qui rappelle au joueur de voter
+[=] : Sur le panel administrateur, rubrique membre, plusieurs pages pour l'affichage des membres avec fonctionnalités de recherche/tri
+(|) : Possibilité de modifier les quantités dans la boutique
+[=] : Refonte de la structure de la page profil
+[=] : Possibilité de se désabonner de la Newsletter en 1 clic
+[=] : Confirmation lors d'une tentative de suppression d'un compte joueur
+[+] : Ajout du moyen de paiement PaysafeCard mais par validation manuelle par l'administrateur du site
+[=] : Refonte du système de permission
+[+] : Mise en place d'une fonction uniquement permettant de vérifier les permissions d'un joueur
+[=] : Refonte du panel administrateur
+[-] : Retrait de Paypal Business car il n'est plus fonctionnel
+(|) : Réglage bug visuel sur le modal d'inscription
+(|) : Fix bug d'impossibilité d'édition des membres s'il y'en a plus de 100 
+[=] : Refonte de la page membres dans le panel administrateur
+[=] : Réunion de deux fonctions JSONAPI équivalentes
+[=] : Refonte du système de gestion des serveurs RCON, Query et JSONAPI
+[=] : Refonte du système de requête et de cache pour les serveurs RCON, Query et JSONAPI
+[=] : Refonte de la page de gestion des serveurs RCON, Query et JSONAPI
+[=] : Réglage du chargement des skins 
+[=] : Refonte de l'éditeur de page personnalisée
+[=] : Déplacement du système de cache des images de skin des utilisateurs vers le répertoire/utilisateurs prévu à cet effet
+[=] : Refonte totale de l'installateur
+(|) : Remise en place de la fonction de suppression du dossier d'installation
+[=] : Amélioration de la fonction récursive pour les chmod automatique
+[+] : Ajout de l'affichage de plusieurs informations de base sur l'installateur
+[=] : Réglages d'incohérences graphique sur le panel administrateur
+(|) : Réglage de bug sur la page de chat instantanné avec le serveur depuis le site
+[=] : Refonte du système de stats sur le panel administrateur
+(|) : Fix d'un bug qui ne prenait pas en compte le choix de la Newsletter à l'inscription
+[=] : L'exemple d'IP pour les serveurs JSONAPI est désormais en chiffre comme le demande le système
+(|) : Fix erreur 500 à la récupération du mot de passe par email
+[+] : Ajout des têtes des joueurs en ligne sur la page chat
+[=] : Refonte de la page vote
+[+] : Ajout sur la page vote de pouvoir envoyer plusieurs récompenses avec pourcentage de l'obtenir
+[+] : Ajout d'une toplist sur la page de vote 
+(|) : Fix d'un bug qui permettez de ce give des jetons
+[+] : Nouveau Thème défaut
+[+] : Ajout d'un éditeur de texte complet
+[+] : Option pour les images sur l'éditeur de texte
+[+] : Ajout d'une information Hors-Ligne/En ligne au niveau de RCON et JSONAPI
+[+] : Pouvoir citer une réponse sur le forum
+[+] : Barre de recherche sur le forum
+[=] : Heure sur les réponses du forum
+[+] : Ajout d'un mode nuit sur le panel
+[+] : Ajout d'une option pour acheter une offre avant une autre sur la boutique
+[=] : Amélioration de l'éditeur des offres sur la boutique
+[-] : Suppression de la messagerie qui n'est pas utilisée
+[=] : Corrections orthographiques et de tournures de phrases
 
-Contributeurs : Emilien52, Guedesite, BadiiiiX, Florentlife
+
+Contributeurs : PandaxCSGO, PinglsDzn, Guedesite, BadiiiX, Emilien52, Florentlife, X3RO, RedBoard, AnackKel, Amjido.

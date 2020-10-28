@@ -44,7 +44,7 @@ else
 	require('include/phpmailer/MailSender.php');
 	if(MailSender::send($_Serveur_, $to, $subject, $txt))
 	{
-		header('Location : index.php?setTemp=1');
+		header('Location: index.php?setTemp=1');
 	} else {
 		header('Location: ?&page=erreur&erreur=21');
 	}

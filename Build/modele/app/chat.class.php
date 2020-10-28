@@ -18,6 +18,10 @@ class Chat extends JsonCon
 		if($i < count($this->json) && $this->connecte[$i] == true)
 		{
 			$messages = $this->json[$i]->GetChat(array('20'));
+			if($messages == null)
+				return "query";
+			if(empty($messages[0]['success']))
+				return "erreur";
 			return $messages[0]['success'];
 		}
 		else
@@ -27,17 +31,13 @@ class Chat extends JsonCon
 	private function conEtablie($i)
 	{
 		$this->api = $this->json[$i]->api;
-		$connexion = $this->json[$i]->GetConnection();
-		if(!isset($connexion[0]['result']) OR $connexion[0]['result'] == 'error')
-			$this->connecte[$i] = false;
-		else
-			$this->connecte[$i] = true;
+		$this->connecte[$i] = $this->json[$i]->GetConnection();
 	}
 
 	public function sendMessageChat($message, $i, $pseudo)
 	{
-		$data = $this->json[$i]->sendChat('[§cSite§r] §5'.$pseudo.'§r : '.$message);
-		return $data[0]['success'];
+		$data = $this->json[$i]->SendBroadcast('[§cSite§r] §5'.$pseudo.'§r : '.$message);
+		return true;
 	}
 
 	public function formattage($message)

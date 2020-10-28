@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['vote']['actions']['deleteVote'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'deleteVote')) {
 	if(isset($_GET['id']))
 	{
 		$id = htmlspecialchars($_GET['id']);

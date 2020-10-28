@@ -1,5 +1,5 @@
 <?php 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['news']['actions']['editNews'] == true)
+if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'editNews'))
 {
 	if(isset($_GET['newsId'], $_GET['epingle']))
 	{

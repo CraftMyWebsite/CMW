@@ -1,22 +1,17 @@
 <?php
-unlink("installation/css/animate.css");
-unlink("installation/css/bootstrap.css");
-unlink("installation/css/style.css");
-rmdir("installation/css/");
-unlink("installation/fonts/material.ttf");
-rmdir("installation/fonts/");
-unlink("installation/img/background.png");
-unlink("installation/img/logo-mysql.png");
-rmdir("installation/img/");
-unlink("installation/chmod.php");
-unlink("installation/compteAdmin.php");
-unlink("installation/droits.php");
-unlink("installation/extension.php");
-unlink("installation/index.php");
-unlink("installation/install.sql");
-unlink("installation/install.yml");
-unlink("installation/installInfos.php");
-unlink("installation/installSQL.php");
-rmdir("installation");
+rrmdir("installation");
 header('Location: index.php');
+
+function rrmdir($dir) {
+   if (is_dir($dir)) {
+     $objects = scandir($dir);
+     foreach ($objects as $object) {
+       if ($object != "." && $object != "..") {
+         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+       }
+     }
+     reset($objects);
+     rmdir($dir);
+   }
+ }
 ?>

@@ -1,23 +1,31 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['payment']['showPage'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) {
 	$lectureP = new Lire('modele/config/config.yml');
 	$lectureP = $lectureP->GetTableau();
 	$lectureP = $lectureP['Payement'];
 
-	$microTokens = new Lire('modele/config/configAlloconv.yml');
-	$microTokens = $microTokens->GetTableau();
-
 	$query = $bddConnection->query('SELECT * FROM cmw_jetons_paypal_offres');
 
-	$i = 0;
-	while($donneesQuery = $query->fetch(PDO::FETCH_ASSOC))
-	{
-		$paypalOffres[$i]['id'] = $donneesQuery['id'];
-		$paypalOffres[$i]['nom'] = $donneesQuery['nom'];
-		$paypalOffres[$i]['description'] = $donneesQuery['description'];
-		$paypalOffres[$i]['prix'] = $donneesQuery['prix'];
-		$paypalOffres[$i]['jetons_donnes'] = $donneesQuery['jetons_donnes'];
-		$i++;
-	}
+	$paypalOffres = $query->fetchAll(PDO::FETCH_ASSOC);
+
+	$query = $bddConnection->query('SELECT * FROM cmw_paypal_historique WHERE 1 ORDER BY date DESC LIMIT 10');
+	
+	$paypalHistorique = $query->fetchAll(PDO::FETCH_ASSOC);
+
+	$req = $bddConnection->query("SELECT * FROM cmw_paysafecard_offres");
+
+	$paysafecard = $req->fetchAll(PDO::FETCH_ASSOC);
+
+	$req = $bddConnection->query("SELECT cmw_paysafecard_historique.id AS id, pseudo, code, cmw_paysafecard_historique.statut AS statut, cmw_paysafecard_offres.montant AS montant, cmw_paysafecard_offres.jetons AS jetons  FROM cmw_paysafecard_historique INNER JOIN cmw_paysafecard_offres ON offre = cmw_paysafecard_offres.id");
+
+	$tabPaysafe = $req->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+function conversionDate($last_answer)
+{
+	$last_answer = substr_replace($last_answer,"h",strpos($last_answer,":"),strlen(":"));
+    $last_answer = str_replace(" ", " à ", substr($last_answer, 0, strpos($last_answer,":")));
+	return $last_answer;
 }
 ?>

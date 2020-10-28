@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_))
+if(Permission::getInstance()->verifPerm("connect"))
 {
 	$id = htmlspecialchars($_GET['id']);
 	$pages = htmlspecialchars($_GET['page_post']);

@@ -1,5 +1,5 @@
 <?php 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['actions']['creerCoupon'] == true)
+if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'creerCoupon'))
 {
 	if(isset($_POST['code'], $_POST['titre'], $_POST['pourcent']))
 	{
@@ -34,6 +34,5 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['actions']['creerC
 							'fin' => $fin,
 							'expire' => $expire
 		));
-		header('Location: ?page=boutique');
 	}
 }

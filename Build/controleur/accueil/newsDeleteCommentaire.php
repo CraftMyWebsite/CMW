@@ -1,16 +1,16 @@
 <?php
-if(isset($_Joueur_)) {
+if(Permission::getInstance()->verifPerm("connect")) {
     $pseudo = $_Joueur_['pseudo'];
     $id_news = urldecode($_GET['id_news']);
     $id = urldecode($_GET['id_comm']);
     $auteur = urldecode($_GET['auteur']);
-    if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['news']['deleteMemberComm'] == true)
+    if(Permission::getInstance()->verifPerm('PermsDefault', 'news', 'deleteMemberComm'))
         $adminMode = true;
 
     require_once('modele/accueil/existNews.class.php');
     $req_ExistNews = new ExistNews($bddConnection);
     $get_ExistNews = $req_ExistNews->GetExistNews($id_news);
-    if($adminMode = true) {
+    if($adminMode == true) {
         $get_ExistCommentaire = $req_ExistNews->GetExistCommentaire($auteur, $id_news, $id);
     } else {
         $get_ExistCommentaire = $req_ExistNews->GetExistCommentaire($pseudo, $id_news, $id);
@@ -24,7 +24,7 @@ if(isset($_Joueur_)) {
     $get_CheckOwnerCommentaire = $rep_CheckOwnerCommentaire->fetch(PDO::FETCH_ASSOC);
     $CheckOwnerCommentaire = $get_CheckOwnerCommentaire['pseudo'];
 
-	if($CheckOwnerCommentaire == $_Joueur_['pseudo'] OR $_Joueur_['rang'] == 1)
+	if($CheckOwnerCommentaire == $pseudo OR $adminMode == true)
 	{
 		if($ExistNews == "0") {
 			header('Location: index.php?&NewsNotExist=true');
@@ -32,7 +32,7 @@ if(isset($_Joueur_)) {
 			if($ExistCommentaire == "0") {
 				header('Location: index.php?&CommentaireNotExist=true');
 			} else {
-					if(!$CheckOwnerCommentaire == $pseudo OR !$adminMode = true) {
+					if(!$CheckOwnerCommentaire == $pseudo OR $adminMode != true) {
 					 header('Location: index.php?&SuppressionImpossible=true');
 				 } else {
 					require_once('modele/accueil/deleteNews.class.php');

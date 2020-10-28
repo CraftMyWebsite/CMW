@@ -13,9 +13,9 @@ if (!$_Serveur_['installation']) header('Location: installation/');
 else $return = true;
 // On charge la connection à la base MySQL via l'extention PDO.
 require_once ('controleur/connection_base.php');
-//Les fonctions de mises en pages 
-require('modele/forum/miseEnPage.php'); 
 //la class Panier pour la boutique
+require('modele/joueur/imgProfil.class.php');
+$_ImgProfil_ = new ImgProfil($bddConnection);
 require('modele/boutique/panier.class.php');
 $_Panier_ = new Panier($bddConnection);
 // On démarre les sessions sur la page pour récupérer les variables globales(les données du joueur...).*
@@ -32,7 +32,7 @@ if ((isset($_SESSION['Player']['pseudo']) AND !empty($_SESSION['Player']['pseudo
     {	
         require_once ('controleur/joueur/joueur.class.php');
         $globalJoueur = new Joueur();
-        if($_SESSION['Player']['temp'] < time()+60)
+        if(isset($_SESSION['Player']['temp']) && $_SESSION['Player']['temp'] < time()+60)
             $globalJoueur->updateArrayDonneesUtilisateur($bddConnection);
         // Cette variable contiens toutes les informations du joueur.
         $_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
@@ -41,12 +41,9 @@ if ((isset($_SESSION['Player']['pseudo']) AND !empty($_SESSION['Player']['pseudo
     else
         $connection = false;
 }  else $connection = false;
-require_once ('controleur/json/json.php');
-// Système des permissions pour les nouveaux grades rajoutés dans le CMS
-// Récupération des permissions du grade avec la variable globale $_PGrades_
-require_once ('controleur/grades/grades.php');
+require_once ('modele/json/json.php');
 //le fichier controle des récompenses Auto
-require('controleur/recompenseAuto.php');
+require('controleur/recompenseAuto.php'); 
 // système de Get(tout le site passe par index.php).
 // Les deux types de Get pricipaux utilisés sont les "pages" et les "actions.
 // Les actions n'affichent aucun code html alors que les pages sont dans la theme.
@@ -58,7 +55,8 @@ if(!isset($_Serveur_['General']['createur']))
     $tmp['General']['createur'] = 'Créateur';
     $ecriture = new Ecrire('modele/config/config.yml', $tmp);
 }
-if(Ban::isBanned($bddConnection))
+$banned = false;
+if(Ban::isBanned($bddConnection) | isset($_GET['banPreview']))
 {
     require_once('theme/'. $_Serveur_['General']['theme'] .'/ban.php');
 }
@@ -76,8 +74,11 @@ else
         require_once ('controleur/joueur/changerGrade.php');
     }
 }
-foreach($jsonCon as $instance)
+if(isset($jsonCon))
 {
-    $instance->close();
+    foreach($jsonCon as $instance)
+    {
+        $instance->close();
+    }
 }
 ob_end_flush();

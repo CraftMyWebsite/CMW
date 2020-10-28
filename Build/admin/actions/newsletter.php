@@ -13,13 +13,13 @@ require('include/phpmailer/Exception.php');
 require('include/phpmailer/PHPMailer.php');
 require('include/phpmailer/SMTP.php');
 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['newsletter']['actions']['send']) { 
+if($_Permission_->verifPerm('PermsPanel', 'newsletter', 'actions', 'send')) { 
  
 
 
 echo '[DIV]'; // pour séparer les erreurs php des valeurs que l'on veut retourner
 
-if($_Joueur_['rang'] == 1 || $_PGrades_['PermsPanel']['news']['actions']['addNews']) {
+if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 	if($_POST['data'] == 0) {
 		$_Serveur_['Mail']['Memoire'] = $_POST['Memoire'];
 		$_Serveur_['Mail']['last'] = date_timestamp_get(date_create());
@@ -53,6 +53,7 @@ if($_Joueur_['rang'] == 1 || $_PGrades_['PermsPanel']['news']['actions']['addNew
 				$mail->Password = htmlspecialchars($_POST['password']);
 				$mail->SMTPSecure = $_POST['protocol'];
 				$mail->Port = $_POST['port'];
+				$mail->Timeout = 5;
 			}
 			else
 			{
@@ -78,12 +79,12 @@ if($_Joueur_['rang'] == 1 || $_PGrades_['PermsPanel']['news']['actions']['addNew
 			if(strpos($e->getMessage(), 'connect() failed')) {
 				echo '\r\n Vos logins sont incorectes';
 			} else if(strpos( $e->getMessage(), 'instantiate mail function')) {
-				echo "\r\n Vous n'avez pas acces à cette fonction sur votre hébergeur, dirigez vous plutôt vers les mails SMTP.";
+				echo "\r\n Vous n'avez pas accès à cette fonction sur votre hébergeur, dirigez vous plutôt vers les mails SMTP.";
 			}
 		}
 	}
 } else {
-	echo 'Permission refusé.';
+	echo 'Permission refusée.';
 }
 }
 ?>

@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_POST['id_topic']) AND isset($_Joueur_))
+if(isset($_POST['id_topic']) AND Permission::getInstance()->verifPerm("connect"))
 {
 	$id = htmlspecialchars($_POST['id_topic']);
 	$pseudo = htmlspecialchars($_Joueur_['pseudo']);
@@ -18,7 +18,7 @@ if(isset($_POST['id_topic']) AND isset($_Joueur_))
 	));
 	$data = $select->fetch(PDO::FETCH_ASSOC);
 	
-	if($data['pseudo'] == $pseudo or $_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1)
+	if($data['pseudo'] == $pseudo or Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic'))
 	{
 		$rcount = $bddConnection->prepare('SELECT * FROM cmw_forum_answer WHERE id_topic = :id');
 		$rcount->execute(array(

@@ -1,0 +1,12 @@
+:disabled{
+    cursor: not-allowed;
+    display: inherit;
+}
+.inputwithoutarrow::-webkit-outer-spin-button,
+.inputwithoutarrow::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.inputwithoutarrow[type=number] {
+  -moz-appearance: textfield;
+}

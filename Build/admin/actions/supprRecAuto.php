@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_Joueur_) && ($_Joueur_['rang'] == 1 OR ($_PGrades_['PermsPanel']['vote']['actions']['resetVote'] == true OR $_PGrades_['PermsPanel']['vote']['actions']['deleteVote'] == true)))
+if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense'))
 {
 	if(isset($_GET['id']))
 	{

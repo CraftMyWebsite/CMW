@@ -125,5 +125,21 @@ class Maj
 			'pseudo' => $this->pseudo
 			));
 	}
+	public function setNewsletter($newsletter)
+	{
+		$reqMaj = $this->bdd->prepare('UPDATE cmw_users SET newsletter = :newsletter WHERE pseudo = :pseudo');
+		$reqMaj->execute(array(
+			'newsletter' => $newsletter,
+			'pseudo' => $this->pseudo
+			));
+	}
+	public function setMailVisibility($mailVisibility)
+	{
+		$reqMaj = $this->bdd->prepare('UPDATE cmw_users SET show_email = :show_email WHERE pseudo = :pseudo');
+		$reqMaj->execute(array(
+			'show_email' => $mailVisibility,
+			'pseudo' => $this->pseudo
+			));
+	}
 }
 ?>

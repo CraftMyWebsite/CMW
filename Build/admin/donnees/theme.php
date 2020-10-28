@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['showPage'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'theme', 'showPage')) {
 	$themes = scandir('theme/');
 	for($i = 2; $i < count($themes); $i++)
 	{
@@ -7,7 +7,7 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['showPage'] == tr
 		if($i >= count($themes) - 3)
 			unset($themes[$i]);
 	}
-	if($lecture['General']['theme'] == 'bootswatch') {
+	/*if($lecture['General']['theme'] == 'bootswatch') {
 		$themesOptions = array(	'bootstrap', 
 			'bootstrap-amelia', 
 			'boostrap-curelean', 
@@ -25,6 +25,6 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['showPage'] == tr
 			'bootstrap-yeti' );
 	} else {
 		$themesOptions = null;
-	}
+	} */
 }
 ?>

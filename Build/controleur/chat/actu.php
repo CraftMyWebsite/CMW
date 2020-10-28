@@ -5,31 +5,31 @@ if($_POST['ajax'] == true)
 	require('modele/forum/forum.class.php');
 	$_Forum_ = new Forum($bddConnection);
 	$Chat = new Chat($jsonCon);
+	$retour = array();
 	for($i=0; $i < count($jsonCon); $i++)
 	{
 		$messages = $Chat->getMessages($i);
-	?>
-		<div id="categorie-<?php echo $i; ?>" class="tab-pane fade <?php if($active == $i) echo 'in active show'; ?>" aria-expanded="false">
-			<div class="panel-body" style="background-color: #CCCCCC">
-				<?php 
-				if($messages != false)
+		if($messages != false && $messages != "erreur" && $messages != "query")
+		{
+			$messages = array_slice($messages, -10, 10);
+			foreach($messages as $key => $value)
+			{
+				if($key < 10)
 				{
-					foreach($messages as $value)
-					{
-						//var_dump($value);
-						$Img = new ImgProfil($value['player'], 'pseudo');
-
-						?>
-							<p class="username"><img class="rounded" src="<?=$Img->getImgToSize(32, $width, $height);?>" style="width: <?=$width;?>px; height: <?=$height;?>px;" alt="avatar de l'auteur" title="<?php echo $value['player']; ?>" /> <?=($value['player'] == '') ? 'Console': $value['player'].', '.$_Forum_->gradeJoueur($value['player']);?> à <span class="font-weight-light"><?=date('H:i:s', $value['time']);?></span> -> <?=$Chat->formattage(htmlspecialchars($value['message']));?></p>
-						<?php
-					}
+					$retour[$i]['msg'][$key]['pseudo'] = $value['player'];
+					$retour[$i]['msg'][$key]['date'] = date('H:i', $value['time']);
+					$retour[$i]['msg'][$key]['message'] = $Chat->formattage(htmlspecialchars($value['message']));
 				}
-				else
-					echo '<div class="alert alert-danger">La connexion au serveur n\'a pas pu être établie. :\'(</div>';
-				?>
-			</div>
-		</div>
-	<?php 
+			}
+			$retour[$i]['success'] = "true";
+		}
+		elseif($messages == "query")
+			$retour[$i]['success'] = "query";
+		elseif($messages == "erreur")
+			$retour[$i]['success'] = "erreur";
+		else
+			$retour[$i]['success'] = 'false';
 	}
+	echo(json_encode($retour));
 }
 ?>

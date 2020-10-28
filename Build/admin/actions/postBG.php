@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editBackground'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground')) {
 	if(isset($_FILES['img']) and !empty($_FILES['img']))
 	{
 		include_once('controleur/upload.class.php');
@@ -15,15 +15,5 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editB
 			$copie->Copie();
 	}
 }
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editTypeBackground'] == true) {
-	if(isset($_POST['bgType']))
-	{
-		$lectureAccueil = new Lire('modele/config/config.yml');
-		$lectureAccueil = $lectureAccueil->GetTableau();
-
-		$lectureAccueil['General']['bgType'] = $_POST['bgType'];
-		
-		$ecriture = new Ecrire('modele/config/config.yml', $lectureAccueil);
-	}
-}
+header('Location: ?page=theme');
 ?>

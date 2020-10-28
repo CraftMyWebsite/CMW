@@ -1,6 +1,7 @@
 ﻿<?php
 $titre = htmlspecialchars($_POST['titre']);
-$message = htmlspecialchars($_POST['message']);
+require('modele/app/ckeditor.class.php');
+	$message = ckeditor::verif($_POST['message']);
 $ticketDisplay = htmlspecialchars((int)$_POST['ticketDisplay']);
 require_once('modele/support/post.class.php');
 if($_Serveur_['support']['visibilite'] != 'both')

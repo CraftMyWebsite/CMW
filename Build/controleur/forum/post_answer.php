@@ -1,10 +1,11 @@
 <?php
-if(isset($_Joueur_))
+if(Permission::getInstance()->verifPerm("connect"))
 {
 	if(isset($_POST['id_topic']) AND isset($_POST['contenue']) AND strlen($_POST['contenue']) <= 10000)
 	{
 		$id = (int)htmlspecialchars($_POST['id_topic']);
-		$contenue = htmlspecialchars($_POST['contenue']);
+		require('modele/app/ckeditor.class.php');
+	$contenue = ckeditor::verif($_POST['contenue']);
 		$req = $bddConnection->prepare("SELECT id, pseudo, contenue, date_post FROM cmw_forum_answer WHERE id_topic = :id_topic ORDER BY ID DESC LIMIT 1");
 		$req->execute(array("id_topic" => $id));
 		$d = $req->fetch(PDO::FETCH_ASSOC);

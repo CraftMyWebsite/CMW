@@ -1,13 +1,13 @@
 <?php
-for($i = 0; $i < count($lecture['Json']); $i++)
+foreach($jsonCon as $key => $serveur)
 {
-	if(!$conEtablie[$i])
+	if(!$conEtablie[$key])
 		break;
 
-	$bannis = $jsonCon[$i]->GetBanList();
+	$bannis = $serveur->GetBanList();
 	if(isset($bannis[0]['success']))
-		$banlist[$i] = json_decode($bannis[0]['success']);
+		$banlist[$key] = json_decode($bannis[0]['success']);
 	else
-		$banlist[$i] = array();
+		$banlist[$key] = array();
 }
 ?>

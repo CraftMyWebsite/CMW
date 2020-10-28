@@ -1,10 +1,11 @@
 <?php
-if(isset($_Joueur_))
+if(Permission::getInstance()->verifPerm("connect"))
 {
 	if(!empty($_POST['nom']) AND !empty($_POST['contenue'] AND strlen($_POST['contenue']) <= 15000))
 	{
 		$nom = htmlspecialchars($_POST['nom']);
-		$contenue = htmlspecialchars($_POST['contenue']);
+		require('modele/app/ckeditor.class.php');
+		$contenue = ckeditor::verif($_POST['contenue']);
 		$id_categorie = htmlspecialchars($_POST['id_categorie']);
 		$sous_forum = htmlspecialchars($_POST['sous-forum']);
 		$pseudo = $_Joueur_['pseudo'];
@@ -20,7 +21,7 @@ if(isset($_Joueur_))
 			'last_answer_temps' => time()
 			));
 		}
-		elseif(strlen($_POST['contenue']) <= 15000){
+		elseif(strlen($_POST['contenue']) > 15000){
 			header('Location: ?page=erreur&erreur=20');				
 		}
 		else

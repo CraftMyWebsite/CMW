@@ -15,7 +15,7 @@ class Forum {
 	public function affichageForum() 
 	{
 		$forum = $this->bdd->query('SELECT * FROM cmw_forum ORDER BY ordre ASC');
-		$donnees = $forum->fetchAll();
+		$donnees = $forum->fetchAll(PDO::FETCH_ASSOC);
 		return $donnees;
 	}
 	
@@ -26,7 +26,7 @@ class Forum {
 		$requete->execute(array(
 			'forum' => htmlspecialchars($id)
 		));
-		$donnees = $requete->fetchAll();
+		$donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
 		return $donnees;
 	}
 	
@@ -89,7 +89,7 @@ class Forum {
 		if($fetch == 0)
 			$donnees = $sousForum->fetch(PDO::FETCH_ASSOC);
 		else
-			$donnees = $sousForum->fetchAll();
+			$donnees = $sousForum->fetchAll(PDO::FETCH_ASSOC);
 		return $donnees;
 	}
 	
@@ -108,7 +108,7 @@ class Forum {
 		$topic = $this->bdd->prepare('SELECT * FROM cmw_forum_post WHERE id_categorie = :id_categorie AND sous_forum IS NULL ORDER BY epingle DESC, last_answer_temps DESC LIMIT '.$count.', 20');
 		$topic->bindParam(':id_categorie', htmlspecialchars($id));
 		$topic->execute();
-		return $topic->fetchAll();
+		return $topic->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//récupération de la table cmw_sous_forum pour le fofo si on se trouve dans un sousForum
@@ -136,13 +136,13 @@ class Forum {
 		$topic = $this->bdd->prepare('SELECT * FROM cmw_forum_post WHERE sous_forum LIKE :sous_forum ORDER BY epingle DESC, last_answer_temps DESC LIMIT '.$count.', 20');
 		$topic->bindParam(':sous_forum', htmlspecialchars($id));
         $topic->execute();
-		return $topic->fetchAll();
+		return $topic->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//Page post.php récupération du topic
 	public function getTopic($id)
 	{
-		$topic = $this->bdd->prepare('SELECT cmw_forum_post.nom AS nom, d_edition, pseudo, contenue, DAY(date_creation) AS jour, MONTH(date_creation) AS mois, YEAR(date_creation) AS annee, id_categorie, sous_forum, last_answer, etat, cmw_forum_post.id AS id, cmw_forum_categorie.nom AS nom_categorie, cmw_forum_post.perms AS perms, cmw_forum_categorie.perms AS permsCat 
+		$topic = $this->bdd->prepare('SELECT cmw_forum_post.nom AS nom, d_edition, pseudo, contenue, date_creation, id_categorie, sous_forum, last_answer, etat, cmw_forum_post.id AS id, cmw_forum_categorie.nom AS nom_categorie, cmw_forum_post.perms AS perms, cmw_forum_categorie.perms AS permsCat 
 		FROM cmw_forum_post 
 			INNER JOIN cmw_forum_categorie 
 				ON cmw_forum_post.id_categorie = cmw_forum_categorie.id
@@ -151,6 +151,8 @@ class Forum {
 			'id' => $id
 		));
 		$donnees = $topic->fetch(PDO::FETCH_ASSOC);
+
+
 		if(isset($donnees['sous_forum']))
 		{
 			$nom = $this->bdd->prepare('SELECT nom FROM cmw_forum_sous_forum WHERE id = :id'); 
@@ -174,10 +176,10 @@ class Forum {
 	//Affichage réponse en fonction de la page :
 	public function affichageReponse($id, $count)
 	{
-		$answer = $this->bdd->prepare('SELECT id, id_topic, pseudo, contenue, d_edition, DAY(date_post) AS day, MONTH(date_post) AS mois, YEAR(date_post) AS annee FROM cmw_forum_answer WHERE id_topic LIKE :id_topic ORDER BY id ASC LIMIT '.$count.', 20');
+		$answer = $this->bdd->prepare('SELECT id, id_topic, pseudo, contenue, d_edition, date_post FROM cmw_forum_answer WHERE id_topic LIKE :id_topic ORDER BY id ASC LIMIT '.$count.', 20');
 		$answer->bindParam(':id_topic', $id);
 		$answer->execute();
-		return $answer->fetchAll();
+		return $answer->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//compte les Like des answer 
@@ -188,7 +190,7 @@ class Forum {
 		$like->bindParam(':type', $type, PDO::PARAM_INT);
 		$like->execute();
 		$count = $like->rowCount();
-		return $like->fetchAll();
+		return $like->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//Pareil pour DisLike :
@@ -199,7 +201,7 @@ class Forum {
 		$dislike->bindParam(':type', $type, PDO::PARAM_INT);
 		$dislike->execute();
 		$count = $dislike->rowCount();
-		return $dislike->fetchAll();
+		return $dislike->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	//Vérifie si la personne a déjà réagit 
@@ -247,11 +249,11 @@ class Forum {
 		if($joueurDonnees['rang'] == 0) {
 			$gradeSite = $_Serveur_['General']['joueur'];
 		} elseif($joueurDonnees['rang'] == 1) {
-			$gradeSite = "<span class='prefix ".$_Serveur_['General']['createur']['prefix']." ".$_Serveur_['General']['createur']['effets']."' style='padding-left: 0px;'>".$_Serveur_['General']['createur']['nom']."</span>";
+			$gradeSite = "<span class='prefix ".$_Serveur_['General']['createur']['effets']."' style='background-color: ".$_Serveur_['General']['createur']['bg']."; color: ".$_Serveur_['General']['createur']['couleur']."' >".$_Serveur_['General']['createur']['nom']."</span>";
 		} elseif(fopen('./modele/grades/'.$joueurDonnees['rang'].'.yml', 'r')) {
 			$openGradeSite = new Lire('./modele/grades/'.$joueurDonnees['rang'].'.yml');
 			$readGradeSite = $openGradeSite->GetTableau();
-			$gradeSite = "<span class='prefix ".$readGradeSite['prefix']." ".$readGradeSite['effets']."' style='padding-left: 0px;'>".$readGradeSite['Grade']."</span>";
+			$gradeSite = "<span class='prefix ".$readGradeSite['effets']."' style='background-color: ".$readGradeSite['prefix']."; color: ".$readGradeSite['couleur']."' >".$readGradeSite['Grade']."</span>";
 			if(empty($readGradeSite['Grade']))
 				$gradeSite = $_Serveur_['General']['joueur'];
 		} else {
@@ -300,6 +302,13 @@ class Forum {
 			return $last_answer;
 	}
 
+	public function conversionDate($last_answer)
+	{
+		$last_answer = substr_replace($last_answer,"h",strpos($last_answer,":"),strlen(":"));
+        $last_answer = str_replace(" ", " à ", substr($last_answer, 0, strpos($last_answer,":")));
+		return $last_answer;
+	}
+
 	public function getPrefixModeration()
 	{
 		$req = $this->bdd->query('SELECT id, nom FROM cmw_forum_prefix ORDER BY id ASC');
@@ -315,15 +324,6 @@ class Forum {
 		$req->execute(array('id' => $id));
 		$data = $req->fetch(PDO::FETCH_ASSOC);
 		return $data['count'];
-	}
-
-	public function getDateConvert($date)
-	{
-		$explode = explode('-', $date);
-		$jours = $explode[2];
-		$mois = $this->switch_date($explode[1]);
-		$annee = $explode[0];
-		return $jours.' '.$mois.' '.$annee;
 	}
 
 	public function getSignature($pseudo)

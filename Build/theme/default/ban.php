@@ -2,94 +2,90 @@
 $req = $bddConnection->query('SELECT * FROM cmw_ban_config');
 $data = $req->fetch(PDO::FETCH_ASSOC);
 require('include/version.php');
+
+$banned = true
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Ban - <?php echo $_Serveur_['General']['name']; ?></title>
-	<?php $configFile = new Lire('modele/config/config.yml');
-	$configFile = $configFile->GetTableau();
-	echo "<style>
-	:root {
-		--color-main: ". $configFile["color"]['theme']["main"] ."; 
-		--color-hover: ". $configFile["color"]['theme']["hover"] ."; 
-		--color-focus: ". $configFile["color"]['theme']["focus"] ."; 
-	}
-	</style>";?>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/bootstrap.min.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/ionicons.min.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/animate.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/hover.min.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/custom.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/maintenance.css">
+
+    <title>
+        <?= $_Serveur_['General']['name'] . " | BANNI " ?>
+    </title>
+
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
+    <meta name="msapplication-navbutton-color" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
+    <meta name="apple-mobile-web-app-statut-bar-style" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
+    <meta name="apple-mobile-web-app-capable" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
+
+    <meta property="og:title" content="<?= $_Serveur_['General']['name'] ?>">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://<?= $_SERVER["SERVER_NAME"] ?>">
+    <meta property="og:image" content="https://<?= $_SERVER["SERVER_NAME"] ?>/favicon.ico">
+    <meta property="og:image:alt" content="<?= $_Serveur_['General']['description'] ?>">
+    <meta property="og:description" content="<?= $_Serveur_['General']['description'] ?>">
+    <meta property="og:site_name" content="<?= $_Serveur_['General']['name'] ?>" />
+
+    <meta name="twitter:title" content="<?= $_Serveur_['General']['name'] ?>">
+    <meta name="twitter:description" content="<?= $_Serveur_['General']['description'] ?>">
+    <meta name="twitter:image" content="https://<?= $_SERVER["SERVER_NAME"] ?>/favicon.ico">
+
+    <meta name="author" content="CraftMyWebsite, TheTueurCiTy, <?= $_Serveur_['General']['name']; ?>" />
+
+    <!-- CSS links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/custom.css">
+
 </head>
+
 <body>
-    <section class="layout" id="page">
-		<div class="container">
-			<div class="card" style="display: block; margin-left: 20%; text-align: center; margin-right: 20%; margin-top: 12%; padding-top: 2%; padding-bottom: 2%;">
-				<div class="card-body">
-				    <h4 class="card-title"><?=$data['titre'];?></h4>
-				    <p class="card-text"><?=$data['texte'];?></p>
-			  	</div>
-			</div>
-		</div>
-	</section>
-	<footer style="margin-top: 50px; width: 100%">
-        <div class="card card-inverse card-primary text-xs-center">
-            <div class="card-block">
-                <div class="container text-center">
-                    <h4 style="color:white;">Rejoignez-nous sur les réseaux sociaux</h4>
-                    <h6 style="margin:0px;">&nbsp;</h6>
-                    <div class="row">
-                        <div class="col-sm-3 text-center wow fadeInLeft">
-                            <a href="<?php echo $_Theme_['Pied']['facebook']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-facebook"></i>
-                                <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                        <div class="col-sm-3 text-center wow fadeInLeft" data-wow-delay="0.3s">
-                            <a href="<?php echo $_Theme_['Pied']['youtube']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-youtube"></i>
-                                <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                        <div class="col-sm-3 text-center wow fadeInRight" data-wow-delay="0.4s">
-                            <a href="<?php echo $_Theme_['Pied']['discord']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-discord"></i>
-                                <i class="fab fa-discord fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                        <div class="col-sm-3 text-center wow fadeInRight" data-wow-delay="0.7s">
-                            <a href="<?php echo $_Theme_['Pied']['twitter']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-twitter"></i>
-                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <?php
+
+    ?>
+
+    <?php
+    include('theme/' . $_Serveur_['General']['theme'] . '/entete.php'); //Header included
+    tempMess(); ?>
+
+
+    <!-- Contenue de la page -->
+
+
+    <section id="Ban">
+        <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
+            <div class="card my-5 p-3">
+                <h3 class="card-header text-center">
+                    <?= $data['titre']; ?>
+                </h3>
+
+                <h5 class="card-body">
+                    <?= $data['texte']; ?>
+                </h5>
             </div>
         </div>
-        <div class="card card-inverse card-inverse text-xs-center bg-inverse">
-            <div class="card-block container">
-                <div style="display:inline-block;">Tous droits réservés, site créé pour le serveur <?php echo $_Serveur_['General']['name']; ?></div><br/>
-                <small style="display:inline-block;"><a href="http://craftmywebsite.fr">CraftMyWebsite.fr</a>#<?php echo $versioncms; ?></small>
-                <div style="display:inline-block;float:right;">
-                    <span class="badge badge-secondary" style="font-size: 100%;"><?php $req = $bddConnection->query('SELECT COUNT(id) AS count 
-                    FROM cmw_users');
-                    $fetch = $req->fetch(PDO::FETCH_ASSOC);
-                    echo $fetch['count']; ?></span><a href="?page=membre" style="color: inherit;"> Membres inscrits</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/jquery.min.js"></script>
-	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/popper.min.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/bootstrap.min.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/wow.min.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/custom.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/snarl.min.js"></script>
+    </section>
+
+
+
+
+    <?php include('theme/' . $_Serveur_['General']['theme'] . '/formulaires.php'); //Forms included 
+    include('theme/' . $_Serveur_['General']['theme'] . '/pied.php');  //Footer included 
+    ?>
+
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </body>
+
 </html>

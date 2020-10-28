@@ -1,6 +1,35 @@
 #Ce fichier contiens la config de base du serveur---
+Main:
+    theme:
+        choosed-theme: 0
+        light:
+            main-color-bg: '#f1f1f1'
+            secondary-color-bg: '#c384d8'
+            base-color: '#190a0a'
+            main-color: '#a042bf'
+            active-color: '#8618aa'
+            darkest: '#d8d8d8'
+            lightest: '#c3c3c3'
+        dark:
+            main-color-bg: '#333336'
+            secondary-color-bg: '#c104ff'
+            base-color: '#e0e0e0'
+            main-color: '#e5a0fc'
+            active-color: '#d457fd'
+            darkest: '#3f3f3f'
+            lightest: '#585858'
 Pied:
-    facebook: '#'
-    twitter: https://twitter.com/craftmywebsite
-    youtube: https://www.youtube.com/channel/UCzkhnB95d0SCLU2zrTWEBOQ
-    discord: https://discord.gg/wMVAeug
+    about: 'Bienvenue sur mon site !'
+    social:
+        - 
+            icon: "<i class='fab fa-discord'></i>"
+            link: https://www.discord.com/
+            message: Rejoignez-nous sur Discord !
+        - 
+            icon: "<i class='fab fa-youtube'></i>"
+            link: https://www.youtube.com/
+            message: Rejoignez-nous sur Youtube !
+        - 
+            icon: "<i class='fab fa-twitter'></i>"
+            link: https://www.twitter.com/
+            message: Rejoignez-nous sur Twitter !

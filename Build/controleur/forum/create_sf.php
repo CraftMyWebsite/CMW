@@ -1,18 +1,17 @@
 <?php 
 
 
-if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addSousForum'] == true) AND isset($_POST['nom']) AND strlen($_POST['nom']) <= 40 AND isset($_POST['id_categorie']))
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addSousForum') AND isset($_POST['nom']) AND strlen($_POST['nom']) <= 40 AND isset($_POST['id_categorie']))
 {
 	$nom = htmlspecialchars($_POST['nom']);
 	$id = htmlspecialchars($_POST['id_categorie']);
-	if(!empty($_POST['img']) AND strlen($_POST['img']) <= 300 )
-	{
-		$img = htmlspecialchars($_POST['img']);
-	}
-	else
-	{
-		$img = NULL;
-	}
+	$img = NULL;
+		if(!empty($_POST['img']) AND strlen($_POST['img']) <= 300)
+		{
+			if(startsWith($_POST['img'], '<i class="') && endsWith($_POST['img'], '"></i>')) {
+				$img = htmlspecialchars(str_replace('<i class="', '', str_replace('"></i>', "", $_POST['img'])));
+			} 
+		}
 	$recup = $bddConnection->prepare('SELECT * FROM cmw_forum_categorie WHERE id = :id');
 	$recup->execute(array(
 		'id' => $id
@@ -32,5 +31,20 @@ if(isset($_Joueur_) AND ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['gen
 	));
 	header('Location: index.php?page=forum_categorie&id=' .$id. '');
 }
-else
+else {
 	header('Location: ?page=erreur&erreur=0');
+}
+function startsWith ($string, $startString) 
+{ 
+    $len = strlen($startString); 
+    return (substr($string, 0, $len) === $startString); 
+} 
+  
+function endsWith($string, $endString) 
+{ 
+    $len = strlen($endString); 
+    if ($len == 0) { 
+        return true; 
+    } 
+    return (substr($string, -$len) === $endString); 
+} 

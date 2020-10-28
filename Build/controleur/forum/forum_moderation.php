@@ -3,7 +3,7 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 {
 	$id = htmlspecialchars($_GET['id_topic']);
 	$choix = htmlspecialchars($_GET['choix']);
-	if($choix == 1 && ($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_Joueur_['rang'] ==1))
+	if($choix == 1 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic'))
 	{
 		//On lock
 		$close = $bddConnection->prepare('UPDATE cmw_forum_post SET etat = 1 WHERE id = :id');
@@ -12,7 +12,7 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 		));
 		header('Location: ?&page=post&id='.$id);
 	}
-	elseif($choix == 2 && ($_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1))
+	elseif($choix == 2 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic'))
 	{
 		//on supprime le topic 
 		if(!isset($_GET['confirmation']))
@@ -62,7 +62,7 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 				header('Location: ?page=erreur&erreur=0');
 		}
 	}
-	elseif($choix == 3 && ($_PGrades_['PermsForum']['moderation']['mooveTopic'] == true OR $_Joueur_['rang'] == 1))
+	elseif($choix == 3 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'mooveTopic'))
 	{
 		//Alors on déplace :P
 		if(!isset($_GET['confirmation']))
@@ -99,7 +99,7 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 				header('Location: ?page=erreur&erreur=0');
 		}
 	}
-	elseif($choix == 4 && ($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_Joueur_['rang'] == 1))
+	elseif($choix == 4 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic'))
 	{
 		//On rouvre 
 		$ouvre = $bddConnection->prepare('UPDATE cmw_forum_post SET etat = 0 WHERE id = :id');

@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['actions']['addLinkMenu'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) {
 $lectureMenu = new Lire('modele/config/configMenu.yml');
 $lectureMenu = $lectureMenu->GetTableau();
 

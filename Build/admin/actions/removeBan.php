@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_) && $_Joueur_['rang'] == 1)
+if($_Permission_->verifPerm("createur"))
 {
 	if(isset($_GET['id']))
 	{
