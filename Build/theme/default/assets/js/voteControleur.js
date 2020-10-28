@@ -27,7 +27,7 @@ function startLoopTimeBtn(el, time) {
         let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        el.innerText = (days != 0 ? days+"jour"+putS(days)+" " : "")+(hours != 0 ? hours+"heur"+putS(hours)+" " : "")+(minutes != 0 ? minutes+"minutes"+putS(minutes)+" ": "")+(seconds+"seconde"+putS(seconds)+" ")+"restante"+putS(seconds);
+        el.innerText = (days != 0 ? days+"jour"+putS(days)+" " : "")+(hours != 0 ? hours+"heure"+putS(hours)+" " : "")+(minutes != 0 ? minutes+"minute"+putS(minutes)+" ": "")+(seconds+"seconde"+putS(seconds)+" ")+"restante"+putS(seconds);
         setTimeout(function () {
             startLoopTimeBtn(el, time);
         }, 1000);
