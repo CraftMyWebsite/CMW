@@ -532,7 +532,7 @@
                                                                         <option value="1" <?php if($actions[$k]['grade'] == 1) echo 'selected'; ?>>Créateur</option>
                                                                     </select>
                                                                     <?php } else {?>
-                                                                    <input name="commandeValeur-<?php echo $actions[$k]['id']; ?>" class="form-control" value="<?php echo $actions[$k]['commande_valeur']; ?>"/>
+                                                                    <input name="commandeValeur-<?php echo $actions[$k]['id']; ?>" class="form-control" value="<?php echo htmlentities($actions[$k]['commande_valeur'], ENT_QUOTES | ENT_HTML401 | ENT_SUBSTITUTE | ENT_DISALLOWED, 'UTF-8', true); ?>"/>
                                                                     <?php }?>
                                                                 </div>
                                                                 <div class="col-md-12 col-lg-5" style="margin-top:10px;">
