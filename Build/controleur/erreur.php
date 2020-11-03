@@ -6,7 +6,7 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '0':
 			$type = 'Erreur: Action quelconque';
 			$titre = 'Un des champs est invalide ou incomplet';
-			$contenue = 'Nous sommes désolé mais le formulaire n\'a pas été remplis correctement, merci de réessayer...';
+			$contenue = 'Nous sommes désolé mais le formulaire n\'a pas été rempli correctement, merci de réessayer...';
 		break;
 
 		case '1':
@@ -24,29 +24,28 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '3':
 			$type = 'Erreur: Création du compte';
 			$titre = 'Mot de passe';
-			$contenue = 'Les deux mot de passe entrés ne correspondent pas...';
+			$contenue = 'Les deux mots de passes entrés ne correspondent pas...';
 		break;
 
 		case '4':
 			$type = 'Erreur: Connexion';
 			$titre = 'Un des champs est invalide ou incomplet';
-			$contenue = 'Nous sommes désolé mais le formulaire n\'a pas été remplis correctement, merci de réessayer...';
+			$contenue = 'Nous sommes désolé mais le formulaire n\'a pas été rempli correctement, merci de réessayer...';
 		break;
 
 		case '5':
 			$type = 'Erreur: Connexion';
 			$titre = 'Utilisateur Inexistant';
-			$contenue = 'Le pseudo que vous avez entré n\'existe pas, si c\'est le votre, inscrivez vous avec !';
+			$contenue = 'Le pseudo que vous avez entré n\'existe pas, si c\'est le votre, inscrivez-vous avec !';
 		break;
 
 		case '6':
 			$type = 'Erreur: Connexion';
 			$titre = 'Mauvais mot de passe...';
-			$contenue = 'Le mot de passe rentré est incorrect... Si vous êtes le propriétaire du compte, vous pouvez changer votre mot de passe en suivant les étapes suivantes:
+			$contenue = 'Le mot de passe entré est incorrect... Si vous êtes le propriétaire du compte, vous pouvez changer votre mot de passe en suivant les étapes suivantes:
 						<ul>
-							<li>Inscrivez votre adresse mail ici : <form action="?action=passRecover" method="post"><input type="email" name="email" /><input type="submit" value="Valider"/></form></li>
-							<li>Si nous reconnaissons votre adresse mail, vous recevrez votre mot de passe par mail ! </li>
-							<li>Le mail peut mettre jusqu\'à 5 minutes pour arrivée !</li>
+							<li>Inscrivez votre adresse mail ici : <form action="?action=passRecover" method="post"><input type="email" name="email" class="form-control custom-text-input w-50 d-inline-block"><input type="submit" value="Valider" class="btn btn-secondary ml-3 px-5"></form></li>
+							<li>Le mail peut mettre jusqu\'à 5 minutes pour arriver !</li>
 							<li>Vous recevrez d\'abord un mail de confirmation de changement du mot de passe puis un nouveau mot de passe toujours par mail vous sera adressé ! </li>
 						</ul>';
 		break;
@@ -78,13 +77,13 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '11':
 			$type = 'Erreur: Création du compte';
 			$titre = 'Adresse email est incorrect.';
-			$contenue = 'Votre adresse est pas conforme.';
+			$contenue = 'Votre adresse mail n\'est pas conforme.';
 		break;
 
 		case '12':
 			$type = "Erreur: URL invalide";
 			$titre = "L'URL est invalide.";
-			$contenue = "L'adresse de la page souhaitez est invalide ou inexistant.";
+			$contenue = "L'adresse de la page souhaitée est invalide ou inexistant.";
 		break;
 
 		case '13':
@@ -102,25 +101,25 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '15':
 			$type = 'Erreur: Création du compte';
 			$titre = 'Email déjà en utilisation.';
-			$contenue = 'Votre adresse email que vous aviez rentrée est déjà utilisé.';
+			$contenue = 'L\'adresse email que vous avez entré est déjà utilisée.';
 		break;
 
 		case '16':
 			$type = 'Erreur: Utilisateur';
 			$titre = 'Non connecté';
-			$contenue = 'Vous devez être connecté pour pouvoir accéder à cette action ! ';
+			$contenue = 'Vous devez être connecté pour pouvoir accéder à cette section ! ';
 		break;
 
 		case '17':
 			$type = "Erreur Fatale";
 			$titre = "Erreur fatale !";
-			$contenue = "Une erreur indéterminé est survenu lors de l'exécution du script ! </br> Contacter immédiatement un administrateur !";
+			$contenue = "Une erreur indéterminée est survenue lors de l'exécution du script ! </br> Contactez immédiatement un administrateur !";
 		break;
 
 		case '18':
 			$type = "Erreur Boutique";
 			$titre = "Solde insuffisant";
-			$contenue = "Votre solde n'est pas suffisant pour acheter ces items. <br/> Merci de renouvelle votre solde ici : <a href='?page=token' class='btn btn-primary link'>Acheter des ".$_Serveur_['General']['moneyName']."</a>";
+			$contenue = "Votre solde n'est pas suffisant pour acheter ces items. <br/> Merci de renouveler votre solde ici : <a href='?page=token' class='btn btn-secondary mx-4 px-3'>Acheter des ".$_Serveur_['General']['moneyName']."</a>";
 		break;
 
 		case '19':
@@ -144,7 +143,7 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		default:
 			$type = '404 Not Found';
 			$titre = 'Page introuvable';
-			$contenue = 'Nous sommes désolés mais la page que vous avez demmandé n\'existe pas (ou plus)...';
+			$contenue = 'Nous sommes désolé mais la page que vous avez demmandé n\'existe pas...';
 		break;
 	}
 }
