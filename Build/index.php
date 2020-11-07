@@ -6,6 +6,8 @@ date_default_timezone_set('Europe/Paris');
 setlocale(LC_TIME, "fr_FR");
 ini_set('display_errors', 1);
 if(!isset($_SESSION["mode"])) $_SESSION["mode"] = false; // pour les admins du forum
+
+if(isset($_GET['removeUpdater'])) { unlink('updater.php'); }
 //ini_set('display_errors', 1);
 require_once ('controleur/config.php');
 // On vérifie si le CMS n'a pas été installé, si il ne l'est pas, on redirige vers les fichiers d'installation...
