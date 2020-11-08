@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_action` (
   `duree` int(11) NOT NULL,
   `id_offre` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_cache_json` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_categories` (
   `connection` int(1) NOT NULL,
   `showNumber` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_boutique_offres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_offres` (
   `evo` text NULL,
   `max_vente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_boutique_reduction` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_reduction` (
   `fin` int(11) UNSIGNED,
   `expire` int(11) UNSIGNED,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_boutique_stats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_stats` (
   `prix` int(11) NOT NULL,
   `pseudo` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS cmw_conversations (
   `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `cmw_dedipass` (
   `tokens` int(11) NOT NULL,
   `date_achat` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum` (
   `perms` int(11) UNSIGNED NOT NULL,
   `ordre` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_answer` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_answer` (
   `date_post` datetime NOT NULL,
   `d_edition` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_answer_removed` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_answer_removed` (
   `date_suppression` datetime NOT NULL,
   `auteur_suppression` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_categorie` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_categorie` (
   `ordre` int(11) UNSIGNED NOT NULL,
   `perms` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_like` (
   `id` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_like` (
   `vu` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `new` tinyint(3) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_lu` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_lu` (
   `id_topic` int(10) UNSIGNED NOT NULL,
   `vu` tinyint(3) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_post` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -167,14 +167,14 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_post` (
   `last_answer_temps` int(11) NOT NULL,
   `perms` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_prefix` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `span` varchar(40) NOT NULL,
   `nom` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_report` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_report` (
   `vu` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `new` tinyint(3) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_sous_forum` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_sous_forum` (
   `close` tinyint(1) UNSIGNED NOT NULL,
   `perms` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_topic_followed` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_topic_followed` (
   `vu` int(10) UNSIGNED NOT NULL DEFAULT '1',
   `new` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_topic_removed` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `cmw_forum_topic_removed` (
   `date_suppression` datetime NOT NULL,
   `auteur_suppression` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_jetons_paypal_offres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -228,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `cmw_jetons_paypal_offres` (
   `prix` decimal(8,2) NOT NULL,
   `jetons_donnes` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_log_DealJeton` ( 
   `ID` INT NOT NULL AUTO_INCREMENT, 
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `cmw_maintenance` (
   `dateFin` int(11) NOT NULL,
   `inscription` tinyint(1) UNSIGNED NOT NULL DEFAULT '0', 
   PRIMARY KEY (`maintenanceId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -261,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `cmw_news` (
   `image` varchar(40) NOT NULL,
   `epingle` tinyint(1) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_news_commentaires` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -272,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `cmw_news_commentaires` (
   `nbrEdit` int(11) NOT NULL,
   `report` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_news_reports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -282,28 +282,28 @@ CREATE TABLE IF NOT EXISTS `cmw_news_reports` (
   `message` text NOT NULL,
   `victime` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_news_stats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_news` int(11) NOT NULL,
   `pseudo` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(100) NOT NULL,
   `contenu` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_postit` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `auteur` varchar(40) NOT NULL,
   `message` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS cmw_reseaux (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
@@ -331,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `cmw_support` (
   `etat` int(1) NOT NULL,
   `ticketDisplay` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_support_commentaires` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -340,14 +340,14 @@ CREATE TABLE IF NOT EXISTS `cmw_support_commentaires` (
   `message` text NOT NULL,
   `date_post` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_sysip` (
   `id` int(1) NOT NULL AUTO_INCREMENT,
   `idPerIP` int(11) NOT NULL,
   `nbrPerIP` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_sysmail` (
   `idMail` int(1) NOT NULL AUTO_INCREMENT,
@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `cmw_sysmail` (
   `strictMail` int(1) NOT NULL,
   `etatMail` int(1) NOT NULL,
   PRIMARY KEY (`idMail`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_tempgrades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -367,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `cmw_tempgrades` (
   `grade_vie` varchar(100) NOT NULL,
   `is_active` int(2) NOT NULL,
   PRIMARY KEY (`id`) 
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -388,14 +388,14 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
   `achats` text NULL,
   `signature` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_visits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip` text NOT NULL,
   `dates` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_votes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -406,7 +406,7 @@ CREATE TABLE IF NOT EXISTS `cmw_votes` (
   `date_dernier` int(11) NOT NULL,
   `isOld` int(1) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_votes_config` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -418,7 +418,7 @@ CREATE TABLE IF NOT EXISTS `cmw_votes_config` (
   `idCustom` text NOT NULL,
   `enligne` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_votes_temp` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -426,7 +426,7 @@ CREATE TABLE IF NOT EXISTS `cmw_votes_temp` (
   `action` text NOT NULL,
   `serveur` tinyint(3) UNSIGNED NOT NULL,
    PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_votes_recompense_auto_config` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -434,7 +434,7 @@ CREATE TABLE IF NOT EXISTS `cmw_votes_recompense_auto_config` (
   `valueType` varchar(50) NOT NULL,
   `action` text NULL,
    PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cmw_paysafecard_offres (
   id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -461,7 +461,7 @@ CREATE TABLE IF NOT EXISTS `cmw_paypal_historique` (
   `pseudo` varchar(32) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cmw_grades (
   id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -474,7 +474,7 @@ CREATE TABLE cmw_grades (
   permPanel LONGBLOB, 
   permForum BLOB
 )              
-ENGINE= INNODB;
+ENGINE= InnoDB;
 
 ALTER TABLE cmw_grades AUTO_INCREMENT=2;
 
