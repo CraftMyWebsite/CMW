@@ -277,6 +277,8 @@ function pickupRecompense() {
     }
 }
 window.addEventListener("load", function () {
-    updateBaltop(true);
-    updateRecompenseList();
+	setTimeout(function(){
+	    updateBaltop(true);
+	    updateRecompenseList();
+	}, 1500);
 });
