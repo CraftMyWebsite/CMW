@@ -15,5 +15,7 @@ if(Permission::getInstance()->verifPerm("connect"))
 			$i++;
 		}
 		 echo json_encode(array_values($tojs)); 
-	} 
+	} else {
+		echo "{}";
+	}
 }?>

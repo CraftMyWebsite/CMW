@@ -276,9 +276,7 @@ function pickupRecompense() {
         });
     }
 }
-window.addEventListener("load", function () {
-	setTimeout(function(){
-	    updateBaltop(true);
-	    updateRecompenseList();
-	}, 1500);
+window.addEventListener('DOMContentLoaded', function() {
+	updateBaltop(true);
+	updateRecompenseList();
 });

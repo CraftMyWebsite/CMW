@@ -315,7 +315,7 @@ class vote {
                 $api = json_decode($this->fetch("https://liste-serv-minecraft.fr/api/check?server=".$id."&ip=".$this->get_client_ip()));
                 if($api['status'] == 200) {
                     if(strtotime($api["datetime_vote_end"]) < time() - 360 ) {
-                        return true
+                        return true;
                     } else {
                         return false;
                     }
