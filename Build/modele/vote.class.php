@@ -308,7 +308,7 @@ class vote {
             }else if(strpos($url, 'minecraft-top.com'))  {
                 $api = json_decode($this->fetch("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
                 if($api->vote == 1){return true;}else{return false;}
-            }else if(strpos($url, 'api.liste-serveurs-minecraft.org'))  {
+            }else if(strpos($url, 'liste-serveurs-minecraft.org'))  {
                 $api = $this->fetch("https://api.liste-serveurs-minecraft.org/vote/vote_verification.php?server_id=".$id."&ip=".$this->get_client_ip()."&duration=360");
                 if($api == "1"){return true;}else{return false;}
             }else if(strpos($url, 'liste-serv-minecraft.fr'))  {
