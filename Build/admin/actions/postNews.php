@@ -6,6 +6,8 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 	} else {
 		$req = $bddConnection->prepare('INSERT INTO cmw_news(titre, message, auteur, date) VALUES(:titre, :message, :auteur, UNIX_TIMESTAMP())');
 	}
+		require('modele/app/ckeditor.class.php');
+		$_POST['message'] = ckeditor::verif($_POST['message']);
 		$req->execute(Array (
 			'titre' => $_POST['titre'],
 			'message' => $_POST['message'],

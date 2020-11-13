@@ -299,7 +299,7 @@ class vote {
             }else if(strpos($url, 'top-serveurs.net'))  {
                 $api = json_decode($this->fetch("https://api.top-serveurs.net/v1/votes/check-ip?server_token=".$id."&ip=". $this->get_client_ip()));
                 if($api->success == true){return true;}else{return false;}
-            }else if(strpos($url, 'serveursminecraft.org'))  {
+            }else if(strpos($url, 'serveursminecraft.org'))   	{
                 $api =$this->fetch("https://www.serveursminecraft.org/sm_api/peutVoter.php?id=".$id."&ip=". $this->get_client_ip());
                 if($api == "true"){return true;}else{return false;}
             }else if(strpos($url, 'serveur-multigames.net'))  {
