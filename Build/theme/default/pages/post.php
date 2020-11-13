@@ -201,7 +201,7 @@ if (isset($_GET['id'])) :
 
                                     <!-- Edition -->
                                     <?php if (isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] || Permission::getInstance()->verifPerm('PermsForum', 'general', 'editTopic') && !$_SESSION['mode'])) : ?>
-                                        <form action="?action=editForum" method="post">
+                                        <form action="?action=editPost" method="post">
                                             <input type="hidden" name="objet" value="topic" />
                                             <input type="hidden" name="id" value="<?= $id; ?>" />
                                             <button type="submit" class="btn btn-secondary w-100 mb-2">
@@ -412,7 +412,7 @@ if (isset($_GET['id'])) :
 
                                         <!-- Edition -->
                                         <?php if ($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] or Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'editMessage') and !$_SESSION['mode']) : ?>
-                                            <form action="?action=editForum" method="post">
+                                            <form action="?action=editPost" method="post">
                                                 <input type="hidden" name="objet" value="answer" />
                                                 <input type="hidden" name="id" value="<?= $answerd[$i]['id']; ?>" />
                                                 <button type="submit" class="btn btn-secondary w-100 mb-2">

@@ -204,7 +204,7 @@ if(isset($_GET['action']))
 			include('controleur/forum/rep.php');
 		break;
 		
-		case 'editForum':
+		case 'editPost':
 			include('controleur/forum/edit.php');
 		break;
 		
