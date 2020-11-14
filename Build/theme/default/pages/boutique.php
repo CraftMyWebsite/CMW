@@ -78,9 +78,6 @@
                                                 </div>
                                                 <div class="card-footer">
                                                     <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
-                                                        <a href="?page=boutique&offre=<?= $offresTableau[$i]['id'] ?>" class="btn btn-main">
-                                                            <i class="fa fa-eye"></i> Fiche produit
-                                                        </a>
                                                         <?php if (isset($offresTableau[$i]['buy'])) { ?>
                                                             <a href="#" class="btn btn-main disabled" disabled>Vous devez d'abord acheter: <?php foreach($offresTableau[$i]['buy'] as $value) { echo $offresByGet[$value]; } ?></a>
                                                         <?php } else if (isset($offresTableau[$i]['maxbuy'])) { ?>
