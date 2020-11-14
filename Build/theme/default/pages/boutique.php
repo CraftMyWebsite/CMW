@@ -58,9 +58,10 @@
                                     <?php foreach ($categories as $key => $value) {
                                         $categories[$key]['offres'] = 0;
                                     }
+
                                     for ($i = 1; $i <= count($offresTableau); $i++) :
                                         if ($offresTableau[$i]['categorie'] == $categories[$j]['id']) : ?>
-                                            <div class="col-12 card mx-3 col-md-<?php echo ((12/$categories[$j]['showNumber'])-1); ?>">
+                                            <div class="col-12 card mx-3 col-md-<?php echo (12/$categories[$j]['showNumber']); ?>">
                                                 <div class="card-header">
                                                     <?= (($offresTableau[$i]['nbre_vente'] == 0) ? "<s>" . $offresTableau[$i]['nom'] . "</s>" : $offresTableau[$i]['nom']); ?>
                                                     <br /><small>
@@ -74,24 +75,20 @@
                                                     </small>
                                                 </div>
                                                 <div class="card-body">
-                                                    <?= htmlspecialchars_decode($offresTableau[$i]['description']) ?>
+                                                    <?= $offresTableau[$i]['description'] ?>
                                                 </div>
                                                 <div class="card-footer">
                                                     <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
                                                         <a href="?page=boutique&offre=<?= $offresTableau[$i]['id'] ?>" class="btn btn-main">
                                                             <i class="fa fa-eye"></i> Fiche produit
                                                         </a>
-                                                        <?php if (isset($offresTableau[$i]['buy'])) { ?>
-                                                            <a href="#" class="btn btn-main disabled" disabled>Vous devez d'abord acheter: <?php foreach($offresTableau[$i]['buy'] as $value) { echo $offresByGet[$value]; } ?></a>
-                                                        <?php } else if (isset($offresTableau[$i]['maxbuy'])) { ?>
-                                                            <a href="#" class="btn btn-main disabled" disabled>Vous avez dépassé le nombre d'achat maximum de cette offre</a>
-                                                        <?php } else if ($offresTableau[$i]['nbre_vente'] == 0) { ?>
+                                                        <?php if ($offresTableau[$i]['nbre_vente'] == 0) : ?>
                                                             <a href="#" class="btn btn-main disabled" disabled>Rupture de stock</a>
-                                                        <?php } else { ?>
+                                                        <?php else : ?>
                                                             <a href="?action=addOffrePanier&offre=<?= $offresTableau[$i]['id'] ?>&quantite=1" class="btn btn-main">
                                                                 <i class="fa fa-cart-arrow-down"></i> Ajouter au panier
                                                             </a>
-                                                        <?php } ?>
+                                                        <?php endif; ?>
                                                     <?php else : ?>
                                                         <a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-main">
                                                             <span class="fas fa-user"></span> Se connecter
