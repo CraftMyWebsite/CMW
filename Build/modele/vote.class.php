@@ -105,12 +105,12 @@ class vote {
     }
 
     public function giveRecompense($bdd, $data, $jsonCon, $save = false) {
-       if(!isset($data)) {
+        global $lectureJSON;
+        if(!isset($data)) {
             $action = $this->lienData['action'];
         }else {
             $action = $data['action'];
         }
-
         $lastquantite = "non définie";
         $lastcmd = "non définie";
         $lastid = "non définie";
@@ -123,51 +123,62 @@ class vote {
                 unset($json2[$key]);
                 continue;
             } else if($value['type'] == "message") {
-                $message = str_replace('{JOUEUR}', $pseudo, str_replace('{CMD}', $lastcmd, str_replace('{QUANTITE}', $lastquantite, str_replace('{ID}', $lastid, str_replace('&amp;', '§', $value['$value'])))));
+                $message = str_replace('{JOUEUR}', $this->Pseudo, str_replace('{CMD}', $lastcmd, str_replace('{QUANTITE}', $lastquantite, str_replace('{ID}', $lastid, str_replace('&amp;', '§', $value['value'])))));
                 if($value['methode'] == "1") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
-                        if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
+                        if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($this->Pseudo, $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
                         {
                             $jsonCon[$j]->SendBroadcast($message);
                             unset($json2[$key]);
-                            continue;
+                            break;
                         }
                     }
                 } else if($value['methode'] == "2") {
-                    $jsonCon[$this->lienData['serveur']]->SendBroadcast($message);
-                    unset($json2[$key]);
-                    continue;
+                    foreach($lectureJSON as $key3 => $serveur)
+                    {
+                        $id3 = $this->exist ? $this->lienData['serveur'] : $data['serveur'];
+                        if($serveur['id'] == $id3) {
+                            $jsonCon[$key3]->SendBroadcast($message);
+                            unset($json2[$key]);
+                            break;
+                        }
+                    }
                 } else if($value['methode'] == "3") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
                         $jsonCon[$j]->SendBroadcast($message);
                     }
                     unset($json2[$key]);
-                    continue;
                 } 
             } else if($value['type'] == "commande") {
-                $cmd = str_replace('{JOUEUR}', $Player['pseudo'], $value['value']);
+                $cmd = str_replace('{JOUEUR}', $this->Pseudo, $value['value']);
                 if($value['methode'] == "1") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
-                        if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($Player['pseudo'], $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
+                        if(!empty($jsonCon[$j]->GetServeurInfos()['joueurs']) && is_array($jsonCon[$j]->GetServeurInfos()['joueurs']) && in_array($this->Pseudo, $jsonCon[$j]->GetServeurInfos()['joueurs'])) 
                         {
                             $jsonCon[$j]->runConsoleCommand($cmd);
                             unset($json2[$key]);
-                            continue;
+                            break;
                         }
                     }
                 } else if($value['methode'] == "2") {
-                    $jsonCon[$this->lienData['serveur']]->runConsoleCommand($cmd);
-                    unset($json2[$key]);
-                    continue;
+                    foreach($lectureJSON as $key3 => $serveur)
+                    {
+
+                        $id3 = $this->exist ? $this->lienData['serveur'] : $data['serveur'];
+                        if($serveur['id'] == $id3) {
+                            $jsonCon[$key3]->runConsoleCommand($cmd);
+                            unset($json2[$key]);
+                            break;
+                        }
+                    }
                 } else if($value['methode'] == "3") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
                         $jsonCon[$j]->runConsoleCommand($cmd);
                         unset($json2[$key]);
-                        continue;
                     }
                 } 
             } else if($value['type'] == "item") {
@@ -178,19 +189,24 @@ class vote {
                         {
                             $jsonCon[$j]->GivePlayerItem($Player['pseudo'].' '.$value['value'] . ' ' .$value['value2']);
                             unset($json2[$key]);
-                            continue;
+                            break;
                         }
                     }
                 } else if($value['methode'] == "2") {
-                    $jsonCon[$this->lienData['serveur']]->GivePlayerItem($Player['pseudo'].' '.$value['value'] . ' ' .$value['value2']);
-                    unset($json2[$key]);
-                    continue;
+                    foreach($lectureJSON as $key3 => $serveur)
+                    {
+                       $id3 = $this->exist ? $this->lienData['serveur'] : $data['serveur'];
+                        if($serveur['id'] == $id3) {
+                            $jsonCon[$key3]->GivePlayerItem($Player['pseudo'].' '.$value['value'] . ' ' .$value['value2']);
+                            unset($json2[$key]);
+                            break;
+                        }
+                    }
                 } else if($value['methode'] == "3") {
                     for($j =0; $j < count($jsonCon); $j++)
                     {
                         $jsonCon[$j]->GivePlayerItem($Player['pseudo'].' '.$value['value'] . ' ' .$value['value2']);
                         unset($json2[$key]);
-                        continue;
                     }
                 } 
             }
