@@ -70,7 +70,7 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editT
 //FOOTER PART (Choix des réseaux et du "A Propos")
 
 
-    $ecritureTheme['Pied']['about'] = htmlspecialchars($_POST['about']);
+    $ecritureTheme['Pied']['about'] = nl2br(htmlspecialchars($_POST['about']));
     $ecritureTheme['Pied']['social'] = json_decode($_POST['jsonReseau'], true);
 
     $ecriture = new Ecrire('theme/'.$_Serveur_['General']['theme'].'/config/config.yml', $ecritureTheme);
