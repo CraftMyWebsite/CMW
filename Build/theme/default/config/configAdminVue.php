@@ -113,8 +113,12 @@
                                                     </tbody>
                                                 </table>
 
-                                                <button type='submit' class="btn btn-primary w-100 m-2" name="changeTheme" onClick="genJsonReseau(); sendPost('configThemeAdmin');" value="<?= $actualTheme ?>">Passer en thème <?= ($actualTheme === "light") ? "sombre" : "clair" ?>
-                                                </button>
+                                                <div id="configColorTheme">
+
+                                                </div>
+
+	                                        <button type='button' class="btn btn-primary w-100 m-2" name="changeTheme" onClick="editTheme(); sendPost('configColorTheme');" value="<?= $actualTheme ?>">Passer en thème <?= ($actualTheme === "light") ? "sombre" : "clair" ?>
+	                                        </button>
 
                                             </div>
 
@@ -298,6 +302,19 @@
             final.push(temp);
         }
         get('jsonReseau').value = JSON.stringify(final);
+    }
+        
+    function editTheme() {
+
+    	el = get('configColorTheme');
+
+    	if(get('themeEdited') === null) {
+			insertedElement = '<input type="hidden" name="themeEdited" id="themeEdited" value="<?= $actualTheme ?>" />';
+			el.insertAdjacentHTML('beforeend', insertedElement);
+			initPost("configColorTheme", "admin.php?action=configTheme");
+
+	}
+
     }
     genJsonReseau();
 

@@ -8,9 +8,9 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editT
 
     //Application des couleurs du thème si non existant (Permet de customiser avec ses couleurs dans config.yml)
 
-    if(isset($_POST['changeTheme'])) {
+    if(isset($_POST['themeEdited'])) {
 
-    	$theme = $_POST['changeTheme'];
+    	$theme = $_POST['themeEdited'];
 
     	if($theme === "light") {
 
