@@ -59,7 +59,8 @@
                                         $categories[$key]['offres'] = 0;
                                     }
                                     for ($i = 1; $i <= count($offresTableau); $i++) :
-                                        if ($offresTableau[$i]['categorie'] == $categories[$j]['id']) : ?>
+                                        if ($offresTableau[$i]['categorie'] == $categories[$j]['id']) : 
+                                            $categories[$j]['showNumber'] = ($categories[$j]['showNumber'] == 0) ? 1 : $categories[$j]['showNumber']; ?>
                                             <div class="col-12 card mx-3 col-md-<?php echo ((12/$categories[$j]['showNumber'])-1); ?>">
                                                 <div class="card-header">
                                                     <?= (($offresTableau[$i]['nbre_vente'] == 0) ? "<s>" . $offresTableau[$i]['nom'] . "</s>" : $offresTableau[$i]['nom']); ?>
