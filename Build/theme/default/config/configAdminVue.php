@@ -136,24 +136,24 @@
                                                 <?php if (isset($_Theme_['Pied']['social']) && !empty($_Theme_['Pied']['social'])) foreach ($_Theme_['Pied']['social'] as $value) : ?>
 
                                                     <div class="form-row jumbotron py-1" data-reseau>
-                                                        <div class="col-md-7 col-lg-3 col-sm-9">
+                                                        <div class="col-12">
                                                             <label class="control-label">Icone du réseau</label>
                                                             <input type="text" data-type="icon" class="form-control" placeholder='<i class="fab fa-discord"></i>' value="<?= str_replace('"', "'", $value['icon']); ?>">
                                                             <small>Disponible sur : <a href="https://fontawesome.com/icons/">
                                                                     https://fontawesome.com/icons/</a></small>
                                                         </div>
 
-                                                        <div class="col-md-7 col-lg-3 col-sm-9">
+                                                        <div class="col-12">
                                                             <label class="control-label">Lien vers le réseau</label>
                                                             <input type="text" data-type="link" class="form-control" value="<?= str_replace('"', "'", $value['link']) ?>">
                                                         </div>
 
-                                                        <div class="col-md-7 col-lg-3 col-sm-9">
+                                                        <div class="col-12">
                                                             <label class="control-label">Message à mettre à côté</label>
                                                             <input type="text" data-type="message" class="form-control" placeholder="Rejoingnez-nous sur Discord !" value="<?= str_replace('"', "'", $value['message']) ?>">
                                                         </div>
 
-                                                        <div class="col-md-2 col-lg-2 col-sm-2 offset-1 my-auto">
+                                                        <div class="col-4 my-4">
                                                             <button class="btn btn-danger form-control" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement); genJsonReseau(); sendPost('configThemeAdmin');">Supprimer</button>
                                                         </div>
 
@@ -164,24 +164,24 @@
 
                                             <div class="form-row well py-1">
                                                 <h5 class="col-12 my-1">Réseau social personnalisé</h5>
-                                                <div class="col-md-7 col-lg-3 col-sm-9">
+                                                <div class="col-12">
                                                     <label class="control-label">Icone du réseau</label>
                                                     <input type="text" class="form-control" id="new-s-icone" placeholder='<i class="fab fa-discord"></i>'>
                                                     <small>Disponible sur : <a href="https://fontawesome.com/icons/">
                                                             https://fontawesome.com/icons/</a></small>
                                                 </div>
 
-                                                <div class="col-md-7 col-lg-3 col-sm-9">
+                                                <div class="col-12">
                                                     <label class="control-label">Lien vers le réseau</label>
                                                     <input type="text" id="new-s-link" class="form-control" />
                                                 </div>
 
-                                                <div class="col-md-7 col-lg-3 col-sm-9">
+                                                <div class="col-12">
                                                     <label class="control-label">Message à mettre à côté</label>
                                                     <input type="text" class="form-control" id="new-s-message" placeholder="Rejoingnez-nous sur Discord !">
                                                 </div>
 
-                                                <div class="col-md-2 col-lg-2 col-sm-2 offset-1 my-auto">
+                                                <div class="col-4 my-4">
                                                     <button class="btn btn-danger form-control">Supprimer</button>
                                                 </div>
 
@@ -249,25 +249,25 @@
             var ht =
                 '<div class="form-row jumbotron py-1" data-reseau>' +
                 '<h5 class="col-12 my-1">Réseau <small> <div class="badge badge-warning">Non sauvegardé si pas cliqué sur sauvegarder !</div></small></h5>' +
-                '<div class="col-md-7 col-lg-3 col-sm-9">' +
+                '<div class="col-12">' +
                 '<label class="control-label">Icone du réseau</label>' +
                 '<input type="text" data-type="icon" class="form-control" id="" placeholder=\'<i class="fab fa-discord"></i>\' value="' +
                 ico.value.replace(/"/g, '\'') + '">' +
                 '<small>Disponible sur : <a href="https://fontawesome.com/icons/"> https://fontawesome.com/icons/</a></small>' +
                 '</div>' +
 
-                '<div class="col-md-7 col-lg-3 col-sm-9">' +
+                '<div class="col-12">' +
                 '<label class="control-label">Lien vers le réseau</label>' +
                 '<input type="text" id="" class="form-control" data-type="link" value="' + link.value.replace(/"/g, '\'') + '">' +
                 '</div>' +
 
-                '<div class="col-md-7 col-lg-3 col-sm-9">' +
+                '<div class="col-12">' +
                 '<label class="control-label">Message à mettre à côté</label>' +
                 '<input type="text" class="form-control" id="" data-type="message" placeholder="Rejoingnez-nous sur Discord !" value="' +
                 msg.value.replace(/"/g, '\'') + '">' +
                 '</div>' +
 
-                '<div class="col-md-2 col-lg-2 col-sm-2 offset-1 my-auto">' +
+                '<div class="col-4 my-4">' +
                 '<button class="btn btn-danger form-control" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement); genJsonReseau(); sendPost(\'configThemeAdmin\');">Supprimer</button>' +
                 '</div>' +
 
