@@ -1,7 +1,6 @@
 Changelog CraftMyWebsite 1.8.0
 
-Ajouts ([+]), modifications ([=]) et suppression ([-]) 
-(|) Bug Fix
+Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 
 [+] : Ajouter un événement (envoyé sur le serveur) qui rappelle au joueur de voter
 [=] : Sur le panel administrateur, rubrique membre, plusieurs pages pour l'affichage des membres avec fonctionnalités de recherche/tri
@@ -11,17 +10,17 @@ Ajouts ([+]), modifications ([=]) et suppression ([-])
 [=] : Confirmation lors d'une tentative de suppression d'un compte joueur
 [+] : Ajout du moyen de paiement PaysafeCard mais par validation manuelle par l'administrateur du site
 [=] : Refonte du système de permission
-[+] : Mise en place d'une fonction uniquement permettant de vérifier les permissions d'un joueur
+[+] : Mise en place d'une fonction unique permettant de vérifier les permissions d'un joueur
 [=] : Refonte du panel administrateur
 [-] : Retrait de Paypal Business car il n'est plus fonctionnel
 (|) : Réglage bug visuel sur le modal d'inscription
-(|) : Fix bug d'impossibilité d'édition des membres s'il y'en a plus de 100 
+(|) : Fix bug d'impossibilité d'édition des membres s'il y'en a plus de 100
 [=] : Refonte de la page membres dans le panel administrateur
 [=] : Réunion de deux fonctions JSONAPI équivalentes
 [=] : Refonte du système de gestion des serveurs RCON, Query et JSONAPI
 [=] : Refonte du système de requête et de cache pour les serveurs RCON, Query et JSONAPI
 [=] : Refonte de la page de gestion des serveurs RCON, Query et JSONAPI
-[=] : Réglage du chargement des skins 
+[=] : Réglage du chargement des skins
 [=] : Refonte de l'éditeur de page personnalisée
 [=] : Déplacement du système de cache des images de skin des utilisateurs vers le répertoire/utilisateurs prévu à cet effet
 [=] : Refonte totale de l'installateur
@@ -37,8 +36,8 @@ Ajouts ([+]), modifications ([=]) et suppression ([-])
 [+] : Ajout des têtes des joueurs en ligne sur la page chat
 [=] : Refonte de la page vote
 [+] : Ajout sur la page vote de pouvoir envoyer plusieurs récompenses avec pourcentage de l'obtenir
-[+] : Ajout d'une toplist sur la page de vote 
-(|) : Fix d'un bug qui permettez de ce give des jetons
+[+] : Ajout d'une toplist sur la page de vote
+(|) : Fix d'un bug qui permettait de se give des jetons
 [+] : Nouveau Thème défaut
 [+] : Ajout d'un éditeur de texte complet
 [+] : Option pour les images sur l'éditeur de texte
@@ -53,4 +52,4 @@ Ajouts ([+]), modifications ([=]) et suppression ([-])
 [=] : Corrections orthographiques et de tournures de phrases
 
 
-Contributeurs : PandaxCSGO, PinglsDzn, Guedesite, BadiiiX, Emilien52, Florentlife, X3RO, RedBoard, AnackKel, Amjido.
+Contributeurs : PandaxCSGO, Guedesite, PinglsDzn, BadiiiX, Emilien52, Florentlife, X3RO, RedBoard, AnackKel, Amjido.
