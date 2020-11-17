@@ -67,14 +67,14 @@ class AdminForum extends Forum
 		}
 	}
 
-	public function verifEdit($objet, $id, $joueur, $perms)
+	public function verifEdit($objet, $id, $joueur)
 	{
 		++$this->actions;
 		if($joueur['rang'] == 1)
 			return true;
-		elseif($objet == 1 && $perms['PermsForum']['moderation']['editTopic'])
+		elseif($objet == 1 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'editTopic'))
 			return true;
-		elseif($objet == 2 && $perms['PermsForum']['moderation']['editMessage'])
+		elseif($objet == 2 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'editMessage'))
 			return true;
 		else
 		{

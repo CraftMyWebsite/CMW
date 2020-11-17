@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['upload']['manage']) {
+if($_Permission_->verifPerm('PermsPanel', 'upload', 'manage')) {
 	$dossier = './theme/upload/panel/';
 	$taille_maxi = 10000000;
 

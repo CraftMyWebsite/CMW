@@ -1,293 +1,370 @@
 <?php
-	// On récupère la classe permettant la lecture en YML. Les fichiers de config sont sous ce format.
 error_reporting(0);
+ini_set('display_errors', 1);
 require_once('../modele/config/yml.class.php');
-
-	// On lit le fichier de config et on récupère les information dans un tableau. Celui-ci contiens la config générale.
 $configLecture = new Lire('../modele/config/config.yml');
 $_Serveur_ = $configLecture->GetTableau();
 
-$installEtape = new Lire('install.yml');
+$installEtape = new Lire('app/data/install.yml');
 $installEtape = $installEtape->GetTableau();
 $installEtape = $installEtape['etape'];
 
+require_once ('app/controller/app.php');
+require_once ('app/controller/action.php');
 
-if(isset($_GET['action']) AND $_GET['action'] == 'sql' AND isset($_POST['hote']) AND isset($_POST['nomBase']) AND isset($_POST['utilisateur']) AND isset($_POST['mdp']) AND isset($_POST['port']))
-{
-	if(($testPDO = verifyPDO($_POST['hote'], $_POST['nomBase'], $_POST['utilisateur'], $_POST['mdp'], $_POST['port'])) === TRUE)
-	{
-		$sql = getPDO($_POST['hote'], $_POST['nomBase'], $_POST['utilisateur'], $_POST['mdp'], $_POST['port']);
-		require_once('installSQL.php');
-	}
-	else if($testPDO == 3)
-	{
-		$erreur['type'] = 'pass';
-	}
-	else
-	{
-		$erreur['type'] = 'sql_mode';
-		$erreur['data'] = $testPDO;
-	}
-}
+include '../include/version.php';
 
-	if(isset($_GET['action']) AND $_GET['action'] == 'infos' AND isset($_POST['nom']) AND isset($_POST['adresse']) AND isset($_POST['description']))
-		require_once('installInfos.php');
+    ?>
+    <!DOCTYPE html>
+    <html lang="fr">
+        <head>
+        <?php include ('app/views/header.php');
+        ?>
+        </head>
 
-	if(isset($_GET['action']) AND $_GET['action'] == 'compte' AND isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['email']))
-	{
-		$sql = getPDO($_Serveur_['DataBase']['dbAdress'], $_Serveur_['DataBase']['dbName'], $_Serveur_['DataBase']['dbUser'], $_Serveur_['DataBase']['dbPassword'], $_Serveur_['DataBase']['dbPort']);
-		require_once('compteAdmin.php');
-		$compte = new CompteAdmin($sql, $_POST['pseudo'], $_POST['mdp'], $_POST['email']);
+    <body class="bg-light2">
 
-		$config = new Lire('../modele/config/config.yml');
-		$config = $config->GetTableau();
-		$config['installation'] = true;
-		$ecriture = new Ecrire('../modele/config/config.yml', $config);
-		
-		$installLecture = new Lire('install.yml');
-		$installLecture = $installLecture->GetTableau();
-		$installLecture['etape'] = 4;
+        <div class="container">
+    
+            <div class="py-5 text-center">
+                <img class="d-block mx-auto mb-4 img"
+                src="app/ressources/images/craftmywebsite.png" alt="CraftMyWebsite - Logo" width="94"
+                height="94" style="border-radius: 9px;">
+                    <h2>Bienvenue sur votre site !</h2>
+                <p class="lead">
+                    Merci d’avoir choisi CraftMyWebsite, des mises à jour seront disponibles très fréquemment sur le site officiel.
+                    Il peut néanmoins y avoir des bugs ! Merci de nous en faire part sur le forum ou sur le discord pour les corriger au plus vite.
+                </p>
 
-		$ecriture = new Ecrire('install.yml', $installLecture);
-		
-		header('Location: index.php');		
-	}
-	include '../include/version.php';
-	?>
-	<!DOCTYPE html>
-	<html>
-	<head>
-		<title>CraftMyWebsite Setup #<?php echo $installEtape;?></title>	
-		<meta charset="utf-8" />
-		<meta http-equiv="x-ua-compatible" content="ie=edge" />
-		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-		<link href="css/style.css" rel="stylesheet" type="text/css">
-		<link href="css/animate.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript">
-			(function titleScroller(text) {
-				document.title = text;
-				console.log(text);
-				setTimeout(function () {
-					titleScroller(text.substr(1) + text.substr(0, 1));
-				}, 500);
-			}("CraftMyWebsite Setup | Etape #<?php echo $installEtape; ?> | "));
-		</script>
-	</head>
-	<body class="container">
-		<?php
-		$extensionok = "false";
-		require_once('droits.php');
-		$return = VerifieChmod();
-		if($return != null) {
-			DrawChmod($return); 
-			$chmodok = "false";
-		} else { 
-			SetHtpasswd();
-			$chmodok = "true";
-		}
+                <div class="row">
 
-		require_once('extension.php');
-		$retour = VerifieExtension();
-		if($retour != "") {
-			$extensionok = "false";
-		} else { 
-			$extensionok = "true";
-		}
-		?>
-		<?php 
-		if($chmodok == "true" && $extensionok != "true") { 
-		
-			echo AfficherExtension($retour);
-		
-		}elseif($chmodok == "true" && $extensionok == "true"){
-		?>
-		<div class="well well-install">
-			<h1 class="animated slideInLeft" style="font-family: material;text-align: center;margin-bottom: 25px;">CraftMyWebsite <?php echo $versioncms; ?></h1>
-			<div class="p-install text-center">
-					<h1>Merci d'avoir choisi CraftMyWebsite !</h1>
-					<p>Des mises à jour seront disponibles très fréquemment sur le site officiel.<br/>
-						Il peut néanmoins y avoir des bugs ! Merci de les report sur le forum pour les corriger au plus vite.<br/>
-						Suivez les instructions pour installer CraftMyWebsite.<br/>
-					</p>
-					<p><a href="http://craftmywebsite.fr" class="btn btn-primary btn-installation" role="button">Aller sur CraftMyWebsite.fr</a></p>
-			</div>
-		<br>
-		<h4 class="text-center" style="padding:15px">Un probléme avec l'installation ? Accédez au tutoriel en cliquant ici : <a target="_blank" href="//www.youtube.com/watch?v=nV4kRY-kYFo">Tutoriel Vidéo</a></h4>
-		<br/>
-		<div class="p-install-form">
-			<div class="container" style="width: 90%; margin: 10px auto;">
-				<div class="row multistep">
-					<div class="col-xs-3 multistep-step <?php if($installEtape == 1) { echo 'current'; } elseif($installEtape >= 1) { echo 'complete'; } ?>">
-						<div class="text-center multistep-stepname" style="color: white;">Étape #1<br/><small>Mise en place BDD SQL</small></div>
-						<div class="progress"><div class="progress-bar"></div></div>
-						<a href="#" class="multistep-dot"></a>
-					</div>
+                    <div class="col-md-12">
+                        <div class="wrapper-progressBar">
+                        <ul class="progressBar">
+                            <li <?php if($installEtape >= 1) echo 'class="active"'; ?>><span class="d-none d-md-block">Configuration de la base de donnée</span></li>
+                            <li <?php if($installEtape >= 2) echo 'class="active"'; ?>><span class="d-none d-md-block">Paramétrage du site</span></li>
+                            <li <?php if($installEtape >= 3) echo 'class="active"'; ?>><span class="d-none d-md-block">Création d'un compte Administrateur</span></li>
+                        </ul>
+                        </div>
+                    </div>
 
-					<div class="col-xs-3 multistep-step <?php if($installEtape == 2) { echo 'current'; } elseif($installEtape >= 2) { echo 'complete'; } ?>">
-						<div class="text-center multistep-stepname" style="color: white;">Étape #2<br/><small>Configuration site</small></div>
-						<div class="progress"><div class="progress-bar"></div></div>
-						<a href="#" class="multistep-dot"></a>
-					</div>
+                </div>
+                <?php
+                $retour = VerifieExtension();
+                if($retour != "") {
+                    $extensionok = "false";
+                } else { 
+                    $extensionok = "true";
+                }
 
-					<div class="col-xs-3 multistep-step <?php if($installEtape == 3) { echo 'current'; } elseif($installEtape >= 3) { echo 'complete'; } ?>">
-						<div class="text-center multistep-stepname" style="color: white;">Étape #3<br/><small>Création compte admin</small></div>
-						<div class="progress"><div class="progress-bar"></div></div>
-						<a href="#" class="multistep-dot"></a>
-					</div>
+                if($chmodok == "false") { 
+                    $retourchmod = VerifieChmod();
+                    DrawChmod($retourchmod);
+                }
+                if($extensionok != "true") {        
+                    echo AfficherExtension($retour);
+                }
 
-					<div class="col-xs-3 multistep-step <?php if($installEtape == 4) { echo 'current'; } elseif($installEtape >= 4) { echo 'complete'; } ?>">
-						<div class="text-center multistep-stepname" style="color: white;">Étape #4<br/><small>Fini c:</small></div>
-						<div class="progress"><div class="progress-bar"></div></div>
-						<a href="#" class="multistep-dot"></a>
-					</div>
-				</div>
+                ?>
 
-			</div>
-			<form method="post" action="<?php if($installEtape == 1) echo '?&action=sql'; elseif($installEtape == 2) echo '?&action=infos'; elseif($installEtape == 3) echo '?&action=compte'; ?>">
+            </div>
+        <?php 
+        if(!array_key_exists('ENV_HTACCESS_READING', $_SERVER) && empty($_COOKIE['forceInstallHtaccess']) && $_COOKIE['forceInstallHtaccess'] != true && !isset($forceInstall))
+        {
+            $htaccess = false;
+            ?>
+            <div class="pt-3">
+                <div class="alert alert-danger">
+                        <strong>ATTENTION</strong> : Erreur Critique, votre serveur est soumis aux failles htaccess. Veuillez les activer, en suivant <a href="https://www.aidoweb.com/tutoriaux/fichier-htaccess-qui-ne-fonctionne-pas-solutions-configuration-apache-648" target="_blank">ce tuto</a> ou nous contacter sur <a href="https://discord.gg/wMVAeug" target="_blank">Discord</a> 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="index.php" class="btn btn-primary btn-block minecrafter">Relancer la verification</a>
+                            </div>
+                            <div class="col-md-6">
+                                <btn onclick="$('#htaccessModal').modal('show')" class="btn btn-danger btn-block minecrafter">Forcer l'installation</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        <?php
+        }
+            if($chmodok == "true" && $extensionok == "true" && (!isset($htaccess) OR $htaccess == true))
+            {
+        ?>
+        
+        <div class="block border shadow bg-texture" style="border-radius: 2% !important;">
 
-				<div class="row">
-					<?php if($installEtape == 1) { 
-						if(isset($erreur))
-						{
-							if($erreur['type'] == 'sql_mode')
-								echo '<div class="alert alert-danger text-center">ATTENTION ! Votre base de donnée est mal configuré ! La configuration MySQL ne doit pas contenir de STRICT_ALL_TABLES dans son sql_mode. Si vous ne savez pas résoudre ce problème, contactez-nous sur discord : https://discord.gg/wMVAeug en envoyant l\'information suivante :\''.$erreur['data'].'\'.</div>';
-							elseif($erreur['type'] == 'pass')
-								echo '<div class="alert alert-danger text-center">ATTENTION ! Vos identifiants sont incorrects.</div>';
-						} ?>
-					<h3 style="font-family: material;text-align: center;margin-top: 40px;">Base de données <img style="width: 115px;margin-top: -33px;"src="img/logo-mysql.png"></h3>
-					<div class="form-group col-md-6">
-						<label>Adresse de la base de donnée</label>
-						<input type="text" name="hote" class="form-control form-install" placeholder="Exemple: sql.hebergeur.fr"/>
-					</div>
-					<div class="form-group col-md-6">
-						<label>Utilisateur</label>
-						<input type="text" name="utilisateur" class="form-control form-install" placeholder="Exemple: monutilisateur864"/>
-					</div>
-					<div class="form-group col-md-6">
-						<label>Mot de passe</label>
-						<input type="password" name="mdp" class="form-control form-install" placeholder="Exemple: ttcpgm18"/>
-					</div>
-					<div class="form-group col-md-6">
-						<label>Nom de la base</label>
-						<input type="text" name="nomBase" class="form-control form-install" placeholder="Exemple: cmw_bdd"/>
-					</div>
-					<div class="form-group col-md-6">
-						<label>Port de connection <small>Si inconnu laissez 3306</small></label>
-						<input type="text" name="port" class="form-control form-install" value="3306"/>
-					</div>		
-					<div class="form-group col-md-6">
-						<input type="submit" class="btn btn-success btn-installation btn-valider"/>
-					</div>	
-					<?php } 
-					elseif($installEtape == 2) { 
-						?>
-					<h3>Configuration du site</h3>
-					<div class="form-group col-md-6">
-						<label>Adresse d'accès au site</label>
-						<input type="text" name="adresse" class="form-control form-install" placeholder="Exemple: http://monsite.fr"/>
-					</div>
-					<div class="form-group col-md-6">
-						<label>Nom du Site/Serveur</label>
-						<input type="text" name="nom" class="form-control form-install" placeholder="Exemple: CraftMyStory"/>
-					</div>
-					<div class="form-group col-md-6">
-						<label>Une petite description</label>
-						<input type="text" name="description" class="form-control form-install" placeholder="Exemple: CraftMyStory est un serveur full vanilla survival."/>
-					</div>
-					<div class="form-group col-md-6">
-						<label>Ip de votre serveur Minecraft (sous forme chiffré sans port)</label>
-						<input type="text" name="ip" class="form-control form-install" placeholder="172.16.254.1">
-					</div>
-					<div class="form-group col-md-5">
-						<label>Ip de votre serveur Minecraft (sous forme textuel)</label>
-						<input type="text" name="ipTexte" class="form-control form-install" placeholder="cmw.minesr.com">
-					</div>
-					<div class="form-group col-md-3">
-						<label>Port de votre serveur Minecraft</label>
-						<input type="number" name="port" class="form-control form-install" placeholder="25565">
-					</div>		
-					<div class="form-group col-md-4">
-						<input type="submit" class="btn btn-success btn-installation btn-valider"/>
-					</div>	
+            <div class="row p-3">
 
-					<?php } 
+            <div class="col-md-4 mb-4" id="prerequis-tab">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Pré-requis</span>
+                </h4>
+                <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                    <h6 class="my-0"> <i class="fas fa-server"></i> Serveur Web</h6>
+                        <small class="text-muted">
+                        <?php 
+                        if ($return['nginx']){
+                            ?>
+                            <b>NGINX <a href="#nginx" class="btn-outline-info" data-toggle="popover" data-placement="top" title="Aide > Nginx / Apache" data-content="Nous avons détecté que vous utilisez NGINX, CraftMyWebsite ne fonctionne pas sous NGINX ou difficilement. Si vous êtes sur Apache vous pouvez continuez l'installation"><i class="fas fa-info-circle"></i></a></b>
+                            <?php
+                            echo $serveurweb;
+                        }else{
+                            echo $serveurweb;
+                        }
+                        ?>
+                        </small>
+                    </div>
+                        <?php
+                        if ($return['nginx']){ ?>
+                            <span class="text-warning">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </span>
+                        <?php
+                        }else{ ?>
+                            <span class="text-success">
+                                <i class="fas fa-check-circle"></i>
+                            </span>
+                        <?php } ?>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                    <h6 class="my-0"> <i class="fab fa-php"></i> Version PHP</h6>
+                    <small class="text-muted"><?php echo phpversion();?></small>
+                    </div>
+                    <span class="text-success">
+                        <i class="fas fa-check-circle"></i>
+                    </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                    <h6 class="my-0"> <i class="fab fa-expeditedssl"></i> SSL/TLS (https)</h6>
+                    <small class="text-muted">
+                    <?php
+                    $return['ssl'] = is_ssl(); 
+                    if (!$return['ssl']){
+                        echo 'non détécté';
+                    }else{
+                        echo 'détécté';
+                    }
+                    ?>
+                    </small>
+                    </div>
+                    <?php
+                    if (!$return['ssl']){ ?>
+                        <span class="text-warning">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </span>
+                    <?php
+                    }else{ ?>
+                        <span class="text-success">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                    <?php } ?>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                    <h6 class="my-0"> <i class="fas fa-wrench"></i> Configuration Web</h6>
+                    <small class="text-muted">
+                    <?php 
+                    if (isset($htaccess) AND $htaccess == false){
+                        echo 'AllowOverride None';
+                    }else{
+                        echo 'AllowOverride All';
+                    }
+                    ?></small>
+                    </div>
+                    <?php
+                    if (isset($htaccess) AND $htaccess == false){ ?>
+                        <span class="text-danger">
+                            <i class="fas fa-exclamation-circle anim-wow"></i>
+                        </span>
+                    <?php
+                    }else{ ?>
+                        <span class="text-success">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                    <?php } ?>
+                    
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                    <h6 class="my-0"> <i class="fas fa-microchip"></i> Extensions</h6>
+                    <small class="text-muted">zip: détecté <span class="text-success"><i
+                            class="fas fa-check-circle"></i></span> </small><br />
+                    <small class="text-muted">pdo: détecté <span class="text-success"><i
+                            class="fas fa-check-circle"></i></span> </small><br />
+                    <small class="text-muted">curl: détecté <span class="text-success"><i
+                            class="fas fa-check-circle"></i></span> </small>
+                    </div>
+                    <span class="text-success">
+                    <i class="fas fa-check-circle"></i>
+                    </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light lh-condensed">
+                    <div>
+                    <h6 class="my-0"> <i class="fas fa-wifi"></i> Informations supplémentaires</h6>
+                    <small class="text-muted">
+                        <span class="bold">IP:</span> <?=$_SERVER['SERVER_ADDR'];?>
+                    </small><br />
+                    <small class="text-muted">
+                        <span class="bold">Port:</span> <?=$_SERVER['SERVER_PORT'];?>
+                    </small><br />
+                    <small class="text-muted">
+                        <span class="bold">Interface:</span> <?=$_SERVER['GATEWAY_INTERFACE'];?>
+                    </small><br />
+                    <small class="text-muted">
+                        <span class="bold">Protocole:</span> <?=$_SERVER['SERVER_PROTOCOL'];?>
+                    </small><br />
+                    <small class="text-muted">
+                        <span class="bold">Chemin:</span> <code><?=$_SERVER['DOCUMENT_ROOT'];?></code>
+                    </small><br />
+                    <small class="text-muted">
+                        <span class="bold">Version CMS:</span> <?=$versioncms;?>
+                    </small><br />
+                    <small class="text-muted">
+                        <span class="bold">Thème:</span> <?=$_Serveur_['General']['theme'];?>
+                    </small><br />
+                    <small class="text-muted">
+                        <span class="bold">Tables:</span> 
+                        (
+                            <?php
+                            if(isset($_Serveur_['DataBase']['dbAdress']) && !empty($_Serveur_['DataBase']['dbAdress'])){
+                                $tablesretour = verifTables($_Serveur_['DataBase']['dbAdress'], $_Serveur_['DataBase']['dbName'], $_Serveur_['DataBase']['dbUser'], $_Serveur_['DataBase']['dbPassword'], $_Serveur_['DataBase']['dbPort']);
+                            }
+                            else
+                            {
+                                echo 'Inconnues';
+                            }
+                            ?>
+                            )
+                    </small><br />
+                    </div>
+                </li>
+                </ul>
+            </div>
 
-					elseif($installEtape == 3) { ?>
+            <div class="col-md-8">
 
-					<h3>Création d'un compte admin</h3>
-					<div class="form-group col-md-6">
-						<label>Nom d'utilisateur <small>(Votre pseudo in-game)</small></label>
-						<input type="text" name="pseudo" class="form-control form-install" placeholder="Exemple: CraftMyWebsite"/>
-					</div>
-					<div class="form-group col-md-6">
-						<label>Adresse Email</label>
-						<input type="email" name="email" class="form-control form-install" placeholder="Exemple: contact@craftmywebsite.fr">
-					</div>
-					<div class="form-group col-md-6">
-						<label>Mot de passe</label>
-						<input type="password" name="mdp" class="form-control form-install" placeholder="Exemple: ttcpgm18000"/>
-					</div>		
-					<div class="form-group col-md-6">
-						<input type="submit" class="btn btn-success btn-installation btn-valider"/>
-					</div>	
+            <?php 
+            if($installEtape == 0) {
+                include('app/views/welcome.php');
+            }
+            if($installEtape == 1) {
+                include('app/views/mysql.php');
+                echo '<script>console.log("Chargement du formulaire MySQL terminé !");</script>';
+            }
+            if($installEtape == 2) {
+                include('app/views/site.php');
+                echo '<script>console.log("Chargement du formulaire de configuration du site terminé !");</script>';
+            } 
+            if($installEtape == 3) {
+                include('app/views/compte.php');
+                echo '<script>console.log("Chargement du formulaire de création de compte admin terminé !");</script>';
+            }
+            if($installEtape >= 4) {
+                include('app/views/installation.php');
+                echo '<script>console.log("Merci d\'avoir installer CraftMyWebsite sur votre site internet !");</script>';
+            }
+            ?>
 
-					<?php } 
-					elseif($_Serveur_['installation'])
-						{ ?>
-					<? 
-					// Bout de code qui envoi le lien du site a l'installation pour les statistiques CraftMyWebsite
-					$URLINSTALL = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
-					$SENDINSTALL = file_get_contents('http://craftmywebsite.fr/information/checksiteinstall.php?site='. $URLINSTALL .'');
-					?>
-					<h4 style="font-family: material;text-align: center;margin-top: 30px;">
-						L'installation de CraftMyWebsite est maintenant terminée.<br/>
-						Vous pouvez aller sur votre site en cliquant ici: <a href="../index.php?action=supprInstall">Aller voir mon site</a>
-					</h4>
-					<?php } ?>
-				</div>
+                <div class="d-none d-md-flex minecraft">
 
-			</form>
-		</div>
-		<div class="footer">
-			Copyright © <a href="http://craftmywebsite.fr">CraftMyWebsite</a> 2014-2020
-		</div>
-	</div>
-	<script src="../theme/<?php echo $_Serveur_['General']['theme']; ?>/js/jquery.js"></script>
-	<script src="../theme/<?php echo $_Serveur_['General']['theme']; ?>/js/bootstrap.min.js"></script>
+                </div>
+
+            </div>
+
+
+
+      </div>
+      <!-- Fermeture de la row -->
+      <center>
+        <div class="my-4">
+          <a class="minecraftia btn text-primary"
+            href="https://craftmywebsite.fr/forum/index.php?threads/tuto-installer-le-cms-craftmywebsite-fr.4437/"
+            target="_blank">Besoin d'aide pour l'installation ?</a>
+        </div>
+      </center>
+    <?php }?>
+
+    </div>
+
+    <footer class="my-4 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2014 - <script>
+          document.write(new Date().getFullYear())
+        </script> CraftMyWebsite</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="https://craftmywebsite.fr/forum/index.php" target="_blank">Forum</a></li>
+        <li class="list-inline-item"><a href="https://discord.gg/P94b7d5" target="_blank"> <i class="fab fa-discord"></i> Discord</a></li>
+        <li class="list-inline-item"><a href="https://github.com/CraftMyWebsite" target="_blank"> <i class="fab fa-github"></i> GitHub</a></li>
+      </ul>
+    </footer>
+  </div>
+    <?php
+    include('app/views/modalHtaccess.php'); ?>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+  <script src="app/ressources/js/main.js"></script>
+  <script>$(function () {
+          $('[data-toggle="popover"]').popover()
+        })</script>
 </body>
 </html>
-<?php } ?>
 <?php
 function verifyPDO($hote, $nomBase, $utilisateur, $mdp, $port)
 {
-	try
-	{
-		$sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
-		$sql->exec("SET CHARACTER SET utf8");
-		$req = $sql->query('SELECT @@GLOBAL.sql_mode AS sql_mode_global, @@SESSION.sql_mode AS sql_mode_session');
-		$data = $req->fetch(PDO::FETCH_ASSOC);
-		if((!isset($data['sql_mode_global']) | empty($data['sql_mode_global']) | strpos($data['sql_mode_global'], 'STRICT_ALL_TABLES') === FALSE) & (!isset($data['sql_mode_session']) | empty($data['sql_mode_session']) | strpos($data['sql_mode_session'], 'STRICT_ALL_TABLES') === FALSE))
-			return true;
-		else
-			return '([GLOBAL.sql_mode: '.$data['sql_mode_globall'].'],[SESSION.sql_mode:'.$data['sql_mode_session'].'])';
-	}
-	catch(Exception $e)
-	{
-		return 3;
-	}
+    try
+    {
+        $sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
+        $sql->exec("SET CHARACTER SET utf8");
+        $req = $sql->query('SELECT @@GLOBAL.sql_mode AS sql_mode_global, @@SESSION.sql_mode AS sql_mode_session');
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+        if((!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_TRANS_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_TRANS_TABLES') === FALSE))
+        {   
+            return true;    
+        }else
+        {    
+            return '([GLOBAL.sql_mode: '.$data['sql_mode_globall'].'],[SESSION.sql_mode:'.$data['sql_mode_session'].'])';
+        }
+    }
+    catch(Exception $e)
+    {
+        return 3;
+    }
 }
 
 
 function getPDO($hote, $nomBase, $utilisateur, $mdp, $port)
 {
-	try
-	{
-		$sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
-		$sql->exec("SET CHARACTER SET utf8");
-		return $sql;
-	}
-	catch(Exception $e)
-	{
-	}
+    try
+    {
+        $sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
+        $sql->exec("SET CHARACTER SET utf8");
+        return $sql;
+    }
+    catch(Exception $e)
+    {
+    }
+}
+
+function verifTables($hote, $nomBase, $utilisateur, $mdp, $port){
+        $sql = new PDO('mysql:host='.$hote.';dbname='.$nomBase.';port='.$port, $utilisateur, $mdp);
+
+        $req = $sql->prepare('SELECT COUNT(*) AS tables FROM information_schema.tables WHERE table_schema = :db AND TABLE_NAME LIKE "cmw_%"');
+        $req->execute(array(
+            'db' => $nomBase
+        ));
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        if(isset($data['tables'])){
+            echo $data['tables'];
+            return true;
+        }else{
+            echo 'Inconnues';
+        }
 }
 ?>

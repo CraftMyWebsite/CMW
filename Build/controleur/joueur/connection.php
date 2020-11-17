@@ -26,33 +26,14 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND !empty($_POST['pseudo'])
 				$reconnexion = NULL;
 				if(isset($_POST['reconnexion']))
 					$reconnexion = 1;
-				include('controleur/maintenance.php');
-				if($maintenance[$i]['maintenanceEtat'] == 1){
-					require_once('./modele/config/yml.class.php');
-					$directoryGrades = './modele/grades/';
-					if(is_dir($directoryGrades)) {
-						$grade = $directoryGrades.$donneesJoueur['rang'].'.yml';
-						if(file_exists($grade)) {
-							$gradeLecture = new Lire($grade);
-							$_PGrades_ = $gradeLecture->GetTableau();
-						}
-						else
-						{
-							$_PGrades_ = false;
-						}
-					}
-					if($donneesJoueur['rang'] == 1 OR $_PGrades_['PermsPanel']['access'] == true) { 
-						$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], $reconnexion, $donneesJoueur['mdp']);
-						header('Location: index.php?&redirection=maintenance');
-					} else { // Si le joueur n'est pas connecté il est redirigé vers la page de maintenance
-						header('Location: index.php?&redirection=maintenance');
-					}
-				}else {
-					$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], $reconnexion, $donneesJoueur['mdp']);
-					if(preg_match('#erreur#', $_SERVER['HTTP_REFERER']))
-						header('Location: index.php');
-					else
-						header('Location: '.$_SERVER['HTTP_REFERER']);
+				$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], $reconnexion, $donneesJoueur['mdp']);
+				if(preg_match('#erreur#', $_SERVER['HTTP_REFERER']))
+				{
+					header('Location: index.php');
+				}
+				else
+				{
+					header('Location: '.$_SERVER['HTTP_REFERER']);
 				}
 			}
 			else

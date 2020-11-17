@@ -1,11 +1,11 @@
 <?php 
-if(isset($_Joueur_) && ($_PGrades_['PermsForum']['moderation']['selTopic'] == true OR $_Joueur_['rang'] == 1))
+if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic'))
 {
 	foreach($_POST['id'] as $value)
 	{
 		$id = htmlspecialchars($value);
 		$idCat = htmlspecialchars($_POST['idCat']);
-		if(isset($_POST['prefix']) && ($_PGrades_['PermsForum']['moderation']['addPrefix'] == true OR $_Joueur_['rang'] == 1) && $_POST['prefix'] != 'NULL')
+		if(isset($_POST['prefix']) && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'addPrefix') && $_POST['prefix'] != 'NULL')
 		{
 			$prefix = htmlspecialchars($_POST['prefix']);
 			$req = $bddConnection->prepare('UPDATE cmw_forum_post SET prefix = :prefix WHERE id = :id');
@@ -15,7 +15,7 @@ if(isset($_Joueur_) && ($_PGrades_['PermsForum']['moderation']['selTopic'] == tr
 				));
 			
 		}
-		if(isset($_POST['epingle']) && ($_PGrades_['PermsForum']['moderation']['epingle'] == true OR $_Joueur_['rang'] == 1))
+		if(isset($_POST['epingle']) && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'epingle'))
 		{
 			$epingle = htmlspecialchars($_POST['epingle']);
 			$req = $bddConnection->prepare('UPDATE cmw_forum_post SET epingle = :epingle WHERE id = :id');
@@ -24,7 +24,7 @@ if(isset($_Joueur_) && ($_PGrades_['PermsForum']['moderation']['selTopic'] == tr
 				'id' => $id
 			));
 		}
-		if(isset($_POST['close']) && ($_PGrades_['PermsForum']['moderation']['closeTopic'] == true OR $_Joueur_['rang'] == 1))
+		if(isset($_POST['close']) && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic'))
 		{
 			$close = htmlspecialchars($_POST['close']);
 			$req = $bddConnection->prepare('UPDATE cmw_forum_post SET etat = :etat WHERE id = :id');
@@ -33,7 +33,7 @@ if(isset($_Joueur_) && ($_PGrades_['PermsForum']['moderation']['selTopic'] == tr
 				'id' => $id
 				));
 		}
-		if(isset($_POST['remove']) && $_POST['remove'] == 1 && ($_PGrades_['PermsForum']['moderation']['deleteTopic'] == true OR $_Joueur_['rang'] == 1))
+		if(isset($_POST['remove']) && $_POST['remove'] == 1 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic'))
 		{
 			$req = $bddConnection->prepare('DELETE FROM cmw_forum_post WHERE id = :id');
 			$req->execute(array(

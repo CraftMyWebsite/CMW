@@ -3,9 +3,9 @@
 $enLigne = false;
 if($jsonCon != false)
 {
-	for($i = 0; $i < count($lecture['Json']); $i++)
+	foreach($jsonCon as $i => $serveur)
 	{
-		$jsonData[$i] = $jsonCon[$i]->GetServeurInfos();
+		$jsonData[$i] = $serveur->GetServeurInfos();
 		
 		if(isset($jsonData[$i]['joueurs']))
 		{
@@ -16,7 +16,7 @@ if($jsonCon != false)
 				if($element == $_GET['profil'])
 					$enLigne = true;
 			}
-			$serveurProfil['rang'] = $jsonCon[$i]->getPermissionsGroups($_GET['profil']);
+			$serveurProfil['rang'] = $serveur->getPermissionsGroups($_GET['profil']);
 		}
 	}
 
@@ -25,9 +25,9 @@ if($jsonCon != false)
 	else 
 		$serveurProfil['status'] = "Déconnecté";
 		
-	for($i = 0; $i < count($lecture['Json']); $i++)
+	foreach($jsonCon as $i => $serveur)
 	{
-		$serveurProfil['rang'] = $jsonCon[$i]->getPermissionsGroups($_GET['profil']);
+		$serveurProfil['rang'] = $serveur->getPermissionsGroups($_GET['profil']);
 		if(isset($jsonData[$i][0]['success']))
 		{
 			$serveurProfil['rang'] = $serveurProfil['rang'][0]['success'][0];

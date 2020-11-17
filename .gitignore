@@ -1,8 +1,7 @@
 Build/admin/actions/.htpasswd
 Build/controleur/.htpasswd
-Build/modele/.htpasswds
 Build/modele/.htpasswd
 Build/controleur/.htpasswd
 Build/admin/actions/.htpasswd
 *.xml
-*.iml
+*.yml

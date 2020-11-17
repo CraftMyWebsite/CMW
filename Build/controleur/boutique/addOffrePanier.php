@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_) && isset($_GET['offre']) && isset($_GET['quantite']))
+if(Permission::getInstance()->verifPerm("connect") && isset($_GET['offre']) && isset($_GET['quantite']))
 {
 	if($_GET['quantite'] > 0)
 	{

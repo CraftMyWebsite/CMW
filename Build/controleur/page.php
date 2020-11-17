@@ -14,14 +14,6 @@ if(isset($_GET['page']))
 			include('controleur/profil/index.php');	
 		break;	
 
-		case 'messagerie':
-			require('modele/app/messagerie.class.php');
-			if(isset($_Joueur_['pseudo']))
-				include('theme/' .$_Serveur_['General']['theme']. '/pages/messagerie.php');
-			else
-				header('Location: index.php');
-		break;
-
 		case 'chat':
 			require('modele/app/chat.class.php');
 			include('theme/'.$_Serveur_['General']['theme']. '/pages/chat.php');
@@ -90,8 +82,14 @@ if(isset($_GET['page']))
 
 		
 		case 'token': 
-			if(isset($_Joueur_['pseudo']))
+			if(Permission::getInstance()->verifPerm("connect"))
+			{
+				if($_Serveur_['Payement']['paypal'])
+					require_once('modele/tokens/paypal.php'); 
+				if($_Serveur_['Payement']['paysafecard'])
+					require_once('modele/tokens/paysafecard.php');
 				include('theme/' .$_Serveur_['General']['theme']. '/pages/tokens.php');
+			}
 			else
 				header('Location: ?page=erreur&erreur=19&titre='.urlencode("Erreur d'accès")."&type=".urlencode("Connexion requise")."&contenue=".urlencode("Vous devez être connecté pour accéder à cette page !"));
 		break;
@@ -103,18 +101,12 @@ if(isset($_GET['page']))
 		
 		case 'support': 
 			require_once('controleur/support/support.php');
-			require_once('modele/forum/miseEnPage.php');
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/support.php');
 		break;	
 		
 		case 'banlist': 
 			require_once('controleur/app/banlist.php');
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/banlist.php');
-		break;	
-		
-		case 'groups': 
-			require_once('controleur/app/groupsList.php');
-			include('theme/' .$_Serveur_['General']['theme']. '/pages/groupsList.php');
 		break;	
 				
 		// Si jamais l'utilisateur à entré un Get inconnu, on lui met une petite erreur :p
@@ -126,14 +118,7 @@ if(isset($_GET['page']))
 			
 			$pageData = $pageDataReq->fetch(PDO::FETCH_ASSOC);
 			
-				$pages['id'] = $pageData['id'];
-				$pages['titre'] = $pageData['titre'];
-				$pages['contenu'] = $pageData['contenu'];
-				$pages['tableauPages'] = explode('#µ¤#', $pages['contenu']);
-				for($j = 0; $j < count($pages['tableauPages']); $j++) 
-					$pageContenu[$j] = explode('|;|', $pages['tableauPages'][$j]);
-			
-			if(!isset($pages) OR empty($pages))
+			if(!isset($pageData) OR empty($pageData))
 			{
 				include('controleur/erreur.php');
 				$erreur = (!isset($_GET['erreur'])) ? 1500879564 : (int)$_GET['erreur'];
@@ -144,7 +129,17 @@ if(isset($_GET['page']))
 				include('theme/' .$_Serveur_['General']['theme']. '/pages/erreur.php');
 			}
 			else
+			{
+				$pages['id'] = $pageData['id'];
+				$pages['titre'] = $pageData['titre'];
+				$pages['contenu'] = $pageData['contenu'];
+				$pages['tableauPages'] = explode('#µ¤#', $pages['contenu']);
+				for($j = 0; $j < count($pages['tableauPages']); $j++) 
+				{
+					$pageContenu[$j] = explode('|;|', $pages['tableauPages'][$j]);
+				}
 				include('theme/' .$_Serveur_['General']['theme']. '/pages/standard.php');
+			}
 	}
 }
 

@@ -1,23 +1,28 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['showPage'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) {
 	if(!isset($categories) AND !isset($offres) AND !isset($actions))
 	{
 		$categories = GetListeCategories($bddConnection);
-		$offres = GetListeOffres($bddConnection);
+
+		require_once('modele/boutique/offres.class.php'); 
+		$offre = new OffresList($bddConnection, $jsonCon, $_Joueur_);
+		$offres = $offre->GetTableauOffres();
+		if(!isset($offres) or empty($offres)) {
+			$offres = array();
+		}
+		$offresByGet = $offre->GetOffresGet();
 		$actions = GetListeActions($bddConnection);
 
 		$categorieNum = count($categories) + 1;
+
+		$recup = $bddConnection->query('SELECT * FROM cmw_grades ORDER BY priorite');
+		$idGrade = $recup->fetchAll(PDO::FETCH_ASSOC);
 	}
 }
 	function getCouponsReduc($bdd)
 	{
 		$req = $bdd->query('SELECT * FROM cmw_boutique_reduction');
-		$i = 0;
-		while($fetch = $req->fetch(PDO::FETCH_ASSOC))
-		{
-			$coupons[$i] = $fetch;
-			$i++;
-		}
+		$coupons = $req->fetchAll(PDO::FETCH_ASSOC);
 		return $coupons;
 	}
 
@@ -25,37 +30,8 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['shop']['showPage'] == tru
 	{
 		$reponse = $bdd->query('SELECT * FROM cmw_boutique_categories');
 		
-		$i = 0;
-		$categories = null;
-		while($donnees = $reponse->fetch(PDO::FETCH_ASSOC))
-		{
-			$categories[$i]['titre'] = $donnees['titre'];
-			$categories[$i]['message'] = $donnees['message'];
-			$categories[$i]['id'] = $donnees['id'];
-			$categories[$i]['ordre'] = $donnees['ordre'];
-			$i++;
-		}
+		$categories = $reponse->fetchAll(PDO::FETCH_ASSOC);
 		return $categories;
-	}
-
-	function GetListeOffres($bdd)
-	{
-		$reponse = $bdd->query('SELECT * FROM cmw_boutique_offres ORDER BY id');
-		
-		$i = 0;
-		$offres = null;
-		while($donnees = $reponse->fetch(PDO::FETCH_ASSOC))
-		{
-			$offres[$i]['id'] = $donnees['id'];
-			$offres[$i]['ordre'] = $donnees['ordre'];
-			$offres[$i]['nom'] = $donnees['nom'];
-			$offres[$i]['description'] = $donnees['description'];
-			$offres[$i]['prix'] = $donnees['prix'];
-			$offres[$i]['nbre_vente'] = $donnees['nbre_vente'];
-			$offres[$i]['categorie'] = $donnees['categorie_id'];
-			$i++;
-		}
-		return $offres;
 	}
 
 	function GetListeActions($bdd)

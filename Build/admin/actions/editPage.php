@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['pages']['actions']['editPage'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'pages', 'actions', 'editPage')) {
 	$i = 0;
 	foreach($_POST as $cle => $element)
 	{

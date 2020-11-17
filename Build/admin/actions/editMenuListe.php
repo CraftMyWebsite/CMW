@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['actions']['editDropAndLinkMenu'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu')) {
 	$menuData = GetTableau($_POST);
 
 	$menuLecture = new Lire('modele/config/configMenu.yml');
@@ -10,9 +10,13 @@ if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['menus']['actions']['editD
 		$menuLecture['MenuListeDeroulante'][$_POST['titreListe']][$i] = $menuData['nom'][$i];
 		
 		if($menuData['methode'][$i] == 1)
+		{
 			$menuLecture['MenuListeDeroulanteLien'][$_POST['titreListe']][$i] = $menuData['lien'][$i];
+		}
 		elseif($menuData['methode'][$i] == 2)
+		{
 			$menuLecture['MenuListeDeroulanteLien'][$_POST['titreListe']][$i] = '?page='. $menuData['page'][$i];	
+		}
 		else
 		{
 			$menuLecture['MenuListeDeroulanteLien'][$_POST['titreListe']][$i] = $menuData['lien'][$i];

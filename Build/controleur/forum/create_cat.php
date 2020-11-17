@@ -2,17 +2,16 @@
 
 if(isset($_Joueur_) AND isset($_POST['nom']) AND isset($_POST['forum']) AND strlen($_POST['nom']) <= 40 )
 {
-	if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['addCategorie'] == true)
+	if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addCategorie'))
 	{
 		$nom = htmlspecialchars($_POST['nom']);
 		$forum = htmlspecialchars($_POST['forum']);
+		$img = NULL;
 		if(!empty($_POST['img']) AND strlen($_POST['img']) <= 300)
 		{
-			$img = htmlspecialchars($_POST['img']);
-		}
-		else
-		{
-			$img = NULL;
+			if(startsWith($_POST['img'], '<i class="') && endsWith($_POST['img'], '"></i>')) {
+				$img = htmlspecialchars(str_replace('<i class="', '', str_replace('"></i>', "", $_POST['img'])));
+			} 
 		}
 		$insert = $bddConnection->prepare('INSERT INTO cmw_forum_categorie (nom, img, forum)
 		VALUES (:nom, :img, :forum) ');
@@ -27,5 +26,23 @@ if(isset($_Joueur_) AND isset($_POST['nom']) AND isset($_POST['forum']) AND strl
 		header('Location: ?page=erreur&erreur=7');
 }
 else
+{
 	header('Location: ?page=erreur&erreur=0');
+}
+
+
+function startsWith ($string, $startString) 
+{ 
+    $len = strlen($startString); 
+    return (substr($string, 0, $len) === $startString); 
+} 
+  
+function endsWith($string, $endString) 
+{ 
+    $len = strlen($endString); 
+    if ($len == 0) { 
+        return true; 
+    } 
+    return (substr($string, -$len) === $endString); 
+} 
 ?>

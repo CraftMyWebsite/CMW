@@ -1,47 +1,56 @@
-<footer>
-        <div class="card card-inverse card-primary text-xs-center">
-            <div class="card-block">
-                <div class="container text-center">
-                    <h4 style="color:white;">Rejoignez-nous sur les réseaux sociaux</h4>
-                    <h6 style="margin:0px;">&nbsp;</h6>
-                    <div class="row">
-                        <div class="col-sm-3 text-center wow fadeInLeft">
-                            <a href="<?php echo $_Theme_['Pied']['facebook']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-facebook"></i>
-                                <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
-                            </a>
+<?php
+$_Theme_ = new Lire('theme/' . $_Serveur_['General']['theme'] . "/config/config.yml");
+$_Theme_ = $_Theme_->GetTableau();
+?>
+<footer id="Footer">
+    <div class="footer-body">
+        <div class="container-fluid col-12 mt-3">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-7">
+                    <?php if(isset($_Theme_['Pied']['about']) && !empty(trim($_Theme_['Pied']['about']))) : ?>
+                    <div class="about-title h4">
+                        À Propos
+                    </div>
+                    <div class="about-content">
+                        <?= $_Theme_['Pied']['about']; ?>
+                    </div>
+                    <?php endif; ?>
+                </div>
+
+                <?php if (isset($_Theme_['Pied']['social']) && !empty($_Theme_['Pied']['social'])) : ?>
+                    <div class="col-md-12 col-sm-12 col-lg-5 ml-auto">
+                        <div class="social-title h4">
+                            Nos Réseaux
                         </div>
-                        <div class="col-sm-3 text-center wow fadeInLeft" data-wow-delay="0.3s">
-                            <a href="<?php echo $_Theme_['Pied']['youtube']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-youtube"></i>
-                                <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
-                            </a>
+                        <div class="social-content">
+
+                             <?php foreach ($_Theme_['Pied']['social'] as $value) : ?>
+
+                                <a href="<?= $value['link'] ?>" class="col-12 discord-social ml-3">
+                                    <span class="social-logo">
+                                        <?= $value['icon'] ?>
+                                    </span>
+                                    <span class="social-text"> <?= $value['message'] ?> </span>
+                                </a>
+
+                            <?php endforeach; ?>
+
                         </div>
-                        <div class="col-sm-3 text-center wow fadeInRight" data-wow-delay="0.4s">
-                            <a href="<?php echo $_Theme_['Pied']['discord']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-discord"></i>
-                                <i class="fab fa-discord fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                        <div class="col-sm-3 text-center wow fadeInRight" data-wow-delay="0.7s">
-                            <a href="<?php echo $_Theme_['Pied']['twitter']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-twitter"></i>
-                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container col-11 mt-3">
+            <div class="row">
+                <div class="col-7">
+                    <div class="copyright">
+                        Tous droits réservés, site créé pour le serveur <?= $_Serveur_['General']['name']; ?> <br />
+                        <small><a href="https://craftmywebsite.fr" target="_blank">CraftMyWebsite.fr</a>#<?= $versioncms; ?></small>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card card-inverse card-inverse text-xs-center bg-inverse">
-            <div class="card-block container">
-                <div style="display:inline-block;">Tous droits réservés, site créé pour le serveur <?php echo $_Serveur_['General']['name']; ?></div><br/>
-                <small style="display:inline-block;"><a href="http://craftmywebsite.fr">CraftMyWebsite.fr</a>#<?php echo $versioncms; ?></small>
-                <div style="display:inline-block;float:right;">
-                    <span class="badge badge-primary" style="font-size: 100%;"><?=($playeronline) ? $playeronline : 0; ?></span> Joueurs connectés au serveur / <span class="badge badge-secondary" style="font-size: 100%;"><?php $req = $bddConnection->query('SELECT COUNT(id) AS count FROM cmw_users');
-                    $fetch = $req->fetch(PDO::FETCH_ASSOC);
-                    echo $fetch['count']; ?></span><a href="?page=membres" style="color: inherit;"> Membres inscrits</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </div>
+</footer>

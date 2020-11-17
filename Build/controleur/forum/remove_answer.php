@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_POST['id_answer']) AND isset($_Joueur_) AND isset($_POST['page']))
+if(isset($_POST['id_answer']) AND Permission::getInstance()->verifPerm("connect") AND isset($_POST['page']))
 {
 	$id = htmlspecialchars($_POST['id_answer']);
 	$pseudo = htmlspecialchars($_Joueur_['pseudo']);

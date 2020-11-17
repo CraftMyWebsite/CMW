@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_) AND isset($_GET['id_topic']))
+if(Permission::getInstance()->verifPerm("connect") AND isset($_GET['id_topic']))
 {
 	$id = htmlspecialchars($_GET['id_topic']);
 	$unfollow = $bddConnection->prepare('DELETE FROM cmw_forum_topic_followed WHERE id_topic = :id_topic AND pseudo = :pseudo');

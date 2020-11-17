@@ -1,221 +1,243 @@
 <?php
-include('controleur/maintenance.php');
-require('include/version.php');
-
-if($maintenance[$i]['maintenanceEtat'] == 0){
-setTempMess("<script> $( document ).ready(function() { Snarl.addNotification({ title: '', text: 'La maintenance n\'est pas activée !', icon: '<span class=\'fas fa-cog\'></span>'});});</script>");
-header('Location: index.php');
-}
-require('theme/'. $_Serveur_['General']['theme'] . '/config/configTheme.php');
+include ('controleur/maintenance.php');
+require ('include/version.php');
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 <head>
-	<?php $configFile = new Lire('modele/config/config.yml');
-	$configFile = $configFile->GetTableau();
-	echo "<style>
-	:root {
-		--color-main: ". $configFile["color"]['theme']["main"] ."; 
-		--color-hover: ". $configFile["color"]['theme']["hover"] ."; 
-		--color-focus: ". $configFile["color"]['theme']["focus"] ."; 
-	}
-	</style>";?>
-	<meta charset="UTF-8">
-	<title>Maintenance <?php echo $_Serveur_['General']['name']; ?></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/bootstrap.min.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/ionicons.min.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/animate.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/hover.min.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/custom.css">
-    <link rel="stylesheet" href="theme/<?php echo $_Serveur_['General']['theme']; ?>/css/maintenance.css">
+
+	<title>
+		<?=$_Serveur_['General']['name'] . " | MAINTENANCE " ?>
+	</title>
+
+	<!-- Meta -->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="theme-color" content="<?=$_Serveur_["color"]["theme"]["main"]; ?>">
+	<meta name="msapplication-navbutton-color" content="<?=$_Serveur_["color"]["theme"]["main"]; ?>">
+	<meta name="apple-mobile-web-app-statut-bar-style" content="<?=$_Serveur_["color"]["theme"]["main"]; ?>">
+	<meta name="apple-mobile-web-app-capable" content="<?=$_Serveur_["color"]["theme"]["main"]; ?>">
+
+	<meta property="og:title" content="<?=$_Serveur_['General']['name'] ?>">
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://<?=$_SERVER["SERVER_NAME"] ?>">
+	<meta property="og:image" content="https://<?=$_SERVER["SERVER_NAME"] ?>/favicon.ico">
+	<meta property="og:image:alt" content="<?=$_Serveur_['General']['description'] ?>">
+	<meta property="og:description" content="<?=$_Serveur_['General']['description'] ?>">
+	<meta property="og:site_name" content="<?=$_Serveur_['General']['name'] ?>" />
+
+	<meta name="twitter:title" content="<?=$_Serveur_['General']['name'] ?>">
+	<meta name="twitter:description" content="<?=$_Serveur_['General']['description'] ?>">
+	<meta name="twitter:image" content="https://<?=$_SERVER["SERVER_NAME"] ?>/favicon.ico">
+
+	<meta name="author" content="CraftMyWebsite, TheTueurCiTy, <?=$_Serveur_['General']['name']; ?>" />
+
+	<!-- CSS links -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<link rel="stylesheet" href="theme/<?=$_Serveur_['General']['theme']; ?>/assets/css/custom.css">
+	<style>
+
+	</style>
+
 </head>
+
 <body>
-    <section class="layout" id="page">
-	<div class="container text-center">
-		<?php if(!empty($donnees['dateFin'])){
-				if($donnees['dateFin'] != 0 && $donnees['dateFin'] <= time()){
-					$req = $bddConnection->prepare('UPDATE cmw_maintenance SET maintenanceEtat = :maintenanceEtat WHERE maintenanceId = :maintenanceId');
-					$req->execute(array('maintenanceEtat' => 0, 'maintenanceId' => $donnees['maintenanceId']));
-					header("Location: /");
-				}?>
-			<div id="clockdiv">
-				<div>
-					<span class="days"></span>
-					<div class="smalltext">Jours</div>
-				</div>
-				<div>
-					<span class="hours"></span>
-					<div class="smalltext">Heures</div>
-				</div>
-				<div>
-					<span class="minutes"></span>
-					<div class="smalltext">Minutes</div>
-				</div>
-				<div>
-					<span class="seconds"></span>
-					<div class="smalltext">Secondes</div>
+	<?php
+//Verif Version
+include ("./include/version.php");
+include ("./include/version_distant.php");
+?>
+
+	<?php
+$maintenanceOn = true;
+include ('theme/' . $_Serveur_['General']['theme'] . '/entete.php'); //Header included
+tempMess(); ?>
+
+
+	<!-- Contenue de la page -->
+
+	<section id="Maintenance">
+		<div class="container-fluid col-md-9 col-lg-9 col-sm-10">
+
+			<div class="row">
+				<!-- Présentation -->
+				<div class="d-flex col-12 info-page mx-auto mb-3">
+					<i class="fas fa-info-circle notification-icon"></i>
+					<div class="info-content">
+						<?php echo $donnees['maintenanceMsg']; ?>
+					</div>
 				</div>
 			</div>
-		<?php }?>
-		
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                <div class="card" style="border:0px;">
-                    <h3 class="card-header text-center" style="border:0px;"><i class="fa fa-cog fa-spin"></i> Maintenance</h3>
-                    <hr>
-                    <div class="card-body text-center">
-                        <h5 class="card-title"><?php echo $_Serveur_['General']['name']; ?> reviens très bientôt !</h5>
-                        <h6 class="card-subtitle text-muted">
-                            <?php echo $donnees['maintenanceMsg']; ?>
-                        </h6>
-                    </div>
-                    <hr><?php if(!isset($_Joueur_['rang'], $_PGrades_) && $_Joueur_['rang'] != 1 AND !$_PGrades_['PermsPanel']['access'])
-                    { ?>
-                    <div class="card-footer text-muted" style="border:0px;">
-                        <a class="btn btn-block btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Connexion administrateur</a>
-                    </div>
-                </div>
-                <div class="collapse" id="collapseExample"><form method="post" action="?action=connection">
-                    <div class="card card-body text-white bg-dark mb-3" style="border:0px;padding:15px;background:#333;border-top:4px solid #562F91;">
-                        <div class="col-auto">
-                        	<h4><?php echo $donnees['maintenanceMsgAdmin']; ?></h4>
-                            <div class="form-group">
-                                <label class="control-label">Votre pseudonyme</label>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon" style="border:0px;"><i class="fa fa-user"></i></div>
-                                        <input type="text" class="form-control" name="pseudo" id="PSEUDO" placeholder="Pseudonyme" style="border:0px;">
-                                    </div>
-                                </div>
-                                <label class="control-label">Votre mot de passe</label>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon" style="border:0px;"><i class="fa fa-lock"></i></div>
-                                        <input type="password" name="mdp" class="form-control" id="MDP" placeholder="Mot de passe" style="border:0px;">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                	<button class="btn btn-lg btn-primary btn-block" type="submit"> Connexion</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form></div><?php 
-                 }
-                 else
-                 {
-                 	?></div>
-					<div class="card-footer text-muted" style="border: 0px;">
-                 		<a class="btn btn-block btn-primary" href="index.php">Accéder au site</a>
-                 	</div><?php 
-                 }
-                 ?>
-            </div>
-        </div>
-    </div>
-</section>
-	<footer style="margin-top: 50px; width: 100%">
-        <div class="card card-inverse card-primary text-xs-center">
-            <div class="card-block">
-                <div class="container text-center">
-                    <h4 style="color:white;">Rejoignez-nous sur les réseaux sociaux</h4>
-                    <h6 style="margin:0px;">&nbsp;</h6>
-                    <div class="row">
-                        <div class="col-sm-3 text-center wow fadeInLeft">
-                            <a href="<?php echo $_Theme_['Pied']['facebook']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-facebook"></i>
-                                <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                        <div class="col-sm-3 text-center wow fadeInLeft" data-wow-delay="0.3s">
-                            <a href="<?php echo $_Theme_['Pied']['youtube']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-youtube"></i>
-                                <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                        <div class="col-sm-3 text-center wow fadeInRight" data-wow-delay="0.4s">
-                            <a href="<?php echo $_Theme_['Pied']['discord']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-discord"></i>
-                                <i class="fab fa-discord fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                        <div class="col-sm-3 text-center wow fadeInRight" data-wow-delay="0.7s">
-                            <a href="<?php echo $_Theme_['Pied']['twitter']; ?>" target="about_blank" class="fa-stack fa-2x hvr-grow">
-                                <i class="fa fa-square fa-stack-2x text-twitter"></i>
-                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card card-inverse card-inverse text-xs-center bg-inverse">
-            <div class="card-block container">
-                <div style="display:inline-block;">Tous droits réservés, site créé pour le serveur <?php echo $_Serveur_['General']['name']; ?></div><br/>
-                <small style="display:inline-block;"><a href="http://craftmywebsite.fr">CraftMyWebsite.fr</a>#<?php echo $versioncms; ?></small>
-                <div style="display:inline-block;float:right;">
-                    <span class="badge badge-secondary" style="font-size: 100%;"><?php $req = $bddConnection->query('SELECT COUNT(id) AS count 
-                    FROM cmw_users');
-                    $fetch = $req->fetch(PDO::FETCH_ASSOC);
-                    echo $fetch['count']; ?></span><a href="?page=membre" style="color: inherit;"> Membres inscrits</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-	
-	<script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/jquery.min.js"></script>
-	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/popper.min.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/bootstrap.min.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/wow.min.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/custom.js"></script>
-    <script src="theme/<?php echo $_Serveur_['General']['theme']; ?>/js/snarl.min.js"></script>
+
+			<div class="row">
+				<?php if (!empty($donnees['dateFin'])):
+    if ($donnees['dateFin'] != 0 && $donnees['dateFin'] <= time())
+    {
+        $req = $bddConnection->prepare('UPDATE cmw_maintenance SET maintenanceEtat = :maintenanceEtat WHERE maintenanceId = :maintenanceId');
+        $req->execute(array(
+            'maintenanceEtat' => 0,
+            'maintenanceId' => $donnees['maintenanceId']
+        ));
+        header("Location: /");
+    } ?>
+
+					<div class="col-sm-10 col-md-9 col-lg-7 mx-auto mt-5">
+						<div class="rounded bg-lightest text-white shadow p-5 text-center mb-5">
+							<h3 class="mb-4 font-weight-bold text-uppercase">Temps restant :</h3>
+							<h5>Voici le temps restant avant le retour de votre site !</h5>
+
+							<div id="clockdiv" class="countdown-circles d-flex flex-wrap justify-content-center pt-4">
+
+								<div class="content-clock">
+									<span class="bloc-clock days h5"></span>
+									<div>Jours</div>
+								</div>
+								<div class="content-clock">
+									<span class="bloc-clock hours h5"></span>
+									<div>Heures</div>
+								</div>
+								<div class="content-clock">
+									<span class="bloc-clock minutes h5"></span>
+									<div>Minutes</div>
+								</div>
+								<div class="content-clock">
+									<span class="bloc-clock seconds h5"></span>
+									<div>Secondes</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				<?php
+endif; ?>
+
+				<!-- Connexion -->
+				<div class="<?=(!empty($donnees['dateFin'])) ? "col-sm-9 col-md-8 col-lg-5 mt-3 mx-md-auto mx-sm-auto" : "col-8 mx-auto mt-3" ?>">
+
+					<div class="card">
+
+						<div class="card-header">
+							<h3 class="text-center m-0">Connexion</h3>
+						</div>
+
+						<div class="card-body">
+							<h5><?=$donnees['maintenanceMsgAdmin']; ?></h5>
+						</div>
+
+						<?php if (Permission::getInstance()->verifPerm("PermsPanel", "maintenance", "actions", "connexionAdmin"))
+{ ?>
+
+							<div class="card-footer">
+								<a href="index.php" class="btn btn-main w-100">Aller sur votre site</a>
+							</div>
+
+						<?php
+}
+elseif (Permission::getInstance()
+    ->verifPerm("connect"))
+{ ?>
+							<div class="card-footer">
+								<a class="btn btn-main w-100">Vous n'avez pas la permission d'accéder au site pendant la maintenance ! </a>
+							</div>
+						<?php
+}
+else
+{ ?>
+							<div class="card-footer">
+								<a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-main w-100">Se connecter</a>
+							</div>
+						<?php
+} ?>
+					</div>
+
+					<?php if ($donnees['inscription'] && !Permission::getInstance()->verifPerm('connect'))
+{ ?>
+						<!-- Inscription -->
+						<div class="card mt-3">
+							<div class="card-header">
+								<h3 class="text-center m-0">Inscription</h3>
+							</div>
+							<div class="card-body">
+								<h5><?=$donnees['maintenanceMsgInscr']; ?></h5>
+							</div>
+							<div class="card-footer">
+								<a data-toggle="modal" data-target="#InscriptionSlide" class="btn btn-main w-100">S'inscrire</a>
+							</div>
+						</div>
+
+					<?php
+} ?>
+					
+				</div>
+			</div>
+	</section>
+
+
+
+
+	<?php include ('theme/' . $_Serveur_['General']['theme'] . '/formulaires.php'); //Forms included
+include ('theme/' . $_Serveur_['General']['theme'] . '/pied.php'); //Footer included
+
+?>
+
+
+
+	<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+	<!-- Script pour fonctionnement de la page -->
 	<script type="text/javascript">
 		function getTimeRemaining(endtime) {
-		  var t = Date.parse(endtime) - Date.parse(new Date());
-		  var seconds = Math.floor((t / 1000) % 60);
-		  var minutes = Math.floor((t / 1000 / 60) % 60);
-		  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-		  var days = Math.floor(t / (1000 * 60 * 60 * 24));
-		  if(days == 0 && hours == 0 && minutes == 0 && seconds == 0)
-			  window.location.replace("/");
-		  return {
-			'total': t,
-			'days': days,
-			'hours': hours,
-			'minutes': minutes,
-			'seconds': seconds
-		  };
+			var t = Date.parse(endtime) - Date.parse(new Date());
+			var seconds = Math.floor((t / 1000) % 60);
+			var minutes = Math.floor((t / 1000 / 60) % 60);
+			var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+			var days = Math.floor(t / (1000 * 60 * 60 * 24));
+			if (days == 0 && hours == 0 && minutes == 0 && seconds == 0)
+				window.location.replace("/");
+			return {
+				'total': t,
+				'days': days,
+				'hours': hours,
+				'minutes': minutes,
+				'seconds': seconds
+			};
 		}
 
 		function initializeClock(id, endtime) {
-		  var clock = document.getElementById(id);
-		  var daysSpan = clock.querySelector('.days');
-		  var hoursSpan = clock.querySelector('.hours');
-		  var minutesSpan = clock.querySelector('.minutes');
-		  var secondsSpan = clock.querySelector('.seconds');
+			var clock = document.getElementById(id);
+			var daysSpan = clock.querySelector('.days');
+			var hoursSpan = clock.querySelector('.hours');
+			var minutesSpan = clock.querySelector('.minutes');
+			var secondsSpan = clock.querySelector('.seconds');
 
-		  function updateClock() {
-			var t = getTimeRemaining(endtime);
+			function updateClock() {
+				var t = getTimeRemaining(endtime);
 
-			daysSpan.innerHTML = t.days;
-			hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-			minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-			secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+				daysSpan.innerHTML = t.days;
+				hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+				minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+				secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
-			if (t.total <= 0) {
-			  clearInterval(timeinterval);
+				if (t.total <= 0) {
+					clearInterval(timeinterval);
+				}
 			}
-		  }
 
-		  updateClock();
-		  var timeinterval = setInterval(updateClock, 1000);
+			updateClock();
+			var timeinterval = setInterval(updateClock, 1000);
 		}
 
-		var deadline = new Date(Date.parse(new Date()) + <?=($donnees["dateFin"] - time())?> * 1000);
+		var deadline = new Date(Date.parse(new Date()) + <?=($donnees["dateFin"] - time()) ?> * 1000);
 		initializeClock('clockdiv', deadline);
 	</script>
 </body>
+
 </html>

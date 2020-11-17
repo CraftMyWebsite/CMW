@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_) && ($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteCategorie'] == true) && isset($_GET['id']) && isset($_GET['lock']))
+if(isset($_Joueur_) && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && isset($_GET['id']) && isset($_GET['lock']))
 {
 	$id = htmlspecialchars($_GET['id']);
 	$close = htmlspecialchars($_GET['lock']);

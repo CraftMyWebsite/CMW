@@ -1,6 +1,6 @@
 <?php
-
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['theme']['actions']['editTheme']) {
+if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editTheme')) 
+{
 	if(isset($_POST['color_theme_main'], $_POST['color_theme_hover'], $_POST['color_theme_focus'], $_POST['color_panel_main'], $_POST['color_panel_hover'], $_POST['color_panel_focus'])) {
 		$configTheme = new Lire('modele/config/config.yml');
 		$_Theme_ = $configTheme->GetTableau();

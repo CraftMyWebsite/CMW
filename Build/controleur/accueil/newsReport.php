@@ -1,5 +1,5 @@
 <?php
-if(isset($_Joueur_)) {
+if(Permission::getInstance()->verifPerm("connect")) {
     $pseudo = $_Joueur_['pseudo'];
     $message = '';
     $id_news = urldecode($_GET['id_news']);

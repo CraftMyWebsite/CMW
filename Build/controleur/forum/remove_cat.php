@@ -1,13 +1,13 @@
 <?php 
 
-if(($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteCategorie'] == true) AND isset($_GET['id']))
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') AND isset($_GET['id']))
 {
 	$id = htmlspecialchars($_GET['id']);
 	$select = $bddConnection->prepare('SELECT * FROM cmw_forum_post WHERE id_categorie = :id');
 	$select->execute(array(
 		'id' => $id
 	));
-	$data = $select->fetchAll();
+	$data = $select->fetchAll(PDO::FETCH_ASSOC);
 	foreach($data as $key => $value)
 	{
 		unset($delete);

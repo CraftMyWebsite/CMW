@@ -11,9 +11,9 @@ while($joueurGrades = $joueurGradesReq->fetch(PDO::FETCH_ASSOC))
 	$gradeJoueur = $tempGrades->RecupDonnees();
 	if($gradeJoueur['grade_temps']< time() AND $gradeJoueur['is_active'] == 1)
 	{		
-		for($i = 0; $i < count($lecture['Json']); $i++)
+		foreach($jsonCon as $serveur)
 		{
-			$jsonCon[$i]->ResetPlayer($joueurGrades['pseudo'], $gradeJoueur['grade_vie']);
+			$serveur->ResetPlayer($joueurGrades['pseudo'], $gradeJoueur['grade_vie']);
 		}
 		$tempGrades->MajJoueurTimeOut();
 	}

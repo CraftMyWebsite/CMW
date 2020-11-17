@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['home']['actions']['editSlider'] == true) {
+if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editSlider')) {
 
 	$lectureAccueil['Slider']['image'] = $_POST['image'];
 

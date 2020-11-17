@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['deleteCategorie'] == true)
+if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie'))
 {
 	$AdminForum = new AdminForum($bddConnection);
 	$nom = htmlspecialchars($_POST['nom']);

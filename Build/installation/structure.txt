@@ -1,0 +1,47 @@
+\index.php
+\.htaccess
+\structure.txt
+\---app
+    +---controller
+    |       action.php
+    |       app.php
+    |
+    +---data
+    |       install.yml
+    |
+    +---miscellaneous
+    |       cgu.php
+    |       install.sql
+    |
+    +---plugins
+    |       chmod.php
+    |       compteAdmin.php
+    |       extension.php
+    |       htpasswd.php
+    |       installInfos.php
+    |       installSQL.php
+    |
+    +---ressources
+    |   +---css
+    |   |       main.css
+    |   |
+    |   +---fonts
+    |   |       Minecrafter.ttf
+    |   |
+    |   +---images
+    |   |       craftmywebsite.png
+    |   |       creeper.png
+    |   |       texture.png
+    |   |
+    |   \---js
+    |           main.js
+    |
+    \---views
+            compte.php
+            header.php
+            installation.php
+            modal-body_cms.html
+            modal-body_cms45.html
+            mysql.php
+            site.php
+            welcome.php

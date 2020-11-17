@@ -3,6 +3,8 @@ $email = VerifieDonnee($_POST['email']);
 $mdpAncien = VerifieDonnee($_POST['mdpAncien']);
 $mdpNouveau = VerifieDonnee($_POST['mdpNouveau']);
 $mdpConfirme = VerifieDonnee($_POST['mdpConfirme']);
+$newsletter = VerifieDonnee($_POST['changeNewsletter']);
+$mailVisibility = VerifieDonnee($_POST['changeVisibilityMail']);
 
 if($email == 1)
 	header('Location: ?&page=profil&profil=' .$_Joueur_['pseudo']. '&erreur=1');
@@ -17,7 +19,36 @@ else
 	
 if($mdpNouveau == 1 OR $mdpAncien == 1 OR $mdpConfirme == 1)
 	ValideChangement($email, $_Joueur_['pseudo'], $bddConnection);
-	
+
+
+if ($newsletter != 1 or $newsletter != 2) {
+	if ($newsletter == 'subscribeNewsletter') {
+		$newsletter = 1;
+		ChangeNewsletter($newsletter, $_Joueur_['pseudo'], $bddConnection);
+	} elseif ($newsletter == 'unsubscribeNewsletter') {
+		$newsletter = 0;
+		ChangeNewsletter($newsletter, $_Joueur_['pseudo'], $bddConnection);
+	} else {
+		header('Location: ?&page=profil&profil=' . $_Joueur_['pseudo'] . '&erreur=9');
+	}
+} else {
+	header('Location: ?&page=profil&profil=' . $_Joueur_['pseudo'] . '&erreur=9');
+}
+
+if ($mailVisibility != 1 or $mailVisibility != 2) {
+	if ($mailVisibility == 'showMail') {
+		$mailVisibility = 1;
+		ChangeMailVisibility($mailVisibility, $_Joueur_['pseudo'], $bddConnection);
+	} elseif ($mailVisibility == 'hideMail') {
+		$mailVisibility = 0;
+		ChangeMailVisibility($mailVisibility, $_Joueur_['pseudo'], $bddConnection);
+	} else {
+		header('Location: ?&page=profil&profil=' . $_Joueur_['pseudo'] . '&erreur=10');
+	}
+} else {
+	header('Location: ?&page=profil&profil=' . $_Joueur_['pseudo'] . '&erreur=10');
+}
+
 $_SESSION['Player']['email'] = $email;
 $_Joueur_['email'] = $email;	
 header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&success=true');
@@ -55,5 +86,17 @@ function ChangeMdp($mdp, $pseudo, $bddConnection)
 	require_once('modele/joueur/maj.class.php');
 	$maj = new Maj($pseudo, $bddConnection);
 	$maj->setNouvellesDonneesMdp($mdp);
+}
+function ChangeNewsletter($newsletter, $pseudo, $bddConnection)
+{
+	require_once('modele/joueur/maj.class.php');
+	$maj = new Maj($pseudo, $bddConnection);
+	$maj->setNewsletter($newsletter);
+}
+function ChangeMailVisibility($mailVisibility, $pseudo, $bddConnection)
+{
+	require_once('modele/joueur/maj.class.php');
+	$maj = new Maj($pseudo, $bddConnection);
+	$maj->setMailVisibility($mailVisibility);
 }
 ?>

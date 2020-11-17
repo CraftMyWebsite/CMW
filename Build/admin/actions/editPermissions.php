@@ -1,5 +1,5 @@
 <?php
-if($_Joueur_['rang'] == 1) {
+if($_Permission_->verifPerm("createur") {
 	$lectureStats = new Lire('modele/config/config.yml');
 	$lectureStats = $lectureStats->getTableau();
 

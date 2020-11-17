@@ -1,34 +1,41 @@
 <?php
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsPanel']['server']['actions']['editServer'] == true) {
-	$lecture = new Lire('modele/config/configServeur.yml');
-	$lecture = $lecture->GetTableau();
+if(Permission::getInstance()->verifPerm('PermsPanel', 'server', 'actions', 'editServer')) {
 
-	for($i = 0; $i < count($lecture['Json']); $i++)
+	$reqRecup = $bddConnection->query('SELECT * FROM cmw_serveur');
+
+	$lecture = $reqRecup->fetchAll(PDO::FETCH_ASSOC);
+
+	foreach($lecture as $key => $serveur)
 	{
-		$lecture['Json'][$i]['adresse'] = $_POST['JsonAddr' . $i];
-
-		if(isset($_POST['localhost' . $i]) AND $_POST['localhost' . $i] == 'on')
-			$lecture['Json'][$i]['localhost'] = true;
-		else
-			$lecture['Json'][$i]['localhost'] = false;
-
-		if(isset($_POST['JsonPort'.$i]))
+		unset($info);
+		$info['addr'] = $_POST['JsonAddr' . $key];
+		if(isset($_POST['JsonPort'.$key]))
 		{
-			$lecture['Json'][$i]['port'] = $_POST['JsonPort' . $i];
-			$lecture['Json'][$i]['utilisateur'] = $_POST['JsonUser' . $i];
+			$info['port'] = $_POST['JsonPort'.$key];
+			$info['user'] = $_POST['JsonUser'.$key];
+			$protocole = 0; //JSONAPI
 		}
 		else
 		{
-			$lecture['Json'][$i]['port']['rcon'] = $_POST['RconPort'. $i];
-			$lecture['Json'][$i]['port']['query'] = $_POST['QueryPort'. $i];
+			$protocole = 1; //RCON/QUERY
+			$info['rcon'] = $_POST['RconPort'.$key]; //port2
+			$info['query'] = $_POST['QueryPort'.$key]; //port
 		}
-		$lecture['Json'][$i]['mdp'] = $_POST['JsonMdp' . $i];
-		$lecture['Json'][$i]['salt'] = $_POST['JsonSalt' . $i];
-		$lecture['Json'][$i]['nom'] = $_POST['JsonNom' . $i];
+		$info['mdp'] = $_POST['JsonMdp'.$key];
+		$info['nom'] = $_POST['JsonNom'.$key];
+		$info['id'] = $_POST['id'.$key];
+		if($protocole == 0)
+		{
+			$req = $bddConnection->prepare('UPDATE cmw_serveur SET nom = :nom, adresse = :addr, port = :port, utilisateur = :user, mdp = :mdp WHERE id = :id');
+			$req->execute($info);
+		}
+		else
+		{
+			$req = $bddConnection->prepare('UPDATE cmw_serveur SET nom = :nom, adresse = :addr, port = :query, port2 = :rcon, mdp = :mdp WHERE id = :id');
+			$req->execute($info);
+		}
+		$videCache = $bddConnection->prepare('DELETE FROM cmw_cache_json WHERE requete LIKE :id');
+		$videCache->execute(array('id' => '%.'.$key));
 	}
-
-
-
-	$ecriture = new Ecrire('modele/config/configServeur.yml', $lecture);
 }
 ?>

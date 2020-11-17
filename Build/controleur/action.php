@@ -14,14 +14,40 @@ if(isset($_GET['action']))
 			setcookie('pass', 0, time(), '/', null, false, false);
 			header('Location: index.php');
 		break;
+		case 'searchTopic':
+			include('controleur/forum/searchTopic.php');
+			exit();
+		case 'uploadCKImg':
+			echo '[DIV]';
+			require('modele/UploadImage.class.php');
+			echo UploadImage::upload($_FILES['upload'], $_Serveur_);
+			exit();
+		case 'editForumCat':
+			include('controleur/forum/editForumCat.php');
+			exit();
+		case 'editForum':
+			include('controleur/forum/editForum.php');
+		break;
+		case  'editSousForum':
+			include('controleur/forum/editSousForum.php');
+		break;
+		case 'getBaltopVote':
+			include('controleur/BaltopVote.php');
+			exit();
+		case 'getRecompenseList':
+			include('controleur/recompenseList.php');
+			exit();
+		case 'voteCron':
+			include('controleur/voteCron.php');
+			exit();
+		break;
 
 		case 'dedipass':
 			include('controleur/dedipass.php');
 		break;
 
-		case  'getConversations':
-			require('modele/app/messagerie.class.php');
-			include('controleur/messagerie/getConversations.php');
+		case 'buyPaysafecard':
+			include('controleur/tokens/paysafecard.php');
 		break;
 
 		case 'changeNomForum':
@@ -31,23 +57,8 @@ if(isset($_GET['action']))
 
 		case 'recupVotesTemp':
 			include('controleur/recupVotesTemp.php');
+			exit();
 		break;
-
-		case 'messageLu':
-			require('modele/app/messagerie.class.php');
-			include('controleur/messagerie/lu.php');
-		break;
-
-		case 'getConversationMessage':
-			require('modele/app/messagerie.class.php');
-			include('controleur/messagerie/getMessages.php');
-		break;
-
-		case 'sendMessage':
-			require('modele/app/messagerie.class.php');
-			include('controleur/messagerie/send.php');
-		break;
-		
 
 		case 'rechercheMembre':
 			require('modele/app/membres.class.php');
@@ -193,7 +204,7 @@ if(isset($_GET['action']))
 			include('controleur/forum/rep.php');
 		break;
 		
-		case 'editForum':
+		case 'editPost':
 			include('controleur/forum/edit.php');
 		break;
 		
@@ -242,7 +253,7 @@ if(isset($_GET['action']))
 		break;
 		
 		case 'mode_joueur':
-			if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsForum']['general']['modeJoueur'] == true)
+			if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur'))
 			{
 				$_SESSION['mode'] = ($_SESSION['mode'] == 1) ? false : true;
 				header('Location: ?page=forum');
@@ -301,40 +312,15 @@ if(isset($_GET['action']))
 
 		case 'passRecover':
             include('controleur/joueur/changeMdpMail.php');
-            //header('Location: index.php');
         break;
 		// Appellé lorsqu'on appuie sur le bouton "acheter" d'un produit. L'id de l'offre est aussi passé en argument(sinon une erreur doit être gérée pour éviter que ça plante).
 		case 'achat':
 			include('controleur/boutique/achat.php');
-			// Cette fois on redirige sur la boutique(car c'est la dernière page visitée avant l'action.
-			//header('Location: ?&page=boutique');
-		break;
-		
-		// Même principe que la boutique, mais sur la page "tokens" dans la section PayPal.
-		case 'achatPaypal':
-			// On traite l'erreur de l'offre(comme boutique).
-			if(isset($_GET['offer']))
-				include('controleur/paypal/index.php');
-			else
-				header('Location: index.php'); // Simple redirection en cas d'erreur.
 		break;
 		
 		// Même principe que la boutique, mais sur la page "tokens" dans la section PayPal.
 		case 'verif_paypal':
 			include('controleur/paypal/verif_paypal_curl.php');
-		break;
-		
-		// Lorsque paypal renvoie le Token au serveur(PHP Curl).
-		case 'achatPaypalReturn':
-			include('controleur/paypal/return.php');
-			header('Location: index.php');
-		break;
-		
-		/// Appellé lorsqu'un code mcgpass est validé.
-		case 'mcgpass':
-			include('controleur/mcgpass.php');
-			// On redirige sur la page d'achat de token, le joueur vas surrement racheter un code(quoi !? Pas le droit de rêver?).
-			//header('Location: ?page=token&success=true');
 		break;
 		
 		// Appellé quand le joueur valide son vote. Action issue d'un formulaire. Les autres infos sont en POST et non en GET.

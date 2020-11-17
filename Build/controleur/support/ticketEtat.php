@@ -4,7 +4,7 @@ require_once('controleur/joueur/joueur.class.php');
 $globalJoueur = new Joueur();
 $_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
 
-if($_Joueur_['rang'] == 1 OR $_PGrades_['PermsDefault']['support']['closeTicket'] == true) {
+if(Permission::getInstance()->verifPerm('PermsDefault', 'support', 'closeTicket')) {
 	$id = htmlspecialchars($_GET['id']);
 	$etat = htmlspecialchars($_POST['etat']);
 

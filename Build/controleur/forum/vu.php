@@ -1,5 +1,5 @@
 <?php 
-if(isset($_Joueur_))
+if(Permission::getInstance()->verifPerm("connect"))
 {
 	$id_answer = htmlspecialchars($_GET['id_answer']);
 	$likeur = htmlspecialchars($_GET['likeur']);
