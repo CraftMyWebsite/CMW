@@ -18,7 +18,7 @@ if (Permission::getInstance()->verifPerm("connect") and isset($_GET['id'], $_GET
 
             <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
                 <div class="row">
-                    <form action="?action=editForum" method="POST" class="w-100 m-3">
+                    <form action="?action=editPost" method="POST" class="w-100 m-3">
 
                         <div class="card">
 
