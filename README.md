@@ -1,18 +1,28 @@
 # CraftMyWebsite
 
-CraftMyWebsite est un CMS Minecraft 100% gratuit proposant des fonctionnalités de qualité parmi lesquelles:
+## Qu'est ce que CraftMyWebsite ?
+
+CraftMyWebsite est un CMS Minecraft 100% gratuit créé en 2014 (première version le 1er Décembre 2014).
+Présent depuis maintenant 6ans sur internet, le projet open-source depuis le début est aujourd'hui toujours maintenu par des passionnés !
+Profitez d'un site stable pour votre serveur minecraft en utilisant notre cms !
+
+### Les fonctionalitées sur la version 1.8.0
 
 -   Boutique supportant Dedipass/Paypal en validation automatique et Paysafecard en validation manuelle 
 -   Des rangs temporaires (boutique et site)
 -   Système de news
 -   Votes avec récompenses et systèmes de vérifications intégrés !
--   Gestion multi-serveur grâce à JSONAPI et à RCON
+-   Gestion multi-serveur grâce à JSONAPI et à RCON/Query
 -   Ticket support
 -   Forum complet !
 -   Newsletter 
+-   Vérifications des inscriptions automatisé
+-   Mode maintenance (avec chrono + inscription)
+-   Thèmes créé par la communauté
 -   Et pleins d'autres !
 
 Une démo est disponible sur notre [site internet](http://demo.craftmywebsite.fr/).
+Les thèmes sont téléchargeable depuis notre forum [site internet](https://craftmywebsite.fr/forum/index.php?resources/featured)
 
 ### Support, infos et communauté
 
@@ -24,12 +34,13 @@ Retrouvez nous sur :
 
 ### Note
 
-Ce répertoire n'est pas prévu pour une utilisation public et, malgré nos efforts, les bugs s'y cachent et pourraient mettre en danger vos utilisateurs. Nous vous recommandons vivement de vous tourner vers la page de téléchargement de notre [site web](http://craftmywebsite.fr/) pour profiter d'une stabilité et d'une performance inégalable !
-Si toutefois vous vous acharnez à vouloir utiliser ce répo comme source pour votre site internet, ce serait avec grand plaisir que nous accepterions vos différents retours/remarques (via les onglets "Issues" et "Pull requests")
+Sur la branche Master vous trouverez la dernière version du cms, vous pouvez participer au développement du cms en proposant vos idées sur le forum ou sur le Git depuis les onglets "issues" et "Pull Request".
+Il est conseillé de Pull les modifications souhaité dans la branche Développement.
+La Branche Archive et un service de stockage de l'ensemble des versions que nous avons développé depuis la version 1.7.0
 
 ### Nos partenaires
 
--  [WebStrator.fr](WebStrator.fr): Hébergeur web
+-   [WebStrator.fr](WebStrator.fr): Hébergeur web
 -   [MineStrator.com](MineStrator.com): Hébergeur de serveurs Minecraft
 -   [Serveurs-minecraft.net](Serveurs-minecraft.net): Référencement de serveurs Minecraft
 
