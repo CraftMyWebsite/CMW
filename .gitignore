@@ -1,0 +1,6 @@
+Build/admin/actions/.htpasswd
+*.xml
+*.yml
+
+# For jetbrain IDE
+.idea 
