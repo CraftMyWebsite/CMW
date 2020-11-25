@@ -86,7 +86,7 @@
                         <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='menus'){echo 'active';}?>">
                             <a class="nav-link"  href="?page=menus">
                                 <i class="fas fa-bars"></i>
-                                Menus personnalisées
+                                Menus personnalisés
                             </a>
                         </li>
 

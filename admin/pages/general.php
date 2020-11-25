@@ -243,7 +243,7 @@
 					    	 <div class="col-lg-12 text-justify">
 							    <div class="alert alert-success">
 							    	<strong>
-							    		CraftMyWebSite a d'intégré un système d'upload d'image dans son éditeur de texte, vous pouvez éditer ces paramètre ici. Sachez que lorsque la taille total des fichiers dépasses la taille maximal de l'espace de stockage les plus anciennes images sont supprimé <u>à jamais</u> jusqu'a rétablir l'équilibre.
+							    		CraftMyWebSite a intégré un système d'upload d'image dans son éditeur de texte, vous pouvez éditer ces paramètre ici. Sachez que lorsque la taille total des fichiers dépasses la taille maximal de l'espace de stockage les plus anciennes images sont supprimé <u>à jamais</u> jusqu'a rétablir l'équilibre.
 							    	</strong><br/>
 							        <ul>
 					                    <li> Nombre total de fichier: <span id="allf"><?=$filetotal;?></span></li>
