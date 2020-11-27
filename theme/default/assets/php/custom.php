@@ -189,7 +189,9 @@
             notif('success','Votre commentaire vient d\'être supprimé.');
     <?php } elseif(isset($_GET["SuppressionImpossible"]) && urldecode($_GET['SuppressionImpossible'])) { ?>
             notif('erreur','Le commentaire ne peut être supprimé.');
-    <?php } ?>
+    <?php } elseif(isset($_GET["postSignalement"])) { ?>
+            notif('success','Le signalement a bien été envoyé.');
+        <?php } ?>
 
 
     <?php if (isset($_GET['setTemp']) && $_GET['setTemp'] == 1) { //Envoie d'un mot de passe nouveau 

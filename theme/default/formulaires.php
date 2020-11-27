@@ -308,7 +308,7 @@
                                                     <small class="font-weight-light float-right text-muted">
                                                         le <?= date('d/m', $newsComments['date_post']) ?> à <?= date('H:i', $newsComments['date_post']); ?>
                                                     </small> <b></b>
-                                                    <?= gradeJoueur($newsComments['pseudo'], $bddConnection) ?>
+                                                    <?= Permission::getInstance()->gradeJoueur($newsComments['pseudo']) ?>
                                                 </h5>
                                                 <?php echo $newsComments['commentaire'];?>
                                             </div>

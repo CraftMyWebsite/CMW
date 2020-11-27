@@ -71,7 +71,7 @@ if (isset($_GET['id'])) :
 
                                             <li class="categorie-item nav-item">
                                                 <a class="nav-link categorie-link" href="?&action=follow&id_topic=<?= $topicd['id']; ?>">
-                                                    Ne plus suivre cette discussion
+                                                    Suivre cette discussion
                                                 </a>
                                             </li>
 
@@ -196,7 +196,7 @@ if (isset($_GET['id'])) :
                                         <?= $topicd['pseudo']; ?>
                                     </h4>
                                     <h6>
-                                        <?= $_Forum_->gradeJoueur($topicd['pseudo']); ?>
+                                        <?= Permission::getInstance()->gradeJoueur($topicd['pseudo']); ?>
                                     </h6>
 
                                     <!-- Edition -->
@@ -407,7 +407,7 @@ if (isset($_GET['id'])) :
                                             <?= $answerd[$i]['pseudo']; ?>
                                         </h4>
                                         <h6>
-                                            <?= $_Forum_->gradeJoueur($answerd[$i]['pseudo']); ?>
+                                            <?= Permission::getInstance()->gradeJoueur($answerd[$i]['pseudo']); ?>
                                         </h6>
 
                                         <!-- Edition -->

@@ -29,7 +29,7 @@ class MembresPage
 		return $fetch['max'];
 	}
 
-    public function gradeJoueur($pseudo)
+    /*public function gradeJoueur($pseudo)
     {
         global $_Serveur_;
 
@@ -58,7 +58,7 @@ class MembresPage
         }
 
         return $gradeSite;
-    }
+    }*/
 
 	public function rechercheMembre($recherche)
 	{

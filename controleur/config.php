@@ -58,26 +58,4 @@
 		setcookie('maxPlayers', $maxPlayers, time() + 120, null, null, false, true);
 		setcookie('servOnline', $servEnLigne, time() + 120, null, null, false, true);
 	}
-
-	function gradeJoueur($pseudo, $bdd)
-	{
-		global $_Serveur_;
-		$req = $bdd->prepare('SELECT rang FROM cmw_users WHERE pseudo = :pseudo');
-		$req->execute(array('pseudo' => $pseudo ));
-		$joueurDonnees = $req->fetch(PDO::FETCH_ASSOC);
-		if($joueurDonnees['rang'] == 0) {
-			$gradeSite = $_Serveur_['General']['joueur'];
-		} elseif($joueurDonnees['rang'] == 1) {
-			$gradeSite = "<span class='prefix ".$_Serveur_['General']['createur']['effets']."' style='background-color: ".$_Serveur_['General']['createur']['bg']."; color: ".$_Serveur_['General']['createur']['couleur']."' id='grade'>".$_Serveur_['General']['createur']['nom']."</span>";
-		} elseif(fopen('./modele/grades/'.$joueurDonnees['rang'].'.yml', 'r')) {
-			$openGradeSite = new Lire('./modele/grades/'.$joueurDonnees['rang'].'.yml');
-			$readGradeSite = $openGradeSite->GetTableau();
-			$gradeSite = "<span class='prefix ".$readGradeSite['effets']."' style='background-color: ".$readGradeSite['prefix']."; color: ".$readGradeSite['couleur']."' id='grade'>".$readGradeSite['Grade']."</span>";
-			if(empty($readGradeSite['Grade']))
-				$gradeSite = $_Serveur_['General']['joueur'];
-		} else {
-			$gradeSite = $_Serveur_['General']['joueur'];
-		}
-		return $gradeSite;
-	}
 ?>
