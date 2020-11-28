@@ -221,17 +221,19 @@ class vote {
             ));
         }
         if($save) {
-            if(empty($json) | !isset($json)) {
-                $req_suppr = $bddConnection->prepare('DELETE FROM cmw_votes_temp WHERE id = :id');
+            if(empty($json2) | !isset($json2)) {
+                $req_suppr = $bdd->prepare('DELETE FROM cmw_votes_temp WHERE id = :id');
                 $req_suppr->execute(array(
                     'id' => $data['id']
                 )); 
+                return false;
             } else {
                 $reqMaj = $bdd->prepare('UPDATE cmw_votes_temp SET action = :action WHERE id = :id');
                 $reqMaj->execute(array(
                     'id' => $data['id'],
                     'action' => json_encode(array_values($json2))
                     ));
+                return true;
             }
         }
     }

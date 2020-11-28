@@ -1,10 +1,11 @@
 <?php
 if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre')) {
 
+	require('modele/app/ckeditor.class.php');
+
 	$_POST['categorieNom'] = htmlspecialchars($_POST['categorieNom']);
 	$_POST['number'] = intval($_POST['number']);
 
-	require('modele/app/ckeditor.class.php');
 	$_POST['categorieInfo'] = ckeditor::verif($_POST['categorieInfo']);
 	$req = $bddConnection->prepare('UPDATE cmw_boutique_categories SET titre = :titre, message = :message, showNumber = :show WHERE id = :id');
 	$req->execute(Array (
@@ -58,8 +59,7 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre
         	} else {
 
 	        	$_POST['offresNom'.$offres[$j]['id']] = htmlspecialchars($_POST['offresNom'.$offres[$j]['id']]);
-	        	$_POST['offresDescription'.$offres[$j]['id']] = htmlspecialchars($_POST['offresDescription'.$offres[$j]['id']]);
-	        	require('modele/app/ckeditor.class.php');
+	        	$_POST['offresDescription'.$offres[$j]['id']] = htmlspecialchars($_POST['offresDescription'.$offres[$j]['id']]);	
 				$_POST['offresDescription'.$offres[$j]['id']] = ckeditor::verif($_POST['offresDescription'.$offres[$j]['id']]);
 	        	$req = $bddConnection->prepare('UPDATE `cmw_boutique_offres` SET `nom`=:nom,`description`=:description,`prix`=:prix,`nbre_vente`=:nbre_vente,`categorie_id`=:categorie_id,`ordre`=:ordre,`evo`=:evo,`max_vente`=:max_vente WHERE id=:id');
 	        	$req->execute(Array (

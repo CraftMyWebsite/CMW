@@ -21,7 +21,7 @@ if(isset($_GET['page']) AND $_GET['page'] != "accueil"){
     ';
 }
 ?>
-<script>var _Jetons_ = <?=$_Serveur_['General']['moneyName'];?></script>
+<script type="text/javascript">var _Jetons_ = "<?=$_Serveur_['General']['moneyName'];?>";</script>
 	<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-xs-3 col-md-2 center" href="#">CraftMyWebsite #<?php echo $versioncms; ?></a>
         <div class="tools w-100">
