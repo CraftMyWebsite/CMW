@@ -31,6 +31,18 @@ class ckeditor
 			  			$item->parentNode->removeChild($item); 
 			  		}
 			  	}
+				$length = $item->attributes->length;
+				for ($i = 0; $i < $length; ++$i) {
+					if($item->attributes->item($i) != null) {
+						$n = strtolower($item->attributes->item($i)->name);
+						if(strlen($n) > 1) {
+							if(substr( $n, 0, 2 ) == "on")
+							{
+								$item->removeAttribute($item->attributes->item($i)->name);
+							}
+						}
+					}
+				}
 			}
 			return $dom->saveHTML($dom->documentElement);
 		}

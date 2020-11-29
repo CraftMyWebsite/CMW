@@ -1,11 +1,7 @@
 <?php
 	// On vérifie si le systeme est compatible.
-	$URLWEBSITE = "http://".$_SERVER['HTTP_HOST']; 
-	$SYSTEMINFO = file_get_contents('http://craftmywebsite.fr/information/website.php?href='. $URLWEBSITE .'');
-	if($SYSTEMINFO == ""){
-	} else {
-	echo $SYSTEMINFO;
-	}
+
+
 	// On récupère la classe permettant la lecture en YML. Les fichiers de config sont sous ce format.
 	require_once('./modele/config/yml.class.php');
 	require_once('./modele/ban.class.php');
@@ -18,6 +14,36 @@
 	$configLecture = new Lire('modele/config/config.yml');
 	$_Serveur_ = $configLecture->GetTableau();
 		
+
+	if(!isset($_Serveur_['lastCMWCheck']) | $_Serveur_['lastCMWCheck'] < time()) {
+		$_Serveur_['lastCMWCheck'] = time() + 3600;
+		$URLWEBSITE = "http://".$_SERVER['HTTP_HOST']; 
+		$SYSTEMINFO = "";
+		if (function_exists('curl_init') and extension_loaded('curl')) {    
+            $ch = curl_init();  
+
+            curl_setopt($ch, CURLOPT_URL,'http://craftmywebsite.fr/information/website.php?href='. $URLWEBSITE);    
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);    
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);   
+
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); 
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);    
+
+            $output = curl_exec($ch);   
+            curl_close($ch);    
+
+            $SYSTEMINFO = $output; 
+        } else {    
+            $SYSTEMINFO = @file_get_contents('http://craftmywebsite.fr/information/website.php?href='. $URLWEBSITE);    
+        }   
+
+		if($SYSTEMINFO != ""){
+			echo $SYSTEMINFO;
+		}
+	}
+	
+
 	// On effectue la même opération mais pour le fichier YML du menu.
 	$configLecture = new Lire('./modele/config/configMenu.yml');
 	$_Menu_ = $configLecture->GetTableau();
@@ -58,4 +84,6 @@
 		setcookie('maxPlayers', $maxPlayers, time() + 120, null, null, false, true);
 		setcookie('servOnline', $servEnLigne, time() + 120, null, null, false, true);
 	}
+
+
 ?>
