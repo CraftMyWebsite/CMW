@@ -17,6 +17,7 @@
 
 	if(!isset($_Serveur_['lastCMWCheck']) | $_Serveur_['lastCMWCheck'] < time()) {
 		$_Serveur_['lastCMWCheck'] = time() + 3600;
+		$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
 		$URLWEBSITE = "http://".$_SERVER['HTTP_HOST']; 
 		$SYSTEMINFO = "";
 		if (function_exists('curl_init') and extension_loaded('curl')) {    
