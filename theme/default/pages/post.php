@@ -200,7 +200,7 @@ if (isset($_GET['id'])) :
                                     </h6>
 
                                     <!-- Edition -->
-                                    <?php if (isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] || Permission::getInstance()->verifPerm('PermsForum', 'general', 'editTopic') && !$_SESSION['mode'])) : ?>
+                                    <?php if (isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] || Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'editTopic') && !$_SESSION['mode'])) : ?>
                                         <form action="?action=editPost" method="post">
                                             <input type="hidden" name="objet" value="topic" />
                                             <input type="hidden" name="id" value="<?= $id; ?>" />
@@ -210,7 +210,7 @@ if (isset($_GET['id'])) :
                                         </form>
                                     <?php endif; ?>
 
-                                    <?php if (isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] || Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteTopic') && !$_SESSION['mode'])) : ?>
+                                    <?php if (isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] || Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic') && !$_SESSION['mode'])) : ?>
                                         <form action="?action=remove_topic" method="post">
                                             <input type="hidden" name="id_topic" value="<?= $id; ?>" />
                                             <a class="btn btn-danger w-100 no-hover" role="button" data-toggle="modal" href="#topic_<?= $id; ?>" aria-expanded="false" aria-controls="modalConfirmation">

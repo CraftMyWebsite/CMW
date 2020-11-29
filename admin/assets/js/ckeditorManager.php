@@ -91,4 +91,28 @@ $( "modal" ).each(function() {
 		show: false
 	});
 });
+
+
+<?php if(isset($_GET['upload'])) {
+	switch(intval($_GET['upload'])) {
+		case 0:
+			echo 'notif("error", "Erreur", "Une erreur interne est survenue.");';
+			break;
+		case 1:
+			echo 'notif("error", "Erreur", "L\'extension n\'est pas valide.");';
+			break;
+		case 2:
+			echo 'notif("error", "Erreur", "L\'image est trop volumineuse.");';
+			break;
+		case 3:
+			echo 'notif("error", "Erreur", "Les dimensions de l\'image sont incorrecte.");';
+			break;
+		case 4:
+			echo 'notif("success", "Action effectuée !","");';
+			break;
+		case 5:
+			echo 'notif("error", "Erreur", "Vous n\'avez pas les permissions suffisante.");';
+			break;
+	}
+} ?>
 </script>

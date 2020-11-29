@@ -419,10 +419,7 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		case 'changeSlider':
 			require_once('admin/actions/changeSlider.php');
 		break;
-		
-		case 'postSlider':
-			require_once('admin/actions/postSlider.php');
-		break; 
+
 		
 		case 'supprSlider':
 			require_once('admin/actions/supprSlider.php');

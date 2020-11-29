@@ -12,8 +12,14 @@ if($_Permission_->verifPerm('PermsPanel', 'theme', 'actions', 'editBackground'))
 		
 		
 		if($verif == 4)
+		{
 			$copie->Copie();
+		}
+		header('Location: admin.php?page=theme&upload='.$verif);
+		exit();
 	}
 }
-header('Location: ?page=theme');
+header('Location: admin.php?page=theme&upload=5');
+exit();
+
 ?>
