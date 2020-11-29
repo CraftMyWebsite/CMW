@@ -6,6 +6,7 @@ if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
 	{
 		$lectureAccueil['Infos'][$_POST["ordre". $i]]['message'] = $_POST['message' . $i];
 		$lectureAccueil['Infos'][$_POST["ordre". $i]]['image'] = $_POST['image' . $i];
+		$lectureAccueil['Infos'][$_POST["ordre". $i]]['type'] = $_POST['typeLien'. $i];
 		if($_POST['typeLien'. $i] == 'page')
 			$lectureAccueil['Infos'][$_POST["ordre". $i]]['lien'] = '?page='. urlencode($_POST['page' . $i]);
 		else 

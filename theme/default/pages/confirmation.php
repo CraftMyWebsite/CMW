@@ -21,6 +21,8 @@
 
                     if (isset($_GET['id_topic'])) {
                         $id = htmlspecialchars($_GET['id_topic']);
+                    } else if (isset($_GET['id_topic2'])) {
+                        $id = htmlspecialchars($_GET['id_topic2']);
                     }
 
                     $choix = htmlspecialchars($_GET['choix']);
@@ -176,7 +178,7 @@
                                             <div class="card-footer">
                                                 <div class="row m-3">
                                                     <div>
-                                                        <button type="submit" class="btn btn-reverse">Déplacer la discussion</button>
+                                                        <button type="submit" class="btn btn-reverse">Envoyer le signalement</button>
                                                     </div>
                                                     <div class="ml-auto">
                                                         <a href="index.php" class="btn btn-main">Annuler</a>
@@ -195,7 +197,7 @@
                                     <!-- Signalement d'un topic -->
 
                                     <div class="card w-100">
-                                        <form action="?&action=signalement&confirmation=true" method="post">
+                                        <form action="?&action=signalement_topic&confirmation=true" method="post">
 
                                             <div class="card-header">
                                                 <h4>Raison d'un signalement d'un topic</h4>
@@ -203,7 +205,7 @@
 
                                             <div class="card-body">
 
-                                                <input type="hidden" name="id_topic2" value="<?= $_GET['id']; ?>" />
+                                                <input type="hidden" name="id_topic2" value="<?= $_GET['id_topic2']; ?>" />
                                                 <div class="form-group">
                                                     <label for="reason">Indiquez une raison</label>
                                                     <input type="text" class="form-control" name="reason" id="reason" placeholder="Indiquez une raison" required />
@@ -214,7 +216,7 @@
                                             <div class="card-footer">
                                                 <div class="row m-3">
                                                     <div>
-                                                        <button type="submit" class="btn btn-reverse">Déplacer la discussion</button>
+                                                        <button type="submit" class="btn btn-reverse">Envoyer le signalement</button>
                                                     </div>
                                                     <div class="ml-auto">
                                                         <a href="index.php" class="btn btn-main">Annuler</a>

@@ -38,7 +38,7 @@
                                         else
                                             foreach($joueurs as $value)
                                             {
-                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=$_Forum_->gradeJoueur($value);?><br/>
+                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=Permission::getInstance()->gradeJoueur($value);?><br/>
                                                 <?php
                                             }
                                         ?>
@@ -71,7 +71,7 @@
                                                         <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($value['player'], 32); ?>" style="width: 32px; height: 32px;" alt="avatar de l'auteur" />
                                                         <div class="media-body">
                                                             <h5 class="mt-0">
-                                                                <?= (empty($value['player'])) ? 'Console' : $value['player'] . ', ' . $_Forum_->gradeJoueur($value['player']); ?>
+                                                                <?= (empty($value['player'])) ? 'Console' : $value['player'] . ', ' . Permission::getInstance()->gradeJoueur($value['player']); ?>
                                                                 <small class="font-weight-light float-right text-muted"><?= date('H:i', $value['time']); ?></small>
                                                             </h5>
                                                             <?= $Chat->formattage(htmlspecialchars($value['message'])); ?>

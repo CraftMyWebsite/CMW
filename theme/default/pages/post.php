@@ -71,7 +71,7 @@ if (isset($_GET['id'])) :
 
                                             <li class="categorie-item nav-item">
                                                 <a class="nav-link categorie-link" href="?&action=follow&id_topic=<?= $topicd['id']; ?>">
-                                                    Ne plus suivre cette discussion
+                                                    Suivre cette discussion
                                                 </a>
                                             </li>
 
@@ -196,7 +196,7 @@ if (isset($_GET['id'])) :
                                         <?= $topicd['pseudo']; ?>
                                     </h4>
                                     <h6>
-                                        <?= $_Forum_->gradeJoueur($topicd['pseudo']); ?>
+                                        <?= Permission::getInstance()->gradeJoueur($topicd['pseudo']); ?>
                                     </h6>
 
                                     <!-- Edition -->
@@ -407,7 +407,7 @@ if (isset($_GET['id'])) :
                                             <?= $answerd[$i]['pseudo']; ?>
                                         </h4>
                                         <h6>
-                                            <?= $_Forum_->gradeJoueur($answerd[$i]['pseudo']); ?>
+                                            <?= Permission::getInstance()->gradeJoueur($answerd[$i]['pseudo']); ?>
                                         </h6>
 
                                         <!-- Edition -->
@@ -424,7 +424,7 @@ if (isset($_GET['id'])) :
                                         <?php if ($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] or Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteMessage') and !$_SESSION['mode']) : ?>
                                             <form action="?action=remove_answer" method="post">
                                                 <input type="hidden" name="id_answer" value="<?= $id; ?>" />
-                                                <input type="hidden" name="page" value="<?= (($_GET['page_post'])) ? $_GET['page_post'] : 1; ?>" />
+                                                <input type="hidden" name="page" value="<?= (isset($_GET['page_post'])) ? $_GET['page_post'] : 1; ?>" />
                                                 <a class="btn btn-danger w-100 no-hover" role="button" data-toggle="modal" href="#awnser_<?= $answerd[$i]['id']; ?>" aria-expanded="false" aria-controls="modalConfirmation">
                                                     Supprimer
                                                 </a>

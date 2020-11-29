@@ -1,7 +1,7 @@
-<?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'resetRecompense')) { 
+<?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'editRecompense')) { 
 	require_once('./admin/donnees/configVoter.php'); ?>
     <div>
-	<table class="table table-striped table-hover">
+<table class="table table-striped table-hover">
             <thead>
               <tr>
                 <th>Type</th>
@@ -20,7 +20,7 @@
                                     echo $donnees[$o]['valueType'].' votes';
                                 else
                                 {
-                                    echo $donnees[$o]['valueType'];
+                                   echo $donnees[$o]['valueType'];
                                     if(((int)$donnees[$o]['valueType'])==1) {
                                       echo 'ier';
                                     } else {
@@ -49,7 +49,7 @@
                                    echo substr($f, 0, -5);
                                 } ?>
                             </td>
-                            <td><button onclick="sendDirectPost('?action=supprRecAuto&id=<?=$donnees[$o]['id'];?>', function(data) { if(data) { hide('rec-<?php echo $o; ?>'); }});" class="btn btn-outline-secondary">Supprimer</button></td>
+                            <td><button onclick="sendDirectPost('admin.php?action=supprRecAuto&id=<?=$donnees[$o]['id'];?>', function(data) { if(data) { hide('rec-<?php echo $o; ?>'); }});" class="btn btn-outline-secondary">Supprimer</button></td>
                         </tr>
                             <?php 
                     }

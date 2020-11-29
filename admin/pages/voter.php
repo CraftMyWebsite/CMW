@@ -365,7 +365,7 @@
 
                                               <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
                                                 <div class="custom-control custom-switch" style="margin-bottom:15px;" >
-                                                    <input type="checkbox" class="custom-control-input" value="1" id="doisetreenligne<?=$o;?>" name="enligne<?=$o;?>" <? if($donnees[$o]['enligne']==1) { echo 'checked' ; } ?>>
+                                                    <input type="checkbox" class="custom-control-input" value="1" id="doisetreenligne<?=$o;?>" name="enligne<?=$o;?>" <?php if($donnees[$o]['enligne']==1) { echo 'checked' ; } ?>>
                                                     <label class="custom-control-label" for="doisetreenligne<?=$o;?>">Oui</label>
                                                 </div>
 

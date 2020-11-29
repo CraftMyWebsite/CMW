@@ -37,7 +37,7 @@ class RecompenseAuto
 		$retour = array();
 		foreach($this->data as $data)
 		{
-			if($data['type'] == 1 && $data['valueType'] <= $nbVotes)
+			if($data['type'] == 1 && $data['valueType'] == $nbVotes)
 			{
 				array_push($retour, $data['action']);
 			}

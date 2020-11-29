@@ -6,7 +6,7 @@ include('controleur/topVoteurs.php');
 $RecompenseAuto = new RecompenseAuto($bddConnection);
 $topRecompense = $RecompenseAuto->getTopRecompenses();
 $dateRec = $RecompenseAuto->getDate();
-if(isset($dateRec) && $dateRec['valueType'] != 0 && $dateRec['etat'] != 0)
+if(isset($dateRec) && !empty($dateRec) && $dateRec['valueType'] != 0 && $dateRec['etat'] != 0)
 {
 	if($dateRec['etat'] <= time()) {
 

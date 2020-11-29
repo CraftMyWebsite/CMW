@@ -68,8 +68,10 @@
 					{
 						$enligne[$key] = false;
 						$serveurStats[$key] = $serveur->GetServeurInfos();
-						if(isset($_Joueur_['pseudo']) AND isset($serveurStats[$key]['joueurs']) AND in_array($_Joueur_['pseudo'], $serveurStats[$key]['joueurs']))
+						if(isset($_Joueur_['pseudo']) AND isset($serveurStats[$key]['joueurs']) AND !empty($serveurStats[$key]['joueurs']) AND in_array($_Joueur_['pseudo'], $serveurStats[$key]['joueurs']))
+						{
 							$enligne[$key] = true;
+						}
 					}
 					$infosOffre = $offres->GetInfosOffre($offre, $_Joueur_);
 					$infosCategories = $categoriesObj->GetInfosCategorie($infosOffre['offre']['categorie'], $lectureJSON);

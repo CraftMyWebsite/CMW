@@ -11,7 +11,7 @@ if(Permission::getInstance()->verifPerm("connect"))
 		$d = $req->fetch(PDO::FETCH_ASSOC);
 		if($d["pseudo"] == $_Joueur_["pseudo"] AND !(strtotime($d['date_post'])+24*3600 <= time()))
 		{
-			$contenu = $d["contenue"] ."[hr]Contenu fusionné[hr]". $contenue;
+			$contenu = $d["contenue"] ."<blockquote>Contenu fusionné</blockquote>". $contenue;
 			$req = $bddConnection->prepare("UPDATE cmw_forum_answer SET contenue = :contenu, date_post = NOW() WHERE id = :id");
 			$req->execute(array("contenu" => $contenu, "id" => $d["id"]));
 		} else {

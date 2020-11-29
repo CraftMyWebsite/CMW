@@ -29,27 +29,36 @@ class MembresPage
 		return $fetch['max'];
 	}
 
-	public function gradeJoueur($pseudo)
-	{
-		global $_Serveur_;
-		$req = $this->bdd->prepare('SELECT rang FROM cmw_users WHERE pseudo = :pseudo');
-		$req->execute(array('pseudo' => $pseudo ));
-		$joueurDonnees = $req->fetch(PDO::FETCH_ASSOC);
-		if($joueurDonnees['rang'] == 0) {
-			$gradeSite = $_Serveur_['General']['joueur'];
-		} elseif($joueurDonnees['rang'] == 1) {
-			$gradeSite = "<span class='prefix ".$_Serveur_['General']['createur']['effets']." ".$_Serveur_['General']['createur']['prefix']."'>".$_Serveur_['General']['createur']['nom']."</span>";
-		} elseif(fopen('./modele/grades/'.$joueurDonnees['rang'].'.yml', 'r')) {
-			$openGradeSite = new Lire('./modele/grades/'.$joueurDonnees['rang'].'.yml');
-			$readGradeSite = $openGradeSite->GetTableau();
-			$gradeSite = "<span class='prefix ".$readGradeSite['prefix']." ".$readGradeSite['effets']."'>".$readGradeSite['Grade']."</span>";
-			if(empty($readGradeSite['Grade']))
-				$gradeSite = $_Serveur_['General']['joueur'];
-		} else {
-			$gradeSite = $_Serveur_['General']['joueur'];
-		}
-		return $gradeSite;
-	}
+    /*public function gradeJoueur($pseudo)
+    {
+        global $_Serveur_;
+
+        $req = $this->bdd->prepare('SELECT rang FROM cmw_users WHERE pseudo = :pseudo');
+        $req->execute(array('pseudo' => $pseudo));
+        $joueur = $req->fetch(PDO::FETCH_ASSOC);
+
+        if (!empty($joueur) && isset($joueur['rang'])) {
+            if ($joueur['rang'] == 0) {
+                $gradeSite = $_Serveur_['General']['joueur'];
+            } elseif ($joueur['rang'] == 1) {
+                $gradeSite = "<span class='prefix " . $_Serveur_['General']['createur']['effets'] . " " . $_Serveur_['General']['createur']['prefix'] . "'>" . $_Serveur_['General']['createur']['nom'] . "</span>";
+            } else {
+                $req = $this->bdd->prepare('SELECT prefix, effets, nom FROM cmw_grades WHERE id = :id');
+                $req->execute(array('id' => $joueur['rang']));
+                $grade = $req->fetch(PDO::FETCH_ASSOC);
+
+                if (!empty($grade)) {
+                    $gradeSite = "<span class='prefix " . $grade['prefix'] . " " . $grade['effets'] . "'>" . $grade['nom'] . "</span>";
+                } else {
+                    $gradeSite = $_Serveur_['General']['joueur'];
+                }
+            }
+        } else {
+            $gradeSite = $_Serveur_['General']['joueur'];
+        }
+
+        return $gradeSite;
+    }*/
 
 	public function rechercheMembre($recherche)
 	{

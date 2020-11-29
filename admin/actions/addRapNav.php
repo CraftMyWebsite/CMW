@@ -9,7 +9,10 @@ if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
   				{
   					break;
   				} else {
-  					$lectureAccueil['Infos'][$i+1] = $lectureAccueil['Infos'][$i];
+  					$lectureAccueil['Infos'][$i+1]['message'] = $lectureAccueil['Infos'][$i]['message'];
+  					$lectureAccueil['Infos'][$i+1]['image'] = $lectureAccueil['Infos'][$i]['image'];
+  					$lectureAccueil['Infos'][$i+1]['type'] = $lectureAccueil['Infos'][$i]['type'];
+            $lectureAccueil['Infos'][$i+1]['lien'] = $lectureAccueil['Infos'][$i]['lien'];
   				}
   			}
   		}

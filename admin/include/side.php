@@ -13,7 +13,7 @@
                                 <p class="text-left text-white">
                                     <b><?php echo $_Joueur_['pseudo']; ?></b>
                                     <small><i><?=$_Joueur_['email']?></i></small>
-                                    <?php echo gradeJoueur($_Joueur_['pseudo'], $bddConnection); ?>
+                                    <?php echo $_Permission_->gradeJoueur($_Joueur_['pseudo']); ?>
                                 </p>
                             </div>
                         </div>
