@@ -106,10 +106,6 @@ a {
     transition: .5s;
 }
 
-strong {
-    color: var(--active-color) !important;
-}
-
 a:hover:not(.no-hover) {
     color: var(--active-color);
     text-decoration: none;
