@@ -111,7 +111,7 @@
                 </div>
 
                 <?php
-                require("modele/vote.class.php");
+                require_once("modele/vote.class.php");
                  $pseudo = htmlspecialchars($_GET['player']); ?>
                 <div class="col-md-12 col-lg-6 col-sm-12 mb-5">
                     <!-- Affichage des sites de vote -->

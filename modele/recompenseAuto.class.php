@@ -86,7 +86,7 @@ class RecompenseAuto
 					$month = cal_days_in_month(CAL_GREGORIAN,intval(date("j")),intval(date("Y")));
 				}
 				$next = strtotime($month." ".date("F", strtotime("next month")));
-				$next += $data['heur'] * 3600 + $data['min'] * 60 - 12 * 3600;
+				$next += $data['heur'] * 3600 + $data['min'] * 60; // - 12 * 3600;
 			}
 			return $next;
 		}

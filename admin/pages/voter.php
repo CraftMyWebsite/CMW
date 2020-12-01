@@ -245,7 +245,7 @@
                     </div>
                     <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote')) { ?>
                     <div class="float-right">
-                        <button onclick="sendDirectPost('admin.php?action=resetVotesConfig', function(data) { if(data) { get('all-vote').innerText = '';}})" class="btn btn-outline-secondary">Réinitialiser</button>
+                        <button onclick="sendDirectPost('admin.php?action=resetVotesConfig', function(data) { if(data) { get('all-vote').innerText = '';}})" class="btn btn-outline-secondary">Tout supprimer</button>
                     </div>
                     <?php } ?>
                 </div>

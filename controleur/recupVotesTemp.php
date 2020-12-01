@@ -24,10 +24,7 @@ if(Permission::getInstance()->verifPerm("connect"))
 			$flag++;
 		}
 	}
-
-	if($flag != 0) {
- 		echo $flag;
-	}
+ 	echo $flag;
 
 /*	$req_suppr = $bddConnection->prepare('DELETE FROM cmw_votes_temp WHERE pseudo = :pseudo');
 	$req_suppr->execute(array(
