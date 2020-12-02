@@ -13,7 +13,6 @@
 		$lienData[$TemplienData['id']] = $TemplienData;
 	}
 
-     echo var_dump($lienData);
 
 	$i = 0;
 	while($VoteHistoryData = $VoteHistoryReq->fetch(PDO::FETCH_ASSOC))

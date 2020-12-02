@@ -101,7 +101,6 @@ function updateBaltop(loop = false) {
                 +"</thead><tbody>";
 
         if(data != "" && is(data)) {
-            console.log(data);
             let json = JSON.parse(data);
 
             json.forEach(function(ar, ar2) { 
