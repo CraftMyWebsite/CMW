@@ -3,8 +3,8 @@ Changelog CraftMyWebsite 1.8.1
 Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 
 [=] : Correction d'une xss (sécurité du cms)
-[|] : Fix des bugs sur la page vote (récompense non envoyé) 
 [=] : Amélioration graphique du thème default
+[|] : Fix des bugs sur la page vote (récompense non envoyé) 
 [|] : Fix des miniatures
 [|] : Fix du fond d'écran
 [|] : Fix de l'ensemble des bugs sur la boutique (erreurs etc)
