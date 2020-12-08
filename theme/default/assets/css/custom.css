@@ -106,7 +106,7 @@ a {
     transition: .5s;
 }
 
-strong {
+strong.important--text {
     color: var(--active-color) !important;
 }
 
