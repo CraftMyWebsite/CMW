@@ -570,7 +570,8 @@ li.nav-item {
 }
 
 .media-body {
-    word-break: break-all;
+    text-align: justify;
+    word-break: break;
 }
 
 /* ==> Profil */
