@@ -221,7 +221,8 @@ $fofo = $_Forum_->affichageForum();
                                                     <br>
                                                     <?= $derniereReponse['pseudo']; ?>, Le
                                                     <?php $date = explode('-', $derniereReponse['date_post']);
-                                                    echo '' . $date[2] . '/' . $date[1] . '/' . $date[0] . ''; ?>
+                                                        $hour = explode(' ', $date[2]);
+                                                        echo $hour[0] . '-' . $date[1] . '-' . $date[0] . ' à ' . $hour[1]; ?>
                                                 </a>
                                             <?php else : ?>
                                                 <p> Il n'y a pas de sujet dans ce forum </p>
