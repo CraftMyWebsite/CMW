@@ -244,7 +244,7 @@
 
                             <!-- Edition d'un commentaire -->
 
-                            <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) :
+                            <?php if (isset($ticketCommentaires[$tickets['id']][$i]['auteur']) && $ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) :
                                 if (!empty($ticketCommentaires[$tickets['id']])) :
                                     for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) : ?>
 

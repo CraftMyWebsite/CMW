@@ -46,6 +46,7 @@ $(document).ready(function() {
 	
 });
 
+
 function boutiqueUpdate() {
 	destroyCK();
 	updateCont("admin.php?action=getOffreBoutique", get("allcategorie"), function(data) { if(data) { 
