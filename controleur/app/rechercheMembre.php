@@ -9,7 +9,7 @@ if(isset($_POST['ajax']))
 	{
 		?><tr>
 			<td scope="row"><a href="?page=profil&profil=<?=$value['pseudo'];?>" style="color: inherit;"><?=$value['id'];?></a></td>
-			<td><a href="?page=profil&profil=<?=$value['pseudo'];?>" style="color: inherit;"><img src='<?=$_ImgProfil_->getUrlHeadByPseudo($value['player'], 32);?>' style='width: 32px; height: 32px;' alt='Profil' /> <?=$value["pseudo"];?></a></td>
+			<td><a href="?page=profil&profil=<?=$value['pseudo'];?>" style="color: inherit;"><img src='<?=$_ImgProfil_->getUrlHeadByPseudo($value['pseudo'], 32);?>' style='width: 32px; height: 32px;' alt='Profil' /> <?=$value["pseudo"];?></a></td>
 			<td><a href="?page=profil&profil=<?=$value['pseudo'];?>" style="color: inherit;"><?=Permission::getInstance()->gradeJoueur($value["pseudo"]);?></a></td>
 			<td><a href="?page=profil&profil=<?=$value['pseudo'];?>" style="color: inherit;"><?=$value['tokens'];?></a></td>
 		</tr><?php
