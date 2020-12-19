@@ -79,21 +79,21 @@ class vote {
             $serveur = $this->lienData['serveur'];
         }
 
-        $json = json_decode($action, true); 
+        $json = $json2 = json_decode($action, true); 
         foreach($json as $key => $value) { 
             if(isset($value['pourcentage']) && ((int)$value['pourcentage']) != 100) {
                 if(rand(0, 100) > ((int)$value['pourcentage'])) {
-                    unset($json[$key]);
+                    unset($json2[$key]);
                     continue;
                 }
             }
             if($value['type'] == "jetonAlea") {
                 $value['type'] = "jeton";
                 $value['value'] = rand($value['value'], $value['value2']);
-                unset($value['value2']);
+                unset($json2[$key]);
             }
         }
-        $action = json_encode(array_values($json)); 
+        $action = json_encode(array_values($json2)); 
 
 
         $req = $bdd->prepare('INSERT INTO cmw_votes_temp (pseudo, action, serveur) VALUES (:pseudo, :action, :serveur)');
@@ -221,7 +221,7 @@ class vote {
             ));
         }
         if($save) {
-            if(empty($json2) | !isset($json2)) {
+            if(empty($json2) || !isset($json2)) {
                 $req_suppr = $bdd->prepare('DELETE FROM cmw_votes_temp WHERE id = :id');
                 $req_suppr->execute(array(
                     'id' => $data['id']
