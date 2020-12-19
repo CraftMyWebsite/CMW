@@ -267,7 +267,12 @@ class vote {
         if(isset($id) AND !empty($id) and $id != "")
         {
             $url = $this->lienData['lien'];
-            if(strpos($url, 'serveur-prive.net'))
+            if(strpos($url, 'serveurs-mc.net'))
+            {
+                $API_call = $this->fetch("https://serveurs-mc.net/api/hasVote/".$id."/".$this->get_client_ip()."/10");
+                $json = json_decode($API_call,true);
+                return $json["hasVote"] == "true";
+            }else if(strpos($url, 'serveur-prive.net'))
             {
                 $API_call = $this->fetch("https://serveur-prive.net/api/vote/".$id."/". $this->get_client_ip());
                 return $API_call == 1;
