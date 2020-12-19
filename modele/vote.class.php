@@ -90,7 +90,7 @@ class vote {
             if($value['type'] == "jetonAlea") {
                 $value['type'] = "jeton";
                 $value['value'] = rand($value['value'], $value['value2']);
-                unset($json2[$key]);
+                unset($value['value2']);
             }
         }
         $action = json_encode(array_values($json2)); 
