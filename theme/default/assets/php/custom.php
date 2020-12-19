@@ -59,13 +59,21 @@
     ?>
 
         function rechercheAjaxMembre() {
-            $("#tableMembre").html("<img src='theme/<?= $_Serveur_['General']['theme']; ?>/img/gif-search.gif'>Recherche en cours ...");
+            $("#tableMembre").html("<td><i class='fas fa-spinner loading mx-2'></i> Recherche en cours...</td>");
             $.ajax({
                 url: 'index.php?action=rechercheMembre',
                 type: 'POST',
                 data: 'ajax=true&recherche=' + $('#recherche').val(),
                 success: function(code, statut) {
-                    $("#tableMembre").html(code);
+                    if(code.length > 0) {
+                        $("#tableMembre").html(code)
+                    }else {
+                        $("#tableMembre").html(`<td class="info-page bg-danger" colspan="5">
+                                                    <div class="text-center">
+                                                        Aucun joueur trouvé.
+                                                    </div>
+                                                </td>`)
+                    }
                 }
             });
         }
