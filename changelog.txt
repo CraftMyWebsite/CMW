@@ -6,6 +6,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [=] : Amélioration graphique du thème default
 [=] : Amélioration des requêtes vers l'api cmw.fr
 [=] : Amélioration de la sécurité du panier sur la boutique
+[=] : Agrandissement des modals des news et du support
 [|] : Fix des bugs sur la page vote (récompense non envoyé) 
 [|] : Fix bug du système de reset auto des votes
 [|] : Fix des miniatures
@@ -24,4 +25,4 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 
 
 
-Contributeurs : Guedesite, BadiiiX, Emilien52, RedBoard, Tomo, CapDRAKE, MrSheepSheep, Human1st.
+Contributeurs : Guedesite, BadiiiX, Emilien52, deadfire, RedBoard, Tomo, CapDRAKE, MrSheepSheep, Human1st.
