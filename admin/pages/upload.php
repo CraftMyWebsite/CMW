@@ -19,21 +19,21 @@
     <?php if(isset($_GET["erreur"])){
 	switch($_GET["erreur"]){
 		case 0:
-			echo "<div class='alert alert-danger'>Vous devez uploader un fichier de type png, gif, jpg ou jpeg...</div>";
+			echo "<script>notif('error', 'Erreur', 'L\'extension n\'est pas correcte.');</script>";
 			break;
 		case 1:
-			echo "<div class='alert alert-danger'>Le fichier est trop volumineux...</div>";
+			echo "<script>notif('error', 'Erreur', 'Le fichier est trop volumineux.');</script>";
 			break;
 		case 2:
-			echo "<div class='alert alert-danger'>L'image existe déjà. Changez le nom de l'image pour pouvoir continuer</div>";
+			echo "<script>notif('error', 'Erreur', 'Un fichier avec ce nom éxiste déjà.');</script>";
 			break;
 		case 3:
-			echo "<div class='alert alert-danger'>Echec de l'upload !</div>";
+			echo "<script>notif('error', 'Erreur', 'Impossible de stocker l\'image.');</script>";
 			break;
-		default:
-			echo "<div class='alert alert-danger'>Erreur inconnue!</div>";
-			break;
+
 	}
+} else if(isset($_GET['success'])) {
+    echo "<script>notif('success', 'Image stocké !', '');</script>";
 }?>
     </div>
     <?php if($_Permission_->verifPerm('PermsPanel', "upload","manager")) { ?>
@@ -55,15 +55,22 @@
 					while(false !== ($fichier = readdir($dossier))) {
 						if(!is_dir($fichier) && $fichier != '.' && $fichier != '..' && $fichier != 'index.php' && $fichier != '.htaccess') {?>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="fich<?php echo $j; ?>">
 
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">
-                                    Fichier: <i><?=$fichier?></i>     
-                                </h5>
+                            <div class="card-header" style="cursor:pointer;" onclick="SwitchDisplay(get('fich2<?=$j?>'));">
+                                <div style="width: 100%;display: inline-block">
+                                    <div class="float-left">
+                                        <h5>
+                                            Fichier: <i><?=$fichier?></i>     
+                                        </h5>
+                                    </div>
+                                    <div class="float-right">
+                                        <button  onclick="sendDirectPost('admin.php?action=supprUpload&file=<?php echo $fichier; ?>', function(data) { if(data) { hide('fich<?php echo $j; ?>'); } });" class="btn btn-sm btn-outline-secondary">Supprimer</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body text-center">
+                            <div class="card-body text-center" style="display:none;" id="fich2<?=$j?>">
                                 <img src="./theme/upload/panel/<?=$fichier?>" alt="<?=$fichier?>" class="img-fluid">                                
                                 <br>
                                 <div class="well mt-3">
@@ -95,7 +102,7 @@
                     </strong>
                 </h5>
             </div>
-            <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data"> 
+            <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data" action="?action=uploadImg"> 
             <!-- action="?action=uploadImg" -->
             <div class="card-body">
                 <div class="form-row">

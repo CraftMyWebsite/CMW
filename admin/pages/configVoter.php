@@ -43,7 +43,7 @@ else
               </select>
           </div>
           <div id="recmoi" <?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo 'style="display:none;"';} ?>>
-            <label class="control-label">le <input name="mois" style="width:auto;display:inline" type="number" min="1" max="31" class="form-control form-control-sm" value="<?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo '1';} else { echo $dateRec['mois']; } ?>"><span id="recmoi2"><?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo '1ier';} else { echo $dateRec['mois'] != 1 ? "ième" : "ier"; } ?></span> du mois</label>
+            <label class="control-label">le <input name="mois" style="width:auto;display:inline" type="number" min="1" max="31" class="form-control form-control-sm" value="<?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo '1';} else { echo $dateRec['mois']; } ?>"><span id="recmoi2"><?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo 'ier';} else { echo $dateRec['mois'] != 1 ? "ième" : "ier"; } ?></span> du mois</label>
             
           </div>
            <div id="recheur" <?php if($dateRec['valueType'] == 0) { echo 'style="display:none;"';} ?>>
@@ -193,7 +193,7 @@ else
                                    echo substr($f, 0, -5);
                                 } ?>
                             </td>
-                            <td><button onclick="sendDirectPost('?action=supprRecAuto&id=<?=$donnees[$o]['id'];?>', function(data) { if(data) { hide('rec-<?php echo $o; ?>'); }});" class="btn btn-outline-secondary">Supprimer</button></td>
+                            <td><button onclick="sendDirectPost('admin.php?action=supprRecAuto&id=<?=$donnees[$o]['id'];?>', function(data) { if(data) { hide('rec-<?php echo $o; ?>'); }});" class="btn btn-outline-secondary">Supprimer</button></td>
                         </tr>
                             <?php 
                     }

@@ -16,15 +16,17 @@ var canEdit = <?php echo $_Permission_->verifPerm('PermsPanel', 'members', "acti
 
 
 $(window).on('load', function () {
-    maxShow =oldmaxShow= <?php echo count($membres)>50 ? '50':count($membres) ; ?>;
+    maxShow = oldmaxShow = <?php echo count($membres) > 50 ? '50' : count($membres); ?>;
     index = 0;
     grade.set(0, "Joueur");
-    <?php if($_Joueur_['rang'] == 1) { echo 'grade.set(1, "Créateur");'; }
-	 $j = 2;
-    foreach($idGrade as $key => $value) { 
-        echo 'grade.set('.$j.', "'.$value['nom'].'");';
-
-        $j++;
+    <?php if ($_Joueur_['rang'] == 1) {
+        echo 'grade.set(1, "Créateur");';
+    }
+    foreach ($idGrade as $key => $value) {
+        // Skip les grades avec comme id numéro 0 (Joueur) et 1 (Créateur) qui viendrait de la base de donnée
+        if ($value['id'] != 0 && $value['id'] != 1) {
+            echo 'grade.set(' . $value['id'] . ', "' . $value['nom'] . '");';
+        }
     } ?>
 
     updateIndex();

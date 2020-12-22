@@ -105,7 +105,6 @@ a {
     text-decoration: none;
     transition: .5s;
 }
-
 a:hover:not(.no-hover) {
     color: var(--active-color);
     text-decoration: none;
@@ -530,6 +529,19 @@ li.nav-item {
     border-color: var(--main-color) !important;
 }
 
+@keyframes loading {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+ 
+.loading {
+    animation: loading 2s linear infinite;
+}
+
 /* ==> Support */
 
 #Support .btn.btn-main {
@@ -566,7 +578,8 @@ li.nav-item {
 }
 
 .media-body {
-    word-break: break-all;
+    text-align: justify;
+    word-break: break;
 }
 
 /* ==> Profil */

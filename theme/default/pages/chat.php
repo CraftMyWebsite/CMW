@@ -38,7 +38,7 @@
                                         else
                                             foreach($joueurs as $value)
                                             {
-                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=$_Forum_->gradeJoueur($value);?><br/>
+                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=Permission::getInstance()->gradeJoueur($value);?><br/>
                                                 <?php
                                             }
                                         ?>
@@ -53,7 +53,7 @@
                 <div class="col-md-12 col-lg-9 col-sm-12 mb-3">
                     <!-- Affichage du Chat -->
                     <div class="tab-content">
-                        <?php for ($i = 0; $i < count($jsonCon); $i++) :
+                        <?php for ($i = 0; $i < count($jsonCon); $i++) {
                             $messages = $Chat->getMessages($i); ?>
                             <div id="server-<?= $i ?>" class="tab-pane fade <?php if ($i == 0) echo 'in active show'; ?>" aria-expanded="false">
                                 <div class="card">
@@ -62,16 +62,16 @@
                                     </div>
                                     <div class="card-body" id="msgChat<?=$i;?>">
                                         <!-- Affichage du message -->
-                                        <?php if ($messages != false && $messages != "erreur" && $messages != "query") :
+                                        <?php if ($messages != false && $messages != "erreur" && $messages != "query") {
                                             $messages = array_slice($messages, -10, 10);
-                                            foreach ($messages as $value) : ?>
+                                            foreach ($messages as $value) { ?>
 
                                                 <div class="media">
                                                     <p class="username">
                                                         <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($value['player'], 32); ?>" style="width: 32px; height: 32px;" alt="avatar de l'auteur" />
                                                         <div class="media-body">
                                                             <h5 class="mt-0">
-                                                                <?= (empty($value['player'])) ? 'Console' : $value['player'] . ', ' . $_Forum_->gradeJoueur($value['player']); ?>
+                                                                <?= (empty($value['player'])) ? 'Console' : $value['player'] . ', ' . Permission::getInstance()->gradeJoueur($value['player']); ?>
                                                                 <small class="font-weight-light float-right text-muted"><?= date('H:i', $value['time']); ?></small>
                                                             </h5>
                                                             <?= $Chat->formattage(htmlspecialchars($value['message'])); ?>
@@ -79,9 +79,9 @@
                                                     </p>
                                                 </div>
 
-                                            <?php endforeach; ?>
+                                            <?php } ?>
                                             <!-- Affichage des erreurs -->
-                                        <?php elseif ($messages == "query") : ?>
+                                        <?php } elseif ($messages == "query") { ?>
                                             <div class="tab-pane fade in show" aria-expanded="false">
                                                 <div class="info-page bg-danger">
                                                     <div class="text-center">
@@ -89,7 +89,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php elseif ($messages == "erreur") : ?>
+                                        <?php } elseif ($messages == "erreur") { ?>
                                             <div class="tab-pane fade in show" aria-expanded="false">
                                                 <div class="info-page bg-info">
                                                     <div class="text-center">
@@ -98,7 +98,7 @@
                                                 </div>
                                             </div>
 
-                                        <?php else : ?>
+                                        <?php } else { ?>
                                             <div class="tab-pane fade in show" aria-expanded="false">
                                                 <div class="info-page bg-danger">
                                                     <div class="text-center">
@@ -107,12 +107,12 @@
                                                 </div>
                                             </div>
 
-                                        <?php endif; ?>
+                                        <?php { ?>
 
                                     </div>
                                 </div>
                             </div>
-                        <?php endfor; ?>
+                        <?php } ?>
                     </div>
 
                     <?php if (Permission::getInstance()->verifPerm("connect")) : ?>

@@ -9,9 +9,15 @@ if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'uploadMiniature'))
 		$copie = new Copie('theme/upload/navRap/', $_FILES['img'], 10000000, $types, 2000, 2000);
 		$verif = $copie->Verification();
 
-		
 		if($verif == 4)
+		{
 			$copie->Copie();
+		}
+
+		header('Location: admin.php?page=slidemini&upload='.$verif);
+		exit();
 	}
 }
+header('Location: admin.php?page=slidemini&upload=5');
+exit();
 ?>

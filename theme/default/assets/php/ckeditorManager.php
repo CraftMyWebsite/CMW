@@ -8,6 +8,7 @@ function initCK() {
 				
 				toolbar: {
 					items: [
+						'viewSource',
 						'heading',
 						'|',
 						'fontBackgroundColor',
@@ -43,13 +44,13 @@ function initCK() {
 				},
 				licenseKey: '',
 				simpleUpload: {
-		            uploadUrl: 'index.php?action=uploadCKImg',
-		            withCredentials: false,
-		            headers: {
-		                'X-CSRF-TOKEN': 'CSFR-Token',
-		                Authorization: 'Bearer <JSON Web Token>'
-		            }
-		        }
+					uploadUrl: 'index.php?action=uploadCKImg',
+					withCredentials: false,
+					headers: {
+						'X-CSRF-TOKEN': 'CSFR-Token',
+						Authorization: ''
+					}
+				}
 				
 			} )
 		.catch( error => {console.log( error );} )

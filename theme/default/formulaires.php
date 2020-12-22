@@ -1,7 +1,7 @@
 <!-- Inscription -->
 
 <div class="modal fade" id="InscriptionSlide" tabindex="-1" role="dialog" aria-labelledby="InscriptionSlide" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form role="form" method="post" action="?&action=inscription">
                 <div class="modal-header">
@@ -153,7 +153,7 @@
 <!-- Connexion -->
 
 <div class="modal fade" id="ConnectionSlide" tabindex="-1" role="dialog" aria-labelledby="ConnectionSlide" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form class="form-signin" role="form" method="post" action="?&action=connection">
                 <div class="modal-header">
@@ -226,7 +226,7 @@
 <!-- Mot de passe oublié -->
 
 <div class="modal fade" id="passRecover" tabindex="-1" role="dialog" aria-labelledby="passRecover" aria-hidden="true" style="padding-right: 16px;">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form role="form" method="post" action="?&action=passRecover">
                 <div class="modal-header">
@@ -273,7 +273,7 @@
                 <!-- Espace commentaire -->
 
                 <div class="modal fade" id="news<?= $news[$i]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="news<?= $news[$i]['id']; ?>" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Commentaires</h5>
@@ -308,7 +308,7 @@
                                                     <small class="font-weight-light float-right text-muted">
                                                         le <?= date('d/m', $newsComments['date_post']) ?> à <?= date('H:i', $newsComments['date_post']); ?>
                                                     </small> <b></b>
-                                                    <?= gradeJoueur($newsComments['pseudo'], $bddConnection) ?>
+                                                    <?= Permission::getInstance()->gradeJoueur($newsComments['pseudo']) ?>
                                                 </h5>
                                                 <?php echo $newsComments['commentaire'];?>
                                             </div>
@@ -332,7 +332,7 @@
                                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>-<?= $newsComments['id'] ?>-edit" data-dismiss="modal">
                                                             Editer
                                                         </a>
-                                                        <a class="dropdown-item text-danger" href="?&action=delete_news_commentaire&id_comm='<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
+                                                        <a class="dropdown-item text-danger" href="?&action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
                                                             Supprimer
                                                         </a>
 
@@ -389,7 +389,7 @@
                         $editCommentaire = $getEditCommentaire['commentaire'];
                         if ($newsComments['pseudo'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm("createur")) :  ?>
                             <div class="modal fade" id="news<?= $news[$i]['id'] . '-' . $newsComments['id'] . '-edit'; ?>" tabindex="-1" role="dialog" aria-labelledby="news<?= $news[$i]['id'] . '-' . $newsComments['id'] . '-edit'; ?>" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Édition du commentaire</h5>
@@ -428,7 +428,7 @@
 
 <?php if(isset($_GET['page']) && $_GET['page'] == "forum" && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) : ?>
 <div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form class="form-signin" role="form" method="post" action="?&action=editForum">
                 <div class="modal-header">
@@ -475,7 +475,7 @@
 <?php endif ?>
 <?php if(isset($_GET['page']) && $_GET['page'] == "forum_categorie") : ?>
 <div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form class="form-signin" role="form" method="post" action="?&action=editSousForum">
                 <div class="modal-header">

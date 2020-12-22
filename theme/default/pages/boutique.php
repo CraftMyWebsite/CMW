@@ -58,7 +58,7 @@
                                     <?php foreach ($categories as $key => $value) {
                                         $categories[$key]['offres'] = 0;
                                     }
-                                    for ($i = 1; $i <= count($offresTableau); $i++) :
+                                    if(isset($offresTableau) && !empty($offresTableau)) : for ($i = 1; $i <= count($offresTableau); $i++) :
                                         if ($offresTableau[$i]['categorie'] == $categories[$j]['id']) : 
                                             $categories[$j]['showNumber'] = ($categories[$j]['showNumber'] == 0) ? 1 : $categories[$j]['showNumber']; ?>
                                             <div class="col-12 card mx-3 col-md-<?php echo ((12/$categories[$j]['showNumber'])-1); ?>">
@@ -102,6 +102,7 @@
 
                                         <?php endif; ?>
                                     <?php endfor; ?>
+                                    <?php endif; ?>
                                 </div>
 
                                 <?php if ($categories[$j]['offres'] == 0) : ?>

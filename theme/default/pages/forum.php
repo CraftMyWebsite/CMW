@@ -139,6 +139,14 @@ $fofo = $_Forum_->affichageForum();
 
                                 if (((Permission::getInstance()->verifPerm("createur") or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > $categorie[$j]['perms']) and !$_SESSION['mode']) or $categorie[$j]['perms'] == 0) :
 
+                                    
+                                    if (Permission::getInstance()->verifPerm("createur") and !$_SESSION['mode'])
+                                        $perms = 100;
+                                    elseif (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > 0)
+                                        $perms = Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms');
+                                    else
+                                        $perms = 0;
+
                                     $sousforum = $bddConnection->prepare('SELECT * FROM cmw_forum_sous_forum WHERE id_categorie = :id_categorie AND perms <= :perms');
                                     $sousforum->execute(array(
                                         'id_categorie' => $categorie[$j]['id'],
@@ -146,12 +154,6 @@ $fofo = $_Forum_->affichageForum();
                                     ));
                                     $sousforum = $sousforum->fetchAll(PDO::FETCH_ASSOC);
 
-                                    if (Permission::getInstance()->verifPerm("createur") and !$_SESSION['mode'])
-                                        $perms = 100;
-                                    elseif (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > 0)
-                                        $perms = Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms');
-                                    else
-                                        $perms = 0;
                             ?>
 
                                     <tr>
@@ -219,7 +221,8 @@ $fofo = $_Forum_->affichageForum();
                                                     <br>
                                                     <?= $derniereReponse['pseudo']; ?>, Le
                                                     <?php $date = explode('-', $derniereReponse['date_post']);
-                                                    echo '' . $date[2] . '/' . $date[1] . '/' . $date[0] . ''; ?>
+                                                        $hour = explode(' ', $date[2]);
+                                                        echo $hour[0] . '-' . $date[1] . '-' . $date[0] . ' à ' . $hour[1]; ?>
                                                 </a>
                                             <?php else : ?>
                                                 <p> Il n'y a pas de sujet dans ce forum </p>

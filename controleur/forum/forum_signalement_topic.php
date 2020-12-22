@@ -3,7 +3,7 @@ if(isset($_POST['id_topic2']) AND isset($_Joueur_))
 {
 	if(!isset($_GET['confirmation']))
 	{
-		header('Location: ?&page=confirmation&choix=5&id_topic=' . $_POST['id_topic2'] . '');
+		header('Location: ?&page=confirmation&choix=5&id_topic2=' . $_POST['id_topic2'] . '');
 	}
 	else
 	{
@@ -14,7 +14,7 @@ if(isset($_POST['id_topic2']) AND isset($_Joueur_))
 			'reason' => $reason,
 			'reporteur' => $_Joueur_['pseudo']
 		));
-		header('Location: ?&page=forum');
+		header('Location: ?&page=forum&postSignalement');
 		
 	}
 }

@@ -96,18 +96,17 @@ class Forum {
 	//Compte les topics
 	public function compteTopics($id)
 	{
-		$count_topic2 = $this->bdd->prepare('SELECT * FROM cmw_forum_post WHERE id_categorie = :id_categorie AND sous_forum IS NULL');
-		$count_topic2->bindParam(':id_categorie', htmlspecialchars($id));
-		$count_topic2->execute();
-		return $count_topic2->rowCount();
+		$count_topic2 = $this->bdd->prepare('SELECT count(id) as count FROM cmw_forum_post WHERE id_categorie = :id_categorie AND sous_forum IS NULL');
+		$count_topic2->execute(array('id_categorie' => $id ));
+		$count_topic2 = $count_topic2->fetch(PDO::FETCH_ASSOC);
+		return $count_topic2['count'];
 	}
 	
 	//Récupération des topics 
 	public function infosTopics($id, $count)
 	{
 		$topic = $this->bdd->prepare('SELECT * FROM cmw_forum_post WHERE id_categorie = :id_categorie AND sous_forum IS NULL ORDER BY epingle DESC, last_answer_temps DESC LIMIT '.$count.', 20');
-		$topic->bindParam(':id_categorie', htmlspecialchars($id));
-		$topic->execute();
+		$topic->execute(array('id_categorie' => $id ));
 		return $topic->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
@@ -240,7 +239,7 @@ class Forum {
 	}
 
 	//Renvoie le grade du joueur
-	public function gradeJoueur($pseudo)
+	/*public function gradeJoueur($pseudo)
 	{
 		global $_Serveur_;
 		$req = $this->bdd->prepare('SELECT rang FROM cmw_users WHERE pseudo = :pseudo');
@@ -260,7 +259,7 @@ class Forum {
 			$gradeSite = $_Serveur_['General']['joueur'];
 		}
 		return $gradeSite;
-	}
+	} */
 
 	//Renvoie le préfix de la discussion
 	public function getPrefix($prefix)

@@ -13,7 +13,7 @@
                                 <p class="text-left text-white">
                                     <b><?php echo $_Joueur_['pseudo']; ?></b>
                                     <small><i><?=$_Joueur_['email']?></i></small>
-                                    <?php echo gradeJoueur($_Joueur_['pseudo'], $bddConnection); ?>
+                                    <?php echo $_Permission_->gradeJoueur($_Joueur_['pseudo']); ?>
                                 </p>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                 <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'showPage')) { ?>
                                 <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='configVoter'){echo 'active';}?>" href="?page=configVoter">
                                     <i class="fas fa-ruler"></i>
-                                    Récompences automatique
+                                    Récompenses automatique
                                 </a>
                                 <?php } ?>
                                 <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) { ?>
