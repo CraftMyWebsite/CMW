@@ -414,8 +414,9 @@ if (isset($_GET['erreur'])) {
                                                 <div class="clearfix"></div>
 
                                                 <div class="col-md-12 text-center wys-options">
-                                                    <textarea  data-UUID="0005" id="ckeditor" name="signature" style="height: 275px; margin: 0px; width: 100%;"></textarea>
-
+                                                    <textarea  data-UUID="0005" id="ckeditor" name="signature" style="height: 275px; margin: 0px; width: 100%;">
+                                                        <?= $joueurDonnees['signature'] ?>
+                                                    </textarea>
                                                 </div>
                                             </div>
 
