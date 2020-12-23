@@ -20,7 +20,7 @@ function VerifieChmod() {
     $dir[6] = 'controleur/.htpasswd';
     $dir[7] = 'admin/actions/.htpasswd';
 
-    $dirDossier[0] = array('../theme/upload/', '../theme/upload/slider/', '../theme/upload/panel/');
+    $dirDossier[0] = array('../theme/upload/', '../theme/upload/navRap/', '../theme/upload/panel/');
     $dirDossier[1] = array('../utilisateurs/');
 
     $err = null;
@@ -127,7 +127,7 @@ function DrawChmod($return)
                         <tr>
                             <td><?php echo $return['dir'][$i]; ?></td>
                             <td><?php echo $return['chmod'][$i]; ?></td>
-                            <td>777</td>
+                            <td>755</td>
                         </tr>
                         <?php } 
                     }?>
