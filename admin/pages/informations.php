@@ -504,7 +504,7 @@
                             <div class="card-body">
 
                                 <div class="list-group">
-                                    <?php if(isset($LastTicket)) { ?>
+			<?php if($LastTicket != false && isset($LastTicket)) { ?>
                                     <li class="list-group-item">
                                         <?php if($LastTicket['etat'] == 1) {?><span class="badge" style="background-color: rgb(0, 151, 0);">Résolu</span><?php } else { ?><span class="badge" style="background-color: rgb(139, 24, 40);">Non résolu</span><?php } ?>
                                         <i class="fas fa-life-ring"></i> Dernier ticket :
@@ -512,7 +512,7 @@
                                     </li>
                                     <?php } ?>
 
-                                    <?php if(isset($LastNews)) { ?>
+                                    <?php if($LastNews != false && isset($LastNews)) { ?>
                                     <li class="list-group-item">
                                         <i class="fas fa-fw fa-wrench"></i> Dernier news :
                                         <strong><?php echo $LastNews['titre']; ?></strong> par <strong><?php echo $LastNews['auteur']; ?></strong>
