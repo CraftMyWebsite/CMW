@@ -1,11 +1,11 @@
 <?php
 if (isset($_GET['action']) AND $_GET['action'] == 'setchmod'){
 	rchmod("../theme/upload");
-	chmod("app/data/install.yml", 0777);
+	chmod("app/data/install.yml", 0755);
 	rchmod('../modele/config');
-	chmod("../modele/.htpasswd", 0777);
-	chmod("../controleur/.htpasswd", 0777);
-	chmod("../admin/actions/.htpasswd", 0777);
+	chmod("../modele/.htpasswd", 0755);
+	chmod("../controleur/.htpasswd", 0755);
+	chmod("../admin/actions/.htpasswd", 0755);
 	rchmod("../utilisateurs/");
 }
 // On essaie de se connecté et d'écrire les premiéres données histoire de voir si la base de données répond bien
@@ -71,10 +71,10 @@ function rchmod($dir) {
      $objects = scandir($dir);
      foreach ($objects as $object) {
        if ($object != "." && $object != "..") {
-         if (filetype($dir."/".$object) == "dir") rchmod($dir."/".$object); else chmod($dir."/".$object, 0777);
+         if (filetype($dir."/".$object) == "dir") rchmod($dir."/".$object); else chmod($dir."/".$object, 0755);
        }
      }
      reset($objects);
-     chmod($dir, 0777);
+     chmod($dir, 0755);
    }
  }
