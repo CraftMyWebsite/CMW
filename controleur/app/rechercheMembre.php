@@ -12,7 +12,7 @@ if(isset($_POST['ajax'])){
 		<td>
                 	<img src='<?= $_ImgProfil_->getUrlHeadByPseudo($value['pseudo'], 32); ?>' style='width: 32px; height: 32px;' alt='image de profile de <?= $value["pseudo"] ?>' /> <?= $value["pseudo"]; ?>
             	</td>
-		<td> <?= $Membres->gradeJoueur($value["pseudo"]); ?> </td>
+		<td> <?= Permission::getInstance()->gradeJoueur($value["pseudo"]); ?> </td>
 		<td> <?= $value['tokens']; ?> </td>
 		<td>
 			<a href="?page=profil&profil=<?= $value['pseudo']; ?>" class="btn btn-reverse">Voir le compte</a>
