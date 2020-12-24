@@ -2,25 +2,24 @@ Changelog CraftMyWebsite 1.8.1
 
 Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 
-[=] : Correction d'une xss (sécurité du cms)
+[=] : Correction d'un faille de sécurité mineure (XSS)
 [=] : Amélioration graphique du thème default
-[=] : Amélioration des requêtes vers l'api cmw.fr
+[=] : Amélioration des requêtes vers l'api craftmywebsite.fr
 [=] : Amélioration de la sécurité du panier sur la boutique
-[=] : Agrandissement des modals des news et du support
+[=] : Agrandissement de toutes les modals
 [=] : Amélioration de ckeditor
-[|] : Fix des bugs sur la page vote (récompense non envoyé) 
-[|] : Fix bug du système de reset auto des votes
+[|] : Fix des bugs sur la page vote (Erreurs d'envoie de récompenses) 
+[|] : Fix bug du système de reset automatique des votes
 [|] : Fix des miniatures
-[|] : Fix du fond d'écran
-[|] : Fix de l'ensemble des bugs sur la boutique (erreurs etc)
-[|] : Fix des bugs touchant le forum (édition/suppresion topic etc...)
-[|] : Fix des grades et de leurs permissions
-[|] : Fix des commentaires sur les news qui ne fonctionné pas
-[|] : Fix notifications non fonctionnel 
-[|] : Fix chat qui ne fonctionné pu
-[|] : Fix des réseaux sociaux dans la partie "membres" du panel
-[|] : Fix erreurs sur la page payement du panel
-[|] : Remise en fonction des notifications qui ne fonctionné pu
+[|] : Fix du fond de l'entête du site
+[|] : Fix de l'ensemble des bugs et erreurs sur la boutique
+[|] : Fix des bugs touchant la modification du forum
+[|] : Fix des bugs liés aux grades et de leurs permissions
+[|] : Fix des commentaires sur les news qui ne fonctionnaient pas
+[|] : Fix des disfonctionnements des notifications 
+[|] : Fix disfonctionnement lié au tchat
+[|] : Fix des réseaux sociaux et signature dans la partie "membres" du panel
+[|] : Fix des erreurs sur la page paiement du panel
 [+] : Ajout d'un messsage sur la page vote quand les récompenses ne sont pas données
 [+] : Ajout messages de confirmation/erreur lors de l'upload d'une image sur le panel
 [+] : Ajout retour apres une action sur la page des récompenses auto
