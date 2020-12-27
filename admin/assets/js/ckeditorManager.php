@@ -1,58 +1,57 @@
 <script>
-var option = {
-	toolbar: {
-		items: [
-			'heading',
-			'|',
-			'fontBackgroundColor',
-			'fontFamily',
-			'fontSize',
-			'fontColor',
-			'highlight',
-			'|',
-			'bold',
-			'underline',
-			'italic',
-			'horizontalLine',
-			'|',
-			'link',
-			'bulletedList',
-			'todoList',
-			'numberedList',
-			'|',
-			<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'imageUpload',"; }  ?>
-			'blockQuote',
-			'mediaEmbed',
-			'undo',
-			'redo'
-		]
-	},
-	language: 'fr',
-	image: {
-		toolbar: [
-			'imageTextAlternative',
-			'imageStyle:full',
-			'imageStyle:side'
-		]
-	},
-	licenseKey: '',
-	simpleUpload: {
-		uploadUrl: 'index.php?action=uploadCKImg',
-		withCredentials: false,
-		headers: {
-			'X-CSRF-TOKEN': 'CSFR-Token',
-			Authorization: 'Bearer <JSON Web Token>'
-		}
-	}
-				
-};
-
 var CK = new Map();
 initCK();
 function initCK() {
 	CK = new Map();
 	for (let el of document.querySelectorAll("[data-UUID]" )) {
-		ClassicEditor.create(el, option )
+		ClassicEditor.create(el, {
+				toolbar: {
+					items: [
+						'viewSource',
+						'heading',
+						'|',
+						'fontBackgroundColor',
+						'fontFamily',
+						'fontSize',
+						'fontColor',
+						'highlight',
+						'|',
+						'bold',
+						'underline',
+						'italic',
+						'horizontalLine',
+						'|',
+						'link',
+						'bulletedList',
+						'todoList',
+						'numberedList',
+						'|',
+						<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'imageUpload',"; }  ?>
+						'blockQuote',
+						'mediaEmbed',
+						'undo',
+						'redo'
+					]
+				},
+				language: 'fr',
+				image: {
+					toolbar: [
+						'imageTextAlternative',
+						'imageStyle:full',
+						'imageStyle:side'
+					]
+				},
+				licenseKey: '',
+				simpleUpload: {
+					uploadUrl: 'index.php?action=uploadCKImg',
+					withCredentials: false,
+					headers: {
+						'X-CSRF-TOKEN': 'CSFR-Token',
+						Authorization: ''
+					}
+				}
+				
+			} )
 		.catch( error => {console.log( error );} )
 		.then(editor => { 
 			CK.set(el, editor); 
@@ -91,4 +90,28 @@ $( "modal" ).each(function() {
 		show: false
 	});
 });
+
+
+<?php if(isset($_GET['upload'])) {
+	switch(intval($_GET['upload'])) {
+		case 0:
+			echo 'notif("error", "Erreur", "Une erreur interne est survenue.");';
+			break;
+		case 1:
+			echo 'notif("error", "Erreur", "L\'extension n\'est pas valide.");';
+			break;
+		case 2:
+			echo 'notif("error", "Erreur", "L\'image est trop volumineuse.");';
+			break;
+		case 3:
+			echo 'notif("error", "Erreur", "Les dimensions de l\'image sont incorrecte.");';
+			break;
+		case 4:
+			echo 'notif("success", "Action effectuée !","");';
+			break;
+		case 5:
+			echo 'notif("error", "Erreur", "Vous n\'avez pas les permissions suffisante.");';
+			break;
+	}
+} ?>
 </script>

@@ -65,7 +65,7 @@
                                     </td>
 
                                     <td>
-                                        <a class="btn btn-reverse no-hover" data-toggle="modal" data-target="#slide-<?= $tickets['id']; ?>" data-dismiss="modal">
+                                            <a class="btn btn-reverse no-hover" data-toggle="modal" data-target="#slide-<?= $tickets['id']; ?>" data-dismiss="modal">
                                             <i class="fa fa-eye"></i> Voir
                                         </a>
                                     </td>
@@ -114,7 +114,7 @@
                                 $commentaires = 0; ?>
 
                                 <div class="modal fade" id="slide-<?= $tickets['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="slide-<?= $tickets['id']; ?>" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close mr-3 ml-0" data-dismiss="modal" aria-label="Close">
@@ -229,7 +229,7 @@
 
                                                 <?php else : ?>
 
-                                                    <div class="m-0 info-page bg-danger">
+                                                    <div class="w-100 m-0 info-page bg-danger">
                                                         <div class="text-center">Ticket résolu ! Merci de contacter un administrateur pour réouvrir votre ticket.</div>
                                                     </div>
 
@@ -244,13 +244,13 @@
 
                             <!-- Edition d'un commentaire -->
 
-                            <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) :
+                            <?php if (isset($ticketCommentaires[$tickets['id']][$i]['auteur']) && $ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) :
                                 if (!empty($ticketCommentaires[$tickets['id']])) :
                                     for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) : ?>
 
                                         <div class="modal fade" id="editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editComm">
                                             <form method="POST" action="?&action=edit_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>&id_ticket=<?= $tickets['id']; ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>">
-                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
 
                                                         <div class="modal-header">

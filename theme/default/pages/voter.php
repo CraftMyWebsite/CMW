@@ -5,14 +5,14 @@
             <?php if (isset($_GET['success'])) :
                 if ($_GET['success'] != 'recupTemp') : ?>
                     <div class="alert alert-success alert-dismissible fade show text-shadow-none" role="alert">
-                        Votre récompense arrive, si vous n'avez pas vu de fenêtre s'ouvrir pour voter, la fenêtre à dû s'ouvrir derrière votre navigateur, validez le vote et <strong>profitez de votre récompense In-Game</strong> !
+                        Votre récompense arrive, si vous n'avez pas vu de fenêtre s'ouvrir pour voter, la fenêtre à dû s'ouvrir derrière votre navigateur, validez le vote et <strong class="important--text">profitez de votre récompense In-Game</strong> !
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 <?php else : ?>
                     <div class="alert alert-success alert-dismissible fade show text-shadow-none" role="alert">
-                        La récompense séléctionnée arrive, <strong>Profitez de cette dernière In-Game ! </strong>
+                        La récompense séléctionnée arrive, <strong class="important--text">Profitez de cette dernière In-Game ! </strong>
                         Votre(vos) récompense(s) arrive(nt), profitez de votre(vos) récompense(s) In-Game !
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -111,7 +111,7 @@
                 </div>
 
                 <?php
-                require("modele/vote.class.php");
+                require_once("modele/vote.class.php");
                  $pseudo = htmlspecialchars($_GET['player']); ?>
                 <div class="col-md-12 col-lg-6 col-sm-12 mb-5">
                     <!-- Affichage des sites de vote -->
@@ -135,7 +135,7 @@
                                             <div class="info-page">
                                                 <div class="info-content">
                                                     Bienvenue dans la catégorie de vote pour le serveur : <br>
-                                                    <strong><?= $serveur['nom']; ?></strong>
+                                                    <strong class="important--text"><?= $serveur['nom']; ?></strong>
                                                 </div>
                                             </div>
                                             <h5 class="title-vote-listing">

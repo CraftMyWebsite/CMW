@@ -51,7 +51,7 @@
 		        <script>initPost("changeInfo", "admin.php?action=general",null);</script>
 		    </div>
 		    <div class="card-footer">
-		        <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeInfo')">Envoyer!</button>
+		        <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeInfo')">Envoyer !</button>
 		    </div>
 		</div>
 		<div class="card">
@@ -169,7 +169,7 @@
 						if(data == "1") {
 							alert("Le mail a bien été envoyé !");
 						} else {
-							alert("Le mail n'a pas été envoyé, avez vous mis à jour les informations ? ou avez vous bien rentré les informations ?");
+							alert("Le mail n'a pas été envoyé, avez vous mis à jour les informations ? Avez-vous bien entré les informations ?");
 						}
 						get('btn-mail').disabled = false;
 					});
@@ -213,7 +213,7 @@
 				   		</script>
 				    </div>
 				    <div class="card-footer">
-				        <button type="submit" class="btn btn-success w-100">Envoyer!</button>
+				        <button type="submit" class="btn btn-success w-100">Envoyer !</button>
 				    </div>
 				</div>
 			</form>
@@ -243,7 +243,7 @@
 					    	 <div class="col-lg-12 text-justify">
 							    <div class="alert alert-success">
 							    	<strong>
-							    		CraftMyWebSite a d'intégré un système d'upload d'image dans son éditeur de texte, vous pouvez éditer ces paramètre ici. Sachez que lorsque la taille total des fichiers dépasses la taille maximal de l'espace de stockage les plus anciennes images sont supprimé <u>à jamais</u> jusqu'a rétablir l'équilibre.
+							    		CraftMyWebSite a d'intégré un système d'upload d'image dans son éditeur de texte, vous pouvez éditer ces paramètres ici. Sachez que lorsque la taille total des fichiers dépasse la taille maximale de l'espace de stockage, les plus anciennes images sont supprimées <u>à jamais</u> jusqu'à rétablir l'équilibre.
 							    	</strong><br/>
 							        <ul>
 					                    <li> Nombre total de fichier: <span id="allf"><?=$filetotal;?></span></li>
@@ -251,15 +251,15 @@
 					                </ul>
 					                <button type="button" class="btn btn-danger" onclick="sendDirectPost('admin.php?action=resetAllUploadImage', 
 					                	function(data) { if(data) { get('allf').innerText = '0';get('alls').innerText = '0'; }});
-					               ">Supprimer tous les fichiers (iréversible)</button>
+					               ">Supprimer tous les fichiers (irréversible)</button>
 							    </div>
 							</div>
 
-					    	<label class="control-label">Taille maximal des images: <span  id="rangValue1"><?=(isset($_Serveur_['uploadImage']['maxFileSize'])) ? ($_Serveur_['uploadImage']['maxFileSize'] >=1000 ? ($_Serveur_['uploadImage']['maxFileSize'] >=1000000 ? ($_Serveur_['uploadImage']['maxFileSize'] / 1000000).'GB' : ($_Serveur_['uploadImage']['maxFileSize'] / 1000).'MB') : $_Serveur_['uploadImage']['maxFileSize'].'KB'): '1MB';?></span></label>
+					    	<label class="control-label">Taille maximale des images: <span  id="rangValue1"><?=(isset($_Serveur_['uploadImage']['maxFileSize'])) ? ($_Serveur_['uploadImage']['maxFileSize'] >=1000 ? ($_Serveur_['uploadImage']['maxFileSize'] >=1000000 ? ($_Serveur_['uploadImage']['maxFileSize'] / 1000000).'GB' : ($_Serveur_['uploadImage']['maxFileSize'] / 1000).'MB') : $_Serveur_['uploadImage']['maxFileSize'].'KB'): '1MB';?></span></label>
 							<input name="maxFileSize" id="rangeInput1" class="border-0" type="range" value="<?=(isset($_Serveur_['uploadImage']['maxFileSize'])) ? $_Serveur_['uploadImage']['maxFileSize']: '1000';?>" step="50" min="50" max="5000" />
 
 
-							<label class="control-label">Taille maximal de l'espace de stockage: <span  id="rangValue2"><?=(isset($_Serveur_['uploadImage']['maxSize'])) ? ($_Serveur_['uploadImage']['maxSize'] >=1000 ? ($_Serveur_['uploadImage']['maxSize'] >=1000000 ? ($_Serveur_['uploadImage']['maxSize'] / 1000000).'GB' : ($_Serveur_['uploadImage']['maxSize'] / 1000).'MB') : $_Serveur_['uploadImage']['maxSize'].'KB'): '1MB';?></span></label>
+							<label class="control-label">Taille maximale de l'espace de stockage: <span  id="rangValue2"><?=(isset($_Serveur_['uploadImage']['maxSize'])) ? ($_Serveur_['uploadImage']['maxSize'] >=1000 ? ($_Serveur_['uploadImage']['maxSize'] >=1000000 ? ($_Serveur_['uploadImage']['maxSize'] / 1000000).'GB' : ($_Serveur_['uploadImage']['maxSize'] / 1000).'MB') : $_Serveur_['uploadImage']['maxSize'].'KB'): '1MB';?></span></label>
 							<input name="maxSize" id="rangeInput2" step="1000" value="<?=(isset($_Serveur_['uploadImage']['maxSize'])) ? $_Serveur_['uploadImage']['maxSize']: '1000';?>" type="range" min="1000" max="5000000" />
 
 
@@ -269,7 +269,7 @@
 					    registerEvent(get('rangeInput2'), ["change", "keyup", "input"], function(evt) { let nb = parseInt(evt.target.value);if(nb>=1000) { if(nb>=1000000){get('rangValue2').innerText = (nb / 1000000)+"GB";} else {get('rangValue2').innerText = (nb / 1000)+"MB";}} else {get('rangValue2').innerText = nb+"KB";}});
 					    initPost("panel-upload", "admin.php?action=editUploadImage");</script>
 					    <div class="card-footer">
-					        <button type="submit" onclick="sendPost('panel-upload');"  class="btn btn-success w-100">Envoyer!</button>
+					        <button type="submit" onclick="sendPost('panel-upload');"  class="btn btn-success w-100">Envoyer !</button>
 					    </div>
 				    </div>
 				</div>

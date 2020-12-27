@@ -302,7 +302,6 @@ function switchEnLigne() {
 	{
 		hide(el.getAttribute('id'));
 	}
-	console.log("joueur"+id);
 	show("joueur"+id);
 }
 

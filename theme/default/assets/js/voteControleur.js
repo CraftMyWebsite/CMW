@@ -157,7 +157,7 @@ function updateBaltop(loop = false) {
 
                         f+='</td>'
                         +'<td>'
-                            +'<img alt="" src="'+ar.url+'" style="height:25px;width:25px" /> <strong>'
+                            +'<img alt="" src="'+ar.url+'" style="height:25px;width:25px" /> <strong class="important--text">'
                                 +'<a href="?page=profil&profil='+ar.pseudo+'">'
                                         +ar.pseudo
                                 +'</a>'
@@ -259,20 +259,24 @@ function pickupRecompense() {
         if (r == true) 
         {
             $.post("index.php?action=recupVotesTemp", {}, function (data, status) {
-                let el = document.getElementById("recompList");
-                el.innerText = "Récompenses envoyé !";
-                setTimeout(function () {
-                    clearRecompense();
-                }, 3000);
+                data = data.substring(data.indexOf('[DIV]')+5);
+                clearRecompense();
+                if(parseInt(data) != 0) {
+                    notif("warning", data+" récompense(s) n'ont pas pu être distribués");
+                } else {
+                    notif("success","Récompenses envoyé !");
+                }
             });
         }
     } else {
         $.post("index.php?action=recupVotesTemp", {}, function (data, status) {
-            let el = document.getElementById("recompList");
-            el.innerText = "Récompenses envoyé !";
-            setTimeout(function () {
-                clearRecompense();
-            }, 3000);
+            data = data.substring(data.indexOf('[DIV]')+5);
+            clearRecompense();
+            if(parseInt(data) != 0) {
+                notif("warning", data+" récompense(s) n'ont pas pu être distribués");
+            } else {
+                notif("success","Récompenses envoyé !");
+            }
         });
     }
 }

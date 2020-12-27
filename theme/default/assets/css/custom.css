@@ -106,8 +106,10 @@ a {
     transition: .5s;
 }
 
-strong {
-    color: var(--active-color) !important;
+strong.important--text {
+  
+  color: var(--active-color) !important;
+
 }
 
 a:hover:not(.no-hover) {
@@ -534,6 +536,19 @@ li.nav-item {
     border-color: var(--main-color) !important;
 }
 
+@keyframes loading {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+ 
+.loading {
+    animation: loading 2s linear infinite;
+}
+
 /* ==> Support */
 
 #Support .btn.btn-main {
@@ -570,7 +585,8 @@ li.nav-item {
 }
 
 .media-body {
-    word-break: break-all;
+    text-align: justify;
+    word-break: break;
 }
 
 /* ==> Profil */

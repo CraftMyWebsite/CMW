@@ -122,6 +122,7 @@
                                     <br/>
                                     Les sites suivant <strong>sont compatible</strong> avec cette vérification:
                                     <ul>
+                                        <li> serveurs-mc.net</li>
                                         <li> serveur-prive.net</li>
                                         <li> serveurs-minecraft.org</li>
                                         <li> serveurs-minecraft.com</li>
@@ -245,7 +246,7 @@
                     </div>
                     <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'resetVote')) { ?>
                     <div class="float-right">
-                        <button onclick="sendDirectPost('admin.php?action=resetVotesConfig', function(data) { if(data) { get('all-vote').innerText = '';}})" class="btn btn-outline-secondary">Réinitialiser</button>
+                        <button onclick="sendDirectPost('admin.php?action=resetVotesConfig', function(data) { if(data) { get('all-vote').innerText = '';}})" class="btn btn-outline-secondary">Tout supprimer</button>
                     </div>
                     <?php } ?>
                 </div>
@@ -365,7 +366,7 @@
 
                                               <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
                                                 <div class="custom-control custom-switch" style="margin-bottom:15px;" >
-                                                    <input type="checkbox" class="custom-control-input" value="1" id="doisetreenligne<?=$o;?>" name="enligne<?=$o;?>" <? if($donnees[$o]['enligne']==1) { echo 'checked' ; } ?>>
+                                                    <input type="checkbox" class="custom-control-input" value="1" id="doisetreenligne<?=$o;?>" name="enligne<?=$o;?>" <?php if($donnees[$o]['enligne']==1) { echo 'checked' ; } ?>>
                                                     <label class="custom-control-label" for="doisetreenligne<?=$o;?>">Oui</label>
                                                 </div>
 

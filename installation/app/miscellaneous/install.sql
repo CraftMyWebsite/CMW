@@ -1,61 +1,61 @@
 CREATE TABLE IF NOT EXISTS cmw_ban (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `ip` VARCHAR(20) NOT NULL,
+  `id` smallint(5) UNSIGNED  AUTO_INCREMENT PRIMARY KEY,
+  `ip` VARCHAR(20) ,
   `pseudo` VARCHAR(16) 
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS cmw_ban_config (
-  `id` TINYINT(5) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `titre` VARCHAR(255) NOT NULL,
-  `texte` TEXT NOT NULL
+  `id` TINYINT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `titre` VARCHAR(255),
+  `texte` TEXT
 );
 
 CREATE TABLE IF NOT EXISTS `cmw_boutique_action` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `methode` int(2) NOT NULL,
-  `commande_valeur` text NOT NULL,
-  `prix` int(11) NOT NULL,
-  `duree` int(11) NOT NULL,
-  `id_offre` int(11) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `methode` int(2),
+  `commande_valeur` text,
+  `prix` int(11),
+  `duree` int(11),
+  `id_offre` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_cache_json` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `requete` varchar(255) NOT NULL,
-  `valeur`TEXT NOT NULL,
+  `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `requete` varchar(255),
+  `valeur`TEXT,
   `temp`int(11)
 ) ENGINE= InnoDB;
 
 CREATE TABLE IF NOT EXISTS `cmw_boutique_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titre` varchar(100) NOT NULL,
-  `message` text NOT NULL,
-  `ordre` int(11) NOT NULL,
-  `serveur` int(11) NOT NULL,
-  `connection` int(1) NOT NULL,
-  `showNumber` int(1) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `titre` varchar(100),
+  `message` text,
+  `ordre` int(11),
+  `serveur` int(11),
+  `connection` int(1),
+  `showNumber` int(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_boutique_offres` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) NOT NULL,
-  `description` text NOT NULL,
-  `prix` int(11) NOT NULL,
-  `nbre_vente` int(11) NOT NULL,
-  `categorie_id` int(11) NOT NULL,
-  `ordre` int(11) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `nom` varchar(100),
+  `description` text,
+  `prix` int(11),
+  `nbre_vente` int(11),
+  `categorie_id` int(11),
+  `ordre` int(11),
   `evo` text NULL,
-  `max_vente` int(11) NOT NULL,
+  `max_vente` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_boutique_reduction` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `code_promo` char(8) NOT NULL,
-  `pourcent` tinyint(3) UNSIGNED NOT NULL,
-  `titre` varchar(60) NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `code_promo` char(8),
+  `pourcent` tinyint(3) UNSIGNED,
+  `titre` varchar(60),
   `categorie` int(11) UNSIGNED,
   `debut` int(11) UNSIGNED,
   `fin` int(11) UNSIGNED,
@@ -64,412 +64,412 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_reduction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_boutique_stats` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `offre_id` int(11) NOT NULL,
-  `date_achat` datetime NOT NULL,
-  `prix` int(11) NOT NULL,
-  `pseudo` varchar(255) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `offre_id` int(11),
+  `date_achat` datetime,
+  `prix` int(11),
+  `pseudo` varchar(255),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS cmw_conversations (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `pseudo1` VARCHAR(20) NOT NULL,
-  `pseudo2` VARCHAR(20) NOT NULL
+  `id` SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `pseudo1` VARCHAR(20),
+  `pseudo2` VARCHAR(20)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `cmw_dedipass` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(40) NOT NULL,
-  `code` varchar(8) NOT NULL,
-  `rate` varchar(60) NOT NULL,
-  `payout` float NOT NULL,
-  `tokens` int(11) NOT NULL,
-  `date_achat` datetime NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `pseudo` varchar(40),
+  `code` varchar(8),
+  `rate` varchar(60),
+  `payout` float,
+  `tokens` int(11),
+  `date_achat` datetime,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nom` varchar(80) NOT NULL,
-  `perms` int(11) UNSIGNED NOT NULL,
-  `ordre` int(11) UNSIGNED NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `nom` varchar(80),
+  `perms` int(11) UNSIGNED,
+  `ordre` int(11) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_answer` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_topic` smallint(6) NOT NULL,
-  `pseudo` varchar(40) NOT NULL,
-  `contenue` varchar(10000) NOT NULL,
-  `date_post` datetime NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `id_topic` smallint(6),
+  `pseudo` varchar(40),
+  `contenue` varchar(10000),
+  `date_post` datetime,
   `d_edition` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_answer_removed` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_answer` smallint(5) UNSIGNED NOT NULL,
-  `id_topic` smallint(5) UNSIGNED NOT NULL,
-  `auteur_answer` varchar(60) NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `id_answer` smallint(5) UNSIGNED,
+  `id_topic` smallint(5) UNSIGNED,
+  `auteur_answer` varchar(60),
   `date_creation` datetime DEFAULT NULL,
   `Raison` varchar(200) DEFAULT NULL,
-  `date_suppression` datetime NOT NULL,
-  `auteur_suppression` varchar(60) NOT NULL,
+  `date_suppression` datetime,
+  `auteur_suppression` varchar(60),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_categorie` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nom` varchar(40) NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `nom` varchar(40),
   `img` varchar(300) DEFAULT NULL,
-  `sous-forum` tinyint(4) NOT NULL DEFAULT '0',
-  `forum` int(11) NOT NULL,
-  `close` tinyint(3) UNSIGNED NOT NULL,
-  `ordre` int(11) UNSIGNED NOT NULL,
-  `perms` int(11) UNSIGNED NOT NULL,
+  `sous-forum` tinyint(4) DEFAULT '0',
+  `forum` int(11),
+  `close` tinyint(3) UNSIGNED,
+  `ordre` int(11) UNSIGNED,
+  `perms` int(11) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_like` (
-  `id` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(40) NOT NULL,
-  `type` tinyint(1) UNSIGNED NOT NULL,
-  `id_answer` int(11) NOT NULL,
-  `Appreciation` smallint(6) NOT NULL,
-  `vu` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
-  `new` tinyint(3) UNSIGNED NOT NULL,
+  `id` smallint(4) UNSIGNED AUTO_INCREMENT,
+  `pseudo` varchar(40),
+  `type` tinyint(1) UNSIGNED,
+  `id_answer` int(11),
+  `Appreciation` smallint(6),
+  `vu` tinyint(3) UNSIGNED DEFAULT '0',
+  `new` tinyint(3) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_lu` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(82) NOT NULL,
-  `id_topic` int(10) UNSIGNED NOT NULL,
-  `vu` tinyint(3) UNSIGNED NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `pseudo` varchar(82),
+  `id_topic` int(10) UNSIGNED,
+  `vu` tinyint(3) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_post` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_categorie` smallint(6) NOT NULL,
-  `nom` varchar(40) NOT NULL,
-  `pseudo` varchar(40) NOT NULL,
-  `contenue` varchar(10000) NOT NULL,
-  `date_creation` datetime NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `id_categorie` smallint(6),
+  `nom` varchar(40),
+  `pseudo` varchar(40),
+  `contenue` varchar(10000),
+  `date_creation` datetime,
   `last_answer` varchar(40) DEFAULT NULL,
   `sous_forum` smallint(6) DEFAULT NULL,
-  `etat` int(11) NOT NULL,
+  `etat` int(11),
   `d_edition` datetime DEFAULT NULL,
-  `prefix` tinyint(4) NOT NULL,
-  `epingle` tinyint(3) UNSIGNED NOT NULL,
-  `affichage` int(10) UNSIGNED NOT NULL,
-  `last_answer_temps` int(11) NOT NULL,
-  `perms` int(11) UNSIGNED NOT NULL,
+  `prefix` tinyint(4),
+  `epingle` tinyint(3) UNSIGNED,
+  `affichage` int(10) UNSIGNED,
+  `last_answer_temps` int(11),
+  `perms` int(11) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_prefix` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `span` varchar(40) NOT NULL,
-  `nom` varchar(40) NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `span` varchar(40),
+  `nom` varchar(40),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_report` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `type` smallint(6) NOT NULL,
-  `id_topic_answer` int(11) NOT NULL,
-  `reason` varchar(200) NOT NULL,
-  `reporteur` varchar(40) NOT NULL,
-  `vu` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
-  `new` tinyint(3) UNSIGNED NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `type` smallint(6),
+  `id_topic_answer` int(11),
+  `reason` varchar(200),
+  `reporteur` varchar(40),
+  `vu` tinyint(3) UNSIGNED DEFAULT '0',
+  `new` tinyint(3) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_sous_forum` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_categorie` smallint(6) NOT NULL,
-  `nom` varchar(40) NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `id_categorie` smallint(6),
+  `nom` varchar(40),
   `description` varchar(300) DEFAULT NULL,
   `img` varchar(300) DEFAULT NULL,
-  `ordre` int(11) UNSIGNED NOT NULL,
-  `close` tinyint(1) UNSIGNED NOT NULL,
-  `perms` int(11) UNSIGNED NOT NULL,
+  `ordre` int(11) UNSIGNED,
+  `close` tinyint(1) UNSIGNED,
+  `perms` int(11) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_topic_followed` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(40) NOT NULL,
-  `id_topic` int(11) NOT NULL,
-  `last_answer` int(11) NOT NULL,
-  `vu` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `new` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED AUTO_INCREMENT,
+  `pseudo` varchar(40),
+  `id_topic` int(11),
+  `last_answer` int(11),
+  `vu` int(10) UNSIGNED DEFAULT '1',
+  `new` int(10) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_forum_topic_removed` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nom` varchar(80) NOT NULL,
-  `nb_reponse` int(10) UNSIGNED NOT NULL,
-  `auteur_topic` varchar(50) NOT NULL,
-  `date_creation` datetime NOT NULL,
-  `raison` varchar(300) NOT NULL,
-  `date_suppression` datetime NOT NULL,
-  `auteur_suppression` varchar(50) NOT NULL,
+  `id` int(11) UNSIGNED AUTO_INCREMENT,
+  `nom` varchar(80),
+  `nb_reponse` int(10) UNSIGNED,
+  `auteur_topic` varchar(50),
+  `date_creation` datetime,
+  `raison` varchar(300),
+  `date_suppression` datetime,
+  `auteur_suppression` varchar(50),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_jetons_paypal_offres` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) NOT NULL,
-  `description` text NOT NULL,
-  `prix` decimal(8,2) NOT NULL,
-  `jetons_donnes` int(11) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `nom` varchar(100),
+  `description` text,
+  `prix` decimal(8,2),
+  `jetons_donnes` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_log_DealJeton` ( 
-  `ID` INT NOT NULL AUTO_INCREMENT, 
-  `fromUser` VARCHAR(20) NOT NULL, 
-  `toUser` VARCHAR(20) NOT NULL, 
-  `amount` INT NOT NULL, 
-  `date` INT NOT NULL, 
+  `ID` INT AUTO_INCREMENT, 
+  `fromUser` VARCHAR(20), 
+  `toUser` VARCHAR(20), 
+  `amount` INT, 
+  `date` INT, 
   PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `cmw_maintenance` (
-  `maintenanceId` int(1) NOT NULL AUTO_INCREMENT,
-  `maintenanceMsg` text NOT NULL,
-  `maintenanceMsgAdmin` text NOT NULL,
-  `maintenanceMsgInscr` text NOT NULL,
-  `maintenanceTime` int(11) NOT NULL,
-  `maintenancePref` int(1) NOT NULL,
-  `maintenanceEtat` int(1) NOT NULL,
-  `dateFin` int(11) NOT NULL,
-  `inscription` tinyint(1) UNSIGNED NOT NULL DEFAULT '0', 
+  `maintenanceId` int(1) AUTO_INCREMENT,
+  `maintenanceMsg` text,
+  `maintenanceMsgAdmin` text,
+  `maintenanceMsgInscr` text,
+  `maintenanceTime` int(11),
+  `maintenancePref` int(1),
+  `maintenanceEtat` int(1),
+  `dateFin` int(11),
+  `inscription` tinyint(1) UNSIGNED DEFAULT '0', 
   PRIMARY KEY (`maintenanceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_news` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titre` varchar(100) NOT NULL,
-  `message` text NOT NULL,
-  `auteur` varchar(20) NOT NULL,
-  `date` int(11) NOT NULL,
-  `image` varchar(40) NOT NULL,
-  `epingle` tinyint(1) UNSIGNED NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `titre` varchar(100),
+  `message` text,
+  `auteur` varchar(20),
+  `date` int(11),
+  `image` varchar(40),
+  `epingle` tinyint(1) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_news_commentaires` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_news` int(11) NOT NULL,
-  `pseudo` varchar(32) NOT NULL,
-  `commentaire` text NOT NULL,
-  `date_post` int(11) NOT NULL,
-  `nbrEdit` int(11) NOT NULL,
-  `report` int(11) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `id_news` int(11),
+  `pseudo` varchar(32),
+  `commentaire` text,
+  `date_post` int(11),
+  `nbrEdit` int(11),
+  `report` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_news_reports` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_news` int(11) NOT NULL,
-  `id_commentaires` int(11) NOT NULL,
-  `pseudo` text NOT NULL,
-  `message` text NOT NULL,
-  `victime` text NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `id_news` int(11),
+  `id_commentaires` int(11),
+  `pseudo` text,
+  `message` text,
+  `victime` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_news_stats` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_news` int(11) NOT NULL,
-  `pseudo` text NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `id_news` int(11),
+  `pseudo` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_pages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titre` varchar(100) NOT NULL,
-  `contenu` text NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `titre` varchar(100),
+  `contenu` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_postit` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `auteur` varchar(40) NOT NULL,
-  `message` varchar(50) NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `auteur` varchar(40),
+  `message` varchar(50),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS cmw_reseaux (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-  `idJoueur` INT UNSIGNED NOT NULL, 
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+  `idJoueur` INT UNSIGNED, 
   `Discord` VARCHAR(30)) 
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS cmw_serveur (
-  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  nom VARCHAR(32) NOT NULL,
-  adresse CHAR(15) NOT NULL,
-  protocole BOOLEAN NOT NULL DEFAULT 0,
-  port SMALLINT UNSIGNED NOT NULL,
+  id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(32),
+  adresse CHAR(15),
+  protocole BOOLEAN DEFAULT 0,
+  port SMALLINT UNSIGNED,
   port2 SMALLINT UNSIGNED NULL,
   utilisateur VARCHAR(32) NULL,
-  mdp VARCHAR(64) NOT NULL
+  mdp VARCHAR(64)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_support` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `auteur` varchar(20) NOT NULL,
-  `titre` varchar(100) NOT NULL,
-  `message` text NOT NULL,
-  `date_post` datetime NOT NULL,
-  `etat` int(1) NOT NULL,
-  `ticketDisplay` int(1) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `auteur` varchar(20),
+  `titre` varchar(100),
+  `message` text,
+  `date_post` datetime,
+  `etat` int(1),
+  `ticketDisplay` int(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_support_commentaires` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ticket` int(11) NOT NULL,
-  `auteur` varchar(20) NOT NULL,
-  `message` text NOT NULL,
-  `date_post` datetime NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `id_ticket` int(11),
+  `auteur` varchar(20),
+  `message` text,
+  `date_post` datetime,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_sysip` (
-  `id` int(1) NOT NULL AUTO_INCREMENT,
-  `idPerIP` int(11) NOT NULL,
-  `nbrPerIP` int(11) NOT NULL,
+  `id` int(1) AUTO_INCREMENT,
+  `idPerIP` int(11),
+  `nbrPerIP` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_sysmail` (
-  `idMail` int(1) NOT NULL AUTO_INCREMENT,
-  `fromMail` text NOT NULL,
-  `sujetMail` text NOT NULL,
-  `msgMail` text NOT NULL,
-  `strictMail` int(1) NOT NULL,
-  `etatMail` int(1) NOT NULL,
+  `idMail` int(1) AUTO_INCREMENT,
+  `fromMail` text,
+  `sujetMail` text,
+  `msgMail` text,
+  `strictMail` int(1),
+  `etatMail` int(1),
   PRIMARY KEY (`idMail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_tempgrades` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(20) NOT NULL,
-  `grade_temporaire` varchar(100) NOT NULL,
-  `grade_temps` int(11) NOT NULL,
-  `grade_vie` varchar(100) NOT NULL,
-  `is_active` int(2) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `pseudo` varchar(20),
+  `grade_temporaire` varchar(100),
+  `grade_temps` int(11),
+  `grade_vie` varchar(100),
+  `is_active` int(2),
   PRIMARY KEY (`id`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(20) NOT NULL,
-  `mdp` varchar(200) NOT NULL,
-  `email` varchar(64) NOT NULL,
-  `anciennete` int(11) NOT NULL,
-  `newsletter` int(1) NOT NULL,
-  `rang` int(2) NOT NULL DEFAULT '1',
-  `tokens` int(11) NOT NULL,
-  `age` int(11) NOT NULL,
-  `resettoken` varchar(32) NOT NULL,
-  `ip` varchar(40) NOT NULL,
-  `CleUnique` varchar(32) NOT NULL,
-  `ValidationMail` int(1) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `pseudo` varchar(20),
+  `mdp` varchar(200),
+  `email` varchar(64),
+  `anciennete` int(11),
+  `newsletter` int(1),
+  `rang` int(2) DEFAULT '1',
+  `tokens` int(11),
+  `age` int(11),
+  `resettoken` varchar(32),
+  `ip` varchar(40),
+  `CleUnique` varchar(32),
+  `ValidationMail` int(1),
   `img_extension` char(4) NULL,
-  `show_email` tinyint(1) UNSIGNED NOT NULL,
+  `show_email` tinyint(1) UNSIGNED,
   `achats` text NULL,
   `signature` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_visits` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ip` text NOT NULL,
-  `dates` datetime NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `ip` text,
+  `dates` datetime,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_votes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(50) NOT NULL,
-  `ip` varchar(20) NOT NULL,
-  `nbre_votes` int(5) NOT NULL,
-  `site` int(4) NOT NULL,
-  `date_dernier` int(11) NOT NULL,
+  `id` int(11) AUTO_INCREMENT,
+  `pseudo` varchar(50),
+  `ip` varchar(20),
+  `nbre_votes` int(5),
+  `site` int(4),
+  `date_dernier` int(11),
   `isOld` int(1) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_votes_config` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
   `action` text NULL,
-  `serveur` tinyint(3) UNSIGNED NOT NULL,
-  `lien` varchar(255) NOT NULL,
-  `temps` int(10) UNSIGNED NOT NULL,
-  `titre` varchar(60) NOT NULL,
-  `idCustom` text NOT NULL,
-  `enligne` int(1) NOT NULL DEFAULT 0,
+  `serveur` tinyint(3) UNSIGNED,
+  `lien` varchar(255),
+  `temps` int(10) UNSIGNED,
+  `titre` varchar(60),
+  `idCustom` text,
+  `enligne` int(1) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_votes_temp` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(16) NOT NULL,
-  `action` text NOT NULL,
-  `serveur` tinyint(3) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED AUTO_INCREMENT,
+  `pseudo` varchar(16),
+  `action` text,
+  `serveur` tinyint(3) UNSIGNED,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `cmw_votes_recompense_auto_config` (
-  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `type` tinyint(3) UNSIGNED NOT NULL,
-  `valueType` varchar(50) NOT NULL,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT,
+  `type` tinyint(3) UNSIGNED,
+  `valueType` varchar(50),
   `action` text NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cmw_paysafecard_offres (
-  id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  montant text NOT NULL,
-  jetons varchar(32) NOT NULL,
-  description text NOT NULL,
-  statut tinyint(1) NOT NULL DEFAULT '1'
+  id smallint(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  montant text,
+  jetons varchar(32),
+  description text,
+  statut tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE cmw_paysafecard_historique (
-  id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  pseudo varchar(32) NOT NULL,
-  code char(16) NOT NULL,
-  offre smallint(5) UNSIGNED NOT NULL,
-  statut tinyint(1) NOT NULL DEFAULT '0',
+  id smallint(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  pseudo varchar(32),
+  code char(16),
+  offre smallint(5) UNSIGNED,
+  statut tinyint(1) DEFAULT '0',
   CONSTRAINT cle_offre 
   FOREIGN KEY (offre) 
   REFERENCES cmw_paysafecard_offres(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cmw_paypal_historique` (
-  `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `montant` double(5, 2) UNSIGNED NOT NULL,
-  `pseudo` varchar(32) NOT NULL,
-  `date` datetime NOT NULL,
+  `id` int(5) UNSIGNED AUTO_INCREMENT,
+  `montant` double(5, 2) UNSIGNED,
+  `pseudo` varchar(32),
+  `date` datetime,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cmw_grades (
-  id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  nom VARCHAR(200) NOT NULL,
-  priorite INT UNSIGNED NOT NULL DEFAULT 0,
-  prefix CHAR(9) NOT NULL DEFAULT '',
-  couleur CHAR(9) NOT NULL DEFAULT '',
-  effets VARCHAR(64) NOT NULL DEFAULT '',
+  id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(200),
+  priorite INT UNSIGNED DEFAULT 0,
+  prefix CHAR(9) DEFAULT '',
+  couleur CHAR(9) DEFAULT '',
+  effets VARCHAR(64) DEFAULT '',
   permDefault BLOB,
   permPanel LONGBLOB, 
   permForum BLOB

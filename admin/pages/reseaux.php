@@ -38,10 +38,10 @@ else
 						<tbody id="cont-res">
 						<?php foreach($donneesSocial as $value)
 						{
-							?><tr id="removeSocial&nom=<?=$value['nom'];?>">
+							?><tr id="removeSocialnom=<?=$value['nom'];?>">
 								<td><?=ucfirst($value['nom']);?></td>
 								<td><button type="button" onclick="sendPost('removeSocial&nom=<?=$value['nom'];?>');" class="btn btn-danger"><i class="fas fa-trash"></i></button></td>
-								<script>initPost("removeSocial&nom=<?=$value['nom'];?>", "admin.php?action=removeSocial&nom=<?=$value['nom'];?>",function (data) { if(data) {  hide('removeSocial&nom=<?=$value['nom'];?>');}});</script>
+								<script>initPost("removeSocial&nom=<?=$value['nom'];?>", "admin.php?action=removeSocial&nom=<?=$value['nom'];?>",function (data) { if(data) {  hide('removeSocialnom=<?=$value['nom'];?>');}});</script>
 							</tr><?php 
 						}
 						?>

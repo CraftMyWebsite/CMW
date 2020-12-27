@@ -79,11 +79,11 @@ class vote {
             $serveur = $this->lienData['serveur'];
         }
 
-        $json = json_decode($action, true); 
+        $json = $json2 = json_decode($action, true); 
         foreach($json as $key => $value) { 
             if(isset($value['pourcentage']) && ((int)$value['pourcentage']) != 100) {
                 if(rand(0, 100) > ((int)$value['pourcentage'])) {
-                    unset($json[$key]);
+                    unset($json2[$key]);
                     continue;
                 }
             }
@@ -93,7 +93,7 @@ class vote {
                 unset($value['value2']);
             }
         }
-        $action = json_encode(array_values($json)); 
+        $action = json_encode(array_values($json2)); 
 
 
         $req = $bdd->prepare('INSERT INTO cmw_votes_temp (pseudo, action, serveur) VALUES (:pseudo, :action, :serveur)');
@@ -221,17 +221,19 @@ class vote {
             ));
         }
         if($save) {
-            if(empty($json) | !isset($json)) {
-                $req_suppr = $bddConnection->prepare('DELETE FROM cmw_votes_temp WHERE id = :id');
+            if(empty($json2) || !isset($json2)) {
+                $req_suppr = $bdd->prepare('DELETE FROM cmw_votes_temp WHERE id = :id');
                 $req_suppr->execute(array(
                     'id' => $data['id']
                 )); 
+                return false;
             } else {
                 $reqMaj = $bdd->prepare('UPDATE cmw_votes_temp SET action = :action WHERE id = :id');
                 $reqMaj->execute(array(
                     'id' => $data['id'],
                     'action' => json_encode(array_values($json2))
                     ));
+                return true;
             }
         }
     }
@@ -265,7 +267,12 @@ class vote {
         if(isset($id) AND !empty($id) and $id != "")
         {
             $url = $this->lienData['lien'];
-            if(strpos($url, 'serveur-prive.net'))
+            if(strpos($url, 'serveurs-mc.net'))
+            {
+                $API_call = $this->fetch("https://serveurs-mc.net/api/hasVote/".$id."/".$this->get_client_ip()."/10");
+                $json = json_decode($API_call,true);
+                return $json["hasVote"] == "true";
+            }else if(strpos($url, 'serveur-prive.net'))
             {
                 $API_call = $this->fetch("https://serveur-prive.net/api/vote/".$id."/". $this->get_client_ip());
                 return $API_call == 1;

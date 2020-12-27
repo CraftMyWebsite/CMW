@@ -37,7 +37,7 @@ class RecompenseAuto
 		$retour = array();
 		foreach($this->data as $data)
 		{
-			if($data['type'] == 1 && $data['valueType'] <= $nbVotes)
+			if($data['type'] == 1 && $data['valueType'] == $nbVotes)
 			{
 				array_push($retour, $data['action']);
 			}
@@ -85,8 +85,12 @@ class RecompenseAuto
 				if($month > cal_days_in_month(CAL_GREGORIAN,intval(date("j")),intval(date("Y")))) {
 					$month = cal_days_in_month(CAL_GREGORIAN,intval(date("j")),intval(date("Y")));
 				}
-				$next = strtotime($month." ".date("F", strtotime("next month")));
-				$next += $data['heur'] * 3600 + $data['min'] * 60 - 12 * 3600;
+				$years = intval(date("Y"));
+				if(intval(date("n")) == 12 && intval(date("n", strtotime("next month"))) == 1) {
+					$years = intval(date("Y")) + 1;
+				} 
+				$next = strtotime($month." ".date("F", strtotime("next month"))." ".$years );
+				$next += $data['heur'] * 3600 + $data['min'] * 60 + 3600;
 			}
 			return $next;
 		}

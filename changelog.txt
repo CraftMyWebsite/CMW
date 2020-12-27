@@ -1,55 +1,29 @@
-Changelog CraftMyWebsite 1.8.0
+Changelog CraftMyWebsite 1.8.1
 
 Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 
-[+] : Ajouter un événement (envoyé sur le serveur) qui rappelle au joueur de voter
-[=] : Sur le panel administrateur, rubrique membre, plusieurs pages pour l'affichage des membres avec fonctionnalités de recherche/tri
-(|) : Possibilité de modifier les quantités dans la boutique
-[=] : Refonte de la structure de la page profil
-[=] : Possibilité de se désabonner de la Newsletter en 1 clic
-[=] : Confirmation lors d'une tentative de suppression d'un compte joueur
-[+] : Ajout du moyen de paiement PaysafeCard mais par validation manuelle par l'administrateur du site
-[=] : Refonte du système de permission
-[+] : Mise en place d'une fonction unique permettant de vérifier les permissions d'un joueur
-[=] : Refonte du panel administrateur
-[-] : Retrait de Paypal Business car il n'est plus fonctionnel
-(|) : Réglage bug visuel sur le modal d'inscription
-(|) : Fix bug d'impossibilité d'édition des membres s'il y'en a plus de 100
-[=] : Refonte de la page membres dans le panel administrateur
-[=] : Réunion de deux fonctions JSONAPI équivalentes
-[=] : Refonte du système de gestion des serveurs RCON, Query et JSONAPI
-[=] : Refonte du système de requête et de cache pour les serveurs RCON, Query et JSONAPI
-[=] : Refonte de la page de gestion des serveurs RCON, Query et JSONAPI
-[=] : Réglage du chargement des skins
-[=] : Refonte de l'éditeur de page personnalisée
-[=] : Déplacement du système de cache des images de skin des utilisateurs vers le répertoire/utilisateurs prévu à cet effet
-[=] : Refonte totale de l'installateur
-(|) : Remise en place de la fonction de suppression du dossier d'installation
-[=] : Amélioration de la fonction récursive pour les chmod automatique
-[+] : Ajout de l'affichage de plusieurs informations de base sur l'installateur
-[=] : Réglages d'incohérences graphique sur le panel administrateur
-(|) : Réglage de bug sur la page de chat instantanné avec le serveur depuis le site
-[=] : Refonte du système de stats sur le panel administrateur
-(|) : Fix d'un bug qui ne prenait pas en compte le choix de la Newsletter à l'inscription
-[=] : L'exemple d'IP pour les serveurs JSONAPI est désormais en chiffre comme le demande le système
-(|) : Fix erreur 500 à la récupération du mot de passe par email
-[+] : Ajout des têtes des joueurs en ligne sur la page chat
-[=] : Refonte de la page vote
-[+] : Ajout sur la page vote de pouvoir envoyer plusieurs récompenses avec pourcentage de l'obtenir
-[+] : Ajout d'une toplist sur la page de vote
-(|) : Fix d'un bug qui permettait de se give des jetons
-[+] : Nouveau Thème défaut
-[+] : Ajout d'un éditeur de texte complet
-[+] : Option pour les images sur l'éditeur de texte
-[+] : Ajout d'une information Hors-Ligne/En ligne au niveau de RCON et JSONAPI
-[+] : Pouvoir citer une réponse sur le forum
-[+] : Barre de recherche sur le forum
-[=] : Heure sur les réponses du forum
-[+] : Ajout d'un mode nuit sur le panel
-[+] : Ajout d'une option pour acheter une offre avant une autre sur la boutique
-[=] : Amélioration de l'éditeur des offres sur la boutique
-[-] : Suppression de la messagerie qui n'est pas utilisée
-[=] : Corrections orthographiques et de tournures de phrases
+[=] : Correction d'une faille de sécurité mineure (XSS)
+[=] : Amélioration graphique du thème default
+[=] : Améliortion des requêtes vers l'api craftmywebsite.fr
+[=] : Amélioration de la sécurité du panier sur la boutique
+[=] : Agrandissement de touts les modals
+[=] : Amélioration de ckeditor
+[|] : Fix des bugs sur la page vote (Erreurs d'envoi de récompenses) 
+[|] : Fix bug du système de reset automatique des votes
+[|] : Fix des miniatures
+[|] : Fix du fond de l'entête du site
+[|] : Fix de l'ensemble des bugs et erreurs sur la boutique
+[|] : Fix des bugs touchant à la modification du forum
+[|] : Fix des bugs liés aux grades et de leurs permissions
+[|] : Fix des commentaires sur les news qui ne fonctionnaient pas
+[|] : Fix des disfonctionnements des notifications 
+[|] : Fix disfonctionnements liés au tchat
+[|] : Fix des réseaux sociaux et signature dans la partie "membres" du panel
+[|] : Fix des erreurs sur la page paiement du panel
+[+] : Ajout d'un messsage sur la page vote quand les récompenses ne sont pas données
+[+] : Ajout messages de confirmation/erreur lors de l'upload d'une image sur le panel
+[+] : Ajout retour après une action sur la page des récompenses auto
 
 
-Contributeurs : PandaxCSGO, Guedesite, PinglsDzn, BadiiiX, Emilien52, Florentlife, X3RO, RedBoard, AnackKel, Amjido.
+
+Contributeurs : Guedesite, BadiiiX, Emilien52, deadfire, RedBoard, Tomo, CapDRAKE, MrSheepSheep, Human1st.

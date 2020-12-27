@@ -45,7 +45,7 @@ class Chat extends JsonCon
 		$count = substr_count($message, '§');
 		if($count == 1)
 		{
-			return str_replace('§0', '', str_replace('§1', '<span style="color: #0000AA>', str_replace('§2', '<span style="color: #00AA00">', str_replace('§3', '<span style="color: #00AAAA>', str_replace('§4', '<span style="color: #AA0000>', str_replace('§5', '<span style="color: #AA00AA>', str_replace('§6', '<span style="color: #FFAA00">', str_replace('§7', '<span style="color: #AAAAAA">', str_replace('§8', '<span style="color: #555555>', str_replace('§9', '<span style="color: #5555FF">', str_replace('§a', '<span style="color: #55FF55;">', str_replace('§b', '<span style="color: #55FFFF">', str_replace('§c', '<span style="color: #FF5555>', str_replace('§d', '<span style="color: #FF55FF">', str_replace('§e', '<span style="color: #FFFF55">', str_replace('§f', '', $message)))))))))))))))).'</span>';
+			return str_replace('§0', '', str_replace('§1', '<span style="color: #0000AA">', str_replace('§2', '<span style="color: #00AA00">', str_replace('§3', '<span style="color: #00AAAA">', str_replace('§4', '<span style="color: #AA0000">', str_replace('§5', '<span style="color: #AA00AA">', str_replace('§6', '<span style="color: #FFAA00">', str_replace('§7', '<span style="color: #AAAAAA">', str_replace('§8', '<span style="color: #555555">', str_replace('§9', '<span style="color: #5555FF">', str_replace('§a', '<span style="color: #55FF55;">', str_replace('§b', '<span style="color: #55FFFF">', str_replace('§c', '<span style="color: #FF5555">', str_replace('§d', '<span style="color: #FF55FF">', str_replace('§e', '<span style="color: #FFFF55">', str_replace('§f', '', $message)))))))))))))))).'</span>';
 		}
 		elseif($count > 1)
 		{

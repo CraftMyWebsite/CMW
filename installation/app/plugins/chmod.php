@@ -20,7 +20,7 @@ function VerifieChmod() {
     $dir[6] = 'controleur/.htpasswd';
     $dir[7] = 'admin/actions/.htpasswd';
 
-    $dirDossier[0] = array('../theme/upload/', '../theme/upload/slider/', '../theme/upload/panel/');
+    $dirDossier[0] = array('../theme/upload/', '../theme/upload/navRap/', '../theme/upload/panel/');
     $dirDossier[1] = array('../utilisateurs/');
 
     $err = null;
@@ -31,7 +31,7 @@ function VerifieChmod() {
         $chmodu[$i]['pr'] = substr($chmod[$i], -3, 1);
         $chmodu[$i]['gr'] = substr($chmod[$i], -2, 1);
         $chmodu[$i]['pu'] = substr($chmod[$i], -1, 1);
-        if($chmodu[$i]['pr'] < 6 OR $chmodu[$i]['gr'] < 6 OR $chmodu[$i]['pu'] < 6)
+        if($chmodu[$i]['pr'] < 6 OR $chmodu[$i]['gr'] < 4 OR $chmodu[$i]['pu'] < 4)
         {
             if($err != null)        
                 $err = $err . ';' . (string) $i;
@@ -51,7 +51,7 @@ function VerifieChmod() {
             $chmodDossierU[$i][$j]['pr'] = substr($chmodDossier[$i][$j], -3, 1);
             $chmodDossierU[$i][$j]['gr'] = substr($chmodDossier[$i][$j], -2, 1);
             $chmodDossierU[$i][$j]['pu'] = substr($chmodDossier[$i][$j], -1, 1);
-            if(($chmodDossierU[$i][$j]['pr'] < 7 OR $chmodDossierU[$i][$j]['gr'] < 7 OR $chmodDossierU[$i][$j]['pu'] < 7) AND !$compte[$i])
+            if(($chmodDossierU[$i][$j]['pr'] < 6 OR $chmodDossierU[$i][$j]['gr'] < 4 OR $chmodDossierU[$i][$j]['pu'] < 4) AND !$compte[$i])
             {
                 if($errDossier != null)        
                     $errDossier = $errDossier . ';' . (string) $i;
@@ -77,7 +77,7 @@ function VerifieChmod() {
         $errDossier = explode(';', $errDossier);
         for($i = 0; $i < count($errDossier); $i++) 
         {    
-            $return['chmodDossier'][$i] = 'inférieur à 777 sur certains fichiers';
+            $return['chmodDossier'][$i] = 'inférieur à 755 sur certains fichiers';
             $return['dirDossier'][$i] = $dirDossier[$errDossier[$i]][0];
         }
     }
@@ -127,7 +127,7 @@ function DrawChmod($return)
                         <tr>
                             <td><?php echo $return['dir'][$i]; ?></td>
                             <td><?php echo $return['chmod'][$i]; ?></td>
-                            <td>777</td>
+                            <td>755</td>
                         </tr>
                         <?php } 
                     }?>

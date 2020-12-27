@@ -1,7 +1,7 @@
 <?php require_once('theme/'. $_Serveur_['General']['theme'].'/assets/php/alerts.php'); ?>
 <!-- Header -->
 <header>
-    <div class="header-content" style="background: linear-gradient(to bottom, rgba(77, 77, 77, 0.52), rgba(68, 68, 68, 0.73)), url('theme/upload/slider/<?= $_Accueil_['Slider']['image']; ?>') center;">
+    <div class="header-content" style="background: linear-gradient(to bottom, rgba(77, 77, 77, 0.52), rgba(68, 68, 68, 0.73)), url('theme/upload/bg.png') center;">
         <div class="container-fluid col-9">
             <!-- Navigation : -->
             <!-- Navigation Left -->

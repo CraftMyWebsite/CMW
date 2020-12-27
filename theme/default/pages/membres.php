@@ -54,7 +54,7 @@ if (isset($_GET['page_membre'])) {
                                 </td>
 
                                 <td>
-                                    <?= $Membres->gradeJoueur($value["pseudo"]); ?>
+                                    <?= Permission::getInstance()->gradeJoueur($value["pseudo"]); ?>
                                 </td>
 
                                 <td>

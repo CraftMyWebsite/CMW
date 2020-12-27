@@ -71,6 +71,7 @@ class JsonCon
 			{
 				$api = new JSONAPI($this->api['adresse'], $this->api['port'], $this->api['user'], $this->api['mdp']);
 				$this->api = $api;
+				$this->connected = true;
 			}
 			else
 			{
@@ -78,6 +79,7 @@ class JsonCon
 					$this->api['query']->Connect($this->api['data']['adresse'], $this->api['data']['portQ']);
 					$this->api['rcon']->Connect($this->api['data']['adresse'], $this->api['data']['portR'], 1, SourceQuery::SOURCE);
 					$this->api['rcon']->SetRconPassword($this->api['data']['mdp']);
+					$this->connected = true;
 				}
 				catch(MinecraftQueryException $e)
 				{
@@ -94,7 +96,6 @@ class JsonCon
 				
 				unset($this->api['data']);
 			}
-			$this->connected = true;
 		}
 	}
 	
@@ -125,311 +126,376 @@ class JsonCon
 	
 	public function SendBroadcast($message)
 	{
-		$message = str_replace('{PLAYER}', $this->pseudo, $message);
-		$message = str_replace('&', '§', $message);
-		if($this->TryMode())
-		{
-			$this->api->call("chat.broadcast", array($message));
-		}
-		else
-		{
-			if($this->api != null && $this->api['rcon']->isConnected())
-				$this->api['rcon']->Rcon("say ".$message);
+		if($this->isConnected()) {
+			$message = str_replace('{PLAYER}', $this->pseudo, $message);
+			$message = str_replace('&', '§', $message);
+			if($this->TryMode())
+			{
+				$this->api->call("chat.broadcast", array($message));
+			}
+			else
+			{
+				if($this->api != null && $this->api['rcon']->isConnected())
+					$this->api['rcon']->Rcon("say ".$message);
+			}
 		}
 	}
 	
 	public function GetChat($donnees)
 	{
-		if($this->TryMode())
-			return $this->api->call("streams.chat.latest", $donnees);
-		else
-			return null;
+		if($this->isConnected()) {
+			if($this->TryMode())
+			{
+				return $this->api->call("streams.chat.latest", $donnees);
+			}
+			else
+			{
+				return null;
+			}
+		}
 	}
 
 	public function getPlugins()
 	{
-		$key = $this->verifyReq("getPlugins");
-		if($key !== false)
-		{
-			return $key;
-		}
-		if($this->TryMode())
-		{
-			$plugins['Test'] = $this->api->call("getPlugins");
-			$plugins['Test'] = $plugins['Test'][0]["success"];
-		}
-		else
-		{
-			if($this->api != null)
+		if($this->isConnected()) {
+			$key = $this->verifyReq("getPlugins");
+			if($key !== false)
 			{
-				$data = $this->api['query']->GetInfo();
-				$plugins['Test'] = $data['Plugins'];
+				return $key;
 			}
+			if($this->TryMode())
+			{
+				$plugins['Test'] = $this->api->call("getPlugins");
+				$plugins['Test'] = $plugins['Test'][0]["success"];
+			}
+			else
+			{
+				if($this->api != null)
+				{
+					$data = $this->api['query']->GetInfo();
+					$plugins['Test'] = $data['Plugins'];
+				}
+			}
+			$this->updateReq("getPlugins", $plugins);
+			return $plugins;
+		} else {
+			return false;
 		}
-		$this->updateReq("getPlugins", $plugins);
-		return $plugins;
 	}
 
 	public function GetConsole()
 	{
-		$key = $this->verifyReq("getLatestConsoleLogsWithLimit");
-		if($key !== false)
-			return $key;
-		$msg = 12;
-		if($this->TryMode())
-		{
-			$console['Test'] = $this->api->call("getLatestConsoleLogsWithLimit", array($msg));
-			$console['Test'] = $console['Test'][0]["success"];
+		if($this->isConnected()) {
+			$key = $this->verifyReq("getLatestConsoleLogsWithLimit");
+			if($key !== false)
+				return $key;
+			$msg = 12;
+			if($this->TryMode())
+			{
+				$console['Test'] = $this->api->call("getLatestConsoleLogsWithLimit", array($msg));
+				$console['Test'] = $console['Test'][0]["success"];
+			}
+			else
+				$console['Test'] = "Impossible de récupérer les données de la console en RCON/QUERY";
+			$this->updateReq("getLatestConsoleLogsWithLimit", $console);
+			return $console;
+		} else {
+			return false;
 		}
-		else
-			$console['Test'] = "Impossible de récupérer les données de la console en RCON/QUERY";
-		$this->updateReq("getLatestConsoleLogsWithLimit", $console);
-		return $console;
 	}
 
 	public function reloadServer() {
-		if($this->TryMode())
-			return $this->api->call("reloadServer");
-		else
-			return false;
+		if($this->isConnected()) {
+			if($this->TryMode())
+			{
+				return $this->api->call("reloadServer");
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 
 	public function restartServer() {
-		if($this->TryMode())
-			return $this->api->call("server.power.restart");
-		else
-			return false;
+		if($this->isConnected()) {
+			if($this->TryMode())
+			{
+				return $this->api->call("server.power.restart");
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 
 	public function getPermissionsGroups($pseudo) {
-		$key = $this->verifyReq("permissions.getGroups.".$pseudo);
-		if($key !== false)
-			return $key;
-		if($this->TryMode())
-		{
-			$return = $this->api->call("permissions.getGroups", Array($pseudo));
-			$this->updateReq("permissions.getGroups.".$pseudo, $return);
-			return $return;
-		}
-		else
+		if($this->isConnected()) {
+			$key = $this->verifyReq("permissions.getGroups.".$pseudo);
+			if($key !== false)
+			{
+				return $key;
+			}
+			if($this->TryMode())
+			{
+				$return = $this->api->call("permissions.getGroups", Array($pseudo));
+				$this->updateReq("permissions.getGroups.".$pseudo, $return);
+				return $return;
+			}
+			else
+			{
+				return '';
+			}
+		} else {
 			return '';
+		}
 	}
 	
 	public function SendMessage($donnees)
 	{
-		if($this->TryMode())
-		{
-			$this->api->call("players.name.send_message", $donnees);
-		}
-		else {
-			if($this->api != null && $this->api['rcon']->isConnected())	
-				$data = $this->api['rcon']->Rcon('msg '.$donnees[0].' '.$donnees[1]);
+		if($this->isConnected()) {
+			if($this->TryMode())
+			{
+				$this->api->call("players.name.send_message", $donnees);
+			}
+			else {
+				if($this->api != null && $this->api['rcon']->isConnected())	
+					$data = $this->api['rcon']->Rcon('msg '.$donnees[0].' '.$donnees[1]);
+			}
 		}
 	}
 
 	public function getMonnaie()
 	{
-		$key = $this->verifyReq("economy.currency.name_plural");
-		if($key !==false)
-			return $key;
-		if($this->TryMode())
-		{
-			$return = $this->api->call("economy.currency.name_plural");
-			$this->updateReq("economy.currency.name_plural", $return);
-			return $return;
+		if($this->isConnected()) {
+			$key = $this->verifyReq("economy.currency.name_plural");
+			if($key !==false)
+				return $key;
+			if($this->TryMode())
+			{
+				$return = $this->api->call("economy.currency.name_plural");
+				$this->updateReq("economy.currency.name_plural", $return);
+				return $return;
+			}
 		}
 		return false;
 	}
 
 	public function runConsoleCommand($message)
 	{
-		$message = str_replace('{PLAYER}', $this->pseudo, $message);
-		$message = str_replace('&', '§', $message);
-		if($this->TryMode())
-		{
-			$this->api->call("runConsoleCommand", array($message));
+		if($this->isConnected()) {
+			$message = str_replace('{PLAYER}', $this->pseudo, $message);
+			$message = str_replace('&', '§', $message);
+			if($this->TryMode())
+			{
+				$this->api->call("runConsoleCommand", array($message));
+			}
+			else
+			{
+				if($this->api != null && $this->api['rcon']->isConnected())
+					$this->api['rcon']->Rcon($message);
+			}		
 		}
-		else
-		{
-			if($this->api != null && $this->api['rcon']->isConnected())
-				$this->api['rcon']->Rcon($message);
-		}		
 	}
 	
 	//Cette fonction à la propriété de gérer les "Grades temporaires" !
 	public function AddPlayerToGroup($message, $duree)
 	{
-		if($this->TryMode())
-		{
-			$this->api->call("runConsoleCommand", array('manudel '.$this->pseudo));
-			$this->api->call("permissions.addPlayerToGroup", array($this->pseudo, $message));
-			require_once('modele/boutique/tempgrades.class.php');
-			$tempGrade = new TempGrades($this->bdd, $this->pseudo, $duree, $message);
-			if($tempGrade->ExistPlayer())
+		if($this->isConnected()) {
+			if($this->TryMode())
 			{
-				if($duree == 0)
-					$tempGrade->MajJoueurVie();
+				$this->api->call("runConsoleCommand", array('manudel '.$this->pseudo));
+				$this->api->call("permissions.addPlayerToGroup", array($this->pseudo, $message));
+				require_once('modele/boutique/tempgrades.class.php');
+				$tempGrade = new TempGrades($this->bdd, $this->pseudo, $duree, $message);
+				if($tempGrade->ExistPlayer())
+				{
+					if($duree == 0)
+						$tempGrade->MajJoueurVie();
+					else
+						$tempGrade->MajJoueur();
+				}
 				else
-					$tempGrade->MajJoueur();
-			}
-			else
-			{
-				if($duree == 0)
-					$tempGrade->CreerJoueurVie();
-				else
-					$tempGrade->CreerJoueur();
+				{
+					if($duree == 0)
+						$tempGrade->CreerJoueurVie();
+					else
+						$tempGrade->CreerJoueur();
+				}
 			}
 		}
 	}
 
 	public function ResetPlayer($pseudo, $grade)
 	{
-		if($this->TryMode())
-		{
-			$this->api->call("runConsoleCommand", array('manudel '.$pseudo));
-			if(!empty($grade))
-				$this->api->call("permissions.addPlayerToGroup", array($pseudo, $grade));	
+		if($this->isConnected()) {
+			if($this->TryMode())
+			{
+				$this->api->call("runConsoleCommand", array('manudel '.$pseudo));
+				if(!empty($grade))
+					$this->api->call("permissions.addPlayerToGroup", array($pseudo, $grade));	
+			}
 		}
 	}
 	
 	public function GivePlayerItem($commande)
 	{
-		if($this->TryMode())
-		{
-			$this->api->call("runConsoleCommand", array('give '.$this->pseudo . ' '. $commande));	
-		}
-		else
-		{
-			if($this->api != null && $this->api['rcon']->isConnected())
-				$this->api['rcon']->Rcon('give '.$this->pseudo.' '.$commande);
+		if($this->isConnected()) {
+			if($this->TryMode())
+			{
+				$this->api->call("runConsoleCommand", array('give '.$this->pseudo . ' '. $commande));	
+			}
+			else
+			{
+				if($this->api != null && $this->api['rcon']->isConnected())
+					$this->api['rcon']->Rcon('give '.$this->pseudo.' '.$commande);
+			}
 		}
 	}
 
 	public function GivePlayerXp($message)
 	{
-		if($this->TryMode())
-			$this->api->call("givePlayerXp", array($message));
+		if($this->isConnected()) {
+			if($this->TryMode()) {
+				$this->api->call("givePlayerXp", array($message));
+			}
+		}
 	}
 
 	public function GivePlayerMoney($message)
 	{
-		if($this->TryMode())
-			$this->api->call("econ.depositPlayer", array($this->pseudo, $message));
+		if($this->isConnected()) {
+			if($this->TryMode())
+			{
+				$this->api->call("econ.depositPlayer", array($this->pseudo, $message));
+			}
+		}
 	}
 
 	public function GetBanList()
 	{
-		$key = $this->verifyReq("files.read.banlist");
-		if($key !== false)
-			return $key;
-		if($this->TryMode())
-		{
-			$return = $this->api->call("files.read", array("banned-players.json"));
-			$this->updateReq("files.read.banlist", $return);
-			return $return;
+		if($this->isConnected()) {
+			$key = $this->verifyReq("files.read.banlist");
+			if($key !== false)
+				return $key;
+			if($this->TryMode())
+			{
+				$return = $this->api->call("files.read", array("banned-players.json"));
+				$this->updateReq("files.read.banlist", $return);
+				return $return;
+			}
 		}
 		return false;
 	}
 
 	public function GetPlayers()
 	{
-		if($this->TryMode())
-		{
-			$key = $this->verifyReq("getPlayerNames");
-			if($key !== false)
-				return $key;
-			$req = $this->api->call("getPlayerNames");
-			$return = $req[0]['success'];
-			$this->updateReq("getPlayerNames", $return);
-			return $return;
-		}
-		else
-		{
-			$key = $this->verifyReq("query.getPlayers");
-			if($key !== false)
+		if($this->isConnected()) {
+			if($this->TryMode())
 			{
-				return $key;
+				$key = $this->verifyReq("getPlayerNames");
+				if($key !== false)
+					return $key;
+				$req = $this->api->call("getPlayerNames");
+				$return = $req[0]['success'];
+				$this->updateReq("getPlayerNames", $return);
+				return $return;
 			}
-			$req = $this->api['query']->GetPlayers();
-			$this->updateReq("query.getPlayers", $req);
-			return $req;
+			else
+			{
+				$key = $this->verifyReq("query.getPlayers");
+				if($key !== false)
+				{
+					return $key;
+				}
+				$req = $this->api['query']->GetPlayers();
+				$this->updateReq("query.getPlayers", $req);
+				return $req;
+			}
+		} else {
+			return false;
 		}
 	}
 
 	// Récupère les pseudo des joueurs et le nombre de joueurs en ligne...
 	public function GetServeurInfos()
 	{
-		if($this->TryMode())
-		{
-			$serveurStats = array(
-				'enLignes' => 0,
-				'maxJoueurs' => 1,
-				'joueurs' => 2,
-				'version' => 3,
-				'usedMemoryServer' => 4,
-				'totalMemoryServer' => 5,
-				'usedDiskSizeServer' => 6,
-				'totalDiskSizeServer' => 7,
-				'freeDiskSizeServer' => 8
-			);
-			$reqs = array(
-				'getPlayerCount',
-				'getPlayerLimit',
-				'getPlayerNames',
-				'getBukkitVersion',
-				'server.performance.memory.used',
-				'server.performance.memory.total',
-				'server.performance.disk.used',
-				'server.performance.disk.size',
-				'server.performance.disk.free'
-			);
-			foreach($serveurStats as $clee => $value)
+		if($this->isConnected()) {
+			if($this->TryMode())
 			{
-				$key = $this->verifyReq($reqs[$value]);
-				if($key !== false)
-					$serveurStats[$clee] = $key;
-				else
+				$serveurStats = array(
+					'enLignes' => 0,
+					'maxJoueurs' => 1,
+					'joueurs' => 2,
+					'version' => 3,
+					'usedMemoryServer' => 4,
+					'totalMemoryServer' => 5,
+					'usedDiskSizeServer' => 6,
+					'totalDiskSizeServer' => 7,
+					'freeDiskSizeServer' => 8
+				);
+				$reqs = array(
+					'getPlayerCount',
+					'getPlayerLimit',
+					'getPlayerNames',
+					'getBukkitVersion',
+					'server.performance.memory.used',
+					'server.performance.memory.total',
+					'server.performance.disk.used',
+					'server.performance.disk.size',
+					'server.performance.disk.free'
+				);
+				foreach($serveurStats as $clee => $value)
 				{
-					$req = $reqs[$value];
-					$serveurStats[$clee] = $this->api->call($req); 
-					$serveurStats[$clee] = $serveurStats[$clee][0]['success'];
-					$this->updateReq($req, $serveurStats[$clee]);
-				}
-				if(is_numeric($serveurStats[$clee]))
-					$serveurStats[$clee] = round($serveurStats[$clee]);
-			}
-		}
-		else
-		{
-			if($this->api != null && $this->api['query'] != null)
-			{
-				$key = $this->verifyReq("query.getInfo");
-				if($key !== false)
-				{
-					$data = $key;
-					$serveurStats['enLignes'] = $data['Players'];
-					$serveurStats['maxJoueurs'] = $data['MaxPlayers'];
-					$serveurStats['version'] = $data['Version'];
-				}
-				else
-				{
-					$data = $this->api['query']->GetInfo();
-					$serveurStats['enLignes'] = $data['Players'];
-					$serveurStats['maxJoueurs'] = $data['MaxPlayers'];
-					$serveurStats['version'] = $data['Version'];
-					$this->updateReq("query.getInfo", $data);
-				}
-				$key = $this->verifyReq("query.getPlayers");
-				if($key !== false)
-					$serveurStats['joueurs'] = $key;
-				else
-				{
-					$serveurStats['joueurs'] = $this->api['query']->GetPlayers();
-					$this->updateReq("query.getPlayers", $serveurStats['joueurs']);
+					$key = $this->verifyReq($reqs[$value]);
+					if($key !== false)
+						$serveurStats[$clee] = $key;
+					else
+					{
+						$req = $reqs[$value];
+						$serveurStats[$clee] = $this->api->call($req); 
+						$serveurStats[$clee] = $serveurStats[$clee][0]['success'];
+						$this->updateReq($req, $serveurStats[$clee]);
+					}
+					if(is_numeric($serveurStats[$clee]))
+						$serveurStats[$clee] = round($serveurStats[$clee]);
 				}
 			}
+			else
+			{
+				if($this->api != null && $this->api['query'] != null)
+				{
+					$key = $this->verifyReq("query.getInfo");
+					if($key !== false)
+					{
+						$data = $key;
+						$serveurStats['enLignes'] = $data['Players'];
+						$serveurStats['maxJoueurs'] = $data['MaxPlayers'];
+						$serveurStats['version'] = $data['Version'];
+					}
+					else
+					{
+						$data = $this->api['query']->GetInfo();
+						$serveurStats['enLignes'] = $data['Players'];
+						$serveurStats['maxJoueurs'] = $data['MaxPlayers'];
+						$serveurStats['version'] = $data['Version'];
+						$this->updateReq("query.getInfo", $data);
+					}
+					$key = $this->verifyReq("query.getPlayers");
+					if($key !== false)
+						$serveurStats['joueurs'] = $key;
+					else
+					{
+						$serveurStats['joueurs'] = $this->api['query']->GetPlayers();
+						$this->updateReq("query.getPlayers", $serveurStats['joueurs']);
+					}
+				}
+			}
+		    return $serveurStats;
+		} else {
+			return false;
 		}
-	    return $serveurStats;
 	}
 
 	public function close()
@@ -482,6 +548,26 @@ class JsonCon
 				'valeur' => json_encode($value),
 				'temp' => time()
 			));
+		}
+	}
+
+	private function isConnected() {
+		$this->TryMode();
+		if($this->connected) {
+			return true;
+		} else {
+			$stack = debug_backtrace();
+			$error_msg = "Action annulé, la connection (".($this->mode == 1 ? "JSONAPI" : "RCON/QUERY") .") au serveur ".($this->mode == 1 ? $this->api['adresse'] : $this->api['data']['adresse'])." n'a pas été établie.";
+		    for ($i = 0; $i < 5; $i++)
+		    {
+		        if (false === ($frame = next($stack)))
+		        {
+		            break;
+		        }
+		        $error_msg .= " <br/> " . $frame['function'] . ':' . $frame['file'] . ' line ' . $frame['line'];
+		    }
+		    trigger_error($error_msg, E_USER_NOTICE);
+			return false;
 		}
 	}
 }

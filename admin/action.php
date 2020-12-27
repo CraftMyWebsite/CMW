@@ -8,6 +8,9 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
+		case 'supprUpload': 
+			require('admin/actions/supprUpload.php');
+			exit();
 		case 'editUploadImage':
 			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
 				$_Serveur_['uploadImage']['maxFileSize'] = intval($_POST['maxFileSize']);
@@ -416,10 +419,7 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		case 'changeSlider':
 			require_once('admin/actions/changeSlider.php');
 		break;
-		
-		case 'postSlider':
-			require_once('admin/actions/postSlider.php');
-		break; 
+
 		
 		case 'supprSlider':
 			require_once('admin/actions/supprSlider.php');
