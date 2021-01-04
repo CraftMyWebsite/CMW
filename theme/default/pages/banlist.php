@@ -28,7 +28,7 @@
                             <ul class="categorie-content nav nav-tabs">
                                 <?php for ($i = 0; $i < count($jsonCon); $i++) : ?>
                                     <li class="categorie-item nav-item<?= ($i == 0) ? ' active' : '' ?>">
-                                        <a href="#server-<?= $j ?>" class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>" data-toggle="tab">
+                                        <a href="#server-<?= $i ?>" class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>" data-toggle="tab">
                                             <?= $lectureJSON[$i]['nom']; ?>
                                         </a>
                                     </li>
