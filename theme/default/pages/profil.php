@@ -41,10 +41,12 @@ if (isset($_GET['erreur'])) {
 
         case 9:
             $errorContent = 'Erreur, Impossible de vous abonner / désabonner à votre Newsletter...';
-
+            break;
+            
         case 10:
             $errorContent = 'Erreur, Impossible d\'afficher / cacher votre email...';
-
+            break;
+            
         default:
             $errorContent = 'Une erreur est survenue lors de l\'enregistrement de vos informations !';
             break;
