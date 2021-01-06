@@ -453,10 +453,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/supprSection.php');
 		break;
 		
-		case 'editPermissions':
-			require_once('admin/actions/editPermissions.php');
-		break;
-		
 		case 'supprTicket':
 			require_once('admin/actions/supprTicket.php');
 		break;

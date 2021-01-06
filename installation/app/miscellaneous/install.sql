@@ -1,3 +1,11 @@
+CREATE TABLE IF NOT EXISTS cmw_menu (
+  `id` int(11) UNSIGNED  AUTO_INCREMENT PRIMARY KEY,
+  `dest` int(3),
+  `url` varchar(100) DEFAULT NULL,
+  `ordre` int(2),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS cmw_ban (
   `id` smallint(5) UNSIGNED  AUTO_INCREMENT PRIMARY KEY,
   `ip` VARCHAR(20) ,
