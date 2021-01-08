@@ -50,6 +50,7 @@ class Permission {
 		}
 		else
 		{
+			$TableauPerm = array();
 			if($perm[0] == "connect")
 			{
 				return true;
