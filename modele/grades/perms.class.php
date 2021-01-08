@@ -94,6 +94,7 @@ class Permission {
 			}
 			array_shift($perm);
 			$retour = false;
+			if(!is_array($TableauPerm)) $TableauPerm = array();
 			foreach($perm as $value)
 			{
 				if(!array_key_exists($value, $TableauPerm))
