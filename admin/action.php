@@ -8,6 +8,10 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
+	    
+	    case 'mooveMenu':
+	        require('admin/actions/mooveMenu.php');
+	        exit();
 		case 'supprUpload': 
 			require('admin/actions/supprUpload.php');
 			exit();
@@ -88,9 +92,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			exit();
 		case 'getRecompenseList':
 			require('admin/actions/getRecompenseList.php');
-			exit();
-		case 'getMenuLien':
-			require('admin/actions/getMenuLien.php');
 			exit();
 		case 'getMenuListe':
 			require('admin/actions/getMenuListe.php');
@@ -279,8 +280,8 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/serveurJsonSuppr.php');
 		break;
 		
-		case 'newLienMenu': 
-			require_once('admin/actions/newLienMenu.php');
+		case 'addMenu': 
+			require_once('admin/actions/addMenu.php');
 		break;
 		
 		case 'editPayement': 
@@ -311,30 +312,19 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/supprimerPaypalOffre.php');
 		break;
 		
-		case 'supprLienMenu': 
-			require_once('admin/actions/supprLienMenu.php');
-		break;
 		
-		case 'supprLienMenuDeroulant': 
-			require_once('admin/actions/supprLienMenuDeroulant.php');
-		break;
-		
-		case 'newListeMenu': 
-			require_once('admin/actions/newListeMenu.php');
+		case 'supprMenu': 
+			require('admin/actions/supprMenu.php');
 		break;
 		
 		case 'modifierLien': 
 			require_once('admin/actions/modifierLien.php');
 		break;
 		
-		case 'editMenuListe': 
-			require_once('admin/actions/editMenuListe.php');
+		case 'editMenu': 
+			require_once('admin/actions/editMenu.php');
 		break;
-		
-		case 'nouveauMenuListeLien': 
-			require_once('admin/actions/nouveauMenuListeLien.php');
-		break;
-		
+				
 		case 'deplacerMenu': 
 			require_once('admin/actions/deplacerMenu.php');
 		break;

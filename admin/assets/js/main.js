@@ -128,14 +128,9 @@ function pagesUpdate() {
 	}});
 }
 
-function menuLienUpdate() {
-	updateCont("admin.php?action=getMenuLien", get("allLien"), function(data) { if(data) { 
-		initPostCallback( null);
-	}});
-}
 
-function menuListeUpdate() {
-	updateCont("admin.php?action=getMenuListe", get("allListe"), function(data) { if(data) { 
+function menuUpdate() {
+	updateCont("admin.php?action=getMenuListe", get("allMenu"), function(data) { if(data) { 
 		initPostCallback( null);
 	}});
 }

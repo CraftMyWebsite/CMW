@@ -44,17 +44,6 @@
 		}
 	}
 	
-
-	// On effectue la même opération mais pour le fichier YML du menu.
-	$configLecture = new Lire('./modele/config/configMenu.yml');
-	$_Menu_ = $configLecture->GetTableau();
-
-	for($i = 0; $i < count($_Menu_['MenuTexte']); $i++)
-	{
-		$_Menu_['MenuTexteBB'][$i] = $_Menu_['MenuTexte'][$i];
-	}
-
-	
 	$configLecture = new Lire('modele/config/configWidgets.yml');
 	$_Widgets_ = $configLecture->GetTableau();
 	

@@ -1,4 +1,9 @@
 <?php
+require("modele/menu.class.php");
+$_Menu_ = new menu($bddConnection);
+$_Menu_ = $_Menu_->getMenuGroup();
+
+
 // On inclut le fichier de contrôle de la maintenance
 include('controleur/maintenance.php');
 // Si la maintenance est activé
