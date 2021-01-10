@@ -15,11 +15,11 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 
 			$_POST["show_email"] = !empty($_POST['show_email']) ? false : true;
 			$get_Lien = 'http://'.$_SERVER['HTTP_HOST'].'/index.php?&action=validationMail&pseudo='.urlencode($get_Pseudo).'&cle='.urldecode($get_CleUnique).'';
-			if (filter_var($lastMembre['ip'], FILTER_VALIDATE_IP)){
-      	$getIp = get_client_ip_env();
-      }else{
-				header('Location: ?&page=erreur&erreur=0'); // Page d'erreur indiquant qu'un des champs est invalide ou incomplet
-      }
+			if (filter_var(get_client_ip_env(), FILTER_VALIDATE_IP)){
+					$getIp = get_client_ip_env();
+				}else{
+					header('Location: ?&page=erreur&erreur=0'); // Page d'erreur indiquant qu'un des champs est invalide ou incomplet
+				}
 
 
 			if(strlen($_POST['pseudo']) > 16) {
