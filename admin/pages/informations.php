@@ -25,8 +25,8 @@
                                 <a style="cursor:pointer;"onClick="sendPost('dropVisits')"; class="btn btn-sm btn-outline-secondary">
                                     Supprimer les visites
                                 </a>
-                                <script>initPost("dropVisits", "admin.php?action=dropVisits",  
-                                            function (data) { if(data) { 
+                                <script>initPost("dropVisits", "admin.php?action=dropVisits",
+                                            function (data) { if(data) {
                                                 var ctx = get('visitsChart')
                                                 var myChart = new Chart(ctx, {
                                                     type: 'line',
@@ -64,7 +64,7 @@
                     <div class="card-body ollapse show" id="stats">
                         <canvas class="my-4 w-100" id="visitsChart" width="900" height="200">
                                   <script>
-                                   <?php 
+                                   <?php
                                    $Dates = date("Y-m-d");
                                    $Dates_Yesterday = strftime("%Y-%m-%d", mktime(0, 0, 0, date('m'), date('d')-1, date('y')));
 
@@ -198,7 +198,7 @@
                                 <div class="row">
                                     <div class="col-md-8 offset-col-md-4">
                                         <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$j?></h4>
-                                        <p class="card-category"> 
+                                        <p class="card-category">
                                             En ligne - <?=$serveur['nom'];?>
                                         </p>
                                     </div>
@@ -212,7 +212,7 @@
                                 </div>
                             </a>
                         </div>
-                        <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'player') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'command') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) { 
+                        <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'player') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'command') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) {
                             ?>
 
                             <div class="modal fade" id="infoServeur<?=$conEtablie[$j]?>" tabindex="-1" role="dialog"
@@ -226,7 +226,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body" style="height: 500px;overflow-y:scroll!important">
-                                           
+
                                         <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console')) { ?>
                                             <div class="card">
                                                 <div class="card-header">
@@ -242,7 +242,7 @@
                                                     }
                                                     setInterval("updateConsole()", 10000);
                                                 </script>
-                                                <?php 
+                                                <?php
                                                 $date = date("Y-m-d");
                                                 echo '<div id="console"><div style="background-color: #373737;color: #8F8F8F;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:solid 2px #8F8F8F;overflow: hidden;">';
                                                 foreach($console[$j]['Test'] as $value) {
@@ -315,7 +315,7 @@
 
                                         <?php }
                                         if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins')) { ?>
-                                        
+
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h4 class="card-title">
@@ -344,7 +344,7 @@
                                                     </table>
                                                 </div>
                                                 <div class="card-footer">
-                                                <?php 
+                                                <?php
                                                if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) { ?>
                                                     <div class="row">
                                                         <div class="col-md-4 text-center">
@@ -368,7 +368,7 @@
                                                <?php } ?>
                                                 </div>
                                             </div>
-                                    
+
 
                                         </div>
                                         <div class="modal-footer">
@@ -387,7 +387,7 @@
                                 <div class="row">
                                     <div class="col-md-8 offset-col-md-4">
                                         <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$j?></h4>
-                                        <p class="card-category"> 
+                                        <p class="card-category">
                                             Hors Ligne - <?=$serveur['nom'];?>
                                         </p>
                                     </div>
@@ -430,7 +430,7 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                           
+
                                             while($lastMembre = $lastRegisterMember->fetch(PDO::FETCH_ASSOC))
                                             {
                                                 echo '<tr>';
@@ -440,7 +440,13 @@
                                                 echo '<td>'.$lastMembre['tokens'].'</td>';
                                                 echo '<td>'.date('d/m/Y', $lastMembre['anciennete']).' &agrave; '.date('H:i:s',$lastMembre['anciennete']).'</td>';
                                                 if($ShowMail) { echo '<td>'.($lastMembre['ValidationMail'] == 1 ? "valide" : "invalide").'</td>'; }
-                                                if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) { echo '<td>'.$lastMembre['ip'].'</td>'; }
+                                                if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) {
+                                                    if (filter_var($lastMembre['ip'], FILTER_VALIDATE_IP)){
+                                                        echo '<td>'.$lastMembre['ip'].'</td>';
+                                                    }else{
+                                                        echo '<td>'.htmlspecialchars($lastMembre['ip']).' <a title="Impossible de vérifier la validité de cette adresse ip"><i class="fas fa-exclamation-circle animation-wow" style="color: darkred;"></i></a></td>';
+                                                    }
+                                                }
                                                  echo '</tr>';
                                             } ?>
                                         </tbody>
@@ -462,22 +468,22 @@
                                     </div>
                                     <div class="float-right">
                                         <button type="submit"  class="btn btn-sm btn-outline-secondary" onClick="sendPost('clearStaffMessage')" title="Cliquer ici pour supprimer à jamais tous les messages"><i class="fas fa-trash" style="color: #bf0a0a;"></i></button>
-                                         <script>initPost("clearStaffMessage", "admin.php?action=clearPostit",  
+                                         <script>initPost("clearStaffMessage", "admin.php?action=clearPostit",
                                             function (data) { if(data) { get('allStaffMessage').innerHTML = "";} });</script>
                                     </div>
                                 </h4>
                             </div>
                             <div class="card-body postit" id="allStaffMessage" style="overflow-y: scroll;padding: 0px;height: 155px; width: 100%;">
-                                <?php 
+                                <?php
                                     while ($message_postit = $all_message_staff->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <p id="StaffMessage-<?=$message_postit['id'];?>">
-                                                [<strong><?php echo $message_postit['auteur']; ?></strong>]: 
-                                            <?php echo $message_postit['message']; ?>&nbsp;&nbsp; 
+                                                [<strong><?php echo $message_postit['auteur']; ?></strong>]:
+                                            <?php echo $message_postit['message']; ?>&nbsp;&nbsp;
                                             <a id="suppStaffMessage-<?=$message_postit['id'];?>" style="cursor:pointer;"onClick="sendPost('suppStaffMessage-<?=$message_postit['id'];?>')">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                                 <input type="number" style="display:none;" value="<?=$message_postit['id'];?>" name="id">
                                             </a>
-                                            <script>initPost("suppStaffMessage-<?=$message_postit['id'];?>", "admin.php?action=supprPostit",  
+                                            <script>initPost("suppStaffMessage-<?=$message_postit['id'];?>", "admin.php?action=supprPostit",
                                             function (data) { if(data) { hide("StaffMessage-<?=$message_postit['id'];?>")} });</script>
                                         </p>
                                    <?php } ?>
@@ -485,7 +491,7 @@
                             <div class="card-footer" id="sendStaffMessage">
                                     <input type="text" name="message" id="message" placeholder="Message (max 50 caractères)" class="form-control" maxlength="50">
                                     <button type="submit" class="btn btn-success w-100" onClick="sendPost('sendStaffMessage')">Envoyer !</button>
-                                    <script>initPost("sendStaffMessage", "admin.php?action=creerPostit",  
+                                    <script>initPost("sendStaffMessage", "admin.php?action=creerPostit",
                                             function (data) { if(data) { console.log('message envoyé'); get('allStaffMessage').innerHTML = "<p>[<strong><?php echo $_Joueur_['pseudo']?></strong>]: "+getValueByName('sendStaffMessage', 'message')+"</p>"+get('allStaffMessage').innerHTML; clearAllInput('sendStaffMessage');}})</script>
                             </div>
                         </div>
@@ -568,7 +574,7 @@
                                                 echo '</tr>';
                                             }
                                             ?>
-                                         
+
 
                                         </tbody>
                                     </table>

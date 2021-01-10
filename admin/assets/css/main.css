@@ -52,7 +52,7 @@ main {
   height: 150px;
   margin: auto;
   /* margin: 15px 0 0 -15%;
-  left: 50%; 
+  left: 50%;
   margin: 10px 50px 20px; */
   z-index: 1002;
 }
@@ -207,6 +207,9 @@ main {
 .switch input {
   display: none;
 }
+
+/* Animation icone alerte */
+.animation-wow{animation:wow-alert 5s ease infinite}@keyframes wow-alert{0%{transform:scale(1)}5%{transform:scale(1.25)}20%{transform:scale(1)}30%{transform:scale(1)}35%{transform:scale(1.25)}50%{transform:scale(1)}55%{transform:scale(1.25)}70%{transform:scale(1)}}
 
 .slider {
   position: absolute;
@@ -639,8 +642,8 @@ border: 1px solid rgb(222,222,222);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-.loader-wave-background { 
- z-index:999; 
+.loader-wave-background {
+ z-index:999;
   display: block;
   position: absolute;
   top: 0;
@@ -1033,7 +1036,7 @@ input[type=range]:focus::-ms-fill-upper {
   background-color: #428bca;
 }
 
-/* 
+/*
  (c) CraftMyWebsite,
   Css by: guedesite & PinglsDzn
 */

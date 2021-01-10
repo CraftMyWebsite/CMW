@@ -1,5 +1,5 @@
 <?php
-function GetClientIpEnv() 
+function GetClientIpEnv()
 {
 	$ipaddress = '';
 	if (getenv('HTTP_CLIENT_IP')) {
@@ -17,7 +17,7 @@ function GetClientIpEnv()
 	} else {
 		$ipaddress = '0.0.0.0';
 	}
-	return $ipaddress;
+	return htmlspecialchars($ipaddress);
 }
 
 require_once('modele/app/accueil.class.php');
@@ -50,7 +50,7 @@ $couleurInfos[2] = '3';
 
 $getIp = GetClientIpEnv();
 $getDates = date("Y-m-d");
-$getOldDates = strftime("%Y-%m-%d", mktime(0, 0, 0, date('m'), date('d')-7, date('y'))); 
+$getOldDates = strftime("%Y-%m-%d", mktime(0, 0, 0, date('m'), date('d')-7, date('y')));
 
 $repCheckVisit = $AccueilData->CheckVisit($getIp, $getDates);
 $CheckVisit = $repCheckVisit->rowCount();
