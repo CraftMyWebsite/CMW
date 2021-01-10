@@ -95,8 +95,12 @@ class menu {
     }
     
     public function createMenu($data) {
-        $req = $this->bdd->prepare("INSERT INTO cmw_menu (name, dest, url, ordre) VALUES (:name, :dest, :url, :ordre)");
+        $req = $this->bdd->prepare("INSERT INTO cmw_menu (name, dest, url, ordre) VALUES (:name, :dest, :url, :ordre);");
         $req->execute(array("name" => $data['name'], "dest" => $data['dest'], "url" => $data['url'], "ordre" => $this->getMaxOfDest($data['dest'])));
+        
+        $req = $this->bdd->query("SELECT id FROM cmw_menu WHERE id= LAST_INSERT_ID()");
+        $req = $req->fetch(PDO::FETCH_ASSOC);
+        return $req['id'];
     }
 
     public function supprMenu($id) {

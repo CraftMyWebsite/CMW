@@ -18,7 +18,8 @@ if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) {
     } else {
         $data['url'] = null;
     }
-    $Menu->createMenu($data);
+    $id = $Menu->createMenu($data);
+    echo '[DIV]'.$id;
     
 }
 ?>

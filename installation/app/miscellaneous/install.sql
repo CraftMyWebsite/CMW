@@ -509,3 +509,14 @@ INSERT INTO `cmw_sysmail` (`idMail`, `fromMail`, `sujetMail`, `msgMail`, `strict
 
 INSERT INTO `cmw_ban_config` (`id`, `titre`, `texte`) VALUES
 (1, 'Vous êtes bannis', 'Vous avez été bannis du site, veuillez prendre contact avec l\'administration pour les raisons de votre bannissement.');
+
+INSERT INTO `cmw_menu` (`id`, `dest`, `url`, `ordre`, `name`) VALUES
+(1, -1, 'index.php', 0, 'Accueil'),
+(2, -1, NULL, 1, 'Serveur'),
+(3, -1, '?&page=boutique', 2, 'Boutique'),
+(4, -1, '?&page=support', 3, 'Support'),
+(5, -1, '?&page=voter', 4, 'Voter'),
+(6, -1, '?page=forum', 5, 'Forum'),
+(7, -1, '?&page=membres', 6, 'Liste des membres'),
+(8, 2, '?page=banlist ', 0, 'Ban - List'),
+(9, 2, '?page=chat ', 1, 'Chat');

@@ -32,7 +32,7 @@ else
           <select name="dest" class="form-control" required>
 			<option value="-1" selected>Aucune</option>
 			<?php foreach($menu as $value)  { if(isset($value['list'])) { ?>
-			   <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+			   <option id="list-option-<?php echo $value['id']; ?>" value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
 			<?php } } ?>
 		  </select>
 
@@ -57,12 +57,12 @@ else
           <div id="typePage" style="display:none;">
             <label class="control-label">Page</label>
             <select class="form-control" name="page">
-              <?php $i = 0;  while($i < count($pages)) { ?><option value="<?php echo $pages[$i]; ?>"><?php echo $pages[$i]; ?></option><?php $i++; } ?>
+              <?php $i = 0;  while($i < count($pages)) { ?><option id="" value="<?php echo $pages[$i]; ?>"><?php echo $pages[$i]; ?></option><?php $i++; } ?>
             </select>
           </div>
       </div>
 
-      <script>initPost('newLien', 'admin.php?action=addMenu',function(data) { if(data) { menuUpdate(); }});</script>
+      <script>initPost('newLien', 'admin.php?action=addMenu',function(data) { if(data) { menuUpdate(); clearAllInput('newLien'); }});</script>
       <div class="card-footer">
         <div class="text-center">
             <input type="submit" onclick="sendPost('newLien', null);" class="btn btn-success btn-block w-100" value="Valider" />
@@ -86,10 +86,10 @@ else
           <small>Vous pourrez éditer la liste plus tard..</small>
       </div>
 
-      <script>initPost('newListe', 'admin.php?action=addMenu',function(data) { if(data) { menuUpdate(); }});</script>
+      <script>initPost('newListe', 'admin.php?action=addMenu',function(data, ret) { if(data) { menuUpdate(); let id = parseInt(ret.substring(ret.indexOf('[DIV]') + 5).replace(" ", "")); getElementByName('newLien', 'dest').insertAdjacentHTML("beforeend", "<option value='"+id+"'>"+getElementByName('newListe', 'name').value+"</option>"); clearAllInput('newListe'); }});</script>
       <div class="card-footer">
         <div class="text-center">
-            <input type="submit" onclick="sendPost('newListe', null);" class="btn btn-success btn-block w-100" value="Valider" />
+            <input type="submit" onclick="sendPost('newListe', null, false);" class="btn btn-success btn-block w-100" value="Valider" />
         </div>
       </div>
     </div>
@@ -119,9 +119,9 @@ else
         						<h3 id="menu-name-<?php echo $value['id']; ?>"><?php echo $value['name']; ?></h3>
         					</div>
         					<div class="float-right">
-        						<?php if(!$i == 0 ) { ?><button type="button" onclick="sendDirectPost('admin.php?&action=mooveMenu&type=0&id=<?php echo $value['id']; ?>', function(data) { if(data) { menuUpdate(); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-up"></i></button><?php } ?>
-        						<?php if($i<count($menu)-1) { ?><button type="button" onclick="sendDirectPost('admin.php?&action=mooveMenu&type=1&id=<?php echo $value['id']; ?>', function(data) { if(data) { menuUpdate(); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-down"></i></button><?php } ?>
-        						<button  onclick="sendDirectPost('admin.php?&action=supprMenu&id=<?php echo $value['id']; ?>', function(data) { if(data) { hide('menu-<?php echo $value['id']; ?>'); hide('tabmenu-<?php echo $value['id']; ?>'); } });" class="btn btn-sm btn-outline-secondary">Supprimer</button>
+        						<button <?php if($i == 0 ) { echo 'style="display:none;"'; } ?> type="button" id="tabmenu-<?php echo $value['id']; ?>-up" onclick="sendDirectPost('admin.php?&action=mooveMenu&type=0&id=<?php echo $value['id']; ?>', function(data) { if(data) { menuMooveUp(get('tabmenu-<?php echo $value['id']; ?>')); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-up"></i></button>
+        						<button <?php if($i==count($menu)-1) { echo 'style="display:none;"'; } ?> type="button" id="tabmenu-<?php echo $value['id']; ?>-down" onclick="sendDirectPost('admin.php?&action=mooveMenu&type=1&id=<?php echo $value['id']; ?>', function(data) { if(data) { menuMooveDown(get('tabmenu-<?php echo $value['id']; ?>')); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-down"></i></button>
+        						<button  onclick="sendDirectPost('admin.php?&action=supprMenu&id=<?php echo $value['id']; ?>', function(data) { if(data) { <?php if(isset($value['list'])) { ?>menuRemovelist('list-option-<?php echo $value['id']; ?>');<?php } ?>hide('menu-<?php echo $value['id']; ?>', true); hide('tabmenu-<?php echo $value['id']; ?>',true, function() { checkMenuForMoove(); }); } });" class="btn btn-sm btn-outline-secondary">Supprimer</button>
         					</div>
         				</div>
         			
@@ -143,7 +143,7 @@ else
               		    <a id="tab2menu-dest-<?php echo $value2['id']; ?>" class="<?php if($first) echo 'active'; ?> nav-link" href="#menu-dest-<?php echo $value2['id']; ?>" data-toggle="tab" style="color: black !important"><?php echo $value2['name']; ?></a></li>
               		<?php $first = false; } ?>
             		</ul>
-            		
+            		<div class="tab-content">
             		<?php for($u = 0; $u<count($value['list']); $u++) { $value2 = $value['list'][$u]; ?>
                 		<div class="tab-pane well <?php if($u == 0) echo 'active'; ?>" id="menu-dest-<?php echo $value2['id']; ?>">
             				<div style="width: 100%;display: inline-block">
@@ -151,9 +151,9 @@ else
             						<h3 id="menu-name-dest-<?php echo $value2['id']; ?>"><?php echo $value2['name']; ?></h3>
             					</div>
             					<div class="float-right">
-            						<?php if(!$u == 0) { ?><button type="button" onclick="sendDirectPost('admin.php?&action=mooveMenu&type=0&id=<?php echo $value2['id']; ?>', function(data) { if(data) { menuUpdate(); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-up"></i></button><?php } ?>
-            						<?php if($u<count($value['list'])-1) { ?><button type="button" onclick="sendDirectPost('admin.php?&action=mooveMenu&type=1&id=<?php echo $value2['id']; ?>', function(data) { if(data) { menuUpdate(); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-down"></i></button><?php } ?>
-            						<button  onclick="sendDirectPost('admin.php?&action=supprMenu&id=<?php echo $value2['id']; ?>', function(data) { if(data) { hide('menu-dest-<?php echo $value2['id']; ?>'); hide('tabmenu-dest-<?php echo $value2['id']; ?>'); } });" class="btn btn-sm btn-outline-secondary">Supprimer</button>
+            						<button <?php if($u == 0) { echo 'style="display:none;"'; } ?> id="tabmenu-dest-<?php echo $value2['id']; ?>-up" type="button" onclick="sendDirectPost('admin.php?&action=mooveMenu&type=0&id=<?php echo $value2['id']; ?>', function(data) { if(data) { menuMooveUp(get('tabmenu-dest-<?php echo $value2['id']; ?>')); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-up"></i></button>
+            						<button <?php if($u==count($value['list'])-1) { echo 'style="display:none;"'; } ?> id="tabmenu-dest-<?php echo $value2['id']; ?>-down" type="button" onclick="sendDirectPost('admin.php?&action=mooveMenu&type=1&id=<?php echo $value2['id']; ?>', function(data) { if(data) { menuMooveDown(get('tabmenu-dest-<?php echo $value2['id']; ?>')); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-down"></i></button>
+            						<button  onclick="sendDirectPost('admin.php?&action=supprMenu&id=<?php echo $value2['id']; ?>', function(data) { if(data) { hide('menu-dest-<?php echo $value2['id']; ?>', true); hide('tabmenu-dest-<?php echo $value2['id']; ?>', true, function() { checkMenuForMoove(); }); } });" class="btn btn-sm btn-outline-secondary">Supprimer</button>
             					</div>
             				</div>
             			
@@ -190,9 +190,10 @@ else
             			
             			</div>
             		<?php }  ?>
+            		</div>
             		
         		 
-        		<?php } } else { ?>
+        		<?php }  else { ?>
         		
         			<label class="control-label">Titre du lien</label>
              		 <input class="form-control" type="text" onkeyup="get('tab2menu-<?php echo $value['id']; ?>').innerText = this.value; get('menu-name-<?php echo $value['id']; ?>').innerText = this.value" value="<?php echo $value['name']; ?>" name="name" />
@@ -228,7 +229,7 @@ else
                         </select>
                       </div>
                       
-        		<?php }?>
+        		<?php } ?>
         		
         		<script>initPost('menu-<?php echo $value['id']; ?>', 'admin.php?&action=editMenu&id=<?php echo $value['id']; ?>');</script>
                 <div class="card-footer" style="background-color:rgba(0,0,0,0);">
@@ -239,7 +240,7 @@ else
         			
             </div>
         			
-        		<?php } ?>
+        		<?php } } ?>
     		</div>
       </div>
     </div>
