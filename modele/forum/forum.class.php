@@ -133,7 +133,7 @@ class Forum {
 	public function infosSousForumTopics($id, $count)
 	{
 		$topic = $this->bdd->prepare('SELECT * FROM cmw_forum_post WHERE sous_forum LIKE :sous_forum ORDER BY epingle DESC, last_answer_temps DESC LIMIT '.$count.', 20');
-		$topic->bindParam(':sous_forum', htmlspecialchars($id));
+		$topic->bindParam(':sous_forum', $id);
         $topic->execute();
 		return $topic->fetchAll(PDO::FETCH_ASSOC);
 	}
