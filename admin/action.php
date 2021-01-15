@@ -1,4 +1,4 @@
-z<?php
+<?php
 /*
 	Ce fichier PHP effectue telle ou telle action selon le contenu des gets envoyés par la theme(selon le lien sur lequel l'utilisateur à cliqué etc...).
 */
