@@ -146,26 +146,34 @@ function sendPost(idform, callback, sendData) {
         clog("post: "+allUrl[idform]+" data:"+data)
         if (status == "success") {
             returnData = true;
-            if(isset(sendData))
+            if(isset(sendData) && sendData === true)
             {
                 donneesRetour = JSON.parse(data);
                 if(donneesRetour['retour'] == "OK")
+				{
                     notif("success", "Action effectuée !","");
+				}
                 else
                 {
                     notif("error", "Erreur !", donneesRetour['message']);
                 }
             }
             else
+			{
                 notif("success", "Action effectuée !","");
+			}
         } else {
             notif("error", "Erreur", status);
         }
         if(isset(allCallBack[idform])) {
             if(isset(sendData))
+			{
                 allCallBack[idform](returnData, data);
+			}
             else
+			{
                 allCallBack[idform](returnData);
+			}
         }
     });
     it = allForm[idform].keys();
@@ -249,11 +257,12 @@ function Switch(el, el1, el2 )
     }
 }
 
-function hide(el, remove = false) {
+function hide(el, remove = false, callback = null) {
     $("#"+el).hide(300);
     if(remove) {
         setTimeout(function () {
-            get(el).parentElement.removeChild(get('el'));
+            get(el).parentElement.removeChild(get(el));
+			if(isset(callback)) { callback(); }
         }, 301);
     }
 }

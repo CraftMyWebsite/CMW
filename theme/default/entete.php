@@ -16,49 +16,35 @@
                 <div class="collapse navbar-collapse" id="navbarMain"> 
                 
                     <?php
-                    for ($i = 0; $i < count($_Menu_['MenuTexte']); $i++) :
-                        // Affichage des dropdowns
-                        if (isset($_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]])) :
-                    ?>
-                        <li class="nav-item dropdown">
-                            <a id="Listdefil<?php echo $i; ?>" class="nav-link dropdown-toggle" href="#" id="dropdown-tools" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_Menu_['MenuTexte'][$i]; ?></a>
-                            <div class="dropdown-menu" aria-labelledby="Listdefil<?php echo $i; ?>">
-                                <?php
-
-                                for ($k = 0; $k < count($_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]]); $k++) :
-
-                                    if ($_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]][$k] == '-divider-') : ?>
-
-                                        <div class="dropdown-divider"></div>
-
-                                    <?php else : ?>
-
-                                        <a href="<?= $_Menu_['MenuListeDeroulanteLien'][$_Menu_['MenuTexteBB'][$i]][$k] ?>" class="dropdown-item"><?= $_Menu_['MenuListeDeroulante'][$_Menu_['MenuTexteBB'][$i]][$k] ?></a>
-
-                                    <?php endif; ?>
-                                <?php endfor; ?>
-
-                            </div>
-                        </li>
-                    <?php else :
-                        // Gestion de l'active, pour la page actuelle
-                        $quellePage = str_replace('index.php?&page=', '', $_Menu_['MenuLien'][$i]);
-                        $quellePage1 = str_replace('?&page=', '', $_Menu_['MenuLien'][$i]);
-                        $quellePage2 = str_replace('?page=', '', $_Menu_['MenuLien'][$i]);
-
-                        if (isset($_GET['page']) and ($quellePage == $_GET['page'] or $quellePage1 == $_GET['page'] or $quellePage2 == $_GET['page'])) {
-                            $active = ' active';
-                        } elseif (!isset($_GET['page']) and $i == 0) {
-                            $active = ' active';
-                        } else {
-                            $active = '';
-                        } ?>
-
-                        <li class="nav-item<?= $active ?>">
-                            <a href="<?= $_Menu_['MenuLien'][$i] ?>" class="nav-link"><?= $_Menu_['MenuTexte'][$i] ?></a>
-                        </li>
-                <?php endif;
-                endfor; ?>
+                    
+                    for($i = 0; $i < count($_Menu_); $i++) {
+                        if(isset($_Menu_[$i]['list'])) { ?>
+                            <li class="nav-item dropdown">
+                                <a id="Listdefil<?php echo $i; ?>" class="nav-link dropdown-toggle" href="#" id="dropdown-tools" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_Menu_[$i]['name']; ?></a>
+                                <div class="dropdown-menu" aria-labelledby="Listdefil<?php echo $i; ?>">
+                                	<?php foreach($_Menu_[$i]['list'] as $m) { ?>
+                                	     <a href="<?= $m['url'] ?>" class="dropdown-item"><?= $m['name'] ?></a>
+                                	<?php }?>
+                                </div> 
+                            </li>
+                       <?php } else {
+                           $quellePage = str_replace('index.php?&page=', '', $_Menu_[$i]['url']);
+                           $quellePage1 = str_replace('?&page=', '',  $_Menu_[$i]['url']);
+                           $quellePage2 = str_replace('?page=', '',  $_Menu_[$i]['url']);
+                           
+                           if (isset($_GET['page']) and ($quellePage == $_GET['page'] or $quellePage1 == $_GET['page'] or $quellePage2 == $_GET['page'])) {
+                               $active = ' active';
+                           } elseif (!isset($_GET['page']) and $i == 0) {
+                               $active = ' active';
+                           } else {
+                               $active = '';
+                           } ?>
+                           
+                           <li class="nav-item<?= $active ?>">
+                             <a href="<?= $_Menu_[$i]['url'] ?>" class="nav-link"><?= $_Menu_[$i]['name'] ?></a>
+                       		</li>
+                        <?php }
+                    } ?>
 
                 <!-- Navigation Right, s'affiche seulement si l'utilisateur n'est pas banni -->
                 <?php if ($banned == false) : ?>
