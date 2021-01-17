@@ -8,58 +8,39 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
+	    
+	    case 'mooveMenu':
+	        require('admin/actions/mooveMenu.php');
+	        exit();
 		case 'supprUpload': 
 			require('admin/actions/supprUpload.php');
 			exit();
 		case 'editUploadImage':
-			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
-				$_Serveur_['uploadImage']['maxFileSize'] = intval($_POST['maxFileSize']);
-				$_Serveur_['uploadImage']['maxSize'] = intval($_POST['maxSize']);
-				$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
-				exit();
-			}
+		    require('admin/actions/editUploadImage.php');
+			exit();
 		case 'resetAllUploadImage':
-			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
-				$directory = 'include/UploadImage/';
-			    foreach (scandir($directory) as $file) {
-			        if ($file !== '.' && $file !== '..' && $file != "index.php") {
-			           unlink($directory.$file);
-			        }
-			    }
-			}
+			require('admin/actions/resetAllUploadImage.php');
 			exit();
 		case 'EnableShowTopVote':
-			$_Serveur_['vote']['oldDisplay'] = intval($_POST['number']);
-			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+		    require('admin/actions/EnableShowTopVote.php');
 			exit();
 		case 'DisableShowTopVote':
-			unset($_Serveur_['vote']['oldDisplay']);
-			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+		    require('admin/actions/DisableShowTopVote.php');
 			exit();
 		case 'switchUploadImage':
-			unset($_Serveur_['uploadImage']);
-			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+		    require('admin/actions/switchUploadImage.php');
 			exit();
 		case 'editResetVote':
 			require('admin/actions/editResetVote.php');
 			exit();
 		case 'editTopVoteNumber':
-			$_Serveur_['vote']['maxDisplay'] = $_POST['maxDisplay'];
-			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+		    require('admin/actions/editTopVoteNumber.php');
 			exit();
 		case 'suppVoteHistory':
-			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
-			{ 
-				$req = $bddConnection->prepare('UPDATE cmw_votes SET `isOld`=1 WHERE pseudo = :pseudo ');
-				$req->execute(array('pseudo' => $_GET['pseudo']));
-			}
+		    require('admin/actions/suppVoteHistory.php');
 			exit();
 		case 'suppOldVoteHistory':
-			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
-			{ 
-				$req = $bddConnection->prepare('DELETE FROM cmw_votes WHERE pseudo = :pseudo and isOld=1');
-				$req->execute(array('pseudo' => $_GET['pseudo']));
-			}
+		    require('admin/actions/suppOldVoteHistory.php');
 			exit();
 		case 'switchPreferenceInscription':
 			require('admin/actions/switchPreferenceInscription.php');
@@ -68,23 +49,13 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require('admin/actions/editMessageInscr.php');
 			exit();
 		case 'suppAllVoteHistory':
-			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
-			{ 
-				$bddConnection->exec('DELETE FROM cmw_votes WHERE isOld=1');
-				$bddConnection->exec('UPDATE cmw_votes SET `isOld`=1');
-			}
+		    require('admin/actions/suppAllVoteHistory.php');
 			exit();
 		case 'suppAllOldVoteHistory':
-			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
-			{ 
-				$bddConnection->exec('DELETE FROM cmw_votes WHERE isOld=1');
-			}
+		    require('admin/actions/suppAllOldVoteHistory.php');
 			exit();
 		case 'supprHistoPaypal':
-			if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'seePaypalHisto') && isset($_GET['id'])) {
-				$req = $bddConnection->prepare('DELETE FROM `cmw_paypal_historique` WHERE id=:id');
-				$req->execute(array('id' => $_GET['id']));
-			}
+		    require('admin/actions/supprHistoPaypal.php');
 			exit();
 		case 'getJsonVoteHistory':
 			require('admin/actions/getJsonVoteHistory.php');
@@ -121,9 +92,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			exit();
 		case 'getRecompenseList':
 			require('admin/actions/getRecompenseList.php');
-			exit();
-		case 'getMenuLien':
-			require('admin/actions/getMenuLien.php');
 			exit();
 		case 'getMenuListe':
 			require('admin/actions/getMenuListe.php');
@@ -191,14 +159,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 
 		case 'pageBan':
 			require('admin/actions/pageBan.php');
-		break;
-
-		case 'removeSocial':
-			if($_Permission_->verifPerm('PermsPanel', 'social', 'showPage'))
-			{
-				$req = $bddConnection->prepare('ALTER TABLE cmw_reseaux DROP :nom');
-				$req->execute(array('nom' => $_GET['nom']));
-			}
 		break;
 
 		case 'commande': 
@@ -320,8 +280,8 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/serveurJsonSuppr.php');
 		break;
 		
-		case 'newLienMenu': 
-			require_once('admin/actions/newLienMenu.php');
+		case 'addMenu': 
+			require_once('admin/actions/addMenu.php');
 		break;
 		
 		case 'editPayement': 
@@ -352,30 +312,19 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/supprimerPaypalOffre.php');
 		break;
 		
-		case 'supprLienMenu': 
-			require_once('admin/actions/supprLienMenu.php');
-		break;
 		
-		case 'supprLienMenuDeroulant': 
-			require_once('admin/actions/supprLienMenuDeroulant.php');
-		break;
-		
-		case 'newListeMenu': 
-			require_once('admin/actions/newListeMenu.php');
+		case 'supprMenu': 
+			require('admin/actions/supprMenu.php');
 		break;
 		
 		case 'modifierLien': 
 			require_once('admin/actions/modifierLien.php');
 		break;
 		
-		case 'editMenuListe': 
-			require_once('admin/actions/editMenuListe.php');
+		case 'editMenu': 
+			require_once('admin/actions/editMenu.php');
 		break;
-		
-		case 'nouveauMenuListeLien': 
-			require_once('admin/actions/nouveauMenuListeLien.php');
-		break;
-		
+				
 		case 'deplacerMenu': 
 			require_once('admin/actions/deplacerMenu.php');
 		break;
@@ -451,10 +400,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		
 		case 'supprSection':
 			require_once('admin/actions/supprSection.php');
-		break;
-		
-		case 'editPermissions':
-			require_once('admin/actions/editPermissions.php');
 		break;
 		
 		case 'supprTicket':

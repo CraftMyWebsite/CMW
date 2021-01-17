@@ -6,6 +6,8 @@ require 'src/MinecraftQueryException.php';
 use xPaw\MinecraftQuery;
 use xPaw\MinecraftQueryException;
 use xPaw\SourceQuery\SourceQuery;
+use xPaw\SourceQuery\Exception\InvalidPacketException;
+use xPaw\SourceQuery\Exception\SocketException;
 class JsonCon
 {
 	public $api;

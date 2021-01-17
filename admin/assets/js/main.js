@@ -23,7 +23,7 @@ function switchTypePassword(el) {
 		if(isset(el.parentElement.parentElement.children[i].type) && el.parentElement.parentElement.children[i].type == "password" ) {
 			el.parentElement.parentElement.children[i].type = "text";
 			el.innerHTML = '<i class="far fa-eye-slash"></i>';
-		} else if(isset(el.parentElement.parentElement.children[i].type) && el.parentElement.parentElement.children[i].type == "text" ) { 
+		} else if(isset(el.parentElement.parentElement.children[i].type) && el.parentElement.parentElement.children[i].type == "text" ) {
 			el.parentElement.parentElement.children[i].type = "password";
 			el.innerHTML = '<i class="far fa-eye"></i>';
 		}
@@ -43,13 +43,139 @@ $(document).ready(function() {
                         container: $this
                     })
                 });
-	
+
 });
+
+function findIndexElement(el, array) {
+	for(let i = 0; i < array.length; i++) {
+		if(el == array[i]) {
+			return i;
+		}
+	}
+}
+
+function menuMooveUp(el) {
+	if(el.parentElement.children.length > 1) {
+		if(el.parentElement.children[0] != el) {
+			let index = findIndexElement(el, el.parentElement.children);
+			let el2 =  el.parentElement.children[index - 1];
+			let id2 = el2.id+"";
+			let ht2 = el2.innerHTML+"";
+			
+			let btn = ['','','',''];
+			
+			btn[0] = get(el.id+"-up").style.display;
+			btn[1] = get(el.id+"-down").style.display;
+			btn[2] = get(el2.id+"-up").style.display;
+			btn[3] = get(el2.id+"-down").style.display;
+			
+			el2.id = el.id;
+			el2.innerHTML = "";
+			el2.insertAdjacentHTML("afterbegin", el.innerHTML);
+			
+			el.innerHTML = "";
+			el.insertAdjacentHTML("afterbegin", ht2);
+			el.id = id2;
+			
+			get(el.id+"-up").style.display = btn[0];
+			get(el.id+"-down").style.display = btn[1];
+			get(el2.id+"-up").style.display = btn[2];
+			get(el2.id+"-down").style.display = btn[3];
+		}
+	}
+}
+
+function checkMenuForMoove() {
+	for (let el of document.querySelectorAll("[btn-menu-up]" )) {
+		let main = el.parentElement.parentElement.parentElement;
+		console.log(main.id);
+		let count = main.parentElement.children.length;
+		if(count < 2) {
+			hide(el.id);
+			return;
+		}
+		let index;
+		for(let i = 0; i < count; i++) {
+			if(main.parentElement.children[i] == main) {
+				index = i;
+				break;
+			}
+		}
+		console.log(index);
+		if(index == 0) {
+			hide(el.id); 
+		} else {
+			show(el.id);
+		}
+	}
+	for (let el of document.querySelectorAll("[btn-menu-down]" )) {
+		let main = el.parentElement.parentElement.parentElement;
+		let count = main.parentElement.children.length;
+		if(count < 2) {
+			hide(el.id);
+			return;
+		}
+		let index;
+		for(let i = 0; i < count; i++) {
+			if(main.parentElement.children[i] == main) {
+				index = i;
+				break;
+			}
+		}
+		if(index == count - 1) {
+			hide(el.id); 
+		} else {
+			show(el.id);
+		}
+	}
+}
+
+function menuMooveDown(el) {
+	if(el.parentElement.children.length > 1) {
+		if(el.parentElement.children[el.parentElement.children.length-1] != el) {
+			let index = findIndexElement(el, el.parentElement.children);
+			let el2 =  el.parentElement.children[index + 1];
+			let id2 = el2.id+"";
+			let ht2 = el2.innerHTML+"";
+			
+			let btn = ['','','',''];
+			
+			btn[0] = get(el.id+"-up").style.display;
+			btn[1] = get(el.id+"-down").style.display;
+			btn[2] = get(el2.id+"-up").style.display;
+			btn[3] = get(el2.id+"-down").style.display;
+			
+			el2.id = el.id;
+			el2.innerHTML = "";
+			el2.insertAdjacentHTML("afterbegin", el.innerHTML);
+			
+			el.innerHTML = "";
+			el.insertAdjacentHTML("afterbegin", ht2);
+			el.id = id2;
+			
+			get(el.id+"-up").style.display = btn[0];
+			get(el.id+"-down").style.display = btn[1];
+			get(el2.id+"-up").style.display = btn[2];
+			get(el2.id+"-down").style.display = btn[3];
+		}
+	}
+}
+
+function menuRemovelist(id) {
+	let el = get(id);
+	let main = getElementByName('newLien','dest');
+	for(let el2 of main.children) {
+		if(el2 == el) {
+			main.removeChild(el2);
+			return;
+		}
+	}
+}
 
 
 function boutiqueUpdate() {
 	destroyCK();
-	updateCont("admin.php?action=getOffreBoutique", get("allcategorie"), function(data) { if(data) { 
+	updateCont("admin.php?action=getOffreBoutique", get("allcategorie"), function(data) { if(data) {
 		initPostCallback();
 		var list = document.querySelectorAll('[data-boutique-callback]');
 		get("allcategorieupdate").innerText = "";
@@ -79,7 +205,7 @@ function boutiqueUpdate() {
 }
 
 function boutiqueActionUpdate(id) {
-	updateCont("admin.php?action=getOffreActionBoutique&id="+id, get("allaction-"+id), function(data) { if(data) { 
+	updateCont("admin.php?action=getOffreActionBoutique&id="+id, get("allaction-"+id), function(data) { if(data) {
 		initPostCallback();
 	}});
 }
@@ -94,7 +220,7 @@ function boutiqueCheck() {
 }
 
 function voteUpdate() {
-	updateCont("admin.php?action=getLienVote&id="+idvote, get("all-vote"), function(data) { if(data) { 
+	updateCont("admin.php?action=getLienVote&id="+idvote, get("all-vote"), function(data) { if(data) {
 		idvote+=1000;
 		initPost("all-vote", "admin.php?action=modifierVote");
 	}});
@@ -102,40 +228,35 @@ function voteUpdate() {
 
 function newsUpdate() {
 	destroyCK();
-	updateCont("admin.php?action=getNewsList", get("edit-news"), function(data) { if(data) { 
+	updateCont("admin.php?action=getNewsList", get("edit-news"), function(data) { if(data) {
 		initPostCallback(null);
 		initCK();
 	}});
 }
 
 function serverUpdate() {
-	updateCont("admin.php?action=getServerList", get("modifServer"), function(data) { if(data) { 
+	updateCont("admin.php?action=getServerList", get("modifServer"), function(data) { if(data) {
 		initPost('modifServer', 'admin.php?&action=serveurConfig');
 	}});
 }
 
 function paypalUpdate() {
-	updateCont("admin.php?action=getOffrePaypal", get("offrePaypal"), function(data) { if(data) { 
+	updateCont("admin.php?action=getOffrePaypal", get("offrePaypal"), function(data) { if(data) {
 		initPostCallback( null);
 	}});
 }
 
 function pagesUpdate() {
 	destroyCK();
-	updateCont("admin.php?action=getPagesList", get("allPage"), function(data) { if(data) { 
+	updateCont("admin.php?action=getPagesList", get("allPage"), function(data) { if(data) {
 		initPostCallback( null);
 		initCK();
 	}});
 }
 
-function menuLienUpdate() {
-	updateCont("admin.php?action=getMenuLien", get("allLien"), function(data) { if(data) { 
-		initPostCallback( null);
-	}});
-}
 
-function menuListeUpdate() {
-	updateCont("admin.php?action=getMenuListe", get("allListe"), function(data) { if(data) { 
+function menuUpdate() {
+	updateCont("admin.php?action=getMenuListe", get("allMenu"), function(data) { if(data) {
 		initPostCallback( null);
 	}});
 }
@@ -154,7 +275,7 @@ function checkGrade() {
 	return false;
 }
 function gradesUpdate() {
-	updateCont("admin.php?action=getGradesList", get("allGrade"), function(data) { if(data) { 
+	updateCont("admin.php?action=getGradesList", get("allGrade"), function(data) { if(data) {
 		initPost("allGrade", "admin.php?&action=editGrade");
 	}});
 }
@@ -173,13 +294,13 @@ function switchGrade(el, id, key) {
 	if(parseInt(el.value) == 0) {
 		el.value=1;
 		el.innerHTML = "<i class='far fa-minus-square'></i> "+key;
-		getEach("#"+id, function(element) { 
+		getEach("#"+id, function(element) {
 			$(element).show(500);
 		})
 	} else if(parseInt(el.value) == 1){
 		el.value=0;
 		el.innerHTML = "<i class='far fa-plus-square'></i> "+key;
-		getEach("#"+id, function(element) { 
+		getEach("#"+id, function(element) {
 			$(element).hide(500);
 		})
 	}
@@ -259,7 +380,7 @@ function addVoteConfigRec(type, id1, id2) {
 
             		 +'<label class="control-label">Nombre d\'item à donner</label>'
             		 +'<input type="number" data-type="value2" min="1" value="1" max="64"  class="form-control"/>';
-    } 
+    }
     if(type != "jeton" && type != "jetonAlea") {
 		ht += '<label class="control-label">Obtention de la récompense</label>'
                         +'<select data-type="methode" class="form-control" style="margin-bottom:20px">'
@@ -309,7 +430,7 @@ function addVoteRec(type, id1, id2) {
 
             		 +'<label class="control-label">Nombre d\'item à donner</label>'
             		 +'<input type="number" data-type="value2" min="1" value="1" max="64"  class="form-control"/>';
-    } 
+    }
     if(type != "jeton" && type != "jetonAlea") {
 		ht += '<label class="control-label">Obtention de la récompense</label>'
                         +'<select data-type="methode" class="form-control" style="margin-bottom:20px">'
@@ -328,17 +449,17 @@ function addVoteRec(type, id1, id2) {
 function genVoteJson(id1, id2) {
 	let el = get(id1);
 	var final = "[";
-	for (let i = 0; i < el.children.length; i++) 
+	for (let i = 0; i < el.children.length; i++)
 	{
-		if(isset(el.children[i].getAttribute('data-type'))) 
+		if(isset(el.children[i].getAttribute('data-type')))
 		{
 			let el2 = el.children[i];
 			final += '{ "type":"'+el2.getAttribute('data-type')+'"';
 
-			for (let o = 0; o < el2.children.length; o++) 
+			for (let o = 0; o < el2.children.length; o++)
 			{
 				let el3 = el2.children[o];
-				for (let a = 0; a < el3.children.length; a++) 
+				for (let a = 0; a < el3.children.length; a++)
 				{
 					if(isset(el3.children[a].getAttribute('data-type')))
 					{
@@ -355,6 +476,8 @@ function genVoteJson(id1, id2) {
 	final += "]";
 		get(id2).value = final;
 }
+
+
 
 function genVoteJson2() {
 	let el = get('all-vote');

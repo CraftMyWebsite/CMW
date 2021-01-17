@@ -134,10 +134,9 @@ const PERMS = array(
 		"menus" => array(
 			"showPage" => "Accès à la page Menus",
 			"actions" => array(
-				"addLinkMenu" => "Ajouter un lien menu",
-				"addDropLinkMenu" => "Ajouter un menu déroulant",
-				"editLinkMenu" => "Edition des liens menus",
-				"editDropAndLinkMenu" => "Edition des liens menus/déroulants"
+				"addLinkMenu" => "Ajouter un lien",
+				"editLinkMenu" => "Edition des menus",
+			    "addDropLinkMenu" => "Ajouter une liste déroulante"
 			)
 		),
 		"vote" => array(
