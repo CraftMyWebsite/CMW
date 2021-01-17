@@ -499,8 +499,8 @@
                                                               <?php $itemps = $i; ?>
                                                             <select class="form-control" name="grade_site">
                                                                     <option value="0">Joueur</option>
-                                                                    <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                                                            <option value="<?php echo $idGrade[$i]['id']; ?>"><?= $idGrade[$i]['nom']?></option>
+                                                                    <?php  for($i2 = 0; $i2 < count($idGrade); $i2++) {  ?>
+                                                                            <option value="<?php echo $idGrade[$i2]['id']; ?>"><?= $idGrade[$i2]['nom']?></option>
                                                                     <?php }?>
                                                                     <option value="1">Créateur</option>
                                                             </select>
@@ -526,8 +526,8 @@
                                                                     <?php if($actions[$k]['methode'] == 6){?>
                                                                     <select class="form-control" name="commandeValeur-<?php echo $actions[$k]['id']; ?>">
                                                                         <option value="0" <?php if($actions[$k]['grade'] == 0) echo 'selected'; ?>> Joueur </option>
-                                                                        <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                                                                <option value="<?php echo $idGrade[$i]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i]['id']) echo 'selected';?>><?= $idGrade[$i]['nom']?></option>
+                                                                        <?php  for($i2 = 0; $i2 < count($idGrade); $i2++) {  ?>
+                                                                                <option value="<?php echo $idGrade[$i2]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i2]['id']) echo 'selected';?>><?= $idGrade[$i2]['nom']?></option>
                                                                         <?php }?>
                                                                         <option value="1" <?php if($actions[$k]['grade'] == 1) echo 'selected'; ?>>Créateur</option>
                                                                     </select>
