@@ -12,19 +12,23 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 			$get_Mail = $_POST['email'];
 			$_POST['age'] = (int) htmlspecialchars($_POST['age']);
 			if($_POST["age"] > 9999 || $_POST["age"] < 0) $_POST["age"] = 0;
-			
+
 			$_POST["show_email"] = !empty($_POST['show_email']) ? false : true;
 			$get_Lien = 'http://'.$_SERVER['HTTP_HOST'].'/index.php?&action=validationMail&pseudo='.urlencode($get_Pseudo).'&cle='.urldecode($get_CleUnique).'';
-			$getIp = get_client_ip_env();
-			
-			
+			if (filter_var(get_client_ip_env(), FILTER_VALIDATE_IP)){
+					$getIp = get_client_ip_env();
+				}else{
+					header('Location: ?&page=erreur&erreur=0'); // Page d'erreur indiquant qu'un des champs est invalide ou incomplet
+				}
+
+
 			if(strlen($_POST['pseudo']) > 16) {
 				header('Location: ?&page=erreur&erreur=2');
 			} elseif($_POST['mdp'] != $_POST['mdpConfirm']) {
 				header('Location: ?&page=erreur&erreur=3');
 			} else {
 				$get_Mdp = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
-				
+
 				$bddConnection = $base->getConnection();
 				require_once('modele/joueur/connection.class.php');
 				$userConnection = new Connection($_POST['pseudo'], $bddConnection);
@@ -37,7 +41,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 					$req_countIpBdd = new CountIpBdd($getIp, $bddConnection);
 					$rep_countIpBdd = $req_countIpBdd->getReponseConnection();
 					$CountIpBdd = $rep_countIpBdd->rowCount();
-					
+
 					require_once('modele/joueur/ScriptBySprik07/reqLimitePerIP.class.php');
 					$req_limiteIpBdd = new LimiteIpBdd($bddConnection);
 					$rep_limiteIpBdd = $req_limiteIpBdd->getReponseConnection();
@@ -46,7 +50,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 
 					if($CountIpBdd < $LimiteIpBdd || $LimiteIpBdd == -1)
 					{
-						if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) 
+						if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
 						{
 							require_once('modele/joueur/ScriptBySprik07/reqSysMail.class.php');
 							$req_apiMailBdd = new GetApiMailBdd($bddConnection);
@@ -70,7 +74,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 									header('Location: ?&page=erreur&erreur=15');
 									exit();
 								}
-								
+
 								require_once('modele/joueur/inscription.class.php');
 								if(isset($_POST['souvenir']) && $_POST['souvenir'] == true)
 									$souvenir = true;
@@ -82,7 +86,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 								$userInsertIP = new InsertCleUnique($get_CleUnique, $get_Pseudo, $bddConnection);
 
 								$destinataire = $get_Mail;
-								
+
 								if(!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $destinataire))
 								{
 									$next_line = "\r\n";
@@ -104,7 +108,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 								$entete.= "MIME-Version: 1.0".$next_line;
 
 								$message= $next_line.$mail_txt.$next_line;
-								
+
 								require('include/phpmailer/MailSender.php');
 								if(MailSender::send($_Serveur_, $destinataire, $sujet, $message))
 								{
@@ -112,7 +116,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 								} else {
 									header('Location: ?&page=erreur&erreur=21');
 								}
-								
+
 								header('Location: ?&WaitActivate=true');
 								exit();
 
@@ -127,12 +131,12 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 
 								$userConnection = new Connection($_POST['pseudo'], $bddConnection);
 								$ligneReponse = $userConnection->getReponseConnection();
-								
+
 								$donneesJoueur = $ligneReponse->fetch(PDO::FETCH_ASSOC);
 								require_once('controleur/joueur/joueurcon.class.php');
 								$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], NULL, NULL);
 								header('Location: '.$_SERVER['HTTP_REFERER']);
-								
+
 							}
 						}
 						else
@@ -175,7 +179,7 @@ function checkCaptcha($response)
 	{
 		$res = false;
 	}
-	unset($_SESSION['captcha_login_form']); 
+	unset($_SESSION['captcha_login_form']);
 	return $res;
 }
 

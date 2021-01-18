@@ -3,7 +3,7 @@
         Gestion de vos nouveautés
     </h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPane', 'news', 'showPage')) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'news', 'showPage')) { ?>
 
 <div class="row">
     <div class="col-md-12 text-center">
