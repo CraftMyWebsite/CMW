@@ -78,7 +78,8 @@ class vote {
         if(!isset($serveur)) {
             $serveur = $this->lienData['serveur'];
         }
-
+        $inst = array();
+        
         $json = $json2 = json_decode($action, true); 
         foreach($json as $key => $value) { 
             if(isset($value['pourcentage']) && ((int)$value['pourcentage']) != 100) {
@@ -92,7 +93,20 @@ class vote {
                 $value['value'] = rand($value['value'], $value['value2']);
                 unset($value['value2']);
             }
+            if(isset($value['inst']) & intval($value['inst']) == 1) {
+                array_push($inst, $value);
+                unset($json2[$key]);
+            }
         }
+        
+        
+        if(!empty($inst)) {
+            $inst2['action'] = json_encode(array_values($inst));
+            $inst2['serveur'] =  $serveur;
+            $this->giveRecompense($bdd, $inst2, false);
+        }
+        
+        
         $action = json_encode(array_values($json2)); 
 
 
@@ -104,8 +118,8 @@ class vote {
         ));
     }
 
-    public function giveRecompense($bdd, $data, $jsonCon, $save = false) {
-        global $lectureJSON;
+    public function giveRecompense($bdd, $data, $save = false) {
+        global $lectureJSON, $jsonCon;
         if(!isset($data)) {
             $action = $this->lienData['action'];
         }else {

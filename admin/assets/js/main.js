@@ -390,6 +390,11 @@ function addVoteConfigRec(type, id1, id2) {
     }
     ht += '<label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>'
             		 +'<input type="number" min="1" max="100" value="100" data-type="pourcentage" class="form-control"/>';
+
+		ht += '<label class="control-label">Donner la récompense instantanément (ne sera pas stocker si possible)</label>'
+            		 +'<div class="custom-control custom-switch" style="padding-top: 5px"><input type="checkbox" id="inst'+idvote+'" data-type="inst" class="custom-control-input" /><label class="custom-control-label" for="inst'+idvote+'">Oui</label> </div>';
+
+
    	ht +='</div></div>';
     el.insertAdjacentHTML("beforeend", ht);
 
@@ -441,6 +446,10 @@ function addVoteRec(type, id1, id2) {
     }
     ht += '<label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>'
             		 +'<input type="number" min="1" max="101" value="100" data-type="pourcentage" class="form-control"/>';
+
+	ht += '<label class="control-label">Donner la récompense instantanément (ne sera pas stocker si possible)</label>'
+            		 +'<div class="custom-control custom-switch" style="padding-top: 5px"><input type="checkbox" id="inst'+idvote+'" data-type="inst" class="custom-control-input" /><label class="custom-control-label" for="inst'+idvote+'">Oui</label> </div>';
+
    	ht +='</div></div>';
     el.insertAdjacentHTML("beforeend", ht);
 
@@ -464,6 +473,17 @@ function genVoteJson(id1, id2) {
 					if(isset(el3.children[a].getAttribute('data-type')))
 					{
 						final += ',"'+el3.children[a].getAttribute('data-type')+'":"'+el3.children[a].value+'"';
+					}else {
+						
+						let el4 = el3.children[a];
+						for (let u = 0; u < el4.children.length; u++)
+						{
+							if(el4.children[u].type == "checkbox" && isset(el4.children[u].getAttribute('data-type')))
+							{
+								final += ',"'+el4.children[u].getAttribute('data-type')+'":"'+(el4.children[u].checked ? 1 : 0 )+'"';
+							}
+						}
+						
 					}
 				}
 			}
