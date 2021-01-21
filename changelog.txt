@@ -6,8 +6,9 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix bug du chat qui ne charge pas
 [|] : Fix de la banlist qui ne chargé pas en multiserveur
 [|] : Fix erreurs sur la page boutique du panel
+[|] : Ajout d'une permission manquante sur le panel admin
 [=] : Fix sécurité sur le cms
-
+[=] : Menu désormais stocker dans la base de données
 
 
 Contributeurs : LoGuardiaN, Guedesite, PinglsDzn
