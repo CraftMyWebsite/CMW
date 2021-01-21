@@ -5,8 +5,9 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 
 [|] : Fix bug du chat qui ne charge pas
 [|] : Fix de la banlist qui ne chargé pas en multiserveur
+[|] : Fix erreurs sur la page boutique du panel
+[=] : Fix sécurité sur le cms
 
 
 
-
-Contributeurs : LoGuardiaN,
+Contributeurs : LoGuardiaN, Guedesite, PinglsDzn
