@@ -361,9 +361,6 @@ class vote {
             }else if(strpos($url, 'minecraft-mp.com'))  {
                 $api = $this->fetch("https://minecraft-mp.com/api/?object=votes&element=claim&key=".$id."&username=".$this->Pseudo);
                 if(intval($api) == 2 ){return true;}else{return false;}
-            }else if(strpos($url, 'minecraft-top.com'))  {
-                $api = json_decode($this->fetch("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
-                if($api->vote == 1){return true;}else{return false;}
             }else {
                 return true;
             }

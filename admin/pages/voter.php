@@ -106,7 +106,12 @@
                             <input type="number" name="temps" placeholder="ex: 86400 pour 24h" class="form-control" required>
 
                             <label class="control-label">Id unique donné par le site web. *</label>
-                            <input type="text" name="idCustom" placeholder="ex: 54748" value="" class="form-control" />
+                            <div class="input-group mb-3">
+                             <input type="text" onkeyup='if(isset(this.value) && this.value.replaceAll(" ", "") != "") { get("btn-test--1").disabled = false; } else { get("btn-test--1").disabled = true; }' name="idCustom" placeholder="ex: 54748" value="" class="form-control" />
+                              <div class="input-group-append">
+                                 <button type="button" onclick="testUrlVoteForTest(getValueByName('new-vote','lien'),getValueByName('new-vote','idCustom'),this);" id="btn-test--1" class="input-group-text btn btn-success" disabled>Tester</button>
+                              </div>
+                            </div>
 
                             <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
                             <div class="custom-control custom-switch" >
@@ -366,8 +371,12 @@
                                                     value="<?=$donnees[$o]['temps'];?>" required>
                                       
                                             <label class="control-label" for="idunique<?=$o;?>">ID Unique</label>
-                                            <input type="text" name="idCustom<?=$o;?>" id="idunique<?=$o;?>" class="form-control"
-                                                    value="<?=$donnees[$o]['idCustom'];?>" />
+                                             <div class="input-group mb-3">
+                                                 <input type="text" id="idunique<?=$o;?>" onkeyup='if(isset(this.value) && this.value.replaceAll(" ", "") != "") { get("btn-test-<?=$o;?>").disabled = false; } else { get("btn-test-<?=$o;?>").disabled = true; }' name="idCustom<?=$o;?>" placeholder="ex: 54748" value="" class="form-control" />
+                                                  <div class="input-group-append">
+                                                     <button type="button" onclick="testUrlVoteForTest(getValueByName('all-vote','lien<?=$o;?>'),getValueByName('all-vote','idCustom<?=$o;?>'),this);" id="btn-test-<?=$o;?>" class="input-group-text btn btn-success" disabled>Tester</button>
+                                                  </div>
+                                                </div>
                                        
 
                                               <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
