@@ -577,14 +577,59 @@ main {
 }
 
 /* FORUM */
-.style16
-{
+.style1 {
   background-image: url('../images/etoile-anime.gif');
 }
 
-.style5
-{
-background-image: url('../images/spark-gold.gif');
+.style2 {
+  background-image: url('../images/spark-gold.gif');
+}
+
+.style3 {
+  background-image: url('../images/lightning-blue.gif');
+}
+
+.style4 {
+  background-image: url('../images/bubble.gif');
+  background-position: center;
+}
+
+.style5 {
+  background-image: url('../images/explosion.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.style6 {
+  background-image: url('../images/fire.gif');
+  background-position: center;
+}
+
+.style7 {
+  background-image: url('../images/hearts.gif');
+  background-position: center;
+}
+
+.style8 {
+  background-image: url("../images/golden-apple.gif");
+  background-position: left;
+  background-repeat: no-repeat;
+}
+
+.style9 {
+  background-image: url("../images/diamond-sword.gif");
+  background-position: left;
+  background-repeat: no-repeat;
+}
+
+.style10 {
+  background-image: url("../images/diamond.gif");
+  background-position: left;
+  background-repeat: no-repeat;
+}
+
+.style11 {
+  background-image: url("../images/coins.gif");
 }
 
 .prefix
