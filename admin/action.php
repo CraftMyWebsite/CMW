@@ -9,6 +9,9 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
 	    
+	    case 'getUrlContent':
+	    	require('admin/actions/getUrlContent.php');
+	    	exit();
 	    case 'mooveMenu':
 	        require('admin/actions/mooveMenu.php');
 	        exit();
