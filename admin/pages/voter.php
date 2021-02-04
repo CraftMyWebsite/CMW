@@ -354,7 +354,7 @@
                                                             <label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>
                                                             <input type="number" min="1" max="100" value="<?php echo $value['pourcentage']; ?>" data-type="pourcentage" class="form-control"/>
                                                     
-                                                    		<label class="control-label">Donner la récompense instantanément (ne sera pas stocker si possible)</label>
+                                                    		<label class="control-label">Donner la récompense instantanément (ne sera pas stocké si possible)</label>
             		 											<div class="custom-control custom-switch" style="padding-top: 5px">
             		 											<input type="checkbox" id="inst<?php echo $idcs; ?>" data-type="inst" class="custom-control-input" <?php echo isset($value['inst']) & intval($value['inst']) == 1 ? 'checked' : '' ;?> />
             		 												<label class="custom-control-label" for="inst<?php echo $idcs; ?>">Oui</label> </div>
