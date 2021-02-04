@@ -12,6 +12,8 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [=] : Menu désormais stocker dans la base de données
 [+] : Ajout de l'option instantané pour les récompenses des votes
 [+] : Ajout d'un bouton pour tester l'id unique par rapport à l'url donné, vérifier si l'id est bonne.
+[+] : Ajout de la modification du noms de la monnaie
+[+] : Ajout de keywords + amélioration du SEO pour le thème "default"
 
 
-Contributeurs : LoGuardiaN, Guedesite, PinglsDzn
+Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir
