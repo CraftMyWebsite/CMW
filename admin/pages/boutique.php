@@ -117,6 +117,30 @@
             </div>
         </div>
     </div>
+
+<?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'parametres')) { ?>
+
+    <div class="col-md-12 col-xl-6 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">
+                    Paramètres de la boutique
+                </h4>
+            </div>
+            <div class="card-body" id="moneyName">
+
+                <label class="control-label">Noms de la monnaie </label>
+                <input type="text" class="form-control" name="moneyName" placeholder="Jetons" value="<?php echo $_Serveur_['General']['moneyName']; ?>" required>
+
+                </select>
+                <script>initPost("moneyName", "admin.php?action=boutique",null);</script>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('moneyName');">Envoyer!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'createCoupon')) { ?>
     <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
@@ -426,8 +450,8 @@
                                                     <script>loopChild(get("new-edit-<?php echo $offres[$j]['id']; ?>"),"navRap<?=$i?>");</script>
                                                     <hr/>
                                                     <div id="new-action-<?php echo $offres[$j]['id']; ?>">
-                                                        <h5 style="margin-top:10px;">Configurer les actions:</h4>
-                                                        <label class="control-label">Type d'action <small>Utilisez {PLAYER} pour la variable joueur</small></select>
+                                                        <h5 style="margin-top:10px;">Configurer les actions:</h5>
+                                                        <label class="control-label">Type d'action <small>Utilisez {PLAYER} pour la variable joueur</small></label>
                                                         <select class="form-control" name="methode" onchange="
                                                             switch(parseInt(this.value)) {
                                                                 case 0:
