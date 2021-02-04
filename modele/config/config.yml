@@ -2,38 +2,39 @@
 installation: false
 licence: free-craftmywebsite.fr
 General:
-    url: 
-    name: 
+    url:
+    name:
     theme: default
     themeOption: bootstrap
-    description: 
+    description:
+    keywords:
     bgType: 0
     permsPlugin: groupManager
     permsWorld: world
-    ipTexte: 
-    ip: 
-    port: 
+    ipTexte:
+    ip:
+    port:
     statut: 2
-    moneyName: "Jeton"
-    createur: 
+    moneyName: Jeton
+    createur:
         nom: Créateur
         effets: style16
         couleur: '#ffffff'
         bg: '#b83d3d'
     joueur: Joueur
 DataBase:
-    dbAdress: 
-    dbName: 
-    dbUser: 
-    dbPassword: 
-    dbPort: 
+    dbAdress:
+    dbName:
+    dbUser:
+    dbPassword:
+    dbPort:
 Payement:
     paypal: true
     dedipass: false
     paysafecard: false
-    public_key: ""
-    private_key: ""
-    paypalEmail: 
+    public_key:
+    private_key:
+    paypalEmail:
 vote:
     maxDisplay: 10
 color:
@@ -41,3 +42,4 @@ color:
         main: '#ff8040'
         hover: '#c16100'
         focus: '#ffbc9b'
+lastCMWCheck: 1612439723
