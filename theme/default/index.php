@@ -38,6 +38,7 @@ $themeColor = ($_Theme_['Main']['theme']['choosed-theme'] === 1) ? 'light': 'dar
     <meta name="apple-mobile-web-app-statut-bar-style" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
     <meta name="apple-mobile-web-app-capable" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
 
+    <!-- SEO -->
     <meta property="og:title" content="<?= $_Serveur_['General']['name'] ?>">
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://<?= $_SERVER["SERVER_NAME"] ?>">
@@ -51,6 +52,15 @@ $themeColor = ($_Theme_['Main']['theme']['choosed-theme'] === 1) ? 'light': 'dar
     <meta name="twitter:image" content="https://<?= $_SERVER["SERVER_NAME"] ?>/favicon.ico">
 
     <meta name="author" content="CraftMyWebsite, TheTueurCiTy, <?= $_Serveur_['General']['name']; ?>" />
+    <meta name="publisher" content="<?= $_SERVER["SERVER_NAME"] ?>"/>
+    <meta name="description" content="<?= $_Serveur_['General']['description'] ?>">
+    <meta name="keywords" content="<?= $_Serveur_['General']['keywords'] ?>">
+
+    <meta name="copyright" content="CraftMyWebsite, <?= $_Serveur_['General']['name']; ?>"/>
+
+    <meta name="robots" content="follow, index, all">
+    <meta name="google" content="notranslate">
+
 
     <!-- CSS links -->
     <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/bootstrap.min.css">

@@ -507,6 +507,10 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		case 'uploadImg': 
 			require_once('admin/actions/uploadImg.php');
 		break;
+
+		case 'boutique':
+			require_once('admin/actions/boutique.php');
+		break;
 		
 		// Si le joueur a rentré un url contenant une valeur d'action innexistant?
 		default:
