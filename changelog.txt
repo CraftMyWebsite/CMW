@@ -7,8 +7,11 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix de la banlist qui ne chargé pas en multiserveur
 [|] : Fix erreurs sur la page boutique du panel
 [|] : Ajout d'une permission manquante sur le panel admin
+[|] : Fix API de vérification
 [=] : Fix sécurité sur le cms
 [=] : Menu désormais stocker dans la base de données
+[+] : Ajout de l'option instantané pour les récompenses des votes
+[+] : Ajout d'un bouton pour tester l'id unique par rapport à l'url donné, vérifier si l'id est bonne.
 
 
 Contributeurs : LoGuardiaN, Guedesite, PinglsDzn
