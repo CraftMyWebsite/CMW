@@ -142,7 +142,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-main w-100" id="InscriptionBtn" disabled>S'inscrire</button>
+                    <button type="submit" class="btn btn-main w-100" id="InscriptionBtn" >S'inscrire</button>
                 </div>
             </form>
         </div>
