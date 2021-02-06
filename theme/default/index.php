@@ -21,6 +21,8 @@ $_Theme_ = $configTheme->GetTableau();
 
             --darkest-color-bg: <?= $_Theme_["Main"]['theme']['couleurs']["darkest"] ?> !important;
             --lightest-color-bg: <?= $_Theme_["Main"]['theme']['couleurs']["lightest"] ?> !important;
+
+            --police: <?= $_Theme_["Main"]['theme']['police'] ?> !important;
         }
     </style>
 

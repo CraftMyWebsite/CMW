@@ -97,7 +97,7 @@ body {
     background: var(--main-color-bg);
     color: var(--base-color);
 
-    font-family: 'Electrolize', sans-serif;
+    font-family: var(--police);
 }
 
 a {

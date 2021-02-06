@@ -33,7 +33,11 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editT
 
 	$ecriture = new Ecrire('theme/default/config/config.yml', $_Theme_);
 
+// Modification police du thème
 
+	$_Theme_['Main']['theme']['police'] = $_POST['police'];
+
+	$ecriture = new Ecrire('theme/default/config/config.yml', $_Theme_);
 
 }
 ?>

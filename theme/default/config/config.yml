@@ -9,6 +9,7 @@ Main:
             active-color: '#d457fd'
             darkest: '#3f3f3f'
             lightest: '#585858'
+        police: "'Electrolize', sans-serif;"
 Pied:
     about: 'Bienvenue sur mon site !'
     social:

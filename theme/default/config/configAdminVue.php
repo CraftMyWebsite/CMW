@@ -45,6 +45,10 @@
                                 </li>
 
                                 <li class="nav-item">
+                                    <a class="nav-link" id="policeEdition-tab" data-toggle="tab" href="#policeEdition" role="tab" aria-controls="policeEdition" aria-selected="false">Police</a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a class="nav-link" id="footerEdition-tab" data-toggle="tab" href="#footerEdition" role="tab" aria-controls="footerEdition" aria-selected="false">Footer</a>
                                 </li>
 
@@ -165,12 +169,6 @@
                                                         </td>
 
 
-
-
-
-
-
-
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -179,6 +177,39 @@
                                     </div>
 
                                 </div>
+
+                                    <?php
+                                    $fontactubrute = $_Theme_['Main']['theme']['police'];
+
+                                    $fontactu = str_replace(array("'", ";"), '', $fontactubrute);
+                                    ?>
+
+                                    <div class="tab-pane fade mx-auto" id="policeEdition" role="tabpanel" aria-labelledby="policeEdition-tab">
+
+                                        <div class="col-11 mx-auto my-2">
+
+                                            <h4>Modification de la police du thème :</h4>
+
+                                            <label class="control-label">Séléction de la police </label>
+                                            <select class="form-control text-center" name="police" style="font-family: <?= $fontactubrute?>">
+                                                <option value="<?= $fontactubrute ?>" selected ><?= $fontactu ?></option>
+
+                                                <option value="'Electrolize', sans-serif;" style="font-family: 'Electrolize', sans-serif;">Electrolize, sans-serif</option>
+                                                <option value="'Brush Script MT', cursive;" style="font-family: 'Brush Script MT', cursive;">Brush Script MT, cursive</option>
+                                                <option value="'Courier New', monospace;" style="font-family: 'Courier New', monospace;">Courier New, monospace</option>
+                                                <option value="'Georgia', serif;" style="font-family: 'Georgia', serif;">Georgia, serif</option>
+                                                <option value="'Trebuchet MS', sans-serif;" style=" font-family: 'Trebuchet MS', sans-serif;">Trebuchet MS, sans-serif</option>
+                                                <option value="'Tahoma', sans-serif;" style=" font-family: 'Tahoma', sans-serif;">Tahoma, sans-serif</option>
+                                                <option value="'Cursive';" style="font-family: 'Cursive';">Cursive</option>
+                                                <option value="'Arial';" style="font-family: 'Arial';">Arial</option>
+                                                <option value="'Palatino';" style="font-family: 'Palatino';">Palatino</option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
 
                                 <div class="tab-pane fade mx-auto" id="footerEdition" role="tabpanel" aria-labelledby="footerEdition-tab">
 
