@@ -32,7 +32,7 @@
 
                                 <div id="msg1<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Modification du message principal</strong></span>
-                                    <textarea data-UUID="0002" id="ckeditor" name="maintenanceMsg" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsg']; ?></textarea>
+                                    <textarea data-UUID="0014" id="ckeditor" name="maintenanceMsg" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsg']; ?></textarea>
                                     <input onclick="sendPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>', null);"  type="submit" class="btn btn-success maintenance_msg_btn" value="Modifier le message !" />
                                 </div>
 
@@ -41,7 +41,7 @@
                             if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editAdminMessage')) { ?>
                                 <div id="msg2<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Message d'administration</strong></span>
-                                    <textarea  data-UUID="0002" id="ckeditor" name="maintenanceMsgAdmin" class="form-control" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsgAdmin']; ?></textarea>
+                                    <textarea  data-UUID="0015" id="ckeditor" name="maintenanceMsgAdmin" class="form-control" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsgAdmin']; ?></textarea>
                                     <input onclick="sendPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>', null);" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message !" />
                                 </div>
 
@@ -51,7 +51,7 @@
 
                                 <div id="msg3<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Message d'inscription</strong></span>
-                                    <textarea  data-UUID="0002" id="ckeditor" name="maintenanceMsgInscr" class="form-control" style="height: 275px; margin: 0px; width: 20%;required"><?php echo $maintenance[$i]['maintenanceMsgInscr']; ?> </textarea>
+                                    <textarea  data-UUID="0016" id="ckeditor" name="maintenanceMsgInscr" class="form-control" style="height: 275px; margin: 0px; width: 20%;required"><?php echo $maintenance[$i]['maintenanceMsgInscr']; ?> </textarea>
                                     <input onclick="sendPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>');" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message !" />
                                 </div>
 
