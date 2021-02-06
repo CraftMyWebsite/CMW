@@ -1081,6 +1081,15 @@ input[type=range]:focus::-ms-fill-upper {
   background-color: #428bca;
 }
 
+.maintenance_msg_desc{
+  margin-top: 12px;
+}
+
+.maintenance_msg_btn{
+  margin-top: 6px;
+}
+
+
 /*
  (c) CraftMyWebsite,
   Css by: guedesite & PinglsDzn
