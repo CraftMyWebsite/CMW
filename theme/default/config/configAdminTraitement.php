@@ -6,26 +6,6 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editT
 
 //====> MAIN PART (Choix du thèmes et couleur)
 
-    //Application des couleurs du thème si non existant (Permet de customiser avec ses couleurs dans config.yml)
-
-    if(isset($_POST['themeEdited'])) {
-
-    	$theme = $_POST['themeEdited'];
-
-    	if($theme === "light") {
-
-    		$ecritureTheme['Main']['theme']["choosed-theme"] = 0;
-
-
-    	} else {
-
-    		$ecritureTheme['Main']['theme']["choosed-theme"] = 1;
-
-    	}
-
-    }
-
-
 
 //FOOTER PART (Choix des réseaux et du "A Propos")
 

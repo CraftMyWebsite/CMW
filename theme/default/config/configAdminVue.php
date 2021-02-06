@@ -356,19 +356,8 @@
         }
         get('jsonReseau').value = JSON.stringify(final);
     }
-        
-    function editTheme() {
 
-    	el = get('configColorTheme');
 
-    	if(get('themeEdited') === null) {
-			insertedElement = '<input type="hidden" name="themeEdited" id="themeEdited" value="couleurs" />';
-			el.insertAdjacentHTML('beforeend', insertedElement);
-			initPost("configColorTheme", "admin.php?action=configTheme");
-
-	}
-
-    }
     genJsonReseau();
 
     $("#aboutTheme").val((i, v) => v.replace(/\s{2,}/g, ''));
