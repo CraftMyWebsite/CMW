@@ -248,13 +248,13 @@ function securPass() {
 			$("#correspondance").addClass("text-success");
 			if ($("#correspondance").hasClass("text-danger"))
 				$("#correspondance").removeClass("text-danger");
-			$("#correspondance").html("Les mots de passes rentrés correspondent !!!");
+			$("#correspondance").html("<i class=\"fas fa-check\"></i>");
 			$("#InscriptionBtn").removeAttr("disabled");
 		} else {
 			$("#correspondance").addClass("text-danger");
 			if ($("#correspondance").hasClass("text-success"))
 				$("#correspondance").removeClass("text-success");
-			$("#correspondance").html("Les mots de passes rentrés ne correspondent pas !!!");
+			$("#correspondance").html("<i class=\"fas fa-times\"></i>");
 		}
 		if ($("#MdpInscriptionForm").val() != $("#MdpConfirmInscriptionForm").val()) {
 			$("#InscriptionBtn").attr("disabled", true);
@@ -334,4 +334,16 @@ $('document').ready(function () {
 		});
 	});
 
+});
+
+// Toggle MDP
+$(".toggle-password").click(function() {
+
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") == "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
 });

@@ -945,7 +945,17 @@ footer {
   max-width: 80%;
 }
 
+.mdp-confirm-form{
+    background: none;
+    border: none;
+}
 
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: 10px;
+    z-index: 2;
+}
 
 /* Add Animation */
 .modal-img-content {  
