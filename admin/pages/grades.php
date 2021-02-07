@@ -166,7 +166,7 @@ else
 								<hr/>
 								<div style="width: 100%;display: inline-block">
                                     <div class="float-left">
-                                        <h5>Permissions:</h3>
+                                        <h5>Permissions:</h5>
                                     </div>
                                 </div>
 

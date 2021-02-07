@@ -66,6 +66,9 @@
                                     </div>
                                 </span>
                                 <input type="password" name="mdp" class="form-control custom-text-input" id="MdpInscriptionForm" placeholder="Entrez votre mot de passe" onKeyUp="securPass();" required>
+                                <div class="input-group-append">
+                                    <span toggle="#MdpInscriptionForm, #MdpConfirmInscriptionForm" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                </div>
                             </div>
                         </div>
 
@@ -79,6 +82,9 @@
                                     </div>
                                 </span>
                                 <input type="password" name="mdpConfirm" class="form-control custom-text-input" id="MdpConfirmInscriptionForm" placeholder="Entrez votre mot de passe" onKeyUp="securPass();" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text mdp-confirm-form" id="correspondance"></span>
+                                </div>
                             </div>
                         </div>
 
@@ -87,10 +93,6 @@
                                 <div class="progress">
                                     <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <p id="correspondance"></p>
                             </div>
                         </div>
 
@@ -192,6 +194,9 @@
                                     </div>
                                 </span>
                                 <input type="password" name="mdp" class="form-control custom-text-input" id="MdpConnectionForm" placeholder="Votre mot de passe" required>
+                                <div class="input-group-append">
+                                    <span toggle="#MdpConnectionForm" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                </div>
                             </div>
 
                         </div>

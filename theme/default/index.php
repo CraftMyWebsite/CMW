@@ -2,7 +2,6 @@
 require('theme/' . $_Serveur_['General']['theme'] . '/preload.php');
 $configTheme = new Lire('theme/'.$_Serveur_['General']['theme'].'/config/config.yml');
 $_Theme_ = $configTheme->GetTableau();
-$themeColor = ($_Theme_['Main']['theme']['choosed-theme'] === 1) ? 'light': 'dark';
 
 ?>
 <!DOCTYPE html>
@@ -13,15 +12,17 @@ $themeColor = ($_Theme_['Main']['theme']['choosed-theme'] === 1) ? 'light': 'dar
     <style>
 
         :root {
-            --main-color-bg: <?= $_Theme_["Main"]['theme'][$themeColor]["main-color-bg"] ?> !important;
-            --secondary-color-bg: <?= $_Theme_["Main"]['theme'][$themeColor]["secondary-color-bg"] ?> !important;
+            --main-color-bg: <?= $_Theme_["Main"]['theme']['couleurs']["main-color-bg"] ?> !important;
+            --secondary-color-bg: <?= $_Theme_["Main"]['theme']['couleurs']["secondary-color-bg"] ?> !important;
 
-            --base-color: <?= $_Theme_["Main"]['theme'][$themeColor]["base-color"] ?> !important;
-            --main-color: <?= $_Theme_["Main"]['theme'][$themeColor]["main-color"] ?> !important;
-            --active-color: <?= $_Theme_["Main"]['theme'][$themeColor]["active-color"] ?> !important;
+            --base-color: <?= $_Theme_["Main"]['theme']['couleurs']["base-color"] ?> !important;
+            --main-color: <?= $_Theme_["Main"]['theme']['couleurs']["main-color"] ?> !important;
+            --active-color: <?= $_Theme_["Main"]['theme']['couleurs']["active-color"] ?> !important;
 
-            --darkest-color-bg: <?= $_Theme_["Main"]['theme'][$themeColor]["darkest"] ?> !important;
-            --lightest-color-bg: <?= $_Theme_["Main"]['theme'][$themeColor]["lightest"] ?> !important;
+            --darkest-color-bg: <?= $_Theme_["Main"]['theme']['couleurs']["darkest"] ?> !important;
+            --lightest-color-bg: <?= $_Theme_["Main"]['theme']['couleurs']["lightest"] ?> !important;
+
+            --police: <?= $_Theme_["Main"]['theme']['police'] ?> !important;
         }
     </style>
 

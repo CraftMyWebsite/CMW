@@ -45,6 +45,10 @@
                                 </li>
 
                                 <li class="nav-item">
+                                    <a class="nav-link" id="policeEdition-tab" data-toggle="tab" href="#policeEdition" role="tab" aria-controls="policeEdition" aria-selected="false">Police</a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a class="nav-link" id="footerEdition-tab" data-toggle="tab" href="#footerEdition" role="tab" aria-controls="footerEdition" aria-selected="false">Footer</a>
                                 </li>
 
@@ -53,16 +57,13 @@
                             <div class="tab-content" id="defaultThemeContent">
 
 
-
                                 <div class="tab-pane fade show active" id="colorsEdition" role="tabpanel" aria-labelledby="colorsEdition-tab">
 
                                     <div class="col-11 mx-auto my-2">
 
-                                        <h4>Thème de couleur</h4>
+                                        <h4>Modifier les couleurs du thème</h4>
 
                                         <div class="col-10 mx-auto">
-
-                                            <?php $actualTheme = (isset($_Theme_['Main']['theme']['choosed-theme']) && $_Theme_['Main']['theme']['choosed-theme'] === 1) ? "light" : "dark"; ?>
 
                                             <div class="well 3">
                                                 <h4>Thème actuel : </h4>
@@ -84,48 +85,131 @@
                                                         <th>Fond foncé</th>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td> <b> Couleur héxadécimal </b> </td>
+                                                    <tr>
+                                                        <td> <b> Modifier les couleurs </b> </td>
 
-                                                            <?php if (isset($_Theme_['Main']['theme'][$actualTheme]) && !empty($_Theme_['Main']['theme'][$actualTheme])) foreach ($_Theme_['Main']['theme'][$actualTheme] as $colorValue) : ?>
 
-                                                                <td class="text-center">
-                                                                    <code> <?= $colorValue ?> </code>
-                                                                </td>
+                                                        <td class="text-center">
+                                                            <input type="color" id="selColor" name="main-color-bg" value="<?php echo $_Theme_['Main']['theme']['couleurs']['main-color-bg']; ?>">
+                                                        </td>
 
-                                                            <?php endforeach; ?>
+                                                        <td class="text-center">
+                                                            <input type="color" id="selColor" name="secondary-color-bg" value="<?php echo $_Theme_['Main']['theme']['couleurs']['secondary-color-bg']; ?>">
+                                                        </td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <b> Couleur présentée </b> </td>
+                                                        <td class="text-center">
+                                                            <input type="color" id="selColor" name="base-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['base-color']; ?>">
+                                                        </td>
 
-                                                            <?php if (isset($_Theme_['Main']['theme'][$actualTheme]) && !empty($_Theme_['Main']['theme'][$actualTheme])) foreach ($_Theme_['Main']['theme'][$actualTheme] as $colorValue) : ?>
+                                                        <td class="text-center">
+                                                            <input type="color" id="selColor" name="main-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['main-color']; ?>">
+                                                        </td>
 
-                                                                <td class="text-center p-0">
-                                                                    <div style="background-color: <?= $colorValue; ?>; width: 100%; padding: 0.75rem">
-                                                                        &nbsp;
-                                                                    </div>
-                                                                </td>
+                                                        <td class="text-center">
+                                                            <input type="color" id="selColor" name="active-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['active-color']; ?>">
+                                                        </td>
 
-                                                            <?php endforeach; ?>
+                                                        <td class="text-center">
+                                                            <input type="color" id="selColor" name="darkest" value="<?php echo $_Theme_['Main']['theme']['couleurs']['darkest']; ?>">
+                                                        </td>
 
-                                                        </tr>
+                                                        <td class="text-center">
+                                                            <input type="color" id="selColor" name="lightest" value="<?php echo $_Theme_['Main']['theme']['couleurs']['lightest']; ?>">
+                                                        </td>
+
+
+
+                                                    </tr>
+
+                                                    <tr id="selColor">
+                                                        <td> <b> Couleur présentée </b> </td>
+
+
+                                                        <td class="text-center p-0">
+                                                            <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['main-color-bg']; ?>; width: 100%; padding: 0.75rem">
+                                                                &nbsp;
+                                                            </div>
+                                                        </td>
+
+                                                        <td class="text-center p-0">
+                                                            <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['secondary-color-bg']; ?>; width: 100%; padding: 0.75rem">
+                                                                &nbsp;
+                                                            </div>
+                                                        </td>
+
+                                                        <td class="text-center p-0">
+                                                            <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['base-color']; ?>; width: 100%; padding: 0.75rem">
+                                                                &nbsp;
+                                                            </div>
+                                                        </td>
+
+                                                        <td class="text-center p-0">
+                                                            <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['main-color']; ?>; width: 100%; padding: 0.75rem">
+                                                                &nbsp;
+                                                            </div>
+                                                        </td>
+
+                                                        <td class="text-center p-0">
+                                                            <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['active-color']; ?>; width: 100%; padding: 0.75rem">
+                                                                &nbsp;
+                                                            </div>
+                                                        </td>
+
+                                                        <td class="text-center p-0">
+                                                            <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['darkest']; ?>; width: 100%; padding: 0.75rem">
+                                                                &nbsp;
+                                                            </div>
+                                                        </td>
+
+
+                                                        <td class="text-center p-0">
+                                                            <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['lightest']; ?>; width: 100%; padding: 0.75rem">
+                                                                &nbsp;
+                                                            </div>
+                                                        </td>
+
+
+                                                    </tr>
                                                     </tbody>
                                                 </table>
-
-                                                <div id="configColorTheme">
-
-                                                </div>
-
-	                                        <button type='button' class="btn btn-primary w-100 m-2" name="changeTheme" onClick="editTheme(); sendPost('configColorTheme');" value="<?= $actualTheme ?>">Passer en thème <?= ($actualTheme === "light") ? "sombre" : "clair" ?>
-	                                        </button>
-
-                                            </div>
 
                                         </div>
                                     </div>
 
                                 </div>
+
+                                    <?php
+                                    $fontactubrute = $_Theme_['Main']['theme']['police'];
+
+                                    $fontactu = str_replace(array("'", ";"), '', $fontactubrute);
+                                    ?>
+
+                                    <div class="tab-pane fade mx-auto" id="policeEdition" role="tabpanel" aria-labelledby="policeEdition-tab">
+
+                                        <div class="col-11 mx-auto my-2">
+
+                                            <h4>Modification de la police du thème :</h4>
+
+                                            <label class="control-label">Séléction de la police </label>
+                                            <select class="form-control text-center" name="police" style="font-family: <?= $fontactubrute?>">
+                                                <option value="<?= $fontactubrute ?>" selected ><?= $fontactu ?></option>
+
+                                                <option value="'Electrolize', sans-serif;" style="font-family: 'Electrolize', sans-serif;">Electrolize, sans-serif</option>
+                                                <option value="'Brush Script MT', cursive;" style="font-family: 'Brush Script MT', cursive;">Brush Script MT, cursive</option>
+                                                <option value="'Courier New', monospace;" style="font-family: 'Courier New', monospace;">Courier New, monospace</option>
+                                                <option value="'Georgia', serif;" style="font-family: 'Georgia', serif;">Georgia, serif</option>
+                                                <option value="'Trebuchet MS', sans-serif;" style=" font-family: 'Trebuchet MS', sans-serif;">Trebuchet MS, sans-serif</option>
+                                                <option value="'Tahoma', sans-serif;" style=" font-family: 'Tahoma', sans-serif;">Tahoma, sans-serif</option>
+                                                <option value="'Cursive';" style="font-family: 'Cursive';">Cursive</option>
+                                                <option value="'Arial';" style="font-family: 'Arial';">Arial</option>
+                                                <option value="'Palatino';" style="font-family: 'Palatino';">Palatino</option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
 
                                 <div class="tab-pane fade mx-auto" id="footerEdition" role="tabpanel" aria-labelledby="footerEdition-tab">
 
@@ -227,7 +311,7 @@
 
             <div class="card-footer">
                 <div class="form-group text-center">
-                    <input type="submit" onClick="genJsonReseau(); sendPost('configThemeAdmin');" class="btn btn-success" value="Sauvegarder">
+                    <input type="submit" onClick="genJsonReseau(); sendPost('configThemeAdmin'); document.location.reload();" class="btn btn-success" value="Sauvegarder">
                 </div>
 
                 <script>
@@ -303,19 +387,8 @@
         }
         get('jsonReseau').value = JSON.stringify(final);
     }
-        
-    function editTheme() {
 
-    	el = get('configColorTheme');
 
-    	if(get('themeEdited') === null) {
-			insertedElement = '<input type="hidden" name="themeEdited" id="themeEdited" value="<?= $actualTheme ?>" />';
-			el.insertAdjacentHTML('beforeend', insertedElement);
-			initPost("configColorTheme", "admin.php?action=configTheme");
-
-	}
-
-    }
     genJsonReseau();
 
     $("#aboutTheme").val((i, v) => v.replace(/\s{2,}/g, ''));
