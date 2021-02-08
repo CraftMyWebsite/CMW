@@ -10,11 +10,13 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix API de vérification de 3 sites qui ne fonctionné pas
 [=] : Fix sécurité sur le cms
 [=] : Menu désormais stocker dans la base de données
+[=] : Refonte de l'inscription pour que ça soit plus "pro" 
 [+] : Possibilité de modifier l'ordre des menus
 [+] : Ajout de l'option instantané pour les récompenses des votes
 [+] : Ajout d'un bouton pour tester l'id unique par rapport à l'url donné, vérifier si l'id est bonne (page vote)
 [+] : Modification du nom de la monnaie depuis le panel
 [+] : Ajouts de nouveaux effets pour les grades
+[+] : Modification de la police d'écriture du thème
 
 
-Contributeurs : LoGuardiaN, Guedesite, PinglsDzn
+Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir, Emilien52
