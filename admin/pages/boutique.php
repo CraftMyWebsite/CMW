@@ -426,8 +426,8 @@
                                                     <script>loopChild(get("new-edit-<?php echo $offres[$j]['id']; ?>"),"navRap<?=$i?>");</script>
                                                     <hr/>
                                                     <div id="new-action-<?php echo $offres[$j]['id']; ?>">
-                                                        <h5 style="margin-top:10px;">Configurer les actions:</h4>
-                                                        <label class="control-label">Type d'action <small>Utilisez {PLAYER} pour la variable joueur</small></select>
+                                                        <h5 style="margin-top:10px;">Configurer les actions:</h5>
+                                                        <label class="control-label">Type d'action <small>Utilisez {PLAYER} pour la variable joueur</small></label>
                                                         <select class="form-control" name="methode" onchange="
                                                             switch(parseInt(this.value)) {
                                                                 case 0:

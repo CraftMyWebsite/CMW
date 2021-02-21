@@ -98,7 +98,7 @@
                                     <div class="col-md-12">
                                         <div class="card" style="text-align: center;">
                                             <div class="card-header">
-                                                <h5 class="card-title">Activer/désactiver la maintenance</h3>
+                                                <h5 class="card-title">Activer/désactiver la maintenance</h5>
                                             </div>
                                             <div class="card-body" id="maintenance">
                                                 <center>Vous souhaitez rendre le site accessible uniquement aux administrateurs ? Il vous suffit d'appuyer sur le bouton ci-dessous. Les visiteurs seront redirigés vers la page de maintenance.</center>
