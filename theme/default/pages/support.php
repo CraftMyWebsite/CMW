@@ -13,7 +13,7 @@
         <div class="row">
             <!-- Tableau des Tickets  -->
             <div class="col-md-12 col-lg9 col-sm-12">
-                <table class="table table-dark table-striped table-hover">
+                <table class="table table-hover table-responsive mb-0 mt-4">
                     <thead>
                         <tr>
                             <?php if (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) : ?>
