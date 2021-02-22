@@ -1,5 +1,5 @@
 <?php
-if(!$admin) { header('Location: index.php'); } 
+if(!$admin) { header('Location: nope.php'); }
 
 $_Serveur_ = new Lire('./modele/config/config.yml');
 $_Serveur_ = $_Serveur_->GetTableau();
