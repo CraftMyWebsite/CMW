@@ -32,6 +32,7 @@ Payement:
     paypal: true
     dedipass: false
     paysafecard: false
+    currency: EUR
     public_key: ""
     private_key: ""
     paypalEmail: 

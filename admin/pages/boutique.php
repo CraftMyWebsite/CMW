@@ -132,7 +132,38 @@
                 <label class="control-label">Noms de la monnaie </label>
                 <input type="text" class="form-control" name="moneyName" placeholder="Jetons" value="<?php echo $_Serveur_['General']['moneyName']; ?>" required>
 
+                <label class="control-label">Devise monétaire </label>
+                <select class="form-control text-center" name="currency">
+                    <option value="<?= $_Serveur_['Payement']['currency'] ?>" selected ><?php if ($_Serveur_['Payement']['currency'] == "EUR") {echo "Euro";}elseif ($_Serveur_['Payement']['currency'] == "CAD"){echo "Canadian Dollar";} elseif ($_Serveur_['Payement']['currency'] == "CHF"){echo "Swiss Franc";} elseif ($_Serveur_['Payement']['currency'] == "USD"){echo "United States Dollar";} elseif ($_Serveur_['Payement']['currency'] == "GBP"){echo "Pound Sterling";} else {echo $_Serveur_['Payement']['currency'];} ?></option>
+                    <option value="AUD">Australian Dollar</option>
+                    <option value="BRL">Brazilian Real</option>
+                    <option value="CAD">Canadian Dollar</option>
+                    <option value="CNY">Chinese Renmenbi</option>
+                    <option value="CZK">Czech Koruna</option>
+                    <option value="DKK">Danish Krone</option>
+                    <option value="EUR">Euro</option>
+                    <option value="HKD">Hong Kong Dollar</option>
+                    <option value="HUF">Hungarian Forint</option>
+                    <option value="INR">Indian Rupee</option>
+                    <option value="ILS">Israeli New Shekel</option>
+                    <option value="JPY">Japanese Yen</option>
+                    <option value="MYR">Malaysian Ringgit</option>
+                    <option value="MXN">Mexican Peso</option>
+                    <option value="TWD">New Taiwan Dollar</option>
+                    <option value="NZD">New Zealand Dollar</option>
+                    <option value="NOK">Norwegian Krone</option>
+                    <option value="PHP">Philippine Peso</option>
+                    <option value="PLN">Polish złoty</option>
+                    <option value="GBP">Pound Sterling</option>
+                    <option value="RUB">Russian Ruble</option>
+                    <option value="SGD">Singapore Dollar</option>
+                    <option value="SEK">Swedish Krona</option>
+                    <option value="CHF">Swiss Franc</option>
+                    <option value="THB">Thai Baht</option>
+                    <option value="USD">United States Dollar</option>
                 </select>
+
+
                 <script>initPost("moneyName", "admin.php?action=boutique",null);</script>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-success w-100" onClick="sendPost('moneyName');">Envoyer!</button>
