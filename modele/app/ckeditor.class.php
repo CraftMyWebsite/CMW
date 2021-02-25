@@ -44,6 +44,7 @@ class ckeditor
 				if($tag == "img") {
 					$item->setAttribute("style", "max-width: 100%;height: auto;cursor:pointer;");
 					$item->setAttribute("onclick", "imageModal(this);");
+                    $item->setAttribute("class", "mx-auto d-block");
 					$str = str_replace(" ", "",$item->getAttribute("src"));
 					if(isset($str) && !empty($str)) {
 						if(strpos($str, "?action=") | strpos($str, "&action="))
