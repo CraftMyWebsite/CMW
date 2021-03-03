@@ -234,6 +234,15 @@ function newsUpdate() {
 	}});
 }
 
+function miniaUpdate() {
+	destroyCK();
+	updateCont("admin.php?action=getMiniaList", get("allMinia"), function(data) { if(data) {
+		show('card-minia');
+		initPost("allMinia", "admin.php?action=editMiniature",null);
+		initCK();
+	}});
+}
+
 function serverUpdate() {
 	updateCont("admin.php?action=getServerList", get("modifServer"), function(data) { if(data) {
 		initPost('modifServer', 'admin.php?&action=serveurConfig');

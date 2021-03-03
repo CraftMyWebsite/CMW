@@ -36,11 +36,6 @@ while($newsDonnees = $newsRecup->fetch(PDO::FETCH_ASSOC))
 	$i++;
 }
 
-$lectureAccueil = new Lire('modele/config/accueil.yml');
-$lectureAccueil = $lectureAccueil->GetTableau();
-
-$sliders = $lectureAccueil['Slider'];
-$iSliders = count($lectureAccueil['Slider']);
 
 $couleurInfos[0] = '1';
 $couleurInfos[1] = '2';

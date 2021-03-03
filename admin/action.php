@@ -15,6 +15,9 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 	    case 'mooveMenu':
 	        require('admin/actions/mooveMenu.php');
 	        exit();
+	    case 'mooveMinia':
+	        require('admin/actions/mooveMinia.php');
+	        exit();
 		case 'supprUpload': 
 			require('admin/actions/supprUpload.php');
 			exit();
@@ -132,8 +135,8 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require('admin/actions/epingleNews.php');
 		break;
 
-		case 'supprMini':
-			require('admin/actions/supprMini.php');
+		case 'supprMiniature':
+			require('admin/actions/supprMiniature.php');
 		break;
 
 		case 'addSocial':
@@ -332,8 +335,8 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/deplacerMenu.php');
 		break;
 		
-		case 'postNavRap': 
-			require_once('admin/actions/postNavRap.php');
+		case 'postMiniature': 
+			require_once('admin/actions/postMiniature.php');
 		break;
 
 		case 'postNews': 
@@ -356,12 +359,12 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/creerAction.php');
 		break;
 		
-		case 'editRapNav': 
-			require_once('admin/actions/editRapNav.php');
+		case 'editMiniature': 
+			require_once('admin/actions/editMiniature.php');
 		break;
 		
-		case 'addRapNav': 
-			require_once('admin/actions/addRapNav.php');
+		case 'addMiniature': 
+			require_once('admin/actions/addMiniature.php');
 		break;
 		
 		case 'newSlider':

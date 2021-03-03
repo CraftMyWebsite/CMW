@@ -193,7 +193,7 @@ function clearAllInput(idform) {
             allForm[idform].get(key).value = "";
         } else if(allForm[idform].get(key).id == "ckeditor") {
             CK.get(allForm[idform].get(key)).setData("");
-            removeCK(allForm[idform].get(key));
+           // removeCK(allForm[idform].get(key));
         }
     }
 }

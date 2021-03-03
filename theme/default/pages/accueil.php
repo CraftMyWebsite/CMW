@@ -65,21 +65,21 @@
 
             <div class="row info-articles col-md-12 col-lg-4 col-sm-12 mx-auto">
                 <!-- Informations Articles -->
-                <?php for ($i = 1; $i < count($lectureAccueil['Infos']) + 1; $i++) : ?>
+                <?php foreach($_Minia_ as $value) : ?>
                     <article class="col-12 info-content">
                         <div class="card">
-                            <img class="card-img-top" src="theme/upload/navRap/<?= $lectureAccueil['Infos'][$i]['image'] ?>" alt="Image <?= $i ?>">
+                            <img class="card-img-top" src="theme/upload/navRap/<?= $value['image'] ?>" alt="">
                             <div class="card-body">
                                 <p class="card-text">
-                                    <?= $lectureAccueil['Infos'][$i]['message']; ?>
+                                    <?= $value['message']; ?>
                                 </p>
                             </div>
                             <div class="card-footer">
-                                <a href="<?= $lectureAccueil['Infos'][$i]['lien']; ?>" class="btn btn-main w-100">S'y rendre !</a>
+                                <a href="<?= $value['lien']; ?>" class="btn btn-main w-100">S'y rendre !</a>
                             </div>
                         </div>
                     </article>
-                <?php endfor; ?>
+                <?php endforeach; ?>
             </div>
 
         </div>
