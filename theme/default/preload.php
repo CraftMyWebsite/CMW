@@ -3,6 +3,10 @@ require("modele/menu.class.php");
 $_Menu_ = new menu($bddConnection);
 $_Menu_ = $_Menu_->getMenuGroup();
 
+require("modele/accueil/miniature.class.php");
+$_Minia_ = new miniature($bddConnection);
+$_Minia_ = $_Minia_->getMinia();
+
 
 // On inclut le fichier de contrôle de la maintenance
 include('controleur/maintenance.php');

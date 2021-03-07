@@ -24,7 +24,6 @@
 	    
 	    $m = $Menu->getMenuWithDest(intval($_POST['id']));
 	    foreach($m as $value) {
-	        echo 'found';
 	        $data = array();
 	        $data['name'] = $_POST['name-dest'.$value['id']];
 	        if(isset($_POST['methode-dest'.$value['id']])) {
