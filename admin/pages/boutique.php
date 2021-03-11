@@ -385,7 +385,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for($j = 1;$j <= count($offres);$j++) {
+                                            <?php if(isset($offres) && !empty($offres)) { for($j = 1;$j <= count($offres);$j++) {
                                                 if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                                     <tr id="ligneoffre-<?php echo $offres[$j]['id']; ?>">
                                                 <td><input type="text" name="offresNom<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nom']; ?>" /></td>
@@ -437,7 +437,7 @@
                                                 <td><a class="btn btn-success" data-toggle="modal"  data-target="#OffreAction<?php echo $offres[$j]['id']; ?>">Modifier</a></td>
                                                 <input type="hidden" name="offresId<?php echo $offres[$j]['id']; ?>" value="<?php echo $offres[$j]['id']; ?>" />
                                             </tr>
-                                            <?php } }?>
+                                            <?php } } }?>
                                         </tbody>
                                     </table>
                                     <script>initPost("navRap<?=$i?>", "admin.php?action=editBoutique", function(data) { if(data) { boutiqueCheck(); } } );</script>
