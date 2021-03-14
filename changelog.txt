@@ -8,15 +8,25 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix erreurs sur la page boutique du panel
 [|] : Ajout d'une permission manquante sur le panel admin
 [|] : Fix API de vérification de 3 sites qui ne fonctionné pas
+[|] : Fix Responsive thème default
+[|] : Fix Responsive du panel admin
+[|] : Fix images non fonctionnel sur la boutique
+
 [=] : Fix sécurité sur le cms
 [=] : Menu désormais stocker dans la base de données
 [=] : Refonte de l'inscription pour que ça soit plus "pro" 
+[=] : Image centré dans les offres boutique
+
 [+] : Possibilité de modifier l'ordre des menus
 [+] : Ajout de l'option instantané pour les récompenses des votes
 [+] : Ajout d'un bouton pour tester l'id unique par rapport à l'url donné, vérifier si l'id est bonne (page vote)
 [+] : Modification du nom de la monnaie depuis le panel
 [+] : Ajouts de nouveaux effets pour les grades
 [+] : Modification de la police d'écriture du thème
+[+] : Ajout d'une erreur en cas de connexion à l'administration sans y être autorisé
+[+] : Ajout de ckeditor à la page maintenance
+[+] : Possibilité de changer la devise monétaire de paypal depuis le panel
+[+] : Ajout d'un système de SEO au thème default
 
 
 Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir, Emilien52
