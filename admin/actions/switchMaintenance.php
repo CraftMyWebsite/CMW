@@ -18,7 +18,7 @@ if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editEtatMai
 		if($dtime != false)
 			$dateTime = $dtime->getTimestamp();
 		if(time() > $dateTime && $dtime != false)
-			$retour = array('retour' => "NOPE", "message" => "Date de fin avant le début");
+			$retour = array('retour' => "erreur", "message" => "Date de fin avant le début");
 		else
 		{
 			$req = $bddConnection->prepare('UPDATE cmw_maintenance SET maintenanceEtat = :maintenanceEtat, maintenanceTime = UNIX_TIMESTAMP(), dateFin = :dateFin WHERE maintenanceId = :maintenanceId');
@@ -32,6 +32,6 @@ if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editEtatMai
 	}
 }
 else
-	$retour = array('retour' => "NOPE", 'message' => "Erreur de permission");
+	$retour = array('retour' => "erreur", 'message' => "Erreur de permission");
 echo json_encode($retour);
 ?>

@@ -255,11 +255,23 @@ function paypalUpdate() {
 	}});
 }
 
+
+var showPopUpPage = null;
+
+function setShowPopUpPage(name) {
+	showPopUpPage = name;
+}
+
 function pagesUpdate() {
 	destroyCK();
 	updateCont("admin.php?action=getPagesList", get("allPage"), function(data) { if(data) {
 		initPostCallback( null);
 		initCK();
+		if(isset(showPopUpPage)) {
+
+			window.open("index.php?page="+showPopUpPage,showPopUpPage,"menubar=no, status=no, scrollbars=no, menubar=no, width=1280, height=720");
+			showPopUpPage = null;
+		}
 	}});
 }
 

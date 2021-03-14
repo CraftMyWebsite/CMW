@@ -309,13 +309,6 @@ CREATE TABLE IF NOT EXISTS `cmw_news_stats` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `cmw_pages` (
-  `id` int(11) AUTO_INCREMENT,
-  `titre` varchar(100),
-  `contenu` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE IF NOT EXISTS `cmw_postit` (
   `id` smallint(5) UNSIGNED AUTO_INCREMENT,
   `auteur` varchar(40),
