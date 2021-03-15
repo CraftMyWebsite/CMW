@@ -37,7 +37,7 @@ if (isset($_GET['id'])) :
 
                                 <?php if (isset($topicd['sous_forum'])) : ?>
                                     <li class="breadcrumb-item">
-                                        <a href="?page=forum_categorie&id=<?= $topicd['id_categorie']; ?>&id_sous_forum=<?= $topicd['sous_forum']; ?>">
+                                        <a href="?page=sous_forum_categorie&id=<?= $topicd['id_categorie']; ?>&id_sous_forum=<?= $topicd['sous_forum']; ?>">
                                             <?= $topicd['nom_sf']; ?>
                                         </a>
                                     </li>
@@ -78,7 +78,7 @@ if (isset($_GET['id'])) :
                                         <?php endif; ?>
 
                                         <li class="categorie-item nav-item">
-                                            <a class="nav-link categorie-link" href="?&page=forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
+                                            <a class="nav-link categorie-link" href="?&page=<?= (isset($topicd['sous_forum'])) ? "sous_" : ""; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
                                                 Revenir à l'accueil de la catégorie
                                             </a>
                                         </li>

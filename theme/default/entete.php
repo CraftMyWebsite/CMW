@@ -171,7 +171,7 @@
                             ?>
                                 <h1 class="text-uppercase"> Edition d'<?= ($_GET['objet'] == 1) ? 'un topic' : 'une réponse'; ?> </h1>
 
-                            <?php elseif (isset($_GET['page']) && $_GET['page'] == "forum_categorie") : //Si c'est la catégorie d'un forum
+                            <?php elseif (isset($_GET['page']) && ($_GET['page'] == "forum_categorie" | $_GET['page'] == "sous_forum_categorie")) : //Si c'est la catégorie d'un forum
                             ?>
                                 <h1 class="text-uppercase"> Forum: <?= $_Forum_->infosCategorie($_GET['id'])['nom'] ?> </h1>
 

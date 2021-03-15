@@ -9,6 +9,8 @@ $_Theme_ = $configTheme->GetTableau();
 
 <head>
 
+    <base href="https://<?= $_SERVER["SERVER_NAME"] ?>/" />
+
     <style>
 
         :root {
@@ -79,8 +81,8 @@ $_Theme_ = $configTheme->GetTableau();
     <script type="text/javascript">var _Jetons_ = "<?=$_Serveur_['General']['moneyName'];?>";</script>
     <?php
     //Verif Version
-    include("./include/version.php");
-    include("./include/version_distant.php");
+    include("include/version.php");
+    include("include/version_distant.php");
 
     if ($versioncms != $versioncmsrelease && Permission::getInstance()->verifPerm('PermsPanel', 'update', 'showPage')) : ?>
 

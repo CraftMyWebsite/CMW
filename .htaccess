@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]*)$ /index.php?page=$1 [L]
+RewriteRule ^voter/([^/]*)$ /index.php?page=voter&player=$1 [L]
+RewriteRule ^membres/([^/]*)$ /index.php?page=membres&page_membre=$1 [L]
+RewriteRule ^profil/([^/]*)$ /index.php?page=profil&profil=$1 [L]
+RewriteRule ^post/([^/]*)$ /index.php?page=post&id=$1 [L]
+RewriteRule ^editForum/([^/]*)/([^/]*)$ /index.php?page=editForum&objet=$1&id=$2 [L]
+RewriteRule ^forum$ /index.php?page=forum&postSignalement [L]
+RewriteRule ^post/([^/]*)/([^/]*)$ /?page=post&id=$2&page_post=$3 [L]
+RewriteRule ^forum_categorie/([^/]*)$ /index.php?page=forum_categorie&id=$1 [L]
+RewriteRule ^sous_forum_categorie/([^/]*)/([^/]*)$ /?page=sous_forum_categorie&id=$1&id_sous_forum=$2 [L]
+RewriteRule ^sous_forum_categorie/([^/]*)/([^/]*)/([^/]*)$ /?page=sous_forum_categorie&id=$1&id_sous_forum=$2&page_topic=$3 [L]
+RewriteRule ^forum_categorie/([^/]*)/([^/]*)$ /?page=forum_categorie&id=$1&page_topic=$2 [L] 

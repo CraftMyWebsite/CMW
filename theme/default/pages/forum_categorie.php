@@ -101,29 +101,29 @@ if(isset($id_sous_forum))
                                     <td>
 
                                         <?php if ($sousforumd[$a]['img'] == NULL) : ?>
-                                            <a style="font-size: 28px;" href="?&page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                            <a style="font-size: 28px;" href="?&page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                                <i class="far fa-comment-dots"></i>
                                             </a>
                                         <?php else : ?>
-                                            <a style="font-size: 28px;" href="?page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>"><i class="<?= $sousforumd[$a]['img']; ?>"></i>
+                                            <a style="font-size: 28px;" href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>"><i class="<?= $sousforumd[$a]['img']; ?>"></i>
                                             </a>
                                         <?php endif; ?>
                                     </td>
 
                                     <td>
-                                        <a href="?&page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                        <a href="?&page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                             <?= $sousforumd[$a]['nom']; ?>
                                         </a>
                                     </td>
 
                                     <td>
-                                        <a href="?page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                        <a href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                             <?= $_Forum_->compteTopicsSF($sousforumd[$a]['id']); ?>
                                         </a>
                                     </td>
 
                                     <td>
-                                        <a href="?page=forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                        <a href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                             <?= $_Forum_->compteAnswerSF($sousforumd[$a]['id']); ?>
                                         </a>
                                     </td>
@@ -445,7 +445,7 @@ if(isset($id_sous_forum))
                         <?php
                         for ($i = 1; $i <= $count_topic_nbrOfPages2; $i++) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?&page=forum_categorie&id=<?= $id ?> <?= (isset($id_sous_forum)) ? "&id_sous_forum=$id_sous_forum" : ""; ?>&page_topic=<?= $i; ?>">
+                                <a class="page-link" href="?&page=<?= (isset($id_sous_forum)) ? "sous_" : ""; ?>forum_categorie&id=<?= $id ?><?= (isset($id_sous_forum)) ? "&id_sous_forum=$id_sous_forum" : ""; ?>&page_topic=<?= $i; ?>">
                                     <?= $i; ?>
                                 </a>
                             </li>

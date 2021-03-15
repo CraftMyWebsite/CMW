@@ -51,6 +51,10 @@ if(isset($_GET['page']))
 		case 'forum_categorie':
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/forum_categorie.php');
 		break;
+
+		case 'sous_forum_categorie':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/forum_categorie.php');
+		break;
 		
 		case 'post':
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/post.php');

@@ -58,10 +58,10 @@ class page
     }
     
     public function traitPHP($c) {
-        $p = strrpos($c, "<?php");
+        $p = strpos($c, "<?php");
         while($p !== false) {
             $p2 = $p;
-            $p = strrpos($c, "?>", $p);
+            $p = strpos($c, "?>", $p);
             if($p !== false) {
                 $p2--;
                 while($p2 <= $p) {
@@ -84,7 +84,7 @@ class page
                         $p = $p + 2;
                     }
                 }
-                $p = strrpos($c, "<?php", $p);
+                $p = strpos($c, "<?php", $p);
             }
         }
         return $c;
