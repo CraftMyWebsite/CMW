@@ -19,6 +19,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [=] : Refonte de l'inscription pour que ça soit plus "pro" 
 [=] : Image centré dans les offres boutique
 [=] : Mise à jour de ckeditor
+[=] : Retour des pages perso dans le ftp
 
 [+] : Possibilité de modifier l'ordre des menus
 [+] : Ajout de l'option instantané pour les récompenses des votes
