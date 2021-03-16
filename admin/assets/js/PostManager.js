@@ -57,20 +57,43 @@ function getEach(element, callBack) {
     }
 }
 
-function sendDirectPost(url, callback) {
+function sendDirectPost(url, callback, sendData) {
     var returnData = false;
     $.post(url, {}, function(data, status) {
         clog("post: "+url+" data:"+data)
         if (status == "success") {
             returnData = true;
-            notif("success", "Action effectuée !","");
+            if(isset(sendData) && sendData === true)
+            {
+                if(jsonDataIsOk(data))
+                {
+                    notif("success", "Action effectuée !","");
+                }
+                else
+                {
+                    notif("error", "Erreur !", donneesRetour['message']);
+                }
+            }
+            else
+            {
+                notif("success", "Action effectuée !","");
+            }
         } else {
             notif("error", "Erreur", status);
         }
         if(isset(callback)) {
-            callback(returnData);
+            if(isset(sendData) && sendData === true) {
+                callback(returnData, data);
+            } else {
+                callback(returnData);
+            }
         }
     });
+}
+
+function jsonDataIsOk(data) {
+    donneesRetour = JSON.parse(data);
+    return donneesRetour['retour'] == "OK";
 }
 
 function removePost(idform, del) {
@@ -148,8 +171,7 @@ function sendPost(idform, callback, sendData) {
             returnData = true;
             if(isset(sendData) && sendData === true)
             {
-                donneesRetour = JSON.parse(data);
-                if(donneesRetour['retour'] == "OK")
+                if(jsonDataIsOk(data))
 				{
                     notif("success", "Action effectuée !","");
 				}
@@ -166,7 +188,7 @@ function sendPost(idform, callback, sendData) {
             notif("error", "Erreur", status);
         }
         if(isset(allCallBack[idform])) {
-            if(isset(sendData))
+            if(isset(sendData) && sendData === true)
 			{
                 allCallBack[idform](returnData, data);
 			}

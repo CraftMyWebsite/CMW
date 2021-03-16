@@ -196,7 +196,7 @@
                                         </thead>
                                         <body>
                                         <?php while($oldVote = $oldvote_req->fetch(PDO::FETCH_ASSOC))
-                                        { if($a < $_Serveur_['vote']['oldDisplay']) { ?>
+                                        { if(($a-1) < $_Serveur_['vote']['oldDisplay']) { ?>
                                             <tr>
                                                 <td><h6><?php echo $a; ?></h6></td>
                                                 <td><h6><?php echo $oldVote['pseudo']; ?></h6></td>

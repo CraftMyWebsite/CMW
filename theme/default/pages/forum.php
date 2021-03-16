@@ -183,7 +183,7 @@ $fofo = $_Forum_->affichageForum();
                                                         <?php if (count($sousforum) != "0") : ?>
                                                             <div class="dropdown-menu" aria-labelledby="sous-forum<?php echo $categorie[$j]['id']; ?>">
                                                                 <?php for ($s = 0; $s < count($sousforum); $s++) : ?>
-                                                                    <a class="dropdown-item" href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>&id_sous_forum=<?= $sousforum[$s]['id']; ?>">
+                                                                    <a class="dropdown-item" href="?&page=sous_forum_categorie&id=<?= $categorie[$j]['id']; ?>&id_sous_forum=<?= $sousforum[$s]['id']; ?>">
                                                                         <?= $sousforum[$s]['nom']; ?>
                                                                     </a>
                                                                 <?php endfor; ?>

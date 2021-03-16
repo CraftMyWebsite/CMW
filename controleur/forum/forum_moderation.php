@@ -54,7 +54,7 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 					'id' => $id 
 				));
 				if(isset($info_removed['sous_forum']))
-					header('Location: ?&page=forum_categorie&id='.$info_removed['id_categorie'].'&id_sous_forum='.$info_removed['sous_forum']);
+					header('Location: ?&page=sous_forum_categorie&id='.$info_removed['id_categorie'].'&id_sous_forum='.$info_removed['sous_forum']);
 				else
 					header('Location: ?page=forum_categorie&id='.$info_removed['id_categorie']);
 			}

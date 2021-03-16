@@ -127,12 +127,12 @@ async function showAll(allPlayer) {
                 all += '<td>'+allPlayer[i].nbre_votes+'</td>';
                 all += '<td>Dernier le '+allPlayer[i].date_dernier2+'</td>';
                 all += '<td>sur '+allPlayer[i].site+'</td>';
-                <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'actions', 'removeVote')) { ?> all += '<td><button onclick="sendDirectPost(\'admin.php?action=suppVoteHistory&pseudo='+allPlayer[i].pseudo+'\', function(data) { if(data) { hide(\'histo'+i+'\')}});" class="input-disabled btn-sm btn btn-danger">Supprimer</button></td>'; <?php } ?>
+                <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'actions', 'removeVote')) { ?> all += '<td><button onclick="sendDirectPost(\'admin.php?action=suppVoteHistory&pseudo='+allPlayer[i].pseudo+'\', function(data) { if(data) { hide(\'histo'+i+'\'); hide(\'hiisto'+i+'\')}});" class="input-disabled btn-sm btn btn-danger">Supprimer</button></td>'; <?php } ?>
             all += '</tr>';
 
             let nb = Object.entries(allPlayer[i].all).length;
 
-            all += '<tr style="display:none;pointer-events: none;border:none;height:'+(nb*32)+'px;" class="col-md-12" id="moreDisplay'+i+'">'; 
+            all += '<tr id="hiisto'+i+'" style="display:none;pointer-events: none;border:none;height:'+(nb*32)+'px;" class="col-md-12" id="moreDisplay'+i+'">'; 
                 all += '<td style="pointer-events: none;border:none;height:'+(nb*32)+'px;" ><div id="absoDisplay'+i+'" style="width:100%;z-index:999; display: block;position: absolute;top: 10;left: 0; height: auto; width: '+get('allUser').offsetWidth+'px"><ul >';
                     for (let [key, value] of Object.entries(allPlayer[i].all)) {
                         all += '<li>'+value.nbre_votes+' vote(s) sur '+value.site+', dernier le '+value.date_dernier+'</li>';

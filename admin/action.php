@@ -400,14 +400,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require_once('admin/actions/editPage.php');
 		break;
 		
-		case 'creerSection':
-			require_once('admin/actions/creerSection.php');
-		break;
-		
-		case 'supprSection':
-			require_once('admin/actions/supprSection.php');
-		break;
-		
 		case 'supprTicket':
 			require_once('admin/actions/supprTicket.php');
 		break;

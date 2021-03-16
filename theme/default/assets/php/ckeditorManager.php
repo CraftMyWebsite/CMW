@@ -27,7 +27,7 @@ function initCK() {
 						'todoList',
 						'numberedList',
 						'|',
-						<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'imageUpload',"; }  ?>
+						<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'uploadImage',"; }  ?>
 						'blockQuote',
 						'mediaEmbed',
 						'undo',
@@ -69,7 +69,7 @@ function isset(obj) {
 }
 
 function addBlockQuote(ck,ht, auteur) {
-	CK.get(document.getElementById(ck)).setData("<blockquote>"+auteur+",<br/>"+document.getElementById(ht).innerHTML+"</blockquote><br/>>>"+CK.get(document.getElementById(ck)).getData());
+	CK.get(document.getElementById(ck)).setData("<blockquote>"+auteur+",<br/>"+document.getElementById(ht).innerHTML+"</blockquote><br/>&gt;&gt;"+CK.get(document.getElementById(ck)).getData());
 }
 
 

@@ -478,7 +478,7 @@
     </div>
 </div>
 <?php endif ?>
-<?php if(isset($_GET['page']) && $_GET['page'] == "forum_categorie") : ?>
+<?php if(isset($_GET['page']) && ($_GET['page'] == "forum_categorie" | $_GET['page'] == "sous_forum_categorie")) : ?>
 <div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
