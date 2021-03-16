@@ -11,11 +11,14 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix Responsive thème default
 [|] : Fix Responsive du panel admin
 [|] : Fix images non fonctionnel sur la boutique
+[|] : Fix historique de vote
+[|] : Fix page boutique qui ne s'affiché pas
 
 [=] : Fix sécurité sur le cms
 [=] : Menu désormais stocker dans la base de données
 [=] : Refonte de l'inscription pour que ça soit plus "pro" 
 [=] : Image centré dans les offres boutique
+[=] : Mise à jour de ckeditor
 
 [+] : Possibilité de modifier l'ordre des menus
 [+] : Ajout de l'option instantané pour les récompenses des votes
@@ -27,6 +30,8 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [+] : Ajout de ckeditor à la page maintenance
 [+] : Possibilité de changer la devise monétaire de paypal depuis le panel
 [+] : Ajout d'un système de SEO au thème default
+[+] : Ajout des URLRewrite à l'ensemble des pages du cms (page public)
+[+] : Création/édition de page du panel avec php
 
 
 Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir, Emilien52
