@@ -131,8 +131,8 @@ if(isset($_GET['page']))
 		include('./admin/pages/update.php');
 		break;
 
-        case 'seo':
-            include('./admin/pages/seo.php');
+        case 'googleService':
+            include('./admin/pages/googleService.php');
         break;
 
 

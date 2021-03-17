@@ -231,8 +231,8 @@ const PERMS = array(
 			"showPage" => "Accès à la page Upload",
 			"manager" => "Peut gérer l'upload d'images"
 		),
-		"seo" => array(
-			"showPage" => "Accès à la page SEO",
+		"googleService" => array(
+			"showPage" => "Accès à la page des services google",
 			"actions" => array(
 				"analytics" => "Gérer google analytics"
 			)
