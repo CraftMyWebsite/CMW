@@ -231,6 +231,12 @@ const PERMS = array(
 		"upload" => array(
 			"showPage" => "Accès à la page Upload",
 			"manager" => "Peut gérer l'upload d'images"
+		),
+		"seo" => array(
+			"showPage" => "Accès à la page SEO",
+			"actions" => array(
+				"analytics" => "Gérer google analytics"
+			)
 		)
 	),
 	"PermsForum" => array(

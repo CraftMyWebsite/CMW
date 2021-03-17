@@ -90,6 +90,14 @@
                             </a>
                         </li>
 
+                     <?php } if($_Permission_->verifPerm('PermsPanel', 'seo', 'showPage')) { ?>
+                         <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='menus'){echo 'active';}?>">
+                             <a class="nav-link"  href="?page=seo">
+                                 <i class="fab fa-searchengin"></i>
+                                 SEO
+                             </a>
+                         </li>
+
                         <h6
                             class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                             <span>Gestion</span>

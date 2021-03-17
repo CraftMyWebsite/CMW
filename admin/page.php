@@ -131,6 +131,10 @@ if(isset($_GET['page']))
 		include('./admin/pages/update.php');
 		break;
 
+        case 'seo':
+            include('./admin/pages/seo.php');
+        break;
+
 
 		// Si jamais l'utilisateur à entré un Get inconnu, on lui met une petite erreur :p
 		default:
