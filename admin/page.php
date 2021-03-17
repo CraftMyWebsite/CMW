@@ -131,6 +131,10 @@ if(isset($_GET['page']))
 		include('./admin/pages/update.php');
 		break;
 
+        case 'seo':
+            include('./admin/pages/seo.php');
+        break;
+
 
 
 		default:
