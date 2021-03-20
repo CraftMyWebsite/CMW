@@ -141,6 +141,7 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		break;
 		
 		default:
+			header("HTTP/1.0 404 Not Found");
 			$type = '404 Not Found';
 			$titre = 'Page introuvable';
 			$contenue = 'Nous sommes désolé mais la page que vous avez demmandé n\'existe pas...';
