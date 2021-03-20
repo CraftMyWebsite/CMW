@@ -17,15 +17,15 @@ if(isset($_FILES['img_profil']) AND $_FILES['img_profil']['error'] == 0)
 			move_uploaded_file($_FILES['img_profil']['tmp_name'], 'utilisateurs/'.$_Joueur_['id'].'/profil.'.$extensionFichier);
 			$_ImgProfil_->defineExt($_Joueur_['pseudo'], $extensionFichier);
 			
-			header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&success=image');
+			header('Location: profil/'.$_Joueur_['pseudo'].'/image');
 		}
 		else
-			header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&erreur=6');
+			header('Location: profil/'.$_Joueur_['pseudo'].'/6');
 	}
 	else
-		header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&erreur=7');
+		header('Location: profil/'.$_Joueur_['pseudo'].'/7');
 }
 else
-	header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&erreur=8');
+	header('Location: profil/'.$_Joueur_['pseudo'].'/8');
 
 ?>

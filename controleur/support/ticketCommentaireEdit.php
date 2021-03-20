@@ -22,20 +22,20 @@ if(Permission::getInstance()->verifPerm("connect")) {
     $ExistCommentaire = $req_ExistCommentaire->rowCount();
     $ExistTicket = $req_ExistTicket->rowCount();
     if($ExistTicket == "0") {
-    	header('Location: index.php?&page=support&TicketNotExist=true');
+    	header('Location: support/TicketNotExist/true');
     } else {
     	if($ExistCommentaire == "0") {
-            header('Location: index.php?&page=support&CommentaireNotExist=true');
+            header('Location: support/CommentaireNotExist/true');
         } else {
             if(!$AuteurCommentaire == $pseudo OR !$adminMode = true) {
-             header('Location: index.php?&page=support&EditionImpossible=true');
+             header('Location: support/EditionImpossible/true');
          } else {
             $commentairesTickets->EditCommentaireTicket($message, $id_comm, $id_ticket, $AuteurCommentaire);
-            header('Location: index.php?&page=support&EditCommentaire=true');
+            header('Location: support/EditCommentaire/true');
         }
     }
 }
 } else {
-    header('Location: index.php?&page=support&NotOnline=true');
+    header('Location: support/NotOnline/true');
 }
 ?>

@@ -11,7 +11,7 @@ $donneesJoueur = $ligneReponse->fetch(PDO::FETCH_ASSOC);
 if(empty($donneesJoueur))
 {
 	//Quand le token est un faux les donneesJoueur sont vides car il n'y a aucune entrée correspondante dans la BDD
-	header('Location: ?&page=erreur&erreur=9');
+	header('Location: erreur/9');
 }
 else
 {	
@@ -46,7 +46,7 @@ else
 	{
 		header('Location: index.php?setTemp=1');
 	} else {
-		header('Location: ?&page=erreur&erreur=21');
+		header('Location: erreur/21');
 	}
 }
 

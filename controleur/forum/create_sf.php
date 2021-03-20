@@ -29,10 +29,10 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addSousForum')
 		'nom' => $nom,
 		'img' => $img
 	));
-	header('Location: index.php?page=forum_categorie&id=' .$id. '');
+	header('Location: sous_forum_categorie/' .$id. '');
 }
 else {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');
 }
 function startsWith ($string, $startString) 
 { 

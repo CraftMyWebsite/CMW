@@ -7,14 +7,14 @@ $newsletter = VerifieDonnee($_POST['changeNewsletter']);
 $mailVisibility = VerifieDonnee($_POST['changeVisibilityMail']);
 
 if($email == 1)
-	header('Location: ?&page=profil&profil=' .$_Joueur_['pseudo']. '&erreur=1');
+	header('Location: profil/' .$_Joueur_['pseudo']. '/1');
 if($email == 2 OR $mdpNouveau == 2 OR $mdpAncien == 2 OR $mdpConfirme == 2)
-	header('Location: ?&page=profil&profil=' .$_Joueur_['pseudo']. '&erreur=2');
+	header('Location: profil/' .$_Joueur_['pseudo']. '/2');
 	
 if(VerifieMdp($mdpAncien, $mdpNouveau, $mdpConfirme, $_Joueur_['pseudo'], $bddConnection))
 	ChangeMdp(password_hash($mdpNouveau, PASSWORD_DEFAULT), $_Joueur_['pseudo'], $bddConnection);
 else
-	header('Location: ?&page=profil&profil=' .$_Joueur_['pseudo']. '&erreur=3');
+	header('Location: profil/' .$_Joueur_['pseudo']. '/3');
 	
 	
 if($mdpNouveau == 1 OR $mdpAncien == 1 OR $mdpConfirme == 1)
@@ -29,10 +29,10 @@ if ($newsletter != 1 or $newsletter != 2) {
 		$newsletter = 0;
 		ChangeNewsletter($newsletter, $_Joueur_['pseudo'], $bddConnection);
 	} else {
-		header('Location: ?&page=profil&profil=' . $_Joueur_['pseudo'] . '&erreur=9');
+		header('Location: profil/' . $_Joueur_['pseudo'] . '/9');
 	}
 } else {
-	header('Location: ?&page=profil&profil=' . $_Joueur_['pseudo'] . '&erreur=9');
+	header('Location: profil/' . $_Joueur_['pseudo'] . '/9');
 }
 
 if ($mailVisibility != 1 or $mailVisibility != 2) {
@@ -43,15 +43,15 @@ if ($mailVisibility != 1 or $mailVisibility != 2) {
 		$mailVisibility = 0;
 		ChangeMailVisibility($mailVisibility, $_Joueur_['pseudo'], $bddConnection);
 	} else {
-		header('Location: ?&page=profil&profil=' . $_Joueur_['pseudo'] . '&erreur=10');
+		header('Location: profil/' . $_Joueur_['pseudo'] . '/10');
 	}
 } else {
-	header('Location: ?&page=profil&profil=' . $_Joueur_['pseudo'] . '&erreur=10');
+	header('Location: profil/' . $_Joueur_['pseudo'] . '/10');
 }
 
 $_SESSION['Player']['email'] = $email;
 $_Joueur_['email'] = $email;	
-header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&success=true');
+header('Location: /profil='.$_Joueur_['pseudo'].'/true');
 function VerifieMdp($mdp, $mdpNew, $mdpConfirm, $pseudo, $bddConnection)
 {
 	require_once('modele/joueur/maj.class.php');

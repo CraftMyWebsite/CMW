@@ -4,7 +4,7 @@ if(isset($_POST['id_answer']) AND isset($_Joueur_) )
 	$id = htmlspecialchars($_POST['id_answer']);
 	if(!isset($_GET['confirmation']))
 	{
-		header("Location: ?&page=confirmation&choix=4&id=".$_POST['id_answer']);
+		header("Location: confirmation/".$_POST['id_answer']."/4");
 	}
 	else
 	{
@@ -15,9 +15,9 @@ if(isset($_POST['id_answer']) AND isset($_Joueur_) )
 			'reason' => $reason,
 			'reporteur' => $_Joueur_['pseudo']
 		));
-		header('Location: ?&page=forum&postSignalement');
+		header('Location: forum/postSignalement');
 	}
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');
 ?>

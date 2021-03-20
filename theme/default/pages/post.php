@@ -8,7 +8,7 @@ if (isset($_GET['id'])) :
     $titleHTML = $topicd['nom'];
     if (!empty($topicd['id'])) :
         if ((Permission::getInstance()->verifPerm("createur") or (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['perms'] and Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['permsCat']) and !$_SESSION['mode']) or ($topicd['perms'] == 0 and $topicd['permsCat'] == 0)) : ?>
-            <script>  document.title = "<?=$_Serveur_['General']['name'] . " | " . $titleHTML;?>"; </script>
+            <script type="application/javascript">  document.title = "<?=$_Serveur_['General']['name'] . " | " . $titleHTML;?>"; </script>
             <section id="Post">
                 <div class="container-fluid col-md-9 col-lg-9 col-sm-10 mt-4">
 
@@ -30,7 +30,7 @@ if (isset($_GET['id'])) :
                                 </li>
 
                                 <li class="breadcrumb-item">
-                                    <a href="?&page=forum_categorie&id=<?= $topicd['id_categorie']; ?>">
+                                    <a href="?page=forum_categorie&id=<?= $topicd['id_categorie']; ?>">
                                         <?= $topicd['nom_categorie']; ?>
                                     </a>
                                 </li>
@@ -62,7 +62,7 @@ if (isset($_GET['id'])) :
                                         <?php if (Permission::getInstance()->verifPerm("connect") && $_JoueurForum_->is_followed($id)) : ?>
 
                                             <li class="categorie-item nav-item">
-                                                <a class="nav-link categorie-link" href="?&action=unfollow&id_topic=<?= $topicd['id']; ?>">
+                                                <a class="nav-link categorie-link" href="?action=unfollow&id_topic=<?= $topicd['id']; ?>">
                                                     Ne plus suivre cette discussion
                                                 </a>
                                             </li>
@@ -70,7 +70,7 @@ if (isset($_GET['id'])) :
                                         <?php elseif (Permission::getInstance()->verifPerm("connect")) : ?>
 
                                             <li class="categorie-item nav-item">
-                                                <a class="nav-link categorie-link" href="?&action=follow&id_topic=<?= $topicd['id']; ?>">
+                                                <a class="nav-link categorie-link" href="?action=follow&id_topic=<?= $topicd['id']; ?>">
                                                     Suivre cette discussion
                                                 </a>
                                             </li>
@@ -78,13 +78,13 @@ if (isset($_GET['id'])) :
                                         <?php endif; ?>
 
                                         <li class="categorie-item nav-item">
-                                            <a class="nav-link categorie-link" href="?&page=<?= (isset($topicd['sous_forum'])) ? "sous_" : ""; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
+                                            <a class="nav-link categorie-link" href="?page=<?= (isset($topicd['sous_forum'])) ? "sous_" : ""; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
                                                 Revenir à l'accueil de la catégorie
                                             </a>
                                         </li>
 
                                         <li class="categorie-item nav-item">
-                                            <a class="nav-link categorie-link" href="?&page=forum">
+                                            <a class="nav-link categorie-link" href="?page=forum">
                                                 Revenir à l'index du forum
                                             </a>
                                         </li>
@@ -118,13 +118,13 @@ if (isset($_GET['id'])) :
 
                                                             if ($topicd['etat'] == 1) : ?>
 
-                                                                <a class="dropdown-item" href="?&action=forum_moderation&id_topic=<?= $id; ?>&choix=4">
+                                                                <a class="dropdown-item" href="?action=forum_moderation&id_topic=<?= $id; ?>&choix=4">
                                                                     Ouvrir la discussion
                                                                 </a>
 
                                                             <?php else : ?>
 
-                                                                <a class="dropdown-item" href="?&action=forum_moderation&id_topic=<?= $id; ?>&choix=1">
+                                                                <a class="dropdown-item" href="?action=forum_moderation&id_topic=<?= $id; ?>&choix=1">
                                                                     Fermer la discussion
                                                                 </a>
 
@@ -134,13 +134,13 @@ if (isset($_GET['id'])) :
 
                                                         <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic')) : ?>
 
-                                                            <a class="dropdown-item" href="?&action=forum_moderation&id_topic=<?= $id; ?>&choix=2">Supprimer le topic</a>
+                                                            <a class="dropdown-item" href="?action=forum_moderation&id_topic=<?= $id; ?>&choix=2">Supprimer le topic</a>
 
                                                         <?php endif; ?>
 
                                                         <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'mooveTopic')) : ?>
 
-                                                            <a class="dropdown-item" href="?&action=forum_moderation&id_topic=<?= $id; ?>&choix=3">
+                                                            <a class="dropdown-item" href="?action=forum_moderation&id_topic=<?= $id; ?>&choix=3">
                                                                 Déplacer la discussion
                                                             </a>
 
@@ -188,7 +188,7 @@ if (isset($_GET['id'])) :
                         <div class="col-lg-3 col-md-12 col-sm-12 m-3 border-1">
 
                             <div class="col-12 text-center">
-                                <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd['pseudo'],192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $topicd['pseudo']; ?>" title="<?= $topicd['pseudo']; ?>" />
+                                <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd['pseudo'],192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $topicd['pseudo']; ?>" alt="<?= $topicd['pseudo']; ?>" />
                             </div>
                             <div class="col-12 mx-auto bg-darkest" style="width: 192px; height: 192px;">
                                 <div class="text-center py-3">
@@ -288,7 +288,7 @@ if (isset($_GET['id'])) :
                                 </div>
 
                                 <?php if (isset($_Joueur_)) : ?>
-                                        <form action="?&action=signalement_topic" method="post">
+                                        <form action="?action=signalement_topic" method="post">
                                             <input type="hidden" name="id_topic2" value='<?= $id; ?>' />
                                             <button type="submit" class="btn btn-danger float-right mb-5">Signaler !</button>
                                         </form>
@@ -331,7 +331,7 @@ if (isset($_GET['id'])) :
 
                                         <div class="col-1">
 
-                                            <form class="form-inline" action="?&action=like" method="post">
+                                            <form class="form-inline" action="?action=like" method="post">
                                                 <input type="hidden" name="choix" value="1" />
                                                 <input type="hidden" name="type" value="1" />
                                                 <input type="hidden" name="id_answer" value="<?= $topicd['id']; ?>" />
@@ -342,7 +342,7 @@ if (isset($_GET['id'])) :
 
                                         <div class="col-2">
 
-                                            <form class="form-inline" action="?&action=like" method="post">
+                                            <form class="form-inline" action="?action=like" method="post">
                                                 <input type="hidden" name="choix" value="2" />
                                                 <input type="hidden" name="type" value="1" />
                                                 <input type="hidden" name="id_answer" value="<?= $topicd['id']; ?>" />
@@ -359,7 +359,7 @@ if (isset($_GET['id'])) :
                                     <div class="row justify-content-end">
                                         <div class="col">
 
-                                            <form class='form' action="?&action=unlike" method="post">
+                                            <form class='form' action="?action=unlike" method="post">
                                                 <input type="hidden" name="id_answer" value="<?= $topicd['id']; ?>" />
                                                 <input type="hidden" name="type" value="1" />
                                                 <button type="submit" class="btn btn-main float-right" title="Ne plus aimer">
@@ -399,7 +399,7 @@ if (isset($_GET['id'])) :
                             <div class="col-lg-3 col-md-12 col-sm-12 m-3 border-1">
 
                                 <div class="col-12 text-center">
-                                    <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($answerd[$i]['pseudo'], 192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $answerd[$i]['pseudo']; ?>" title="<?= $answerd[$i]['pseudo']; ?>" />
+                                    <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($answerd[$i]['pseudo'], 192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $answerd[$i]['pseudo']; ?>" alt="<?= $answerd[$i]['pseudo']; ?>" />
                                 </div>
                                 <div class="col-12 mx-auto bg-darkest" style="width: 192px; height: 192px;">
                                     <div class="text-center py-3">
@@ -500,7 +500,7 @@ if (isset($_GET['id'])) :
                                     </div>
 
                                     <?php if (isset($_Joueur_)) : ?>
-                                            <form action="?&action=signalement_topic" method="post">
+                                            <form action="?action=signalement_topic" method="post">
                                                 <input type="hidden" name="id_topic2" value='<?= $answerd[$i]['id']; ?>' />
                                                 <button type="submit" class="btn btn-danger float-right mb-5">Signaler !</button>
                                             </form>
@@ -543,7 +543,7 @@ if (isset($_GET['id'])) :
 
                                             <div class="col-1">
 
-                                                <form class="form-inline" action="?&action=like" method="post">
+                                                <form class="form-inline" action="?action=like" method="post">
                                                     <input type="hidden" name="choix" value="1" />
                                                     <input type="hidden" name="type" value="1" />
                                                     <input type="hidden" name="id_answer" value="<?= $answerd[$i]['id']; ?>" />
@@ -554,7 +554,7 @@ if (isset($_GET['id'])) :
 
                                             <div class="col-2">
 
-                                                <form class="form-inline" action="?&action=like" method="post">
+                                                <form class="form-inline" action="?action=like" method="post">
                                                     <input type="hidden" name="choix" value="2" />
                                                     <input type="hidden" name="type" value="1" />
                                                     <input type="hidden" name="id_answer" value="<?= $answerd[$i]['id']; ?>" />
@@ -570,7 +570,7 @@ if (isset($_GET['id'])) :
                                         <div class="row justify-content-end">
                                             <div class="col">
 
-                                                <form class='form' action="?&action=unlike" method="post">
+                                                <form class='form' action="?action=unlike" method="post">
                                                     <input type="hidden" name="id_answer" value="<?= $answerd[$i]['id']; ?>" />
                                                     <input type="hidden" name="type" value="1" />
                                                     <button type="submit" class="btn btn-main float-right" title="Ne plus aimer">
@@ -595,7 +595,7 @@ if (isset($_GET['id'])) :
                             <?php for ($i = 1; $i <= $count_nbrOfPages; $i++) : ?>
 
                                 <li class="page-item">
-                                    <a class="page-link" href="?&page=post&id=<?= $id; ?>&page_post=<?= $i; ?>">
+                                    <a class="page-link" href="?page=post&id=<?= $id; ?>&page_post=<?= $i; ?>">
                                         <?= $i; ?>
                                     </a>
                                 </li>
@@ -624,7 +624,7 @@ if (isset($_GET['id'])) :
 
 
 
-                                <form action="?&action=post_answer" method="post">
+                                <form action="?action=post_answer" method="post">
                                     <input type='hidden' name="id_topic" value="<?= $id; ?>" />
 
                                     <div class="form-row">

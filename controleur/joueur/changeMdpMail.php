@@ -11,7 +11,7 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 	$donneesJoueur = $ligneReponse->fetch(PDO::FETCH_ASSOC);
 	if(empty($donneesJoueur))
 	{
-		header('Location: ?&page=erreur&erreur=4');
+		header('Location: erreur/4');
 	}
 	else
 	{
@@ -23,14 +23,14 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 			require_once('modele/joueur/maj.class.php');
 			$maj = new Maj($donneesJoueur['pseudo'], $bddConnection);
 			$maj->setNouvellesDonneesResetToken($resetToken);
-			
-			$lien = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER["PHP_SELF"].'?&action=passRecoverConfirm&token='.urlencode($resetToken);
 
-			//Décommentez les deux lignes suivantes pour avoir un meilleur débug ! 
-			//$mail->SMTPDebug = 2; // 0 -> off 1-> CLIENT 2 -> CLIENT et SERVER
-			//$mail->Debugoutput = 'html';
-			$retourligne = "\r\n";
+			$url = $_SERVER['SERVER_NAME'];
+	    	$ht = $_SERVER["HTTPS"] == "on" ? "https://" : "http://";
 			
+			$lien = $ht.$url.'index.php?&action=passRecoverConfirm&token='.urlencode($resetToken);
+
+			$retourligne = "\r\n";
+
             $to = $donneesJoueur['email'];
             $subject = "[".$_Serveur_['General']['name']."]Recuperation de mot de passe";
             $txt = 'Bonjour, '.$donneesJoueur['pseudo'].$retourligne
@@ -47,16 +47,16 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 			require('include/phpmailer/MailSender.php');
 			if(MailSender::send($_Serveur_, $to, $subject, $txt))
 			{
-				header('Location: index.php?envoieMail=true');
+				header('Location: accueil/envoieMail');
 			} else {
-				header('Location: ?&page=erreur&erreur=21');
+				header('Location: erreur/21');
 			}
 		}
-		else header('Location: ?&page=erreur&erreur=4');
+		else header('Location: erreur/4');
 	}
 }
 else
 {
-	header('Location: ?&page=erreur&erreur=4');
+	header('Location: erreur/4');
 }       
 ?>

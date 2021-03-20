@@ -256,10 +256,10 @@ if(isset($_GET['action']))
 			if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur'))
 			{
 				$_SESSION['mode'] = ($_SESSION['mode'] == 1) ? false : true;
-				header('Location: ?page=forum');
+				header('Location: forum');
 			}
 			else
-				header('Location: ?page=erreur&erreur=7');
+				header('Location: erreur/7');
 		break;
 		// Fin d'appel en cas d'action forum
 
@@ -270,24 +270,24 @@ if(isset($_GET['action']))
 		case 'supprItemPanier':
 			$exec = $_Panier_->supprimerProduit(htmlspecialchars($_GET['id']));
 			if($exec !== false)
-				header('Location: ?page=panier');
+				header('Location: panier');
 			else
-				header('Location: ?page=erreur&erreur=17');
+				header('Location: erreur/17');
 		break;
 
 		case 'viderPanier':
 			$_Panier_->supprimerPanier();
-			header('Location: ?page=panier');
+			header('Location: panier');
 		break;
 
 		case 'retirerReduction':
 			$_Panier_->retirerReduction();
-			header('Location: ?page=panier');
+			header('Location: panier');
 		break;
 
 		case 'ajouterCode':
 			$_Panier_->ajouterReduction($_POST['codepromo']);
-			header('Location: ?page=panier');
+			header('Location: panier');
 		break;
 
 		// Appellé lorsqu'on envoie un formulaire de conneciton.
@@ -300,12 +300,7 @@ if(isset($_GET['action']))
 		case 'inscription':
 			include('controleur/joueur/inscription.php');
 		break;
-		
-        case 'changeMdp':
-            include('controleur/joueur/changeMdp.php');
-            header('Location: index.php');
-        break;
-		
+
 		case 'passRecoverConfirm':
             include('controleur/joueur/recuperationMailLink.php');
         break;
@@ -330,12 +325,12 @@ if(isset($_GET['action']))
 		
 		case 'post_ticket':
 			include('controleur/support/ticket.php');
-			header('Location: index.php?&page=support');
+			header('Location: support');
 		break;
 		
 		case 'post_ticket_commentaire':
 			include('controleur/support/ticketCommentaire.php');
-			header('Location: index.php?&page=support');
+			header('Location: support');
 		break;
 		
 		case 'changeProfil':
@@ -350,7 +345,7 @@ if(isset($_GET['action']))
 		
 		case 'ticketEtat':
 			include('controleur/support/ticketEtat.php');
-			header('Location: index.php?&page=support');
+			header('Location: support');
 		break;
 
 		case 'post_news_commentaire':
@@ -387,7 +382,7 @@ if(isset($_GET['action']))
 		
 		// Si le joueur a rentré un url contenant une valeur d'action innexistant?
 		default:
-			header('Location: index.php');
+			header('Location: accueil');
 	}
 }
 ?>

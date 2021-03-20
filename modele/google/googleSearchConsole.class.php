@@ -83,7 +83,7 @@ class googleSearchConsole {
         $xml->appendChild($base);
         
         $xml->save($this->id.".xml");
-        file_put_contents("robots.txt", "User-Agent: *\r\nDisallow:\r\nDisallow: /admin\r\nDisallow: /admin.php\r\nDisallow: /installation\r\nSitemap: ".$url.$this->id.".xml");
+        file_put_contents("robots.txt", "User-Agent: *\r\nDisallow: /admin\r\nDisallow: /admin.php\r\nDisallow: /installation\r\nSitemap: ".$url.$this->id.".xml");
     }
     
     private function listPages($bdd) {

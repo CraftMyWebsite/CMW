@@ -39,7 +39,7 @@
                                                     <a href="#" class="h5 mr-3" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>">Commenter (<?= $countCommentaires ?>)</a> <i class="fa fa-thumbs-up"></i> <?= $countLikesPlayers ?>
                                                 <?php else : ?>
                                                     <a href="#" class="h5 mr-3" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>">Commenter (<?= $countCommentaires ?>)</a>
-                                                    <a href="?&action=likeNews&id_news=<?= $news[$i]['id'] ?>" class="h5 mx-3">J'aime</a>
+                                                    <a href="?action=likeNews&id_news=<?= $news[$i]['id'] ?>" class="h5 mx-3">J'aime</a>
                                                     <i class="fa fa-thumbs-up"></i> <?= $countLikesPlayers ?>
                                                 <?php endif; ?>
                                             <?php else : ?>
@@ -68,7 +68,7 @@
                 <?php foreach($_Minia_ as $value) : ?>
                     <article class="col-12 info-content">
                         <div class="card">
-                            <img class="card-img-top" src="theme/upload/navRap/<?= $value['image'] ?>" alt="">
+                            <img class="card-img-top" src="theme/upload/navRap/<?= $value['image'] ?>" alt="<?= $value['image'] ?>">
                             <div class="card-body">
                                 <p class="card-text">
                                     <?= $value['message']; ?>

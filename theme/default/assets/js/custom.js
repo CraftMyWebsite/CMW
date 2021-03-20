@@ -43,7 +43,7 @@ function searchForum(value, el, table, title) {
                                 +"</a>"
                             +"</td>"
 							+"<td>"
-                        		+"<a href='?&page=post&id="+ar.id2+"'>";
+                        		+"<a href='?page=post&id="+ar.id2+"'>";
 	                        		if(typeof ar.prefix !== 'undefined' && ar.prefix !== null)
 	                        		{
 	                        			f += ar.prefix+ " ";
@@ -63,7 +63,7 @@ function searchForum(value, el, table, title) {
                                 +"<p>Réponses : "+ar.compte
                             +"</td>"
 							+"<td>"
-                           		+"<a href='?&page=post&id="+ar.id2+"'>"
+                           		+"<a href='?page=post&id="+ar.id2+"'>"
                                     +ar.last_answer
                                 +"</a>"
                             +"</td>"

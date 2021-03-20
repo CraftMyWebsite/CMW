@@ -26,5 +26,5 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') 
 			'id' => $id
 		));
 	}
-	header('Location: ?page=forum');
+	header('Location: forum');
 }

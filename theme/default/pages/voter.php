@@ -126,7 +126,7 @@
                                     <?php
 
                                     if(Permission::getInstance()->verifPerm("connect") AND  isset($_GET['player']) AND $_Joueur_['pseudo'] == $_GET['player'] ) {
-                                        echo '<script>isConnect = true;</script>';
+                                        echo '<script type="application/javascript">isConnect = true;</script>';
                                     }
 
                                      $first=true; foreach($lectureJSON as $serveur) { ?>
@@ -149,7 +149,7 @@
                                                   ?>
 
                                                  <button type="button" id="votebtn-<?php echo $allvote['id']; ?>" ></button>
-                                                 <script>initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>');</script>
+                                                 <script type="application/javascript">initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>');</script>
                                             <?php } ?>
                                          </div>
 
@@ -160,7 +160,7 @@
                         </div>
                     </div>
                 </div>
-                <script>
+                <script type="application/javascript">
                 <?php 
                     foreach($topRecompense as $key => $value) {
                         echo "topRec.set(".$key.",JSON.parse('".$value."'));";

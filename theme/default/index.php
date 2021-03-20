@@ -57,7 +57,7 @@ $_Theme_ = $configTheme->GetTableau();
     <meta name="author" content="CraftMyWebsite, TheTueurCiTy, <?= $_Serveur_['General']['name']; ?>" />
     <meta name="publisher" content="<?= $_SERVER["SERVER_NAME"] ?>"/>
     <meta name="description" content="<?= $_Serveur_['General']['description'] ?>">
-    <meta name="keywords" content="<?= $_Serveur_['General']['keywords'] ?>">
+    <meta name="keywords" content="<?= isset($_Serveur_['General']['keywords']) & !empty($_Serveur_['General']['keywords']) ? $_Serveur_['General']['keywords'] : 'Minecraft CraftMyWebSite Vote' ?>">
 
     <meta name="copyright" content="CraftMyWebsite, <?= $_Serveur_['General']['name']; ?>"/>
 
@@ -76,19 +76,19 @@ $_Theme_ = $configTheme->GetTableau();
 	?>
 
     <!-- CSS links -->
-    <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/fa-all.min.css">
-    <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/fa-all.min.css">
+    <link rel="stylesheet" type="text/css" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/custom.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
-    <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/toastr.min.css">
-    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/ckeditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/toastr.min.css">
+    <script type="application/javascript" src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/ckeditor.js"></script>
     <?php if(isset($_GET['page']) && $_GET['page'] == "voter") {
-        echo '<script src="theme/'.$_Serveur_['General']['theme'].'/assets/js/voteControleur.js"></script>';
+        echo '<script type="application/javascript" src="theme/'.$_Serveur_['General']['theme'].'/assets/js/voteControleur.js"></script>';
     } ?>
 </head>
 
 <body>
-    <script type="text/javascript">var _Jetons_ = "<?=$_Serveur_['General']['moneyName'];?>";</script>
+    <script type="application/javascript">var _Jetons_ = "<?=$_Serveur_['General']['moneyName'];?>";</script>
     <?php
     //Verif Version
     include("include/version.php");
@@ -127,20 +127,20 @@ $_Theme_ = $configTheme->GetTableau();
 
 
     <!-- Librairies Essential -->
-    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/jquery.min.js"></script>
-    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/popper.min.js"></script>
-    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+    <script type="application/javascript" src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/jquery.min.js"></script>
+    <script type="application/javascript" src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/popper.min.js"></script>
+    <script type="application/javascript" src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
 
     <!-- Scripts -->
-    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/zxcvbn.js"></script>
-    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/custom.js"></script>
+    <script type="application/javascript" src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/zxcvbn.js"></script>
+    <script type="application/javascript" src="theme/<?= $_Serveur_['General']['theme']; ?>/assets/js/custom.js"></script>
     <?php include "theme/" . $_Serveur_['General']['theme'] . "/assets/php/ckeditorManager.php"; ?>
-    <script src="theme/<?= $_Serveur_['General']['theme']; ?>/assets//js/toastr.min.js"></script>
+    <script type="application/javascript" src="theme/<?= $_Serveur_['General']['theme']; ?>/assets//js/toastr.min.js"></script>
     <?php include "theme/" . $_Serveur_['General']['theme'] . "/assets/php/custom.php"; ?>
     <?php if ($_Serveur_['Payement']['dedipass']) : //API DEDIPASS 
     ?>
-        <script src="//api.dedipass.com/v1/pay.js"></script>
+        <script type="application/javascript" src="//api.dedipass.com/v1/pay.js"></script>
     <?php endif; ?>
 
 </body>

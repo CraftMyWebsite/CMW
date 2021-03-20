@@ -17,11 +17,11 @@
 			'id' => $_POST['id']
 		));
 
-	header('Location: index.php?page=forum');
+	header('Location: forum');
 }
 else
 {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');
 }
 function startsWith ($string, $startString) 
 { 

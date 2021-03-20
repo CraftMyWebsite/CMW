@@ -45,12 +45,12 @@ if(isset($_POST['id_topic']) AND Permission::getInstance()->verifPerm("connect")
 			'id' => $id
 		));
 		if(isset($data['sous_forum']))
-			header('Location: ?page=sous_forum_categorie&id='.$data['id_categorie'].'&id_sous_forum='.$data['sous_forum']);
+			header('Location: sous_forum_categorie/'.$data['id_categorie'].'/'.$data['sous_forum']);
 		else
-			header('Location: ?page=forum_categorie&id='.$data['id_categorie']);
+			header('Location: forum_categorie/'.$data['id_categorie']);
 	} else {
-		header('Location: ?page=erreur&erreur=7');
+		header('Location: erreur/7');
 	}
 }
 else
-	header('Location: ?page=erreur&erreur=16');
+	header('Location: erreur/16');
