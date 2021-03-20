@@ -1,40 +1,6 @@
 <?php
-class googleSearchConsole {
-    
-    public static function call($_Serveur_, $bdd, $full = true) {
-        if(!isset($_Serveur_['googleService']['searchConsole']['id'])) {
-            $_Serveur_['googleService']['searchConsole']['id'] = self::genKey($_Serveur_);
-        }
-        
-        if($full) {
-            global $ZEND_THREAD_SAFE;
-            $id=$_Serveur_['googleService']['searchConsole']['id'];
-            
-            if(file_exists($id.".xml")) {
-                if(filemtime($id.".xml") < time() - 86400 * 3) {
-                    if($ZEND_THREAD_SAFE) {
-                        require_once("modele/google/googleSearchConsole.thread.class.php");
-                        $gen = new googleSearchConsoleThread($id, $bdd);
-                        $gen->start();
-                    } else {
-                        $gen = new googleSearchConsole($id, $bdd);
-                         $gen->run();
-                    }
-                }
-            } else {
-                if($ZEND_THREAD_SAFE) {
-                    require_once("modele/google/googleSearchConsole.thread.class.php");
-                    $gen = new googleSearchConsoleThread($id, $bdd);
-                    $gen->start();
-                 $gen->start();
-                } else {
-                     $gen = new googleSearchConsole($id, $bdd);
-                    $gen->run(); 
-                }
-            }
-        }
-    }
-    
+class googleSearchConsoleThread extends Thread {
+
     private $bdd;
     private $id;
     
@@ -83,7 +49,14 @@ class googleSearchConsole {
         $xml->appendChild($base);
         
         $xml->save($this->id.".xml");
-        file_put_contents("robots.txt", "User-Agent: *\r\nDisallow:\r\nDisallow: /admin\r\nDisallow: /admin.php\r\nDisallow: /installation\r\nSitemap: ".$url.$this->id.".xml");
+        
+        file_put_contents("robots.txt", "User-Agent: *
+            Disallow: 
+            Disallow: /admin
+            Disallow: /admin.php
+            Disallow: /installation
+            Sitemap: ".$url.$this->id.".xml");
+        
     }
     
     private function listPages($bdd) {
@@ -123,20 +96,4 @@ class googleSearchConsole {
         
         return $pages;
     }
-    
-    public static function genKey($_Serveur_) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $length = strlen($characters);
-        $ran = "";
-        for ($i = 0; $i < 10; $i++) {
-            $ran .= $characters[rand(0, $length - 1)];
-        }
-        
-        $_Serveur_['googleService']['searchConsole']['id']  = "siteMap-".$ran;
-        require_once('modele/config/yml.class.php');
-        $ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
-        return $_Serveur_;
-    }
-    
-    
 }

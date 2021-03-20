@@ -16,7 +16,7 @@ $_Theme_ = $_Theme_->GetTableau();
                     </div>
                     <?php endif; ?>
                 </div>
-                <?php if(googleService::isAdsenseEnable($_Serveur_)) : ?>
+                <?php if(googleService::isAdsenseEnable($_Serveur_) && googleService::getAdsense()->hasPub()) : ?>
                 <div class="col-md-12 col-sm-12 col-lg-3">
                    
                     <div class="about-title h4">

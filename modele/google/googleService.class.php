@@ -39,7 +39,15 @@ class googleService {
     }
     
     public static function isAdsenseEnable($config) {
-        return isset($config['googleService']['adsense']['enable']) && $config['googleService']['adsense']['enable'] == true && isset($config['googleService']['adsense']['id']);
+        return isset($config['googleService']['adsense']['enable']) && $config['googleService']['adsense']['enable'] == true && isset($config['googleService']['adsense']['id']) && isset($config['googleService']['adsense']['pub']);
+    }
+    
+    public static function isAnalyticsEnable2($config) {
+        return isset($config['googleService']['analytics']['enable']) && $config['googleService']['analytics']['enable'] == true ;
+    }
+    
+    public static function isAdsenseEnable2($config) {
+        return isset($config['googleService']['adsense']['enable']) && $config['googleService']['adsense']['enable'] == true;
     }
     
 }

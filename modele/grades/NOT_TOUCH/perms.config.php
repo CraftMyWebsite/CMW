@@ -234,7 +234,9 @@ const PERMS = array(
 		"googleService" => array(
 			"showPage" => "Accès à la page des services google",
 			"actions" => array(
-				"analytics" => "Gérer google analytics"
+				"analytics" => "Gérer Google Analytics",
+				"adsense" => "Gérer Google Adsense",
+				"searchConsole" => "Gérer Google Search Console"
 			)
 		)
 	),
