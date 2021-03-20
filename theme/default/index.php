@@ -64,6 +64,16 @@ $_Theme_ = $configTheme->GetTableau();
     <meta name="robots" content="follow, index, all">
     <meta name="google" content="notranslate">
 
+	<!-- Google Service -->
+	<?php 
+	if(googleService::isAdsenseEnable($_Serveur_)) {
+	    googleService::getAdsense()->writeHead();
+	}
+	if(googleService::isAnalyticsEnable($_Serveur_)) {
+	    googleService::getAnalytics()->writeHead();
+	}
+	
+	?>
 
     <!-- CSS links -->
     <link rel="stylesheet" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/bootstrap.min.css">

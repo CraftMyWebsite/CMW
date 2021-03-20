@@ -1,15 +1,13 @@
 <?php 
 
-class urlRwrite
+class urlRewrite
 {
 
 
 	public static function call() {
 	    global $_SERVER, $_GET;
 	    if(strrpos($_SERVER['REQUEST_URI'], "page=") !== false) {
-	        $uri = substr($_SERVER["SCRIPT_NAME"], 0, strrpos($_SERVER["SCRIPT_NAME"], '/')+1 );
-	        $url = $_SERVER['SERVER_NAME'];
-	        $ht = $_SERVER["HTTPS"] == "on" ? "https://" : "http://";
+	        $url = self::getSiteUrl();
 	        $arg = "";
 	        $first = true;
 	        foreach($_GET as $value) {
@@ -20,9 +18,18 @@ class urlRwrite
 	                $arg .= "/".$value;
 	            }
 	        }
-	        header("Location: ".$ht.$url.$uri.$arg);
+	        header("Location: ".$url.$arg);
 	    } 
 	    
+	}
+	
+	public static function getSiteUrl() {
+	    global $_SERVER;
+	    $uri = substr($_SERVER["SCRIPT_NAME"], 0, strrpos($_SERVER["SCRIPT_NAME"], '/')+1 );
+	    $url = $_SERVER['SERVER_NAME'];
+	    $ht = $_SERVER["HTTPS"] == "on" ? "https://" : "http://";
+	    
+	    return $ht.$url.$uri;
 	}
 
 }

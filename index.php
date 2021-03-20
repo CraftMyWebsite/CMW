@@ -1,6 +1,4 @@
 <?php // On appelle les classes du controleur qui instancies les objets principaux (BDD, config, JSONAPI...).
-
-
 ob_start();
 session_start();
 error_reporting(0);
@@ -8,8 +6,9 @@ date_default_timezone_set('Europe/Paris');
 setlocale(LC_TIME, "fr_FR");
 ini_set('display_errors', 1);
 
+
 require("modele/app/urlRewrite.class.php");
-urlRwrite::call();
+urlRewrite::call();
 
 if(!isset($_SESSION["mode"])) $_SESSION["mode"] = false; // pour les admins du forum
 
@@ -21,6 +20,10 @@ if (!$_Serveur_['installation']) header('Location: installation/');
 else $return = true;
 // On charge la connection à la base MySQL via l'extention PDO.
 require ('controleur/connection_base.php');
+
+require("modele/google/googleService.class.php");
+googleService::initialise($_Serveur_, $bddConnection);
+
 //la class Panier pour la boutique
 require('modele/joueur/imgProfil.class.php');
 $_ImgProfil_ = new ImgProfil($bddConnection);

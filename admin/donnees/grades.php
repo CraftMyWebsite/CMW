@@ -63,7 +63,7 @@ $PermissionFormat["PermsPanel"]="Permissions panel";
     $PermissionFormat["PermsPanel-ban"]="Page Membres => Bannissement";
         $PermissionFormat["PermsPanel-ban-actions"]="Actions";
     $PermissionFormat["PermsPanel-upload"]="Page Upload";
-    $PermissionFormat["PermsPanel-seo"]="Page SEO";
+    $PermissionFormat["PermsPanel-googleService"]="Page services Google";
         $PermissionFormat["PermsPanel-seo-actions"]="Actions";
 
 $PermissionFormat["PermsForum"]="Permissions Forums";
