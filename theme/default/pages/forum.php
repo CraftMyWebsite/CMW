@@ -160,7 +160,7 @@ $fofo = $_Forum_->affichageForum();
 
                                         <td style="width: 3%;">
                                             <?php if ($categorie[$j]['img'] == NULL) : ?>
-                                                <a href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" style="font-size: 38px;" class="d-flex align-self-center text-center">
+                                                <a href="?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" style="font-size: 38px;" class="d-flex align-self-center text-center">
                                                     <i class="far fa-comment-dots"></i>
                                                 </a>
                                             <?php else : ?>
@@ -170,7 +170,7 @@ $fofo = $_Forum_->affichageForum();
                                         </td>
 
                                         <td style="width: 25%;">
-                                            <a href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" class="d-flex align-self-center">
+                                            <a href="?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" class="d-flex align-self-center">
                                                 <?= $categorie[$j]['nom']; ?>
                                             </a>
 
@@ -183,7 +183,7 @@ $fofo = $_Forum_->affichageForum();
                                                         <?php if (count($sousforum) != "0") : ?>
                                                             <div class="dropdown-menu" aria-labelledby="sous-forum<?php echo $categorie[$j]['id']; ?>">
                                                                 <?php for ($s = 0; $s < count($sousforum); $s++) : ?>
-                                                                    <a class="dropdown-item" href="?&page=sous_forum_categorie&id=<?= $categorie[$j]['id']; ?>&id_sous_forum=<?= $sousforum[$s]['id']; ?>">
+                                                                    <a class="dropdown-item" href="?page=sous_forum_categorie&id=<?= $categorie[$j]['id']; ?>&id_sous_forum=<?= $sousforum[$s]['id']; ?>">
                                                                         <?= $sousforum[$s]['nom']; ?>
                                                                     </a>
                                                                 <?php endfor; ?>
@@ -195,7 +195,7 @@ $fofo = $_Forum_->affichageForum();
                                         </td>
 
                                         <td class="text-center">
-                                            <a href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>">
+                                            <a href="?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>">
                                                 <?= $CountTopics = $_Forum_->compteTopicsForum($categorie[$j]['id']); ?>
                                                 <br>
                                                 <span class="text-uppercase">Discussions</span>

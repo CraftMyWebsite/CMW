@@ -7,9 +7,9 @@ if(Permission::getInstance()->verifPerm("connect") AND isset($_GET['id_topic']))
 		'id_topic' => $id,
 		'pseudo' => $_Joueur_['pseudo']
 	));
-	header('Location: ?&page=post&id=' . $id);
+	header('Location: post/' . $id);
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');
 
 ?>

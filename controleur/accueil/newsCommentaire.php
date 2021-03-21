@@ -16,20 +16,20 @@ if(Permission::getInstance()->verifPerm("connect")) {
 	$id = $get_CountCommentaires['id'];
 
 	if($ExistNews == "0") {
-        header('Location: index.php?&NewsNotExist=true');
+        header('Location: accueil/NewsNotExist');
 	} else {
         if(strlen($commentaire) > 255) {
-		    header('Location: index.php?&MessageTropLong=true');
+		    header('Location: accueil/MessageTropLong');
 	    } elseif(strlen($commentaire) < 6) {
-		    header('Location: index.php?&MessageTropCourt=true');
+		    header('Location: accueil/MessageTropCourt');
         } else {
             require_once('modele/accueil/postNews.class.php');
             $req_CommentaireNews = new PostNews($bddConnection);
             $req_CommentaireNews->AddCommentaire($id + 1, $id_news, $pseudo, $commentaire);
-            header('Location: index.php?&MessageEnvoyer=true');
+            header('Location: accueil/MessageEnvoyer');
         }
     }
 } else {
-	header('Location: index.php?&NotOnline=true');
+	header('Location: accueil/NotOnline');
 }
 ?>

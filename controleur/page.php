@@ -14,6 +14,12 @@ if(isset($_GET['page']))
 			include('controleur/profil/index.php');	
 		break;	
 
+		case 'accueil':
+			unset($_GET['page']);
+			require_once('controleur/accueil.php');
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/accueil.php');
+		break;	
+
 		case 'chat':
 			require('modele/app/chat.class.php');
 			include('theme/'.$_Serveur_['General']['theme']. '/pages/chat.php');
@@ -95,7 +101,7 @@ if(isset($_GET['page']))
 				include('theme/' .$_Serveur_['General']['theme']. '/pages/tokens.php');
 			}
 			else
-				header('Location: ?page=erreur&erreur=19&titre='.urlencode("Erreur d'accès")."&type=".urlencode("Connexion requise")."&contenue=".urlencode("Vous devez être connecté pour accéder à cette page !"));
+				header('Location: erreur/19/'.urlencode("Erreur d'accès")."/".urlencode("Connexion requise")."/".urlencode("Vous devez être connecté pour accéder à cette page !"));
 		break;
 		
 		case 'voter': 

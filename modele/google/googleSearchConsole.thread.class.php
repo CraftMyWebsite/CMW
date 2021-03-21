@@ -50,13 +50,7 @@ class googleSearchConsoleThread extends Thread {
         
         $xml->save($this->id.".xml");
         
-        file_put_contents("robots.txt", "User-Agent: *
-            Disallow: 
-            Disallow: /admin
-            Disallow: /admin.php
-            Disallow: /installation
-            Sitemap: ".$url.$this->id.".xml");
-        
+        file_put_contents("robots.txt", "User-Agent: *\r\nDisallow: /admin\r\nDisallow: /admin.php\r\nDisallow: /installation\r\nSitemap: ".$url.$this->id.".xml");
     }
     
     private function listPages($bdd) {

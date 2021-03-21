@@ -1,8 +1,6 @@
 
 
 <?php
-
-
 $raw_post_data = file_get_contents('php://input');
 $raw_post_array = explode('&', $raw_post_data);
 $PostData = array();
@@ -58,10 +56,10 @@ if (strcmp ($res, "VERIFIED") == 0) {
 		$joueurMaj->setReponseConnection($playerData);
 		$joueurMaj->setNouvellesDonneesTokens($playerData);
 
-		$req = $bddConnection->prepare('INSERT INTO cmw_paypal_historique (montant, pseudo, date) VALUES (:prix, :pseudo, NOW())');
+		$req = $bddConnection->prepare('INSERT INTO `cmw_paypal_historique`(`montant`, `pseudo`, `date`) VALUES (:prix, :pseudo, NOW())');
 		$req->execute(array(
 			'prix' => doubleval($donneesActions['prix']),
-			'pseudo' => $_Joueur_['pseudo']
+			'pseudo' => $playerData['pseudo']
 		));
 	}
 }

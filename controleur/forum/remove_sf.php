@@ -28,7 +28,7 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteSousForu
 	$remove->execute(array(
 		'id' => $id_sf
 	));
-	header('Location: index.php?page=forum_categorie&id=' .$id_cat. '');
+	header('Location: sous_forum_categorie/' .$id_cat. '');
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');

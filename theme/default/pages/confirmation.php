@@ -19,11 +19,8 @@
                 <?php
                 if (isset($_GET['choix'])) :
 
-                    if (isset($_GET['id_topic'])) {
-                        $id = htmlspecialchars($_GET['id_topic']);
-                    } else if (isset($_GET['id_topic2'])) {
-                        $id = htmlspecialchars($_GET['id_topic2']);
-                    }
+                    $id = htmlspecialchars($_GET['id_topic']);
+        
 
                     $choix = htmlspecialchars($_GET['choix']);
 
@@ -43,7 +40,7 @@
                                             <i class="fas fa-exclamation-triangle"></i> Si vous supprimez cette discussion elle ne sera plus jamais accessible !
                                         </div>
                                         <div class="card w-100">
-                                            <form action="<?= $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?= $id; ?>&choix=2&confirmation=true" method="post">
+                                            <form action="<?= $_Serveur_['General']['url']; ?>?action=forum_moderation&id_topic=<?= $id; ?>&choix=2&confirmation=true" method="post">
 
                                                 <div class="card-header">
                                                     <h4>Suppression d'un topic</h4>
@@ -88,7 +85,7 @@
                                         <!-- Déplacement d'une discussion -->
 
                                         <div class="card w-100">
-                                            <form action="<?= $_Serveur_['General']['url']; ?>?&action=forum_moderation&id_topic=<?= $id; ?>&choix=3&confirmation=true" method="post">
+                                            <form action="<?= $_Serveur_['General']['url']; ?>?action=forum_moderation&id_topic=<?= $id; ?>&choix=3&confirmation=true" method="post">
 
                                                 <div class="card-header">
                                                     <h4>Déplacement d'une discussion</h4>
@@ -159,7 +156,7 @@
                                     <!-- Signalement d'une réponse -->
 
                                     <div class="card w-100">
-                                        <form action="?&action=signalement&confirmation=true" method="post">
+                                        <form action="?action=signalement&confirmation=true" method="post">
 
                                             <div class="card-header">
                                                 <h4>Raison d'un signalement d'un message</h4>
@@ -167,7 +164,7 @@
 
                                             <div class="card-body">
 
-                                                <input type="hidden" name="id_answer" value="<?= $_GET['id']; ?>" />
+                                                <input type="hidden" name="id_answer" value="<?= $id; ?>" />
                                                 <div class="form-group">
                                                     <label for="reason">Indiquez une raison</label>
                                                     <input type="text" class="form-control" name="reason" id="reason" placeholder="Indiquez une raison" required />
@@ -197,7 +194,7 @@
                                     <!-- Signalement d'un topic -->
 
                                     <div class="card w-100">
-                                        <form action="?&action=signalement_topic&confirmation=true" method="post">
+                                        <form action="?action=signalement_topic&confirmation=true" method="post">
 
                                             <div class="card-header">
                                                 <h4>Raison d'un signalement d'un topic</h4>
@@ -205,7 +202,7 @@
 
                                             <div class="card-body">
 
-                                                <input type="hidden" name="id_topic2" value="<?= $_GET['id_topic2']; ?>" />
+                                                <input type="hidden" name="id_topic" value="<?= $id; ?>" />
                                                 <div class="form-group">
                                                     <label for="reason">Indiquez une raison</label>
                                                     <input type="text" class="form-control" name="reason" id="reason" placeholder="Indiquez une raison" required />

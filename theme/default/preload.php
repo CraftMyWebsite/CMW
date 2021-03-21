@@ -14,7 +14,7 @@ include('controleur/maintenance.php');
 if($maintenance[$i]['maintenanceEtat'] == 1){
 	// On vérifie si le joueur est connecté
 	if(!(isset($_Joueur_))){
-		header('Location: index.php?&redirection=maintenance');
+		header('Location: index.php?page=maintenance');
 	} elseif(Permission::getInstance()->verifPerm('PermsPanel', 'maintenance', 'actions', 'connexionAdmin')) { // On vérifie si il est admin
 		if( $maintenance[$i]['maintenancePref'] == 0 ){ // Si la pref vaut 0 les admins ont accès au site avec l'entête en plus
 		include('theme/' .$_Serveur_['General']['theme']. '/maintenance/entete.php');
@@ -22,10 +22,10 @@ if($maintenance[$i]['maintenanceEtat'] == 1){
 		header('Location: admin.php');
 		}
 			else { // Si le joueur n'est pas admin il est redirigé vers la page de maintenance
-			header('Location: index.php?&redirection=maintenance');
+			header('Location: index.php?page=maintenance');
 		}
 	} else { // Si le joueur n'est pas connecté il est redirigé vers la page de maintenance
-	header('Location: index.php?&redirection=maintenance');
+	header('Location: index.php?page=maintenance');
 }
 }
 if(Permission::getInstance()->verifPerm("connect"))

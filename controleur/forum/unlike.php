@@ -15,7 +15,7 @@ if(isset($_POST['id_answer']) && Permission::getInstance()->verifPerm("connect")
 	$testcount = $rtest->rowCount();
 	if($testcount > 1)
 	{
-		header('Location: ?page=erreur&erreur=17');
+		header('Location: erreur/17');
 	}
 	else
 	{
@@ -35,11 +35,11 @@ if(isset($_POST['id_answer']) && Permission::getInstance()->verifPerm("connect")
 			'id' => $id
 		));
 		$header = $rheader->fetch(PDO::FETCH_ASSOC);
-		header('Location: ?&page=post&id=' . $header['id_topic'] . '');
+		header('Location: post/' . $header['id_topic'] . '');
 	}
 	else
-		header('Location: ?page=post&id='.$id);
+		header('Location: post/'.$id);
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');
 ?>

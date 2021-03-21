@@ -75,7 +75,7 @@ else
 {
     if (isset($_GET['action'])) {
         require ('controleur/action.php');
-    } elseif (isset($_GET['redirection']) AND $_GET['redirection'] == 'maintenance') {
+    } elseif (isset($_GET['page']) AND $_GET['page'] == 'maintenance') {
         include ('theme/' . $_Serveur_['General']['theme'] . '/maintenance.php');
     }else
     // On charge l'index uniquement si il n'y a pas d'action, cela permet de choisir la page sur laquelle l'utilisateur sera redirigé après l'action. Sinon, on redirige vers

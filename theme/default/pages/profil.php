@@ -118,7 +118,7 @@ if (isset($_GET['erreur'])) {
 
             <div class="collapse mx-auto" id="collapseGiveJetons">
                 <div class="card">
-                    <form class="form-horizontal" method="post" action="?&action=give_jetons" role="form">
+                    <form class="form-horizontal" method="post" action="?action=give_jetons" role="form">
 
                         <div class="card-header">
                             <h4> Envoyer des <?=$_Serveur_['General']['moneyName'];?> à un joueur </h4>
@@ -211,7 +211,7 @@ if (isset($_GET['erreur'])) {
                                     <div id="editPersonal" class="tab-pane fade show active" role="tabpanel"
                                         aria-labelledby="editPersonal">
 
-                                        <form class="form-horizontal" method="post" action="?&action=changeProfil"
+                                        <form class="form-horizontal" method="post" action="?action=changeProfil"
                                             role="form">
 
                                             <div class="form-row py-1">
@@ -381,7 +381,7 @@ if (isset($_GET['erreur'])) {
 
                                     <div id="editOptionnal" class="tab-pane fade" role="tabpanel"
                                         aria-labelledby="editOptionnal">
-                                        <form class="form-horizontal" method="post" action="?&action=changeProfilAutres"
+                                        <form class="form-horizontal" method="post" action="?action=changeProfilAutres"
                                             role="form">
 
                                             <?php foreach ($listeReseaux as $value) : ?>

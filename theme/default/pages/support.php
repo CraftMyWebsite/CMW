@@ -51,8 +51,8 @@
                                     <?php endif; ?>
 
                                     <td>
-                                        <a href="index.php?&page=profil&profil=<?= $tickets['auteur'] ?>">
-                                            <img class="icon-player-topbar" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32) ?>" style="width: 32px; height: 32px" />
+                                        <a href="index.php?page=profil&profil=<?= $tickets['auteur'] ?>">
+                                            <img alt="auteur" class="icon-player-topbar" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32) ?>" style="width: 32px; height: 32px" />
                                             <?= $tickets['auteur'] ?>
                                         </a>
                                     </td>
@@ -86,7 +86,7 @@
 
                                     <?php if (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'closeTicket')) : ?>
                                         <td style="text-align: center;">
-                                            <form class="form-horizontal default-form" method="post" action="?&action=ticketEtat&id=<?= $tickets['id']; ?>">
+                                            <form class="form-horizontal default-form" method="post" action="?action=ticketEtat&id=<?= $tickets['id']; ?>">
                                                 <?php if ($tickets['etat'] == 0) : ?>
                                                     <button type="submit" name="etat" class="btn btn-main" value="1">
                                                         Fermer le ticket
@@ -177,7 +177,7 @@
                                                                                             <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) : ?>
 
                                                                                                 <li>
-                                                                                                    <a href="?&action=delete_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>&id_ticket=<?= $tickets['id'] ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" class="dropdown-item">
+                                                                                                    <a href="?action=delete_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>&id_ticket=<?= $tickets['id'] ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" class="dropdown-item">
                                                                                                         Supprimer
                                                                                                     </a>
                                                                                                 </li>
@@ -218,7 +218,7 @@
                                                 <!-- Envoie d'un commentaire -->
                                                 <?php if ($tickets['etat'] == "0") : ?>
 
-                                                    <form action="?&action=post_ticket_commentaire" method="post">
+                                                    <form action="?action=post_ticket_commentaire" method="post">
                                                         <input type="hidden" name="id" value="<?= $tickets['id'] ?>" />
                                                             <div style="width:100%;">
                                                             
@@ -249,7 +249,7 @@
                                     for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) : ?>
 
                                         <div class="modal fade" id="editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editComm">
-                                            <form method="POST" action="?&action=edit_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>&id_ticket=<?= $tickets['id']; ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>">
+                                            <form method="POST" action="?action=edit_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>&id_ticket=<?= $tickets['id']; ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
 

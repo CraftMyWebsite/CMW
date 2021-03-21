@@ -10,5 +10,5 @@ if(isset($_Joueur_, $_GET['actuel']))
 		'show' => $show,
 		'id' => $_Joueur_['id']
 	));
-	header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&success=true');
+	header('Location: profil/'.$_Joueur_['pseudo'].'/true');
 }

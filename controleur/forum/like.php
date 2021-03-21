@@ -20,10 +20,10 @@ if(isset($_POST['choix']) AND isset($_Joueur_) AND isset($_POST['id_answer']))
 	));
 	$postd = $post->fetch(PDO::FETCH_ASSOC);
 	if($type == 2)
-		header('Location: ?&page=post&id=' . $postd['id_topic'] . '');
+		header('Location: post/' . $postd['id_topic'] . '');
 	else
-		header('Location: ?page=post&id='.$id);
+		header('Location: post/'.$id);
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');
 ?>

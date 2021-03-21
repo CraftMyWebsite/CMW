@@ -10,14 +10,14 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 		$close->execute(array(
 			'id' => $id
 		));
-		header('Location: ?&page=post&id='.$id);
+		header('Location: post/'.$id);
 	}
 	elseif($choix == 2 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic'))
 	{
 		//on supprime le topic 
 		if(!isset($_GET['confirmation']))
 		{
-			header('Location: ?&page=confirmation&id_topic=' .$id. '&choix=2');
+			header('Location: confirmation/' .$id. '/2');
 		}
 		else
 		{
@@ -54,12 +54,12 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 					'id' => $id 
 				));
 				if(isset($info_removed['sous_forum']))
-					header('Location: ?&page=sous_forum_categorie&id='.$info_removed['id_categorie'].'&id_sous_forum='.$info_removed['sous_forum']);
+					header('Location: sous_forum_categorie/'.$info_removed['id_categorie'].'/'.$info_removed['sous_forum']);
 				else
-					header('Location: ?page=forum_categorie&id='.$info_removed['id_categorie']);
+					header('Location: forum_categorie/'.$info_removed['id_categorie']);
 			}
 			else
-				header('Location: ?page=erreur&erreur=0');
+				header('Location: erreur/0');
 		}
 	}
 	elseif($choix == 3 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'mooveTopic'))
@@ -67,7 +67,7 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 		//Alors on déplace :P
 		if(!isset($_GET['confirmation']))
 		{
-			header('Location: ?&page=confirmation&id_topic=' . $id . '&choix=3');
+			header('Location: confirmation/' . $id . '/3');
 			
 		}
 		else 
@@ -93,10 +93,10 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 						'id' => $id
 					));
 				}
-				header('Location: ?&page=post&id='.$id);
+				header('Location: post/'.$id);
 			}
 			else
-				header('Location: ?page=erreur&erreur=0');
+				header('Location: erreur/0');
 		}
 	}
 	elseif($choix == 4 && Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'closeTopic'))
@@ -106,11 +106,11 @@ if(isset($_GET['id_topic']) AND isset($_GET['choix']))
 		$ouvre->execute(array(
 			'id' => $id
 		));
-		header('Location: ?&page=post&id='.$id);
+		header('Location: post/'.$id);
 	}
 	else
-		header('Location: ?page=erreur&erreur=');
+		header('Location: erreur/0');
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');
 ?>

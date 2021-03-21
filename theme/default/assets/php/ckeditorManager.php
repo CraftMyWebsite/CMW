@@ -1,4 +1,4 @@
-<script>
+<script type="application/javascript">
 var CK = {};
 initCK();
 function initCK() {
