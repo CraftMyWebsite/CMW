@@ -31,6 +31,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [+] : Ajout de ckeditor à la page maintenance
 [+] : Possibilité de changer la devise monétaire de paypal depuis le panel
 [+] : Ajout d'un système de SEO au thème default
+[+] : Ajout des services google sur le cms
 [+] : Ajout des URLRewrite à l'ensemble des pages du cms (page public)
 [+] : Création/édition de page du panel avec php
 
