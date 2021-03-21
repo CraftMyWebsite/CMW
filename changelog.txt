@@ -34,6 +34,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [+] : Ajout des services google sur le cms
 [+] : Ajout des URLRewrite à l'ensemble des pages du cms (page public)
 [+] : Création/édition de page du panel avec php
+[+] : Vérification du mdp lors du changement de mail
 
 
 Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir, Emilien52
