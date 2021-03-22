@@ -644,6 +644,9 @@ li.nav-item {
     cursor: pointer;
 }
 
+.collapse-profile{
+    margin-bottom: 20px;
+}
 
 /* --- --- FORUM --- --- */
 

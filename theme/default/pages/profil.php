@@ -116,7 +116,7 @@ if (isset($_GET['erreur'])) {
         <!-- Offrir des jetons -->
         <div class="row">
 
-            <div class="collapse mx-auto" id="collapseGiveJetons">
+            <div class="collapse mx-auto collapse-profile" id="collapseGiveJetons">
                 <div class="card">
                     <form class="form-horizontal" method="post" action="?action=give_jetons" role="form">
 
@@ -172,7 +172,7 @@ if (isset($_GET['erreur'])) {
 
         <!-- Modification du compte -->
         <div class="row">
-            <div class="collapse mx-auto col-10" id="collapseEditSettings">
+            <div class="collapse mx-auto col-10 collapse-profile" id="collapseEditSettings">
                 <div class="card">
 
                     <div class="card-header">
