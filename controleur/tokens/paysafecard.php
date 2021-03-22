@@ -7,7 +7,7 @@ if(isset($_POST) && Permission::getInstance()->verifPerm('connect'))
 		'code' => htmlspecialchars($_POST['code']),
 		'offre' => htmlspecialchars($_POST['offre'])
 	));
-	header('Location: ?page=token&notif=2');
+	header('Location: token/2');
 }
 
 ?>

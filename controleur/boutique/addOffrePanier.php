@@ -10,18 +10,18 @@ if(Permission::getInstance()->verifPerm("connect") && isset($_GET['offre']) && i
 		$fetch = $req->fetch(PDO::FETCH_ASSOC);
 		if($fetch['nbre_vente'] == 0 )
 		{
-			header('Location: ?page=erreur&erreur=19&type='.htmlspecialchars("Erreur Boutique").'&titre='.htmlspecialchars("Stock insufisant !"). '&contenue='.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( !"));
+			header('Location: erreur/19/'.htmlspecialchars("Erreur Boutique").'/'.htmlspecialchars("Stock insufisant !"). '/'.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( !"));
 				exit();
 		}
 		$execution = $_Panier_->ajouterProduit(htmlspecialchars($_GET['offre']), htmlspecialchars($_GET['quantite']), $fetch['prix']);
 		if($execution !== false)
-			header('Location: ?page=boutique');
+			header('Location: boutique/ajout');
 		else
-			var_dump($execution); var_dump($_GET);
+			header('Location: erreur/17');
 	}
 	else
-		header('Location: ?page=erreur&erreur=17');
+		header('Location: erreur/17');
 }
 else
-	header('Location: ?page=erreur&erreur=17');
+	header('Location: erreur/17');
 ?>

@@ -20,14 +20,14 @@ if(isset($_Joueur_) AND isset($_POST['nom']) AND isset($_POST['forum']) AND strl
 			'img' => $img,
 			'forum' => $forum
 		));
-		header('Location: index.php?page=forum');
+		header('Location: forum');
 	}
 	else
-		header('Location: ?page=erreur&erreur=7');
+		header('Location: erreur/7');
 }
 else
 {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');
 }
 
 

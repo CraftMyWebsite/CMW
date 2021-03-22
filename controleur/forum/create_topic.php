@@ -22,7 +22,7 @@ if(Permission::getInstance()->verifPerm("connect"))
 			));
 		}
 		elseif(strlen($_POST['contenue']) > 15000){
-			header('Location: ?page=erreur&erreur=20');				
+			header('Location: erreur/20');				
 		}
 		else
 		{
@@ -44,11 +44,11 @@ if(Permission::getInstance()->verifPerm("connect"))
 			'pseudo' => $_Joueur_['pseudo'],
 			'id_topic' => $return['id']
 		));
-		header('Location: ?&page=post&id=' . $return['id'] . '');
+		header('Location: post/' . $return['id']);
 	}
 	else
-		header('Location: ?page=erreur&erreur=0');
+		header('Location: erreur/0');
 }
 else
-	header('Location: ?page=erreur&erreur=7');
+	header('Location: erreur/7');
 ?>

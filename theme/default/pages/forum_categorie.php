@@ -28,7 +28,7 @@ $titleHTML = $categoried['nom'];
 if(isset($id_sous_forum))
     $titleHTML .= " > ".$sousforumd['nom'];
 ?>
-<script>  document.title = "<?=$_Serveur_['General']['name'] . " | " . $titleHTML;?>"; </script>
+<script type="application/javascript">  document.title = "<?=$_Serveur_['General']['name'] . " | " . $titleHTML;?>"; </script>
 <section id="ForumCategorie">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
         <div class="row">
@@ -101,7 +101,7 @@ if(isset($id_sous_forum))
                                     <td>
 
                                         <?php if ($sousforumd[$a]['img'] == NULL) : ?>
-                                            <a style="font-size: 28px;" href="?&page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                            <a style="font-size: 28px;" href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                                <i class="far fa-comment-dots"></i>
                                             </a>
                                         <?php else : ?>
@@ -111,7 +111,7 @@ if(isset($id_sous_forum))
                                     </td>
 
                                     <td>
-                                        <a href="?&page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                        <a href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                             <?= $sousforumd[$a]['nom']; ?>
                                         </a>
                                     </td>
@@ -306,7 +306,7 @@ if(isset($id_sous_forum))
                                     </td>
 
                                     <td>
-                                        <a href="?&page=post&id=<?= $topicd[$i]['id']; ?>">
+                                        <a href="?page=post&id=<?= $topicd[$i]['id']; ?>">
                                             <?php if (isset($topicd[$i]['prefix']) && $topicd[$i]['prefix'] != 0) : ?>
                                                 <?= $_Forum_->getPrefix($topicd[$i]['prefix']); ?>
                                             <?php endif; ?>
@@ -326,7 +326,7 @@ if(isset($id_sous_forum))
                                     </td>
 
                                     <td>
-                                        <a href="?&page=post&id=<?= $topicd[$i]['id']; ?>">
+                                        <a href="?page=post&id=<?= $topicd[$i]['id']; ?>">
                                             <?= $_Forum_->conversionLastAnswer($topicd[$i]['last_answer']); ?>
                                         </a>
                                     </td>
@@ -445,7 +445,7 @@ if(isset($id_sous_forum))
                         <?php
                         for ($i = 1; $i <= $count_topic_nbrOfPages2; $i++) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?&page=<?= (isset($id_sous_forum)) ? "sous_" : ""; ?>forum_categorie&id=<?= $id ?><?= (isset($id_sous_forum)) ? "&id_sous_forum=$id_sous_forum" : ""; ?>&page_topic=<?= $i; ?>">
+                                <a class="page-link" href="?page=<?= (isset($id_sous_forum)) ? "sous_" : ""; ?>forum_categorie&id=<?= $id ?><?= (isset($id_sous_forum)) ? "&id_sous_forum=$id_sous_forum" : ""; ?>&page_topic=<?= $i; ?>">
                                     <?= $i; ?>
                                 </a>
                             </li>
@@ -467,7 +467,7 @@ if(isset($id_sous_forum))
             <?php if (Permission::getInstance()->verifPerm("connect") && ((($categoried['close'] == 0 and $sousforumd['close'] == 0) or Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide')) and !$_SESSION['mode'])) : ?>
 
                 <div class="card col-8 mx-auto">
-                    <form action="?&action=create_topic" method="post">
+                    <form action="?action=create_topic" method="post">
 
                         <div class="card-header">
                             <h4>

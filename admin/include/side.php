@@ -90,11 +90,11 @@
                             </a>
                         </li>
 
-                     <?php } if($_Permission_->verifPerm('PermsPanel', 'seo', 'showPage')) { ?>
-                         <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='menus'){echo 'active';}?>">
-                             <a class="nav-link"  href="?page=seo">
+                     <?php } if($_Permission_->verifPerm('PermsPanel', 'googleService', 'showPage')) { ?>
+                         <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='googleService'){echo 'active';}?>">
+                             <a class="nav-link"  href="?page=googleService">
                                  <i class="fab fa-searchengin"></i>
-                                 SEO
+                                 Service Google
                              </a>
                          </li>
 

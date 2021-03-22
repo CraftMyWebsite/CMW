@@ -28,9 +28,15 @@
                                 </div> 
                             </li>
                        <?php } else {
-                           $quellePage = str_replace('index.php?&page=', '', $_Menu_[$i]['url']);
-                           $quellePage1 = str_replace('?&page=', '',  $_Menu_[$i]['url']);
-                           $quellePage2 = str_replace('?page=', '',  $_Menu_[$i]['url']);
+                           $quellePage = str_replace('index.php?page=', '', $_Menu_[$i]['url']);
+                           $quellePage1 = str_replace('?page=', '',  $_Menu_[$i]['url']);
+                           $quellePage2 = str_replace('?&page=', '',  $_Menu_[$i]['url']);
+
+                           $url = str_replace('index.php?page=', '', $_Menu_[$i]['url']);
+                           $url = str_replace('index.php?&page=', '', $_Menu_[$i]['url']);
+                           $url = str_replace('index.php', '', $_Menu_[$i]['url']);
+                           $url = str_replace('?page=', '',  $url);
+                           $url = str_replace('?&page=', '',  $url);
                            
                            if (isset($_GET['page']) and ($quellePage == $_GET['page'] or $quellePage1 == $_GET['page'] or $quellePage2 == $_GET['page'])) {
                                $active = ' active';
@@ -41,7 +47,7 @@
                            } ?>
                            
                            <li class="nav-item<?= $active ?>">
-                             <a href="<?= $_Menu_[$i]['url'] ?>" class="nav-link"><?= $_Menu_[$i]['name'] ?></a>
+                             <a href="<?= $url ?>" class="nav-link"><?= $_Menu_[$i]['name'] ?></a>
                        		</li>
                         <?php }
                     } ?>
@@ -53,7 +59,7 @@
                         <li class="nav-item dropdown ml-auto">
 
                             <a id="profil-<?= $_Joueur_['pseudo']; ?>" class="nav-link dropdown-toggle btn btn-main" href="#" id="dropdown-tools" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo'], 24); ?>" style="margin-left: -10px; width: 24px; height: 24px"> <?= $_Joueur_['pseudo']; ?>
+                                <img alt="profil" src="<?= $_ImgProfil_->getUrlHeadByPseudo($_Joueur_['pseudo'], 24); ?>" style="margin-left: -10px; width: 24px; height: 24px"> <?= $_Joueur_['pseudo']; ?>
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="profil-<?= $_Joueur_['pseudo']; ?>">
@@ -132,7 +138,7 @@
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        État de votre serveur :
+                                        État du serveur Minecraft :
                                         <?php if ($_Serveur_['General']['statut'] == 0 || $servEnLigne == false) : ?>
                                             <span class="badge badge-danger">Hors-Ligne</span>
                                         <?php elseif ($_Serveur_['General']['statut'] == 1 && $servEnLigne == true) : ?>

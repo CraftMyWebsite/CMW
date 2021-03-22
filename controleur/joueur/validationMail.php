@@ -14,7 +14,7 @@ if(urldecode($_GET['pseudo']) AND urldecode($_GET['cle']))
   
   if($get_Actif == '1')
   {
-    header('Location: ?&page=erreur&erreur=13');
+    header('Location: erreur/13');
   }
   else 
   {
@@ -22,16 +22,16 @@ if(urldecode($_GET['pseudo']) AND urldecode($_GET['cle']))
    {
     require_once('modele/joueur/ScriptBySprik07/inscriptionValidateMail.class.php');
     $validateMail = new UserValidateMail($get_Pseudo, $bddConnection);
-    header('Location: ?&ActivateSuccess=true');
+    header('Location: accueil/ActivateSuccess');
   }
   else
   {
-    header('Location: ?&ActivateImpossible=false');
+    header('Location: accueil/ActivateImpossible');
   }
 }
 }
 else
 {
-  header('Location: ?&page=erreur&erreur=12');
+  header('Location: erreur/12');
 } 
 ?>

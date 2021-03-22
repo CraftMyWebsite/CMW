@@ -1,7 +1,7 @@
 <?php 
 $code = isset($_POST['code']) ? preg_replace('/[^a-zA-Z0-9]+/', '', $_POST['code']) : ''; 
 if( empty($code) ) { 
-  header('Location: index.php?page=token&success=false');
+  header('Location: token/errorDedipass');
 } 
 else { 
   $dedipass = file_get_contents('http://api.dedipass.com/v1/pay/?public_key=' . $_Serveur_['Payement']['public_key'] . '&private_key=' . $_Serveur_['Payement']['private_key'] . '&code=' . $code);
@@ -35,11 +35,11 @@ else {
 	$joueurMaj->setNouvellesDonneesTokens($playerData);
 	$_Joueur_['tokens'] = $_Joueur_['tokens'] + $virtual_currency;
 	
-  header("Location: index.php?page=token&success=true&tokens={$virtual_currency}");
+  header("Location: token/successDedipass");
   } 
   else { 
     // Le code est invalide 
-    header('Location: index.php?page=token&success=false');
+    header('Location: token/errorDedipass');
   } 
 } 
 ?>

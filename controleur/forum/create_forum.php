@@ -11,7 +11,7 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addForum') AND
 		'nom' => $nom,
 		'ordre' => $ordre+1
 	));
-	header('Location: ?page=forum');
+	header('Location: forum');
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: erreur/0');

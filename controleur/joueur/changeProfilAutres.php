@@ -19,7 +19,7 @@ $age = VerifieDonnee($_POST['age']);
 $age = intval($age);
 
 ValideChangement($changementsReseaux, $age, $_Joueur_['pseudo'], $signature, $bddConnection, $_Joueur_['id']);
-header('Location: ?page=profil&profil='.$_Joueur_['pseudo'].'&success=true');
+header('Location: profil/'.$_Joueur_['pseudo'].'/true');
 
 function VerifieDonnee($donnee)
 {	

@@ -3,7 +3,7 @@
 <div class="modal fade" id="InscriptionSlide" tabindex="-1" role="dialog" aria-labelledby="InscriptionSlide" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form role="form" method="post" action="?&action=inscription">
+            <form role="form" method="post" action="?action=inscription">
                 <div class="modal-header">
                     <h5 class="modal-title">Inscription</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -120,7 +120,7 @@
                             <label for="CAPTCHA">Captcha <span class="star-required"></span></label>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <img id='captcha' src='include/purecaptcha/purecaptcha_img.php?t=login_form' style="width: 80%;height: 100px;" />
+                            <img id='captcha' alt="captcha" src='include/purecaptcha/purecaptcha_img.php?t=login_form' style="width: 80%;height: 100px;" />
                         </div>
                         <div class="col-md-6">
                             <button type="button" onclick='var t=document.getElementById("captcha"); t.src=t.src+"&amp;"+Math.random();' class="btn btn-reverse captcha-btn" style="margin-top:35px">
@@ -157,7 +157,7 @@
 <div class="modal fade" id="ConnectionSlide" tabindex="-1" role="dialog" aria-labelledby="ConnectionSlide" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-signin" role="form" method="post" action="?&action=connection">
+            <form class="form-signin" role="form" method="post" action="?action=connection">
                 <div class="modal-header">
                     <h5 class="modal-title">Connexion</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -233,7 +233,7 @@
 <div class="modal fade" id="passRecover" tabindex="-1" role="dialog" aria-labelledby="passRecover" aria-hidden="true" style="padding-right: 16px;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form role="form" method="post" action="?&action=passRecover">
+            <form role="form" method="post" action="?action=passRecover">
                 <div class="modal-header">
                     <h5 class="modal-title">Mot de passe oublié</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -337,14 +337,14 @@
                                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>-<?= $newsComments['id'] ?>-edit" data-dismiss="modal">
                                                             Editer
                                                         </a>
-                                                        <a class="dropdown-item text-danger" href="?&action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
+                                                        <a class="dropdown-item text-danger" href="?action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
                                                             Supprimer
                                                         </a>
 
                                                     <?php endif; ?>
                                                     <?php if ($newsComments['pseudo'] != $_Joueur_['pseudo']) :
                                                         if ($checkReport == "0") : ?>
-                                                            <a class="dropdown-item" href="?&action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
+                                                            <a class="dropdown-item" href="?action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
                                                                 Signaler
                                                             </a>
                                                         <?php else : ?>
@@ -359,7 +359,7 @@
                             </div>
                             <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
                                 <div class="modal-footer w-100">
-                                    <form action="?&action=post_news_commentaire&id_news=<?php echo $news[$i]['id']; ?>" method="post" class="w-100">
+                                    <form action="?action=post_news_commentaire&id_news=<?php echo $news[$i]['id']; ?>" method="post" class="w-100">
                                         <h5>
                                             Commenter !
                                         </h5>
@@ -403,7 +403,7 @@
                                             </button>
                                         </div>
 
-                                        <form action="?&action=edit_news_commentaire&id_news=<?= $news[$i]['id'] . '&auteur=' . $newsComments['pseudo'] . '&id_comm=' . $newsComments['id']; ?>" method="post">
+                                        <form action="?action=edit_news_commentaire&id_news=<?= $news[$i]['id'] . '&auteur=' . $newsComments['pseudo'] . '&id_comm=' . $newsComments['id']; ?>" method="post">
                                             <div class="modal-body">
                                                 <h6>Commentaire de base :</h6>
                                                 <textarea name="old_commentaire" id="old_commentaire" rows="3" style="resize: none;" class="form-control disabled mb-5" disabled><?= $editCommentaire; ?></textarea>
@@ -435,7 +435,7 @@
 <div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-signin" role="form" method="post" action="?&action=editForum">
+            <form class="form-signin" role="form" method="post" action="?action=editForum">
                 <div class="modal-header">
                     <h5 class="modal-title">Édition du forum "<span id="editForumTitle" ></span>"</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -482,7 +482,7 @@
 <div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-signin" role="form" method="post" action="?&action=editSousForum">
+            <form class="form-signin" role="form" method="post" action="?action=editSousForum">
                 <div class="modal-header">
                     <h5 class="modal-title">Édition du sous-forum "<span id="editForumTitle" ></span>"</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -520,5 +520,5 @@
 
 <div id="modal-image" class="img-modal">
   <div class="modal-img-close" onclick="this.parentElement.style.display='none';"><i class="fas fa-times"  ></i></div>
-  <img class="modal-img-content" id="modal-image-src" />
+  <img class="modal-img-content" alt="image modal" id="modal-image-src" />
 </div>

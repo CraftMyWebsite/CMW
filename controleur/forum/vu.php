@@ -10,9 +10,9 @@ if(Permission::getInstance()->verifPerm("connect"))
 		'id' => $id_answer,
 		'pseudo' => $likeur
 	));
-	header('Location: index.php?page=post&id=' .$id. '&page_post=' .$pages. '#' .$id_answer. '');
+	header('Location: post/' .$id. '/' .$pages. '#' .$id_answer. '');
 }
 else
-	header('Location: ?page=erreur&erreur=16');
+	header('Location: erreur/16');
 
 ?>

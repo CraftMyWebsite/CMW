@@ -520,8 +520,8 @@ INSERT INTO `cmw_menu` (`id`, `dest`, `url`, `ordre`, `name`) VALUES
 (5, -1, '?&page=voter', 4, 'Voter'),
 (6, -1, '?page=forum', 5, 'Forum'),
 (7, -1, '?&page=membres', 6, 'Liste des membres'),
-(8, 2, '?page=banlist ', 0, 'Ban - List'),
-(9, 2, '?page=chat ', 1, 'Chat');
+(8, 2, '?page=banlist', 0, 'Ban - List'),
+(9, 2, '?page=chat', 1, 'Chat');
 
 INSERT INTO `cmw_miniature` (`message`, `image`, `type`, `lien`, `ordre`) VALUES 
 ('Image de démo à modifier dans votre panel CraftMyWebsite ! (1)', 'miniature-demo-1.jpg', 0, '#', 0), 
