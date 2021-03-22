@@ -11,7 +11,9 @@ if(isset($_GET['page']))
 	{ 		
 		// Quand un joueur veut accèder au profil de qqun ou le sien...
 		case 'profil':
-			include('controleur/profil/index.php');	
+			require('controleur/profil/profil.class.php');	
+			$_Profil_ = new profil($bddConnection);
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/profil.php');	
 		break;	
 
 		case 'accueil':

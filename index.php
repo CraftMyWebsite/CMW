@@ -1,7 +1,7 @@
 <?php // On appelle les classes du controleur qui instancies les objets principaux (BDD, config, JSONAPI...).
 ob_start();
 session_start();
-error_reporting(0);
+error_reporting(E_ALL);
 date_default_timezone_set('Europe/Paris');
 setlocale(LC_TIME, "fr_FR");
 ini_set('display_errors', 1);
@@ -60,6 +60,7 @@ require('controleur/recompenseAuto.php');
 // Les actions n'affichent aucun code html alors que les pages sont dans la theme.
 // Ici une condition pour vérifier si il faut charger le fichier controleur des actions. Ce fichier effectue l'action qu'il faut en
 // faisant appel au bon fichier en fonction de la valeur du get
+
 if(!isset($_Serveur_['General']['createur']))
 {
     $tmp = $_Serveur_;

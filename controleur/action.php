@@ -6,6 +6,38 @@ if(isset($_GET['action']))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 		
+	    
+	    case 'editAge':
+	        include('controleur/joueur/profil/editAge.php');
+	       break;
+	    
+	    case 'editImgProfil':
+	        include('controleur/joueur/profil/editImgProfil.php');
+	        break;
+	        
+	    case 'editMail':
+	        include('controleur/joueur/profil/editMail.php');
+	        break;
+	        
+	    case 'editMailVisibility':
+	        include('controleur/joueur/profil/editMailVisibility.php');
+	        break;
+	        
+	    case 'editMdp':
+	        include('controleur/joueur/profil/editMdp.php');
+	        break;
+	        
+	    case 'editNewsletter':
+	        include('controleur/joueur/profil/editNewsletter.php');
+	        break;
+	        
+	    case 'editReseau':
+	        include('controleur/joueur/profil/editReseau.php');
+	        break;
+	        
+	    case 'editSignature':
+	        include('controleur/joueur/profil/editSignature.php');
+	        break;
 		// Appellée quand on clique sur un bouton de déconnection (bouton disponible quand connecté.
 		case 'deco': 
 			// Destruction des sessions + redirection sur l'accueil.
@@ -331,16 +363,6 @@ if(isset($_GET['action']))
 		case 'post_ticket_commentaire':
 			include('controleur/support/ticketCommentaire.php');
 			header('Location: support');
-		break;
-		
-		case 'changeProfil':
-			include('controleur/joueur/changeProfil.php');
-			//header('Location: index.php?&page=profil&profil=' .$_Joueur_['pseudo']);
-		break;
-		
-		case 'changeProfilAutres':
-			require('modele/joueur/donneesJoueur.class.php');
-			include('controleur/joueur/changeProfilAutres.php');
 		break;
 		
 		case 'ticketEtat':
