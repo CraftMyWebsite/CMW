@@ -204,13 +204,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" data-toggle="modal" data-target="#infoServeur<?=$conEtablie[$j]?>">
-                                <div class="card-footer">
-                                    <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en
-                                        détails
-                                        <i class="fas fa-arrow-circle-right"></i></button>
+                            <!-- Détecte si le serveur est connecté en JSONAPI ou en RCON-->
+                            <?php if($serveur['protocole'] == 0){?>
+                                <a href="#" data-toggle="modal" data-target="#infoServeur<?=$conEtablie[$j]?>">
+                                    <div class="card-footer">
+
+                                        <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en détails
+                                            <i class="fas fa-arrow-circle-right"></i></button>
+
+                                    </div>
+                                </a>
+                            <?php }else{ ?>
+
+                                <div class="card-footer text-center">
+
+                                    <span class="alert-warning">Cette fonctionnalité n'est pas disponible avec la connexion RCON, merci de choisir la connexion JSONAPI</span>
+
                                 </div>
-                            </a>
+
+                            <?php }?>
                         </div>
                         <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'player') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'command') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) {
                             ?>

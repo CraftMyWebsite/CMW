@@ -123,7 +123,7 @@
                             <img id='captcha' alt="captcha" src='include/purecaptcha/purecaptcha_img.php?t=login_form' style="width: 80%;height: 100px;" />
                         </div>
                         <div class="col-md-6">
-                            <button type="button" onclick='var t=document.getElementById("captcha"); t.src=t.src+"&amp;"+Math.random();' class="btn btn-reverse" style="margin-top:35px">
+                            <button type="button" onclick='var t=document.getElementById("captcha"); t.src=t.src+"&amp;"+Math.random();' class="btn btn-reverse captcha-btn" style="margin-top:35px">
                                 <i class="fas fa-sync"></i> Recharger le captcha
                             </button>
                         </div>

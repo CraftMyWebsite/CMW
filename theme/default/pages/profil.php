@@ -116,7 +116,7 @@ if (isset($_GET['erreur'])) {
         <!-- Offrir des jetons -->
         <div class="row">
 
-            <div class="collapse mx-auto" id="collapseGiveJetons">
+            <div class="collapse mx-auto collapse-profile" id="collapseGiveJetons">
                 <div class="card">
                     <form class="form-horizontal" method="post" action="?action=give_jetons" role="form">
 
@@ -172,7 +172,7 @@ if (isset($_GET['erreur'])) {
 
         <!-- Modification du compte -->
         <div class="row">
-            <div class="collapse mx-auto col-10" id="collapseEditSettings">
+            <div class="collapse mx-auto col-10 collapse-profile" id="collapseEditSettings">
                 <div class="card">
 
                     <div class="card-header">
@@ -351,7 +351,7 @@ if (isset($_GET['erreur'])) {
                                                 <div class="col-md-4">
                                                     <?php if ($joueurDonnees['newsletter']) : ?>
                                                     <button type='submit'
-                                                        class="btn btn-reverse form-control text-danger"
+                                                        class="btn btn-reverse form-control "
                                                         name="changeNewsletter" value="unsubscribeNewsletter"
                                                         style="margin-top: 1.9rem">Se désinscrire
                                                     </button>
@@ -400,8 +400,7 @@ if (isset($_GET['erreur'])) {
 
                                             <div class="form-row">
                                                 <label for="age">
-                                                    Âge <small>(0 =
-                                                        caché)</small>
+                                                    Âge <small>(0 = caché)</small>
                                                 </label>
                                                 <input type="number" name="age" class="form-control custom-text-input "
                                                     min="0" max="99" placeholder="17"
@@ -410,11 +409,12 @@ if (isset($_GET['erreur'])) {
                                             </div>
 
 
-                                            <div class="form-row wys-content">
+
                                                 <h5 class="mt-4 mb-0">Signature Forum</h5>
                                                 <hr class="bg-main w-80 float-left my-1">
                                                 <div class="clearfix"></div>
 
+                                            <div class="form-row wys-content">
                                                 <div class="col-md-12 text-center wys-options">
                                                     <textarea  data-UUID="0005" id="ckeditor" name="signature" style="height: 275px; margin: 0px; width: 100%;">
                                                         <?= $joueurDonnees['signature'] ?>
