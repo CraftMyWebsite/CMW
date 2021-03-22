@@ -38,7 +38,7 @@
                                         else
                                             foreach($joueurs as $value)
                                             {
-                                                ?><img class="mr-3" alt="profil" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=Permission::getInstance()->gradeJoueur($value);?><br/>
+                                                ?><img class="mr-3" alt="profil de <?= $_Joueur_['pseudo']; ?>" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=Permission::getInstance()->gradeJoueur($value);?><br/>
                                                 <?php
                                             }
                                         ?>

@@ -194,7 +194,7 @@
                                                 <th><h6>Votes</h6></th>
                                             </tr>
                                         </thead>
-                                        <body>
+                                        <tbody>
                                         <?php while($oldVote = $oldvote_req->fetch(PDO::FETCH_ASSOC))
                                         { if(($a-1) < $_Serveur_['vote']['oldDisplay']) { ?>
                                             <tr>
@@ -205,7 +205,7 @@
 
                                         <?php $a++; } else { break; } } 
                                         ?>
-                                        </body>
+                                        </tbody>
                                     </table>
                                 <?php } ?>
 

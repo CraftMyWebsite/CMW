@@ -234,7 +234,7 @@ blockquote {
 .btn-reverse:hover {
     background-color: var(--secondary-color-bg);
     color: var(--base-color);
-    box-shadow: 0px 1px 10px 3px var(--lightest-color-bg);
+    box-shadow: 0 1px 10px 3px var(--lightest-color-bg);
 }
 
 .btn-main:disabled,
@@ -341,7 +341,7 @@ li.nav-item {
     content: '';
     display: block;
     margin: 0 auto;
-    width: 0%;
+    width: 0;
     opacity: 0;
     height: .2rem;
     margin-top: .5rem;
@@ -491,10 +491,9 @@ li.nav-item {
 
 .categorie-item {
     font-size: 17px !important;
-    margin: 0 .4rem .4rem 0rem !important;
+    margin: 0 .4rem .4rem 0 !important;
     padding: .6rem;
     list-style-type: none;
-    font-size: 17px !important;
     background-color: var(--lightest-color-bg);
     transition: .5s;
 }
@@ -605,7 +604,7 @@ li.nav-item {
 
 .media-body {
     text-align: justify;
-    word-break: break;
+    word-break: break-word;
 }
 
 
@@ -706,13 +705,13 @@ li.nav-item {
 
 .prefix {
     background-color: transparent;
-    padding: 0px 6px;
+    padding: 0 6px;
     margin: -1px 0;
     border: 1px solid transparent;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    -khtml-border-radius: 0px;
-    border-radius: 0px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -khtml-border-radius: 0;
+    border-radius: 0;
     display: inline-block;
 }
 
@@ -1059,7 +1058,7 @@ footer {
         content: '';
         display: block;
         margin: .1rem auto 0;
-        width: 0%;
+        width: 0;
         opacity: 0;
         height: .2rem;
         border-radius: 99px !important;

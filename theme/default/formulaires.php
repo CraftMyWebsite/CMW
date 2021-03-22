@@ -458,8 +458,8 @@
                             </small>
                     </div>
                     <div class="form-row my-2">
-                        <label for="forum">Catégorie <span class="star-required"></span></label>
-                        <select name="forum" class="form-control custom-text-input" required>
+                        <label for="forumCat">Catégorie <span class="star-required"></span></label>
+                        <select name="forum" id="forumCat" class="form-control custom-text-input" required>
                         <?php for ($z = 0, $zMax = count($fofo); $z < $zMax; $z++) : ?>
                             <option id="editForumCat<?= $fofo[$z]['id']; ?>" value="<?= $fofo[$z]['id']; ?>">
                                 <?= $fofo[$z]['nom']; ?>
@@ -495,12 +495,12 @@
                      <input type="hidden" name="idSF" value="" id="editForumSFId"/>
                      <input type="hidden" name="index" value="" id="editForumIndex"/>
                     <div class="form-row my-2">
-                        <label for="nomForum">Nom du sous-Forum <span class="star-required"></span></label>
+                        <label for="editForumName">Nom du sous-Forum <span class="star-required"></span></label>
                         <input type="text" name="nom" id="editForumName" maxlength="40" class="form-control custom-text-input" required />
                     </div>
 
                     <div class="form-row my-2">
-                        <label for="img">Icône</label>
+                        <label for="editForumImg">Icône</label>
                             <input type="text" name="img" id="editForumImg" maxlength="300" placeholder='<i class="far fa-comment-dots"></i>' class="form-control custom-text-input" />
                             <small id="imgHelp" class="form-text text-muted">
                                 disponible sur : <a href="https://fontawesome.com/icons/" target="_blank">https://fontawesome.com/icons/</a>
