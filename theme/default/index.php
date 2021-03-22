@@ -57,8 +57,6 @@ $_Theme_ = $configTheme->GetTableau();
     <meta name="author" content="CraftMyWebsite, TheTueurCiTy, <?= $_Serveur_['General']['name']; ?>" />
     <meta name="publisher" content="<?= $_SERVER["SERVER_NAME"] ?>"/>
     <meta name="description" content="<?= $_Serveur_['General']['description'] ?>">
-    <meta name="keywords" content="<?= isset($_Serveur_['General']['keywords']) & !empty($_Serveur_['General']['keywords']) ? $_Serveur_['General']['keywords'] : 'Minecraft CraftMyWebSite Vote' ?>">
-
     <meta name="copyright" content="CraftMyWebsite, <?= $_Serveur_['General']['name']; ?>"/>
 
     <meta name="robots" content="follow, index, all">

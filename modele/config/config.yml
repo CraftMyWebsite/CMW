@@ -7,7 +7,6 @@ General:
     theme: default
     themeOption: bootstrap
     description:
-    keywords:
     bgType: 0
     permsPlugin: groupManager
     permsWorld: world

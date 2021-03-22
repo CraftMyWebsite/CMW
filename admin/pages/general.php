@@ -37,9 +37,6 @@
                     <label class="control-label">Description</label>
                     <input type="text" name="description" class="form-control" placeholder="Mon super serveur minecraft !" value="<?php echo $_Serveur_['General']['description']; ?>">
 
-                    <label class="control-label">Mots Clés (Mettez des virgules après chaque mots-clé)</label>
-                    <input type="text" name="keywords" class="form-control" placeholder="Skyblock, serveur survie, minecraft, 1.16.5" value="<?php echo $_Serveur_['General']['keywords']; ?>">
-
                     <label class="control-label">Adresse de votre serveur Minecraft (textuel)</label>
                     <input type="text" name="ipTexte" class="form-control" placeholder="cmw.minesr.com" value="<?php echo $_Serveur_['General']['ipTexte']; ?>">
 

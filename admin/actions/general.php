@@ -5,7 +5,6 @@ if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editGeneral')) 
 		$_Serveur_['General']['url'] = $_POST['adresseWeb'];
 		$_Serveur_['General']['name'] = $_POST['nom'];
 		$_Serveur_['General']['description'] = $_POST['description'];
-        $_Serveur_['General']['keywords'] = $_POST['keywords'];
 		$_Serveur_['General']['ipTexte'] = $_POST['ipTexte'];
 		$_Serveur_['General']['ip'] = $_POST['ip'];
 		$_Serveur_['General']['port'] = $_POST['port'];
