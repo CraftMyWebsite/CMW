@@ -106,7 +106,7 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
 			{
 				throw new AuthenticationException( $Trimmed, AuthenticationException::BAD_PASSWORD );
 			}
-			else if( $Trimmed === 'Vous avez été bannis de ce serveur.' )
+			else if( $Trimmed === 'Vous avez été banni de ce serveur.' )
 			{
 				throw new AuthenticationException( $Trimmed, AuthenticationException::BANNED );
 			}
