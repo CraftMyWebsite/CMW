@@ -27,7 +27,7 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 			$url = $_SERVER['SERVER_NAME'];
 	    	$ht = $_SERVER["HTTPS"] == "on" ? "https://" : "http://";
 			
-			$lien = $ht.$url.'index.php?&action=passRecoverConfirm&token='.urlencode($resetToken);
+			$lien = $ht.$url.'/index.php?&action=passRecoverConfirm&token='.urlencode($resetToken);
 
 			$retourligne = "\r\n";
 
