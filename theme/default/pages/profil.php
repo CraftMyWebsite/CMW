@@ -351,7 +351,7 @@ if (isset($_GET['erreur'])) {
                                                 <div class="col-md-4">
                                                     <?php if ($joueurDonnees['newsletter']) : ?>
                                                     <button type='submit'
-                                                        class="btn btn-reverse form-control text-danger"
+                                                        class="btn btn-reverse form-control "
                                                         name="changeNewsletter" value="unsubscribeNewsletter"
                                                         style="margin-top: 1.9rem">Se désinscrire
                                                     </button>
