@@ -12,6 +12,18 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 	    case 'getUrlContent':
 	    	require('admin/actions/getUrlContent.php');
 	    	exit();
+	    case 'mooveWidgets':
+	        require('admin/actions/mooveWidgets.php');
+	        exit();
+	    case 'addWidgets':
+	    	require('admin/actions/addWidgets.php');
+	    	exit();
+	    case 'editWidgets':
+	    	require('admin/actions/editWidgets.php');
+	    	exit();
+	    case 'supprWidgets':
+	    	require('admin/actions/supprWidgets.php');
+	    	exit();
 	    case 'mooveMenu':
 	        require('admin/actions/mooveMenu.php');
 	        exit();
@@ -402,22 +414,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		
 		case 'supprTicket':
 			require('admin/actions/supprTicket.php');
-		break;
-		
-		case 'newWidget':
-			require('admin/actions/newWidget.php');
-		break;
-		
-		case 'supprWidget':
-			require('admin/actions/supprWidget.php');
-		break;
-		
-		case 'upWidget':
-			require('admin/actions/upWidget.php');
-		break;
-		
-		case 'downWidget':
-			require('admin/actions/downWidget.php');
 		break;
 		
 		case 'editNews':

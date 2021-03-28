@@ -255,6 +255,14 @@ function paypalUpdate() {
 	}});
 }
 
+function widgetsUpdate() {
+	destroyCK();
+	updateCont('admin.php?action=getWidgetsList', get('allWidgets'), function(data) { if(data) { 
+		initPost("allWidgets", "admin.php?action=editWidgets"); 
+		initCK();
+	}});
+}
+
 
 var showPopUpPage = null;
 
