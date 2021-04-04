@@ -42,11 +42,19 @@
                                                         }]
                                                     },
                                                     options: {
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
                                                         scales: {
                                                             yAxes: [{
                                                                 ticks: {
-                                                                    beginAtZero: false
+                                                                    beginAtZero: false,
+                                                                    precision: 0
                                                                 }
+                                                            }],
+                                                            xAxes: [{
+                                                              ticks: {
+                                                                precision: 0
+                                                              }
                                                             }]
                                                         },
                                                         legend: {
@@ -62,32 +70,43 @@
                         </div>
                     </div>
                     <div class="card-body ollapse show" id="stats">
-                        <canvas class="my-4 w-100" id="visitsChart" width="900" height="200">
+                        <div class="chart-container">
+                            <canvas id="visitsChart" ></canvas>
+                        </div>
                                   <script>
                                    <?php
-                                   $Dates = date("Y-m-d");
-                                   $Dates_Yesterday = strftime("%Y-%m-%d", mktime(0, 0, 0, date('m'), date('d')-1, date('y')));
-
-                                   $req_NumberOfDay = $bddConnection->prepare('SELECT dates AS dates FROM cmw_visits GROUP BY dates LIMIT 0, 7;');
-                                   $req_NumberOfDay->execute();
-                                   $get_NumberOfDay = $req_NumberOfDay->fetchAll(PDO::FETCH_ASSOC);
-
-                                   $req_TotalVisitsPerDay = $bddConnection->prepare('SELECT count(dates) AS visits FROM cmw_visits GROUP BY dates LIMIT 0, 7;');
-                                   $req_TotalVisitsPerDay->execute();
-                                   $get_TotalVisitsPerDay = $req_TotalVisitsPerDay->fetchAll(PDO::FETCH_ASSOC);
-                                   ?>
+                                   $req = $bddConnection->query('SELECT count(dates) as total, UNIX_TIMESTAMP(dates) as time FROM cmw_visits GROUP BY dates ASC LIMIT 0, 7;');
+                                   $dailyVisite = $req->fetchAll(PDO::FETCH_ASSOC); ?>
 
                                         var ctx = get('visitsChart')
                                         var myChart = new Chart(ctx, {
                                             type: 'line',
                                             data: {
-                                                labels: [<?php foreach ($get_NumberOfDay as $get_NumberOfDay) {
-                                                  $replace_DatesBy = array("Aujourd'hui", "Hier");
-                                                  $find_Dates = array($Dates, $Dates_Yesterday);
-                                                  echo '"'.str_replace($find_Dates, $replace_DatesBy, $get_NumberOfDay['dates']).'"'.","; } ?>],
+                                                labels: [
+                                                <?php 
+                                                $actual = date('N', time());
+                                                $yesterday = date('N', time() - 86400);
+                                                $dayofweek = array('', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
+
+                                                foreach ($dailyVisite as $value) 
+                                                {
+                                                    echo '"';
+                                                    $day = date('N', $value['time']);
+                                                    if($day == $actual) {
+                                                        echo "Aujourd'hui";
+                                                    } else if($day == $yesterday){
+                                                        echo "Hier";
+                                                    } else {
+                                                        echo $dayofweek[$day];
+                                                    }
+                                                    echo '",';
+                                                } ?>],
                                                 datasets: [{
-                                                    data: [<?php foreach ($get_TotalVisitsPerDay as $get_TotalVisitsPerDay) {
-                                         echo '"'.$get_TotalVisitsPerDay['visits'].'"'.","; } ?>],
+                                                    data: [
+                                                    <?php foreach ($dailyVisite as $value)  
+                                                    {
+                                                        echo '"'.$value['total'].'",';
+                                                    } ?>],
                                                     lineTension: 0,
                                                     backgroundColor: '#343A40',
                                                     borderColor: '#2F3136',
@@ -96,11 +115,19 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 scales: {
                                                     yAxes: [{
                                                         ticks: {
-                                                            beginAtZero: false
+                                                            beginAtZero: false,
+                                                            precision: 0
                                                         }
+                                                    }], 
+                                                    xAxes: [{
+                                                      ticks: {
+                                                        precision: 0
+                                                      }
                                                     }]
                                                 },
                                                 legend: {

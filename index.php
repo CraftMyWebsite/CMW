@@ -21,6 +21,10 @@ else $return = true;
 // On charge la connection à la base MySQL via l'extention PDO.
 require ('controleur/connection_base.php');
 
+require('modele/app/visit.class.php');
+$visit = new visit($bddConnection);
+
+
 require("modele/google/googleService.class.php");
 googleService::initialise($_Serveur_, $bddConnection);
 
