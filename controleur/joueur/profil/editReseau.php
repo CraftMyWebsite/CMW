@@ -1,20 +1,26 @@
 <?php 
 require('modele/joueur/donneesJoueur.class.php');
-$joueurDonnees = new JoueurDonnees($bddConnection, $_Joueur_['pseudo']);
-$joueurDonnees = $joueurDonnees->getTableauDonnees($listeReseaux);
+
+$reseau = array();
+
+$req = $bddConnection->query("DESCRIBE cmw_reseaux");
+$req = $req->fetchAll(PDO::FETCH_ASSOC);
 
 $changementsReseaux = array();
-foreach($listeReseaux as $value)
-{
-	if(!empty($_POST[$value['nom']]))
-	{
-		$temp = htmlspecialchars($_POST[$value['nom']]);
-		$changementsReseaux += [ $value['nom'] => $temp ];
-	}
+
+foreach($req as $value) {
+    if($value['Field'] != "id" && $value['Field'] != "idJoueur") {
+        if(!empty($_POST[$value['Field']]))
+        {
+            $temp = htmlspecialchars($_POST[$value['Field']]);
+            $changementsReseaux += [ $value['Field'] => $temp ];
+        }
+    }
 }
 
+
 require_once('modele/joueur/maj.class.php');
-$maj = new Maj($_Joueur_['id'], $bddConnection);
+$maj = new Maj($_Joueur_['pseudo'], $bddConnection);
 if(!empty($changementsReseaux))
 {
     $maj->setNouvellesDonneesReseaux($changementsReseaux, $_Joueur_['id']);

@@ -161,10 +161,6 @@
             });
         }
 
-    <?php elseif (isset($_GET['page']) && $_GET['page'] == 'profil') : //Pour la page de profil 
-    ?>
-        previewTopic($("#signature"));
-
     <?php endif; ?>
 
     //Notifications
@@ -314,4 +310,120 @@
             notif2("Forum", "Signalement envoyé !", "success");
         });
     <?php } ?>
+
+    <?php if(isset($_GET['page']) && $_GET['page'] == "profil" && isset($_GET['status'])) {
+        switch(intval($_GET['status'])) {
+            case 0: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Mot de passe incorrect", "error");
+                    $("#editmdp").collapse("show");
+
+                });';
+                break;
+            case 1: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Votre mot de passe a été mis à jour !", "success");
+                });';
+                break;
+            case 2: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Mot de passe incorrect", "error");
+                    $("#editmail").collapse("show");
+
+                });';
+                break;
+            case 3: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Votre image de profil a été mis à jour !", "success");
+                });';
+                break;
+            case 4: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Extension de fichier non autorisé", "error");
+                    $("#editimg").collapse("show");
+                });';
+                break;
+            case 5: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Fichier trop volumineux", "error");
+                    $("#editimg").collapse("show");
+                });';
+                break;
+            case 6: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Erreur interne", "error");
+                    $("#editimg").collapse("show");
+                });';
+                break;
+            case 7: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Votre Email a été mis à jour !", "success");
+                });';
+                break;
+            case 8: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Abonnement à la newsletter mis à jour ! Etat: activé", "success");
+                });';
+                break;
+            case 9: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Abonnement à la newsletter mis à jour ! Etat: désactivé, "success");
+                });';
+                break;
+            case 10: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Visibilité de votre Email mis à jour ! Etat: activé", "success");
+                });';
+                break;
+            case 11: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Visibilité de votre Email mis à jour ! Etat: désactivé", "success");
+                });';
+                break;
+            case 12: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Vos réseaux ont été mis à jour !", "success");
+                });';
+                break;
+            case 13: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Votre signature a été mis à jour !", "success");
+                });';
+                break;
+            case 14: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Votre âge a été mis à jour !", "success");
+                });';
+                break;
+            case 15: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "utilisateur inexistant !", "error");
+                });';
+                break;
+            case 16: 
+                echo '$(document).ready(function() {
+                    notif2("Profil", "Vous n\'avez pas les fonds nécessaire", "error");
+                });';
+                break;
+            
+    } }?>
+
+    <?php if(isset($_GET['page']) && $_GET['page'] == "profil" && isset($_GET['montant']) && isset($_GET['pseudo'])) {
+        echo '$(document).ready(function() {
+            notif2("Profil", "Vous venez de donner '.$_GET['montant'].' '.$_Serveur_['General']['moneyName'].' à '.$_GET['pseudo'].'", "success");
+            $(\'#profilspec\').hide(500);$(\'#editProfil\').show(500);
+        });';
+    } ?>
+
+    function unCollapseAll(el) {
+        let all = ['editage', 'editimg', 'editmail', 'editmailvisi', 'editmdp', 'editnews', 'editres', 'editsign', 'editjeton'];
+        all.forEach(function(item){
+            if(el.getAttribute('data-target').substr(1) != item) {
+                $("#"+item).collapse("hide");
+            }
+        });
+    }
+
+
+
 </script>

@@ -28,14 +28,16 @@ if (isset($_POST['pseudo']) && isset($_POST['montant'])) {
                 $_Joueur_['tokens'] = $_Joueur_['tokens'] - $_POST['montant'];
                 $req = $bddConnection->prepare("INSERT INTO cmw_log_DealJeton (fromUser, toUser, amount, date) VALUE(:from, :to, :amount, :date)");
                 $req->execute(array("from" => $_Joueur_["pseudo"], "to" => $pseudo, "amount" => $_POST['montant'], "date" => time()));
-                header('Location: profil/' . $_Joueur_['pseudo'] . '/jetons/' . $pseudo . '/' . $_POST['montant']);
+                header('Location: profil/' . $_Joueur_['pseudo'] . '/' . $pseudo . '/' . $_POST['montant']);
             } else {
-                header('Location: profil/' . $_Joueur_['pseudo'] . '/4');
+                header('Location: profil/' . $_Joueur_['pseudo'] . '/16');
             }
         } else {
-            header('Location: profil/' . $_Joueur_['pseudo'] . '/5');
+            header('Location: profil/' . $_Joueur_['pseudo'] . '/15');
         }
     } else {
-        header('Location: profil/' . $_Joueur_['pseudo'] . '/4');
+        header('Location: profil/' . $_Joueur_['pseudo'] . '/6');
     }
+} else {
+    header('Location: profil/' . $_Joueur_['pseudo'] . '/6');
 }
