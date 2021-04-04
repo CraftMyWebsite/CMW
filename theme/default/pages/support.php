@@ -52,7 +52,7 @@
 
                                     <td>
                                         <a href="index.php?page=profil&profil=<?= $tickets['auteur'] ?>">
-                                            <img alt="auteur" class="icon-player-topbar" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32) ?>" style="width: 32px; height: 32px" />
+                                            <img alt="Avatar de l'auteur <?= $_Joueur_['pseudo']; ?>" class="icon-player-topbar" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32) ?>" style="width: 32px; height: 32px" />
                                             <?= $tickets['auteur'] ?>
                                         </a>
                                     </td>
