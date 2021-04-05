@@ -17,8 +17,8 @@ if(isset($_GET['id_topic']))
 		'id_topic' => $id,
 		'last_answer' => $reqd['id']
 	));
-	header('Location: post/' . $id);
+	header('Location: index.php?page=post&id=' . $id);
 }
 else
-	header('Location: erreur/0');
+	header('Location: index.php?page=erreur&erreur=0');
 ?>

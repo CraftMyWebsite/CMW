@@ -18,18 +18,18 @@ if(Permission::getInstance()->verifPerm("connect")) {
     $CountLikes = $get_CountLikes['id'];
 
     if($ExistNews == "0") {
-    	header('Location: accueil/NewsNotExist');
+    	header('Location: index.php?page=accueil&NewsNotExist');
     } else {
         if($ExistLike == $pseudo) {
-            header('Location: accueil/LikeExist');
+            header('Location: index.php?page=accueil&LikeExist');
         } else {
             require_once('modele/accueil/postNews.class.php');
             $req_LikeNews = new PostNews($bddConnection);
             $req_LikeNews->AddLike($CountLikes + 1, $id_news, $pseudo);
-            header('Location: accueil/LikeAdd');
+            header('Location: index.php?page=accueil&LikeAdd');
         }
     }
 } else {
-    header('Location: accueil/NotOnline');
+    header('Location: index.php?page=accueil&NotOnline');
 }
 ?>

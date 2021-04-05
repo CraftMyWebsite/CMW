@@ -26,13 +26,13 @@ class profil
                 $this->isOwner = true;
             }
             else {
-                header('Location: erreur/19/Profil/'.htmlspecialchars("Utilisateur inexistant !").'/'.htmlspecialchars("L'utilisateur recherché est inexistant ou n'est pas connue de nos bases de données ! :("));
+                header('Location: index.php?page=erreur&erreur=19&type=Profil&titre='.htmlspecialchars("Utilisateur inexistant !").'&contenue='.htmlspecialchars("L'utilisateur recherché est inexistant ou n'est pas connue de nos bases de données ! :("));
                 exit();
             }
         }
         
         if(!$this->initPlayer($bddConnection, $pseudo)) {
-            header('Location: erreur/19/Profil/'.htmlspecialchars("Utilisateur inexistant !").'/'.htmlspecialchars("L'utilisateur recherché est inexistant ou n'est pas connue de nos bases de données ! :("));
+            header('Location: index.php?page=erreur&erreur=19&type=Profil&titre='.htmlspecialchars("Utilisateur inexistant !").'&contenue='.htmlspecialchars("L'utilisateur recherché est inexistant ou n'est pas connue de nos bases de données ! :("));
             exit();
         }
         

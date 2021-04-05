@@ -3,7 +3,7 @@ $id = $_GET['id'];
 $categoried = $_Forum_->infosCategorie($id);
 
 if (!isset($id)) {
-    header('Location: ?page=erreur&erreur=16');
+    header('Location: index.php?page=erreur&erreur=16');
 }
 
 if (!$_Forum_->exist($id)) {
@@ -21,7 +21,7 @@ if (isset($id_sous_forum)) {
 }
 
 if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $categoried['perms']) && !$_SESSION['mode']) or $categoried['perms'] == 0)) {
-    header('Location: ?page=erreur&erreur=7');
+    header('Location: index.php?page=erreur&erreur=7');
 }
 
 $titleHTML = $categoried['nom'];
@@ -48,10 +48,10 @@ if(isset($id_sous_forum))
 
                     <li class="breadcrumb-item ml-4"><a href="/">Accueil</a></li>
 
-                    <li class="breadcrumb-item"><a href="?page=forum">Forum</a></li>
+                    <li class="breadcrumb-item"><a href="index.php?page=forum">Forum</a></li>
 
                     <?php if (isset($id_sous_forum)) : ?>
-                        <li class="breadcrumb-item"> <a href="?page=forum_categorie&id=<?= $id ?>"> <?= $categoried['nom'] ?> </a></li>
+                        <li class="breadcrumb-item"> <a href="index.php?page=forum_categorie&id=<?= $id ?>"> <?= $categoried['nom'] ?> </a></li>
                     <?php else : ?>
                         <li class="breadcrumb-item"><?= $categoried['nom'] ?> </li>
                     <?php endif; ?>
@@ -101,29 +101,29 @@ if(isset($id_sous_forum))
                                     <td>
 
                                         <?php if ($sousforumd[$a]['img'] == NULL) : ?>
-                                            <a style="font-size: 28px;" href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                            <a style="font-size: 28px;" href="index.php?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                                <i class="far fa-comment-dots"></i>
                                             </a>
                                         <?php else : ?>
-                                            <a style="font-size: 28px;" href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>"><i class="<?= $sousforumd[$a]['img']; ?>"></i>
+                                            <a style="font-size: 28px;" href="index.php?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>"><i class="<?= $sousforumd[$a]['img']; ?>"></i>
                                             </a>
                                         <?php endif; ?>
                                     </td>
 
                                     <td>
-                                        <a href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                        <a href="index.php?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                             <?= $sousforumd[$a]['nom']; ?>
                                         </a>
                                     </td>
 
                                     <td>
-                                        <a href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                        <a href="index.php?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                             <?= $_Forum_->compteTopicsSF($sousforumd[$a]['id']); ?>
                                         </a>
                                     </td>
 
                                     <td>
-                                        <a href="?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
+                                        <a href="index.php?page=sous_forum_categorie&id=<?= $id; ?>&id_sous_forum=<?= $sousforumd[$a]['id']; ?>">
                                             <?= $_Forum_->compteAnswerSF($sousforumd[$a]['id']); ?>
                                         </a>
                                     </td>
@@ -152,8 +152,8 @@ if(isset($id_sous_forum))
                                                             <i class="fas fa-list"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="?action=ordreSousForum&ordre=<?= $sousforumd[$a]['ordre']; ?>&id=<?= $sousforumd[$a]['id']; ?>&id_cat=<?= $sousforumd[$a]['id_categorie']; ?>&modif=monter"><i class="fas fa-arrow-up"></i> Monter d'un cran</a>
-                                                            <a class="dropdown-item" href="?action=ordreSousForum&ordre=<?= $sousforumd[$a]['ordre']; ?>&id=<?= $sousforumd[$a]['id']; ?>&id_cat=<?= $sousforumd[$a]['id_categorie']; ?>&modif=descendre"><i class="fas fa-arrow-down"></i> Descendre d'un cran</a>
+                                                            <a class="dropdown-item" href="index.php?action=ordreSousForum&ordre=<?= $sousforumd[$a]['ordre']; ?>&id=<?= $sousforumd[$a]['id']; ?>&id_cat=<?= $sousforumd[$a]['id_categorie']; ?>&modif=monter"><i class="fas fa-arrow-up"></i> Monter d'un cran</a>
+                                                            <a class="dropdown-item" href="index.php?action=ordreSousForum&ordre=<?= $sousforumd[$a]['ordre']; ?>&id=<?= $sousforumd[$a]['id']; ?>&id_cat=<?= $sousforumd[$a]['id_categorie']; ?>&modif=descendre"><i class="fas fa-arrow-down"></i> Descendre d'un cran</a>
                                                         </div>
                                                     </div>
 
@@ -163,20 +163,20 @@ if(isset($id_sous_forum))
 
                                                     <?php if ($sousforumd[$a]['close'] == 0) : ?>
 
-                                                        <a href="?action=lock_sf&id_f=<?= $sousforumd[$a]['id_categorie']; ?>&id=<?= $sousforumd[$a]['id']; ?>&lock=1" title="Fermer le sous-forum" class="btn btn-reverse ml-1 no-hover">
+                                                        <a href="index.php?action=lock_sf&id_f=<?= $sousforumd[$a]['id_categorie']; ?>&id=<?= $sousforumd[$a]['id']; ?>&lock=1" title="Fermer le sous-forum" class="btn btn-reverse ml-1 no-hover">
                                                             <i class="fas fa-unlock-alt" aria-hidden="true"></i>
                                                         </a>
 
                                                     <?php else : ?>
 
-                                                        <a href="?action=unlock_sf&id_f=<?= $sousforumd[$a]['id_categorie']; ?> &id=<?= $sousforumd[$a]['id']; ?>&lock=0" title="Ouvrir le sous-forum" class="btn btn-reverse ml-1 no-hover">
+                                                        <a href="index.php?action=unlock_sf&id_f=<?= $sousforumd[$a]['id_categorie']; ?> &id=<?= $sousforumd[$a]['id']; ?>&lock=0" title="Ouvrir le sous-forum" class="btn btn-reverse ml-1 no-hover">
                                                             <i class="fas fa-lock" aria-hidden="true"></i>
                                                         </a>
 
                                                     <?php endif; ?>
 
 
-                                                    <a class="btn btn-danger no-hover ml-1" href="?action=remove_sf&id_cat=<?php echo $id; ?>&id_sf=<?php echo $sousforumd[$a]['id']; ?>"><i class="fas fa-trash-alt"></i></a>
+                                                    <a class="btn btn-danger no-hover ml-1" href="index.php?action=remove_sf&id_cat=<?php echo $id; ?>&id_sf=<?php echo $sousforumd[$a]['id']; ?>"><i class="fas fa-trash-alt"></i></a>
 
                                                 </div>
 
@@ -300,13 +300,13 @@ if(isset($id_sous_forum))
                                     <?php endif; ?>
 
                                     <td>
-                                        <a href="?page=profil&profil=<?= $topicd[$i]['pseudo']; ?>">
+                                        <a href="index.php?page=profil&profil=<?= $topicd[$i]['pseudo']; ?>">
                                             <img src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd[$i]['pseudo'], 42); ?>" style="width: 42px; height: 42px;" alt="avatar de l'auteur" title="<?= $topicd[$i]['pseudo']; ?>" />
                                         </a>
                                     </td>
 
                                     <td>
-                                        <a href="?page=post&id=<?= $topicd[$i]['id']; ?>">
+                                        <a href="index.php?page=post&id=<?= $topicd[$i]['id']; ?>">
                                             <?php if (isset($topicd[$i]['prefix']) && $topicd[$i]['prefix'] != 0) : ?>
                                                 <?= $_Forum_->getPrefix($topicd[$i]['prefix']); ?>
                                             <?php endif; ?>
@@ -314,7 +314,7 @@ if(isset($id_sous_forum))
                                         </a>
                                         <p>
                                             <small>
-                                                <a href="?page=profil&profil=<?= $topicd[$i]['pseudo']; ?>">
+                                                <a href="index.php?page=profil&profil=<?= $topicd[$i]['pseudo']; ?>">
                                                     <?= $topicd[$i]['pseudo']; ?>
                                                 </a>, le <?= $_Forum_->conversionDate($topicd[$i]['date_creation']); ?>
                                             </small>
@@ -326,7 +326,7 @@ if(isset($id_sous_forum))
                                     </td>
 
                                     <td>
-                                        <a href="?page=post&id=<?= $topicd[$i]['id']; ?>">
+                                        <a href="index.php?page=post&id=<?= $topicd[$i]['id']; ?>">
                                             <?= $_Forum_->conversionLastAnswer($topicd[$i]['last_answer']); ?>
                                         </a>
                                     </td>
@@ -445,7 +445,7 @@ if(isset($id_sous_forum))
                         <?php
                         for ($i = 1; $i <= $count_topic_nbrOfPages2; $i++) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?= (isset($id_sous_forum)) ? "sous_" : ""; ?>forum_categorie&id=<?= $id ?><?= (isset($id_sous_forum)) ? "&id_sous_forum=$id_sous_forum" : ""; ?>&page_topic=<?= $i; ?>">
+                                <a class="page-link" href="index.php?page=<?= (isset($id_sous_forum)) ? "sous_" : ""; ?>forum_categorie&id=<?= $id ?><?= (isset($id_sous_forum)) ? "&id_sous_forum=$id_sous_forum" : ""; ?>&page_topic=<?= $i; ?>">
                                     <?= $i; ?>
                                 </a>
                             </li>

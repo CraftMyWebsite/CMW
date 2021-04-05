@@ -3,7 +3,7 @@ if(isset($_POST['id_topic']) AND isset($_Joueur_))
 {
 	if(!isset($_GET['confirmation']))
 	{
-		header('Location: confirmation/'.$_POST['id_topic'].'/5');
+		header('Location: index.php?page=confirmation&id_topic='.$_POST['id_topic'].'&choix=5');
 	}
 	else
 	{
@@ -14,11 +14,11 @@ if(isset($_POST['id_topic']) AND isset($_Joueur_))
 			'reason' => $reason,
 			'reporteur' => $_Joueur_['pseudo']
 		));
-		header('Location: forum/postSignalement');
+		header('Location: index.php?page=forum&postSignalement');
 		
 	}
 }
 else
-	header('Location: erreur/0');
+	header('Location: index.php?page=erreur&erreur=0');
 
 ?>

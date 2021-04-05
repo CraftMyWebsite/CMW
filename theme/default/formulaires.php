@@ -337,14 +337,14 @@
                                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>-<?= $newsComments['id'] ?>-edit" data-dismiss="modal">
                                                             Editer
                                                         </a>
-                                                        <a class="dropdown-item text-danger" href="?action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
+                                                        <a class="dropdown-item text-danger" href="index.php?action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
                                                             Supprimer
                                                         </a>
 
                                                     <?php endif; ?>
                                                     <?php if ($newsComments['pseudo'] != $_Joueur_['pseudo']) :
                                                         if ($checkReport == "0") : ?>
-                                                            <a class="dropdown-item" href="?action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
+                                                            <a class="dropdown-item" href="index.php?action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
                                                                 Signaler
                                                             </a>
                                                         <?php else : ?>

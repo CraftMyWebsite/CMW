@@ -25,5 +25,5 @@ if(!empty($changementsReseaux))
 {
     $maj->setNouvellesDonneesReseaux($changementsReseaux, $_Joueur_['id']);
 }
-header('Location: profil/' . $_Joueur_['pseudo'] . '/12');
+header('Location: index.php?page=profil&profil=' . $_Joueur_['pseudo'] . '&status=12');
 ?>

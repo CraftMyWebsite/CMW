@@ -44,8 +44,8 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic'))
 	if(isset($_POST['idSF']))
 	{
 		$sf = htmlspecialchars($_POST['idSF']);
-		header('Location: sous_forum_categorie/'.$idCat.'/'.$sf);
+		header('Location: index.php?page=sous_forum_categorie&id='.$idCat.'&id_sous_forum='.$sf);
 	}
 	else
-		header('Location: forum_categorie/'.$idCat);
+		header('Location: index.php?page=forum_categorie&id='.$idCat);
 }

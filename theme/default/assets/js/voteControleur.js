@@ -158,7 +158,7 @@ function updateBaltop(loop = false) {
                         f+='</td>'
                         +'<td>'
                             +'<img alt="'+ar.pseudo+'" src="'+ar.url+'" style="height:25px;width:25px" /> <strong class="important--text">'
-                                +'<a href="?page=profil&profil='+ar.pseudo+'">'
+                                +'<a href="index.php?page=profil&profil='+ar.pseudo+'">'
                                         +ar.pseudo
                                 +'</a>'
                             +'</strong>'

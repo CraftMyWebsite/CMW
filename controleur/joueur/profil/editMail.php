@@ -6,9 +6,9 @@ $maj2 = $maj2->fetch(PDO::FETCH_ASSOC);
 
 if(password_verify($_POST['mdp'], $maj2['mdp'])) {
     $maj->setNouvellesDonneesEmail(htmlspecialchars($_POST['email']));
-    header('Location: profil/' . $_Joueur_['pseudo'] . '/7');
+    header('Location: index.php?page=profil&profil=' . $_Joueur_['pseudo'] . '&status=7');
 } else {
-    header('Location: profil/' . $_Joueur_['pseudo'] . '/2');
+    header('Location: index.php?page=profil&profil=' . $_Joueur_['pseudo'] . '&status=2');
 }
 
 ?>

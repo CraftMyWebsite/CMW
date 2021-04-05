@@ -71,7 +71,7 @@
                                         </div>
 
                                     <?php else :
-                                        header('Location: ?page=erreur&erreur=7');
+                                        header('Location: index.php?page=erreur&erreur=7');
                                     endif ?>
 
                                     <?php break; ?>
@@ -145,7 +145,7 @@
                                         </div>
 
                                     <?php else :
-                                        header('Location: ?page=erreur&erreur=7');
+                                        header('Location: index.php?page=erreur&erreur=7');
                                     endif; ?>
 
                                     <?php break; ?>
@@ -231,7 +231,7 @@
                     <?php endif; ?>
 
                 <?php else :
-                    header('Location: ?page=erreur&erreur=7');
+                    header('Location: index.php?page=erreur&erreur=7');
                 endif;
                 ?>
 
