@@ -40,13 +40,13 @@
                         <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
                         <input class="form-control" required type="number" name="number"  min ="1" max="4" value="3" />
                     
-                        <label class="control-label">Connexion In-Game</label>
+                        <label class="control-label">Connexion In-Game (le joueur devra être connecté pour finaliser son payement)</label>
                         <select name="connection"class="form-control" required>
                             <option value="0">Désactivé</option>
                             <option value="1">Activé</option>
                         </select>
                 
-                        <label class="control-label">Serveurs d'action</label>
+                        <label class="control-label">Serveurs ou éxécuter les actions</label>
                         <select name="serveur" class="form-control" required>
                             <option value="-1">Tous</option>
                             <option value="-2">Au choix (Le joueur se connecte sur le serveur voulu)</option>

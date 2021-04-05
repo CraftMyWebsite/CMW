@@ -43,6 +43,7 @@ RewriteRule accueil/ReportVictimeExist index.php?page=accueil&ReportVictimeExist
 RewriteRule accueil/NotReportYourSelf index.php?page=accueil&NotReportYourSelf [L]
 
 RewriteRule panier/success index.php?page=panier&success [L]
+RewriteRule panier/notOnline index.php?page=panier&notOnline [L]
 
 RewriteRule boutique/ajout index.php?page=boutique&ajout [L]
 

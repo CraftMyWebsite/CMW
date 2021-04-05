@@ -309,6 +309,11 @@
         $(document).ready(function() {
             notif2("Forum", "Signalement envoyé !", "success");
         });
+     <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['notOnline'])) {  
+    ?>
+        $(document).ready(function() {
+            notif2("Boutique", "Vous devez être connecté sur le serveur en question pour finaliser vos achats !", "error");
+        });
     <?php } ?>
 
     <?php if(isset($_GET['page']) && $_GET['page'] == "profil" && isset($_GET['status'])) {

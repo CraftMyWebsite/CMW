@@ -1,7 +1,57 @@
 <?php
 	if($_Joueur_['tokens'] >= $_Panier_->montantGlobal())
 	{
+		$enligne = array();
+		foreach($jsonCon as $key => $serveur)
+		{
+			$enligne[$key] = false;
+			$serveurStats[$key] = $serveur->GetServeurInfos();
+			if(isset($_Joueur_['pseudo']) AND isset($serveurStats[$key]['joueurs']) AND !empty($serveurStats[$key]['joueurs']) AND in_array($_Joueur_['pseudo'], $serveurStats[$key]['joueurs']))
+			{
+				$enligne[$key] = true;
+			}
+		}
+
 		$nb = $_Panier_->compterArticle();
+		for($a = 0; $a < $nb; $a++)
+		{
+			$req = $bddConnection->prepare("SELECT categorie_id FROM cmw_boutique_offres WHERE id = :id");
+			$req->execute(array("id" => $_SESSION['panier']['id'][$a]));
+			$d = $req->fetch(PDO::FETCH_ASSOC);
+
+			$req = $bddConnection->prepare("SELECT serveur, connection FROM cmw_boutique_categories WHERE id = :id");
+			$req->execute(array("id" => $d['categorie_id']));
+			$d2 = $req->fetch(PDO::FETCH_ASSOC);
+
+			if($d2['connection'] == 1) {
+				$flag = false;
+				if($d2['serveur'] == -2 || $d2['serveur'] == -1) {
+					foreach($jsonCon as $key => $serveur)
+					{
+						if($enligne[$key]) {
+							$flag = true;
+							break;
+						}
+					}
+				} else {
+					foreach($lectureJSON as $key => $s)
+					{
+						if($s['id'] == $d2['serveur'] && $enligne[$key])
+						{
+							$flag = true;
+							break;
+						}
+					}
+				}
+
+				if(!$flag) {
+					header('Location: index.php?page=panier&notOnline');
+					exit();
+				}
+			}
+
+		}
+
 		for($a = 0; $a < $nb; $a++)
 		{
 			$req = $bddConnection->prepare("SELECT nbre_vente FROM cmw_boutique_offres WHERE id = :id");
@@ -64,15 +114,6 @@
 					$categoriesObj = new CategoriesList($bddConnection);
 					$categories = $categoriesObj->GetTableauCategories();
 
-					foreach($jsonCon as $key => $serveur)
-					{
-						$enligne[$key] = false;
-						$serveurStats[$key] = $serveur->GetServeurInfos();
-						if(isset($_Joueur_['pseudo']) AND isset($serveurStats[$key]['joueurs']) AND !empty($serveurStats[$key]['joueurs']) AND in_array($_Joueur_['pseudo'], $serveurStats[$key]['joueurs']))
-						{
-							$enligne[$key] = true;
-						}
-					}
 					$infosOffre = $offres->GetInfosOffre($offre, $_Joueur_);
 					$infosCategories = $categoriesObj->GetInfosCategorie($infosOffre['offre']['categorie'], $lectureJSON);
 					foreach($jsonCon as $serveur)
@@ -83,28 +124,31 @@
 					{
 
 						if($infosCategories['serveurId'] == -1) 
+						{
 							foreach($jsonCon as $serveur)
 							{
-								for($z=0; $z < $_SESSION['panier']['quantite'][$a]; $z++)
-								{
-									SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
-								}
+								SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
 							}
+						}
 						elseif($infosCategories['serveurId'] == -2)
+						{
 							foreach($jsonCon as $key => $serveur)
 							{
-								for($z = 0; $z < $_SESSION['panier']['quantite'][$a]; $z++)
+								if($enligne[$key])
 								{
-									if($enligne[$key])
-										SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+									SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
 								}
 							}
-						else
-							for($z = 0; $z < $_SESSION['panier']['quantite'][$a]; $z++)
+						}
+						else {
+							foreach($lectureJSON as $key => $s)
 							{
-								$cle = array_search($infosCategories['serveurId'], array_column($lectureJSON, 'id'));
-								SendCommand($jsonCon[$cle], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
+								if($s['id'] == $infosCategories['serveurId'] && $enligne[$key])
+								{
+									SendCommand($jsonCon[$key], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+								}
 							}
+						}
 					}
 					require_once('modele/app/statistiques.class.php');
 				    $stats = new StatsUpdate($bddConnection);

@@ -43,6 +43,7 @@ if (Permission::getInstance()->verifPerm("connect")) :
                             </tr>
                             <?php else :
                             //Affichage de l'offre
+
                             for ($i = 0; $i < $nbArticles; $i++) :
                                 $_Panier_->infosArticle(htmlspecialchars($_SESSION['panier']['id'][$i]), $nom, $infos);
                                 $precedent += htmlspecialchars($_SESSION['panier']['prix'][$i]) * htmlspecialchars($_SESSION['panier']['quantite'][$i]); ?>
