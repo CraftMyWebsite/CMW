@@ -16,6 +16,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix responsive des statistique sur le panel
 [|] : Fix extension sur l'installateur
 [|] : Fix du mdp inchangeable depuis son profil
+[|] : Fix tache Cron qui ne fonctionné pas
 
 [=] : Fix sécurité sur le cms
 [=] : Menu désormais stocker dans la base de données
