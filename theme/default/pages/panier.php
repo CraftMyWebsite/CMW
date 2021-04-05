@@ -63,7 +63,7 @@ if (Permission::getInstance()->verifPerm("connect")) :
                                         <?= $precedent; ?> <i class="fas fa-gem"></i>
                                     </td>
                                     <td>
-                                        <a href="?action=supprItemPanier&id=<?= htmlspecialchars($_SESSION['panier']['id'][$i]); ?>" class="btn btn-danger link no-hover"><i class="fa fa-trash"></i></a>
+                                        <a href="index.php?action=supprItemPanier&id=<?= htmlspecialchars($_SESSION['panier']['id'][$i]); ?>" class="btn btn-danger link no-hover"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endfor; ?>
@@ -128,10 +128,10 @@ if (Permission::getInstance()->verifPerm("connect")) :
                         </div>
                         <div class="card-footer">
                             <div class="text-right">
-                                <a href="?action=viderPanier" class="btn btn-danger w-100 mb-2 no-hover">
+                                <a href="index.php?action=viderPanier" class="btn btn-danger w-100 mb-2 no-hover">
                                     Vider le panier
                                 </a>
-                                <a href="?action=achat" class="btn btn-reverse w-100 mb-2 no-hover">
+                                <a href="index.php?action=achat" class="btn btn-reverse w-100 mb-2 no-hover">
                                     Passer à l'achat 
                                 </a>
                             </div>

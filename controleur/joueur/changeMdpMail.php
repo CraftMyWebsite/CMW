@@ -11,7 +11,7 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 	$donneesJoueur = $ligneReponse->fetch(PDO::FETCH_ASSOC);
 	if(empty($donneesJoueur))
 	{
-		header('Location: erreur/4');
+		header('Location: index.php?page=erreur&erreur=4');
 	}
 	else
 	{
@@ -47,16 +47,16 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 			require('include/phpmailer/MailSender.php');
 			if(MailSender::send($_Serveur_, $to, $subject, $txt))
 			{
-				header('Location: accueil/envoieMail');
+				header('Location: index.php?page=accueil&envoieMail');
 			} else {
-				header('Location: erreur/21');
+				header('Location: index.php?page=erreur&erreur=21');
 			}
 		}
-		else header('Location: erreur/4');
+		else header('Location: index.php?page=erreur&erreur=4');
 	}
 }
 else
 {
-	header('Location: erreur/4');
+	header('Location: index.php?page=erreur&erreur=4');
 }       
 ?>

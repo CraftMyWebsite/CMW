@@ -24,20 +24,20 @@ if (isset($_GET['id'])) :
                                 </li>
 
                                 <li class="breadcrumb-item">
-                                    <a href="?page=forum">
+                                    <a href="index.php?page=forum">
                                         Forum
                                     </a>
                                 </li>
 
                                 <li class="breadcrumb-item">
-                                    <a href="?page=forum_categorie&id=<?= $topicd['id_categorie']; ?>">
+                                    <a href="index.php?page=forum_categorie&id=<?= $topicd['id_categorie']; ?>">
                                         <?= $topicd['nom_categorie']; ?>
                                     </a>
                                 </li>
 
                                 <?php if (isset($topicd['sous_forum'])) : ?>
                                     <li class="breadcrumb-item">
-                                        <a href="?page=sous_forum_categorie&id=<?= $topicd['id_categorie']; ?>&id_sous_forum=<?= $topicd['sous_forum']; ?>">
+                                        <a href="index.php?page=sous_forum_categorie&id=<?= $topicd['id_categorie']; ?>&id_sous_forum=<?= $topicd['sous_forum']; ?>">
                                             <?= $topicd['nom_sf']; ?>
                                         </a>
                                     </li>
@@ -62,7 +62,7 @@ if (isset($_GET['id'])) :
                                         <?php if (Permission::getInstance()->verifPerm("connect") && $_JoueurForum_->is_followed($id)) : ?>
 
                                             <li class="categorie-item nav-item">
-                                                <a class="nav-link categorie-link" href="?action=unfollow&id_topic=<?= $topicd['id']; ?>">
+                                                <a class="nav-link categorie-link" href="index.php?action=unfollow&id_topic=<?= $topicd['id']; ?>">
                                                     Ne plus suivre cette discussion
                                                 </a>
                                             </li>
@@ -70,7 +70,7 @@ if (isset($_GET['id'])) :
                                         <?php elseif (Permission::getInstance()->verifPerm("connect")) : ?>
 
                                             <li class="categorie-item nav-item">
-                                                <a class="nav-link categorie-link" href="?action=follow&id_topic=<?= $topicd['id']; ?>">
+                                                <a class="nav-link categorie-link" href="index.php?action=follow&id_topic=<?= $topicd['id']; ?>">
                                                     Suivre cette discussion
                                                 </a>
                                             </li>
@@ -78,13 +78,13 @@ if (isset($_GET['id'])) :
                                         <?php endif; ?>
 
                                         <li class="categorie-item nav-item">
-                                            <a class="nav-link categorie-link" href="?page=<?= (isset($topicd['sous_forum'])) ? "sous_" : ""; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
+                                            <a class="nav-link categorie-link" href="index.php?page=<?= (isset($topicd['sous_forum'])) ? "sous_" : ""; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
                                                 Revenir à l'accueil de la catégorie
                                             </a>
                                         </li>
 
                                         <li class="categorie-item nav-item">
-                                            <a class="nav-link categorie-link" href="?page=forum">
+                                            <a class="nav-link categorie-link" href="index.php?page=forum">
                                                 Revenir à l'index du forum
                                             </a>
                                         </li>
@@ -118,13 +118,13 @@ if (isset($_GET['id'])) :
 
                                                             if ($topicd['etat'] == 1) : ?>
 
-                                                                <a class="dropdown-item" href="?action=forum_moderation&id_topic=<?= $id; ?>&choix=4">
+                                                                <a class="dropdown-item" href="index.php?action=forum_moderation&id_topic=<?= $id; ?>&choix=4">
                                                                     Ouvrir la discussion
                                                                 </a>
 
                                                             <?php else : ?>
 
-                                                                <a class="dropdown-item" href="?action=forum_moderation&id_topic=<?= $id; ?>&choix=1">
+                                                                <a class="dropdown-item" href="index.php?action=forum_moderation&id_topic=<?= $id; ?>&choix=1">
                                                                     Fermer la discussion
                                                                 </a>
 
@@ -134,13 +134,13 @@ if (isset($_GET['id'])) :
 
                                                         <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic')) : ?>
 
-                                                            <a class="dropdown-item" href="?action=forum_moderation&id_topic=<?= $id; ?>&choix=2">Supprimer le topic</a>
+                                                            <a class="dropdown-item" href="index.php?action=forum_moderation&id_topic=<?= $id; ?>&choix=2">Supprimer le topic</a>
 
                                                         <?php endif; ?>
 
                                                         <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'mooveTopic')) : ?>
 
-                                                            <a class="dropdown-item" href="?action=forum_moderation&id_topic=<?= $id; ?>&choix=3">
+                                                            <a class="dropdown-item" href="index.php?action=forum_moderation&id_topic=<?= $id; ?>&choix=3">
                                                                 Déplacer la discussion
                                                             </a>
 
@@ -595,7 +595,7 @@ if (isset($_GET['id'])) :
                             <?php for ($i = 1; $i <= $count_nbrOfPages; $i++) : ?>
 
                                 <li class="page-item">
-                                    <a class="page-link" href="?page=post&id=<?= $id; ?>&page_post=<?= $i; ?>">
+                                    <a class="page-link" href="index.php?page=post&id=<?= $id; ?>&page_post=<?= $i; ?>">
                                         <?= $i; ?>
                                     </a>
                                 </li>
@@ -662,11 +662,11 @@ if (isset($_GET['id'])) :
             </section>
 
 <?php else :
-            header('Location: ?page=erreur&erreur=7');
+            header('Location: index.php?page=erreur&erreur=7');
         endif;
     else :
         header('Location: index.php');
     endif;
 else :
-    header('Location: ?page=erreur&erreur=17'); //fatale
+    header('Location: index.php?page=erreur&erreur=17'); //fatale
 endif; ?>

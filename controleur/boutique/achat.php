@@ -8,7 +8,7 @@
 			$req->execute(array("id" => $_SESSION['panier']['id'][$a]));
 			$d = $req->fetch(PDO::FETCH_ASSOC);
 			if($d["nbre_vente"] == "0"){
-				header('Location: erreur/19/'.htmlspecialchars("Erreur Boutique").'/'.htmlspecialchars("Stock insufisant !"). '/'.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( !"));
+				header('Location: index.php?page=erreur&erreur=19&type='.htmlspecialchars("Erreur Boutique").'&titre='.htmlspecialchars("Stock insufisant !"). '&contenue='.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( !"));
 				exit();
 			}
 			if($_SESSION['panier']['prix'][$a] >= 0 && $_SESSION['panier']['quantite'][$a] > 0)
@@ -152,12 +152,12 @@
 		}
 		$_Panier_->supprimerPanier();
 		if(array_search('1', $probleme))
-			header('Location: erreur/19/'.htmlspecialchars("Erreur Boutique").'/'.htmlspecialchars("Stock insufisant !"). '/'.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( ! Vos autres articles ont été livrés correctement."));
+			header('Location: index.php?page=erreur&erreur=19&type='.htmlspecialchars("Erreur Boutique").'&titre='.htmlspecialchars("Stock insufisant !"). '&contenue)'.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( ! Vos autres articles ont été livrés correctement."));
 		else
-			header('Location: panier/success');
+			header('Location: index.php?page=panier&success');
 	}
 	else
-		header('Location: erreur/18');
+		header('Location: index.php?page=erreur&erreur=18');
 
 function SendCommand($jsonCon, $methode, $valeur, $duree, $bdd, &$joueur)
 {

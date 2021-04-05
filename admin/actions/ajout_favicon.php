@@ -11,14 +11,14 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'general', 'actions', 'edi
 			 if(in_array($extensions_fichier, $extension_autorisees))
 			 {
 			 	 move_uploaded_file($_FILES['favicon']['tmp_name'], './favicon.ico');
-			 	 header('Location: ?page=configsite');
+			 	 header('Location: admin.php?page=configsite');
 			 }
 			 else
-			 	 header('Location: ?erreur=3');
+			 	 header('Location: admin.php?erreur=3');
 		}
 		else
-			header('Location: ?erreur=2');
+			header('Location: admin.php?erreur=2');
 	}
 	else
-		header('Location: ?erreur=1');
+		header('Location: admin.php?erreur=1');
 }
