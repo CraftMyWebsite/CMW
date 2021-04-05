@@ -22,7 +22,7 @@ class MinecraftQuery
 	{
 		if( !is_int( $Timeout ) || $Timeout < 0 )
 		{
-			throw new \InvalidArgumentException( 'Timeout must be an integer.' );
+			throw new \InvalidArgumentException( "Le délai d'expiration doit être un entier." );
 		}
 
 		if( $ResolveSRV )
@@ -34,7 +34,7 @@ class MinecraftQuery
 
 		if( $ErrNo || $this->Socket === false )
 		{
-			throw new MinecraftQueryException( 'Could not create socket: ' . $ErrStr );
+			throw new MinecraftQueryException( 'Impossible de créer un socket: ' . $ErrStr );
 		}
 
 		Stream_Set_Timeout( $this->Socket, $Timeout );
@@ -68,7 +68,7 @@ class MinecraftQuery
 
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( 'Failed to receive challenge.' );
+			throw new MinecraftQueryException( 'Impossible de recevoir les challanges.' );
 		}
 
 		return Pack( 'N', $Data );
@@ -80,7 +80,7 @@ class MinecraftQuery
 
 		if( !$Data )
 		{
-			throw new MinecraftQueryException( 'Failed to receive status.' );
+			throw new MinecraftQueryException( "Impossible d'obtenir le status du rcon." );
 		}
 
 		$Last = '';
@@ -173,14 +173,14 @@ class MinecraftQuery
 
 		if( $Length !== FWrite( $this->Socket, $Command, $Length ) )
 		{
-			throw new MinecraftQueryException( "Failed to write on socket." );
+			throw new MinecraftQueryException( "Impossible d'écrire sur le socket." );
 		}
 
 		$Data = FRead( $this->Socket, 4096 );
 
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( "Failed to read from socket." );
+			throw new MinecraftQueryException( "Impossible de lire sur le socket." );
 		}
 
 		if( StrLen( $Data ) < 5 || $Data[ 0 ] != $Command[ 2 ] )

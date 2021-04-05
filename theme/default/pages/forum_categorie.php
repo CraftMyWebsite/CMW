@@ -300,8 +300,8 @@ if(isset($id_sous_forum))
                                     <?php endif; ?>
 
                                     <td>
-                                        <a href="index.php?page=profil&profil=<?= $topicd[$i]['pseudo']; ?>">
-                                            <img src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd[$i]['pseudo'], 42); ?>" style="width: 42px; height: 42px;" alt="avatar de l'auteur" title="<?= $topicd[$i]['pseudo']; ?>" />
+                                        <a href="?page=profil&profil=<?= $topicd[$i]['pseudo']; ?>">
+                                            <img src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd[$i]['pseudo'], 42); ?>" style="width: 42px; height: 42px;" alt="avatar de l'auteur <?= $_Joueur_['pseudo']; ?>" title="<?= $topicd[$i]['pseudo']; ?>" />
                                         </a>
                                     </td>
 

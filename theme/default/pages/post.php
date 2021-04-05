@@ -188,7 +188,7 @@ if (isset($_GET['id'])) :
                         <div class="col-lg-3 col-md-12 col-sm-12 m-3 border-1">
 
                             <div class="col-12 text-center">
-                                <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd['pseudo'],192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $topicd['pseudo']; ?>" alt="<?= $topicd['pseudo']; ?>" />
+                                <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd['pseudo'],192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $topicd['pseudo']; ?>" />
                             </div>
                             <div class="col-12 mx-auto bg-darkest" style="width: 192px; height: 192px;">
                                 <div class="text-center py-3">
@@ -399,7 +399,7 @@ if (isset($_GET['id'])) :
                             <div class="col-lg-3 col-md-12 col-sm-12 m-3 border-1">
 
                                 <div class="col-12 text-center">
-                                    <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($answerd[$i]['pseudo'], 192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $answerd[$i]['pseudo']; ?>" alt="<?= $answerd[$i]['pseudo']; ?>" />
+                                    <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($answerd[$i]['pseudo'], 192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $answerd[$i]['pseudo']; ?>"/>
                                 </div>
                                 <div class="col-12 mx-auto bg-darkest" style="width: 192px; height: 192px;">
                                     <div class="text-center py-3">

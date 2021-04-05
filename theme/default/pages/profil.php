@@ -76,7 +76,6 @@
                     </div>
                 </div>
             </div>
-
              <div class="card">
                 <div class="card-header" style="cursor:pointer;" onclick="unCollapseAll(this);" data-toggle="collapse" data-target="#editimg" aria-expanded="true">
                     <div style="margin:15px;vertical-align: middle;" >
@@ -133,9 +132,6 @@
 
                             <label class="control-label">Votre mot de passe:</label>
                             <input type="password" class="form-control" name="mdp" required>
-
-
-
                             <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
                         </form>
                     </div>
