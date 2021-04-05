@@ -9,7 +9,7 @@ $_Theme_ = $configTheme->GetTableau();
 
 <head>
 
-    <base href="https://<?= $_SERVER["SERVER_NAME"] ?>/" />
+    <base href="<?= urlRewrite::getSiteUrl() ?>" />
 
     <style>
 
