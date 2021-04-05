@@ -51,7 +51,7 @@ if (Permission::getInstance()->verifPerm("connect")) :
                                         <?= $nom; ?>
                                     </td>
                                     <td>
-                                        <?= $infos; ?>
+                                        <?= htmlspecialchars_decode($infos); ?>
                                     </td>
                                     <td>
                                         <?= htmlspecialchars($_SESSION['panier']['quantite'][$i]); ?>
