@@ -15,6 +15,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix page boutique qui ne s'affiché pas
 [|] : Fix responsive des statistique sur le panel
 [|] : Fix extension sur l'installateur
+[|] : Fix du mdp inchangeable depuis son profil
 
 [=] : Fix sécurité sur le cms
 [=] : Menu désormais stocker dans la base de données
@@ -38,6 +39,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [+] : Ajout des URLRewrite à l'ensemble des pages du cms (page public)
 [+] : Création/édition de page du panel avec php
 [+] : Vérification du mdp lors du changement de mail
+[+] : Nouvelle page de profil
 
 
 
