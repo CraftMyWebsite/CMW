@@ -66,8 +66,7 @@
                                         <div class="col-10 mx-auto">
 
                                             <div class="well 3">
-                                                <h4>Thème actuel : </h4>
-                                                <h5 class="p-1 bg-secondary w-100 rounded d-block text-center" style="color: white;"><b> Thème <?= ($actualTheme === "light") ? "clair" : "sombre" ?></b></h5>
+                                                <h4>Thème customisable : </h4>
                                             </div>
 
                                             <h4> Présentation du thème :</h4>
