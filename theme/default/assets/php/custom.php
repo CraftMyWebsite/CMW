@@ -284,30 +284,35 @@
             notif2("Dedipass", "Votre paiement n'a pas pu être éffectué.", "error");
         });
 
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && $_GET['success']) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['success'])) { 
     ?>
         $(document).ready(function() {
             notif2("Boutique", "Vos achats ont été validé.", "success");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "boutique" && $_GET['ajout']) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "boutique" && isset($_GET['ajout'])) { 
     ?>
         $(document).ready(function() {
             notif2("Boutique", "Article ajouter dans le panier.", "success");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && $_GET['success']) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['success'])) { 
     ?>
         $(document).ready(function() {
             notif2("Chat", "Message envoyé.", "success");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && $_GET['erreur']) {  
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['erreur'])) {  
     ?>
         $(document).ready(function() {
             notif2("Chat", "Le message n'a pas pu être envoyé.", "error");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "forum" && $_GET['postSignalement']) {  
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "forum" && isset($_GET['postSignalement'])) {  
     ?>
         $(document).ready(function() {
             notif2("Forum", "Signalement envoyé !", "success");
+        });
+     <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['notOnline'])) {  
+    ?>
+        $(document).ready(function() {
+            notif2("Boutique", "Vous devez être connecté sur le serveur en question pour finaliser vos achats !", "error");
         });
     <?php } ?>
 

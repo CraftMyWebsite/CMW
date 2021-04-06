@@ -36,8 +36,24 @@ class OffresList
 				'max_vente' => $tableauOffres['max_vente'],
 				'ordre' => $tableauOffres['ordre'],
 				'evo' => isset($tableauOffres['evo']) && empty($tableauOffres['evo']) ? null : $tableauOffres['evo'] );
-
-			if(isset($info)) {
+			if(isset($_SESSION['panier']['id']) && !empty($_SESSION['panier']['id'])) {
+			    $info = array();
+			    foreach($_SESSION['panier']['id'] as $key => $value) {
+			        if($offres[$i]['nbre_vente'] > 0 && $_SESSION['panier']['id'][$key] == $offres[$i]['id']) {
+			            $offres[$i]['nbre_vente'] -= $_SESSION['panier']['quantite'][$key];
+			        }
+			        if(isset($info) & !empty($info)) {
+			            foreach($info as $i3 => $v) {
+			                if($info[$i3]['id2'] == $_SESSION['panier']['id'][$key]) {
+			                    $info[$i3]['nombre'] += intval($_SESSION['panier']['quantite'][$key]);
+			                }
+			            }
+			        } else {
+			            array_push($info, array("id2" => $_SESSION['panier']['id'][$key], "nombre" => $_SESSION['panier']['quantite'][$key]));
+			        }
+			    }
+			}
+			if(isset($info) & !empty($info)) {
 				$temp = array();
 				if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != "" ) {
 					foreach(explode(",",$tableauOffres['evo']) as $value)

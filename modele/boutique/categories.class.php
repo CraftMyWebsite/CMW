@@ -16,7 +16,8 @@ class CategoriesList
 				'titre' => $tableauCategories['titre'],
 				'message' => $tableauCategories['message'],
 				'serveur' => $tableauCategories['serveur'],
-				'showNumber' => $tableauCategories['showNumber']
+				'showNumber' => $tableauCategories['showNumber'],
+				'connection' => $tableauCategories['connection']
 				 );
 			$i++;
 		}
