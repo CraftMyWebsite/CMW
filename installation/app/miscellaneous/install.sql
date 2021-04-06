@@ -524,6 +524,6 @@ INSERT INTO `cmw_menu` (`id`, `dest`, `url`, `ordre`, `name`) VALUES
 (9, 2, '?page=chat', 1, 'Chat');
 
 INSERT INTO `cmw_miniature` (`message`, `image`, `type`, `lien`, `ordre`) VALUES 
-('Image de démo à modifier dans votre panel CraftMyWebsite ! (1)', 'miniature-demo-1.jpg', 0, '#', 0), 
-('Image de démo à modifier dans votre panel CraftMyWebsite ! (2)', 'miniature-demo-2.jpg', 0, '#', 1),
-('Image de démo à modifier dans votre panel CraftMyWebsite ! (3)', 'miniature-demo-3.jpg', 0, '#', 2);
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (1)', 'miniature-demo-1.png', 0, '#', 0), 
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (2)', 'miniature-demo-2.png', 0, '#', 1),
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (3)', 'miniature-demo-3.png', 0, '#', 2);
