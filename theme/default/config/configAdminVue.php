@@ -176,6 +176,7 @@
                                     </div>
 
                                 </div>
+                            </div>
 
                                     <?php
                                     $fontactubrute = $_Theme_['Main']['theme']['police'];
