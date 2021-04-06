@@ -17,6 +17,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix extension sur l'installateur
 [|] : Fix du mdp inchangeable depuis son profil
 [|] : Fix tache Cron qui ne fonctionné pas
+[|] : Fix sur le panier pour les achats des joueurs devant être connecté sur le serveur
 
 [=] : Fix sécurité sur le cms
 [=] : Menu désormais stocker dans la base de données
