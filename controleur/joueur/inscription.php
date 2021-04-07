@@ -18,14 +18,14 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 			if (filter_var(get_client_ip_env(), FILTER_VALIDATE_IP)){
 					$getIp = get_client_ip_env();
 				}else{
-					header('Location: erreur/0'); // Page d'erreur indiquant qu'un des champs est invalide ou incomplet
+					header('Location: index.php?page=erreur&erreur=0'); // Page d'erreur indiquant qu'un des champs est invalide ou incomplet
 				}
 
 
 			if(strlen($_POST['pseudo']) > 16) {
-				header('Location: erreur/2');
+				header('Location: index.php?page=erreur&erreur=2');
 			} elseif($_POST['mdp'] != $_POST['mdpConfirm']) {
-				header('Location: erreur/3');
+				header('Location: index.php?page=erreur&erreur=3');
 			} else {
 				$get_Mdp = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
 
@@ -71,7 +71,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 
 								if($CountEmailBdd > $ApiMailBdd['strictMail'])
 								{
-									header('Location: erreur/15');
+									header('Location: index.php?page=erreur&erreur=15');
 									exit();
 								}
 
@@ -107,12 +107,12 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 								require('include/phpmailer/MailSender.php');
 								if(MailSender::send($_Serveur_, $destinataire, $sujet, $message))
 								{
-									header('Location: accueil/WaitActivate');
+									header('Location: index.php?page=accueil&WaitActivate');
 								} else {
-									header('Location: erreur/21');
+									header('Location: index.php?page=erreur&erreur=21');
 								}
 
-								header('Location: accueil/WaitActivate');
+								header('Location: index.php?page=accueil&WaitActivate');
 								exit();
 
 							} else {
@@ -130,39 +130,39 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 								$donneesJoueur = $ligneReponse->fetch(PDO::FETCH_ASSOC);
 								require_once('controleur/joueur/joueurcon.class.php');
 								$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], NULL, NULL);
-								header('Location: accueil');
+								header('Location: index.php?page=accueil');
 
 							}
 						}
 						else
 						{
-							header('Location: erreur/11');
+							header('Location: index.php?page=erreur&erreur=11');
 						}
 					}
 					else
 					{
-						header('Location: erreur/10');
+						header('Location: index.php?page=erreur&erreur=10');
 					}
 				}
 				else
 				{
-					header('Location: erreur/1');
+					header('Location: index.php?page=erreur&erreur=1');
 				}
 			}
 		}
 		else
 		{
-			header('Location: erreur/8');
+			header('Location: index.php?page=erreur&erreur=8');
 		}
 	}
 	else
 	{
-		header('Location: erreur/010');
+		header('Location: index.php?page=erreur&erreur=010');
 	}
 }
 else
 {
-	header('Location: erreur/0');
+	header('Location: index.php?page=erreur&erreur=0');
 }
 function checkCaptcha($response)
 {

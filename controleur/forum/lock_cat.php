@@ -10,11 +10,11 @@ if(isset($_Joueur_) && Permission::getInstance()->verifPerm('PermsForum', 'gener
 			'close' => $close,
 			'id' => $id
 		));
-		header('Location: forum');
+		header('Location: index.php?page=forum');
 	}
 	else
-		header('Location: erreur/17');
+		header('Location: index.php?page=erreur&erreur=17');
 }
 else
-	header('Location: erreur/0');
+	header('Location: index.php?page=erreur&erreur=0');
 ?>

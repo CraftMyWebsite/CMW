@@ -1,19 +1,19 @@
 <?php
 
-if(isset($_GET['mdp']) AND isset($_Serveur_['VoteCron']['mdp']) AND $_Serveur_['VoteCron']['mdp'] == htmlspecialchars($_GET['mdp']) )
+if(isset($_GET['mdp']) && isset($_Serveur_['VoteCron']['mdp']) && $_Serveur_['VoteCron']['mdp'] == $_GET['mdp'])
 {
-	foreach($jsonCon as $i => $serveur)
+    foreach($lectureJSON as $key => $s)
 	{
-		$serveurStats[$key] = $serveur->GetServeurInfos();
+	    $i = $s['id'];
+	    $serveur = $jsonCon[$key];
+		$serveurStats[$i] = $serveur->GetServeurInfos();
 		$req_vote->execute(array('serveur' => $i));
 		$count_req->execute(array('serveur' => $i));
-		$data_count = $count_req->fetch();
+		$data_count = $count_req->fetch(PDO::FETCH_ASSOC);
 		if($data_count['count'] > 0)
 		{
 			foreach ($serveurStats[$i]['joueurs'] as $cle => $element) 
 			{ 
-			
-				
 				if(!ExisteJoueur2($serveurStats[$i]['joueurs'][$cle],$bddConnection) && $_Serveur_['VoteCron']['sendtoall'] == 0)
 				{
 					continue;

@@ -28,9 +28,9 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategori
 	$removesf->execute(array(
 		'id' => $id
 	));
-	header('Location: forum');
+	header('Location: index.php?page=forum');
 }
 else
-	header('Location: erreur/0');
+	header('Location: index.php?page=erreur&erreur=0');
 
 ?>

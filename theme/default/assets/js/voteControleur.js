@@ -157,18 +157,19 @@ function updateBaltop(loop = false) {
                     f += rec;
                 }
 
-                f += '</td>'
-                    + '<td>'
-                    + '<img alt="' + ar.pseudo + '" src="' + ar.url + '" style="height:25px;width:25px" /> <strong class="important--text">'
-                    + '<a href="?page=profil&profil=' + ar.pseudo + '">'
-                    + ar.pseudo
-                    + '</a>'
-                    + '</strong>'
-                    + '</td>'
-                    + '<td>'
-                    + ar.nombre
-                    + '</td>'
-                    + '</tr>';
+                        f+='</td>'
+                        +'<td>'
+                            +'<img alt="'+ar.pseudo+'" src="'+ar.url+'" style="height:25px;width:25px" /> <strong class="important--text">'
+                                +'<a href="index.php?page=profil&profil='+ar.pseudo+'">'
+                                        +ar.pseudo
+                                +'</a>'
+                            +'</strong>'
+                        +'</td>'
+                        +'<td>'
+                            +ar.nombre
+                        +'</td>'
+                    +'</tr>';
+
             });
         } else {
             f += '<tr class="p-0 no-hover">'
@@ -283,7 +284,9 @@ function pickupRecompense() {
     }
 }
 
+
 window.addEventListener('DOMContentLoaded', function () {
     updateBaltop(true);
     updateRecompenseList();
 });
+

@@ -38,12 +38,12 @@ function searchForum(value, el, table, title) {
 
             		f += "<tr>"
 							+"<td>"
-                                +"<a href='?page=profil&profil="+ar.pseudo+"'>"
+                                +"<a href='index.php?page=profil&profil="+ar.pseudo+"'>"
                                     +"<img src='"+ar.img+"' style='width: 42px; height: 42px;' alt='avatar de l\'auteur' title='ar.pseudo' />"
                                 +"</a>"
                             +"</td>"
 							+"<td>"
-                        		+"<a href='?page=post&id="+ar.id2+"'>";
+                        		+"<a href='index.php?page=post&id="+ar.id2+"'>";
 	                        		if(typeof ar.prefix !== 'undefined' && ar.prefix !== null)
 	                        		{
 	                        			f += ar.prefix+ " ";
@@ -53,7 +53,7 @@ function searchForum(value, el, table, title) {
                                 +"</a>"
                                 +"<p>"
                                 	+"<small>"
-                                        +"<a href='?page=profil&profil="+ar.pseudo+"'>"
+                                        +"<a href='index.php?page=profil&profil="+ar.pseudo+"'>"
                                             +ar.pseudo
                                         +"</a>, le "+ar.date_creation
                                     +"</small>"
@@ -63,7 +63,7 @@ function searchForum(value, el, table, title) {
                                 +"<p>Réponses : "+ar.compte
                             +"</td>"
 							+"<td>"
-                           		+"<a href='?page=post&id="+ar.id2+"'>"
+                           		+"<a href='index.php?page=post&id="+ar.id2+"'>"
                                     +ar.last_answer
                                 +"</a>"
                             +"</td>"

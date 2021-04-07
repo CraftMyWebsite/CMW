@@ -32,11 +32,7 @@
                            $quellePage1 = str_replace('?page=', '',  $_Menu_[$i]['url']);
                            $quellePage2 = str_replace('?&page=', '',  $_Menu_[$i]['url']);
 
-                           $url = str_replace('index.php?page=', '', $_Menu_[$i]['url']);
-                           $url = str_replace('index.php?&page=', '', $_Menu_[$i]['url']);
-                           $url = str_replace('index.php', '', $_Menu_[$i]['url']);
-                           $url = str_replace('?page=', '',  $url);
-                           $url = str_replace('?&page=', '',  $url);
+                           $url = $_Menu_[$i]['url'];
                            
                            if (isset($_GET['page']) and ($quellePage == $_GET['page'] or $quellePage1 == $_GET['page'] or $quellePage2 == $_GET['page'])) {
                                $active = ' active';
@@ -70,20 +66,20 @@
                                     <div class="dropdown-divider"></div>
                                 <?php endif; ?>
 
-                                <a class="dropdown-item" href="?page=profil&profil=<?= $_Joueur_['pseudo']; ?>"><i class="fas fa-user"></i> Mon profil</a>
+                                <a class="dropdown-item" href="index.php?page=profil&profil=<?= $_Joueur_['pseudo']; ?>"><i class="fas fa-user"></i> Mon profil</a>
                                 <div class="dropdown-divider"></div>
 
                                 <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement')) :
                                     $req_report = $bddConnection->query('SELECT id FROM cmw_forum_report WHERE vu = 0');
                                     $signalement = $req_report->rowCount(); ?>
                                     <!-- Signalements -->
-                                    <a href="?page=signalement" class="dropdown-item text-warning"><i class="fa fa-bell"></i> Signalement <span class="badge badge-pill badge-warning" id="signalement"><?= $signalement ?></span></a>
+                                    <a href="index.php?page=signalement" class="dropdown-item text-warning"><i class="fa fa-bell"></i> Signalement <span class="badge badge-pill badge-warning" id="signalement"><?= $signalement ?></span></a>
                                 <?php endif; ?>
-                                <a class="dropdown-item" href="?page=alert"><i class="fa fa-bell"></i> Alertes : <span class="badge badge-pill badge-primary" id="alerts"><?= $alerte; ?></span></a>
+                                <a class="dropdown-item" href="index.php?page=alert"><i class="fa fa-bell"></i> Alertes : <span class="badge badge-pill badge-primary" id="alerts"><?= $alerte; ?></span></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="?page=token"></i> Mon solde : <?php if (isset($_Joueur_['tokens'])) echo $_Joueur_['tokens']; ?> <i class="fas fa-gem"></i></a>
+                                <a class="dropdown-item" href="index.php?page=token"></i> Mon solde : <?php if (isset($_Joueur_['tokens'])) echo $_Joueur_['tokens']; ?> <i class="fas fa-gem"></i></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="?action=deco"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                                <a class="dropdown-item text-danger" href="index.php?action=deco"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
 
                             </div>
                         </li>

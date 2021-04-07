@@ -80,10 +80,33 @@ class googleSearchConsole {
             
             $base->appendChild($u);
         }
+        
+        $users = $this->listUser($this->bdd);
+        foreach($users as $value) {
+            $u = $xml->createElement("url");
+            $loc = $xml->createElement("loc", $url."profil/".$value);
+            $lastmod = $xml->createElement("lastmod", date("Y m d"));
+
+            $changefreq = $xml->createElement("changefreq", "daily");
+            $priority = $xml->createElement("priority", "0.3");
+  
+            $u->appendChild($loc);
+            $u->appendChild($lastmod);
+            $u->appendChild($changefreq);
+            $u->appendChild($priority);
+            
+            $base->appendChild($u);
+        }
+        
         $xml->appendChild($base);
         
         $xml->save($this->id.".xml");
         file_put_contents("robots.txt", "User-Agent: *\r\nDisallow: /admin\r\nDisallow: /admin.php\r\nDisallow: /installation\r\nSitemap: ".$url.$this->id.".xml");
+    }
+    
+    private function listUser($bdd) {
+        $req = $bdd->query("SELECT * FROM cmw_users");
+        return $req->fetchAll(PDO::FETCH_ASSOC);
     }
     
     private function listPages($bdd) {
