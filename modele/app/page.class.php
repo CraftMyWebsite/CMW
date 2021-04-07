@@ -8,14 +8,17 @@ class page
     
     public function __construct()
     {
-        $pages = scandir($this->dir);
-        foreach($pages as $value)
-        {
-            if($value != "." && $value != "..") {
-                if(strtolower(substr($value, -4)) == ".php" && strlen($value) > 4) {
-                    array_push($this->pages, substr($value, 0, -4));
-                } else {
-                    $this->removePage(substr($value, 0, -4));
+
+        if(file_exists($this->dir)) {
+            $pages = scandir($this->dir);
+            foreach($pages as $value)
+            {
+                if($value != "." && $value != "..") {
+                    if(strtolower(substr($value, -4)) == ".php" && strlen($value) > 4) {
+                        array_push($this->pages, substr($value, 0, -4));
+                    } else {
+                        $this->removePage(substr($value, 0, -4));
+                    }
                 }
             }
         }

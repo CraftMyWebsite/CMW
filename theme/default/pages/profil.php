@@ -252,7 +252,7 @@
 
                 <div id="editsign" class="collapse">
                     <div class="card-body">
-                        <form method="post" action="?action=" role="form">
+                        <form method="post" action="?action=editSignature" role="form">
                             <label class="control-label">Votre signature (afficher après vos messages sur le forum et sur votre profil):</label>
                             <textarea  data-UUID="1003" name="signature" style="height: 750px; margin: 0px; width: 100%;"><?=$_Profil_->getPlayer()['signature']?></textarea>
 

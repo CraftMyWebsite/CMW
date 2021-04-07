@@ -10,7 +10,7 @@ if(isset($_GET['mdp']) && isset($_Serveur_['VoteCron']['mdp']) && $_Serveur_['Vo
 		$req_vote->execute(array('serveur' => $i));
 		$count_req->execute(array('serveur' => $i));
 		$data_count = $count_req->fetch(PDO::FETCH_ASSOC);
-		if($data_count['count'] > 0)
+		if($data_count['count'] > 0 || $_Serveur_['VoteCron']['sendtoallserv'] == 1)
 		{
 			foreach ($serveurStats[$i]['joueurs'] as $cle => $element) 
 			{ 
