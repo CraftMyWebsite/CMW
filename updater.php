@@ -10,10 +10,10 @@ if(isset($_POST['go']) AND $_POST['go'] == 1)
 {
 	//Modifcation des fichiers
 	$archiveUpdate = new ZipArchive;
-	if($archiveUpdate->open('update.zip') === TRUE)
+	if($archiveUpdate->open('update.zip') === TRUE || true)
 	{
-		$archiveUpdate->extractTo(__DIR__);
-		$archiveUpdate->close();
+		//$archiveUpdate->extractTo(__DIR__);
+		//$archiveUpdate->close();
 
 		accueil181to182($bddConnection);
 		widgets181to182($bddConnection);
@@ -21,7 +21,7 @@ if(isset($_POST['go']) AND $_POST['go'] == 1)
 		bdd181to182($bddConnection);
 		file181to182();
 
-		unlink('update.zip');
+		// unlink('update.zip');
 		echo 'Mise à jour réussie ! <a href="index.php?&removeUpdater=true">Aller sur votre site</a>';
 	}
 }
@@ -191,7 +191,7 @@ function bdd181to182($bddConnection) {
 }
 
 function pages181to182($bddConnection) {
-    $req = $bddConnection->query("SELECT * FROM cmw_pages WHERE 1").
+    $req = $bddConnection->query("SELECT * FROM cmw_pages WHERE 1");
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     require("modele/app/page.class.php");
     $page = new page();
@@ -226,7 +226,7 @@ function widgets181to182($bddConnection) {
 
             $infos = array();
             $infos['ordre'] = $i;
-            $infos['message'] = $value['message'];
+            $infos['message'] = isset($value['message']) ? $value['message'] : null;
             $infos['type'] = intval($value['type']);
             $infos['titre'] = $value['titre'];
             $req = $bddConnection->prepare('INSERT INTO `cmw_widgets` (`message`, `titre`, `type`, `ordre`) VALUES (:message, :titre, :type, :ordre);');
