@@ -202,11 +202,17 @@
                        
                     </div>
                         <div class="row">
-                            <div class="col-md-6 col-6">
-                                <label class="control-label">Envoyé la notification même aux personnes qui n'ont jamais voté.
-                                <input type="checkbox" name="sendtoall"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoall']) && $_Serveur_['VoteCron']['sendtoall'] == 1) { echo 'checked'; }  ?>></label>
+                            <div class="col-md-6 col-12">
+                                <div class="col-md-12 col-12">
+                                    <label class="control-label">Envoyé la notification même aux personnes qui n'ont jamais voté.
+                                    <input type="checkbox" name="sendtoall"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoall']) && $_Serveur_['VoteCron']['sendtoall'] == 1) { echo 'checked'; }  ?>></label>
+                                </div>
+                                <div class="col-md-12 col-12">
+                                    <label class="control-label">Envoyé la notification sur tous les serveurs (inclus donc les serveur n'ayant pas de site de vote attribué).
+                                    <input type="checkbox" name="sendtoallserv"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoallserv']) && $_Serveur_['VoteCron']['sendtoallserv'] == 1) { echo 'checked'; }  ?>></label>
+                                </div>
                             </div>
-                            <div class="col-md-6 col-6">
+                            <div class="col-md-6 col-12">
                                 <input type="button" onClick="tryCron()" id="trycron" style="margin-top:15px;" class="btn btn-danger w-100" value="Try it !"/>
                             </div>
                         </div>
