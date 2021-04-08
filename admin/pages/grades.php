@@ -108,7 +108,7 @@ else
 	                            <?php for($a =0; $a < count($effets); $a++) { ?>
 	                                <label class="checkbox-inline">
 										<input class="form-check-input" type="radio" name="effetCreateur" onchange="updatePrevisu('Crea');" value="<?=$effets[$a];?>"  <?=($_Serveur_['General']['createur']['effets'] == $effets[$a]) ? 'checked' : ''; ?>>
-										<span class="username <?=$effets[$a];?>">Test</span>
+										<span class="username <?=$effets[$a];?>">Effet animé <?php echo ($a+1) ?></span>
 									</label>
 								<?php } ?>
 								<label class="checkbox-inline">
@@ -154,7 +154,7 @@ else
 		                            <?php for($a =0; $a < count($effets); $a++) { ?>
 		                                <label class="checkbox-inline">
 											<input class="form-check-input" type="radio" name="effet<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=$effets[$a];?>"  <?=($idGrade[$i]['effets'] == $effets[$a]) ? 'checked' : ''; ?>>
-											<span class="username <?=$effets[$a];?>">Test</span>
+											<span class="username <?=$effets[$a];?>">Effet animé <?php echo ($a+1) ?></span>
 										</label>
 									<?php } ?>
 									<label class="checkbox-inline">
