@@ -148,7 +148,7 @@
     
                                                   ?>
 
-                                                 <button type="button" id="votebtn-<?php echo $allvote['id']; ?>" ></button>
+                                                 <button type="button" style="margin-top:15px;" id="votebtn-<?php echo $allvote['id']; ?>" ></button>
                                                  <script type="application/javascript">initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>');</script>
                                             <?php } ?>
                                          </div>

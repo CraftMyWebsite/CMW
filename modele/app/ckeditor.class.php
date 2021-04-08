@@ -15,7 +15,7 @@ class ckeditor
 			
 
 			$dom = new DOMDocument('1.0', 'utf-8');
-			$dom->loadHTML(str_replace("[hr]Contenu fusionné[hr]", "",'<?xml encoding="utf-8" ?>'.$content2));
+			@$dom->loadHTML(str_replace("[hr]Contenu fusionné[hr]", "",'<?xml encoding="utf-8" ?>'.$content2));
 			$dom->removeChild($dom->doctype);    
 			if(!$admin) {
     			foreach ($dom->childNodes as $item)

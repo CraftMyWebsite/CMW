@@ -166,7 +166,7 @@ function updateBaltop(loop = false) {
                             +'</strong>'
                         +'</td>'
                         +'<td>'
-                            +ar.nombre
+                            + (ar.nombre != null ? ar.nombre : 0)
                         +'</td>'
                     +'</tr>';
 

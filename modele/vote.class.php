@@ -38,7 +38,7 @@ class vote {
 
 
     public function getLastVoteTimeMili() {
-        return empty($this->Player) ? 0 : $this->Player['date_dernier'];
+        return empty($this->Player) ? 0 : ((isset($this->Player['date_dernier']) && !empty($this->Player['date_dernier'])) ? $this->Player['date_dernier'] : 0 );
     }
 
     public function getTimeVoteTimeMili() {
