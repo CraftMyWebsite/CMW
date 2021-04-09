@@ -16,7 +16,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix responsive des statistique sur le panel
 [|] : Fix extension sur l'installateur
 [|] : Fix du mdp inchangeable depuis son profil
-[|] : Fix tache Cron qui ne fonctionné pas
+[|] : Fix tache Cron qui ne fonctionnait pas
 [|] : Fix sur le panier pour les achats des joueurs devant être connecté sur le serveur
 
 [=] : Fix sécurité sur le cms
