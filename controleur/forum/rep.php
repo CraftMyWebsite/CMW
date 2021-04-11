@@ -12,4 +12,4 @@ if(Permission::getInstance()->verifPerm("connect"))
 	header('Location: index.php?page=post&id=' .$id. '&page_post=' .$pages. '#' .$answer. '');
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');

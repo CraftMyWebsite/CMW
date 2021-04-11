@@ -10,10 +10,10 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategori
 	if($AdminForum->getErreurs($e) == 0)
 	{
 		$page = $AdminForum->getPage($entite+1, $id);
-		header('Location: ?page='.$page);
+		header('Location: index.php?page='.$page);
 	}
 	else
 	{
-		header('Location: ?page=erreur&erreur=19&type='.$e['type'].'&titre='.$e['titre'].'&contenue='.$e['contenue']);
+		header('Location: index.php?page=erreur&erreur=19&type='.$e['type'].'&titre='.$e['titre'].'&contenue='.$e['contenue']);
 	}
 }

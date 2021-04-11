@@ -1,10 +1,26 @@
+CREATE TABLE IF NOT EXISTS cmw_miniature (
+  `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `message` varchar(200) DEFAULT NULL,
+  `image` varchar(100),
+  `type` int(1) DEFAULT 0,
+  `lien` varchar(100),
+  `ordre` int(2)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS cmw_widgets (
+  `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `message` varchar(200) DEFAULT NULL,
+  `titre` varchar(100),
+  `type` int(1) DEFAULT 0,
+  `ordre` int(2)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS cmw_menu (
   `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(100),
   `dest` int(11),
   `url` varchar(100) DEFAULT NULL,
-  `ordre` int(2),
-  PRIMARY KEY (`id`)
+  `ordre` int(2)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS cmw_ban (
@@ -300,13 +316,6 @@ CREATE TABLE IF NOT EXISTS `cmw_news_stats` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `cmw_pages` (
-  `id` int(11) AUTO_INCREMENT,
-  `titre` varchar(100),
-  `contenu` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE IF NOT EXISTS `cmw_postit` (
   `id` smallint(5) UNSIGNED AUTO_INCREMENT,
   `auteur` varchar(40),
@@ -518,5 +527,17 @@ INSERT INTO `cmw_menu` (`id`, `dest`, `url`, `ordre`, `name`) VALUES
 (5, -1, '?&page=voter', 4, 'Voter'),
 (6, -1, '?page=forum', 5, 'Forum'),
 (7, -1, '?&page=membres', 6, 'Liste des membres'),
-(8, 2, '?page=banlist ', 0, 'Ban - List'),
-(9, 2, '?page=chat ', 1, 'Chat');
+(8, 2, '?page=banlist', 0, 'Ban - List'),
+(9, 2, '?page=chat', 1, 'Chat');
+
+INSERT INTO `cmw_miniature` (`message`, `image`, `type`, `lien`, `ordre`) VALUES 
+
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (1)', 'miniature-demo-1.png', 0, '#', 0), 
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (2)', 'miniature-demo-2.png', 0, '#', 1),
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (3)', 'miniature-demo-3.png', 0, '#', 2);
+
+INSERT INTO `cmw_widgets` (`message`, `titre`, `type`, `ordre`) VALUES
+('', 'GERER MON COMPTE', 0, 0),
+('', 'JOUEURS EN LIGNE', 2, 1),
+('', 'ETAT DES SERVEURS', 1, 2),
+('<p>&nbsp;</p><p>Nos partenaires: <a href=\"http://craftmywebsite.fr\">CraftMyWebsite</a></p><p>&nbsp;</p>', 'PARTENAIRES', 3, 3);

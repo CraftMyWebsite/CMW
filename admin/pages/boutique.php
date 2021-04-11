@@ -28,7 +28,7 @@
             </div>
             <div class="card-body" id="createCate">
                     <div class="alert alert-success">
-                        <strong>Avant de créez une catégorie sachez d'abord à quoi servent ces catégories, en effet en plus de permettre de ne pas tout mettre en vrac et d'avoir un minimum d'organisation, les catégories vous permettent de gérer le multiserveur! Vous avez trois choix pour le serveur d'action d'une catégorie: tous les serveurs(la commande est envoyée sur tous les serveurs), le serveur où le joueur est en ligne(par exemple pour un give d'item) ou un serveur spécifique que vous choisissez à l'avance. L'ordre de la catégorie est l'ordre d'affichage, il ne sert qu'à titre d'organisation.</strong>
+                        <strong>Avant de créer une catégorie sachez d'abord à quoi servent ces catégories, en effet en plus de permettre de ne pas tout mettre en vrac et d'avoir un minimum d'organisation, les catégories vous permettent de gérer le multiserveur! Vous avez trois choix pour le serveur d'action d'une catégorie: tous les serveurs(la commande est envoyée sur tous les serveurs), le serveur où le joueur est en ligne(par exemple pour un give d'item) ou un serveur spécifique que vous choisissez à l'avance. L'ordre de la catégorie est l'ordre d'affichage, il ne sert qu'à titre d'organisation.</strong>
                     </div>
 
                         <label class="control-label">Titre de la catégorie</label>
@@ -40,13 +40,13 @@
                         <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
                         <input class="form-control" required type="number" name="number"  min ="1" max="4" value="3" />
                     
-                        <label class="control-label">Connexion In-Game</label>
+                        <label class="control-label">Connexion In-Game (le joueur devra être connecté pour finaliser son payement)</label>
                         <select name="connection"class="form-control" required>
                             <option value="0">Désactivé</option>
                             <option value="1">Activé</option>
                         </select>
                 
-                        <label class="control-label">Serveurs d'action</label>
+                        <label class="control-label">Serveurs ou éxécuter les actions</label>
                         <select name="serveur" class="form-control" required>
                             <option value="-1">Tous</option>
                             <option value="-2">Au choix (Le joueur se connecte sur le serveur voulu)</option>
@@ -117,6 +117,61 @@
             </div>
         </div>
     </div>
+
+<?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'parametres')) { ?>
+
+    <div class="col-md-12 col-xl-6 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">
+                    Paramètres de la boutique
+                </h4>
+            </div>
+            <div class="card-body" id="moneyName">
+
+                <label class="control-label">Noms de la monnaie </label>
+                <input type="text" class="form-control" name="moneyName" placeholder="Jetons" value="<?php echo $_Serveur_['General']['moneyName']; ?>" required>
+
+                <label class="control-label">Devise monétaire </label>
+                <select class="form-control text-center" name="currency">
+                    <option value="<?= $_Serveur_['Payement']['currency'] ?>" selected ><?php if ($_Serveur_['Payement']['currency'] == "EUR") {echo "Euro";}elseif ($_Serveur_['Payement']['currency'] == "CAD"){echo "Canadian Dollar";} elseif ($_Serveur_['Payement']['currency'] == "CHF"){echo "Swiss Franc";} elseif ($_Serveur_['Payement']['currency'] == "USD"){echo "United States Dollar";} elseif ($_Serveur_['Payement']['currency'] == "GBP"){echo "Pound Sterling";} else {echo $_Serveur_['Payement']['currency'];} ?></option>
+                    <option value="AUD">Australian Dollar</option>
+                    <option value="BRL">Brazilian Real</option>
+                    <option value="CAD">Canadian Dollar</option>
+                    <option value="CNY">Chinese Renmenbi</option>
+                    <option value="CZK">Czech Koruna</option>
+                    <option value="DKK">Danish Krone</option>
+                    <option value="EUR">Euro</option>
+                    <option value="HKD">Hong Kong Dollar</option>
+                    <option value="HUF">Hungarian Forint</option>
+                    <option value="INR">Indian Rupee</option>
+                    <option value="ILS">Israeli New Shekel</option>
+                    <option value="JPY">Japanese Yen</option>
+                    <option value="MYR">Malaysian Ringgit</option>
+                    <option value="MXN">Mexican Peso</option>
+                    <option value="TWD">New Taiwan Dollar</option>
+                    <option value="NZD">New Zealand Dollar</option>
+                    <option value="NOK">Norwegian Krone</option>
+                    <option value="PHP">Philippine Peso</option>
+                    <option value="PLN">Polish złoty</option>
+                    <option value="GBP">Pound Sterling</option>
+                    <option value="RUB">Russian Ruble</option>
+                    <option value="SGD">Singapore Dollar</option>
+                    <option value="SEK">Swedish Krona</option>
+                    <option value="CHF">Swiss Franc</option>
+                    <option value="THB">Thai Baht</option>
+                    <option value="USD">United States Dollar</option>
+                </select>
+
+
+                <script>initPost("moneyName", "admin.php?action=boutique",null);</script>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('moneyName');">Envoyer!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'createCoupon')) { ?>
     <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
@@ -330,7 +385,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for($j = 1;$j <= count($offres);$j++) {
+                                            <?php if(isset($offres) && !empty($offres)) { for($j = 1;$j <= count($offres);$j++) {
                                                 if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                                     <tr id="ligneoffre-<?php echo $offres[$j]['id']; ?>">
                                                 <td><input type="text" name="offresNom<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nom']; ?>" /></td>
@@ -382,7 +437,7 @@
                                                 <td><a class="btn btn-success" data-toggle="modal"  data-target="#OffreAction<?php echo $offres[$j]['id']; ?>">Modifier</a></td>
                                                 <input type="hidden" name="offresId<?php echo $offres[$j]['id']; ?>" value="<?php echo $offres[$j]['id']; ?>" />
                                             </tr>
-                                            <?php } }?>
+                                            <?php } } }?>
                                         </tbody>
                                     </table>
                                     <script>initPost("navRap<?=$i?>", "admin.php?action=editBoutique", function(data) { if(data) { boutiqueCheck(); } } );</script>
@@ -426,8 +481,8 @@
                                                     <script>loopChild(get("new-edit-<?php echo $offres[$j]['id']; ?>"),"navRap<?=$i?>");</script>
                                                     <hr/>
                                                     <div id="new-action-<?php echo $offres[$j]['id']; ?>">
-                                                        <h5 style="margin-top:10px;">Configurer les actions:</h4>
-                                                        <label class="control-label">Type d'action <small>Utilisez {PLAYER} pour la variable joueur</small></select>
+                                                        <h5 style="margin-top:10px;">Configurer les actions:</h5>
+                                                        <label class="control-label">Type d'action <small>Utilisez {PLAYER} pour la variable joueur</small></label>
                                                         <select class="form-control" name="methode" onchange="
                                                             switch(parseInt(this.value)) {
                                                                 case 0:
@@ -499,8 +554,8 @@
                                                               <?php $itemps = $i; ?>
                                                             <select class="form-control" name="grade_site">
                                                                     <option value="0">Joueur</option>
-                                                                    <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                                                            <option value="<?php echo $idGrade[$i]['id']; ?>"><?= $idGrade[$i]['nom']?></option>
+                                                                    <?php  for($i2 = 0; $i2 < count($idGrade); $i2++) {  ?>
+                                                                            <option value="<?php echo $idGrade[$i2]['id']; ?>"><?= $idGrade[$i2]['nom']?></option>
                                                                     <?php }?>
                                                                     <option value="1">Créateur</option>
                                                             </select>
@@ -526,8 +581,8 @@
                                                                     <?php if($actions[$k]['methode'] == 6){?>
                                                                     <select class="form-control" name="commandeValeur-<?php echo $actions[$k]['id']; ?>">
                                                                         <option value="0" <?php if($actions[$k]['grade'] == 0) echo 'selected'; ?>> Joueur </option>
-                                                                        <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                                                                <option value="<?php echo $idGrade[$i]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i]['id']) echo 'selected';?>><?= $idGrade[$i]['nom']?></option>
+                                                                        <?php  for($i2 = 0; $i2 < count($idGrade); $i2++) {  ?>
+                                                                                <option value="<?php echo $idGrade[$i2]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i2]['id']) echo 'selected';?>><?= $idGrade[$i2]['nom']?></option>
                                                                         <?php }?>
                                                                         <option value="1" <?php if($actions[$k]['grade'] == 1) echo 'selected'; ?>>Créateur</option>
                                                                     </select>

@@ -25,8 +25,8 @@
                                 <a style="cursor:pointer;"onClick="sendPost('dropVisits')"; class="btn btn-sm btn-outline-secondary">
                                     Supprimer les visites
                                 </a>
-                                <script>initPost("dropVisits", "admin.php?action=dropVisits",  
-                                            function (data) { if(data) { 
+                                <script>initPost("dropVisits", "admin.php?action=dropVisits",
+                                            function (data) { if(data) {
                                                 var ctx = get('visitsChart')
                                                 var myChart = new Chart(ctx, {
                                                     type: 'line',
@@ -42,11 +42,19 @@
                                                         }]
                                                     },
                                                     options: {
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
                                                         scales: {
                                                             yAxes: [{
                                                                 ticks: {
-                                                                    beginAtZero: false
+                                                                    beginAtZero: false,
+                                                                    precision: 0
                                                                 }
+                                                            }],
+                                                            xAxes: [{
+                                                              ticks: {
+                                                                precision: 0
+                                                              }
                                                             }]
                                                         },
                                                         legend: {
@@ -62,32 +70,43 @@
                         </div>
                     </div>
                     <div class="card-body ollapse show" id="stats">
-                        <canvas class="my-4 w-100" id="visitsChart" width="900" height="200">
+                        <div class="chart-container">
+                            <canvas id="visitsChart" ></canvas>
+                        </div>
                                   <script>
-                                   <?php 
-                                   $Dates = date("Y-m-d");
-                                   $Dates_Yesterday = strftime("%Y-%m-%d", mktime(0, 0, 0, date('m'), date('d')-1, date('y')));
-
-                                   $req_NumberOfDay = $bddConnection->prepare('SELECT dates AS dates FROM cmw_visits GROUP BY dates LIMIT 0, 7;');
-                                   $req_NumberOfDay->execute();
-                                   $get_NumberOfDay = $req_NumberOfDay->fetchAll(PDO::FETCH_ASSOC);
-
-                                   $req_TotalVisitsPerDay = $bddConnection->prepare('SELECT count(dates) AS visits FROM cmw_visits GROUP BY dates LIMIT 0, 7;');
-                                   $req_TotalVisitsPerDay->execute();
-                                   $get_TotalVisitsPerDay = $req_TotalVisitsPerDay->fetchAll(PDO::FETCH_ASSOC);
-                                   ?>
+                                   <?php
+                                   $req = $bddConnection->query('SELECT count(dates) as total, UNIX_TIMESTAMP(dates) as time FROM cmw_visits GROUP BY dates ASC LIMIT 0, 7;');
+                                   $dailyVisite = $req->fetchAll(PDO::FETCH_ASSOC); ?>
 
                                         var ctx = get('visitsChart')
                                         var myChart = new Chart(ctx, {
                                             type: 'line',
                                             data: {
-                                                labels: [<?php foreach ($get_NumberOfDay as $get_NumberOfDay) {
-                                                  $replace_DatesBy = array("Aujourd'hui", "Hier");
-                                                  $find_Dates = array($Dates, $Dates_Yesterday);
-                                                  echo '"'.str_replace($find_Dates, $replace_DatesBy, $get_NumberOfDay['dates']).'"'.","; } ?>],
+                                                labels: [
+                                                <?php 
+                                                $actual = date('N', time());
+                                                $yesterday = date('N', time() - 86400);
+                                                $dayofweek = array('', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
+
+                                                foreach ($dailyVisite as $value) 
+                                                {
+                                                    echo '"';
+                                                    $day = date('N', $value['time']);
+                                                    if($day == $actual) {
+                                                        echo "Aujourd'hui";
+                                                    } else if($day == $yesterday){
+                                                        echo "Hier";
+                                                    } else {
+                                                        echo $dayofweek[$day];
+                                                    }
+                                                    echo '",';
+                                                } ?>],
                                                 datasets: [{
-                                                    data: [<?php foreach ($get_TotalVisitsPerDay as $get_TotalVisitsPerDay) {
-                                         echo '"'.$get_TotalVisitsPerDay['visits'].'"'.","; } ?>],
+                                                    data: [
+                                                    <?php foreach ($dailyVisite as $value)  
+                                                    {
+                                                        echo '"'.$value['total'].'",';
+                                                    } ?>],
                                                     lineTension: 0,
                                                     backgroundColor: '#343A40',
                                                     borderColor: '#2F3136',
@@ -96,11 +115,19 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 scales: {
                                                     yAxes: [{
                                                         ticks: {
-                                                            beginAtZero: false
+                                                            beginAtZero: false,
+                                                            precision: 0
                                                         }
+                                                    }], 
+                                                    xAxes: [{
+                                                      ticks: {
+                                                        precision: 0
+                                                      }
                                                     }]
                                                 },
                                                 legend: {
@@ -198,21 +225,33 @@
                                 <div class="row">
                                     <div class="col-md-8 offset-col-md-4">
                                         <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$j?></h4>
-                                        <p class="card-category"> 
+                                        <p class="card-category">
                                             En ligne - <?=$serveur['nom'];?>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" data-toggle="modal" data-target="#infoServeur<?=$conEtablie[$j]?>">
-                                <div class="card-footer">
-                                    <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en
-                                        détails
-                                        <i class="fas fa-arrow-circle-right"></i></button>
+                            <!-- Détecte si le serveur est connecté en JSONAPI ou en RCON-->
+                            <?php if($serveur['protocole'] == 0){?>
+                                <a href="#" data-toggle="modal" data-target="#infoServeur<?=$conEtablie[$j]?>">
+                                    <div class="card-footer">
+
+                                        <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en détails
+                                            <i class="fas fa-arrow-circle-right"></i></button>
+
+                                    </div>
+                                </a>
+                            <?php }else{ ?>
+
+                                <div class="card-footer text-center">
+
+                                    <span class="alert-warning">Cette fonctionnalité n'est pas disponible avec la connexion RCON, merci de choisir la connexion JSONAPI</span>
+
                                 </div>
-                            </a>
+
+                            <?php }?>
                         </div>
-                        <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'player') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'command') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) { 
+                        <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'player') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'command') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) {
                             ?>
 
                             <div class="modal fade" id="infoServeur<?=$conEtablie[$j]?>" tabindex="-1" role="dialog"
@@ -226,7 +265,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body" style="height: 500px;overflow-y:scroll!important">
-                                           
+
                                         <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console')) { ?>
                                             <div class="card">
                                                 <div class="card-header">
@@ -242,7 +281,7 @@
                                                     }
                                                     setInterval("updateConsole()", 10000);
                                                 </script>
-                                                <?php 
+                                                <?php
                                                 $date = date("Y-m-d");
                                                 echo '<div id="console"><div style="background-color: #373737;color: #8F8F8F;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:solid 2px #8F8F8F;overflow: hidden;">';
                                                 foreach($console[$j]['Test'] as $value) {
@@ -315,7 +354,7 @@
 
                                         <?php }
                                         if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins')) { ?>
-                                        
+
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h4 class="card-title">
@@ -344,7 +383,7 @@
                                                     </table>
                                                 </div>
                                                 <div class="card-footer">
-                                                <?php 
+                                                <?php
                                                if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) { ?>
                                                     <div class="row">
                                                         <div class="col-md-4 text-center">
@@ -368,7 +407,7 @@
                                                <?php } ?>
                                                 </div>
                                             </div>
-                                    
+
 
                                         </div>
                                         <div class="modal-footer">
@@ -387,7 +426,7 @@
                                 <div class="row">
                                     <div class="col-md-8 offset-col-md-4">
                                         <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$j?></h4>
-                                        <p class="card-category"> 
+                                        <p class="card-category">
                                             Hors Ligne - <?=$serveur['nom'];?>
                                         </p>
                                     </div>
@@ -430,7 +469,7 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                           
+
                                             while($lastMembre = $lastRegisterMember->fetch(PDO::FETCH_ASSOC))
                                             {
                                                 echo '<tr>';
@@ -440,7 +479,13 @@
                                                 echo '<td>'.$lastMembre['tokens'].'</td>';
                                                 echo '<td>'.date('d/m/Y', $lastMembre['anciennete']).' &agrave; '.date('H:i:s',$lastMembre['anciennete']).'</td>';
                                                 if($ShowMail) { echo '<td>'.($lastMembre['ValidationMail'] == 1 ? "valide" : "invalide").'</td>'; }
-                                                if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) { echo '<td>'.$lastMembre['ip'].'</td>'; }
+                                                if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) {
+                                                    if (filter_var($lastMembre['ip'], FILTER_VALIDATE_IP)){
+                                                        echo '<td>'.$lastMembre['ip'].'</td>';
+                                                    }else{
+                                                        echo '<td>'.htmlspecialchars($lastMembre['ip']).' <a title="Impossible de vérifier la validité de cette adresse ip"><i class="fas fa-exclamation-circle animation-wow" style="color: darkred;"></i></a></td>';
+                                                    }
+                                                }
                                                  echo '</tr>';
                                             } ?>
                                         </tbody>
@@ -462,22 +507,22 @@
                                     </div>
                                     <div class="float-right">
                                         <button type="submit"  class="btn btn-sm btn-outline-secondary" onClick="sendPost('clearStaffMessage')" title="Cliquer ici pour supprimer à jamais tous les messages"><i class="fas fa-trash" style="color: #bf0a0a;"></i></button>
-                                         <script>initPost("clearStaffMessage", "admin.php?action=clearPostit",  
+                                         <script>initPost("clearStaffMessage", "admin.php?action=clearPostit",
                                             function (data) { if(data) { get('allStaffMessage').innerHTML = "";} });</script>
                                     </div>
                                 </h4>
                             </div>
                             <div class="card-body postit" id="allStaffMessage" style="overflow-y: scroll;padding: 0px;height: 155px; width: 100%;">
-                                <?php 
+                                <?php
                                     while ($message_postit = $all_message_staff->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <p id="StaffMessage-<?=$message_postit['id'];?>">
-                                                [<strong><?php echo $message_postit['auteur']; ?></strong>]: 
-                                            <?php echo $message_postit['message']; ?>&nbsp;&nbsp; 
+                                                [<strong><?php echo $message_postit['auteur']; ?></strong>]:
+                                            <?php echo $message_postit['message']; ?>&nbsp;&nbsp;
                                             <a id="suppStaffMessage-<?=$message_postit['id'];?>" style="cursor:pointer;"onClick="sendPost('suppStaffMessage-<?=$message_postit['id'];?>')">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                                 <input type="number" style="display:none;" value="<?=$message_postit['id'];?>" name="id">
                                             </a>
-                                            <script>initPost("suppStaffMessage-<?=$message_postit['id'];?>", "admin.php?action=supprPostit",  
+                                            <script>initPost("suppStaffMessage-<?=$message_postit['id'];?>", "admin.php?action=supprPostit",
                                             function (data) { if(data) { hide("StaffMessage-<?=$message_postit['id'];?>")} });</script>
                                         </p>
                                    <?php } ?>
@@ -485,7 +530,7 @@
                             <div class="card-footer" id="sendStaffMessage">
                                     <input type="text" name="message" id="message" placeholder="Message (max 50 caractères)" class="form-control" maxlength="50">
                                     <button type="submit" class="btn btn-success w-100" onClick="sendPost('sendStaffMessage')">Envoyer !</button>
-                                    <script>initPost("sendStaffMessage", "admin.php?action=creerPostit",  
+                                    <script>initPost("sendStaffMessage", "admin.php?action=creerPostit",
                                             function (data) { if(data) { console.log('message envoyé'); get('allStaffMessage').innerHTML = "<p>[<strong><?php echo $_Joueur_['pseudo']?></strong>]: "+getValueByName('sendStaffMessage', 'message')+"</p>"+get('allStaffMessage').innerHTML; clearAllInput('sendStaffMessage');}})</script>
                             </div>
                         </div>
@@ -568,7 +613,7 @@
                                                 echo '</tr>';
                                             }
                                             ?>
-                                         
+
 
                                         </tbody>
                                     </table>

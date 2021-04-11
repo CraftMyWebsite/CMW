@@ -52,7 +52,19 @@
     <?php
     if(!isset($_GET['page']) OR $_GET['page'] == "accueil") {
             if(!isset($_SESSION['loader']) || $_SESSION['loader'] != true){
-                $arr = json_decode(fetch('https://pastebin.com/raw/FXhFjgCh'));
+                $arr = array(
+                    "Quel belle journée pour administrer votre serveur de jeu",
+                    "Passez une agréable journée administrateur !",
+                    "Saviez-vous qu'il est possible d'installer un thème pour personnaliser l'apparence de votre site ?",
+                    "On me dit de vous souhaiter une agréable journée",
+                    "Bienvenue sur votre panel d'administration !",
+                    "Connaissez-vous Minestrator ? C'est l'hébergeur Minecraft par excellence !",
+                    "Connaisez-vous Webstrator ? L'hébergeur web partenaire CraftMyWebsite garantie 100% compatible ! <br/> <strong>Premier mois offert !</strong>",
+                    "La première version de CraftMyWebsite est sortie au téléchargement le 01/12/2014",
+                    "Chargement en cours ...",
+                    "Comment ça va aujourd'hui vous ? Moi ça va",
+                    "En cas de problèmes, rejoignez le Discord de CraftMyWebsite"
+                );
                 echo '<div id="loader-wrapper">
                         <div id="loader"></div>
                         <div id="loader-text">'.$arr[array_rand($arr, 1)].'</div>

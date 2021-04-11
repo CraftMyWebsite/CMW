@@ -1,5 +1,4 @@
 User-Agent: *
-Disallow: 
 Disallow: /admin
 Disallow: /admin.php
 Disallow: /installation

@@ -49,7 +49,7 @@ ini_set('display_errors', 1);
 	}
 	else
 	{
-		header('Location: index.php');
+		header('Location: nope.php');
 	}
 	
 ?>

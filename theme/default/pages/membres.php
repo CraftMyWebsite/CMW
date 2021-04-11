@@ -62,7 +62,7 @@ if (isset($_GET['page_membre'])) {
                                 </td>
 
                                 <td>
-                                    <a href="?page=profil&profil=<?= $value['pseudo']; ?>" class="btn btn-reverse">Voir le compte</a>
+                                    <a href="index.php?page=profil&profil=<?= $value['pseudo']; ?>" class="btn btn-reverse">Voir le compte</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -74,7 +74,7 @@ if (isset($_GET['page_membre'])) {
                     <ul class="pagination">
                         <?php if ($page > 1) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=membres&page_membre=<?= $page - 1 ?>" aria-label="Précédent">
+                                <a class="page-link" href="index.php?page=membres&page_membre=<?= $page - 1 ?>" aria-label="Précédent">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Précédent</span>
                                 </a>
@@ -82,13 +82,13 @@ if (isset($_GET['page_membre'])) {
                         <?php endif;
                         for ($i = 1; $i <= $Membres->nbPages; $i++) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=membres&page_membre=<?= $i; ?>"><?= $i; ?></a>
+                                <a class="page-link" href="index.php?page=membres&page_membre=<?= $i; ?>"><?= $i; ?></a>
                             </li>
                         <?php
                         endfor;
                         if ($page < $Membres->nbPages) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=membres&page_membre=<?= $page + 1 ?>" aria-label="Suivant">
+                                <a class="page-link" href="index.php?page=membres&page_membre=<?= $page + 1 ?>" aria-label="Suivant">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Suivant</span>
                                 </a>

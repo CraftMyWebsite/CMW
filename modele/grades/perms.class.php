@@ -175,7 +175,11 @@ class Permission {
 		}
 		else
 		{
-			$lecture = unserialize($data['result']);
+			if(isset($data['result'])) {
+				$lecture = unserialize($data['result']);
+			}else {
+				$lecture = [];
+			}
 		}
 		return $lecture;
 	}

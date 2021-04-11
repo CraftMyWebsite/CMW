@@ -1,6 +1,6 @@
 <?php
 rrmdir("installation");
-header('Location: index.php');
+header('Location: index.php?page=accueil');
 
 function rrmdir($dir) {
    if (is_dir($dir)) {

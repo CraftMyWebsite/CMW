@@ -13,6 +13,6 @@ if(isset($_GET['id_a']) AND Permission::getInstance()->verifPerm('PermsForum', '
 	
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');
 
 ?>

@@ -1,14 +1,20 @@
 <?php
 if(!(!$_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu') AND !$_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addDropLinkMenu') AND !$_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMenu'))) {
-	$pagesReq = $bddConnection->query('SELECT titre FROM cmw_pages');
 
-	$i = 0;
-	while($pagesDonnees = $pagesReq->fetch(PDO::FETCH_ASSOC))
-	{
-		$pages[$i] = $pagesDonnees['titre'];
-		$i++;
-	}
-	if(empty($pages)) $pages[0] = '- Aucune Page -';
+	require("modele/app/page.class.php");
+	$page = new page();
+	
+	$pages = $page->getPagesName();
+	
+	array_push($pages, "boutique");
+	array_push($pages, "voter");
+	array_push($pages, "tokens");
+	array_push($pages, "forum");
+	array_push($pages, "support");
+	array_push($pages, "chat");
+	array_push($pages, "membres");
+	array_push($pages, "panier");
+	array_push($pages, "banlist");
 
 
 	function isPage($str, $pages) {

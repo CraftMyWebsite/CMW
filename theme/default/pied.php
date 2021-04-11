@@ -6,7 +6,7 @@ $_Theme_ = $_Theme_->GetTableau();
     <div class="footer-body">
         <div class="container-fluid col-12 mt-3">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-lg-7">
+                <div class="col-md-12 col-sm-12 col-lg-3">
                     <?php if(isset($_Theme_['Pied']['about']) && !empty(trim($_Theme_['Pied']['about']))) : ?>
                     <div class="about-title h4">
                         À Propos
@@ -16,7 +16,17 @@ $_Theme_ = $_Theme_->GetTableau();
                     </div>
                     <?php endif; ?>
                 </div>
-
+                <?php if(googleService::isAdsenseEnable($_Serveur_) && googleService::getAdsense()->hasPub()) : ?>
+                <div class="col-md-12 col-sm-12 col-lg-3">
+                   
+                    <div class="about-title h4">
+                        Publicité
+                    </div>
+                    <div class="about-content">
+                        <?php googleService::getAdsense()->writePub(); ?>
+                    </div>
+                </div>
+				<?php endif; ?>
                 <?php if (isset($_Theme_['Pied']['social']) && !empty($_Theme_['Pied']['social'])) : ?>
                     <div class="col-md-12 col-sm-12 col-lg-5 ml-auto">
                         <div class="social-title h4">

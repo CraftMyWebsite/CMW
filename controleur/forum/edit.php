@@ -10,7 +10,7 @@ if(isset($_POST['id'], $_POST['objet'], $_Joueur_))
 	$id = htmlentities($_POST['id']);
 	if($AdminForum->verifEdit($objet, $id, $_Joueur_) && !isset($_POST['contenue']))
 	{
-		header('Location: ?page=editForum&objet='.$objet.'&id='.$id);
+		header('Location: index.php?page=editForum&objet='.$objet.'&id='.$id);
 	}
 	elseif($AdminForum->verifEdit($objet, $id, $_Joueur_) && isset($_POST['contenue']))
 	{
@@ -21,11 +21,11 @@ if(isset($_POST['id'], $_POST['objet'], $_Joueur_))
 		$AdminForum->editObjet($objet, $id, $_Joueur_['pseudo'], $contenue, $id_topic, $titre);
 		if($AdminForum->getErreurs($e) == 0)
 		{
-			header('Location: ?page='.$AdminForum->getPage(4, $id_topic));
+			header('Location: index.php?page='.$AdminForum->getPage(4, $id_topic));
 		}
 		else
 		{
-			header('Location: ?page=erreur&erreur=19&type='.$e['type'].'&titre='.$e['titre'].'&contenue='.$e['contenue']);
+			header('Location: index.php?page=erreur&erreur=19&type='.$e['type'].'&titre='.$e['titre'].'&contenue='.$e['contenue']);
 		}
 	}
 }

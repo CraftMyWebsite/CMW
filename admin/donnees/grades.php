@@ -63,6 +63,8 @@ $PermissionFormat["PermsPanel"]="Permissions panel";
     $PermissionFormat["PermsPanel-ban"]="Page Membres => Bannissement";
         $PermissionFormat["PermsPanel-ban-actions"]="Actions";
     $PermissionFormat["PermsPanel-upload"]="Page Upload";
+    $PermissionFormat["PermsPanel-googleService"]="Page services Google";
+        $PermissionFormat["PermsPanel-seo-actions"]="Actions";
 
 $PermissionFormat["PermsForum"]="Permissions Forums";
     $PermissionFormat["PermsForum-general"]="Général";
@@ -78,8 +80,17 @@ foreach($idGrade as $key => $value)
 }
 
 $effets = array(
+    'style1',
+    'style2',
+    'style3',
+    'style4',
     'style5',
-    'style16'
+    'style6',
+    'style7',
+    'style8',
+    'style9',
+    'style10',
+    'style11'
 );
 }
 function hasPerm($i, $str, $grades) {

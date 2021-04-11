@@ -36,6 +36,7 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) {
 
 	function GetListeActions($bdd)
 	{
+		global $_Permission_;
 		$reponse = $bdd->query('SELECT * FROM cmw_boutique_action ORDER BY id');
 		
 		$i = 0;
@@ -66,15 +67,15 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) {
 					$action[$i]['commande_valeur'] = 'Joueur';
 				} elseif($donnees['commande_valeur'] == 1) {
 					$action[$i]['commande_valeur'] = "Créateur";
-				} elseif(fopen('./modele/grades/'.$donnees['commande_valeur'].'.yml', 'r')) {
-					$openGradeSite = new Lire('./modele/grades/'.$donnees['commande_valeur'].'.yml');
-					$readGradeSite = $openGradeSite->GetTableau();
-					$action[$i]['commande_valeur'] = $readGradeSite['Grade'];
-					if(empty($readGradeSite['Grade']))
+				} else  {
+					$perm = $_Permission_->readPerm($donnees['commande_valeur']);
+					if(!isset($perm) || empty($perm))
+					{
 						$action[$i]['commande_valeur'] = 'Joueur';
-				} else {
-					$action[$i]['commande_valeur'] = 'Joueur';
-				}
+					} else {
+						$action[$i]['commande_valeur'] = $perm['Grade'];
+					}
+				} 
 				$action[$i]['grade'] = $donnees['commande_valeur'];
 			}
 			else

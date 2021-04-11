@@ -20,7 +20,7 @@ if(Permission::getInstance()->verifPerm("connect"))
 	$flag = 0;
 
 	foreach ($datas as $data) {
-		if($vote->giveRecompense($bddConnection, $data,$jsonCon, true)) {
+		if($vote->giveRecompense($bddConnection, $data, true)) {
 			$flag++;
 		}
 	}

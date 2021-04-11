@@ -46,16 +46,7 @@
 	
 	$configLecture = new Lire('modele/config/configWidgets.yml');
 	$_Widgets_ = $configLecture->GetTableau();
-	
-	$configLecture = new Lire('modele/config/accueil.yml');
-	$_Accueil_ = $configLecture->GetTableau();
 
-    if($_Serveur_['General']['bgType'] == 0)
-        $bgType = 'background: url(\'theme/upload/bg.png\') no-repeat fixed 0% 0% / 100% 100% transparent;';
-    else
-        $bgType = 'background: url(\'theme/upload/bg.png\') repeat scroll center top rgb(0, 0, 0);';
-
-	
 	require_once('controleur/tempMess.class.php');
 	
 	if(isset($_COOKIE['playeronline'], $_COOKIE['maxPlayers'], $_COOKIE['servOnline']) && $_COOKIE['servOnline'] == true)

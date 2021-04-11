@@ -230,6 +230,14 @@ const PERMS = array(
 		"upload" => array(
 			"showPage" => "Accès à la page Upload",
 			"manager" => "Peut gérer l'upload d'images"
+		),
+		"googleService" => array(
+			"showPage" => "Accès à la page des services google",
+			"actions" => array(
+				"analytics" => "Gérer Google Analytics",
+				"adsense" => "Gérer Google Adsense",
+				"searchConsole" => "Gérer Google Search Console"
+			)
 		)
 	),
 	"PermsForum" => array(

@@ -31,6 +31,6 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategori
 	header('Location: index.php?page=forum');
 }
 else
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');
 
 ?>

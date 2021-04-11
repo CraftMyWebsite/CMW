@@ -26,24 +26,24 @@ if(Permission::getInstance()->verifPerm("connect")) {
 	$CountEditCommentaire = $get_CountEditCommentaire['nbrEdit'];
 
 	if($ExistNews == "0") {
-		header('Location: index.php?&NewsNotExist=true');
+		header('Location: index.php?page=accueil&NewsNotExist');
 	} else {
 		if(!$CheckOwnerCommentaire == $pseudo OR $adminMode != true) {
-			header('Location: index.php?&EditImpossible=true');
+			header('Location: index.php?page=accueil&EditImpossible');
 		} else {
 			if(strlen($commentaire) > 255) {
-				header('Location: index.php?&MessageTropLong=true');
+				header('Location: index.php?page=accueil&MessageTropLong');
 			} elseif(strlen($commentaire) < 6) {
-				header('Location: index.php?&MessageTropCourt=true');
+				header('Location: index.php?page=accueil&MessageTropCourt');
 			} else {
 				require_once('modele/accueil/postNews.class.php');
 				$req_EditCommentaire = new PostNews($bddConnection);
 				$req_EditCommentaire->AddEditCommentaire($id_comm, $id_news, $auteur, $commentaire, $CountEditCommentaire + 1);
-				header('Location: index.php?&MessageEditer=true');
+				header('Location: index.php?page=accueil&MessageEditer');
 			}
 		}
 	}
 } else {
-	header('Location: index.php?&NotOnline=true');
+	header('Location: index.php?page=accueil&NotOnline');
 }
 ?>

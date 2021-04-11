@@ -10,7 +10,7 @@
 	        {
 	            $data['url'] = !empty($_POST['lien']) ? $_POST['lien'] : "index.php";
 	        } else {
-	            $data['url'] = '?&page='. urlencode($_POST['page']);
+	            $data['url'] = '?page='. urlencode($_POST['page']);
 	        }
 	    } else {
 	        $data['url'] = null;
@@ -24,7 +24,6 @@
 	    
 	    $m = $Menu->getMenuWithDest(intval($_POST['id']));
 	    foreach($m as $value) {
-	        echo 'found';
 	        $data = array();
 	        $data['name'] = $_POST['name-dest'.$value['id']];
 	        if(isset($_POST['methode-dest'.$value['id']])) {
@@ -32,7 +31,7 @@
 	            {
 	                $data['url'] = !empty($_POST['lien-dest'.$value['id']]) ? $_POST['lien-dest'.$value['id']] : "index.php";
 	            } else {
-	                $data['url'] = '?&page='. urlencode($_POST['page-dest'.$value['id']]);
+	                $data['url'] = '?page='. urlencode($_POST['page-dest'.$value['id']]);
 	            }
 	        } else {
 	            $data['url'] = null;

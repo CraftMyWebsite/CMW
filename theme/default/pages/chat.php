@@ -38,7 +38,7 @@
                                         else
                                             foreach($joueurs as $value)
                                             {
-                                                ?><img class="mr-3" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=Permission::getInstance()->gradeJoueur($value);?><br/>
+                                                ?><img class="mr-3" alt="profil de <?= $_Joueur_['pseudo']; ?>" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=Permission::getInstance()->gradeJoueur($value);?><br/>
                                                 <?php
                                             }
                                         ?>
@@ -149,6 +149,14 @@
                         </div>
                     <?php endif; ?>
 
+                </div>
+            </div>
+            <?php else : ?>
+            <div class="tab-pane fade in show" aria-expanded="false">
+                <div class="info-page bg-danger">
+                    <div class="text-center">
+                        Aucun serveur n'a été enregistré !
+                    </div>
                 </div>
             </div>
         <?php endif ?>

@@ -10,7 +10,11 @@ class UploadImage {
 					$extensionFichier = strtolower ($chemin['extension']);
 					if(in_array($extensionFichier, array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico')))
 					{
-						$path = self::findFreePath(".".$extensionFichier);
+						// NETTOYAGE DE L'URL
+						$pathwaitclean = self::findFreePath(".".$extensionFichier);
+						$path = preg_replace("/(\t|\n|\v|\f|\r| |\xC2\x85|\xc2\xa0|\xe1\xa0\x8e|\xe2\x80[\x80-\x8D]|\xe2\x80\xa8|\xe2\x80\xa9|\xe2\x80\xaF|\xe2\x81\x9f|\xe2\x81\xa0|\xe3\x80\x80|\xef\xbb\xbf)+/",
+							"", $pathwaitclean);
+
 						move_uploaded_file($file['tmp_name'], $path);
 						self::checkOlderFile($_Serveur_);
 						echo $path;

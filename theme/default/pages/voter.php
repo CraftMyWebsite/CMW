@@ -126,7 +126,7 @@
                                     <?php
 
                                     if(Permission::getInstance()->verifPerm("connect") AND  isset($_GET['player']) AND $_Joueur_['pseudo'] == $_GET['player'] ) {
-                                        echo '<script>isConnect = true;</script>';
+                                        echo '<script type="application/javascript">isConnect = true;</script>';
                                     }
 
                                      $first=true; foreach($lectureJSON as $serveur) { ?>
@@ -148,8 +148,8 @@
     
                                                   ?>
 
-                                                 <button type="button" id="votebtn-<?php echo $allvote['id']; ?>" ></button>
-                                                 <script>initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>');</script>
+                                                 <button type="button" style="margin-top:15px;" id="votebtn-<?php echo $allvote['id']; ?>" ></button>
+                                                 <script type="application/javascript">initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>');</script>
                                             <?php } ?>
                                          </div>
 
@@ -160,7 +160,7 @@
                         </div>
                     </div>
                 </div>
-                <script>
+                <script type="application/javascript">
                 <?php 
                     foreach($topRecompense as $key => $value) {
                         echo "topRec.set(".$key.",JSON.parse('".$value."'));";
@@ -194,9 +194,9 @@
                                                 <th><h6>Votes</h6></th>
                                             </tr>
                                         </thead>
-                                        <body>
+                                        <tbody>
                                         <?php while($oldVote = $oldvote_req->fetch(PDO::FETCH_ASSOC))
-                                        { if($a < $_Serveur_['vote']['oldDisplay']) { ?>
+                                        { if(($a-1) < $_Serveur_['vote']['oldDisplay']) { ?>
                                             <tr>
                                                 <td><h6><?php echo $a; ?></h6></td>
                                                 <td><h6><?php echo $oldVote['pseudo']; ?></h6></td>
@@ -205,7 +205,7 @@
 
                                         <?php $a++; } else { break; } } 
                                         ?>
-                                        </body>
+                                        </tbody>
                                     </table>
                                 <?php } ?>
 

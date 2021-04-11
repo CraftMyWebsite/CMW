@@ -23,23 +23,23 @@ if(isset($_Joueur_) && ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_J
 		$ExistCommentaire = $req_ExistCommentaire->rowCount();
 		$ExistTicket = $req_ExistTicket->rowCount();
 		if($ExistTicket == "0") {
-			header('Location: index.php?&page=support&TicketNotExist=true');
+			header('Location: index.php?page=support&TicketNotExist');
 		} else {
 			if($ExistCommentaire == "0") {
-				header('Location: index.php?&page=support&CommentaireNotExist=true');
+				header('Location: index.php?page=support&CommentaireNotExist');
 			} else {
 				if($AuteurCommentaire != $pseudo OR $adminMode != true) {
-					 header('Location: index.php?&page=support&SuppressionImpossible=true');
+					 header('Location: index.php?page=support&SuppressionImpossible');
 				 } else {
 					$commentairesTickets->DeleteCommentaireTicket($id_comm, $id_ticket, $AuteurCommentaire);
-					header('Location: index.php?&page=support&SuppressionCommentaire=true');
+					header('Location: index.php?page=support&SuppressionCommentaire');
 				 }
 			}
 		}
 	} else {
-		header('Location: index.php?&page=support&SuppressionCommentaire=false');
+		header('Location: index.php?page=support&SuppressionCommentaire');
 	}
 } else {
-    header('Location: index.php?&page=support&NotOnline=true');
+    header('Location: index.php?page=support&NotOnline');
 }
 ?>

@@ -13,7 +13,7 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'addOffre')) {
 	}
 
 	require('modele/app/ckeditor.class.php');
-	$_POST['description'] = ckeditor::verif($_POST['description']);
+	$_POST['description'] = ckeditor::verif($_POST['description'],true);
 
 	$req = $bddConnection->prepare('INSERT INTO cmw_boutique_offres(nom, description, prix, nbre_vente, categorie_id, ordre, evo, max_vente) VALUES(:nom, :description, :prix, :nbre_vente, :categorie_id, :ordre, :evo, :max_vente)');
 	$req->execute(Array(

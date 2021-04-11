@@ -38,7 +38,7 @@ class vote {
 
 
     public function getLastVoteTimeMili() {
-        return empty($this->Player) ? 0 : $this->Player['date_dernier'];
+        return empty($this->Player) ? 0 : ((isset($this->Player['date_dernier']) && !empty($this->Player['date_dernier'])) ? $this->Player['date_dernier'] : 0 );
     }
 
     public function getTimeVoteTimeMili() {
@@ -78,7 +78,8 @@ class vote {
         if(!isset($serveur)) {
             $serveur = $this->lienData['serveur'];
         }
-
+        $inst = array();
+        
         $json = $json2 = json_decode($action, true); 
         foreach($json as $key => $value) { 
             if(isset($value['pourcentage']) && ((int)$value['pourcentage']) != 100) {
@@ -92,7 +93,20 @@ class vote {
                 $value['value'] = rand($value['value'], $value['value2']);
                 unset($value['value2']);
             }
+            if(isset($value['inst']) & intval($value['inst']) == 1) {
+                array_push($inst, $value);
+                unset($json2[$key]);
+            }
         }
+        
+        
+        if(!empty($inst)) {
+            $inst2['action'] = json_encode(array_values($inst));
+            $inst2['serveur'] =  $serveur;
+            $this->giveRecompense($bdd, $inst2, false);
+        }
+        
+        
         $action = json_encode(array_values($json2)); 
 
 
@@ -104,8 +118,8 @@ class vote {
         ));
     }
 
-    public function giveRecompense($bdd, $data, $jsonCon, $save = false) {
-        global $lectureJSON;
+    public function giveRecompense($bdd, $data, $save = false) {
+        global $lectureJSON, $jsonCon;
         if(!isset($data)) {
             $action = $this->lienData['action'];
         }else {
@@ -269,17 +283,16 @@ class vote {
             $url = $this->lienData['lien'];
             if(strpos($url, 'serveurs-mc.net'))
             {
-                $API_call = $this->fetch("https://serveurs-mc.net/api/hasVote/".$id."/".$this->get_client_ip()."/10");
-                $json = json_decode($API_call,true);
-                return $json["hasVote"] == "true";
+                $json = json_decode($this->fetch("https://serveurs-mc.net/api/hasVote/".$id."/".$this->get_client_ip()."/10"));
+                return $json->hasVote == "true";
             }else if(strpos($url, 'serveur-prive.net'))
             {
-                $API_call = $this->fetch("https://serveur-prive.net/api/vote/".$id."/". $this->get_client_ip());
-                return $API_call == 1;
-            } else if(strpos($url, 'serveurs-minecraft.org'))
+                $json = json_decode($this->fetch("https://serveur-prive.net/api/vote/json/".$id."/". $this->get_client_ip()));
+                return $json->status == 1;
+            } else if(strpos($url, 'serveurs-minecraft.org') & !strpos($url, 'liste-serveurs-minecraft.org'))
             {
                 $is_valid_vote = $this->fetch('https://www.serveurs-minecraft.org/api/is_valid_vote.php?id='.$id.'&ip='. $this->get_client_ip().'&duration=5');
-                return $is_valid_vote > 0;
+                return intval($is_valid_vote) > 0;
             } else if(strpos($url, 'serveurs-minecraft.com'))
             {
                 $apiaddr = 'https://serveurs-minecraft.com/api.php?Classement=' . $id .'&ip=' .  $this->get_client_ip();
@@ -297,7 +310,7 @@ class vote {
                 return false;
             } else if(strpos($url, 'serveursminecraft.fr'))
             {
-                $data = file_get_contents ( "https://serveursminecraft.fr/api/api.php?IDServeur=" . $id . "&IP=" .  $this->get_client_ip());
+                $data = $this->fetch( "https://serveursminecraft.fr/api/api.php?IDServeur=" . $id . "&IP=" .  $this->get_client_ip());
                 if ( $data == false )
                 {
                     return false;
@@ -305,7 +318,7 @@ class vote {
                 else
                 {
                     $data_decoded = json_decode($data,true);
-                    if ( $data_decoded["DateVote"] >= $data_decoded["DateActuelle"] - 360 ){return true;}else{return false;}
+                    if ( $data_decoded->DateVote >= $data_decoded->DateActuelle - 360 ){return true;}else{return false;}
                 }
             }else if(strpos($url, 'liste-minecraft-serveurs.com'))
             {
@@ -326,18 +339,18 @@ class vote {
                 $api =$this->fetch("https://www.serveursminecraft.org/sm_api/peutVoter.php?id=".$id."&ip=". $this->get_client_ip());
                 if($api == "true"){return true;}else{return false;}
             }else if(strpos($url, 'serveur-multigames.net'))  {
-                $api =$this->fetch("https://serveur-multigames.net/api/v2/vote/true/".$id."/". $this->get_client_ip());
-                if($api == "1"){return true;}else{return false;}
+                $json = json_decode($this->fetch("https://serveur-multigames.net/api/v2/vote/json/".$id."/". $this->get_client_ip()));
+                if($json->status == "passed"){return true;}else{return false;}
             }else if(strpos($url, 'minecraft-top.com'))  {
                 $api = json_decode($this->fetch("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
                 if($api->vote == 1){return true;}else{return false;}
             }else if(strpos($url, 'liste-serveurs-minecraft.org'))  {
                 $api = $this->fetch("https://api.liste-serveurs-minecraft.org/vote/vote_verification.php?server_id=".$id."&ip=".$this->get_client_ip()."&duration=360");
-                if($api == "1"){return true;}else{return false;}
+                if(intval($api) == 1){return true;}else{return false;}
             }else if(strpos($url, 'liste-serv-minecraft.fr'))  {
                 $api = json_decode($this->fetch("https://liste-serv-minecraft.fr/api/check?server=".$id."&ip=".$this->get_client_ip()));
-                if($api['status'] == 200) {
-                    if(strtotime($api["datetime_vote_end"]) < time() - 360 ) {
+                if($api->status == 200) {
+                    if(strtotime($api->datetime_vote_end) < time() - 360 ) {
                         return true;
                     } else {
                         return false;
@@ -347,10 +360,7 @@ class vote {
                 }
             }else if(strpos($url, 'minecraft-mp.com'))  {
                 $api = $this->fetch("https://minecraft-mp.com/api/?object=votes&element=claim&key=".$id."&username=".$this->Pseudo);
-                if($api == "2"){return true;}else{return false;}
-            }else if(strpos($url, 'minecraft-top.com'))  {
-                $api = json_decode($this->fetch("https://api.minecraft-top.com/v1/vote/". $this->get_client_ip()."/".$id));
-                if($api->vote == 1){return true;}else{return false;}
+                if(intval($api) == 2 ){return true;}else{return false;}
             }else {
                 return true;
             }
