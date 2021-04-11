@@ -209,7 +209,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 
 		case 'configTheme':
 			require('theme/'.$_Serveur_['General']['theme'].'/config/configAdminTraitement.php');
-			$_SESSION['referrerAdmin'] = 'theme';
 		break;
 
 		case 'creerCoupon':

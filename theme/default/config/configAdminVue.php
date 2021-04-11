@@ -64,12 +64,7 @@
                                         <h4>Modifier les couleurs du thème</h4>
 
                                         <div class="col-10 mx-auto">
-
-                                            <div class="well 3">
-                                                <h4>Thème actuel : </h4>
-                                                <h5 class="p-1 bg-secondary w-100 rounded d-block text-center" style="color: white;"><b> Thème <?= ($actualTheme === "light") ? "clair" : "sombre" ?></b></h5>
-                                            </div>
-
+                                            
                                             <h4> Présentation du thème :</h4>
 
                                             <div class="col-9 mx-auto mt-5">
@@ -87,91 +82,69 @@
                                                     <tbody>
                                                     <tr>
                                                         <td> <b> Modifier les couleurs </b> </td>
-
-
                                                         <td class="text-center">
                                                             <input type="color" id="selColor" name="main-color-bg" value="<?php echo $_Theme_['Main']['theme']['couleurs']['main-color-bg']; ?>">
                                                         </td>
-
                                                         <td class="text-center">
                                                             <input type="color" id="selColor" name="secondary-color-bg" value="<?php echo $_Theme_['Main']['theme']['couleurs']['secondary-color-bg']; ?>">
                                                         </td>
-
                                                         <td class="text-center">
                                                             <input type="color" id="selColor" name="base-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['base-color']; ?>">
                                                         </td>
-
                                                         <td class="text-center">
                                                             <input type="color" id="selColor" name="main-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['main-color']; ?>">
                                                         </td>
-
                                                         <td class="text-center">
                                                             <input type="color" id="selColor" name="active-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['active-color']; ?>">
                                                         </td>
-
                                                         <td class="text-center">
                                                             <input type="color" id="selColor" name="darkest" value="<?php echo $_Theme_['Main']['theme']['couleurs']['darkest']; ?>">
                                                         </td>
-
                                                         <td class="text-center">
                                                             <input type="color" id="selColor" name="lightest" value="<?php echo $_Theme_['Main']['theme']['couleurs']['lightest']; ?>">
                                                         </td>
-
-
-
                                                     </tr>
-
                                                     <tr id="selColor">
                                                         <td> <b> Couleur présentée </b> </td>
-
-
                                                         <td class="text-center p-0">
                                                             <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['main-color-bg']; ?>; width: 100%; padding: 0.75rem">
                                                                 &nbsp;
                                                             </div>
                                                         </td>
-
                                                         <td class="text-center p-0">
                                                             <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['secondary-color-bg']; ?>; width: 100%; padding: 0.75rem">
                                                                 &nbsp;
                                                             </div>
                                                         </td>
-
                                                         <td class="text-center p-0">
                                                             <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['base-color']; ?>; width: 100%; padding: 0.75rem">
                                                                 &nbsp;
                                                             </div>
                                                         </td>
-
                                                         <td class="text-center p-0">
                                                             <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['main-color']; ?>; width: 100%; padding: 0.75rem">
                                                                 &nbsp;
                                                             </div>
                                                         </td>
-
                                                         <td class="text-center p-0">
                                                             <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['active-color']; ?>; width: 100%; padding: 0.75rem">
                                                                 &nbsp;
                                                             </div>
                                                         </td>
-
                                                         <td class="text-center p-0">
                                                             <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['darkest']; ?>; width: 100%; padding: 0.75rem">
                                                                 &nbsp;
                                                             </div>
                                                         </td>
-
-
                                                         <td class="text-center p-0">
                                                             <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['lightest']; ?>; width: 100%; padding: 0.75rem">
                                                                 &nbsp;
                                                             </div>
                                                         </td>
-
-
                                                     </tr>
                                                     </tbody>
                                                 </table>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -290,7 +263,7 @@
 
                                             <div class="col-10 mx-auto">
 
-                                                <textarea class="form-control" name="about" id="aboutTheme">
+                                                <textarea name="about" data-UUID="0954" id="ckeditor">
                                                     <?= $_Theme_['Pied']['about'] ?>
                                                 </textarea>
 
@@ -311,11 +284,11 @@
 
             <div class="card-footer">
                 <div class="form-group text-center">
-                    <input type="submit" onClick="genJsonReseau(); sendPost('configThemeAdmin'); document.location.reload();" class="btn btn-success" value="Sauvegarder">
+                    <input type="submit" onClick="genJsonReseau(); sendPost('configThemeAdmin');" class="btn btn-success" value="Sauvegarder">
                 </div>
 
                 <script>
-                    initPost("configThemeAdmin", "admin.php?action=configTheme");
+                    initPost("configThemeAdmin", "admin.php?action=configTheme", function(data) { if(data) { setTimeout(function() { },1500); }});
                 </script>
             </div>
 
@@ -390,6 +363,4 @@
 
 
     genJsonReseau();
-
-    $("#aboutTheme").val((i, v) => v.replace(/\s{2,}/g, ''));
 </script>
