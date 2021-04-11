@@ -64,7 +64,7 @@
                                         <h4>Modifier les couleurs du thème</h4>
 
                                         <div class="col-10 mx-auto">
-                                            
+                                          
                                             <h4> Présentation du thème :</h4>
 
                                             <div class="col-9 mx-auto mt-5">
@@ -150,6 +150,7 @@
                                     </div>
 
                                 </div>
+                            </div>
 
                                     <?php
                                     $fontactubrute = $_Theme_['Main']['theme']['police'];

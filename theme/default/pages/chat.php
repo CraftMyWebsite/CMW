@@ -151,6 +151,14 @@
 
                 </div>
             </div>
+            <?php else : ?>
+            <div class="tab-pane fade in show" aria-expanded="false">
+                <div class="info-page bg-danger">
+                    <div class="text-center">
+                        Aucun serveur n'a été enregistré !
+                    </div>
+                </div>
+            </div>
         <?php endif ?>
 
     </div>

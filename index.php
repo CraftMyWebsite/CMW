@@ -1,7 +1,7 @@
 <?php // On appelle les classes du controleur qui instancies les objets principaux (BDD, config, JSONAPI...).
 ob_start();
 session_start();
-error_reporting(E_ALL);
+error_reporting(0);
 date_default_timezone_set('Europe/Paris');
 setlocale(LC_TIME, "fr_FR");
 ini_set('display_errors', 1);

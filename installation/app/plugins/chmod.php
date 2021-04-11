@@ -3,18 +3,16 @@ function VerifieChmod() {
 
     $dirR[0] = 'app/data/install.yml';
     $dirR[1] = '../modele/config/config.yml';
-    $dirR[2] = '../modele/config/configWidgets.yml';
-    $dirR[3] = '../modele/.htpasswd';
-    $dirR[4] = '../controleur/.htpasswd';
-    $dirR[5] = '../admin/actions/.htpasswd';
+    $dirR[2] = '../modele/.htpasswd';
+    $dirR[3] = '../controleur/.htpasswd';
+    $dirR[4] = '../admin/actions/.htpasswd';
 
 
     $dir[0] = 'installation/app/data/install.yml';
     $dir[1] = 'modele/config/config.yml';
-    $dir[2] = 'modele/config/configWidgets.yml';
-    $dir[3] = 'modele/.htpasswd';
-    $dir[4] = 'controleur/.htpasswd';
-    $dir[5] = 'admin/actions/.htpasswd';
+    $dir[2] = 'modele/.htpasswd';
+    $dir[3] = 'controleur/.htpasswd';
+    $dir[4] = 'admin/actions/.htpasswd';
 
     $dirDossier[0] = array('../theme/upload/', '../theme/upload/navRap/', '../theme/upload/panel/');
     $dirDossier[1] = array('../utilisateurs/');
