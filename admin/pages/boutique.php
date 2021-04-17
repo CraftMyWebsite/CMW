@@ -14,7 +14,7 @@
 <?php } else {?>
     <div class="col-lg-12 text-justify">
             <div class="alert alert-success">
-                <strong>Dans cette section vous pourrez configurer les offres proposé dans votre boutique</strong><br/>
+                <strong>Dans cette section vous pourrez configurer les offres proposées dans votre boutique</strong><br/>
             </div>
         </div>
 <div class="row">

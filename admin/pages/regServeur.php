@@ -17,7 +17,7 @@
 else
     { echo '<div class="row">'; if($_Permission_->verifPerm('PermsPanel', 'server', 'actions', 'addServer')) { ?>
     <div class="alert alert-success">
-        <strong>Vous pouvez ajouter autant de serveurs minecraft que vous souhaitez. La connexion au(x) serveur(s) est essentielle ! Si vous n'avez pas JSONAPI, une connexion RCON/Query est possible (mais privilégiez JSONAPI qui permettra plus de possibilités !(Par exemple la console ainsi que le système de grade temporaire seront impossible avec une connexion RCON/Query)). Pour vous</strong>
+        <strong>Vous pouvez ajouter autant de serveurs minecraft que vous souhaitez. La connexion au(x) serveur(s) est essentielle ! Si vous n'avez pas JSONAPI, une connexion RCON/Query est possible (mais privilégiez JSONAPI qui permettra plus de possibilités !(Par exemple la console ainsi que le système de grade temporaire seront impossible avec une connexion RCON/Query).</strong>
     </div>
 
     <div class="col-md-12 col-xl-6 col-12">
