@@ -22,13 +22,13 @@ else
           <li>Les récompenses lorsque le joueur vote X fois</li>
           <li>Les récompenses pour les 1er, 2eme, 3eme ... meilleurs voteurs à la fin du cycle</li>
         </ul>
-        Le cycle peut être définis ci dessous, il représente quand les votes vont être rénitialisé et par conséquent les récompenses enregistrés pour les meilleurs voteurs vont être distribué. Le joueur pourra les récupérer comme n'importe quelles récompense après un vote. 
+        Le cycle peut être définis ci dessous, il représente quand les votes vont être réinitialisé et par conséquent les récompenses enregistrées pour les meilleurs voteurs vont être distribués. Le joueur pourra les récupérer comme n'importe quelles récompenses après un vote. 
 
         <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'editReset')) { ?>
          <select name="type" name="type" style="margin-top:10px;margin-bottom:10px;width:200px;" class="form-control form-control-sm" onChange="if(this.value==0) { hide('recsem');hide('recmoi');hide('recheur'); } else if(this.value==1) { show('recsem');hide('recmoi'); show('recheur');} else if(this.value==2) { hide('recsem');show('recmoi');show('recheur'); }" >
                 <option value="0" <?php if($dateRec['valueType'] == 0) { echo 'selected';} ?>> Désactivé</option>
                 <option value="1" <?php if($dateRec['valueType'] == 1) { echo 'selected';} ?>> Toutes les semaines</option>
-                <option value="2" <?php if($dateRec['valueType'] == 2) { echo 'selected';} ?>> Tous mois</option>
+                <option value="2" <?php if($dateRec['valueType'] == 2) { echo 'selected';} ?>> Tous les mois</option>
               </select>
           <div id="recsem" <?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 2) { echo 'style="display:none;"';} ?>>
             <label class="control-label">Le jour de la semaine:</label>

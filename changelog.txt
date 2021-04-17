@@ -25,6 +25,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [=] : Image centré dans les offres boutique
 [=] : Mise à jour de ckeditor
 [=] : Retour des pages perso dans le ftp
+[=] : Corrections de plusieurs fautes d'orthographes sur le panel
 
 [+] : Possibilité de modifier l'ordre des menus
 [+] : Ajout de l'option instantané pour les récompenses des votes
