@@ -29,7 +29,7 @@ $_Theme_ = $configTheme->GetTableau();
     </style>
 
     <title>
-        <?= $_Serveur_['General']['name'] . " | " . (isset($_GET["page"]) ? $_GET["page"] : $_Serveur_['General']['description']) ?>
+        <?= $_Serveur_['General']['name'] . " | " . (isset($_GET["page"]) ? ucfirst($_GET["page"]) : $_Serveur_['General']['description']) ?>
     </title>
 
     <!-- Meta -->
