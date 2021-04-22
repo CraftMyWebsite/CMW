@@ -15,6 +15,26 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 
 			$_POST["show_email"] = !empty($_POST['show_email']) ? false : true;
 			$get_Lien = 'http://'.$_SERVER['HTTP_HOST'].'/index.php?&action=validationMail&pseudo='.urlencode($get_Pseudo).'&cle='.urldecode($get_CleUnique).'';
+			
+			//Gestion UUID
+	        $UUID = file_get_contents("https://api.mojang.com/users/profiles/minecraft/".$_POST['pseudo']);
+	        $obj = json_decode($UUID);
+	        $UUID = $obj->{'id'};
+
+	        if ($UUID == NULL) {
+	            $UUID = "INVALIDE";
+	        }
+
+	            //CONVERSION UUIDF
+	       if ($UUID != "INVALIDE") {
+	            $UUIDF = substr_replace($UUID, "-", 8, 0);
+	            $UUIDF = substr_replace($UUIDF, "-", 13, 0);
+	            $UUIDF = substr_replace($UUIDF, "-", 18, 0);
+	            $UUIDF = substr_replace($UUIDF, "-", 23, 0);
+	       }else{
+	            $UUIDF = "INVALIDE";
+	       }
+
 			if (filter_var(get_client_ip_env(), FILTER_VALIDATE_IP)){
 					$getIp = get_client_ip_env();
 				}else{
@@ -80,7 +100,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 									$souvenir = true;
 								else
 									$souvenir = false;
-								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), $souvenir, 0, $_POST["age"], $getIp, $_POST["show_email"], $bddConnection);
+								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), $souvenir, 0, $_POST["age"], $getIp, $_POST["show_email"], $UUID, $UUIDF, $bddConnection);
 
 								require_once('modele/joueur/ScriptBySprik07/inscriptionCleUnique.class.php');
 								$userInsertIP = new InsertCleUnique($get_CleUnique, $get_Pseudo, $bddConnection);
@@ -118,7 +138,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 							} else {
 
 								require_once('modele/joueur/inscription.class.php');
-								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), 1, 0, $_POST["age"], $getIp, $_POST["show_email"], $bddConnection);
+								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), 1, 0, $_POST["age"], $getIp, $_POST["show_email"], $UUID, $UUIDF, $bddConnection);
 
 
 								require_once('modele/joueur/ScriptBySprik07/inscriptionValidateMail.class.php');
