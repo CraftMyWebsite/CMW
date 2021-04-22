@@ -51,5 +51,5 @@ if (Permission::getInstance()->verifPerm("connect") and isset($_GET['id'], $_GET
 
     <?php endif; ?>
 <?php else :
-    header('Location: ?page=erreur&erreur=0');
+    header('Location: index.php?page=erreur&erreur=0');
 endif;  ?>

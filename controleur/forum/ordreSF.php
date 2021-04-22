@@ -26,5 +26,5 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') 
 			'id' => $id
 		));
 	}
-	header('Location: sous_forum_categorie/'.$_GET['id_cat']);
+	header('Location: index.php?page=sous_forum_categorie&id='.$_GET['id_cat'].'&id_sous_forum'.$_GET['id']);
 }

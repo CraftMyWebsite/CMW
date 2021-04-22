@@ -10,12 +10,20 @@ class urlRewrite
 	        $url = self::getSiteUrl();
 	        $arg = "";
 	        $first = true;
-	        foreach($_GET as $value) {
+	        foreach($_GET as $key => $value) {
 	            if($first) {
 	                $first = false;
-	                $arg .= $value;
+	                if(!isset($value) | empty($value)) {
+	                    $arg .= "/".$key;
+	                } else {
+	                   $arg .= $value;
+	                }
 	            } else {
-	                $arg .= "/".$value;
+	                if(!isset($value) | empty($value)) {
+	                    $arg .= "/".$key;
+	                } else {
+	                   $arg .= "/".$value;
+	                }
 	            }
 	        }
 	        header("Location: ".$url.$arg);

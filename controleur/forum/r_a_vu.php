@@ -9,10 +9,10 @@ if(isset($_GET['id_a']) AND Permission::getInstance()->verifPerm('PermsForum', '
 	$req->execute(array(
 		'id' => $id
 	));
-	header('Location: post/' .$id_t. '/' .$page. '#' .$id. '');
+	header('Location: index.php?page=post&id=' .$id_t. '&page_post=' .$page. '#' .$id. '');
 	
 }
 else
-	header('Location: erreur/0');
+	header('Location: index.php?page=erreur&erreur=0');
 
 ?>

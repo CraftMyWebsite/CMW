@@ -24,30 +24,30 @@ if(Permission::getInstance()->verifPerm("connect")) {
     $id = $get_CountReportNews['id'];
 
     if($ExistNews == "0") {
-        header('Location: accueil/NewsNotExist');
+        header('Location: index.php?page=accueil&NewsNotExist');
     } else {
         if($pseudo == $victime) {
-    	    header('Location: accueil/NotReportYourSelf');
+    	    header('Location: index.php?page=accueil&NotReportYourSelf');
     	} else {
             if($ExistReport == "1") {
-                header('Location: accueil/ReportVictimeExist');
+                header('Location: index.php?page=accueil&ReportVictimeExist');
             } else {
                 if($ExistVictime == "0") {
-    	            header('Location: accueil/PlayerNotExist');
+    	            header('Location: index.php?page=accueil&PlayerNotExist');
                 } else {
                     if($ExistCommentaire == "0") {
-                        header('Location: accueil/CommentaireNotExist');
+                        header('Location: index.php?page=accueil&CommentaireNotExist');
                     } else {
     	                require_once('modele/accueil/postNews.class.php');
     	                $req_ReportVictime = new PostNews($bddConnection);
      	                $req_ReportVictime->AddReport($id + 1, $id_news, $id_comm, $pseudo, $message, $victime);
-    	                header('Location: accueil/ReportEnvoyer');
+    	                header('Location: index.php?page=accueil&ReportEnvoyer');
                     }
                 }
             }
         }
     }
 } else {
-	header('Location: accueil/NotOnline');
+	header('Location: index.php?page=accueil&NotOnline');
 }
 ?>

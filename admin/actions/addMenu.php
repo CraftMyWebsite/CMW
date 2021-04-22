@@ -13,7 +13,7 @@ if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) {
         {
             $data['url'] = !empty($_POST['lien']) ? $_POST['lien'] : "index.php";
         } else {
-            $data['url'] = '?&page='. urlencode($_POST['page']);
+            $data['url'] = '?page='. urlencode($_POST['page']);
         }
     } else {
         $data['url'] = null;

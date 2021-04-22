@@ -86,7 +86,7 @@
                                                         <?php } else if ($offresTableau[$i]['nbre_vente'] == 0) { ?>
                                                             <a href="#" class="btn btn-main disabled" disabled>Rupture de stock</a>
                                                         <?php } else { ?>
-                                                            <a href="?action=addOffrePanier&offre=<?= $offresTableau[$i]['id'] ?>&quantite=1" class="btn btn-main">
+                                                            <a href="index.php?action=addOffrePanier&offre=<?= $offresTableau[$i]['id'] ?>&quantite=1" class="btn btn-main">
                                                                 <i class="fa fa-cart-arrow-down"></i> Ajouter au panier
                                                             </a>
                                                         <?php } ?>

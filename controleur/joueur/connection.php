@@ -29,25 +29,25 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND !empty($_POST['pseudo'])
 					$reconnexion = 1;
 				}
 				$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], $reconnexion, $donneesJoueur['mdp']);
-					header('Location: accueil/Connection');
+					header('Location: index.php?page=accueil&Connection');
 			}
 			else
 			{
-				header('Location: erreur/14');
+				header('Location: index.php?page=erreur&erreur=14');
 			}
 		}
 		else 
 		{ 
-			header('Location: erreur/6');
+			header('Location: index.php?page=erreur&erreur=6');
 		}
 	}
 	else
 	{
-		header('Location: erreur/5');
+		header('Location: index.php?page=erreur&erreur=5');
 	}
 }
 else
 {
-	header('Location: erreur/4');
+	header('Location: index.php?page=erreur&erreur=4');
 }
 ?>

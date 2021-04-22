@@ -13,6 +13,11 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix images non fonctionnel sur la boutique
 [|] : Fix historique de vote
 [|] : Fix page boutique qui ne s'affiché pas
+[|] : Fix responsive des statistique sur le panel
+[|] : Fix extension sur l'installateur
+[|] : Fix du mdp inchangeable depuis son profil
+[|] : Fix tache Cron qui ne fonctionné pas
+[|] : Fix sur le panier pour les achats des joueurs devant être connecté sur le serveur
 
 [=] : Fix sécurité sur le cms
 [=] : Menu désormais stocker dans la base de données
@@ -32,9 +37,12 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [+] : Possibilité de changer la devise monétaire de paypal depuis le panel
 [+] : Ajout d'un système de SEO au thème default
 [+] : Ajout des services google sur le cms
+[+] : Nouveau système de statistique sur le panel
 [+] : Ajout des URLRewrite à l'ensemble des pages du cms (page public)
 [+] : Création/édition de page du panel avec php
 [+] : Vérification du mdp lors du changement de mail
+[+] : Nouvelle page de profil
+
 
 
 Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir, Emilien52

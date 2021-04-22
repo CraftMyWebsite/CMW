@@ -7,6 +7,10 @@ require("modele/accueil/miniature.class.php");
 $_Minia_ = new miniature($bddConnection);
 $_Minia_ = $_Minia_->getMinia();
 
+require("modele/widgets.class.php");
+$_Widgets_ = new widgets($bddConnection);
+$_Widgets_ = $_Widgets_->getWidgets();
+
 
 // On inclut le fichier de contrôle de la maintenance
 include('controleur/maintenance.php');

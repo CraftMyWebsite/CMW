@@ -7,12 +7,12 @@ if(isset($_GET['id']) AND Permission::getInstance()->verifPerm('PermsForum', 'mo
 	$update->execute(array(
 		'id' => $id
 	));
-	header('Location: post/' .$id);
+	header('Location: index.php?page=post&id=' .$id);
 	exit();
 }
 else
 {
-	header('Location: erreur/0');
+	header('Location: index.php?page=erreur&erreur=0');
 	exit();
 }
 

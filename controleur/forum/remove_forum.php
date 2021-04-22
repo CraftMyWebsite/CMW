@@ -6,17 +6,17 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') 
 	$remove->execute(array(
 		'id' => $id
 	));
-	header('Location: forum');
+	header('Location: index.php?page=forum');
 }
 elseif(!isset($_Joueur_))
 {
-	header('Location: erreur/16');
+	header('Location: index.php?page=erreur&erreur=16');
 }
 elseif($_Joueur_ != 1)
 {
-	header('Location: erreur/7');
+	header('Location: index.php?page=erreur&erreur=7');
 }
 else
 {
-	header('Location: erreur/0'); 
+	header('Location: index.php?page=erreur&erreur=0'); 
 }
