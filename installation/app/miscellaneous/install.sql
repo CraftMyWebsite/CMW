@@ -405,6 +405,8 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
   `show_email` tinyint(1) UNSIGNED,
   `achats` text NULL,
   `signature` text,
+  `UUID` varchar(32),
+  `UUIDF` varchar(36),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
