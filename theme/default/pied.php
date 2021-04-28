@@ -57,7 +57,7 @@ $_Theme_ = $_Theme_->GetTableau();
                 <div class="col-7">
                     <div class="copyright">
                         Tous droits réservés, site créé pour le serveur <?= $_Serveur_['General']['name']; ?> <br />
-                        <small><a href="https://craftmywebsite.fr" target="_blank">CraftMyWebsite.fr</a>#<?= $versioncms; ?></small>
+                        <small><a href="https://craftmywebsite.fr" target="_blank">CraftMyWebsite.fr</a>#<?= $displayversioncms; ?></small>
                     </div>
                 </div>
             </div>
