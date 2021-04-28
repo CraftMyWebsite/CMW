@@ -50,21 +50,21 @@ RewriteRule boutique/ajout index.php?page=boutique&ajout [L]
 RewriteRule chat/success index.php?page=chat&success [L]
 RewriteRule chat/erreur index.php?page=chat&erreur [L]
 
-RewriteRule ^erreur/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ /?page=erreur&erreur=$1&type=$2&titre=$3&contenue=$4 [L]
-RewriteRule ^erreur/([^/]*)$ /?page=erreur&erreur=$1 [L]
+RewriteRule ^erreur/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?page=erreur&erreur=$1&type=$2&titre=$3&contenue=$4 [L]
+RewriteRule ^erreur/([^/]*)$ index.php?page=erreur&erreur=$1 [L]
 
-RewriteRule ^confirmation/([^/]*)/([^/]*)$ /?page=confirmation&id_topic=$1&choix=$2 [L]
+RewriteRule ^confirmation/([^/]*)/([^/]*)$ index.php?page=confirmation&id_topic=$1&choix=$2 [L]
 
 
 
 RewriteRule ^post/([^/]*)$ index.php?page=post&id=$1 [L]
 RewriteRule ^editForum/([^/]*)/([^/]*)$ index.php?page=editForum&objet=$1&id=$2 [L]
 RewriteRule ^forum/postSignalement$ index.php?page=forum&postSignalement [L]
-RewriteRule ^post/([^/]*)/([^/]*)$ /?page=post&id=$1&page_post=$2 [L]
+RewriteRule ^post/([^/]*)/([^/]*)$ index.php?page=post&id=$1&page_post=$2 [L]
 RewriteRule ^forum_categorie/([^/]*)$ index.php?page=forum_categorie&id=$1 [L]
-RewriteRule ^sous_forum_categorie/([^/]*)/([^/]*)$ /?page=sous_forum_categorie&id=$1&id_sous_forum=$2 [L]
-RewriteRule ^sous_forum_categorie/([^/]*)/([^/]*)/([^/]*)$ /?page=sous_forum_categorie&id=$1&id_sous_forum=$2&page_topic=$3 [L]
-RewriteRule ^forum_categorie/([^/]*)/([^/]*)$ /?page=forum_categorie&id=$1&page_topic=$2 [L] 
+RewriteRule ^sous_forum_categorie/([^/]*)/([^/]*)$ index.php?page=sous_forum_categorie&id=$1&id_sous_forum=$2 [L]
+RewriteRule ^sous_forum_categorie/([^/]*)/([^/]*)/([^/]*)$ index.php?page=sous_forum_categorie&id=$1&id_sous_forum=$2&page_topic=$3 [L]
+RewriteRule ^forum_categorie/([^/]*)/([^/]*)$ index.php?page=forum_categorie&id=$1&page_topic=$2 [L] 
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1$1 [R=301,L]

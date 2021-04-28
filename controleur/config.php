@@ -17,7 +17,6 @@
 
 	if(!isset($_Serveur_['lastCMWCheck']) || (isset($_Serveur_['lastCMWCheck']) && $_Serveur_['lastCMWCheck'] < time())) {
 		$_Serveur_['lastCMWCheck'] = time() + 3600;
-		$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
 		$URLWEBSITE = "http://".$_SERVER['HTTP_HOST']; 
 		$SYSTEMINFO = "";
 		if (function_exists('curl_init') and extension_loaded('curl')) {    
@@ -38,10 +37,12 @@
         } else {    
             $SYSTEMINFO = @file_get_contents('https://craftmywebsite.fr/information/website.php?href='. $URLWEBSITE);    
         }   
-
-		if($SYSTEMINFO != ""){
-			echo $SYSTEMINFO;
-		}
+        if($SYSTEMINFO != "") {
+        	$_Serveur_['SYSTEMINFO'] = $SYSTEMINFO;
+        } else if(isset($_Serveur_['SYSTEMINFO'])) {
+        	unset($_Serveur_['SYSTEMINFO']);
+        }
+        $ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
 	}
 	
 	$configLecture = new Lire('modele/config/configWidgets.yml');

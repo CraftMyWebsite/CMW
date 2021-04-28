@@ -1,5 +1,25 @@
 <script type="application/javascript">
     
+    function cmw() {
+        console.log("Version CMS: <?= $versioncms; ?>");
+        if(document.querySelectorAll("[versioncms]").length > 0) {
+            console.log("Version affiché");
+        } else {
+            console.log("Version non affiché");
+        }
+        <?php if(isset($_Serveur_['SYSTEMINFO'])) { ?>
+            console.log("SYSTEMINFO: <?=$_Serveur_['SYSTEMINFO']?>");
+        <?php } else { ?>
+            console.log("Aucune info");
+        <?php } 
+        if(!isset($_Serveur_['lastCMWCheck']) && $_Serveur_['lastCMWCheck'] < time() && $_Serveur_['lastCMWCheck'] < time() + 86400) { ?>
+            console.log("La dernière vérification du site web est trop ancienne! Le système peut avoir été enlevé manuellement");
+        <?php }  else if($_Serveur_['lastCMWCheck'] > time()) {
+            $time = round(($_Serveur_['lastCMWCheck'] - time()) / 60); ?>
+            console.log("Dernière vérification il y a <?=$time?> minute(s)");
+         <?php } ?>
+    }
+
     toastr.options = {
         "closeButton"   : true,
         "debug"         : true,
