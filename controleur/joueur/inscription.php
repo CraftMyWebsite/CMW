@@ -15,25 +15,6 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 
 			$_POST["show_email"] = !empty($_POST['show_email']) ? false : true;
 			$get_Lien = 'http://'.$_SERVER['HTTP_HOST'].'/index.php?&action=validationMail&pseudo='.urlencode($get_Pseudo).'&cle='.urldecode($get_CleUnique).'';
-			
-			//Gestion UUID
-	        $UUID = file_get_contents("https://api.mojang.com/users/profiles/minecraft/".$_POST['pseudo']);
-	        $obj = json_decode($UUID);
-	        $UUID = $obj->{'id'};
-
-	        if ($UUID == NULL) {
-	            $UUID = "INVALIDE";
-	        }
-
-	            //CONVERSION UUIDF
-	       if ($UUID != "INVALIDE") {
-	            $UUIDF = substr_replace($UUID, "-", 8, 0);
-	            $UUIDF = substr_replace($UUIDF, "-", 13, 0);
-	            $UUIDF = substr_replace($UUIDF, "-", 18, 0);
-	            $UUIDF = substr_replace($UUIDF, "-", 23, 0);
-	       }else{
-	            $UUIDF = "INVALIDE";
-	       }
 
 			if (filter_var(get_client_ip_env(), FILTER_VALIDATE_IP)){
 					$getIp = get_client_ip_env();
@@ -87,6 +68,22 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 							$rep_countEmailBdd = $req_countEmailBdd->getReponseConnection();
 							$CountEmailBdd = $rep_countEmailBdd->rowCount();
 
+							//Gestion UUID
+							require_once("modele/vote.class.php");
+							$UUID = vote::fetch("https://api.mojang.com/users/profiles/minecraft/".$_POST['pseudo']);
+							$obj = json_decode($UUID);
+							$UUID = $obj->{'id'};
+							
+							//CONVERSION UUIDF
+							if ($UUID != "INVALIDE" && $UUID != null) {
+							    $UUIDF = substr_replace($UUID, "-", 8, 0);
+							    $UUIDF = substr_replace($UUIDF, "-", 13, 0);
+							    $UUIDF = substr_replace($UUIDF, "-", 18, 0);
+							    $UUIDF = substr_replace($UUIDF, "-", 23, 0);
+							}else{
+							    $UUIDF = "INVALIDE";
+							}
+							
 							if ($ApiMailBdd['etatMail'] == "1") {
 
 								if($CountEmailBdd > $ApiMailBdd['strictMail'])

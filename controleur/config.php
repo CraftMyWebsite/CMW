@@ -18,26 +18,9 @@
 	if(!isset($_Serveur_['lastCMWCheck']) || (isset($_Serveur_['lastCMWCheck']) && $_Serveur_['lastCMWCheck'] < time())) {
 		$_Serveur_['lastCMWCheck'] = time() + 3600;
 		$URLWEBSITE = "http://".$_SERVER['HTTP_HOST']; 
-		$SYSTEMINFO = "";
-		if (function_exists('curl_init') and extension_loaded('curl')) {    
-            $ch = curl_init();  
-
-            curl_setopt($ch, CURLOPT_URL,'https://craftmywebsite.fr/information/website.php?href='. $URLWEBSITE);    
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);    
-            curl_setopt($ch, CURLOPT_TIMEOUT, 5);   
-
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); 
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);    
-
-            $output = curl_exec($ch);   
-            curl_close($ch);    
-
-            $SYSTEMINFO = $output; 
-        } else {    
-            $SYSTEMINFO = @file_get_contents('https://craftmywebsite.fr/information/website.php?href='. $URLWEBSITE);    
-        }   
-        if($SYSTEMINFO != "") {
+		require_once("modele/vote.class.php");
+		$SYSTEMINFO = vote::fetch('https://craftmywebsite.fr/information/website.php?href='. $URLWEBSITE);
+        if($SYSTEMINFO != "" && !empty($SYSTEMINFO)) {
         	$_Serveur_['SYSTEMINFO'] = $SYSTEMINFO;
         } else if(isset($_Serveur_['SYSTEMINFO'])) {
         	unset($_Serveur_['SYSTEMINFO']);
