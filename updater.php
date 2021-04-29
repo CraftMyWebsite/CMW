@@ -10,7 +10,7 @@ if(isset($_POST['go']) AND $_POST['go'] == 1)
 {
 	//Modifcation des fichiers
 	$archiveUpdate = new ZipArchive;
-	if($archiveUpdate->open('update.zip') === TRUE || true)
+	if($archiveUpdate->open('update.zip') === TRUE)
 	{
 		//$archiveUpdate->extractTo(__DIR__);
 		//$archiveUpdate->close();
