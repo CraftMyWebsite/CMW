@@ -10,7 +10,7 @@ if(isset($_POST['go']) AND $_POST['go'] == 1)
 {
 	//Modifcation des fichiers
 	$archiveUpdate = new ZipArchive;
-	if($archiveUpdate->open('update.zip') === TRUE || true)
+	if($archiveUpdate->open('update.zip') === TRUE)
 	{
 		//$archiveUpdate->extractTo(__DIR__);
 		//$archiveUpdate->close();
@@ -147,8 +147,44 @@ else
 
 // https://github.com/guedesite/CMWListDeleteFile
 function file181to182() {
-	
-
+	unlink('admin\actions\addRapNav.php');
+    unlink('admin\actions\changeSlider.php');
+    unlink('admin\actions\creerSection.php');
+    unlink('admin\actions\downWidget.php');
+    unlink('admin\actions\editMenuListe.php');
+    unlink('admin\actions\editPermissions.php');
+    unlink('admin\actions\editRapNav.php');
+    unlink('admin\actions\getMenuLien.php');
+    unlink('admin\actions\newLienMenu.php');
+    unlink('admin\actions\newListeMenu.php');
+    unlink('admin\actions\newSlider.php');
+    unlink('admin\actions\newWidget.php');
+    unlink('admin\actions\nouveauMenuListeLien.php');
+    unlink('admin\actions\postNavRap.php');
+    unlink('admin\actions\supprLienMenu.php');
+    unlink('admin\actions\supprLienMenuDeroulant.php');
+    unlink('admin\actions\supprMini.php');
+    unlink('admin\actions\supprSection.php');
+    unlink('admin\actions\supprWidget.php');
+    unlink('admin\actions\upWidget.php');
+    unlink('controleur\joueur\changeMdp.php');
+    unlink('controleur\joueur\changeProfil.php');
+    unlink('controleur\joueur\changeProfilAutres.php');
+    unlink('controleur\joueur\modifImgProfil.php');
+    unlink('controleur\paypal\api.class.php');
+    unlink('controleur\paypal\cancel.php');
+    unlink('controleur\paypal\fonction_api.php');
+    unlink('controleur\paypal\index.php');
+    unlink('controleur\paypal\return.php');
+    unlink('controleur\profil\index.php');
+    unlink('controleur\profil\serveur.php');
+    unlink('modele\app\accueil.class.php');
+    unlink('modele\config\accueil.yml');
+    unlink('modele\config\configMenu.yml');
+    unlink('modele\config\configStats.yml');
+    unlink('modele\config\configWidgets.yml');
+    unlink('modele\page.class.php');
+    unlink('theme\upload\navRap\miniature-demo-1.jpg');
 }
 
 function bdd181to182($bddConnection) {
