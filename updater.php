@@ -12,16 +12,16 @@ if(isset($_POST['go']) AND $_POST['go'] == 1)
 	$archiveUpdate = new ZipArchive;
 	if($archiveUpdate->open('update.zip') === TRUE)
 	{
-		//$archiveUpdate->extractTo(__DIR__);
-		//$archiveUpdate->close();
+		$archiveUpdate->extractTo(__DIR__);
+		$archiveUpdate->close();
 
+        bdd181to182($bddConnection);
 		accueil181to182($bddConnection);
 		widgets181to182($bddConnection);
         pages181to182($bddConnection);
-		bdd181to182($bddConnection);
 		file181to182();
 
-		// unlink('update.zip');
+		unlink('update.zip');
 		echo 'Mise à jour réussie ! <a href="index.php?&removeUpdater=true">Aller sur votre site</a>';
 	}
 }
@@ -147,44 +147,44 @@ else
 
 // https://github.com/guedesite/CMWListDeleteFile
 function file181to182() {
-	unlink('admin\actions\addRapNav.php');
-    unlink('admin\actions\changeSlider.php');
-    unlink('admin\actions\creerSection.php');
-    unlink('admin\actions\downWidget.php');
-    unlink('admin\actions\editMenuListe.php');
-    unlink('admin\actions\editPermissions.php');
-    unlink('admin\actions\editRapNav.php');
-    unlink('admin\actions\getMenuLien.php');
-    unlink('admin\actions\newLienMenu.php');
-    unlink('admin\actions\newListeMenu.php');
-    unlink('admin\actions\newSlider.php');
-    unlink('admin\actions\newWidget.php');
-    unlink('admin\actions\nouveauMenuListeLien.php');
-    unlink('admin\actions\postNavRap.php');
-    unlink('admin\actions\supprLienMenu.php');
-    unlink('admin\actions\supprLienMenuDeroulant.php');
-    unlink('admin\actions\supprMini.php');
-    unlink('admin\actions\supprSection.php');
-    unlink('admin\actions\supprWidget.php');
-    unlink('admin\actions\upWidget.php');
-    unlink('controleur\joueur\changeMdp.php');
-    unlink('controleur\joueur\changeProfil.php');
-    unlink('controleur\joueur\changeProfilAutres.php');
-    unlink('controleur\joueur\modifImgProfil.php');
-    unlink('controleur\paypal\api.class.php');
-    unlink('controleur\paypal\cancel.php');
-    unlink('controleur\paypal\fonction_api.php');
-    unlink('controleur\paypal\index.php');
-    unlink('controleur\paypal\return.php');
-    unlink('controleur\profil\index.php');
-    unlink('controleur\profil\serveur.php');
-    unlink('modele\app\accueil.class.php');
-    unlink('modele\config\accueil.yml');
-    unlink('modele\config\configMenu.yml');
-    unlink('modele\config\configStats.yml');
-    unlink('modele\config\configWidgets.yml');
-    unlink('modele\page.class.php');
-    unlink('theme\upload\navRap\miniature-demo-1.jpg');
+	unlink('admin/actions/addRapNav.php');
+    unlink('admin/actions/changeSlider.php');
+    unlink('admin/actions/creerSection.php');
+    unlink('admin/actions/downWidget.php');
+    unlink('admin/actions/editMenuListe.php');
+    unlink('admin/actions/editPermissions.php');
+    unlink('admin/actions/editRapNav.php');
+    unlink('admin/actions/getMenuLien.php');
+    unlink('admin/actions/newLienMenu.php');
+    unlink('admin/actions/newListeMenu.php');
+    unlink('admin/actions/newSlider.php');
+    unlink('admin/actions/newWidget.php');
+    unlink('admin/actions/nouveauMenuListeLien.php');
+    unlink('admin/actions/postNavRap.php');
+    unlink('admin/actions/supprLienMenu.php');
+    unlink('admin/actions/supprLienMenuDeroulant.php');
+    unlink('admin/actions/supprMini.php');
+    unlink('admin/actions/supprSection.php');
+    unlink('admin/actions/supprWidget.php');
+    unlink('admin/actions/upWidget.php');
+    unlink('controleur/joueur/changeMdp.php');
+    unlink('controleur/joueur/changeProfil.php');
+    unlink('controleur/joueur/changeProfilAutres.php');
+    unlink('controleur/joueur/modifImgProfil.php');
+    unlink('controleur/paypal/api.class.php');
+    unlink('controleur/paypal/cancel.php');
+    unlink('controleur/paypal/fonction_api.php');
+    unlink('controleur/paypal/index.php');
+    unlink('controleur/paypal/return.php');
+    unlink('controleur/profil/index.php');
+    unlink('controleur/profil/serveur.php');
+    unlink('modele/app/accueil.class.php');
+    unlink('modele/config/accueil.yml');
+    unlink('modele/config/configMenu.yml');
+    unlink('modele/config/configStats.yml');
+    unlink('modele/config/configWidgets.yml');
+    unlink('modele/page.class.php');
+    unlink('theme/upload/navRap/miniature-demo-1.jpg');
 }
 
 function bdd181to182($bddConnection) {
@@ -212,6 +212,14 @@ function bdd181to182($bddConnection) {
       type int(1) DEFAULT 0,
       lien varchar(100),
       ordre int(2)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+
+    $bddConnection->exec("CREATE TABLE IF NOT EXISTS cmw_menu (
+      `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      `name` varchar(100),
+      `dest` int(11),
+      `url` varchar(100) DEFAULT NULL,
+      `ordre` int(2)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
     $bddConnection->exec("INSERT INTO `cmw_menu` (`id`, `dest`, `url`, `ordre`, `name`) VALUES
@@ -286,7 +294,8 @@ function accueil181to182($bddConnection) {
             $infos['message'] = $value['message'];
             $infos['type'] = $value['type'] == "lien" ? 0 : 1;
             $infos['lien'] = $value['lien'];
-            $infos['image'] = $value['image'];
+            $infos['image'] = str_replace("miniature-demo-1.jpg", "miniature-demo-1.png",str_replace("miniature-demo-2.jpg", "miniature-demo-1.png",str_replace("miniature-demo-3.jpg", "miniature-demo-1.png",$value['image'])));
+
             $req = $bddConnection->prepare("INSERT INTO `cmw_miniature` (`message`, `image`, `type`, `lien`, `ordre`) VALUES (:message, :image, :type, :lien, :ordre);");
             $req->execute($infos);
             $i++;
