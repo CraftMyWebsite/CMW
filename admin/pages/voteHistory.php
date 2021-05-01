@@ -158,7 +158,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1; foreach($oldHistory as $value) {  if($i < 21) {?>
+                                <?php $i = 0; foreach($oldHistory as $value) {  if($i < 20) {?>
                                     <tr>
                                         <td><?php echo $i; ?></td>
                                         <td ><?php echo $value['pseudo']; ?></td>
