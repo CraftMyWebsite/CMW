@@ -108,7 +108,7 @@ class Panier
 		if($reduc == 1)
 			return $total;
 		else
-			return $total*(1-$_SESSION['panier']['reduction']);
+		    return $total*(1-$_SESSION['panier']['reduction']);
 	}
 	
 	public function compterArticle()

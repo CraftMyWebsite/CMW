@@ -15,7 +15,7 @@ if(isset($_POST['ajax'])){
 		<td> <?= Permission::getInstance()->gradeJoueur($value["pseudo"]); ?> </td>
 		<td> <?= $value['tokens']; ?> </td>
 		<td>
-			<a href="?page=profil&profil=<?= $value['pseudo']; ?>" class="btn btn-reverse">Voir le compte</a>
+			<a href="profil/<?= $value['pseudo']; ?>" class="btn btn-reverse">Voir le compte</a>
 		</td>
 	</tr>
 <?php }

@@ -54,8 +54,7 @@ class MinecraftPing {
 			}
 
 			$socket = @fsockopen($address, $port, $errno, $errstr, $timeout);
-			if(!$socket) {
-				@fclose($socket);
+			if(!is_resource($socket)) {
 				throw new Exception("[MinecraftPing] Impossible de créé une connexion: $errstr");
 			}
 			stream_set_timeout($socket, $timeout);
@@ -67,7 +66,7 @@ class MinecraftPing {
 			@fclose($socket);
 		}
 		catch(Exception $e) {
-			if($socket != null) {
+			if($socket != null && is_resource($socket)) {
 				@fclose($socket);
 			}
  			error_log($e->getMessage());

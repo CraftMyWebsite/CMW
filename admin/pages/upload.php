@@ -42,7 +42,7 @@
             <div class="card-header">
                 <h3 class="card-title">
                     <strong>
-                        Liste des images uploadés
+                        Liste des images uploadées
                     </strong>
                 </h3>
             </div>

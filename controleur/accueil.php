@@ -1,5 +1,5 @@
 <?php
-function GetClientIpEnv() 
+function GetClientIpEnv()
 {
 	$ipaddress = '';
 	if (getenv('HTTP_CLIENT_IP')) {
@@ -17,12 +17,10 @@ function GetClientIpEnv()
 	} else {
 		$ipaddress = '0.0.0.0';
 	}
-	return $ipaddress;
+	return htmlspecialchars($ipaddress);
 }
 
-require_once('modele/app/accueil.class.php');
-$AccueilData = new AccueilData($bddConnection);
-$newsRecup = $AccueilData->GetNews();
+$newsRecup = $bddConnection->query('SELECT * FROM cmw_news ORDER BY epingle DESC, date DESC');
 
 $i = 0;
 while($newsDonnees = $newsRecup->fetch(PDO::FETCH_ASSOC))
@@ -36,34 +34,10 @@ while($newsDonnees = $newsRecup->fetch(PDO::FETCH_ASSOC))
 	$i++;
 }
 
-$lectureAccueil = new Lire('modele/config/accueil.yml');
-$lectureAccueil = $lectureAccueil->GetTableau();
-
-$sliders = $lectureAccueil['Slider'];
-$iSliders = count($lectureAccueil['Slider']);
 
 $couleurInfos[0] = '1';
 $couleurInfos[1] = '2';
 $couleurInfos[2] = '3';
-
-// rajout //
-
-$getIp = GetClientIpEnv();
-$getDates = date("Y-m-d");
-$getOldDates = strftime("%Y-%m-%d", mktime(0, 0, 0, date('m'), date('d')-7, date('y'))); 
-
-$repCheckVisit = $AccueilData->CheckVisit($getIp, $getDates);
-$CheckVisit = $repCheckVisit->rowCount();
-
-$repTotalVisits = $AccueilData->GetTotalVisits();
-$getTotalVisits = $repTotalVisits->fetch(PDO::FETCH_ASSOC);
-$totalVisits = $getTotalVisits['id'];
-
-if($CheckVisit == "0") {
-	$AccueilData->AddVisit($totalVisits + 1, $getIp, $getDates);
-}
-
-$AccueilData->DelOldVisits($getOldDates);
 
 require_once('modele/accueil/accueilNews.class.php');
 $accueilNews = new accueilNews($bddConnection);

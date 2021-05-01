@@ -8,58 +8,57 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
+	    
+	    case 'getUrlContent':
+	    	require('admin/actions/getUrlContent.php');
+	    	exit();
+	    case 'mooveWidgets':
+	        require('admin/actions/mooveWidgets.php');
+	        exit();
+	    case 'addWidgets':
+	    	require('admin/actions/addWidgets.php');
+	    	exit();
+	    case 'editWidgets':
+	    	require('admin/actions/editWidgets.php');
+	    	exit();
+	    case 'supprWidgets':
+	    	require('admin/actions/supprWidgets.php');
+	    	exit();
+	    case 'mooveMenu':
+	        require('admin/actions/mooveMenu.php');
+	        exit();
+	    case 'mooveMinia':
+	        require('admin/actions/mooveMinia.php');
+	        exit();
 		case 'supprUpload': 
 			require('admin/actions/supprUpload.php');
 			exit();
 		case 'editUploadImage':
-			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
-				$_Serveur_['uploadImage']['maxFileSize'] = intval($_POST['maxFileSize']);
-				$_Serveur_['uploadImage']['maxSize'] = intval($_POST['maxSize']);
-				$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
-				exit();
-			}
+		    require('admin/actions/editUploadImage.php');
+			exit();
 		case 'resetAllUploadImage':
-			if($_Permission_->verifPerm('PermsPanel', 'general', 'actions', 'editUploadImg')) {
-				$directory = 'include/UploadImage/';
-			    foreach (scandir($directory) as $file) {
-			        if ($file !== '.' && $file !== '..' && $file != "index.php") {
-			           unlink($directory.$file);
-			        }
-			    }
-			}
+			require('admin/actions/resetAllUploadImage.php');
 			exit();
 		case 'EnableShowTopVote':
-			$_Serveur_['vote']['oldDisplay'] = intval($_POST['number']);
-			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+		    require('admin/actions/EnableShowTopVote.php');
 			exit();
 		case 'DisableShowTopVote':
-			unset($_Serveur_['vote']['oldDisplay']);
-			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+		    require('admin/actions/DisableShowTopVote.php');
 			exit();
 		case 'switchUploadImage':
-			unset($_Serveur_['uploadImage']);
-			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+		    require('admin/actions/switchUploadImage.php');
 			exit();
 		case 'editResetVote':
 			require('admin/actions/editResetVote.php');
 			exit();
 		case 'editTopVoteNumber':
-			$_Serveur_['vote']['maxDisplay'] = $_POST['maxDisplay'];
-			$ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
+		    require('admin/actions/editTopVoteNumber.php');
 			exit();
 		case 'suppVoteHistory':
-			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
-			{ 
-				$req = $bddConnection->prepare('UPDATE cmw_votes SET `isOld`=1 WHERE pseudo = :pseudo ');
-				$req->execute(array('pseudo' => $_GET['pseudo']));
-			}
+		    require('admin/actions/suppVoteHistory.php');
 			exit();
 		case 'suppOldVoteHistory':
-			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
-			{ 
-				$req = $bddConnection->prepare('DELETE FROM cmw_votes WHERE pseudo = :pseudo and isOld=1');
-				$req->execute(array('pseudo' => $_GET['pseudo']));
-			}
+		    require('admin/actions/suppOldVoteHistory.php');
 			exit();
 		case 'switchPreferenceInscription':
 			require('admin/actions/switchPreferenceInscription.php');
@@ -68,23 +67,13 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require('admin/actions/editMessageInscr.php');
 			exit();
 		case 'suppAllVoteHistory':
-			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
-			{ 
-				$bddConnection->exec('DELETE FROM cmw_votes WHERE isOld=1');
-				$bddConnection->exec('UPDATE cmw_votes SET `isOld`=1');
-			}
+		    require('admin/actions/suppAllVoteHistory.php');
 			exit();
 		case 'suppAllOldVoteHistory':
-			if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) 
-			{ 
-				$bddConnection->exec('DELETE FROM cmw_votes WHERE isOld=1');
-			}
+		    require('admin/actions/suppAllOldVoteHistory.php');
 			exit();
 		case 'supprHistoPaypal':
-			if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'seePaypalHisto') && isset($_GET['id'])) {
-				$req = $bddConnection->prepare('DELETE FROM `cmw_paypal_historique` WHERE id=:id');
-				$req->execute(array('id' => $_GET['id']));
-			}
+		    require('admin/actions/supprHistoPaypal.php');
 			exit();
 		case 'getJsonVoteHistory':
 			require('admin/actions/getJsonVoteHistory.php');
@@ -122,9 +111,6 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		case 'getRecompenseList':
 			require('admin/actions/getRecompenseList.php');
 			exit();
-		case 'getMenuLien':
-			require('admin/actions/getMenuLien.php');
-			exit();
 		case 'getMenuListe':
 			require('admin/actions/getMenuListe.php');
 			exit();
@@ -161,8 +147,8 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require('admin/actions/epingleNews.php');
 		break;
 
-		case 'supprMini':
-			require('admin/actions/supprMini.php');
+		case 'supprMiniature':
+			require('admin/actions/supprMiniature.php');
 		break;
 
 		case 'addSocial':
@@ -193,147 +179,138 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require('admin/actions/pageBan.php');
 		break;
 
-		case 'removeSocial':
-			if($_Permission_->verifPerm('PermsPanel', 'social', 'showPage'))
-			{
-				$req = $bddConnection->prepare('ALTER TABLE cmw_reseaux DROP :nom');
-				$req->execute(array('nom' => $_GET['nom']));
-			}
-		break;
-
 		case 'commande': 
-			require_once('admin/actions/commande.php');
+			require('admin/actions/commande.php');
 		break;
 
 		case 'changeNom':
-			require_once('admin/actions/nom.php');
+			require('admin/actions/nom.php');
 		break;
 
 		case 'modifierVote':
-			require_once('admin/actions/modifierVote.php');
+			require('admin/actions/modifierVote.php');
 		break;
 
 		case 'supprAllTickets':
-			require_once('admin/actions/supprAllTickets.php');
+			require('admin/actions/supprAllTickets.php');
 		break;
 
 		case 'switchTypeSupport':
-			require_once('admin/actions/switchTypeSupport.php');
+			require('admin/actions/switchTypeSupport.php');
 		break;
 
 		case 'addPrefix':
-			require_once('admin/actions/addPrefix.php');
+			require('admin/actions/addPrefix.php');
 		break;
 
 		case 'supprPrefix':
-			require_once('admin/actions/supprPrefix.php');
+			require('admin/actions/supprPrefix.php');
 		break;
 
 		case 'configTheme':
-			require_once('theme/'.$_Serveur_['General']['theme'].'/config/configAdminTraitement.php');
-			$_SESSION['referrerAdmin'] = 'theme';
+			require('theme/'.$_Serveur_['General']['theme'].'/config/configAdminTraitement.php');
 		break;
 
 		case 'creerCoupon':
-			require_once('admin/actions/creerCoupon.php');
+			require('admin/actions/creerCoupon.php');
 		break;
 
 		case 'creerPostit':
-			require_once('admin/actions/creerPostit.php');
+			require('admin/actions/creerPostit.php');
 		break;
 
 		case 'supprPostit':
-			require_once('admin/actions/supprPostit.php');
+			require('admin/actions/supprPostit.php');
 		break;
 
 		case 'supprCoupon':
-			require_once('admin/actions/supprCoupon.php');
+			require('admin/actions/supprCoupon.php');
 		break;
 
 		case 'ajout_favicon':
-			require_once('admin/actions/ajout_favicon.php');
+			require('admin/actions/ajout_favicon.php');
 		break;
 		
 		case 'general': 
-			require_once('admin/actions/general.php');
+			require('admin/actions/general.php');
 		break;
 
 
 		case 'editBdd': 
-			require_once('admin/actions/editBdd.php');
+			require('admin/actions/editBdd.php');
 		break;
 		
 		case 'editTheme': 
-			require_once('admin/actions/editTheme.php');
+			require('admin/actions/editTheme.php');
 		break;
 		
 		case 'themeColor': 
-			require_once('admin/actions/themeColor.php');
+			require('admin/actions/themeColor.php');
 		break;
 		
 		case 'supprMembre': 
-			require_once('admin/actions/supprMembre.php');
+			require('admin/actions/supprMembre.php');
 		break;
 		
 		case 'validMail': 
-			require_once('admin/actions/validMail.php');
+			require('admin/actions/validMail.php');
 		break;
 		
 		case 'modifierMembres': 
-			require_once('admin/actions/modifierMembres.php');
+			require('admin/actions/modifierMembres.php');
 			exit();
 		break;
 		
 		case 'creerPage': 
-			require_once('admin/actions/creerPage.php');
+			require('admin/actions/creerPage.php');
 		break;
 		
 		case 'supprPage': 
-			require_once('admin/actions/supprPage.php');
+			require('admin/actions/supprPage.php');
 		break;
 		
 		case 'editBoutique': 
-			require_once('admin/actions/editBoutique.php');
+			require('admin/actions/editBoutique.php');
 		break;
 		
 		case 'supprCategorie': 
-			require_once('admin/actions/supprCategorie.php');
+			require('admin/actions/supprCategorie.php');
 		break;
 		
 		case 'supprAction': 
-			require_once('admin/actions/supprAction.php');
+			require('admin/actions/supprAction.php');
 		break;
 		
 		case 'editerAction': 
-			require_once('admin/actions/editerAction.php');
+			require('admin/actions/editerAction.php');
 		break;
 		
 		case 'serveurJsonNew': 
-			require_once('admin/actions/serveurJsonNew.php');
+			require('admin/actions/serveurJsonNew.php');
 		break;
 		
 		case 'serveurConfig': 
-			require_once('admin/actions/serveurConfig.php');
+			require('admin/actions/serveurConfig.php');
 		break;
 		
 		case 'supprJson': 
-			require_once('admin/actions/serveurJsonSuppr.php');
+			require('admin/actions/serveurJsonSuppr.php');
 		break;
 		
-		case 'newLienMenu': 
-			require_once('admin/actions/newLienMenu.php');
+		case 'addMenu': 
+			require('admin/actions/addMenu.php');
 		break;
 		
 		case 'editPayement': 
-			require_once('admin/actions/editPayement.php');
+			require('admin/actions/editPayement.php');
 		break;
 		
 		case 'creerOffrePaypal': 
-			require_once('admin/actions/creerOffrePaypal.php');
+			require('admin/actions/creerOffrePaypal.php');
 		break;
 		
 		case 'modifierOffrePaypal': 
-			require_once('admin/actions/modifierOffrePaypal.php');
+			require('admin/actions/modifierOffrePaypal.php');
 		break;
 
 		case 'validerPaysafecard':
@@ -349,136 +326,97 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 		break;
 		
 		case 'supprimerPaypalOffre': 
-			require_once('admin/actions/supprimerPaypalOffre.php');
+			require('admin/actions/supprimerPaypalOffre.php');
 		break;
 		
-		case 'supprLienMenu': 
-			require_once('admin/actions/supprLienMenu.php');
-		break;
 		
-		case 'supprLienMenuDeroulant': 
-			require_once('admin/actions/supprLienMenuDeroulant.php');
-		break;
-		
-		case 'newListeMenu': 
-			require_once('admin/actions/newListeMenu.php');
+		case 'supprMenu': 
+			require('admin/actions/supprMenu.php');
 		break;
 		
 		case 'modifierLien': 
-			require_once('admin/actions/modifierLien.php');
+			require('admin/actions/modifierLien.php');
 		break;
 		
-		case 'editMenuListe': 
-			require_once('admin/actions/editMenuListe.php');
+		case 'editMenu': 
+			require('admin/actions/editMenu.php');
 		break;
-		
-		case 'nouveauMenuListeLien': 
-			require_once('admin/actions/nouveauMenuListeLien.php');
-		break;
-		
+				
 		case 'deplacerMenu': 
-			require_once('admin/actions/deplacerMenu.php');
+			require('admin/actions/deplacerMenu.php');
 		break;
 		
-		case 'postNavRap': 
-			require_once('admin/actions/postNavRap.php');
+		case 'postMiniature': 
+			require('admin/actions/postMiniature.php');
 		break;
 
 		case 'postNews': 
-			require_once('admin/actions/postNews.php');
+			require('admin/actions/postNews.php');
 		break;
 		
 		case 'supprNews': 
-			require_once('admin/actions/supprNews.php');
+			require('admin/actions/supprNews.php');
 		break;
 		
 		case 'creerCategorie': 
-			require_once('admin/actions/creerCategorie.php');
+			require('admin/actions/creerCategorie.php');
 		break;
 		
 		case 'creerOffre': 
-			require_once('admin/actions/creerOffre.php');
+			require('admin/actions/creerOffre.php');
 		break;
 		
 		case 'creerAction': 
-			require_once('admin/actions/creerAction.php');
+			require('admin/actions/creerAction.php');
 		break;
 		
-		case 'editRapNav': 
-			require_once('admin/actions/editRapNav.php');
+		case 'editMiniature': 
+			require('admin/actions/editMiniature.php');
 		break;
 		
-		case 'addRapNav': 
-			require_once('admin/actions/addRapNav.php');
+		case 'addMiniature': 
+			require('admin/actions/addMiniature.php');
 		break;
 		
 		case 'newSlider':
-			require_once('admin/actions/newSlider.php');
+			require('admin/actions/newSlider.php');
 		break;
 		
 		case 'changeSlider':
-			require_once('admin/actions/changeSlider.php');
+			require('admin/actions/changeSlider.php');
 		break;
 
 		
 		case 'supprSlider':
-			require_once('admin/actions/supprSlider.php');
+			require('admin/actions/supprSlider.php');
 		break; 
 		
 		case 'postBG':
-			require_once('admin/actions/postBG.php');
+			require('admin/actions/postBG.php');
 		break; 
 
 		case 'typeBG':
-			require_once('admin/actions/postBG.php');
+			require('admin/actions/postBG.php');
 		break; 
 		
 		case 'creerLienVote':
-			require_once('admin/actions/creerLienVote.php');
+			require('admin/actions/creerLienVote.php');
 		break;
 		
 		case 'supprVote':
-			require_once('admin/actions/supprVote.php');
+			require('admin/actions/supprVote.php');
 		break;
 		
 		case 'editPage':
-			require_once('admin/actions/editPage.php');
-		break;
-		
-		case 'creerSection':
-			require_once('admin/actions/creerSection.php');
-		break;
-		
-		case 'supprSection':
-			require_once('admin/actions/supprSection.php');
-		break;
-		
-		case 'editPermissions':
-			require_once('admin/actions/editPermissions.php');
+			require('admin/actions/editPage.php');
 		break;
 		
 		case 'supprTicket':
-			require_once('admin/actions/supprTicket.php');
-		break;
-		
-		case 'newWidget':
-			require_once('admin/actions/newWidget.php');
-		break;
-		
-		case 'supprWidget':
-			require_once('admin/actions/supprWidget.php');
-		break;
-		
-		case 'upWidget':
-			require_once('admin/actions/upWidget.php');
-		break;
-		
-		case 'downWidget':
-			require_once('admin/actions/downWidget.php');
+			require('admin/actions/supprTicket.php');
 		break;
 		
 		case 'editNews':
-			require_once('admin/actions/editNews.php');
+			require('admin/actions/editNews.php');
 		break;
 
 		case 'resetVotes':
@@ -497,72 +435,97 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 
 		
 		case 'etatTickets':
-			require_once('admin/actions/etatTickets.php');
+			require('admin/actions/etatTickets.php');
 		break;
 
 		case 'switchMaintenance':
-			require_once('admin/actions/switchMaintenance.php');
+			require('admin/actions/switchMaintenance.php');
 		break;
 		
 		case 'switchPreference':
-			require_once('admin/actions/switchPreference.php');
+			require('admin/actions/switchPreference.php');
 		break;
 
 		case 'editMessage':
-			require_once('admin/actions/editMessage.php');
+			require('admin/actions/editMessage.php');
 		break;
 
 		case 'editMessageAdmin':
-			require_once('admin/actions/editMessageAdmin.php');
+			require('admin/actions/editMessageAdmin.php');
 		break;
 
 		case 'commandeConsole': 
-			require_once('admin/actions/commandeConsole.php');
+			require('admin/actions/commandeConsole.php');
 		break;
 
 		case 'commandeRechargementPlugins': 
-			require_once('admin/actions/commandeRechargementPlugins.php');
+			require('admin/actions/commandeRechargementPlugins.php');
 		break;
 
 		case 'commandeRedemarrageServer': 
-			require_once('admin/actions/commandeRedemarrageServer.php');
+			require('admin/actions/commandeRedemarrageServer.php');
 		break;
 
 		case 'switchSysMail': 
-			require_once('admin/actions/switchSysMail.php');
+			require('admin/actions/switchSysMail.php');
 		break;
 
 		case 'editSysMail': 
-			require_once('admin/actions/editSysMail.php');
+			require('admin/actions/editSysMail.php');
 		break;
 
 		case 'editNbrPerIP': 
-			require_once('admin/actions/editNbrPerIP.php');
+			require('admin/actions/editNbrPerIP.php');
 		break;
 
 		case 'supprGrade': 
-			require_once('admin/actions/supprGrade.php');
+			require('admin/actions/supprGrade.php');
 		break;
 
 		case 'addGrade': 
-			require_once('admin/actions/addGrade.php');
+			require('admin/actions/addGrade.php');
 		break;
 
 		case 'editGrade': 
-			require_once('admin/donnees/grades.php');
-			require_once('admin/actions/editGrade.php');
+			require('admin/donnees/grades.php');
+			require('admin/actions/editGrade.php');
 		break;
 
 		case 'newsletter': 
-			require_once('admin/actions/newsletter.php');
+			require('admin/actions/newsletter.php');
 		exit();
 		
 		break;
 
 		case 'uploadImg': 
-			require_once('admin/actions/uploadImg.php');
+			require('admin/actions/uploadImg.php');
+		break;
+
+		case 'boutique':
+			require('admin/actions/boutique.php');
 		break;
 		
+		case 'switchGoogleAdsense':
+		    require('admin/actions/switchGoogleAdsense.php');
+		break;
+		
+		case 'switchGoogleAnalytics':
+		    require('admin/actions/switchGoogleAnalytics.php');
+		break;
+		
+		case 'switchGoogleSearchConsole':
+		    require('admin/actions/switchGoogleSearchConsole.php');
+		break;
+		
+		case 'editGoogleAdsense':
+		    require('admin/actions/editGoogleAdsense.php');
+		break;
+		
+		case 'editGoogleAnalytics':
+		    require('admin/actions/editGoogleAnalytics.php');
+		break;
+		    
+	
 		// Si le joueur a rentré un url contenant une valeur d'action innexistant?
 		default:
 			header('Location: admin.php');

@@ -12,7 +12,7 @@ if(isset($_GET['id']) AND Permission::getInstance()->verifPerm('PermsForum', 'mo
 }
 else
 {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');
 	exit();
 }
 

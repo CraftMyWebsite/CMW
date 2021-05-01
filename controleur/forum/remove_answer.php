@@ -33,9 +33,9 @@ if(isset($_POST['id_answer']) AND Permission::getInstance()->verifPerm("connect"
 	$remove->execute(array(
 		'id' => $id,
 	));
-	header('Location: ?page=post&id=' .$data['id_topic']. '&page_post=' .$page. '');
+	header('Location: index.php?page=post&id=' .$data['id_topic']. '&page_post=' .$page. '');
 }
 else 
 {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');
 }

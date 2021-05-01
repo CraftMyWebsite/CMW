@@ -10,6 +10,7 @@
 	$url_cancel = $_Serveur_['General']['url']. '/index.php?page=token&notif=1'; /* page d'annulation d'achat SI RETOUR */
 	$url_confirmation = $_Serveur_['General']['url'] .'/?action=verif_paypal'; //Page de confirmation (callback IPN)
 	$lien = 'https://www.paypal.com/cgi-bin/webscr';
+    $currency = $_Serveur_['Payement']['currency'];
 	//Fin des paramètres invariant
 
 	foreach($tableauOffres as $key => $value)
@@ -28,7 +29,7 @@
 			'item_number' => '1',
 			'quantity' => '1',
 			'amount' => $item_prix,
-			'currency_code' => 'EUR',
+			'currency_code' => $currency,
 			'no_note' => '1',
 			'no-shipping' => '1',
 			'tax' => '0.00',

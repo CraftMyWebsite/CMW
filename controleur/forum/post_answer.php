@@ -54,11 +54,11 @@ if(Permission::getInstance()->verifPerm("connect"))
 			'id' => $id,
 			'pseudo' => $_Joueur_['pseudo']
 		));
-		header('Location: ' . $_Serveur_['General']['url'] . '?&page=post&id=' . $id . '');
+		header('Location: index.php?page=post&id=' . $id . '');
 	}
 	else
-		header('Location: ?page=erreur&erreur=0');
+		header('Location: index.php?page=erreur&erreur=0');
 }
 else
-	header('Location: ?page=erreur&erreur=16');
+	header('Location: index.php?page=erreur&erreur=16');
 ?>

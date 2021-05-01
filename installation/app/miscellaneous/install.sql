@@ -1,5 +1,30 @@
+CREATE TABLE IF NOT EXISTS cmw_miniature (
+  `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `message` varchar(200) DEFAULT NULL,
+  `image` varchar(100),
+  `type` int(1) DEFAULT 0,
+  `lien` varchar(100),
+  `ordre` int(2)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS cmw_widgets (
+  `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `message` varchar(200) DEFAULT NULL,
+  `titre` varchar(100),
+  `type` int(1) DEFAULT 0,
+  `ordre` int(2)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS cmw_menu (
+  `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `name` varchar(100),
+  `dest` int(11),
+  `url` varchar(100) DEFAULT NULL,
+  `ordre` int(2)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS cmw_ban (
-  `id` smallint(5) UNSIGNED  AUTO_INCREMENT PRIMARY KEY,
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `ip` VARCHAR(20) ,
   `pseudo` VARCHAR(16) 
 ) ENGINE=InnoDB;
@@ -291,13 +316,6 @@ CREATE TABLE IF NOT EXISTS `cmw_news_stats` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `cmw_pages` (
-  `id` int(11) AUTO_INCREMENT,
-  `titre` varchar(100),
-  `contenu` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE IF NOT EXISTS `cmw_postit` (
   `id` smallint(5) UNSIGNED AUTO_INCREMENT,
   `auteur` varchar(40),
@@ -376,8 +394,8 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
   `email` varchar(64),
   `anciennete` int(11),
   `newsletter` int(1),
-  `rang` int(2) DEFAULT '1',
-  `tokens` int(11),
+  `rang` int(2) DEFAULT 1,
+  `tokens` int(11) default 0,
   `age` int(11),
   `resettoken` varchar(32),
   `ip` varchar(40),
@@ -387,6 +405,8 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
   `show_email` tinyint(1) UNSIGNED,
   `achats` text NULL,
   `signature` text,
+  `UUID` varchar(32) DEFAULT NULL,
+  `UUIDF` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -500,3 +520,26 @@ INSERT INTO `cmw_sysmail` (`idMail`, `fromMail`, `sujetMail`, `msgMail`, `strict
 
 INSERT INTO `cmw_ban_config` (`id`, `titre`, `texte`) VALUES
 (1, 'Vous êtes bannis', 'Vous avez été bannis du site, veuillez prendre contact avec l\'administration pour les raisons de votre bannissement.');
+
+INSERT INTO `cmw_menu` (`id`, `dest`, `url`, `ordre`, `name`) VALUES
+(1, -1, 'index.php', 0, 'Accueil'),
+(2, -1, NULL, 1, 'Serveur'),
+(3, -1, '?&page=boutique', 2, 'Boutique'),
+(4, -1, '?&page=support', 3, 'Support'),
+(5, -1, '?&page=voter', 4, 'Voter'),
+(6, -1, '?page=forum', 5, 'Forum'),
+(7, -1, '?&page=membres', 6, 'Liste des membres'),
+(8, 2, '?page=banlist', 0, 'Ban - List'),
+(9, 2, '?page=chat', 1, 'Chat');
+
+INSERT INTO `cmw_miniature` (`message`, `image`, `type`, `lien`, `ordre`) VALUES 
+
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (1)', 'miniature-demo-1.png', 0, '#', 0), 
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (2)', 'miniature-demo-2.png', 0, '#', 1),
+('Image de démo à modifier dans votre panel CraftMyWebsite ! (3)', 'miniature-demo-3.png', 0, '#', 2);
+
+INSERT INTO `cmw_widgets` (`message`, `titre`, `type`, `ordre`) VALUES
+('', 'GERER MON COMPTE', 0, 0),
+('', 'JOUEURS EN LIGNE', 2, 1),
+('', 'ETAT DES SERVEURS', 1, 2),
+('<p>&nbsp;</p><p>Nos partenaires: <a href=\"http://craftmywebsite.fr\">CraftMyWebsite</a></p><p>&nbsp;</p>', 'PARTENAIRES', 3, 3);

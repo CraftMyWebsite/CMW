@@ -7,7 +7,7 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'editNews')) {
 		$req = $bddConnection->prepare('UPDATE cmw_news SET titre = :titre, message = :contenu WHERE id = :id');
 	}
 	require('modele/app/ckeditor.class.php');
-	$_POST['message'] = ckeditor::verif($_POST['message']);
+	$_POST['message'] = ckeditor::verif($_POST['message'],true);
 	$req->execute(array(
 		'titre' => $_POST['titre'],
 		'contenu' => $_POST['message'],

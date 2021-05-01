@@ -106,7 +106,12 @@
                             <input type="number" name="temps" placeholder="ex: 86400 pour 24h" class="form-control" required>
 
                             <label class="control-label">Id unique donné par le site web. *</label>
-                            <input type="text" name="idCustom" placeholder="ex: 54748" value="" class="form-control" />
+                            <div class="input-group mb-3">
+                             <input type="text" onkeyup='if(isset(this.value) && this.value.replaceAll(" ", "") != "") { get("btn-test--1").disabled = false; } else { get("btn-test--1").disabled = true; }' name="idCustom" placeholder="ex: 54748" value="" class="form-control" />
+                              <div class="input-group-append">
+                                 <button type="button" onclick="testUrlVoteForTest(getValueByName('new-vote','lien'),getValueByName('new-vote','idCustom'),this);" id="btn-test--1" class="input-group-text btn btn-success" disabled>Tester</button>
+                              </div>
+                            </div>
 
                             <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
                             <div class="custom-control custom-switch" >
@@ -197,11 +202,17 @@
                        
                     </div>
                         <div class="row">
-                            <div class="col-md-6 col-6">
-                                <label class="control-label">Envoyé la notification même aux personnes qui n'ont jamais voté.
-                                <input type="checkbox" name="sendtoall"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoall']) && $_Serveur_['VoteCron']['sendtoall'] == 1) { echo 'checked'; }  ?>></label>
+                            <div class="col-md-6 col-12">
+                                <div class="col-md-12 col-12">
+                                    <label class="control-label">Envoyé la notification même aux personnes qui n'ont jamais voté.
+                                    <input type="checkbox" name="sendtoall"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoall']) && $_Serveur_['VoteCron']['sendtoall'] == 1) { echo 'checked'; }  ?>></label>
+                                </div>
+                                <div class="col-md-12 col-12">
+                                    <label class="control-label">Envoyé la notification sur tous les serveurs (inclus donc les serveur n'ayant pas de site de vote attribué).
+                                    <input type="checkbox" name="sendtoallserv"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoallserv']) && $_Serveur_['VoteCron']['sendtoallserv'] == 1) { echo 'checked'; }  ?>></label>
+                                </div>
                             </div>
-                            <div class="col-md-6 col-6">
+                            <div class="col-md-6 col-12">
                                 <input type="button" onClick="tryCron()" id="trycron" style="margin-top:15px;" class="btn btn-danger w-100" value="Try it !"/>
                             </div>
                         </div>
@@ -348,6 +359,12 @@
 
                                                             <label class="control-label">Pourcentage de chance d\'obtenir cette récompense</label>
                                                             <input type="number" min="1" max="100" value="<?php echo $value['pourcentage']; ?>" data-type="pourcentage" class="form-control"/>
+                                                    
+                                                    		<label class="control-label">Donner la récompense instantanément (ne sera pas stocké si possible)</label>
+            		 											<div class="custom-control custom-switch" style="padding-top: 5px">
+            		 											<input type="checkbox" id="inst<?php echo $idcs; ?>" data-type="inst" class="custom-control-input" <?php echo isset($value['inst']) & intval($value['inst']) == 1 ? 'checked' : '' ;?> />
+            		 												<label class="custom-control-label" for="inst<?php echo $idcs; ?>">Oui</label> </div>
+                                                    
                                                     </div></div>
 
                                                     <?php } ?>
@@ -360,8 +377,12 @@
                                                     value="<?=$donnees[$o]['temps'];?>" required>
                                       
                                             <label class="control-label" for="idunique<?=$o;?>">ID Unique</label>
-                                            <input type="text" name="idCustom<?=$o;?>" id="idunique<?=$o;?>" class="form-control"
-                                                    value="<?=$donnees[$o]['idCustom'];?>" />
+                                             <div class="input-group mb-3">
+                                                 <input type="text" id="idunique<?=$o;?>" onkeyup='if(isset(this.value) && this.value.replaceAll(" ", "") != "") { get("btn-test-<?=$o;?>").disabled = false; } else { get("btn-test-<?=$o;?>").disabled = true; }' name="idCustom<?=$o;?>" placeholder="ex: 54748" value="" class="form-control" />
+                                                  <div class="input-group-append">
+                                                     <button type="button" onclick="testUrlVoteForTest(getValueByName('all-vote','lien<?=$o;?>'),getValueByName('all-vote','idCustom<?=$o;?>'),this);" id="btn-test-<?=$o;?>" class="input-group-text btn btn-success" disabled>Tester</button>
+                                                  </div>
+                                                </div>
                                        
 
                                               <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>

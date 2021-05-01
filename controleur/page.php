@@ -11,7 +11,15 @@ if(isset($_GET['page']))
 	{ 		
 		// Quand un joueur veut accèder au profil de qqun ou le sien...
 		case 'profil':
-			include('controleur/profil/index.php');	
+			require('controleur/profil/profil.class.php');	
+			$_Profil_ = new profil($bddConnection);
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/profil.php');	
+		break;	
+
+		case 'accueil':
+			unset($_GET['page']);
+			require_once('controleur/accueil.php');
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/accueil.php');
 		break;	
 
 		case 'chat':
@@ -49,6 +57,10 @@ if(isset($_GET['page']))
 		break;
 		
 		case 'forum_categorie':
+			include('theme/' .$_Serveur_['General']['theme']. '/pages/forum_categorie.php');
+		break;
+
+		case 'sous_forum_categorie':
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/forum_categorie.php');
 		break;
 		
@@ -91,7 +103,7 @@ if(isset($_GET['page']))
 				include('theme/' .$_Serveur_['General']['theme']. '/pages/tokens.php');
 			}
 			else
-				header('Location: ?page=erreur&erreur=19&titre='.urlencode("Erreur d'accès")."&type=".urlencode("Connexion requise")."&contenue=".urlencode("Vous devez être connecté pour accéder à cette page !"));
+				header('Location: index.php?page=erreur&erreur=19&type='.urlencode("Erreur d'accès")."&titre=".urlencode("Connexion requise")."&contenue=".urlencode("Vous devez être connecté pour accéder à cette page !"));
 		break;
 		
 		case 'voter': 
@@ -111,34 +123,21 @@ if(isset($_GET['page']))
 				
 		// Si jamais l'utilisateur à entré un Get inconnu, on lui met une petite erreur :p
 		default:
-			require_once('modele/page.class.php');
-			$pageDataReq = new PageData($bddConnection);
-			$pageDataReq = $pageDataReq->GetListPages(urldecode($_GET['page']));
-
-			
-			$pageData = $pageDataReq->fetch(PDO::FETCH_ASSOC);
-			
-			if(!isset($pageData) OR empty($pageData))
+			require_once('modele/app/page.class.php');
+			$page = new page();
+			$_GET['page'] = urldecode($_GET['page']);
+			if($page->exist($_GET['page']))
 			{
-				include('controleur/erreur.php');
-				$erreur = (!isset($_GET['erreur'])) ? 1500879564 : (int)$_GET['erreur'];
-				unset($type);
-				unset($titre);
-				unset($contenue);
-				get_erreur($erreur, $type, $titre, $contenue);
-				include('theme/' .$_Serveur_['General']['theme']. '/pages/erreur.php');
-			}
-			else
-			{
-				$pages['id'] = $pageData['id'];
-				$pages['titre'] = $pageData['titre'];
-				$pages['contenu'] = $pageData['contenu'];
-				$pages['tableauPages'] = explode('#µ¤#', $pages['contenu']);
-				for($j = 0; $j < count($pages['tableauPages']); $j++) 
-				{
-					$pageContenu[$j] = explode('|;|', $pages['tableauPages'][$j]);
-				}
-				include('theme/' .$_Serveur_['General']['theme']. '/pages/standard.php');
+			    $customPage = $page->getPath($_GET['page']);
+			    include('theme/' .$_Serveur_['General']['theme']. '/pages/standard.php');
+			} else {
+			    include('controleur/erreur.php');
+			    $erreur = (!isset($_GET['erreur'])) ? 1500879564 : (int)$_GET['erreur'];
+			    unset($type);
+			    unset($titre);
+			    unset($contenue);
+			    get_erreur($erreur, $type, $titre, $contenue);
+			    include('theme/' .$_Serveur_['General']['theme']. '/pages/erreur.php');
 			}
 	}
 }

@@ -20,11 +20,11 @@ if (((Permission::getInstance()->verifPerm("createur") or Permission::getInstanc
 			'id' => $_POST['idSF']
 		));
 
-	header('Location: index.php?page=forum_categorie&id='.$_POST['id']);
+	header('Location: index.php?page=sous_forum_categorie&id='.$_POST['id']);
 }
 else
 {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');
 }
 function startsWith ($string, $startString) 
 { 

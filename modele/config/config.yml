@@ -6,7 +6,7 @@ General:
     name: 
     theme: default
     themeOption: bootstrap
-    description: 
+    description:
     bgType: 0
     permsPlugin: groupManager
     permsWorld: world
@@ -31,6 +31,7 @@ Payement:
     paypal: true
     dedipass: false
     paysafecard: false
+    currency: EUR
     public_key: ""
     private_key: ""
     paypalEmail: 

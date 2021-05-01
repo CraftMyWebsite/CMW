@@ -1,65 +1,55 @@
 <?php
 
-if(isset($_GET['mdp']) AND isset($_Serveur_['VoteCron']['mdp']) AND $_Serveur_['VoteCron']['mdp'] == htmlspecialchars($_GET['mdp']) )
+if(isset($_GET['mdp']) && isset($_Serveur_['VoteCron']['mdp']) && $_Serveur_['VoteCron']['mdp'] == $_GET['mdp'])
 {
-	foreach($jsonCon as $i => $serveur)
+
+	foreach($lectureJSON as $key => $s)
 	{
-		$serveurStats[$key] = $serveur->GetServeurInfos();
-		$req_vote->execute(array('serveur' => $i));
-		$count_req->execute(array('serveur' => $i));
-		$data_count = $count_req->fetch();
-		if($data_count['count'] > 0)
-		{
-			foreach ($serveurStats[$i]['joueurs'] as $cle => $element) 
-			{ 
-			
-				
-				if(!ExisteJoueur2($serveurStats[$i]['joueurs'][$cle],$bddConnection) && $_Serveur_['VoteCron']['sendtoall'] == 0)
+		$serveur = $jsonCon[$key];
+		$info = $serveur->GetServeurInfos();
+		foreach ($info['joueurs'] as $player) 
+		{ 
+			if(!ExisteJoueur2($player,$bddConnection) && $_Serveur_['VoteCron']['sendtoall'] == 0)
+			{
+				continue;
+			}
+			if($_Serveur_['VoteCron']['sendtoallserv'] == 1) {
+				$lienInfo = $bddConnection->query('SELECT id, lien, titre, temps FROM cmw_votes_config');
+			} else {
+				$lienInfo = $bddConnection->prepare('SELECT id, lien, titre, temps FROM cmw_votes_config WHERE serveur = :serveur');
+				$lienInfo->execute(array("serveur" => $s['id']));
+			}
+			if(!empty($_Serveur_['VoteCron']['entete']))
+			{
+				$serveur->SendMessage(array($player, str_replace('&','§', $_Serveur_['VoteCron']['entete'])));
+			}
+
+			foreach($lienInfo as $value) {
+				$lien = explode('/',str_replace('https://', '', str_replace('http://', '', $value['lien'])));
+				if(!ExisteJoueur($player, $value['id'], $bddConnection))
 				{
-					continue;
-				}
-				if(!empty($_Serveur_['VoteCron']['entete']))
-				{
-					$serveur->SendMessage(array($serveurStats[$i]['joueurs'][$cle], str_replace('&','§', $_Serveur_['VoteCron']['entete'])));
-				}
-				while($liensVotes = $req_vote->fetch())
-				{ 
-					$id = $liensVotes['id'];
-					$lectureVotes = LectureVote($id, $bddConnection);
-					$lien = explode('/',str_replace('https://', '', str_replace('http://', '', $liensVotes['lien'])));
-					if(!ExisteJoueur($serveurStats[$i]['joueurs'][$cle], $id, $bddConnection))
+					$serveur->SendMessage(array($player, str_replace('{LIEN}', $lien[0],str_replace('&','§', $_Serveur_['VoteCron']['msgallow']))));
+				} else {
+					$donnees = RecupJoueur($player, $value['id'], $bddConnection);
+					if(!Vote($player, $value['id'], $bddConnection, $donnees, $value['temps']))
 					{
-					
-						CreerJoueur($serveurStats[$i]['joueurs'][$cle], $id, $bddConnection);
-						$donnees = RecupJoueur($serveurStats[$i]['joueurs'][$cle], $id, $bddConnection);
-						$serveur->SendMessage(array($serveurStats[$i]['joueurs'][$cle], str_replace('{LIEN}', $lien[0],str_replace('&','§', $_Serveur_['VoteCron']['msgallow']))));
-					}
-					else {
-						$donnees = RecupJoueur($serveurStats[$i]['joueurs'][$cle], $id, $bddConnection);
-						if(!Vote($serveurStats[$i]['joueurs'][$cle], $id, $bddConnection, $donnees, $lectureVotes['temps']))
-						{
-							$serveur->SendMessage(array($serveurStats[$i]['joueurs'][$cle], str_replace('{TEMPS}',
-							GetTempsRestant($donnees['date_dernier'],$lectureVotes['temps'], $donnees), 
+						$serveur->SendMessage(array($player, str_replace('{TEMPS}',
+							GetTempsRestant($donnees['date_dernier'],$value['temps'], $donnees), 
 							str_replace('&','§', str_replace('{LIEN}', $lien[0],$_Serveur_['VoteCron']['msgdeny'])))));
-						}
-						else
-						{
-							$serveur->SendMessage(array($serveurStats[$i]['joueurs'][$cle], str_replace('{LIEN}', $lien[0],str_replace('&','§', $_Serveur_['VoteCron']['msgallow']))));
-						}
-						
+					} else {
+						$serveur->SendMessage(array($player, str_replace('{LIEN}', $lien[0],str_replace('&','§', $_Serveur_['VoteCron']['msgallow']))));
 					}
-					$first =false;
-					
+
 				}
-				if(!empty($_Serveur_['VoteCron']['footer']))
-				{
-					$serveur->SendMessage(array($serveurStats[$i]['joueurs'][$cle], str_replace('&','§', $_Serveur_['VoteCron']['footer'])));
-				}
+
+			}
+
+			if(!empty($_Serveur_['VoteCron']['footer']))
+			{
+				$serveur->SendMessage(array($player, str_replace('&','§', $_Serveur_['VoteCron']['footer'])));
 			}
 		}
-		
 	}
-
 }
 	function RecupJoueur($pseudo, $id, $bddConnection)
 	{
@@ -149,10 +139,4 @@ if(isset($_GET['mdp']) AND isset($_Serveur_['VoteCron']['mdp']) AND $_Serveur_['
 		}
 	}
 
-	function LectureVote($id, $bddConnection)
-	{
-		$req = $bddConnection->prepare('SELECT * FROM cmw_votes_config WHERE id = :id');
-		$req->execute(array('id' => $id));
-		return $req->fetch(PDO::FETCH_ASSOC);
-	}
 ?>

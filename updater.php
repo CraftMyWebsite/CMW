@@ -15,10 +15,10 @@ if(isset($_POST['go']) AND $_POST['go'] == 1)
 		$archiveUpdate->extractTo(__DIR__);
 		$archiveUpdate->close();
 
-        bdd181to182($bddConnection);
+    bdd181to182($bddConnection);
 		accueil181to182($bddConnection);
 		widgets181to182($bddConnection);
-        pages181to182($bddConnection);
+    pages181to182($bddConnection);
 		file181to182();
 
 		unlink('update.zip');
@@ -75,9 +75,7 @@ else
                 </p>
             </div>
 
-                <!-- Détection fichier update.zip -->
-
-                        <?php
+            <?php
                 if (! file_exists("update.zip")){
                     ?>
                     <div class="alert alert-danger">
@@ -88,7 +86,7 @@ else
                         <?php
                 }
             ?>
-
+          
             <div class="block border" style="border-radius: 2% !important;">
 
                 <div class="row p-5">
@@ -254,7 +252,6 @@ function bdd181to182($bddConnection) {
         `UUID` varchar(32) DEFAULT NULL,
         `UUIDF` varchar(36) DEFAULT NULL 
     )");
-
 }
 
 function pages181to182($bddConnection) {
