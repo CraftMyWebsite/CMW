@@ -15,10 +15,10 @@ if(isset($_POST['go']) AND $_POST['go'] == 1)
 		$archiveUpdate->extractTo(__DIR__);
 		$archiveUpdate->close();
 
-        bdd181to182($bddConnection);
+    bdd181to182($bddConnection);
 		accueil181to182($bddConnection);
 		widgets181to182($bddConnection);
-        pages181to182($bddConnection);
+    pages181to182($bddConnection);
 		file181to182();
 
 		unlink('update.zip');
@@ -74,6 +74,19 @@ else
                     Cette version réinitialisera votre choix thème (Défault), les thèmes autre que Default sont pas forcément compatible avec cette version - en cas de doute contacter le créateur du thème que vous souaither utilisé ! 
                 </p>
             </div>
+
+            <?php
+                if (! file_exists("update.zip")){
+                    ?>
+                    <div class="alert alert-danger">
+                        <p class="text">
+                            ALERTE ! Il vous manque le fichier <strong>update.zip</strong>, vous ne pouvez pas commencer la migration sans ce fichier !!!
+                        </p>
+                    </div>
+                        <?php
+                }
+            ?>
+          
             <div class="block border" style="border-radius: 2% !important;">
 
                 <div class="row p-5">
@@ -232,6 +245,13 @@ function bdd181to182($bddConnection) {
         (7, -1, '?&page=membres', 6, 'Liste des membres'),
         (8, 2, '?page=banlist', 0, 'Ban - List'),
         (9, 2, '?page=chat', 1, 'Chat');");
+
+
+     // Gestion des UUID dans la bdd
+     $bddConnection->exec("ALTER TABLE cmw_users ADD (
+        `UUID` varchar(32) DEFAULT NULL,
+        `UUIDF` varchar(36) DEFAULT NULL 
+    )");
 }
 
 function pages181to182($bddConnection) {
