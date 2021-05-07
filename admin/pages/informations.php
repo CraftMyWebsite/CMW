@@ -75,7 +75,7 @@
                         </div>
                                   <script>
                                    <?php
-                                   $req = $bddConnection->query('SELECT count(dates) as total, UNIX_TIMESTAMP(dates) as time FROM cmw_visits GROUP BY dates ASC LIMIT 0, 7;');
+                                   $req = $bddConnection->query('SELECT count(dates) as total, UNIX_TIMESTAMP(dates) as time FROM cmw_visits GROUP BY dates ORDER BY dates ASC LIMIT 0, 7');
                                    $dailyVisite = $req->fetchAll(PDO::FETCH_ASSOC); ?>
 
                                         var ctx = get('visitsChart')
