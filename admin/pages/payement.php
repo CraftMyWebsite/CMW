@@ -207,7 +207,7 @@ if(isset($_GET['paypal'])){
                                                 <button onclick="sendDirectPost('?&action=supprimerPaypalOffre&id=<?php echo $paypalOffres[$i]['id']; ?>',function(data) { if(data) { hide('payementPaypal<?php echo $i; ?>'); hide('tab-payementPaypal<?php echo $i; ?>');}});" class="btn btn-danger w-100">Supprimer</button>                                        
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="submit"  onclick="sendPost('payementPaypal<?php echo $i; ?>');" class="btn btn-success w-100" value="Modifier Les changements !"/>
+                                                <input type="submit"  onclick="sendPost('payementPaypal<?php echo $i; ?>');" class="btn btn-success w-100" value="Valider les changements !"/>
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@ if(isset($_GET['paypal'])){
                                 </div><hr>
                                 <div class="row">
                                     <div class="offset-md-4 col-md-4">
-                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Modifier Les changements !"/>
+                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Valider les changements !"/>
                                     </div>
                                 </div>
                                  <script>initPost('payementPaysafecard<?php echo $i; ?>', 'admin.php?&action=modifierOffrePaysafecard&id=<?php echo $paysafecard[$i]['id']; ?>',null);</script>
