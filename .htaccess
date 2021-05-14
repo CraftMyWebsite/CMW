@@ -71,7 +71,7 @@ RewriteRule ^(.*)$ http://%1$1 [R=301,L]
 RewriteCond %{HTTPS} on
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1$1 [R=301,L]
-ErrorDocument 404 index.php?page=erreur
+ErrorDocument 404 /index.php?page=erreur
 <IfModule mod_expires.c>
     ExpiresActive on
     ExpiresByType image/jpg "access plus 1 month"
