@@ -196,7 +196,7 @@
 
                                                 <?php if (isset($_Theme_['Pied']['social']) && !empty($_Theme_['Pied']['social'])) foreach ($_Theme_['Pied']['social'] as $value) : ?>
 
-                                                    <div class="form-row jumbotron py-1" data-reseau>
+                                                    <div class="form-row well py-1" data-reseau>
                                                         <div class="col-12">
                                                             <label class="control-label">Icone du réseau</label>
                                                             <input type="text" data-type="icon" class="form-control" placeholder='<i class="fab fa-discord"></i>' value="<?= str_replace('"', "'", $value['icon']); ?>">
