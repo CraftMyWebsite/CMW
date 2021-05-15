@@ -5,6 +5,7 @@ function VerifieChmod() {
     $errInstall = null;
 
     $dirInstall[0] = 'app/data/install.yml';
+    $dirInstallAbs[0] = '/installation/app/data/install.yml';
     for ($i = 0; $i < count($dirInstall); $i++) {
         $chmodi[$i] = substr(sprintf('%o', fileperms($dirInstall[$i])), -3);
 
@@ -24,13 +25,14 @@ function VerifieChmod() {
         for ($i = 0; $i < count($errInstall); $i++) {
             $return['chmodInstall'][$i] = $chmodi[$errInstall[$i]];
             $return['dirInstall'][$i] = $dirInstall[$errInstall[$i]];
+            $return['dirInstallAbsolu'][$i] = $dirInstallAbs[$errInstall[$i]];
         }
     }
 
-    $dirR[1] = '../modele/config/config.yml';
-    $dirR[2] = '../modele/.htpasswd';
-    $dirR[3] = '../controleur/.htpasswd';
-    $dirR[4] = '../admin/actions/.htpasswd';
+    $dirR[0] = '../modele/config/config.yml';
+    $dirR[1] = '../modele/.htpasswd';
+    $dirR[2] = '../controleur/.htpasswd';
+    $dirR[3] = '../admin/actions/.htpasswd';
     for ($i = 0; $i < count($dirR); $i++) {
         $chmod[$i] = substr(sprintf('%o', fileperms($dirR[$i])), -3);
 
@@ -113,7 +115,7 @@ function DrawChmod($return) {
                         <?php if (isset($return['chmodInstall'])) {
                         for ($i = 0; $i < count($return['chmodInstall']); $i++) { ?>
                         <tr>
-                            <td><?php echo $return['dirInstall'][$i]; ?></td>
+                            <td><?php echo $return['dirInstallAbsolu'][$i]; ?></td>
                             <td><?php echo $return['chmodInstall'][$i]; ?></td>
                             <td>775</td>
                         </tr>
@@ -123,7 +125,7 @@ function DrawChmod($return) {
                         if (isset($return['chmodDossier'])) {
                             for ($i = 0; $i < count($return['chmodDossier']); $i++) { ?>
                                 <tr>
-                                    <td><?php echo $return['dirDossier'][$i]; ?></td>
+                                    <td><?php echo substr($return['dirDossier'][$i], 2); ?></td>
                                     <td><?php echo $return['chmodDossier'][$i]; ?></td>
                                     <td>777</td>
                                 </tr>
@@ -133,7 +135,7 @@ function DrawChmod($return) {
                         if (isset($return['chmod'])) {
                             for ($i = 0; $i < count($return['chmod']); $i++) { ?>
                                 <tr>
-                                    <td><?php echo $return['dir'][$i]; ?></td>
+                                    <td><?php echo substr($return['dir'][$i],2); ?></td>
                                     <td><?php echo $return['chmod'][$i]; ?></td>
                                     <td>755</td>
                                 </tr>
