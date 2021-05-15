@@ -27,14 +27,10 @@ function VerifieChmod() {
         }
     }
 
-    $dirR[0] = '../modele/config/accueil.yml';
     $dirR[1] = '../modele/config/config.yml';
-    $dirR[2] = '../modele/config/configMenu.yml';
-    $dirR[3] = '../modele/config/configWidgets.yml';
-    $dirR[4] = '../modele/config/configStats.yml';
-    $dirR[5] = '../modele/.htpasswd';
-    $dirR[6] = '../controleur/.htpasswd';
-    $dirR[7] = '../admin/actions/.htpasswd';
+    $dirR[2] = '../modele/.htpasswd';
+    $dirR[3] = '../controleur/.htpasswd';
+    $dirR[4] = '../admin/actions/.htpasswd';
     for ($i = 0; $i < count($dirR); $i++) {
         $chmod[$i] = substr(sprintf('%o', fileperms($dirR[$i])), -3);
 
