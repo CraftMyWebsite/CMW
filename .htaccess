@@ -22,7 +22,6 @@ RewriteRule accueil/MessageTropLong index.php?page=accueil&MessageTropLong [L]
 RewriteRule accueil/MessageTropCourt index.php?page=accueil&MessageTropCourt [L]
 RewriteRule accueil/MessageEnvoyer index.php?page=accueil&MessageEnvoyer [L]
 
-RewriteRule accueil/Connection index.php?page=accueil&Connection [L]
 RewriteRule accueil/envoieMail index.php?page=accueil&envoieMail [L]
 
 RewriteRule ^token/([^/]*)$ index.php?page=token&notif=$1 [L]
