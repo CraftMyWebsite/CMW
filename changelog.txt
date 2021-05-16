@@ -26,6 +26,9 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [=] : Mise à jour de ckeditor
 [=] : Retour des pages perso dans le ftp
 [=] : Corrections de plusieurs fautes d'orthographes sur le panel
+[=] : Amélioration du mode nuit sur certaines pages
+[=] : Plus besoin de recharger sa page pour voir ses modifiations sur le panel
+[=] : Mise à jour de l'installateur du cms
 
 [+] : Possibilité de modifier l'ordre des menus
 [+] : Ajout de l'option instantané pour les récompenses des votes
