@@ -15,6 +15,7 @@ class MailSender
         {
 			try {
 				$mail = new PHPMailer(true);
+				$mail->CharSet = 'UTF-8';
 				$mail->isSMTP();
 				$mail->Host = htmlspecialchars($arrayData['SMTP']['Host']);
 				$mail->SMTPAuth = true;
