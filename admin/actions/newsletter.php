@@ -44,6 +44,7 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 	} else {
 		try {
 			$mail = new PHPMailer(true);
+			$mail->CharSet = 'UTF-8';
 			if($_POST['CheckSmtp'] == 1)
 			{
 				$mail->isSMTP();
