@@ -42,3 +42,15 @@ color:
         main: '#ff8040'
         hover: '#c16100'
         focus: '#ffbc9b'
+lastCMWCheck: 1621453057
+googleService:
+    searchConsole:
+        id: ""
+        enable: false
+    analytics:
+        enable: false
+        id: ""
+    adsense:
+        enable: false
+        id: ""
+        pub: ""
