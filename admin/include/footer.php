@@ -8,7 +8,6 @@
             <div class="col-md-6">
                 <p class="gray text-right footer-text" style="padding-right: 15px;">
                     &copy; 2014 -<script>document.write(new Date().getFullYear())</script> CraftMyWebsite, tous droits réservé
-                    <a onclick="coffin();"><img src="./admin/assets/images/coffin.svg" width="22px" style="opacity:0.25;" class="hrvreav"/></a>
                 </p>
                 <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input" id="darkSwitch">
@@ -23,24 +22,7 @@
     <script src="./admin/assets/js/bootstrap.js"></script>
     <script src="./admin/assets/js/dark.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.13.1/js/all.js"></script>
-    <script>
-    function coffin(){
-        var audioElement = document.createElement('audio');
-        audioElement.setAttribute('src', './admin/assets/audio/sound.ogg');
-
-        audioElement.addEventListener("canplay",function(){
-        });
-        
-        $('#coffin').modal('show');
-        audioElement.play();
-
-        setTimeout(function(){
-            $('#coffin').modal('hide');
-            audioElement.currentTime = 0;
-            audioElement.pause();
-        }, 20000);
-    }
-    </script>
+   
  </body>
 </html>
 <!-- 
