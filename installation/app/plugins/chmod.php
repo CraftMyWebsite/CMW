@@ -13,7 +13,7 @@ function VerifieChmod() {
         $chmodInstallU[$i]['gr'] = substr($chmodi[$i], -2, 1);
         $chmodInstallU[$i]['pu'] = substr($chmodi[$i], -1, 1);
 
-        if ($chmodInstallU[$i]['pr'] < 7 or $chmodInstallU[$i]['gr'] < 7 or $chmodInstallU[$i]['pu'] < 5) {
+        if ($chmodInstallU[$i]['pr'] < 7 or $chmodInstallU[$i]['gr'] < 7 or $chmodInstallU[$i]['pu'] < 7) {
             if ($errInstall != null)
                 $errInstall = $errInstall . ';' . (string)$i;
             else
@@ -117,7 +117,7 @@ function DrawChmod($return) {
                         <tr>
                             <td><?php echo $return['dirInstallAbsolu'][$i]; ?></td>
                             <td><?php echo $return['chmodInstall'][$i]; ?></td>
-                            <td>775</td>
+                            <td>777</td>
                         </tr>
                         <?php }
                         }
