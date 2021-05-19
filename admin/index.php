@@ -48,10 +48,6 @@ if(isset($_GET['page']) AND $_GET['page'] != "accueil"){
      	</div>
     </div>
 
-    <div class="modal coffin" id="coffin" data-backdrop="static">
-        <img width="100%" height="100%" src="https://media1.tenor.com/images/89cc0f940769bc079795e4aed3095227/tenor.gif?itemid=16828836" alt="Chargement en cours du gif coffin_dance-minecraft.gif (tenor.gif)">
-    </div>
-
     <div class="modal fade" id="snakemodal" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="game">
             <div class="modal-body">
