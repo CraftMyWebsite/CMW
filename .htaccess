@@ -71,6 +71,8 @@ RewriteCond %{HTTPS} on
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1$1 [R=301,L]
 ErrorDocument 404 /index.php?page=erreur
+
+
 <IfModule mod_expires.c>
     ExpiresActive on
     ExpiresByType image/jpg "access plus 1 month"
@@ -80,4 +82,11 @@ ErrorDocument 404 /index.php?page=erreur
     ExpiresByType text/javascript "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
     ExpiresByType text/css "access plus 1 month"
+</IfModule>
+
+# Extra Security Headers (XSS, content-sniffing, click-jacking)
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+	Header always append X-Frame-Options SAMEORIGIN
+	Header set X-Content-Type-Options nosniff
 </IfModule>
