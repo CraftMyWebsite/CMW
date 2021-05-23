@@ -105,8 +105,7 @@ $_Theme_ = $configTheme->GetTableau();
 
     <?php endif; ?>
 
-    <?php if (Permission::getInstance()->verifPerm("connect")) /* --> */ setcookie('pseudo', $_Joueur_['pseudo'], time() + 86400, null, null, false, true);
-
+    <?php
     include('theme/' . $_Serveur_['General']['theme'] . '/entete.php'); //Header included
     tempMess(); ?>
 
