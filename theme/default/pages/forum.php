@@ -88,7 +88,7 @@ $fofo = $_Forum_->affichageForum();
                                         </div>
 
                                     </div>
-
+                                     <?php if(count($fofo) > 1) { ?>
                                     <div class="dropdown d-inline-block">
 
                                         <button class="btn btn-main dropdown-toggle" type="button" id="ordreforum<?= $fofo[$i]['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -96,15 +96,19 @@ $fofo = $_Forum_->affichageForum();
                                         </button>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <?php if($i != 0) { ?>
                                             <a class="dropdown-item" href="index.php?action=ordreForum&ordre=<?= $fofo[$i]['ordre']; ?>&id=<?= $fofo[$i]['id']; ?>&modif=monter">
                                                 <i class="fas fa-arrow-up"></i> Monter d'un cran
                                             </a>
+                                            <?php } if($i != count($fofo) - 1) { ?>
                                             <a class="dropdown-item" href="index.php?action=ordreForum&ordre=<?= $fofo[$i]['ordre']; ?>&id=<?= $fofo[$i]['id']; ?>&modif=descendre">
                                                 <i class="fas fa-arrow-down"></i> Descendre d'un cran
                                             </a>
+                                            <?php } ?>
                                         </div>
 
                                     </div>
+                                    <?php } ?>
 
                                     <a href="index.php?action=remove_forum&id=<?php echo $fofo[$i]['id']; ?>" class="btn btn-danger no-hover">
                                         <i class="fas fa-trash"></i> Supprimer
@@ -249,21 +253,24 @@ $fofo = $_Forum_->affichageForum();
                                                             </form>
                                                         </div>
                                                     </div>
-
+                                                    <?php if(count($categorie) > 1) { ?>
                                                     <div class="dropdown d-inline ml-1">
                                                         <button type="button" class="btn btn-main dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <i class="fas fa-list"></i>
                                                         </button>
-
                                                         <div class="dropdown-menu">
+                                                             <?php if($j != 0) { ?>
                                                             <a class="dropdown-item" href="index.php?action=ordreCat&ordre=<?= $categorie[$j]['ordre']; ?>&id=<?= $categorie[$j]['id']; ?>&forum=<?= $categorie[$j]['forum']; ?>&modif=monter">
                                                                 <i class="fas fa-arrow-up"></i> Monter d'un cran
                                                             </a>
+                                                            <?php } if($j != count($categorie) - 1) { ?>
                                                             <a class="dropdown-item" href="index.php?action=ordreCat&ordre=<?= $categorie[$j]['ordre']; ?>&id=<?= $categorie[$j]['id']; ?>&forum=<?= $categorie[$j]['forum']; ?>&modif=descendre">
                                                                 <i class="fas fa-arrow-down"></i> Descendre d'un cran
                                                             </a>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <?php } ?>
                                                     <button type="button" onclick="openModalEditForum(<?= $categorie[$j]['id']; ?>,'<?= $categorie[$j]['nom']; ?>',<?php echo $fofo[$i]['id']; ?>, <?php if ($categorie[$j]['img'] == NULL) { echo 'null'; }  else { echo "'".$categorie[$j]['img']."'";} ?> );" class="btn btn-main ml-1" >
                                                         <i class="fas fa-cog"></i>
                                                     </button>
