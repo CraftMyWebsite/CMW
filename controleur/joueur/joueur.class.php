@@ -50,13 +50,15 @@ class Joueur
     }
     
     private function defineToken($bdd, $id) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $token = '';
-        for ($i = 0; $i < 24; $i++) {
-            $token .= $characters[rand(0, $charactersLength - 1)];
-        }
-        $token .= "-".time();
+        do {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $token = '';
+            for ($i = 0; $i < 16; $i++) {
+                $token .= $characters[rand(0, $charactersLength - 1)];
+            }
+            $token .= "-".time();
+        } while($this->tokenExist($bdd, $token) != null);
         
         $req = $bdd->prepare("UPDATE `cmw_users` SET `token`=:token WHERE id=:id");
         $req->execute(array("id" => $id, "token" => $token));
@@ -93,7 +95,7 @@ class Joueur
         if(count($part) == 2 ) {
             return ((string) (int) $part[1] === $part[1])
             && ($part[1] <= PHP_INT_MAX)
-            && ($part[1] >= ~PHP_INT_MAX) && strlen($part[0]) == 24;
+            && ($part[1] >= ~PHP_INT_MAX) && strlen($part[0]) == 16;
         } else {
             return false;
         }
@@ -103,7 +105,7 @@ class Joueur
         $req = $bdd->prepare("SELECT * FROM cmw_users WHERE token=:token");
         $req->execute(array("token"=>$token));
         if(!empty($req)) {
-            
+            return $req->fetch(PDO::FETCH_ASSOC);
         }
         return null;
     }
