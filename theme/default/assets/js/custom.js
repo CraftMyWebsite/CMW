@@ -158,24 +158,40 @@ function initForumEdit(el, id, index) {
 		}
 	}
 
+	let state = false;
+
 	el.addEventListener("mouseleave", function(event) {
-		span.style.display="inline";
-		ic.style.display="none";
-		input.style.display="none";
-		input.blur();
-		document.getSelection().removeAllRanges();
+		if(!state) {
+			span.style.display="inline";
+			ic.style.display="none";
+			input.style.display="none";
+			input.blur();
+			document.getSelection().removeAllRanges();
+		}
 	});
 	el.addEventListener("mouseenter", function(event) {
-		span.style.display="inline";
-		ic.style.display="inline";
-		input.style.display="none";
+		if(!state)
+		{
+			span.style.display="inline";
+			ic.style.display="inline";
+			input.style.display="none";
+		}
 	});
 	el.addEventListener("click", function(event) {
+		state = true;
 		span.style.display="none";
 		ic.style.display="inline";
 		input.style.display="inline";
 		input.focus();
 		input.select();
+	});
+	input.addEventListener("blur", function(event) {
+		state = false;
+		span.style.display="inline";
+		ic.style.display="none";
+		input.style.display="none";
+		input.blur();
+		document.getSelection().removeAllRanges();
 	});
 }
 
