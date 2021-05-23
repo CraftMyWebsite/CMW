@@ -81,6 +81,7 @@ class Joueur
             'id' => $_SESSION['Player']['id'],
             'pseudo' => $_SESSION['Player']['pseudo'],
             'rang' => $_SESSION['Player']['rang'],
+            'email' => $_SESSION['Player']['email'],
             'tokens' => $_SESSION['Player']['tokens'],
             'uuid' => $_SESSION['Player']['uuid'],
             'uuidf' => $_SESSION['Player']['uuidf']
