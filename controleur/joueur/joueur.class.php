@@ -10,7 +10,7 @@ class Joueur
     
     public function __construct($bdd)
     {
-        if(isset($_SESSION['Player'])) {
+        if(isset($_SESSION['Player']['pseudo'])) {
             if($_SESSION['Player']['temp'] < time() - 60) {
                 $req = $bdd->prepare('SELECT * FROM cmw_users WHERE id = :id');
                 $req->execute(array(
