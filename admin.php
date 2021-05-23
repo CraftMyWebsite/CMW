@@ -1,22 +1,13 @@
 <?php
+session_start();
 error_reporting(E_ALL);
 date_default_timezone_set('Europe/Paris');
 ini_set('display_errors', 1);
+
 	// On appelle les classes du controleur qui instancies les objets principaux (BDD, config, JSONAPI...).
 	require_once('controleur/config.php');
 	require_once('controleur/connection_base.php');	
 
-	// On démarre les sessions sur la page pour récupérer les variables globales(les données du joueur...).
-	session_start();
-
-	if(isset($_COOKIE['id'], $_COOKIE['pass']))
-	{
-		require_once('controleur/joueur/connexion_cookie.php');
-		require_once ('controleur/joueur/joueur.class.php');
-        $globalJoueur = new Joueur();
-        // Cette variable contiens toutes les informations du joueur.
-        $_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
-	}
 	
 	require('modele/joueur/imgProfil.class.php');
 	$_ImgProfil_ = new ImgProfil($bddConnection);
@@ -24,15 +15,10 @@ ini_set('display_errors', 1);
 	   le laps de temps du chargement de la page contrairement aux sessions. */
   /* On instancie un joueur, et on récupère le tableau de données. $_Joueur_ sera donc utilisable 
 	   sur toutes les pages grâce au système de GET sur l'index.*/
-	if((isset($_SESSION['Player']['pseudo']) AND !empty($_SESSION['Player']['pseudo'])))
-	{
-		require_once('controleur/joueur/joueur.class.php');
 	
-		$globalJoueur = new Joueur();
-		// Cette variable contiens toutes les informations du joueur.
-		$_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
-		$connection = true;
-	}
+	require('controleur/joueur/joueur.class.php');
+	$globalJoueur = new Joueur($bddConnection);
+	$_Joueur_ = $globalJoueur->getUser();
 
 	if(Permission::getInstance()->verifPerm("PermsPanel","access"))
 	{

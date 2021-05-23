@@ -45,9 +45,9 @@
 		$playeronline = $pingClass->Players;
 		$maxPlayers = $pingClass->MaxPlayer;
 		$servEnLigne = $pingClass->Online;
-		setcookie('playeronline', $playeronline, time() + 120, null, null, false, true);
-		setcookie('maxPlayers', $maxPlayers, time() + 120, null, null, false, true);
-		setcookie('servOnline', $servEnLigne, time() + 120, null, null, false, true);
+		setcookie('playeronline', $playeronline, time() + 120, null, null, true, true);
+		setcookie('maxPlayers', $maxPlayers, time() + 120, null, null, true, true);
+		setcookie('servOnline', $servEnLigne, time() + 120, null, null, true, true);
 	}
 
 

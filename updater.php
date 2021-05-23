@@ -251,6 +251,7 @@ function bdd181to182($bddConnection) {
      $bddConnection->exec("ALTER TABLE cmw_users ADD (
         `UUID` varchar(32) DEFAULT NULL,
         `UUIDF` varchar(36) DEFAULT NULL 
+        `token` varchar(32) DEFAULT NULL
     )");
 }
 
