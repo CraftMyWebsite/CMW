@@ -181,10 +181,10 @@ class AdminForum extends Forum
 		elseif($entite == 3)
 		{
 			$data = $this->SousForum($id);
-			return 'forum_categorie/'.$data['id_categorie'];
+			return 'forum_categorie&id='.$data['id_categorie'];
 		}
 		else
-			return 'post/'.$id;
+			return 'post&id='.$id;
 	}
 }
 
