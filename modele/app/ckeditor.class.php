@@ -36,7 +36,7 @@ class ckeditor
 			} else {
 				if($item->attributes != null) {
 			    	$length = $item->attributes->length;
-					for ($i = 0; $i < $length; ++$i) {
+					for ($i = $length - 1; $i >= 0; --$i) {
 						if($item->attributes->item($i) != null) {
 							$n = strtolower($item->attributes->item($i)->name);
 							if(strlen($n) > 1) {

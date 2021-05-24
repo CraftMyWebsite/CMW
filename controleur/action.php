@@ -41,9 +41,7 @@ if(isset($_GET['action']))
 		// Appellée quand on clique sur un bouton de déconnection (bouton disponible quand connecté.
 		case 'deco': 
 			// Destruction des sessions + redirection sur l'accueil.
-			session_destroy();
-			setcookie('id', 0, time(), '/', null, false, false);
-			setcookie('pass', 0, time(), '/', null, false, false);
+		    $globalJoueur->destroy();
 			header('Location: index.php');
 		break;
 		case 'searchTopic':

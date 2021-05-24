@@ -405,6 +405,7 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
   `show_email` tinyint(1) UNSIGNED,
   `achats` text NULL,
   `signature` text,
+  `token` varchar(32) DEFAULT NULL,
   `UUID` varchar(32) DEFAULT NULL,
   `UUIDF` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`id`)

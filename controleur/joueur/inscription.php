@@ -145,8 +145,8 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 								$ligneReponse = $userConnection->getReponseConnection();
 
 								$donneesJoueur = $ligneReponse->fetch(PDO::FETCH_ASSOC);
-								require_once('controleur/joueur/joueurcon.class.php');
-								$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], NULL, NULL);
+
+								$globalJoueur->createUser($bddConnection, $donneesJoueur, false);
 								header('Location: index.php?page=accueil');
 
 							}

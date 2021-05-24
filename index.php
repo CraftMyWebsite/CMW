@@ -36,26 +36,11 @@ $_Panier_ = new Panier($bddConnection);
 // On démarre les sessions sur la page pour récupérer les variables globales(les données du joueur...).*
 /* Si l'utilisateur est connecté, on met ses informations dans un tableau global, qui sera utilisable que
  le laps de temps du chargement de la page contrairement aux sessions. */
-if ((isset($_SESSION['Player']['pseudo']) AND !empty($_SESSION['Player']['pseudo'])) OR isset($_COOKIE['id'], $_COOKIE['pass'])) {
-    /* On instancie un joueur, et on récupère le tableau de données. $_Joueur_ sera donc utilisable
-     sur toutes les pages grâce au système de GET sur l'index.*/
-	if(!isset($_SESSION['Player']['pseudo']))
-		require('controleur/joueur/connexion_cookie.php');
-    else
-        $suite = true;
-    if($suite == true)
-    {	
-        require('controleur/joueur/joueur.class.php');
-        $globalJoueur = new Joueur();
-        if((isset($_SESSION['Player']['temp']) && $_SESSION['Player']['temp'] < time()+60) ||!isset($_SESSION['Player']['uuid']) )
-            $globalJoueur->updateArrayDonneesUtilisateur($bddConnection);
-        // Cette variable contiens toutes les informations du joueur.
-        $_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
-        $connection = true;
-    }
-    else
-        $connection = false;
-}  else $connection = false;
+
+require('controleur/joueur/joueur.class.php');
+$globalJoueur = new Joueur($bddConnection);
+$_Joueur_ = $globalJoueur->getUser();
+
 require('modele/json/json.php');
 //le fichier controle des récompenses Auto
 require('controleur/recompenseAuto.php'); 

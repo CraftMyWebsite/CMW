@@ -1,9 +1,4 @@
 <?php
-
-require_once('controleur/joueur/joueur.class.php');
-$globalJoueur = new Joueur();
-$_Joueur_ = $globalJoueur->getArrayDonneesUtilisateur();
-
 if(Permission::getInstance()->verifPerm('PermsDefault', 'support', 'closeTicket')) {
 	$id = htmlspecialchars($_GET['id']);
 	$etat = htmlspecialchars($_POST['etat']);
