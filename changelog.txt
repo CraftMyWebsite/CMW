@@ -19,7 +19,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix tache Cron qui ne fonctionnait pas
 [|] : Fix sur le panier pour les achats des joueurs devant être connecté sur le serveur
 
-[=] : Fix sécurité sur le cms
+[=] : Fixs sécurité sur le cms (XSS + cookie)
 [=] : Menu désormais stocker dans la base de données
 [=] : Refonte de l'inscription pour que ça soit plus "pro" 
 [=] : Image centré dans les offres boutique
@@ -29,6 +29,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [=] : Amélioration du mode nuit sur certaines pages
 [=] : Plus besoin de recharger sa page pour voir ses modifiations sur le panel
 [=] : Mise à jour de l'installateur du cms
+[=] : Suppression de certains eastegger du panel
 
 [+] : Possibilité de modifier l'ordre des menus
 [+] : Ajout de l'option instantané pour les récompenses des votes
