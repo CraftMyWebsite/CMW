@@ -147,7 +147,7 @@ else
 		</div>
 		<div class="card-footer">
 	        <div class="row text-center">
-	            <button type="button" class="circle-btn-start btn btn-success w-100" >Envoyer le newsletter !</button>
+	            <button type="button" class="circle-btn-start btn btn-success w-100" >Envoyer la newsletter !</button>
 	        </div>
 	    </div>
 	</div>
