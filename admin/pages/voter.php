@@ -378,7 +378,7 @@
                                       
                                             <label class="control-label" for="idunique<?=$o;?>">ID Unique</label>
                                              <div class="input-group mb-3">
-                                                 <input type="text" id="idunique<?=$o;?>" onkeyup='if(isset(this.value) && this.value.replaceAll(" ", "") != "") { get("btn-test-<?=$o;?>").disabled = false; } else { get("btn-test-<?=$o;?>").disabled = true; }' name="idCustom<?=$o;?>" placeholder="ex: 54748" value="" class="form-control" />
+                                                 <input type="text" id="idunique<?=$o;?>" onkeyup='if(isset(this.value) && this.value.replaceAll(" ", "") != "") { get("btn-test-<?=$o;?>").disabled = false; } else { get("btn-test-<?=$o;?>").disabled = true; }' name="idCustom<?=$o;?>" placeholder="ex: 54748" value="<?=$donnees[$o]['idCustom'];?>" class="form-control" />
                                                   <div class="input-group-append">
                                                      <button type="button" onclick="testUrlVoteForTest(getValueByName('all-vote','lien<?=$o;?>'),getValueByName('all-vote','idCustom<?=$o;?>'),this);" id="btn-test-<?=$o;?>" class="input-group-text btn btn-success" disabled>Tester</button>
                                                   </div>
