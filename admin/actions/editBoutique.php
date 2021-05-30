@@ -59,7 +59,6 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre
         	} else {
 
 	        	$_POST['offresNom'.$offres[$j]['id']] = htmlspecialchars($_POST['offresNom'.$offres[$j]['id']]);
-	        	$_POST['offresDescription'.$offres[$j]['id']] = htmlspecialchars($_POST['offresDescription'.$offres[$j]['id']]);	
 				$_POST['offresDescription'.$offres[$j]['id']] = ckeditor::verif($_POST['offresDescription'.$offres[$j]['id']],true);
 	        	$req = $bddConnection->prepare('UPDATE `cmw_boutique_offres` SET `nom`=:nom,`description`=:description,`prix`=:prix,`nbre_vente`=:nbre_vente,`categorie_id`=:categorie_id,`ordre`=:ordre,`evo`=:evo,`max_vente`=:max_vente WHERE id=:id');
 	        	$req->execute(Array (
