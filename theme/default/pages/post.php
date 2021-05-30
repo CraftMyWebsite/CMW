@@ -423,7 +423,7 @@ if (isset($_GET['id'])) :
 
                                         <?php if ($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] or Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteMessage') and !$_SESSION['mode']) : ?>
                                             <form action="?action=remove_answer" method="post">
-                                                <input type="hidden" name="id_answer" value="<?= $id; ?>" />
+                                                <input type="hidden" name="id_answer" value="<?= $answerd[$i]['id']; ?>" />
                                                 <input type="hidden" name="page" value="<?= (isset($_GET['page_post'])) ? $_GET['page_post'] : 1; ?>" />
                                                 <a class="btn btn-danger w-100 no-hover" role="button" data-toggle="modal" href="#awnser_<?= $answerd[$i]['id']; ?>" aria-expanded="false" aria-controls="modalConfirmation">
                                                     Supprimer
