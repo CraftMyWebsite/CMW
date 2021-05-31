@@ -537,7 +537,9 @@ li.nav-item {
     width: 100%;
     margin-bottom: 0.2rem;
 }
-
+#Shop .image.image_resized img, #Shop figure.image.image_resized {
+  width: 100%!important;
+}
 
 /* ==> Membres */
 
