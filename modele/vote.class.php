@@ -361,7 +361,11 @@ class vote {
             }else if(strpos($url, 'minecraft-mp.com'))  {
                 $api = self::fetch("https://minecraft-mp.com/api/?object=votes&element=claim&key=".$id."&username=".$this->Pseudo);
                 if(intval($api) == 2 ){return true;}else{return false;}
-            }else {
+            }else if(strpos($url, 'serveur-minecraft.com')){
+                $api = self::fetch("https://serveur-minecraft.com/api/1/vote/".$id."/".$this->get_client_ip());
+                if(intval($api) == 0){return true;}else{return false;}
+            }
+            else {
                 return true;
             }
         } else {
