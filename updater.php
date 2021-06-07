@@ -6,22 +6,32 @@ error_reporting(E_ALL);
 require_once('controleur/config.php');
 require_once('controleur/connection_base.php');
 
+var_dump($_POST);
 if(isset($_POST['go']) AND $_POST['go'] == 1)
 {
-	//Modifcation des fichiers
+	echo "0";
 	$archiveUpdate = new ZipArchive;
+    echo "1";
 	if($archiveUpdate->open('update.zip') === TRUE)
 	{
+        echo "2";
 		$archiveUpdate->extractTo(__DIR__);
+        echo "3";
 		$archiveUpdate->close();
-
+        echo "4";
     bdd181to182($bddConnection);
+    echo "5";
 		accueil181to182($bddConnection);
+        echo "6";
 		widgets181to182($bddConnection);
+        echo "7";
     pages181to182($bddConnection);
+    echo "8";
 		file181to182();
+        echo "9";
 
 		unlink('update.zip');
+        echo "10";
 		echo 'Mise à jour réussie ! <a href="index.php?&removeUpdater=true">Aller sur votre site</a>';
 	}
 }
@@ -72,6 +82,13 @@ else
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <p class="text">
                     Cette version réinitialisera votre choix thème (Défault), les thèmes autre que Default sont pas forcément compatible avec cette version - en cas de doute contacter le créateur du thème que vous souaither utilisé ! 
+                </p>
+            </div>
+			<div class="alert alert-danger">
+                <p class="text">
+					<center><strong>ATTENTION</strong></center>
+					Cette mise à jour va modifier le stockage des menus. Par conséquent, <strong>vos menus vont être réinitialisés</strong> et remis par défaut.
+					Pensez à noter vos menus afin de les réintégrer prochainement. 
                 </p>
             </div>
 
