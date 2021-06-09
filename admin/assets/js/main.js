@@ -703,7 +703,7 @@ function testUrlVoteForTest(url, id, btn) {
 		});
 	}else if(url.includes("serveur-minecraft.com")) {
 		fetchVote("https://serveur-minecraft.com/"+id, function(data, status) {
-			// true -> 100, false -> <h2>Serveur introuvable.</h2>
+			// true -> 100, false -> <title>An Error Occurred: Not Found</title>
 			if(!data.includes("<title>An Error Occurred: Not Found</title>")) {
 				notif("success", "serveur-minecraft.com", "Id "+id+" trouvé !");
 			} else {
