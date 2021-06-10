@@ -701,6 +701,16 @@ function testUrlVoteForTest(url, id, btn) {
 			}
 			btn.disabled = false;
 		});
+	}else if(url.includes("serveur-minecraft.com")) {
+		fetchVote("https://serveur-minecraft.com/"+id, function(data, status) {
+			// true -> 100, false -> <title>An Error Occurred: Not Found</title>
+			if(!data.includes("<title>An Error Occurred: Not Found</title>")) {
+				notif("success", "serveur-minecraft.com", "Id "+id+" trouvé !");
+			} else {
+				notif("error", "serveur-minecraft.com", "Id "+id+" introuvable.");
+			}
+			btn.disabled = false;
+		});
 	} else {
 		notif("warning", url, "Aucune API enregistré pour se site.");
 		btn.disabled = false;
