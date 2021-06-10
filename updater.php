@@ -62,7 +62,7 @@ else
             </p>
             <div class="alert alert-danger">
                 <p class="text">
-                    Attention: la mise à jour de votre site web et iréversible ! Pensez à sauvegarder vos fichiers et
+                    Attention: la mise à jour de votre site web et irréversible ! Pensez à sauvegarder vos fichiers et
                     bases
                     de données avant de procéder à celle-ci.
                 </p>
@@ -74,7 +74,13 @@ else
                     Cette version réinitialisera votre choix thème (Défault), les thèmes autre que Default sont pas forcément compatible avec cette version - en cas de doute contacter le créateur du thème que vous souaither utilisé ! 
                 </p>
             </div>
-
+		<div class="alert alert-danger">
+                <p class="text">
+					<center><strong>ATTENTION</strong></center>
+					Cette mise à jour va modifier le stockage des menus. Par conséquent, <strong>vos menus vont être réinitialisés</strong> et remis par défaut.
+					Pensez à noter vos menus afin de les réintégrer prochainement. 
+                </p>
+            </div>
             <?php
                 if (! file_exists("update.zip")){
                     ?>
