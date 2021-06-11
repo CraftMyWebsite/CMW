@@ -50,4 +50,4 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 
 
 
-Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir, Emilien52, BadiiiX
+Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir, Emilien52, BadiiiX, MrFlamme26
