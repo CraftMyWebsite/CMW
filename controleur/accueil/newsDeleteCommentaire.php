@@ -28,26 +28,26 @@ if(Permission::getInstance()->verifPerm("connect")) {
 	if($CheckOwnerCommentaire == $pseudo OR $adminMode == true)
 	{
 		if($ExistNews == "0") {
-			header('Location: index.php?&NewsNotExist=true');
+			header('Location: index.php?page=accueil&NewsNotExist');
 		} else {
 			if($ExistCommentaire == "0") {
-				header('Location: index.php?&CommentaireNotExist=true');
+				header('Location: index.php?page=accueil&CommentaireNotExist');
 			} else {
 					if(!$CheckOwnerCommentaire == $pseudo OR $adminMode != true) {
-					 header('Location: index.php?&SuppressionImpossible=true');
+					 header('Location: index.php?page=accueil&SuppressionImpossible');
 				 } else {
 					require_once('modele/accueil/deleteNews.class.php');
 					$req_DeleteInfo = new DeleteNews($bddConnection);
 					$req_DeleteInfo->DeleteOwnerCommentaire($id_news, $auteur, $id);
 					$req_DeleteInfo->DeleteOwnerReports($id, $id_news);
-					header('Location: index.php?&SuppressionCommentaire=true');
+					header('Location: index.php?page=accueil&SuppressionCommentaire');
 				}
 			}
 		}
 	}else {
-		header('Location: index.php?&SuppressionCommentaire=false');
+		header('Location: index.php?page=accueil&SuppressionImpossible');
 	}
 } else {
-    header('Location: index.php?&NotOnline=true');
+    header('Location: index.php?page=accueil&NotOnline');
 }
 ?>

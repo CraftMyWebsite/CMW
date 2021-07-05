@@ -57,20 +57,43 @@ function getEach(element, callBack) {
     }
 }
 
-function sendDirectPost(url, callback) {
+function sendDirectPost(url, callback, sendData) {
     var returnData = false;
     $.post(url, {}, function(data, status) {
         clog("post: "+url+" data:"+data)
         if (status == "success") {
             returnData = true;
-            notif("success", "Action effectuée !","");
+            if(isset(sendData) && sendData === true)
+            {
+                if(jsonDataIsOk(data))
+                {
+                    notif("success", "Action effectuée !","");
+                }
+                else
+                {
+                    notif("error", "Erreur !", donneesRetour['message']);
+                }
+            }
+            else
+            {
+                notif("success", "Action effectuée !","");
+            }
         } else {
             notif("error", "Erreur", status);
         }
         if(isset(callback)) {
-            callback(returnData);
+            if(isset(sendData) && sendData === true) {
+                callback(returnData, data);
+            } else {
+                callback(returnData);
+            }
         }
     });
+}
+
+function jsonDataIsOk(data) {
+    donneesRetour = JSON.parse(data);
+    return donneesRetour['retour'] == "OK";
 }
 
 function removePost(idform, del) {
@@ -146,26 +169,33 @@ function sendPost(idform, callback, sendData) {
         clog("post: "+allUrl[idform]+" data:"+data)
         if (status == "success") {
             returnData = true;
-            if(isset(sendData))
+            if(isset(sendData) && sendData === true)
             {
-                donneesRetour = JSON.parse(data);
-                if(donneesRetour['retour'] == "OK")
+                if(jsonDataIsOk(data))
+				{
                     notif("success", "Action effectuée !","");
+				}
                 else
                 {
                     notif("error", "Erreur !", donneesRetour['message']);
                 }
             }
             else
+			{
                 notif("success", "Action effectuée !","");
+			}
         } else {
             notif("error", "Erreur", status);
         }
         if(isset(allCallBack[idform])) {
-            if(isset(sendData))
+            if(isset(sendData) && sendData === true)
+			{
                 allCallBack[idform](returnData, data);
+			}
             else
+			{
                 allCallBack[idform](returnData);
+			}
         }
     });
     it = allForm[idform].keys();
@@ -185,7 +215,7 @@ function clearAllInput(idform) {
             allForm[idform].get(key).value = "";
         } else if(allForm[idform].get(key).id == "ckeditor") {
             CK.get(allForm[idform].get(key)).setData("");
-            removeCK(allForm[idform].get(key));
+           // removeCK(allForm[idform].get(key));
         }
     }
 }
@@ -249,11 +279,12 @@ function Switch(el, el1, el2 )
     }
 }
 
-function hide(el, remove = false) {
+function hide(el, remove = false, callback = null) {
     $("#"+el).hide(300);
     if(remove) {
         setTimeout(function () {
-            get(el).parentElement.removeChild(get('el'));
+            get(el).parentElement.removeChild(get(el));
+			if(isset(callback)) { callback(); }
         }, 301);
     }
 }

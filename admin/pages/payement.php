@@ -105,7 +105,7 @@ if(isset($_GET['paypal'])){
                 <input type="hidden" name="paysafecardpage" value="1">
                 <div class="row">
                     <div class="alert alert-danger">
-                        <p>Notre systéme "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuelle ! Lorsqu'un joueur achète des <?=$_Serveur_['General']['moneyName'];?> via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livrer les <?=$_Serveur_['General']['moneyName'];?> à l'acheteur ! Pour valider des codes paysafecard / vérifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
+                        <p>Notre système "PaySafeCard" n'est pas affilié à PaySafe / PaySafeCard LTD et repose sur une validation manuelle ! Lorsqu'un joueur achète des <?=$_Serveur_['General']['moneyName'];?> via une offre PaySafeCard il vous faut venir sur cette page afin de récupérer le code du joueur, prélever le montant de l'offre et cliquer sur le bouton de validation afin de livrer les <?=$_Serveur_['General']['moneyName'];?> à l'acheteur ! Pour valider des codes paysafecard / vérifier le solde de code paysafecard rendez-vous <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer">sur le site officiel de PaySafe</a> </p>
                         Le saviez-vous: <strong>Vous pouvez payer l'hébergement de votre site web via code PaySafeCard <a href="https://webstrator.fr/" target="_blank" rel="noopener noreferrer">chez notre partenaire Webstrator.fr</a> !</strong>
                     </div>
                 </div>
@@ -207,7 +207,7 @@ if(isset($_GET['paypal'])){
                                                 <button onclick="sendDirectPost('?&action=supprimerPaypalOffre&id=<?php echo $paypalOffres[$i]['id']; ?>',function(data) { if(data) { hide('payementPaypal<?php echo $i; ?>'); hide('tab-payementPaypal<?php echo $i; ?>');}});" class="btn btn-danger w-100">Supprimer</button>                                        
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="submit"  onclick="sendPost('payementPaypal<?php echo $i; ?>');" class="btn btn-success w-100" value="Modifier Les changements !"/>
+                                                <input type="submit"  onclick="sendPost('payementPaypal<?php echo $i; ?>');" class="btn btn-success w-100" value="Valider les changements !"/>
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@ if(isset($_GET['paypal'])){
                                 </div><hr>
                                 <div class="row">
                                     <div class="offset-md-4 col-md-4">
-                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Modifier Les changements !"/>
+                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Valider les changements !"/>
                                     </div>
                                 </div>
                                  <script>initPost('payementPaysafecard<?php echo $i; ?>', 'admin.php?&action=modifierOffrePaysafecard&id=<?php echo $paysafecard[$i]['id']; ?>',null);</script>

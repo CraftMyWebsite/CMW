@@ -21,7 +21,7 @@
 }
 else
 {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');
 }
 function startsWith ($string, $startString) 
 { 

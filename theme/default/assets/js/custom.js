@@ -38,12 +38,12 @@ function searchForum(value, el, table, title) {
 
             		f += "<tr>"
 							+"<td>"
-                                +"<a href='?page=profil&profil="+ar.pseudo+"'>"
+                                +"<a href='index.php?page=profil&profil="+ar.pseudo+"'>"
                                     +"<img src='"+ar.img+"' style='width: 42px; height: 42px;' alt='avatar de l\'auteur' title='ar.pseudo' />"
                                 +"</a>"
                             +"</td>"
 							+"<td>"
-                        		+"<a href='?&page=post&id="+ar.id2+"'>";
+                        		+"<a href='index.php?page=post&id="+ar.id2+"'>";
 	                        		if(typeof ar.prefix !== 'undefined' && ar.prefix !== null)
 	                        		{
 	                        			f += ar.prefix+ " ";
@@ -53,7 +53,7 @@ function searchForum(value, el, table, title) {
                                 +"</a>"
                                 +"<p>"
                                 	+"<small>"
-                                        +"<a href='?page=profil&profil="+ar.pseudo+"'>"
+                                        +"<a href='index.php?page=profil&profil="+ar.pseudo+"'>"
                                             +ar.pseudo
                                         +"</a>, le "+ar.date_creation
                                     +"</small>"
@@ -63,7 +63,7 @@ function searchForum(value, el, table, title) {
                                 +"<p>Réponses : "+ar.compte
                             +"</td>"
 							+"<td>"
-                           		+"<a href='?&page=post&id="+ar.id2+"'>"
+                           		+"<a href='index.php?page=post&id="+ar.id2+"'>"
                                     +ar.last_answer
                                 +"</a>"
                             +"</td>"
@@ -158,24 +158,40 @@ function initForumEdit(el, id, index) {
 		}
 	}
 
+	let state = false;
+
 	el.addEventListener("mouseleave", function(event) {
-		span.style.display="inline";
-		ic.style.display="none";
-		input.style.display="none";
-		input.blur();
-		document.getSelection().removeAllRanges();
+		if(!state) {
+			span.style.display="inline";
+			ic.style.display="none";
+			input.style.display="none";
+			input.blur();
+			document.getSelection().removeAllRanges();
+		}
 	});
 	el.addEventListener("mouseenter", function(event) {
-		span.style.display="inline";
-		ic.style.display="inline";
-		input.style.display="none";
+		if(!state)
+		{
+			span.style.display="inline";
+			ic.style.display="inline";
+			input.style.display="none";
+		}
 	});
 	el.addEventListener("click", function(event) {
+		state = true;
 		span.style.display="none";
 		ic.style.display="inline";
 		input.style.display="inline";
 		input.focus();
 		input.select();
+	});
+	input.addEventListener("blur", function(event) {
+		state = false;
+		span.style.display="inline";
+		ic.style.display="none";
+		input.style.display="none";
+		input.blur();
+		document.getSelection().removeAllRanges();
 	});
 }
 
@@ -248,13 +264,13 @@ function securPass() {
 			$("#correspondance").addClass("text-success");
 			if ($("#correspondance").hasClass("text-danger"))
 				$("#correspondance").removeClass("text-danger");
-			$("#correspondance").html("Les mots de passes rentrés correspondent !!!");
+			$("#correspondance").html("<i class=\"fas fa-check\"></i>");
 			$("#InscriptionBtn").removeAttr("disabled");
 		} else {
 			$("#correspondance").addClass("text-danger");
 			if ($("#correspondance").hasClass("text-success"))
 				$("#correspondance").removeClass("text-success");
-			$("#correspondance").html("Les mots de passes rentrés ne correspondent pas !!!");
+			$("#correspondance").html("<i class=\"fas fa-times\"></i>");
 		}
 		if ($("#MdpInscriptionForm").val() != $("#MdpConfirmInscriptionForm").val()) {
 			$("#InscriptionBtn").attr("disabled", true);
@@ -334,4 +350,16 @@ $('document').ready(function () {
 		});
 	});
 
+});
+
+// Toggle MDP
+$(".toggle-password").click(function() {
+
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") == "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
 });

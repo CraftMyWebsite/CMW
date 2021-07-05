@@ -22,37 +22,32 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND !empty($_POST['pseudo'])
 
 			if($VerifMailBdd == '1')
 			{
-				require_once('controleur/joueur/joueurcon.class.php');
-				$reconnexion = NULL;
+
+				$reconnexion = false;
 				if(isset($_POST['reconnexion']))
-					$reconnexion = 1;
-				$utilisateur_connection = new JoueurCon($donneesJoueur['id'], $donneesJoueur['pseudo'], $donneesJoueur['email'], $donneesJoueur['rang'], $donneesJoueur['tokens'], $reconnexion, $donneesJoueur['mdp']);
-				if(preg_match('#erreur#', $_SERVER['HTTP_REFERER']))
 				{
-					header('Location: index.php');
+					$reconnexion = true;
 				}
-				else
-				{
-					header('Location: '.$_SERVER['HTTP_REFERER']);
-				}
+				$globalJoueur->createUser($bddConnection, $donneesJoueur, $reconnexion);
+				header('Location: index.php?page=accueil');
 			}
 			else
 			{
-				header('Location: ?&page=erreur&erreur=14');
+				header('Location: index.php?page=erreur&erreur=14');
 			}
 		}
 		else 
 		{ 
-			header('Location: ?&page=erreur&erreur=6');
+			header('Location: index.php?page=erreur&erreur=6');
 		}
 	}
 	else
 	{
-		header('Location: ?&page=erreur&erreur=5');
+		header('Location: index.php?page=erreur&erreur=5');
 	}
 }
 else
 {
-	header('Location: ?&page=erreur&erreur=4');
+	header('Location: index.php?page=erreur&erreur=4');
 }
 ?>

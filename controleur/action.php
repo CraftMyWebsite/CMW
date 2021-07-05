@@ -6,12 +6,42 @@ if(isset($_GET['action']))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 		
+	    
+	    case 'editAge':
+	        include('controleur/joueur/profil/editAge.php');
+	       break;
+	    
+	    case 'editImgProfil':
+	        include('controleur/joueur/profil/editImgProfil.php');
+	        break;
+	        
+	    case 'editMail':
+	        include('controleur/joueur/profil/editMail.php');
+	        break;
+	        
+	    case 'editMailVisibility':
+	        include('controleur/joueur/profil/editMailVisibility.php');
+	        break;
+	        
+	    case 'editMdp':
+	        include('controleur/joueur/profil/editMdp.php');
+	        break;
+	        
+	    case 'editNewsletter':
+	        include('controleur/joueur/profil/editNewsletter.php');
+	        break;
+	        
+	    case 'editReseau':
+	        include('controleur/joueur/profil/editReseau.php');
+	        break;
+	        
+	    case 'editSignature':
+	        include('controleur/joueur/profil/editSignature.php');
+	        break;
 		// Appellée quand on clique sur un bouton de déconnection (bouton disponible quand connecté.
 		case 'deco': 
 			// Destruction des sessions + redirection sur l'accueil.
-			session_destroy();
-			setcookie('id', 0, time(), '/', null, false, false);
-			setcookie('pass', 0, time(), '/', null, false, false);
+		    $globalJoueur->destroy();
 			header('Location: index.php');
 		break;
 		case 'searchTopic':
@@ -89,10 +119,6 @@ if(isset($_GET['action']))
 			include('controleur/forum/modifPerms.php');
 		break;
 
-		case 'modifShowEmail':
-			include('controleur/joueur/modifShowEmail.php');
-		break;
-
 		case 'chatActu':
 			require('modele/app/chat.class.php');
 			include('controleur/chat/actu.php');
@@ -101,14 +127,6 @@ if(isset($_GET['action']))
 		case 'sendChat':
 			require('modele/app/chat.class.php');
 			include('controleur/chat/send.php');
-		break;
-
-		case 'modifImgProfil':
-			include('controleur/joueur/modifImgProfil.php');
-		break;
-
-		case 'removeImgProfil':
-			include('controleur/joueur/removeImgProfil.php');
 		break;
 				
 		case 'supprInstall':
@@ -256,10 +274,10 @@ if(isset($_GET['action']))
 			if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur'))
 			{
 				$_SESSION['mode'] = ($_SESSION['mode'] == 1) ? false : true;
-				header('Location: ?page=forum');
+				header('Location: index.php?page=forum');
 			}
 			else
-				header('Location: ?page=erreur&erreur=7');
+				header('Location: index.php?page=erreur&erreur=7');
 		break;
 		// Fin d'appel en cas d'action forum
 
@@ -270,24 +288,24 @@ if(isset($_GET['action']))
 		case 'supprItemPanier':
 			$exec = $_Panier_->supprimerProduit(htmlspecialchars($_GET['id']));
 			if($exec !== false)
-				header('Location: ?page=panier');
+				header('Location: index.php?page=panier');
 			else
-				header('Location: ?page=erreur&erreur=17');
+				header('Location: index.php?page=erreur&erreur=17');
 		break;
 
 		case 'viderPanier':
 			$_Panier_->supprimerPanier();
-			header('Location: ?page=panier');
+			header('Location: index.php?page=panier');
 		break;
 
 		case 'retirerReduction':
 			$_Panier_->retirerReduction();
-			header('Location: ?page=panier');
+			header('Location: index.php?page=panier');
 		break;
 
 		case 'ajouterCode':
 			$_Panier_->ajouterReduction($_POST['codepromo']);
-			header('Location: ?page=panier');
+			header('Location: index.php?page=panier');
 		break;
 
 		// Appellé lorsqu'on envoie un formulaire de conneciton.
@@ -300,12 +318,7 @@ if(isset($_GET['action']))
 		case 'inscription':
 			include('controleur/joueur/inscription.php');
 		break;
-		
-        case 'changeMdp':
-            include('controleur/joueur/changeMdp.php');
-            header('Location: index.php');
-        break;
-		
+
 		case 'passRecoverConfirm':
             include('controleur/joueur/recuperationMailLink.php');
         break;
@@ -330,27 +343,17 @@ if(isset($_GET['action']))
 		
 		case 'post_ticket':
 			include('controleur/support/ticket.php');
-			header('Location: index.php?&page=support');
+			header('Location: index.php?page=support');
 		break;
 		
 		case 'post_ticket_commentaire':
 			include('controleur/support/ticketCommentaire.php');
-			header('Location: index.php?&page=support');
-		break;
-		
-		case 'changeProfil':
-			include('controleur/joueur/changeProfil.php');
-			//header('Location: index.php?&page=profil&profil=' .$_Joueur_['pseudo']);
-		break;
-		
-		case 'changeProfilAutres':
-			require('modele/joueur/donneesJoueur.class.php');
-			include('controleur/joueur/changeProfilAutres.php');
+			header('Location: index.php?page=support');
 		break;
 		
 		case 'ticketEtat':
 			include('controleur/support/ticketEtat.php');
-			header('Location: index.php?&page=support');
+			header('Location: index.php?page=support');
 		break;
 
 		case 'post_news_commentaire':
@@ -387,7 +390,7 @@ if(isset($_GET['action']))
 		
 		// Si le joueur a rentré un url contenant une valeur d'action innexistant?
 		default:
-			header('Location: index.php');
+			header('Location: index.php?page=accueil');
 	}
 }
 ?>

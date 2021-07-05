@@ -44,6 +44,7 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 	} else {
 		try {
 			$mail = new PHPMailer(true);
+			$mail->CharSet = 'UTF-8';
 			if($_POST['CheckSmtp'] == 1)
 			{
 				$mail->isSMTP();
@@ -66,7 +67,7 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 			$mail->isHTML(true);                               
 			$mail->Subject = htmlspecialchars($_POST["sujet"]);
 			require('modele/app/ckeditor.class.php');
-			$_POST['contenu'] = ckeditor::verif($_POST['contenu']);
+			$_POST['contenu'] = ckeditor::verif($_POST['contenu'],true);
 			$mail->Body    = $_POST["contenu"];
 			$mail->AltBody = strip_tags($_POST["contenu"]);
 			if(!$mail->send()) {

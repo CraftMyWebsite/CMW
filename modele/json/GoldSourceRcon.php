@@ -102,11 +102,11 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
 			
 			$Trimmed = trim( $StringBuffer );
 			
-			if( $Trimmed === 'Bad rcon_password.' )
+			if( $Trimmed === 'Mot de passe Rcon invalide.' )
 			{
 				throw new AuthenticationException( $Trimmed, AuthenticationException::BAD_PASSWORD );
 			}
-			else if( $Trimmed === 'You have been banned from this server.' )
+			else if( $Trimmed === 'Vous avez été banni de ce serveur.' )
 			{
 				throw new AuthenticationException( $Trimmed, AuthenticationException::BANNED );
 			}

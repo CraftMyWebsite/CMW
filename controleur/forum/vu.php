@@ -13,6 +13,6 @@ if(Permission::getInstance()->verifPerm("connect"))
 	header('Location: index.php?page=post&id=' .$id. '&page_post=' .$pages. '#' .$id_answer. '');
 }
 else
-	header('Location: ?page=erreur&erreur=16');
+	header('Location: index.php?page=erreur&erreur=16');
 
 ?>

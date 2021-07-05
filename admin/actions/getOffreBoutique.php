@@ -7,10 +7,10 @@
                     </ul>
                     <div class="tab-content" id="speccategorie">
                      
-                       <?php for($j = 1;$j <= count($offres);$j++) { ?>
+                       <?php if(isset($offres) && !empty($offres)) { for($j = 1;$j <= count($offres);$j++) { ?>
                             <div data-callback="allaction-<?php echo $offres[$j]['id']; ?>" data-url="admin.php?action=editerAction"></div>
                             <div data-callback="new-action-<?php echo $offres[$j]['id']; ?>" data-url="admin.php?action=creerAction"></div>
-                        <?php } for($i = 0;$i < count($categories);$i++) {?>
+                        <?php } } for($i = 0;$i < count($categories);$i++) {?>
 
                             <div data-boutique-callback="<?php echo $categories[$i]['id']; ?>" data-boutique-callback-name="<?php echo $categories[$i]['titre']; ?>"></div>
                             <div data-callback="navRap<?=$i?>" data-url="admin.php?action=editBoutique" data-js="boutiqueCheck"></div>
@@ -54,7 +54,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for($j = 1;$j <= count($offres);$j++) {
+                                            <?php if(isset($offres) && !empty($offres)) { for($j = 1;$j <= count($offres);$j++) {
                                                 if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                                     <tr id="ligneoffre-<?php echo $offres[$j]['id']; ?>">
                                                 <td><input type="text" name="offresNom<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nom']; ?>" /></td>
@@ -106,7 +106,7 @@
                                                 <td><a class="btn btn-success" data-toggle="modal" data-target="#OffreAction<?php echo $offres[$j]['id']; ?>">Modifier</a></td>
                                                 <input type="hidden" name="offresId<?php echo $offres[$j]['id']; ?>" value="<?php echo $offres[$j]['id']; ?>" />
                                             </tr>
-                                            <?php } }?>
+                                            <?php } } }?>
                                         </tbody>
                                     </table>
                                     <button type="submit" class="btn btn-success w-100" style="margin-top:10px;" onClick="sendPost('navRap<?=$i?>');">Envoyer!</button>
@@ -218,8 +218,8 @@
                                                               <?php $itemps = $i;?>
                                                             <select class="form-control" name="grade_site">
                                                                     <option value="0">Joueur</option>
-                                                                    <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                                                            <option value="<?php echo $idGrade[$i]['id']; ?>"><?= $idGrade[$i]['nom']?></option>
+                                                                    <?php  for($i2 = 0; $i2 < count($idGrade); $i2++) {  ?>
+                                                                            <option value="<?php echo $idGrade[$i2]['id']; ?>"><?= $idGrade[$i2]['nom']?></option>
                                                                     <?php }?>
                                                                     <option value="1">Créateur</option>
                                                             </select>
@@ -244,8 +244,8 @@
                                                                     <?php if($actions[$k]['methode'] == 6){?>
                                                                     <select class="form-control" name="commandeValeur-<?php echo $actions[$k]['id']; ?>">
                                                                         <option value="0" <?php if($actions[$k]['grade'] == 0) echo 'selected'; ?>> Joueur </option>
-                                                                        <?php  for($i = 0; $i < count($idGrade); $i++) {  ?>
-                                                                                <option value="<?php echo $idGrade[$i]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i]['id']) echo 'selected';?>><?= $idGrade[$i]['nom']?></option>
+                                                                        <?php  for($i2 = 0; $i2 < count($idGrade); $i2++) {  ?>
+                                                                                <option value="<?php echo $idGrade[$i2]['id']; ?>" <?php if($actions[$k]['grade'] == $idGrade[$i2]['id']) echo 'selected';?>><?= $idGrade[$i2]['nom']?></option>
                                                                         <?php }?>
                                                                         <option value="1" <?php if($actions[$k]['grade'] == 1) echo 'selected'; ?>>Créateur</option>
                                                                     </select>

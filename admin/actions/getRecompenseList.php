@@ -34,15 +34,15 @@
                                 $f = "";
                                 foreach($json as $value) { 
                                   if($value['type'] == "item") {
-                                    $f= $f.'Give '.$value['value2'].' item ID '.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%)<br/>';
+                                    $f= $f.'Give '.$value['value2'].' item ID '.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
                                   } else if($value['type'] == "commande") {
-                                    $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%)<br/>';
+                                    $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
                                   } else if($value['type'] == "jeton") {
-                                     $f= $f.'Give '.$value['value'].' '.$_Serveur_['General']['moneyName'].'(s) ('.$value['pourcentage'].'%)<br/>';
+                                     $f= $f.'Give '.$value['value'].' '.$_Serveur_['General']['moneyName'].'(s) ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
                                   } else if($value['type'] == "jetonAlea") {
-                                     $f= $f.'Give entre '.$value['value'].' et '.$value['value2'].' '.$_Serveur_['General']['moneyName'].'(s) ('.$value['pourcentage'].'%)<br/>';
+                                     $f= $f.'Give entre '.$value['value'].' et '.$value['value2'].' '.$_Serveur_['General']['moneyName'].'(s) ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
                                   } else if($value['type'] == "message") {
-                                    $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%)<br/>';
+                                      $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
                                   } 
                                 }  
                                 if($f != "" && !empty($f)) {

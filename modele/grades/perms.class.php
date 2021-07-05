@@ -50,6 +50,7 @@ class Permission {
 		}
 		else
 		{
+			$TableauPerm = array();
 			if($perm[0] == "connect")
 			{
 				return true;
@@ -93,6 +94,7 @@ class Permission {
 			}
 			array_shift($perm);
 			$retour = false;
+			if(!is_array($TableauPerm)) $TableauPerm = array();
 			foreach($perm as $value)
 			{
 				if(!array_key_exists($value, $TableauPerm))
@@ -173,7 +175,11 @@ class Permission {
 		}
 		else
 		{
-			$lecture = unserialize($data['result']);
+			if(isset($data['result'])) {
+				$lecture = unserialize($data['result']);
+			}else {
+				$lecture = [];
+			}
 		}
 		return $lecture;
 	}

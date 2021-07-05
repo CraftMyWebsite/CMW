@@ -25,43 +25,40 @@
                       <div class="card-header ">
                         <h3 class="card-title"><strong>Édition des messages</strong></h3>
                       </div>
-                      <div class="card-body" >
-                       <table class="table table-striped table-bordered">
-                                    <?php if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editDefaultMessage')) { ?>
-                                        <tr>
-                                            <th>Message :</th>
-                                            <th>Action :</th>
-                                        </tr>
-                                        <tr id="msg1<?php echo $maintenance[$i]['maintenanceId']; ?>">
-                                            <td><input type="text" name="maintenanceMsg" class="form-control" required value="<?php echo $maintenance[$i]['maintenanceMsg']; ?>"/></td>
-                                            <td><input onclick="sendPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>', null);"  type="submit" class="btn btn-success" value="Modifier le message !" /></td>
-                                        </tr>
-                                        <script>initPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessage&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
-                                    <?php }
-                                    if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editAdminMessage')) { ?>
-                                        <tr>
-                                            <th>Message Administration :</th>
-                                            <th></th>
-                                        </tr>
-                                        <tr id="msg2<?php echo $maintenance[$i]['maintenanceId']; ?>">
-                                            <td><input type="text" name="maintenanceMsgAdmin" class="form-control" required value="<?php echo $maintenance[$i]['maintenanceMsgAdmin']; ?>"/></td>
-                                            <td><input onclick="sendPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>', null);" type="submit" class="btn btn-success" value="Modifier le message !" /></td>
-                                        </tr>
-                                        <script>initPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageAdmin&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
-                                    <?php }
-                                    if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editInscrMessage')) { ?>
-                                        <tr>
-                                            <th>Message Inscription :</th>
-                                            <th></th>
-                                        </tr>
-                                        <tr id="msg3<?php echo $maintenance[$i]['maintenanceId']; ?>">
-                                            <td><input type="text" name="maintenanceMsgInscr" class="form-control" required value="<?php echo $maintenance[$i]['maintenanceMsgInscr']; ?>"/></td>
-                                            <td><input onclick="sendPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>');" type="submit" class="btn btn-success" value="Modifier le message !" /></td>
-                                        </tr>
-                                        <script>initPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageInscr&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>');</script>
-                                    <?php } ?>
-                                </table>
-                      </div>
+                        <div class="card-body" >
+
+                            <?php if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editDefaultMessage')) { ?>
+
+
+                                <div id="msg1<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
+                                    <span><strong>Modification du message principal</strong></span>
+                                    <textarea data-UUID="0014" id="ckeditor" name="maintenanceMsg" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsg']; ?></textarea>
+                                    <input onclick="sendPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>', null);"  type="submit" class="btn btn-success maintenance_msg_btn" value="Modifier le message !" />
+                                </div>
+
+                                <script>initPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessage&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
+                            <?php }
+                            if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editAdminMessage')) { ?>
+                                <div id="msg2<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
+                                    <span><strong>Message d'administration</strong></span>
+                                    <textarea  data-UUID="0015" id="ckeditor" name="maintenanceMsgAdmin" class="form-control" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsgAdmin']; ?></textarea>
+                                    <input onclick="sendPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>', null);" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message !" />
+                                </div>
+
+                                <script>initPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageAdmin&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
+                            <?php }
+                            if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'actions', 'editInscrMessage')) { ?>
+
+                                <div id="msg3<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
+                                    <span><strong>Message d'inscription</strong></span>
+                                    <textarea  data-UUID="0016" id="ckeditor" name="maintenanceMsgInscr" class="form-control" style="height: 275px; margin: 0px; width: 20%;required"><?php echo $maintenance[$i]['maintenanceMsgInscr']; ?> </textarea>
+                                    <input onclick="sendPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>');" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message !" />
+                                </div>
+
+                                <script>initPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageInscr&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>');</script>
+                            <?php } ?>
+
+                        </div>
                     </div>
                 </div>
 
@@ -98,7 +95,7 @@
                                     <div class="col-md-12">
                                         <div class="card" style="text-align: center;">
                                             <div class="card-header">
-                                                <h5 class="card-title">Activer/désactiver la maintenance</h3>
+                                                <h5 class="card-title">Activer/désactiver la maintenance</h5>
                                             </div>
                                             <div class="card-body" id="maintenance">
                                                 <center>Vous souhaitez rendre le site accessible uniquement aux administrateurs ? Il vous suffit d'appuyer sur le bouton ci-dessous. Les visiteurs seront redirigés vers la page de maintenance.</center>

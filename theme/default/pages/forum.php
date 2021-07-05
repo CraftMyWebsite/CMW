@@ -2,7 +2,7 @@
 $fofo = $_Forum_->affichageForum();
 ?>
 
-<section id="Forum">
+<section id="Forum" style="overflow-y: hidden">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
         <div class="row">
             <!-- Présentation -->
@@ -55,14 +55,14 @@ $fofo = $_Forum_->affichageForum();
         <div class="row">
             <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur')) : ?>
                 <p class="text-center">
-                    <a href="?action=mode_joueur" class="btn btn-main w-100">Passer en mode visuel <?= ($_SESSION['mode']) ? "Administrateur" : "Joueur"; ?></a>
+                    <a href="index.php?action=mode_joueur" class="btn btn-main w-100">Passer en mode visuel <?= ($_SESSION['mode']) ? "Administrateur" : "Joueur"; ?></a>
                 </p>
             <?php endif; ?>
 
             <?php for ($i = 0; $i < count($fofo); $i++) :
                 if (((Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $fofo[$i]['perms'] or Permission::getInstance()->verifPerm("createur")) and !$_SESSION['mode']) or $fofo[$i]['perms'] == 0) : ?>
 
-                    <table class="table table-dark table-striped">
+                    <table class="table table-hover table-dark table-responsive mb-0">
 
                         <!-- Edition du forum -->
                         <div class="row ml-auto">
@@ -88,7 +88,7 @@ $fofo = $_Forum_->affichageForum();
                                         </div>
 
                                     </div>
-
+                                     <?php if(count($fofo) > 1) { ?>
                                     <div class="dropdown d-inline-block">
 
                                         <button class="btn btn-main dropdown-toggle" type="button" id="ordreforum<?= $fofo[$i]['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -96,17 +96,21 @@ $fofo = $_Forum_->affichageForum();
                                         </button>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="?action=ordreForum&ordre=<?= $fofo[$i]['ordre']; ?>&id=<?= $fofo[$i]['id']; ?>&modif=monter">
+                                            <?php if($i != 0) { ?>
+                                            <a class="dropdown-item" href="index.php?action=ordreForum&ordre=<?= $fofo[$i]['ordre']; ?>&id=<?= $fofo[$i]['id']; ?>&modif=monter">
                                                 <i class="fas fa-arrow-up"></i> Monter d'un cran
                                             </a>
-                                            <a class="dropdown-item" href="?action=ordreForum&ordre=<?= $fofo[$i]['ordre']; ?>&id=<?= $fofo[$i]['id']; ?>&modif=descendre">
+                                            <?php } if($i != count($fofo) - 1) { ?>
+                                            <a class="dropdown-item" href="index.php?action=ordreForum&ordre=<?= $fofo[$i]['ordre']; ?>&id=<?= $fofo[$i]['id']; ?>&modif=descendre">
                                                 <i class="fas fa-arrow-down"></i> Descendre d'un cran
                                             </a>
+                                            <?php } ?>
                                         </div>
 
                                     </div>
+                                    <?php } ?>
 
-                                    <a href="?action=remove_forum&id=<?php echo $fofo[$i]['id']; ?>" class="btn btn-danger no-hover">
+                                    <a href="index.php?action=remove_forum&id=<?php echo $fofo[$i]['id']; ?>" class="btn btn-danger no-hover">
                                         <i class="fas fa-trash"></i> Supprimer
                                     </a>
 
@@ -119,7 +123,7 @@ $fofo = $_Forum_->affichageForum();
                             <tr>
                                 <th colspan="5" style="width: <?= (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') and !$_SESSION['mode']) ? '75%' : '100%'; ?>;">
                                     <h5 class="text-center" <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteForum') and !$_SESSION['mode']) { ?>data-editforum-index="<?= $i; ?>" data-editforum="<?php echo $fofo[$i]['id']; ?>" <?php } ?>>
-                                        <span style="display:inline;"><?= ucfirst($fofo[$i]['nom']); ?></span> <input type="text" class="text-center no-hover" value="<?= ucfirst($fofo[$i]['nom']); ?>" style="width:auto;color:white;display:none;background: transparent;border: none;" > <i style="display:none;" style="cursor:pointer" class="fas fa-cog"></i>
+                                        <span style="display:inline;"><?= ucfirst($fofo[$i]['nom']); ?></span> <input type="text" class="text-center no-hover" value="<?= ucfirst($fofo[$i]['nom']); ?>" style="width:50%;color:white;display:none;background: transparent;border: none;" > <i style="display:none;" style="cursor:pointer" class="fas fa-cog"></i>
                                     </h5>
                                 </th>
                                 <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') and !$_SESSION['mode']) : ?>
@@ -160,17 +164,17 @@ $fofo = $_Forum_->affichageForum();
 
                                         <td style="width: 3%;">
                                             <?php if ($categorie[$j]['img'] == NULL) : ?>
-                                                <a href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" style="font-size: 38px;" class="d-flex align-self-center text-center">
+                                                <a href="index.php?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" style="font-size: 38px;" class="d-flex align-self-center text-center">
                                                     <i class="far fa-comment-dots"></i>
                                                 </a>
                                             <?php else : ?>
-                                                <a href="?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" style="font-size: 38px;" class="d-flex align-self-center text-center">
+                                                <a href="index.php?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" style="font-size: 38px;" class="d-flex align-self-center text-center">
                                                     <i class="<?php echo $categorie[$j]['img']; ?>"></i>
                                                 </a><?php endif; ?>
                                         </td>
 
                                         <td style="width: 25%;">
-                                            <a href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" class="d-flex align-self-center">
+                                            <a href="index.php?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>" class="d-flex align-self-center">
                                                 <?= $categorie[$j]['nom']; ?>
                                             </a>
 
@@ -183,7 +187,7 @@ $fofo = $_Forum_->affichageForum();
                                                         <?php if (count($sousforum) != "0") : ?>
                                                             <div class="dropdown-menu" aria-labelledby="sous-forum<?php echo $categorie[$j]['id']; ?>">
                                                                 <?php for ($s = 0; $s < count($sousforum); $s++) : ?>
-                                                                    <a class="dropdown-item" href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>&id_sous_forum=<?= $sousforum[$s]['id']; ?>">
+                                                                    <a class="dropdown-item" href="index.php?page=sous_forum_categorie&id=<?= $categorie[$j]['id']; ?>&id_sous_forum=<?= $sousforum[$s]['id']; ?>">
                                                                         <?= $sousforum[$s]['nom']; ?>
                                                                     </a>
                                                                 <?php endfor; ?>
@@ -195,7 +199,7 @@ $fofo = $_Forum_->affichageForum();
                                         </td>
 
                                         <td class="text-center">
-                                            <a href="?&page=forum_categorie&id=<?= $categorie[$j]['id']; ?>">
+                                            <a href="index.php?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>">
                                                 <?= $CountTopics = $_Forum_->compteTopicsForum($categorie[$j]['id']); ?>
                                                 <br>
                                                 <span class="text-uppercase">Discussions</span>
@@ -203,7 +207,7 @@ $fofo = $_Forum_->affichageForum();
                                         </td>
 
                                         <td class="text-center">
-                                            <a href="?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>">
+                                            <a href="index.php?page=forum_categorie&id=<?= $categorie[$j]['id']; ?>">
                                                 <?= $_Forum_->compteMessages($categorie[$j]['id']) + $CountTopics; ?>
                                                 <br>
                                                 <span class="text-uppercase">Messages</span>
@@ -212,7 +216,7 @@ $fofo = $_Forum_->affichageForum();
 
                                         <td class="text-center">
                                             <?php if ($derniereReponse) : ?>
-                                                <a href="?page=post&id=<?= $derniereReponse['id']; ?>" title="<?= $derniereReponse['titre']; ?>">
+                                                <a href="index.php?page=post&id=<?= $derniereReponse['id']; ?>" title="<?= $derniereReponse['titre']; ?>">
                                                     Dernier: <?php $taille = strlen($derniereReponse['titre']);
                                                                 echo substr($derniereReponse['titre'], 0, 15);
                                                                 if (strlen($taille > 15)) {
@@ -249,41 +253,44 @@ $fofo = $_Forum_->affichageForum();
                                                             </form>
                                                         </div>
                                                     </div>
-
+                                                    <?php if(count($categorie) > 1) { ?>
                                                     <div class="dropdown d-inline ml-1">
                                                         <button type="button" class="btn btn-main dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <i class="fas fa-list"></i>
                                                         </button>
-
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="?action=ordreCat&ordre=<?= $categorie[$j]['ordre']; ?>&id=<?= $categorie[$j]['id']; ?>&forum=<?= $categorie[$j]['forum']; ?>&modif=monter">
+                                                             <?php if($j != 0) { ?>
+                                                            <a class="dropdown-item" href="index.php?action=ordreCat&ordre=<?= $categorie[$j]['ordre']; ?>&id=<?= $categorie[$j]['id']; ?>&forum=<?= $categorie[$j]['forum']; ?>&modif=monter">
                                                                 <i class="fas fa-arrow-up"></i> Monter d'un cran
                                                             </a>
-                                                            <a class="dropdown-item" href="?action=ordreCat&ordre=<?= $categorie[$j]['ordre']; ?>&id=<?= $categorie[$j]['id']; ?>&forum=<?= $categorie[$j]['forum']; ?>&modif=descendre">
+                                                            <?php } if($j != count($categorie) - 1) { ?>
+                                                            <a class="dropdown-item" href="index.php?action=ordreCat&ordre=<?= $categorie[$j]['ordre']; ?>&id=<?= $categorie[$j]['id']; ?>&forum=<?= $categorie[$j]['forum']; ?>&modif=descendre">
                                                                 <i class="fas fa-arrow-down"></i> Descendre d'un cran
                                                             </a>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <?php } ?>
                                                     <button type="button" onclick="openModalEditForum(<?= $categorie[$j]['id']; ?>,'<?= $categorie[$j]['nom']; ?>',<?php echo $fofo[$i]['id']; ?>, <?php if ($categorie[$j]['img'] == NULL) { echo 'null'; }  else { echo "'".$categorie[$j]['img']."'";} ?> );" class="btn btn-main ml-1" >
                                                         <i class="fas fa-cog"></i>
                                                     </button>
 
                                                     <?php if ($categorie[$j]['close'] == 0) : ?>
 
-                                                        <a href="?action=lock_cat&id=<?= $categorie[$j]['id']; ?>&lock=1" title="Fermer le forum" class="btn btn-reverse ml-1 no-hover">
+                                                        <a href="index.php?action=lock_cat&id=<?= $categorie[$j]['id']; ?>&lock=1" title="Fermer le forum" class="btn btn-reverse ml-1 no-hover">
                                                             <i class="fas fa-unlock-alt" aria-hidden="true"></i>
                                                         </a>
 
                                                     <?php else : ?>
 
-                                                        <a href="?action=unlock_cat&id=<?= $categorie[$j]['id']; ?>&lock=0" title="Ouvrir le forum" class="btn btn-reverse ml-1 no-hover">
+                                                        <a href="index.php?action=unlock_cat&id=<?= $categorie[$j]['id']; ?>&lock=0" title="Ouvrir le forum" class="btn btn-reverse ml-1 no-hover">
                                                             <i class="fas fa-lock" aria-hidden="true"></i>
                                                         </a>
 
                                                     <?php endif; ?>
 
 
-                                                    <a href="?action=remove_cat&id=<?= $categorie[$j]['id']; ?>" class="btn btn-danger no-hover ml-1">
+                                                    <a href="index.php?action=remove_cat&id=<?= $categorie[$j]['id']; ?>" class="btn btn-danger no-hover ml-1">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
 

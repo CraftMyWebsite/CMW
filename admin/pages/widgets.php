@@ -25,28 +25,30 @@
 				<div class="card-header ">
 					<h3 class="card-title"><strong>Création d'un widget</strong></h3>
 				</div>
-				<div class="card-body" id="addWidget">
+				<div class="card-body" id="addWidgets">
 	                <label class="control-label">Titre du Widget</label>
 	                <input type="text" name="titre" class="form-control" placeholder="Partenaires...">
 
 	                <label class="control-label">Type de Widget</label>
-	                <select class="form-control" name="type">
+	                <select class="form-control" onchange="if(this.value == '3' | this.value == 3) { show('ck-ct'); } else { hide('ck-ct'); }" name="type">
 	                    <option value="0">Gestion du compte</option>
 	                    <option value="1">Status Serveurs</option>
 	                    <option value="2">Joueurs en ligne</option>
 	                    <option value="3">Champ Texte</option>
 	                </select>
 
-	                <label class="control-label">Message du widget<small> uniquement pour les "champs texte"</small></label>
-	                <textarea class="form-control" id="ckeditor" data-UUID="0009" name="message"></textarea>
+	                <div id="ck-ct" style="display:none;">
+		                <label class="control-label">Message du widget</label>
+		                <textarea class="form-control" id="ckeditor" data-UUID="0009" name="message"></textarea>
+	            	</div>
 
 	            </div>
 
-	            <script>initPost("addWidget", "admin.php?&action=newWidget",function(data) { if(data) { updateCont('admin.php?action=getWidgetsList', get('allWidgets'), null)}});</script>
+	            <script>initPost("addWidgets", "admin.php?&action=addWidgets",function(data) { if(data) { widgetsUpdate(); }});</script>
 
 	            <div class="card-footer">
 	                <div class="row text-center">
-	                    <input type="submit" onclick="sendPost('addWidget', null );" class="btn btn-success w-100"
+	                    <input type="submit" onclick="sendPost('addWidgets', null );" class="btn btn-success w-100"
 	                        value="Envoyer !" />
 	                </div>
 	            </div>
@@ -60,35 +62,64 @@
 					<h3 class="card-title"><strong>Édition des Widgets</strong></h3>
 				</div>
 				<div class="card-body" id="allWidgets">
-					<?php if(!empty($widgets)) { ?>
-	                <ul class="nav nav-tabs">
-	                    <?php for($i = 0; $i < count($widgets); $i++) { ?>
-	                    <li class="nav-item" id="tab-widget-<?php echo $i; ?>"><a
-	                            class="<?php if($i == 0) echo 'active'; ?> nav-link"
-	                            href="#widget-<?php echo $i; ?>" data-toggle="tab"
-	                            style="color: black !important"><?php echo $widgets[$i]['titre']; ?></a></li>
-	                    <?php } ?>
-	                </ul>
-					<div class="tab-content">
-						<?php for($i = 0; $i < count($widgets); $i++) { ?>
-	                    	<div class="tab-pane well <?php if($i == 0) echo 'active'; ?>"id="widget-<?php echo $i; ?>">
-	                    		<div class="row">
-                                         <div class="col-md-6">
-                                                <button class="btn btn-secondary w-100" onclick="sendDirectPost('admin.php?action=upWidget&id=<?php echo $i; ?>', function(data) { if(data) { updateCont('admin.php?action=getWidgetsList', get('allWidgets'), null); }} );" <?php if($i == 0) { echo 'disabled'; } ?>><i class="fas fa-arrow-up"></i> Monter le widget</button>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn btn-secondary w-100" onclick="sendDirectPost('admin.php?action=downWidget&id=<?php echo $i; ?>', function(data) { if(data) { updateCont('admin.php?action=getWidgetsList', get('allWidgets'), null); }} );" <?php if($i == count($widgets) - 1) { echo 'disabled'; }?> ><i class="fas fa-arrow-down"></i> Descendre le widget</button>
-                                            </div>
-     
-                                        <div class="col-md-12" style="margin-top:20px;"">
-                                            <button class="btn btn-danger w-100" onclick="sendDirectPost('admin.php?action=supprWidget&id=<?php echo $i; ?>', function(data) { if(data) { hide('widget-<?php echo $i; ?>');}} );">Supprimer ce widget</button>
-                                        </div>
-                                </div>
-	                    	</div>
-	                    <?php } ?>
-					</div>
-					<?php } ?>
+
+
+				<?php if(!empty($widgets)) { ?>
+      		 	<input type="hidden" name="count" value="<?php echo count($widgets); ?>">
+                <ul class="nav nav-tabs">
+                    <?php for($i = 0; $i < count($widgets); $i++) { ?>
+                    <li class="nav-item" id="li-widgets-<?php echo $widgets[$i]['id']; ?>"><a
+                            class="<?php if($i == 0) echo 'active'; ?> nav-link"
+                            href="#widgets-<?php echo $widgets[$i]['id'];  ?>" data-toggle="tab"
+                            style="color: black !important">Widget #<?php echo $i+1; ?></a></li>
+                    <?php } ?>
+                </ul>
+                <div class="tab-content">
+                    <?php for($i = 0; $i < count($widgets); $i++) { ?>
+                    <div class="tab-pane well <?php if($i == 0) echo 'active'; ?>" id="widgets-<?php echo $widgets[$i]['id']; ?>">
+                        <div style="width: 100%;display: inline-block">
+                           <div class="float-left">
+                               <h3>Widget #<?php echo $i+1; ?></h3>
+                           </div>
+                           <div class="float-right">
+                           		<button <?php if($i == 0 ) { echo 'style="display:none;"'; } ?> type="button" id="li-widgets-<?php echo $widgets[$i]['id']; ?>-up" onclick="sendDirectPost('admin.php?&action=mooveWidgets&type=0&id=<?php echo $widgets[$i]['id']; ?>', function(data) { if(data) { menuMooveUp(get('li-widgets-<?php echo $widgets[$i]['id']; ?>')); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-up"></i></button>
+        						<button <?php if($i==count($widgets)-1) { echo 'style="display:none;"'; } ?> type="button" id="li-widgets-<?php echo $widgets[$i]['id']; ?>-down" onclick="sendDirectPost('admin.php?&action=mooveWidgets&type=1&id=<?php echo $widgets[$i]['id']; ?>', function(data) { if(data) { menuMooveDown(get('li-widgets-<?php echo $widgets[$i]['id']; ?>')); }});" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-down"></i></button>
+        						
+                               <button  onclick="sendDirectPost('admin.php?action=supprWidgets&id=<?php echo $widgets[$i]['id']; ?>', function(data) { if(data) { hide('widgets-<?php echo $widgets[$i]['id']; ?>'); hide('li-widgets-<?php echo $widgets[$i]['id']; ?>',true, function() { checkMenuForMoove(); }); } });" class="btn btn-sm btn-outline-secondary">Supprimer</button>
+                           </div>
+                        </div>
+                        
+                        <input type="hidden" name="id<?php echo $i; ?>" value="<?php echo $widgets[$i]['id']; ?>">
+                        
+                        <label class="control-label">Titre du Widget</label>
+		                <input type="text" name="titre<?php echo $i; ?>" value="<?=$widgets[$i]['titre'] ?> " class="form-control" placeholder="Partenaires...">
+
+		                <label class="control-label">Type de Widget</label>
+		                <select class="form-control" onchange="if(this.value == '3' | this.value == 3) { show('ck-ct<?php echo $i; ?>'); } else { hide('ck-ct<?php echo $i; ?>'); }" name="type<?php echo $i; ?>">
+		                    <option value="0" <?=$widgets[$i]['type'] == 0 ? "selected": ""?>>Gestion du compte</option>
+		                    <option value="1" <?=$widgets[$i]['type'] == 1 ? "selected": ""?>>Status Serveurs</option>
+		                    <option value="2" <?=$widgets[$i]['type'] == 2 ? "selected": ""?>>Joueurs en ligne</option>
+		                    <option value="3" <?=$widgets[$i]['type'] == 3 ? "selected": ""?>>Champ Texte</option>
+		                </select>
+
+		                <div id="ck-ct<?php echo $i; ?>" <?=$widgets[$i]['type'] == 3 ? "" : 'style="display:none;"' ?>  >
+			                <label class="control-label">Message du widget</label>
+			                <textarea class="form-control" id="ckeditor" data-UUID="0009" name="message<?php echo $i; ?>">
+			                	<?=$widgets[$i]['type'] == 3 ? $widgets[$i]['message'] : "" ?> 
+			                </textarea>
+		            	</div>
+                      
+                    </div>
+                    <?php } ?>
+                </div>
+                <?php } ?>
+
+
 				</div>
+				<script>initPost("allWidgets", "admin.php?action=editWidgets");</script>
+	            <div class="card-footer">
+	                <button type="submit" class="btn btn-success w-100" onClick="sendPost('allWidgets')">Envoyer!</button>
+	            </div>
 			</div>
 		</div>
 

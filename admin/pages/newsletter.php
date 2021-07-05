@@ -21,7 +21,7 @@ else
    	<div class="col-md-12 col-xl-6 col-12">
 		<div class="card  ">
 			<div class="card-header ">
-				<h3 class="card-title"><strong>Liste des utilisateur recevant la newsletter</strong></h3>
+				<h3 class="card-title"><strong>Liste des utilisateurs recevant la newsletter</strong></h3>
 			</div>
 			<div class="card-body">
 				<div class="animate-top text-center" id="BlockCircle" style="display:none;">
@@ -147,7 +147,7 @@ else
 		</div>
 		<div class="card-footer">
 	        <div class="row text-center">
-	            <button type="button" class="circle-btn-start btn btn-success w-100" >Envoyer le newsletter !</button>
+	            <button type="button" class="circle-btn-start btn btn-success w-100" >Envoyer la newsletter !</button>
 	        </div>
 	    </div>
 	</div>

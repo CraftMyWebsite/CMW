@@ -3,7 +3,7 @@
       if(isset($erreur))
     {
       if($erreur['type'] == 'sql_mode')
-          echo '<div class="alert alert-danger text-center">ATTENTION ! Votre base de donnée est mal configurée ! La configuration MySQL ne doit pas contenir de STRICT_ALL_TABLES dans son sql_mode. Si vous ne savez pas résoudre ce problème, contactez-nous sur <a href="https://discord.gg/wMVAeug" target="_blank">discord</a> en envoyant l\'information suivante : <pre>'.$erreur['data'].'</pre></div>';
+          echo '<div class="alert alert-danger text-center">ATTENTION ! Votre base de donnée est mal configurée ! La configuration MySQL ne doit pas contenir de STRICT_ALL_TABLES dans son sql_mode. Si vous ne savez pas résoudre ce problème, voici un <a href="https://craftmywebsite.fr/forum/index.php?threads/sql-mode-strict_all_tables.4530/" target="_blank"> tutoriel </a> pour apprendre à corriger cette erreur, si le problème persiste contactez-nous sur <a href="https://discord.gg/wMVAeug" target="_blank">discord</a> en envoyant l\'information suivante : <pre>'.$erreur['data'].'</pre></div>';
         elseif($erreur['type'] == 'pass')
         echo '<div class="alert alert-danger text-center">ATTENTION ! Vos identifiants sont incorrects.</div>';
         }

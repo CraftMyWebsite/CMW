@@ -12,15 +12,15 @@ if(Permission::getInstance()->verifPerm("connect") && isset($_POST['i']) && isse
 		$i = htmlentities($_POST['i']);
 		$Chat = new Chat($jsonCon);
 		if($Chat->sendMessageChat($message, $i, $_Joueur_['pseudo']) == true)
-			header('Location: ?page=chat');
+			header('Location: index.php?page=chat&success');
 		else
-			header('Location: ?page=chat&erreur=send');
+			header('Location: index.php?page=chat&erreur');
 	}
 	else
 	{
-		header('Location: ?page=erreur&erreur=19&type='+urlencode("Erreur Chat")+"&titre="+urlencode("Erreur Message")+"&contenue="+urlencode("Message trop long ou trop court :/"));
+		header('Location: index.php?page=erreur&erreur=19&type='.urlencode("Erreur Chat")."&titre=".urlencode("Erreur Message")."&contenue=".urlencode("Message trop long ou trop court :/"));
 	}
 }
 else
-	header('Location: ?page=erreur&erreur=16');
+	header('Location: index.php?page=erreur&erreur=16');
 ?>

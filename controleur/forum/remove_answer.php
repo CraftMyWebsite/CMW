@@ -13,7 +13,7 @@ if(isset($_POST['id_answer']) AND Permission::getInstance()->verifPerm("connect"
 	{
 		$reason = "Aucune/Non renseigné";
 	}
-	$select = $bddConnection->prepare('SELECT * FROM cmw_forum_answer WHERE id_topic = :id');
+	$select = $bddConnection->prepare('SELECT * FROM cmw_forum_answer WHERE id = :id');
 	$select->execute(array(
 		'id' => $id
 	));
@@ -29,13 +29,13 @@ if(isset($_POST['id_answer']) AND Permission::getInstance()->verifPerm("connect"
 		'raison' => $reason,
 		'auteur_suppression' => $pseudo
 	));
-	$remove = $bddConnection->prepare('DELETE FROM cmw_forum_answer WHERE id_topic = :id');
+	$remove = $bddConnection->prepare('DELETE FROM cmw_forum_answer WHERE id= :id');
 	$remove->execute(array(
 		'id' => $id,
 	));
-	header('Location: ?page=post&id=' .$data['id_topic']. '&page_post=' .$page. '');
+	header('Location: index.php?page=post&id=' .$data['id_topic']. '&page_post=' .$page. '');
 }
 else 
 {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');
 }

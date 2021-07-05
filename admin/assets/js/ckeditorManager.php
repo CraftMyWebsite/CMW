@@ -4,62 +4,113 @@ initCK();
 function initCK() {
 	CK = new Map();
 	for (let el of document.querySelectorAll("[data-UUID]" )) {
-		ClassicEditor.create(el, {
-				toolbar: {
-					items: [
-						'viewSource',
-						'heading',
-						'|',
-						'fontBackgroundColor',
-						'fontFamily',
-						'fontSize',
-						'fontColor',
-						'highlight',
-						'|',
-						'bold',
-						'underline',
-						'italic',
-						'horizontalLine',
-						'|',
-						'link',
-						'bulletedList',
-						'todoList',
-						'numberedList',
-						'|',
-						<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'imageUpload',"; }  ?>
-						'blockQuote',
-						'mediaEmbed',
-						'undo',
-						'redo'
-					]
-				},
-				language: 'fr',
-				image: {
-					toolbar: [
-						'imageTextAlternative',
-						'imageStyle:full',
-						'imageStyle:side'
-					]
-				},
-				licenseKey: '',
-				simpleUpload: {
-					uploadUrl: 'index.php?action=uploadCKImg',
-					withCredentials: false,
-					headers: {
-						'X-CSRF-TOKEN': 'CSFR-Token',
-						Authorization: ''
-					}
-				}
+		var option = {};
+		if(isset(el.getAttribute("data-UUID")) && el.getAttribute("data-UUID").includes("PHP")) {
+			option = {
+						toolbar: {
+							items: [
+								'viewSource',
+								'heading',
+								'|',
+								'fontBackgroundColor',
+								'fontFamily',
+								'fontSize',
+								'fontColor',
+								'highlight',
+								'|',
+								'bold',
+								'underline',
+								'italic',
+								'horizontalLine',
+								'|',
+								'link',
+								'bulletedList',
+								'todoList',
+								'numberedList',
+								'|',
+								<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'uploadImage',"; }  ?>
+								'blockQuote',
+								'mediaEmbed',
+								'undo',
+								'redo',
+								'viewSourceAdmin'
+							]
+						},
+						language: 'fr',
+						image: {
+							toolbar: [
+								'imageTextAlternative',
+								'imageStyle:full',
+								'imageStyle:side'
+							]
+						},
+						licenseKey: '',
+						simpleUpload: {
+							uploadUrl: 'index.php?action=uploadCKImg',
+							withCredentials: false,
+							headers: {
+								'X-CSRF-TOKEN': 'CSFR-Token',
+								Authorization: ''
+							}
+						}
+						
+					};
+		} else {
+				option = {
+						toolbar: {
+							items: [
+								'viewSource',
+								'heading',
+								'|',
+								'fontBackgroundColor',
+								'fontFamily',
+								'fontSize',
+								'fontColor',
+								'highlight',
+								'|',
+								'bold',
+								'underline',
+								'italic',
+								'horizontalLine',
+								'|',
+								'link',
+								'bulletedList',
+								'todoList',
+								'numberedList',
+								'|',
+								<?php if(isset($_Serveur_['uploadImage']) && isset($_Serveur_['uploadImage']['maxFileSize']) && isset($_Serveur_['uploadImage']['maxSize'])) { echo "'uploadImage',"; }  ?>
+								'blockQuote',
+								'mediaEmbed',
+								'undo',
+								'redo'
+							]
+						},
+						language: 'fr',
+						image: {
+							toolbar: [
+								'imageTextAlternative',
+								'imageStyle:full',
+								'imageStyle:side'
+							]
+						},
+						licenseKey: '',
+						simpleUpload: {
+							uploadUrl: 'index.php?action=uploadCKImg',
+							withCredentials: false,
+							headers: {
+								'X-CSRF-TOKEN': 'CSFR-Token',
+								Authorization: ''
+							}
+						}
+						
+					};
+		}
+		ClassicEditor.create(el, option) .catch( error => {console.log( error );} )
+			.then(editor => { 
+				CK.set(el, editor); 
 				
-			} )
-		.catch( error => {console.log( error );} )
-		.then(editor => { 
-			CK.set(el, editor); 
-			if(isset(el.innerText) && el.innerText.replace(" ", "") != "") {
-				editor.setData(el.innerText);
-			}
-		});
-		
+			});
+			
 	}
 }
 
@@ -70,7 +121,7 @@ function isset(obj) {
 
 function addBlockQuote(ck,ht, auteur) {
 
-	CK.get(document.getElementById(ck)).setData("<blockquote>"+auteur+",<br/>"+document.getElementById(ht).innerHTML+"</blockquote><br/>>>"+CK.get(document.getElementById(ck)).getData());
+	CK.get(document.getElementById(ck)).setData("<blockquote>"+auteur+",<br/>"+document.getElementById(ht).innerHTML+"</blockquote><br/>&gt;&gt;"+CK.get(document.getElementById(ck)).getData());
 
 }
 

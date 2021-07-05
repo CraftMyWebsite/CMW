@@ -10,8 +10,8 @@ $ligneReponse = $tokenInfos->getReponseConnection();
 $donneesJoueur = $ligneReponse->fetch(PDO::FETCH_ASSOC);
 if(empty($donneesJoueur))
 {
-	//Quand le token est un faux les donneesJoueur sont vides car il n'y a aucune entrée correspondante dans la BDD
-	header('Location: ?&page=erreur&erreur=9');
+	//Quand le token est un faux les donneesJoueur sont vides car il n'y a aucune entrï¿½e correspondante dans la BDD
+	header('Location: index.php?page=erreur&status=9');
 }
 else
 {	
@@ -33,11 +33,11 @@ else
 	$subject = "[".$_Serveur_['General']['name']."]Confirmation : Recuperation de mot de passe";
 	$txt = 'Bonjour, '.$donneesJoueur['pseudo'].$retourligne
 			.$retourligne
-			.'Vous avez bien confirmé votre demande de changement de mot de passe.'.$retourligne
+			.'Vous avez bien confirmï¿½ votre demande de changement de mot de passe.'.$retourligne
 			.'Voici votre nouveau mot de passe : '.$mdp.$retourligne
 			.$retourligne
 			.'Merci de changer votre mot de passe pour cela rendez-vous sur votre profil.'.$retourligne
-			.'Il est inutile de répondre à ce mail automatique.'.$retourligne
+			.'Il est inutile de rï¿½pondre ï¿½ ce mail automatique.'.$retourligne
 			.$retourligne
 			.'Cordialement, '.$_Serveur_['General']['name'].'.';
 
@@ -46,7 +46,7 @@ else
 	{
 		header('Location: index.php?setTemp=1');
 	} else {
-		header('Location: ?&page=erreur&erreur=21');
+		header('Location: index.php?page=erreur&erreur=21');
 	}
 }
 

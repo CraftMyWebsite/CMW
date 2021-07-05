@@ -14,7 +14,7 @@
 else
   {
     ?><div class="alert alert-success">
-      <strong>Sur cette section, vous pouvez gérer les système de limitation de comptes par IP, et la vérification lors de l'inscription de l'email</strong>
+      <strong>Sur cette section, vous pouvez gérer le système de limitation de comptes par IP, et la vérification lors de l'inscription de l'email</strong>
     </div>
   <div class="row"><?php 
 if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editLimitIp')) {

@@ -67,7 +67,7 @@
                         <div class="alert alert-success">
                             <div class="text-center">
                                 <p>
-                                    <i class="fas fa-info-circle"></i> Vous pouvez cliquer sur les noms des colonnes pour obtenir une recherche plus avancé / conforme à vos attentes.
+                                    <i class="fas fa-info-circle"></i> Vous pouvez cliquer sur les noms des colonnes pour obtenir une recherche plus avancée / conforme à vos attentes.
                                 </p>
                             </div>
                         </div>

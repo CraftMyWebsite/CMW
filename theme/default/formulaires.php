@@ -3,7 +3,7 @@
 <div class="modal fade" id="InscriptionSlide" tabindex="-1" role="dialog" aria-labelledby="InscriptionSlide" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form role="form" method="post" action="?&action=inscription">
+            <form role="form" method="post" action="?action=inscription">
                 <div class="modal-header">
                     <h5 class="modal-title">Inscription</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -66,6 +66,9 @@
                                     </div>
                                 </span>
                                 <input type="password" name="mdp" class="form-control custom-text-input" id="MdpInscriptionForm" placeholder="Entrez votre mot de passe" onKeyUp="securPass();" required>
+                                <div class="input-group-append">
+                                    <span toggle="#MdpInscriptionForm, #MdpConfirmInscriptionForm" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                </div>
                             </div>
                         </div>
 
@@ -79,6 +82,9 @@
                                     </div>
                                 </span>
                                 <input type="password" name="mdpConfirm" class="form-control custom-text-input" id="MdpConfirmInscriptionForm" placeholder="Entrez votre mot de passe" onKeyUp="securPass();" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text mdp-confirm-form" id="correspondance"></span>
+                                </div>
                             </div>
                         </div>
 
@@ -87,10 +93,6 @@
                                 <div class="progress">
                                     <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <p id="correspondance"></p>
                             </div>
                         </div>
 
@@ -118,10 +120,10 @@
                             <label for="CAPTCHA">Captcha <span class="star-required"></span></label>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <img id='captcha' src='include/purecaptcha/purecaptcha_img.php?t=login_form' style="width: 80%;height: 100px;" />
+                            <img id='captcha' alt="captcha" src='include/purecaptcha/purecaptcha_img.php?t=login_form' style="width: 80%;height: 100px;" />
                         </div>
                         <div class="col-md-6">
-                            <button type="button" onclick='var t=document.getElementById("captcha"); t.src=t.src+"&amp;"+Math.random();' class="btn btn-reverse" style="margin-top:35px">
+                            <button type="button" onclick='var t=document.getElementById("captcha"); t.src=t.src+"&amp;"+Math.random();' class="btn btn-reverse captcha-btn" style="margin-top:35px">
                                 <i class="fas fa-sync"></i> Recharger le captcha
                             </button>
                         </div>
@@ -142,7 +144,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-main w-100" id="InscriptionBtn" disabled>S'inscrire</button>
+                    <button type="submit" class="btn btn-main w-100" id="InscriptionBtn" >S'inscrire</button>
                 </div>
             </form>
         </div>
@@ -155,7 +157,7 @@
 <div class="modal fade" id="ConnectionSlide" tabindex="-1" role="dialog" aria-labelledby="ConnectionSlide" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-signin" role="form" method="post" action="?&action=connection">
+            <form class="form-signin" role="form" method="post" action="?action=connection">
                 <div class="modal-header">
                     <h5 class="modal-title">Connexion</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -192,6 +194,9 @@
                                     </div>
                                 </span>
                                 <input type="password" name="mdp" class="form-control custom-text-input" id="MdpConnectionForm" placeholder="Votre mot de passe" required>
+                                <div class="input-group-append">
+                                    <span toggle="#MdpConnectionForm" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                </div>
                             </div>
 
                         </div>
@@ -228,7 +233,7 @@
 <div class="modal fade" id="passRecover" tabindex="-1" role="dialog" aria-labelledby="passRecover" aria-hidden="true" style="padding-right: 16px;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form role="form" method="post" action="?&action=passRecover">
+            <form role="form" method="post" action="?action=passRecover">
                 <div class="modal-header">
                     <h5 class="modal-title">Mot de passe oublié</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -332,14 +337,14 @@
                                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>-<?= $newsComments['id'] ?>-edit" data-dismiss="modal">
                                                             Editer
                                                         </a>
-                                                        <a class="dropdown-item text-danger" href="?&action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
+                                                        <a class="dropdown-item text-danger" href="index.php?action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
                                                             Supprimer
                                                         </a>
 
                                                     <?php endif; ?>
                                                     <?php if ($newsComments['pseudo'] != $_Joueur_['pseudo']) :
                                                         if ($checkReport == "0") : ?>
-                                                            <a class="dropdown-item" href="?&action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
+                                                            <a class="dropdown-item" href="index.php?action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
                                                                 Signaler
                                                             </a>
                                                         <?php else : ?>
@@ -354,7 +359,7 @@
                             </div>
                             <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
                                 <div class="modal-footer w-100">
-                                    <form action="?&action=post_news_commentaire&id_news=<?php echo $news[$i]['id']; ?>" method="post" class="w-100">
+                                    <form action="?action=post_news_commentaire&id_news=<?php echo $news[$i]['id']; ?>" method="post" class="w-100">
                                         <h5>
                                             Commenter !
                                         </h5>
@@ -398,7 +403,7 @@
                                             </button>
                                         </div>
 
-                                        <form action="?&action=edit_news_commentaire&id_news=<?= $news[$i]['id'] . '&auteur=' . $newsComments['pseudo'] . '&id_comm=' . $newsComments['id']; ?>" method="post">
+                                        <form action="?action=edit_news_commentaire&id_news=<?= $news[$i]['id'] . '&auteur=' . $newsComments['pseudo'] . '&id_comm=' . $newsComments['id']; ?>" method="post">
                                             <div class="modal-body">
                                                 <h6>Commentaire de base :</h6>
                                                 <textarea name="old_commentaire" id="old_commentaire" rows="3" style="resize: none;" class="form-control disabled mb-5" disabled><?= $editCommentaire; ?></textarea>
@@ -430,7 +435,7 @@
 <div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-signin" role="form" method="post" action="?&action=editForum">
+            <form class="form-signin" role="form" method="post" action="?action=editForum">
                 <div class="modal-header">
                     <h5 class="modal-title">Édition du forum "<span id="editForumTitle" ></span>"</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -453,8 +458,8 @@
                             </small>
                     </div>
                     <div class="form-row my-2">
-                        <label for="forum">Catégorie <span class="star-required"></span></label>
-                        <select name="forum" class="form-control custom-text-input" required>
+                        <label for="forumCat">Catégorie <span class="star-required"></span></label>
+                        <select name="forum" id="forumCat" class="form-control custom-text-input" required>
                         <?php for ($z = 0, $zMax = count($fofo); $z < $zMax; $z++) : ?>
                             <option id="editForumCat<?= $fofo[$z]['id']; ?>" value="<?= $fofo[$z]['id']; ?>">
                                 <?= $fofo[$z]['nom']; ?>
@@ -473,11 +478,11 @@
     </div>
 </div>
 <?php endif ?>
-<?php if(isset($_GET['page']) && $_GET['page'] == "forum_categorie") : ?>
+<?php if(isset($_GET['page']) && ($_GET['page'] == "forum_categorie" | $_GET['page'] == "sous_forum_categorie")) : ?>
 <div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-signin" role="form" method="post" action="?&action=editSousForum">
+            <form class="form-signin" role="form" method="post" action="?action=editSousForum">
                 <div class="modal-header">
                     <h5 class="modal-title">Édition du sous-forum "<span id="editForumTitle" ></span>"</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -490,12 +495,12 @@
                      <input type="hidden" name="idSF" value="" id="editForumSFId"/>
                      <input type="hidden" name="index" value="" id="editForumIndex"/>
                     <div class="form-row my-2">
-                        <label for="nomForum">Nom du sous-Forum <span class="star-required"></span></label>
+                        <label for="editForumName">Nom du sous-Forum <span class="star-required"></span></label>
                         <input type="text" name="nom" id="editForumName" maxlength="40" class="form-control custom-text-input" required />
                     </div>
 
                     <div class="form-row my-2">
-                        <label for="img">Icône</label>
+                        <label for="editForumImg">Icône</label>
                             <input type="text" name="img" id="editForumImg" maxlength="300" placeholder='<i class="far fa-comment-dots"></i>' class="form-control custom-text-input" />
                             <small id="imgHelp" class="form-text text-muted">
                                 disponible sur : <a href="https://fontawesome.com/icons/" target="_blank">https://fontawesome.com/icons/</a>
@@ -515,5 +520,5 @@
 
 <div id="modal-image" class="img-modal">
   <div class="modal-img-close" onclick="this.parentElement.style.display='none';"><i class="fas fa-times"  ></i></div>
-  <img class="modal-img-content" id="modal-image-src" />
+  <img class="modal-img-content" alt="image modal" id="modal-image-src" />
 </div>

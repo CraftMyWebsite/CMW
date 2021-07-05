@@ -1,0 +1,92 @@
+RewriteEngine On
+
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^([^/]*)$ index.php?page=$1 [L]
+RewriteRule ^voter/([^/]*)$ index.php?page=voter&player=$1 [L]
+RewriteRule ^membres/([^/]*)$ index.php?page=membres&page_membre=$1 [L]
+RewriteRule ^profil/([^/]*)$ index.php?page=profil&profil=$1 [L]
+RewriteRule ^profil/([^/]*)/([^/]*)$ index.php?page=profil&profil=$1&status=$2 [L]
+RewriteRule ^profil/([^/]*)/([^/]*)/([^/]*)$ index.php?page=profil&profil=$1&pseudo=$2&montant=$3 [L]
+RewriteRule ^support/TicketNotExist/([^/]*)$ index.php?page=support&TicketNotExist=$1 [L]
+RewriteRule ^support/CommentaireNotExist/([^/]*)$ index.php?page=support&CommentaireNotExist=$1 [L]
+RewriteRule ^support/EditionImpossible/([^/]*)$ index.php?page=support&EditionImpossible=$1 [L]
+RewriteRule ^support/EditCommentaire/([^/]*)$ index.php?page=support&EditCommentaire=$1 [L]
+RewriteRule ^support/NotOnline/([^/]*)$ index.php?page=support&NotOnline=$1 [L]
+
+RewriteRule accueil/NotOnline index.php?page=accueil&NotOnline= [L]
+RewriteRule accueil/NewsNotExist index.php?page=accueil&NewsNotExist [L]
+RewriteRule accueil/MessageTropLong index.php?page=accueil&MessageTropLong [L]
+RewriteRule accueil/MessageTropCourt index.php?page=accueil&MessageTropCourt [L]
+RewriteRule accueil/MessageEnvoyer index.php?page=accueil&MessageEnvoyer [L]
+
+RewriteRule accueil/envoieMail index.php?page=accueil&envoieMail [L]
+
+RewriteRule ^token/([^/]*)$ index.php?page=token&notif=$1 [L]
+
+RewriteRule accueil/CommentaireNotExist index.php?page=accueil&CommentaireNotExist [L]
+RewriteRule accueil/SuppressionImpossible index.php?page=accueil&SuppressionImpossible [L]
+RewriteRule accueil/SuppressionCommentaire index.php?page=accueil&SuppressionCommentaire [L]
+
+RewriteRule accueil/EditImpossible index.php?page=accueil&EditImpossible [L]
+RewriteRule accueil/MessageEditer index.php?page=accueil&MessageEditer [L]
+
+RewriteRule accueil/LikeExist index.php?page=accueil&LikeExist [L]
+RewriteRule accueil/LikeAdd index.php?page=accueil&LikeAdd [L]
+
+RewriteRule accueil/ReportEnvoyer index.php?page=accueil&ReportEnvoyer [L]
+RewriteRule accueil/PlayerNotExist index.php?page=accueil&PlayerNotExist [L]
+RewriteRule accueil/ReportVictimeExist index.php?page=accueil&ReportVictimeExist [L]
+RewriteRule accueil/NotReportYourSelf index.php?page=accueil&NotReportYourSelf [L]
+
+RewriteRule panier/success index.php?page=panier&success [L]
+RewriteRule panier/notOnline index.php?page=panier&notOnline [L]
+
+RewriteRule boutique/ajout index.php?page=boutique&ajout [L]
+
+RewriteRule chat/success index.php?page=chat&success [L]
+RewriteRule chat/erreur index.php?page=chat&erreur [L]
+
+RewriteRule ^erreur/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?page=erreur&erreur=$1&type=$2&titre=$3&contenue=$4 [L]
+RewriteRule ^erreur/([^/]*)$ index.php?page=erreur&erreur=$1 [L]
+
+RewriteRule ^confirmation/([^/]*)/([^/]*)$ index.php?page=confirmation&id_topic=$1&choix=$2 [L]
+
+
+
+RewriteRule ^post/([^/]*)$ index.php?page=post&id=$1 [L]
+RewriteRule ^editForum/([^/]*)/([^/]*)$ index.php?page=editForum&objet=$1&id=$2 [L]
+RewriteRule ^forum/postSignalement$ index.php?page=forum&postSignalement [L]
+RewriteRule ^post/([^/]*)/([^/]*)$ index.php?page=post&id=$1&page_post=$2 [L]
+RewriteRule ^forum_categorie/([^/]*)$ index.php?page=forum_categorie&id=$1 [L]
+RewriteRule ^sous_forum_categorie/([^/]*)/([^/]*)$ index.php?page=sous_forum_categorie&id=$1&id_sous_forum=$2 [L]
+RewriteRule ^sous_forum_categorie/([^/]*)/([^/]*)/([^/]*)$ index.php?page=sous_forum_categorie&id=$1&id_sous_forum=$2&page_topic=$3 [L]
+RewriteRule ^forum_categorie/([^/]*)/([^/]*)$ index.php?page=forum_categorie&id=$1&page_topic=$2 [L] 
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1$1 [R=301,L]
+RewriteCond %{HTTPS} on
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1$1 [R=301,L]
+ErrorDocument 404 /index.php?page=erreur
+
+
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+</IfModule>
+
+# Extra Security Headers (XSS, content-sniffing, click-jacking)
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+	Header always append X-Frame-Options SAMEORIGIN
+	Header set X-Content-Type-Options nosniff
+</IfModule>

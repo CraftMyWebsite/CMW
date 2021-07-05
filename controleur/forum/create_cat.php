@@ -23,11 +23,11 @@ if(isset($_Joueur_) AND isset($_POST['nom']) AND isset($_POST['forum']) AND strl
 		header('Location: index.php?page=forum');
 	}
 	else
-		header('Location: ?page=erreur&erreur=7');
+		header('Location: index.php?page=erreur&erreur=7');
 }
 else
 {
-	header('Location: ?page=erreur&erreur=0');
+	header('Location: index.php?page=erreur&erreur=0');
 }
 
 

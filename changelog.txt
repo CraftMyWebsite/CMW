@@ -1,29 +1,53 @@
-Changelog CraftMyWebsite 1.8.1
+Changelog CraftMyWebsite 1.8.2
 
 Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 
-[=] : Correction d'une faille de sécurité mineure (XSS)
-[=] : Amélioration graphique du thème default
-[=] : Améliortion des requêtes vers l'api craftmywebsite.fr
-[=] : Amélioration de la sécurité du panier sur la boutique
-[=] : Agrandissement de touts les modals
-[=] : Amélioration de ckeditor
-[|] : Fix des bugs sur la page vote (Erreurs d'envoi de récompenses) 
-[|] : Fix bug du système de reset automatique des votes
-[|] : Fix des miniatures
-[|] : Fix du fond de l'entête du site
-[|] : Fix de l'ensemble des bugs et erreurs sur la boutique
-[|] : Fix des bugs touchant à la modification du forum
-[|] : Fix des bugs liés aux grades et de leurs permissions
-[|] : Fix des commentaires sur les news qui ne fonctionnaient pas
-[|] : Fix des disfonctionnements des notifications 
-[|] : Fix disfonctionnements liés au tchat
-[|] : Fix des réseaux sociaux et signature dans la partie "membres" du panel
-[|] : Fix des erreurs sur la page paiement du panel
-[+] : Ajout d'un messsage sur la page vote quand les récompenses ne sont pas données
-[+] : Ajout messages de confirmation/erreur lors de l'upload d'une image sur le panel
-[+] : Ajout retour après une action sur la page des récompenses auto
+
+[|] : Fix bug du chat qui ne charge pas
+[|] : Fix de la banlist qui ne chargé pas en multiserveur
+[|] : Fix erreurs sur la page boutique du panel
+[|] : Ajout d'une permission manquante sur le panel admin
+[|] : Fix API de vérification de 3 sites qui ne fonctionnait pas
+[|] : Fix Responsive thème default
+[|] : Fix Responsive du panel admin
+[|] : Fix images non fonctionnel sur la boutique
+[|] : Fix historique de vote
+[|] : Fix page boutique qui ne s'affiché pas
+[|] : Fix responsive des statistique sur le panel
+[|] : Fix extension sur l'installateur
+[|] : Fix du mdp inchangeable depuis son profil
+[|] : Fix tache Cron qui ne fonctionnait pas
+[|] : Fix sur le panier pour les achats des joueurs devant être connecté sur le serveur
+
+[=] : Fixs sécurité sur le cms (XSS + cookie)
+[=] : Menu désormais stocker dans la base de données
+[=] : Refonte de l'inscription pour que ça soit plus "pro" 
+[=] : Image centré dans les offres boutique
+[=] : Mise à jour de ckeditor
+[=] : Retour des pages perso dans le ftp
+[=] : Corrections de plusieurs fautes d'orthographes sur le panel
+[=] : Amélioration du mode nuit sur certaines pages
+[=] : Plus besoin de recharger sa page pour voir ses modifiations sur le panel
+[=] : Mise à jour de l'installateur du cms
+[=] : Suppression de certains eastegger du panel
+
+[+] : Possibilité de modifier l'ordre des menus
+[+] : Ajout de l'option instantané pour les récompenses des votes
+[+] : Ajout d'un bouton pour tester l'id unique par rapport à l'url donné, vérifier si l'id est bonne (page vote)
+[+] : Modification du nom de la monnaie depuis le panel
+[+] : Ajouts de nouveaux effets pour les grades
+[+] : Modification de la police d'écriture du thème
+[+] : Ajout d'une erreur en cas de connexion à l'administration sans y être autorisé
+[+] : Ajout de ckeditor à la page maintenance
+[+] : Possibilité de changer la devise monétaire de paypal depuis le panel
+[+] : Ajout d'un système de SEO au thème default
+[+] : Ajout des services google sur le cms
+[+] : Nouveau système de statistique sur le panel
+[+] : Ajout des URLRewrite à l'ensemble des pages du cms (page public)
+[+] : Création/édition de page du panel avec php
+[+] : Vérification du mdp lors du changement de mail
+[+] : Nouvelle page de profil
 
 
 
-Contributeurs : Guedesite, BadiiiX, Emilien52, deadfire, RedBoard, Tomo, CapDRAKE, MrSheepSheep, Human1st.
+Contributeurs : LoGuardiaN, Guedesite, PinglsDzn, Teyir, Emilien52, BadiiiX

@@ -6,7 +6,7 @@ General:
     name: 
     theme: default
     themeOption: bootstrap
-    description: 
+    description:
     bgType: 0
     permsPlugin: groupManager
     permsWorld: world
@@ -31,6 +31,7 @@ Payement:
     paypal: true
     dedipass: false
     paysafecard: false
+    currency: EUR
     public_key: ""
     private_key: ""
     paypalEmail: 
@@ -41,3 +42,15 @@ color:
         main: '#ff8040'
         hover: '#c16100'
         focus: '#ffbc9b'
+lastCMWCheck: 1621453057
+googleService:
+    searchConsole:
+        id: ""
+        enable: false
+    analytics:
+        enable: false
+        id: ""
+    adsense:
+        enable: false
+        id: ""
+        pub: ""

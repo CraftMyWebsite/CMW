@@ -1,5 +1,5 @@
 <?php
-if(!$admin) { header('Location: index.php'); } 
+if(!$admin) { header('Location: nope.php'); }
 
 $_Serveur_ = new Lire('./modele/config/config.yml');
 $_Serveur_ = $_Serveur_->GetTableau();
@@ -46,10 +46,6 @@ if(isset($_GET['page']) AND $_GET['page'] != "accueil"){
         	<?php include('./admin/page.php');?>
         	</main>
      	</div>
-    </div>
-
-    <div class="modal coffin" id="coffin" data-backdrop="static">
-        <img width="100%" height="100%" src="https://media1.tenor.com/images/89cc0f940769bc079795e4aed3095227/tenor.gif?itemid=16828836" alt="Chargement en cours du gif coffin_dance-minecraft.gif (tenor.gif)">
     </div>
 
     <div class="modal fade" id="snakemodal" data-backdrop="static">
