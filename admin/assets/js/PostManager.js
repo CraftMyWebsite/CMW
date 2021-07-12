@@ -105,12 +105,12 @@ function sendPost(idform, callback, sendData) {
     let postData = {};
     for (let key of it) {
         if(!Array.isArray(allForm[idform].get(key))) {
-            if(allForm[idform].get(key).required && (allForm[idform].get(key).type=="checkbox" |allForm[idform].get(key).type=="text" |allForm[idform].get(key).type=="password" |allForm[idform].get(key).type=="number" |allForm[idform].get(key).type=="email" )&& (!isset(allForm[idform].get(key).value) | allForm[idform].get(key).value.replace(" ", "") == ""))
+            if(allForm[idform].get(key).hasAttribute('required') && (allForm[idform].get(key).type=="checkbox" |allForm[idform].get(key).type=="text" |allForm[idform].get(key).type=="password" |allForm[idform].get(key).type=="number" |allForm[idform].get(key).type=="email" )&& (!isset(allForm[idform].get(key).value) | allForm[idform].get(key).value.replace(" ", "") == ""))
             { 
                 errorForm[idform] = [];
                 let it2 = allForm[idform].keys();
                 for (let op of it2) {
-                    if(allForm[idform].get(op).required && (allForm[idform].get(op).type=="text" | allForm[idform].get(op).type=="password"|allForm[idform].get(op).type=="number" |allForm[idform].get(op).type=="email" )&& (!isset(allForm[idform].get(op).value) | allForm[idform].get(op).value.replace(" ", "") == ""))
+                    if(allForm[idform].get(op).hasAttribute('required') && (allForm[idform].get(op).type=="text" | allForm[idform].get(op).type=="password"|allForm[idform].get(op).type=="number" |allForm[idform].get(op).type=="email" )&& (!isset(allForm[idform].get(op).value) | allForm[idform].get(op).value.replace(" ", "") == ""))
                     { 
                         errorForm[idform].push(allForm[idform].get(op));
                         allForm[idform].get(op).classList.add("input-red");
