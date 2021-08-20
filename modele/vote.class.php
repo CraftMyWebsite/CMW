@@ -285,6 +285,10 @@ class vote {
             {
                 $json = json_decode(self::fetch("https://serveurs-mc.net/api/hasVote/".$id."/".$this->get_client_ip()."/10"));
                 return $json->hasVote == "true";
+            } else if (strpos($url, 'serveur-minecraft-vote.fr')) { // Serveur minecraft vote
+                $apiUrl = "https://serveur-minecraft-vote.fr/api/v1/servers/" . $id . "/vote/ " . $this->get_client_ip();
+                $json = json_decode(self::fetch($apiUrl));
+                return $json->canVote == false;
             }else if(strpos($url, 'serveur-prive.net'))
             {
                 $json = json_decode(self::fetch("https://serveur-prive.net/api/vote/json/".$id."/". $this->get_client_ip()));
