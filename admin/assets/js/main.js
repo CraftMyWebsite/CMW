@@ -563,6 +563,16 @@ function testUrlVoteForTest(url, id, btn) {
 			}
 			btn.disabled = false;
 		});
+	} else if (url.includes("serveur-minecraft-vote.fr")) { // Serveur minecraft vote
+		fetchVote("https://serveur-minecraft-vote.fr/api/v1/servers/" + id, function (data, status) {
+			// true -> json {"status":"1"}, false -> {"status":"0"}
+			if (isJson(data)) {
+				notif("success", "serveur-minecraft-vote.fr", "Id " + id + " trouvé !");
+			} else {
+				notif("error", "serveur-minecraft-vote.fr", "Valeur invalide: " + data);
+			}
+			btn.disabled = false;
+		});
 	} else if(url.includes("serveur-prive.net")) {
 		fetchVote("https://serveur-prive.net/api/stats/json/"+id+"/position", function(data, status) {
 			// true -> json {"status":"1"}, false -> {"status":"0"}

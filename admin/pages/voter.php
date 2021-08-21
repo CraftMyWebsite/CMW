@@ -127,6 +127,7 @@
                                     <br/>
                                     Les sites suivant <strong>sont compatible</strong> avec cette vérification:
                                     <ul>
+                                        <li> serveur-minecraft-vote.fr</li>
                                         <li> serveurs-mc.net</li>
                                         <li> serveur-prive.net</li>
                                         <li> serveurs-minecraft.org</li>
