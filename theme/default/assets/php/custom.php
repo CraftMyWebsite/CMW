@@ -309,22 +309,32 @@
         $(document).ready(function() {
             notif2("Boutique", "Vos achats ont été validé.", "success");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "boutique" && isset($_GET['ajout'])) {
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['dependances'])) { 
     ?>
         $(document).ready(function() {
-            notif2("Boutique", "Article ajouté à votre panier.", "success");
+            notif2("Panier", "Suite à des dépendances de l'article que vous avez supprimé, d'autres articles ont pu se faire supprimer de votre panier", "error");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['success'])) {
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "boutique" && isset($_GET['ajout'])) { 
+    ?>
+        $(document).ready(function() {
+            notif2("Boutique", "Article ajouté dans le panier.", "success");
+        });
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['success'])) { 
     ?>
         $(document).ready(function() {
             notif2("Chat", "Message envoyé.", "success");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['erreur'])) {
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['erreur'])) {  
     ?>
         $(document).ready(function() {
             notif2("Chat", "Le message n'a pas pu être envoyé.", "error");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "forum" && isset($_GET['postSignalement'])) {
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['msgErreur'])) {
+    ?>
+        $(document).ready(function() {
+            notif2("Chat", "Message trop long ou trop court.", "error");
+        });
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "forum" && isset($_GET['postSignalement'])) {  
     ?>
         $(document).ready(function() {
             notif2("Forum", "Signalement envoyé !", "success");
@@ -342,7 +352,6 @@
                 echo '$(document).ready(function() {
                     notif2("Profil", "Mot de passe incorrect", "error");
                     $("#editmdp").collapse("show");
-
                 });';
                 break;
             case 1:
@@ -354,7 +363,6 @@
                 echo '$(document).ready(function() {
                     notif2("Profil", "Mot de passe incorrect", "error");
                     $("#editmail").collapse("show");
-
                 });';
                 break;
             case 3:

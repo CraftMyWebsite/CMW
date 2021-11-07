@@ -58,6 +58,24 @@
                                     <?php foreach ($categories as $key => $value) {
                                         $categories[$key]['offres'] = 0;
                                     }
+                                    if(isset($_SESSION['panier']['id']) && !empty($_SESSION['panier']['id'])) {
+                                        foreach($_SESSION['panier']['id'] as $key => $itemId) {
+                                            $req = $bddConnection->prepare("SELECT id FROM cmw_boutique_offres WHERE evo = :evo");
+                                            $req->execute(array("evo" => $itemId));
+                                            $d = $req->fetch(PDO::FETCH_ASSOC);
+                                            if (isset($d['id']) && !empty($d['id'])) {
+                                                unset($offresTableau[($key+2)]['buy']);
+                                            }
+                                            $req = $bddConnection->prepare("SELECT max_vente FROM cmw_boutique_offres WHERE id = :id");
+                                            $req->execute(array("id" => $itemId));
+                                            $d = $req->fetch(PDO::FETCH_ASSOC);
+                                            if(isset($d['max_vente']) && $d['max_vente'] !== "-1") {
+                                                if ($_SESSION['panier']['quantite'][$key] >= $d['max_vente']) {
+                                                    $offresTableau[($key+1)]['maxbuy']=1;  
+                                                }
+                                            }                                                               
+                                        }
+                                    }
                                     if(isset($offresTableau) && !empty($offresTableau)) : for ($i = 1; $i <= count($offresTableau); $i++) :
                                         if ($offresTableau[$i]['categorie'] == $categories[$j]['id']) : 
                                             $categories[$j]['showNumber'] = ($categories[$j]['showNumber'] == 0) ? 1 : $categories[$j]['showNumber']; ?>
