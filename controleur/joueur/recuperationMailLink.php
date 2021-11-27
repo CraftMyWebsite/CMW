@@ -33,11 +33,11 @@ else
 	$subject = "[".$_Serveur_['General']['name']."]Confirmation : Recuperation de mot de passe";
 	$txt = 'Bonjour, '.$donneesJoueur['pseudo'].$retourligne
 			.$retourligne
-			.'Vous avez bien confirm� votre demande de changement de mot de passe.'.$retourligne
+			.'Vous avez bien confirmé votre demande de changement de mot de passe.'.$retourligne
 			.'Voici votre nouveau mot de passe : '.$mdp.$retourligne
 			.$retourligne
 			.'Merci de changer votre mot de passe pour cela rendez-vous sur votre profil.'.$retourligne
-			.'Il est inutile de r�pondre � ce mail automatique.'.$retourligne
+			.'Il est inutile de répondre à ce mail automatique.'.$retourligne
 			.$retourligne
 			.'Cordialement, '.$_Serveur_['General']['name'].'.';
 
