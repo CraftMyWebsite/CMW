@@ -11,7 +11,9 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 	$donneesJoueur = $ligneReponse->fetch(PDO::FETCH_ASSOC);
 	if(empty($donneesJoueur))
 	{
-		header('Location: index.php?page=erreur&erreur=4');
+		//email mining
+		//header('Location: index.php?page=erreur&erreur=4');
+		header('Location: index.php?page=accueil&envoieMail');
 	}
 	else
 	{
@@ -48,11 +50,12 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 			if(MailSender::send($_Serveur_, $to, $subject, $txt))
 			{
 				header('Location: index.php?page=accueil&envoieMail');
-			} else {
-				header('Location: index.php?page=erreur&erreur=21');
-			}
+			} 
+			//else {
+			//	header('Location: index.php?page=erreur&erreur=21');
+			//}
 		}
-		else header('Location: index.php?page=erreur&erreur=4');
+		//else header('Location: index.php?page=erreur&erreur=4');
 	}
 }
 else
