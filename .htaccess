@@ -42,12 +42,14 @@ RewriteRule accueil/ReportVictimeExist index.php?page=accueil&ReportVictimeExist
 RewriteRule accueil/NotReportYourSelf index.php?page=accueil&NotReportYourSelf [L]
 
 RewriteRule panier/success index.php?page=panier&success [L]
+RewriteRule panier/dependances index.php?page=panier&dependances [L]
 RewriteRule panier/notOnline index.php?page=panier&notOnline [L]
 
 RewriteRule boutique/ajout index.php?page=boutique&ajout [L]
 
 RewriteRule chat/success index.php?page=chat&success [L]
 RewriteRule chat/erreur index.php?page=chat&erreur [L]
+RewriteRule chat/msgErreur index.php?page=chat&msgErreur [L]
 
 RewriteRule ^erreur/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?page=erreur&erreur=$1&type=$2&titre=$3&contenue=$4 [L]
 RewriteRule ^erreur/([^/]*)$ index.php?page=erreur&erreur=$1 [L]

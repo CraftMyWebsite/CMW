@@ -44,11 +44,20 @@ class Panier
 			$tmp['quantite'] = array();
 			$tmp['prix'] = array();
 			$tmp['verrou'] = false;
-
+			$panier_erreurEvo = "";
 			for($i = 0; $i < count($_SESSION['panier']['id']); $i++)
 			{
+				start:
+				$req = $this->bdd->prepare("SELECT id FROM cmw_boutique_offres WHERE evo = :evo");
+				$req->execute(array("evo" => $id));
+				$d = $req->fetch(PDO::FETCH_ASSOC);
 				if($_SESSION['panier']['id'][$i] !== $id)
 				{
+					if($_SESSION['panier']['id'][$i] == $d['id']) {
+						$panier_erreurEvo = "dependances";
+						$id = $d['id'];
+						goto start;
+					}
 					array_push($tmp['id'], $_SESSION['panier']['id'][$i]);
 					array_push($tmp['quantite'], $_SESSION['panier']['quantite'][$i]);
 					array_push($tmp['prix'], $_SESSION['panier']['prix'][$i]);
@@ -57,6 +66,9 @@ class Panier
 
 			$_SESSION['panier'] = $tmp;
 			unset($tmp);
+			if($panier_erreurEvo == "dependances") {
+				return $panier_erreurEvo;
+			}
 			return true;
 	}
 
