@@ -1,6 +1,6 @@
 Changelog CraftMyWebsite 1.8.2a - Fixs sécurité IMPORTANT
 
-Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
+Ajouts ([+]), modifications ([=]) et suppressions ([-]), ([|]) Bugs Fix
 
 
 [|] : Fix problème des emails publiques/privés sur le profil
@@ -8,6 +8,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), (|) Bugs Fix
 [|] : Fix de la newsletter sur l'inscription d'un compte
 [|] : Fix id verification du site serveursminecraft.fr
 [|] : Fix d'un bug sur le panier de la boutique
+[|] : Fix des pages infini sur la liste des membres
 
 [=] : Fixs sécurité sur le cms
 [=] : Fautes d'ortographes
