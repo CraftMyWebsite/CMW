@@ -74,7 +74,7 @@ if (isset($_GET['page_membre'])) {
                     <ul class="pagination justify-content-center">
                         <?php if ($page > 5) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="index.php?page=membres&page_membre=0" aria-label="Précédent">
+                                <a class="page-link" href="index.php?page=membres&page_membre=1" aria-label="Précédent">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Précédent</span>
                                 </a>
