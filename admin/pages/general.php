@@ -69,26 +69,39 @@
                 </div>
                 <div class="card-body" id="changeBdd">
                     <label class="control-label">Adresse</label>
-                    <input type="text" name="adresse" class="form-control" placeholder="localhost" value="<?php echo $_Serveur_['DataBase']['dbAdress']; ?>">
+                    <input type="text" name="adresse" class="form-control" placeholder="localhost" value="<?php echo $_Serveur_['DataBase']['dbAdress']; ?>" required>
 
                     <label class="control-label">Nom de la base</label>
-                    <input type="text" name="dbNom" class="form-control" placeholder="BaseSite" value="<?php echo $_Serveur_['DataBase']['dbName']; ?>">
+                    <input type="text" name="dbNom" class="form-control" placeholder="BaseSite" value="<?php echo $_Serveur_['DataBase']['dbName']; ?>" required>
 
                     <label class="control-label">Nom d'utilisateur</label>
-                    <input type="text" name="dbUtilisateur" class="form-control" placeholder="root" value="<?php echo $_Serveur_['DataBase']['dbUser']; ?>">
+                    <input type="text" name="dbUtilisateur" class="form-control" placeholder="root" value="<?php echo $_Serveur_['DataBase']['dbUser']; ?>" required>
+                    </br>
+                    <hr></hr>
+                    <button type="submit" class="btn btn-danger w-100" onClick="get('sendconfbdd').disabled = true;show('switchpassconf');">Changer le mot de passe</button>
 
-                    <label class="control-label">Mot de passe</label>
+                    <div id="switchpassconf" style="display:none;">
+                        <label class="control-label">Nouveau mot de passe</label>
+                        <div class="input-group mb-3">
+                            <input type="password" name="dbMdp" class="form-control" placeholder="Balançoire" onkeyup="if(getValueByName('changeBdd', 'dbMdpconf') == getValueByName('changeBdd', 'dbMdp')) { get('sendconfbdd').disabled = false; } else { get('sendconfbdd').disabled = true; }">
+                            <div class="input-group-append">
+                                <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
+                            </div>
+                        </div>
 
-                    <div class="input-group mb-3">
-                        <input type="password" name="dbMdp" class="form-control" placeholder="Balançoire" value="<?php echo $_Serveur_['DataBase']['dbPassword']; ?>">
-                        <div class="input-group-append">
-                            <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
+                        <label class="control-label">Confirmer le nouveau mot de passe</label>
+                        <div class="input-group mb-3">
+                            <input type="password" name="dbMdpconf" class="form-control" placeholder="Balançoire" onkeyup="if(getValueByName('changeBdd', 'dbMdpconf') == getValueByName('changeBdd', 'dbMdp')) { get('sendconfbdd').disabled = false; } else { get('sendconfbdd').disabled = true; }">
+                            <div class="input-group-append">
+                                <span onclick="switchTypePassword(this);" class="input-group-text" style="cursor:pointer;"><i class="far fa-eye"></i></span>
+                            </div>
                         </div>
                     </div>
+
                     <script>initPost("changeBdd", "admin.php?action=editBdd",null);</script>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeBdd')">Envoyer!</button>
+                    <button type="submit" id="sendconfbdd" class="btn btn-success w-100" onClick="sendPost('changeBdd')">Envoyer!</button>
                 </div>
             </div>
 
