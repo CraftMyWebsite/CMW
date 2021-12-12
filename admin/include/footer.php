@@ -1,4 +1,4 @@
- 	<footer class="footer" style="overflow-x: hidden !important;">
+<footer class="footer" style="overflow-x: hidden !important;">
         <div class="row">
             <div class="col-md-4  offset-md-2">
                 <p class="text-muted footer-text" style="padding-left: 15px;">
@@ -10,8 +10,18 @@
                     &copy; 2014 -<script>document.write(new Date().getFullYear())</script> CraftMyWebsite, tous droits réservé
                 </p>
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="darkSwitch">
-                    <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i> Mode Nuit</label>
+                    <form id="darkForm" method="POST" action="">
+                        <?php
+                            if (isset($_SESSION['darkSwitch'])) {
+                                echo '<input type="hidden" name="removeDarkSwitch" id="removeDarkSwitch" value="1">
+                                <input type="checkbox" class="custom-control-input" id="darkSwitch" name="darkSwitch" value="1" checked>';
+                                
+                            } else {
+                                echo '<input type="checkbox" class="custom-control-input" id="darkSwitch" name="darkSwitch" value="1">';
+                            }
+                        ?>
+                        <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i> Mode Nuit</label>
+                    </form>
                 </div>
             </div>
         </div>
