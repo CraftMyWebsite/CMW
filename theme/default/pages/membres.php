@@ -71,28 +71,28 @@ if (isset($_GET['page_membre'])) {
 
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <?php if ($page > 1) : ?>
+                    <ul class="pagination justify-content-center">
+                        <?php if ($page > 5) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="index.php?page=membres&page_membre=<?= $page - 1 ?>" aria-label="Précédent">
+                                <a class="page-link" href="index.php?page=membres&page_membre=1" aria-label="Précédent">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Précédent</span>
                                 </a>
                             </li>
                         <?php endif;
-                        for ($i = 1; $i <= $Membres->nbPages; $i++) : ?>
-                            <li class="page-item">
+                        for ($i = ($page > 5 ? $page - 5 : 1); $i <= ($page + 5 < $Membres->nbPages ? $page + 5 : $Membres->nbPages); $i++) : ?>
+                            <li class="page-item <?= ($page==$i?'disabled':'') ?>">
                                 <a class="page-link" href="index.php?page=membres&page_membre=<?= $i; ?>"><?= $i; ?></a>
                             </li>
                         <?php
                         endfor;
-                        if ($page < $Membres->nbPages) : ?>
+                        if ($page+5 < $Membres->nbPages) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="index.php?page=membres&page_membre=<?= $page + 1 ?>" aria-label="Suivant">
+                                <a class="page-link" href="index.php?page=membres&page_membre=<?= $Membres->nbPages ?>" aria-label="Suivant">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Suivant</span>
                                 </a>
-                            </li>';
+                            </li>
                         <?php endif; ?>
                     </ul>
                 </nav>
