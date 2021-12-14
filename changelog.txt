@@ -1,4 +1,4 @@
-Changelog CraftMyWebsite 1.8.2a - Fixs sécurité IMPORTANT
+Changelog CraftMyWebsite 1.8.3 - Fixs sécurité IMPORTANT
 
 Ajouts ([+]), modifications ([=]) et suppressions ([-]), ([|]) Bugs Fix
 
@@ -9,6 +9,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), ([|]) Bugs Fix
 [|] : Fix id verification du site serveursminecraft.fr
 [|] : Fix d'un bug sur le panier de la boutique
 [|] : Fix des pages infini sur la liste des membres
+[|] : Fix du mode nuit du panel 
 
 [=] : Fixs sécurité sur le cms
 [=] : Fautes d'ortographes
