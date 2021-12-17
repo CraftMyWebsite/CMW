@@ -44,32 +44,45 @@ class Panier
 			$tmp['quantite'] = array();
 			$tmp['prix'] = array();
 			$tmp['verrou'] = false;
-			$panier_erreurEvo = "";
+
 			for($i = 0; $i < count($_SESSION['panier']['id']); $i++)
 			{
-				start:
-				$req = $this->bdd->prepare("SELECT id FROM cmw_boutique_offres WHERE evo = :evo");
-				$req->execute(array("evo" => $id));
-				$d = $req->fetch(PDO::FETCH_ASSOC);
 				if($_SESSION['panier']['id'][$i] !== $id)
 				{
-					if($_SESSION['panier']['id'][$i] == $d['id']) {
-						$panier_erreurEvo = "dependances";
-						$id = $d['id'];
-						goto start;
-					}
 					array_push($tmp['id'], $_SESSION['panier']['id'][$i]);
 					array_push($tmp['quantite'], $_SESSION['panier']['quantite'][$i]);
 					array_push($tmp['prix'], $_SESSION['panier']['prix'][$i]);
 				}
 			}
 
+			$tmp = $this->checkEvo($id, $tmp);
 			$_SESSION['panier'] = $tmp;
 			unset($tmp);
-			if($panier_erreurEvo == "dependances") {
-				return $panier_erreurEvo;
-			}
 			return true;
+	}
+
+	private function checkEvo($id, $all){
+		$allcopy = $all;
+		foreach($all['id'] as $key => $el ) {
+			$req = $this->bdd->prepare('SELECT evo FROM cmw_boutique_offres WHERE id = :offre');
+			$req->execute(array(
+				'offre' => htmlspecialchars($el)
+			));
+			$fetch = $req->fetch(PDO::FETCH_ASSOC);
+			if(isset($fetch['evo']) && !empty($fetch['evo'])) {
+				foreach(explode(",",$fetch['evo']) as $el2) {
+					if(intval($el2) == $id) {
+						unset($allcopy['id'][$key]);
+						unset($allcopy['quantite'][$key]);
+						unset($allcopy['prix'][$key]);
+						$allcopy = $this->checkEvo($el, $allcopy);
+						break;
+					}
+				}
+			}
+		}
+		return $allcopy;
+
 	}
 
 	public function modifierQteArticle($id, $quantite)
@@ -120,7 +133,7 @@ class Panier
 		if($reduc == 1)
 			return $total;
 		else
-		    return $total*(1-$_SESSION['panier']['reduction']);
+		    return $total*(1-(isset($_SESSION['panier']['reduction']) ? $_SESSION['panier']['reduction'] : 0));
 	}
 	
 	public function compterArticle()

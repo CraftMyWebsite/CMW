@@ -58,25 +58,60 @@
                                     <?php foreach ($categories as $key => $value) {
                                         $categories[$key]['offres'] = 0;
                                     }
-                                    if(isset($_SESSION['panier']['id']) && !empty($_SESSION['panier']['id'])) {
-                                        foreach($_SESSION['panier']['id'] as $key => $itemId) {
-                                            $req = $bddConnection->prepare("SELECT id FROM cmw_boutique_offres WHERE evo = :evo");
-                                            $req->execute(array("evo" => $itemId));
-                                            $d = $req->fetch(PDO::FETCH_ASSOC);
-                                            if (isset($d['id']) && !empty($d['id'])) {
-                                                unset($offresTableau[($key+2)]['buy']);
-                                            }
-                                            $req = $bddConnection->prepare("SELECT max_vente FROM cmw_boutique_offres WHERE id = :id");
-                                            $req->execute(array("id" => $itemId));
-                                            $d = $req->fetch(PDO::FETCH_ASSOC);
-                                            if(isset($d['max_vente']) && $d['max_vente'] !== "-1") {
-                                                if ($_SESSION['panier']['quantite'][$key] >= $d['max_vente']) {
-                                                    $offresTableau[($key+1)]['maxbuy']=1;  
-                                                }
-                                            }                                                               
-                                        }
-                                    }
+                                    
                                     if(isset($offresTableau) && !empty($offresTableau)) : for ($i = 1; $i <= count($offresTableau); $i++) :
+                                        if(isset($_SESSION['panier']['id']) && !empty($_SESSION['panier']['id'])) {
+                                            foreach($_SESSION['panier']['id'] as $itemId) {
+                                                $req = $bddConnection->prepare("SELECT id FROM cmw_boutique_offres WHERE evo = :evo");
+                                                $req->execute(array("evo" => $itemId));
+                                                $d = $req->fetch(PDO::FETCH_ASSOC);
+                                                if (isset($d['id']) && !empty($d['id'])) {
+                                                    unset($offresTableau[($d['id'])]['buy']);
+                                                }
+                                                $req = $bddConnection->prepare("SELECT max_vente FROM cmw_boutique_offres WHERE id = :id");
+                                                $req->execute(array("id" => $itemId));
+                                                $s = $req->fetch(PDO::FETCH_ASSOC);
+                                                if ($offresTableau[$i]['id'] == $d['id']) {
+                                                    $keyPanier = array_search($d['id'], $_SESSION['panier']['id']);
+                                                    if(isset($keyPanier) && $keyPanier) {
+                                                        if ($_SESSION['panier']['quantite'][$keyPanier] >= $s['max_vente']) {
+                                                            $offresTableau[$i]['maxbuy'] = 1;
+                                                        }
+                                                    }
+                                                }                                       
+                                            }
+                                        }
+
+                                        if(isset($_SESSION["Player"]["id"])) {
+                                            $req = $bddConnection->prepare("SELECT achats FROM cmw_users WHERE id = :id");
+                                            $req->execute(array("id" => $_SESSION["Player"]["id"]));
+                                            $e = $req->fetch(PDO::FETCH_ASSOC);
+                                            if (isset($e['achats']) && !empty($e['achats'])) {
+                                                $arrayAchat = array();
+                                                $arrayAchat = (json_decode($e['achats'], true));
+                                                foreach($arrayAchat as $achats) {
+                                                    $req = $bddConnection->prepare("SELECT id FROM cmw_boutique_offres WHERE evo = :evo");
+                                                    $req->execute(array("evo" => $achats['id2']));
+                                                    $d = $req->fetch(PDO::FETCH_ASSOC);
+                                                    if (isset($d['id']) && !empty($d['id']) && $offresTableau[$i]['id'] == $d['id']) {
+                                                        $_SESSION["bddachat"][$i] = 1;
+                                                    } else {
+                                                        unset($_SESSION["bddachat"][$i]);
+                                                    }
+                                                    $req = $bddConnection->prepare("SELECT max_vente FROM cmw_boutique_offres WHERE id = :id");
+                                                    $req->execute(array("id" => $achats["id2"]));
+                                                    $s = $req->fetch(PDO::FETCH_ASSOC);
+                                                    if($achats["nombre"]>=$s["max_vente"]) {
+                                                        if ($offresTableau[$i]['id'] == $achats["id2"]) {
+                                                            $offresTableau[$i]['maxbuy'] = 1;
+                                                        }
+                                                    }
+                                                }
+                                            } else {
+                                                unset($_SESSION["bddachat"][$i]);
+                                            }
+                                        }
+
                                         if ($offresTableau[$i]['categorie'] == $categories[$j]['id']) : 
                                             $categories[$j]['showNumber'] = ($categories[$j]['showNumber'] == 0) ? 1 : $categories[$j]['showNumber']; ?>
                                             <div class="col-12 card mx-3 col-md-<?php echo ((12/$categories[$j]['showNumber'])-1); ?>">
@@ -97,7 +132,7 @@
                                                 </div>
                                                 <div class="card-footer">
                                                     <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
-                                                        <?php if (isset($offresTableau[$i]['buy'])) { ?>
+                                                        <?php if (isset($offresTableau[$i]['buy']) && !isset($_SESSION["bddachat"][$i])) { ?>
                                                             <a href="#" class="btn btn-main disabled" disabled>Vous devez d'abord acheter: <?php foreach($offresTableau[$i]['buy'] as $value) { echo $offresByGet[$value]; } ?></a>
                                                         <?php } else if (isset($offresTableau[$i]['maxbuy'])) { ?>
                                                             <a href="#" class="btn btn-main disabled" disabled>Vous avez dépassé le nombre d'achat maximum de cette offre</a>
