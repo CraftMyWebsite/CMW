@@ -27,8 +27,9 @@ class urlRewrite
 	            }
 	        }
 	        header("Location: ".$url.$arg);
-	    } 
-	    
+	    }else if($_SERVER['REQUEST_URI'] == "/index.php") {
+	    	 header("Location: ".self::getSiteUrl());
+	    }
 	}
 	
 	public static function getSiteUrl() {
