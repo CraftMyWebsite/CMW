@@ -14,6 +14,7 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), ([|]) Bugs Fix
 [=] : Fixs sécurité sur le cms
 [=] : Fautes d'ortographes
 [=] : Modification d'un message d'erreur sur la page chat
+[=] : Modification de l' url rewriting de l'accueil qui redirigé vers /index.php
 
 [+] : Ajout du site de vote serveur-minecraft-vote.fr
 
