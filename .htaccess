@@ -4,7 +4,6 @@ RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule / index.php [L]
 RewriteRule ^([^/]*)$ index.php?page=$1 [L]
 RewriteRule ^voter/([^/]*)$ index.php?page=voter&player=$1 [L]
 RewriteRule ^membres/([^/]*)$ index.php?page=membres&page_membre=$1 [L]
