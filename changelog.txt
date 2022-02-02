@@ -6,7 +6,6 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), ([|]) Bugs Fix
 [|] : Fix problème des emails publiques/privés sur le profil
 [|] : Fix page nope
 [|] : Fix de la newsletter sur l'inscription d'un compte
-[|] : Fix id verification du site serveursminecraft.fr
 [|] : Fix d'un bug sur la boutique pour certains achats nécessitant d'acheter l'offre A pour débloquer la B
 [|] : Fix des pages infini sur la liste des membres
 [|] : Fix du mode nuit du panel 
