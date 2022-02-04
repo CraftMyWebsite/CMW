@@ -58,11 +58,10 @@ class OffresList
 				if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != "" ) {
 					foreach(explode(",",$tableauOffres['evo']) as $value)
 					{
-						$temp[$value] = false;
+						$temp[$value] = in_array($value, $_SESSION['panier']['id']);
 					} 
 				}
        			foreach($info as $key => $value) { 
-       				$temp[intval($value['id2'])] = true;
        				if(intval($value['id2']) == $tableauOffres['id']) {
        					if($tableauOffres['max_vente'] != -1 && intval($value['nombre']) >= $tableauOffres['max_vente']) {
        						$offres[$i]['maxbuy'] = true;

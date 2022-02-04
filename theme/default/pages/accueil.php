@@ -2,7 +2,7 @@
 <section id="News">
     <div class="container-fluid col-md-12 col-lg-9 col-sm-10">
         <div class="row">
-            <div class="row news-articles col-md-12 col-lg-8 col-sm-12 mx-auto">
+            <div class="row news-articles col-md-12 col-lg-8 col-sm-12 mx-auto align-content-start">
                 <!-- News Articles -->
                 <?php
                 if (isset($news) && count($news) > 0) :

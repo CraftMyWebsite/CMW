@@ -1,19 +1,19 @@
 <script type="application/javascript">
-    
+
     function cmw() {
         console.log("Version CMS: <?= $versioncms; ?>");
         if(document.querySelectorAll("[versioncms]").length > 0) {
-            console.log("Version affiché");
+            console.log("Version affichée");
         } else {
-            console.log("Version non affiché");
+            console.log("Version non affichée");
         }
         <?php if(isset($_Serveur_['SYSTEMINFO'])) { ?>
             console.log("SYSTEMINFO: <?=$_Serveur_['SYSTEMINFO']?>");
         <?php } else { ?>
-            console.log("Aucune info");
-        <?php } 
+            console.log("Aucune information");
+        <?php }
         if(!isset($_Serveur_['lastCMWCheck']) && $_Serveur_['lastCMWCheck'] < time() && $_Serveur_['lastCMWCheck'] < time() + 86400) { ?>
-            console.log("La dernière vérification du site web est trop ancienne! Le système peut avoir été enlevé manuellement");
+            console.log("La dernière vérification du site web est trop ancienne ! Le système peut avoir été enlevé manuellement");
         <?php }  else if($_Serveur_['lastCMWCheck'] > time()) {
             $time = round(($_Serveur_['lastCMWCheck'] - time()) / 60); ?>
             console.log("Dernière vérification il y a <?=$time?> minute(s)");
@@ -75,7 +75,7 @@
 
     //Scripts de page
 
-    <?php if (isset($_GET['page']) && $_GET['page'] == 'membres') : //Recherche de membres dans la page membre 
+    <?php if (isset($_GET['page']) && $_GET['page'] == 'membres') : //Recherche de membres dans la page membre
     ?>
 
         function rechercheAjaxMembre() {
@@ -188,11 +188,11 @@
     <?php if(isset($_GET["ActivateSuccess"])){ ?>
         notif('success','Votre compte vient d\'être activé avec succès.');
     <?php } elseif(isset($_GET["WaitActivate"])) { ?>
-            notif('warning', 'Un mail vient de vous être envoyé pour l\'activation de votre compte. Vérifiez dans les Courriers indésirables.');
+            notif('warning', 'Un mail vient de vous être envoyé pour l\'activation de votre compte. Vérifiez dans les courriers indésirables.');
     <?php } elseif(isset($_GET["ActivateImpossible"])) { ?>
             notif('error', 'Votre compte ne peut être activé.');
     <?php } elseif(isset($_GET["MessageEnvoyer"])) { ?>
-            notif('success','Votre commentaire vient d\'être envoyé.');
+            notif('success','Votre commentaire vient d\'être envoyée.');
     <?php } elseif(isset($_GET["MessageTropLong"])) { ?>
             notif('error', 'Votre commentaire est trop long.');
     <?php } elseif(isset($_GET["MessageTropCourt"])) { ?>
@@ -222,28 +222,28 @@
     <?php }elseif(isset($_GET["NotReportYourSelf"])) { ?>
             notif('error','You are stupid.');
     <?php }elseif(isset($_GET["ReportVictimeExist"])) { ?>
-            notif('error','Vous ne pouvez pas report plusieurs fois.');
+            notif('error','Vous ne pouvez pas rapporter plusieurs fois la même personne.');
     <?php }elseif(isset($_GET["ReportEnvoyer"])) { ?>
-            notif('success','Report envoyer !');
+            notif('success','Rapport envoyer !');
     <?php }elseif(isset($_GET["PlayerNotExist"])) { ?>
-            notif('error','L\'utilisateur n\'éxiste pas.');
+            notif('error','L\'utilisateur n\'existe pas.');
     <?php }  elseif(isset($_GET["postSignalement"])) { ?>
             notif('success','Le signalement a bien été envoyé.');
     <?php }  elseif(isset($_GET["Connection"])) { ?>
-            notif('success','Connection réussie !');
+            notif('success','Connexion réussie !');
      <?php }  elseif(isset($_GET["Register"])) { ?>
             notif('success','Bienvenue sur <?=$_Serveur['General']['name']?> !');
         <?php } ?>
 
 
-    <?php if (isset($_GET['setTemp']) && $_GET['setTemp'] == 1) { //Envoie d'un mot de passe nouveau 
+    <?php if (isset($_GET['setTemp']) && $_GET['setTemp'] == 1) { //Envoie d'un mot de passe nouveau
     ?>
         window.onload = function() {
-            notif("success", "Votre nouveau mot de passe vous a été envoyé par mail!");
+            notif("success", "Votre nouveau mot de passe vous a été envoyé par mail !");
         }
     <?php } ?>
 
-    <?php if (isset($_Joueur_)) { //Système d'alerte 
+    <?php if (isset($_Joueur_)) { //Système d'alerte
     ?>
         setInterval(ajax_alerts, 10000);
 
@@ -268,7 +268,7 @@
         }
     <?php } ?>
 
-    <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement')) { //Système de signalement 
+    <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignalement')) { //Système de signalement
     ?>
         setInterval(ajax_signalement, 10000);
 
@@ -286,33 +286,38 @@
         }
     <?php } ?>
 
-    <?php if (isset($_GET['envoieMail'])) { //Récupération de compte 
+    <?php if (isset($_GET['envoieMail'])) { //Récupération de compte
     ?>
        $(document).ready(function() {
             notif2("Message Système", "Un mail de récupération a bien été envoyé !", "success");
         });
 
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['successDedipass'])) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['successDedipass'])) {
     ?>
         $(document).ready(function() {
             notif2("Dedipass", "Votre paiement a bien été effectué !", "success");
         });
 
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['errorDedipass'])) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['errorDedipass'])) {
     ?>
         $(document).ready(function() {
-            notif2("Dedipass", "Votre paiement n'a pas pu être éffectué.", "error");
+            notif2("Dedipass", "Votre paiement n'a pas pu être effectué.", "error");
         });
 
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['success'])) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['success'])) {
     ?>
         $(document).ready(function() {
             notif2("Boutique", "Vos achats ont été validé.", "success");
         });
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['dependances'])) { 
+    ?>
+        $(document).ready(function() {
+            notif2("Panier", "Suite à des dépendances de l'article que vous avez supprimé, d'autres articles ont pu se faire supprimer de votre panier", "error");
+        });
     <?php } if (isset($_GET['page']) && $_GET['page'] == "boutique" && isset($_GET['ajout'])) { 
     ?>
         $(document).ready(function() {
-            notif2("Boutique", "Article ajouter dans le panier.", "success");
+            notif2("Boutique", "Article ajouté dans le panier.", "success");
         });
     <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['success'])) { 
     ?>
@@ -324,12 +329,17 @@
         $(document).ready(function() {
             notif2("Chat", "Le message n'a pas pu être envoyé.", "error");
         });
+    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['msgErreur'])) {
+    ?>
+        $(document).ready(function() {
+            notif2("Chat", "Message trop long ou trop court.", "error");
+        });
     <?php } if (isset($_GET['page']) && $_GET['page'] == "forum" && isset($_GET['postSignalement'])) {  
     ?>
         $(document).ready(function() {
             notif2("Forum", "Signalement envoyé !", "success");
         });
-     <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['notOnline'])) {  
+     <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['notOnline'])) {
     ?>
         $(document).ready(function() {
             notif2("Boutique", "Vous devez être connecté sur le serveur en question pour finaliser vos achats !", "error");
@@ -338,99 +348,97 @@
 
     <?php if(isset($_GET['page']) && $_GET['page'] == "profil" && isset($_GET['status'])) {
         switch(intval($_GET['status'])) {
-            case 0: 
+            case 0:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Mot de passe incorrect", "error");
                     $("#editmdp").collapse("show");
-
                 });';
                 break;
-            case 1: 
+            case 1:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Votre mot de passe a été mis à jour !", "success");
                 });';
                 break;
-            case 2: 
+            case 2:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Mot de passe incorrect", "error");
                     $("#editmail").collapse("show");
-
                 });';
                 break;
-            case 3: 
+            case 3:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Votre image de profil a été mis à jour !", "success");
                 });';
                 break;
-            case 4: 
+            case 4:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Extension de fichier non autorisé", "error");
                     $("#editimg").collapse("show");
                 });';
                 break;
-            case 5: 
+            case 5:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Fichier trop volumineux", "error");
                     $("#editimg").collapse("show");
                 });';
                 break;
-            case 6: 
+            case 6:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Erreur interne", "error");
                     $("#editimg").collapse("show");
                 });';
                 break;
-            case 7: 
+            case 7:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Votre Email a été mis à jour !", "success");
                 });';
                 break;
-            case 8: 
+            case 8:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Abonnement à la newsletter mis à jour ! Etat: activé", "success");
                 });';
                 break;
-            case 9: 
+            case 9:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Abonnement à la newsletter mis à jour ! Etat: désactivé, "success");
                 });';
                 break;
-            case 10: 
+            case 10:
                 echo '$(document).ready(function() {
-                    notif2("Profil", "Visibilité de votre Email mis à jour ! Etat: activé", "success");
+                    notif2("Profil", "Visibilité de votre email mis à jour ! Etat: activé", "success");
                 });';
                 break;
-            case 11: 
+            case 11:
                 echo '$(document).ready(function() {
-                    notif2("Profil", "Visibilité de votre Email mis à jour ! Etat: désactivé", "success");
+                    notif2("Profil", "Visibilité de votre email mis à jour ! Etat: désactivé", "success");
                 });';
                 break;
-            case 12: 
+            case 12:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Vos réseaux ont été mis à jour !", "success");
                 });';
                 break;
-            case 13: 
+            case 13:
                 echo '$(document).ready(function() {
-                    notif2("Profil", "Votre signature a été mis à jour !", "success");
+                    notif2("Profil", "Votre signature a été mise à jour !", "success");
                 });';
                 break;
-            case 14: 
+            case 14:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Votre âge a été mis à jour !", "success");
                 });';
                 break;
-            case 15: 
+            case 15:
                 echo '$(document).ready(function() {
-                    notif2("Profil", "utilisateur inexistant !", "error");
+                    notif2("Profil", "Utilisateur inexistant !", "error");
                 });';
                 break;
-            case 16: 
+            case 16:
                 echo '$(document).ready(function() {
                     notif2("Profil", "Vous n\'avez pas les fonds nécessaire", "error");
                 });';
                 break;
-            
+
     } }?>
 
     <?php if(isset($_GET['page']) && $_GET['page'] == "profil" && isset($_GET['montant']) && isset($_GET['pseudo'])) {

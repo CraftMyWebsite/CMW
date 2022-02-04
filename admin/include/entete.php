@@ -48,7 +48,19 @@
     </style>
     <?php if(file_exists('./favicon.ico')){echo '<link rel="icon" type="image/x-icon" href="./favicon.ico"></link>';}?>
 </head>
-<body>
+<?php
+if (isset($_POST['darkSwitch'])) {
+    $_SESSION['darkSwitch'] = 1;
+} elseif (isset($_POST['removeDarkSwitch']) && isset($_SESSION['darkSwitch'])) {
+    unset($_SESSION['darkSwitch']);
+}
+
+if (isset($_SESSION['darkSwitch'])) {
+    echo '<body data-theme="dark">';
+} else {
+    echo '<body>';
+}
+?>
     <?php
     if(!isset($_GET['page']) OR $_GET['page'] == "accueil") {
             if(!isset($_SESSION['loader']) || $_SESSION['loader'] != true){

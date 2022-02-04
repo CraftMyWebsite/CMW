@@ -114,7 +114,7 @@
     <div><p>> <span>CODE D'ERREUR</span>: "<i>Accès non autorisé</i>"</p>
         <p>> <span>DESCRIPTION DE L'ERREUR</span>: "<i>Vous n'avez pas le droit d'être ici</i>"</p>
         <p>> <span>CAUSE DE L'ERREUR</span>: [<b>execute access forbidden, read access forbidden, write access forbidden, ssl required, ssl 128 required, ip address rejected, client certificate required, site access denied, too many users, invalid configuration, password change, mapper denied access, client certificate revoked, directory listing denied, client access licenses exceeded, client certificate is untrusted or invalid, client certificate has expired or is not yet valid, passport logon failed, source access denied, infinite depth is denied, too many requests from the same client ip <strong>ptdr t'as juste pas les droits !</strong> </b>]</p>
-        <p>> <span>Merci de revenir à l'accueil !</span>: [<a href="index.php">Accueil</a>]</p>
+        <p>> <span>Merci de revenir à l'accueil !</span>: [<a href="../index.php">Accueil</a>]</p>
         <p><i>- CraftMyWebsite</i></p>
     </div>
 

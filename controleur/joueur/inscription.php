@@ -13,7 +13,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 			$_POST['age'] = (int) htmlspecialchars($_POST['age']);
 			if($_POST["age"] > 9999 || $_POST["age"] < 0) $_POST["age"] = 0;
 
-			$_POST["show_email"] = !empty($_POST['show_email']) ? false : true;
+			$_POST["show_email"] = !empty($_POST['show_email']) ? true : false;
 			$get_Lien = 'http://'.$_SERVER['HTTP_HOST'].'/index.php?&action=validationMail&pseudo='.urlencode($get_Pseudo).'&cle='.urldecode($get_CleUnique).'';
 
 			if (filter_var(get_client_ip_env(), FILTER_VALIDATE_IP)){
@@ -93,10 +93,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 								}
 
 								require_once('modele/joueur/inscription.class.php');
-								if(isset($_POST['souvenir']) && $_POST['souvenir'] == true)
-									$souvenir = true;
-								else
-									$souvenir = false;
+								$souvenir = !empty($_POST['souvenir']) ? true : false;
 								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), $souvenir, 0, $_POST["age"], $getIp, $_POST["show_email"], $UUID, $UUIDF, $bddConnection);
 
 								require_once('modele/joueur/ScriptBySprik07/inscriptionCleUnique.class.php');

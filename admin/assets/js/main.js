@@ -563,6 +563,16 @@ function testUrlVoteForTest(url, id, btn) {
 			}
 			btn.disabled = false;
 		});
+	} else if (url.includes("serveur-minecraft-vote.fr")) { // Serveur minecraft vote
+		fetchVote("https://serveur-minecraft-vote.fr/api/v1/servers/" + id, function (data, status) {
+			// true -> json {"status":"1"}, false -> {"status":"0"}
+			if (isJson(data)) {
+				notif("success", "serveur-minecraft-vote.fr", "Id " + id + " trouvé !");
+			} else {
+				notif("error", "serveur-minecraft-vote.fr", "Valeur invalide: " + data);
+			}
+			btn.disabled = false;
+		});
 	} else if(url.includes("serveur-prive.net")) {
 		fetchVote("https://serveur-prive.net/api/stats/json/"+id+"/position", function(data, status) {
 			// true -> json {"status":"1"}, false -> {"status":"0"}
@@ -600,7 +610,7 @@ function testUrlVoteForTest(url, id, btn) {
 	}else if(url.includes("serveursminecraft.fr")) { // Access-Control-Allow-Origin
 		fetchVote("https://serveursminecraft.fr/api/ping.php?ServeurID="+id+"&Info=Version", function(data, status) {
 			// true -> 1.16.5, false -> Le serveur demandé n'éxiste pas.
-			if(!(data.includes("Le serveur demandé n'éxiste pas.") | data.includes("Il manque les paramètres 'ServeurIP' ou 'ServeurPort'.")) ) {
+			if(!(data.includes("false")) ) {
 				notif("success", "serveursminecraft.fr", "Id "+id+" trouvé !");
 			} else {
 				notif("error", "serveursminecraft.fr", "Id "+id+" introuvable.");

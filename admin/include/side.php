@@ -94,7 +94,7 @@
                          <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='googleService'){echo 'active';}?>">
                              <a class="nav-link"  href="?page=googleService">
                                  <i class="fab fa-searchengin"></i>
-                                 Service Google
+                                 Services Google
                              </a>
                          </li>
 

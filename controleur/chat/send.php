@@ -18,7 +18,7 @@ if(Permission::getInstance()->verifPerm("connect") && isset($_POST['i']) && isse
 	}
 	else
 	{
-		header('Location: index.php?page=erreur&erreur=19&type='.urlencode("Erreur Chat")."&titre=".urlencode("Erreur Message")."&contenue=".urlencode("Message trop long ou trop court :/"));
+		header('Location: index.php?page=chat&msgErreur');
 	}
 }
 else
