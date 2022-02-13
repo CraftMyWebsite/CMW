@@ -127,25 +127,36 @@
 						{
 							foreach($jsonCon as $serveur)
 							{
-								SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
+								//On exécute la commande autant de fois que nécessaire par rapport à la quantité de l'article
+								for($z=0; $z < $_SESSION['panier']['quantite'][$a]; $z++)
+								{
+									SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
+								}
 							}
 						}
 						elseif($infosCategories['serveurId'] == -2)
 						{
 							foreach($jsonCon as $key => $serveur)
 							{
-								if($enligne[$key])
-								{
-									SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+								//On exécute la commande autant de fois que nécessaire par rapport à la quantité de l'article
+								for($z = 0; $z < $_SESSION['panier']['quantite'][$a]; $z++){
+									if($enligne[$key])
+									{
+										SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+									}
 								}
+	
 							}
 						}
 						else {
 							foreach($lectureJSON as $key => $s)
 							{
-								if($s['id'] == $infosCategories['serveurId'] && $enligne[$key])
-								{
-									SendCommand($jsonCon[$key], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+								//On exécute la commande autant de fois que nécessaire par rapport à la quantité de l'article
+								for($z = 0; $z < $_SESSION['panier']['quantite'][$a]; $z++){
+									if($s['id'] == $infosCategories['serveurId'] && $enligne[$key])
+									{
+										SendCommand($jsonCon[$key], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+									}
 								}
 							}
 						}
