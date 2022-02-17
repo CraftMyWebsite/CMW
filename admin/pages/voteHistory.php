@@ -79,15 +79,18 @@
                                     <th style="cursor:pointer;" onclick="setAxe('pseudo');">Pseudo</th>
                                     <th style="cursor:pointer;" onclick="setAxe('ip');">IP</th>
                                     <th style="cursor:pointer;" onclick="setAxe('nombre');">Nombre de votes (total: <span id="countall"><?=$countall?></span>)</th>
-                                    <th style="cursor:pointer;" onclick="setAxe('date_dernier');">Date du dernier vote</th>
-                                    <th >Dernier vote sur le site:</th>
-                                     <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'actions', 'removeVote')) { ?>
-                                         <th>Suppression</th>
-                                <?php } ?>
                                 </tr>
                             </thead>
                             <tbody id="allUser">
+                                <?php $i = 0; foreach($History as $value) {?>
+                                    <tr>
+                                        <td><?php echo $i; ?></td>
+                                        <td ><?php echo $value['pseudo']; ?></td>
+                                        <td ><?php echo $value['ip']; ?></td>
+                                        <td ><?php echo $value['nbre_votes']; ?></td>
+                                    </tr>
 
+                                <?php $i++;}?>
                             </tbody>
                         </table>
                     </div>
