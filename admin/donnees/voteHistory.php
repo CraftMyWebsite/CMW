@@ -5,6 +5,9 @@
 	$top = $bddConnection->query('SELECT * FROM cmw_votes WHERE isOld=1 group by pseudo ORDER BY nbre_votes DESC');
 	$oldHistory = $top->fetchAll(PDO::FETCH_ASSOC);
 
+	$top2 = $bddConnection->query('SELECT pseudo, ip, SUM(nbre_votes) as nbre_votes, titre, date_dernier FROM cmw_votes, cmw_votes_config WHERE cmw_votes.site = cmw_votes_config.id AND isOld=0 group by pseudo ORDER BY nbre_votes DESC');
+	$History = $top2->fetchAll(PDO::FETCH_ASSOC);
+
 
 	$allOld = $bddConnection->query('SELECT SUM(`nbre_votes`) as total FROM cmw_votes WHERE isOld=1');
 	$allOld = $allOld->fetch(PDO::FETCH_ASSOC);

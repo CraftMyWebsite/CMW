@@ -101,7 +101,7 @@
                                                     $req = $bddConnection->prepare("SELECT max_vente FROM cmw_boutique_offres WHERE id = :id");
                                                     $req->execute(array("id" => $achats["id2"]));
                                                     $s = $req->fetch(PDO::FETCH_ASSOC);
-                                                    if($achats["nombre"]>=$s["max_vente"]) {
+                                                    if($achats["nombre"]>=$s["max_vente"] && $s["max_vente"] != -1) {
                                                         if ($offresTableau[$i]['id'] == $achats["id2"]) {
                                                             $offresTableau[$i]['maxbuy'] = 1;
                                                         }
