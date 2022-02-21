@@ -58,22 +58,39 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 mb-5">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Entrez votre pseudonyme</h4>
+                            <?php if(isset($_SESSION["Player"]['id']) && !empty($_SESSION["Player"]['id'])){ ?>
+                            <h4>La récompense du vote sera donnée à :</h4>
                             <div class="card-body">
                                 <form id="forme-vote" role="form" method="GET" action="index.php">
                                     <div>
                                         <div class="row">
                                             <input type="text" style="display:none;" name="page" value="voter">
-                                            <div class="col-md-12 col-lg-9 col-sm-12">
-                                                <input type="text" id="vote-pseudo" class="form-control" name="player" placeholder="Pseudo" value="<?= (Permission::getInstance()->verifPerm("connect")) ? $_Joueur_['pseudo'] : '' ?>" required>
+                                            <div class="col-md-12 col-lg-6 col-sm-12">
+                                                <input type="text" readonly id="vote-pseudo" style="cursor: unset" class="form-control" name="player" placeholder="Pseudo" value="<?= (Permission::getInstance()->verifPerm("connect")) ? $_Joueur_['pseudo'] : '' ?>" required>
                                             </div>
-                                            <div class="col-md-12 col-lg-3 col-sm-12">
-                                                <button class="form-control btn btn-reverse" type="submit">Suivant</button>
+                                            <div class="col-md-12 col-lg-6 col-sm-12">
+                                                <button class="form-control btn btn-secondary" type="submit">Suivant</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
+                            <?php } else { ?>
+                            <h4>Veuillez vous connecter pour voter</h4>
+                            <div class="card-body">
+                                <div>
+                                    <div class="row">
+                                        <input type="text" style="display:none;" name="page" value="voter">
+                                        <div class="col-md-12 col-lg-6 col-sm-12">
+                                            <a href="#" data-toggle="modal" data-target="#ConnectionSlide"><button class="form-control btn btn-secondary">Se connecter</button></a>
+                                        </div>
+                                        <div class="col-md-12 col-lg-6 col-sm-12">
+                                            <a href="#" data-toggle="modal" data-target="#InscriptionSlide"><button class="form-control btn btn-secondary">Créer un compte</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
