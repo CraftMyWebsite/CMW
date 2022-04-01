@@ -52,7 +52,7 @@
 
 
         <div class="row">
-            <?php if (!isset($_GET['player'])) { ?>
+            <?php if (!isset($_GET['player']) || !isset($_SESSION["Player"]['id']) || empty($_SESSION["Player"]['id']) || $_Joueur_['pseudo'] != $_GET['player']) { ?>
 
                 <!-- Demande du Pseudonyme -->
                 <div class="col-md-12 col-lg-12 col-sm-12 mb-5">
