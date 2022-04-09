@@ -57,17 +57,17 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail
           <div class="row">
 
               <div class="col-md-8 offset-md-2" <?php if($sysMail[$i]['etatMail'] == "1") { echo 'style="display:none;"'; }?> id="active<?php echo $sysMail[$i]['idMail']; ?>">
-                <div class="alert alert-success text-center">
+                <div class="alert alert-danger text-center">
                   <span style="text-align: center">
-                  L'API est actuellement activé.
+                  L'API est actuellement désactivée.
                   </span>
                 </div>
               </div>
 
               <div class="col-md-8 offset-md-2" <?php if($sysMail[$i]['etatMail'] == "0") { echo 'style="display:none;"'; }?>id="desact<?php echo $sysMail[$i]['idMail']; ?>">
-                <div class="alert alert-danger text-center">
+                <div class="alert alert-success text-center">
                   <span style="text-align: center">
-                  L'API est actuellement désactivée.
+                  L'API est actuellement activé.
                   </span>
                 </div>
               </div>
