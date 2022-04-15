@@ -368,6 +368,9 @@ class vote {
             }else if(strpos($url, 'serveur-minecraft.com')){
                 $api = self::fetch("https://serveur-minecraft.com/api/1/vote/".$id."/".$this->get_client_ip());
                 if(intval($api) == 0){return true;}else{return false;}
+            }else if(strpos($url, 'meilleurs-serveurs.com')){
+                $api = json_decode(self::fetch("https://meilleurs-serveurs.com/api/v1/server/".$id."/vote/check?ip_address=".$this->get_client_ip()));
+                if($api->status_code == 200){return true;}else{return false;}
             }
             else {
                 return true;

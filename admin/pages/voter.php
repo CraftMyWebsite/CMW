@@ -142,7 +142,8 @@
                                         <li> liste-serveurs-minecraft.org</li>
                                         <li> Liste-serv-minecraft.fr</li>
                                         <li> minecraft-mp.com</li>
-					<li> serveur-minecraft.com</li>    
+					                    <li> serveur-minecraft.com</li>    
+					                    <li> meilleurs-serveurs.com</li>    
 
                                     </ul>
                                 <span>
