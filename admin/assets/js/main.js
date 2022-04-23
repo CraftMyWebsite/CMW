@@ -722,7 +722,6 @@ function testUrlVoteForTest(url, id, btn) {
 			btn.disabled = false;
 		});
 	}else if(url.includes("meilleurs-serveurs.com")) {
-		console.error('ok');
 		fetchVote("https://meilleurs-serveurs.com/api/v1/server/"+id+"/vote/check?ip_address=0.0.0.0", function(data, status) {
 			// true -> ?, false -> Server not found
 			if(!data.includes("Server not found")) {
