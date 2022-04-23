@@ -142,9 +142,8 @@
                                         <li> liste-serveurs-minecraft.org</li>
                                         <li> Liste-serv-minecraft.fr</li>
                                         <li> minecraft-mp.com</li>
-					                    <li> serveur-minecraft.com</li>    
-					                    <li> meilleurs-serveurs.com</li>    
-
+					                    <li> serveur-minecraft.com</li>
+					                    <li> meilleurs-serveurs.com</li>
                                     </ul>
                                 <span>
                                     À noter que certains service de recherche du serveur n'ont pas une API utilisable ! Pour que celle-ci fonctionne sur le cms vous devez remplir le champ "Id unique" par l'id donner par le site web ( généralement dans les onglets API). Laisser vide pour le désactiver. Si l'id venait â être incorrecte, ne vous étonnez pas que les votes ne se valident pas !
