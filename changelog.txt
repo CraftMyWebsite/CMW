@@ -1,22 +1,14 @@
-Changelog CraftMyWebsite 1.8.3 - Fixs sécurité IMPORTANT
+Changelog CraftMyWebsite 1.8.4 - Fixs sécurité IMPORTANT
 
 Ajouts ([+]), modifications ([=]) et suppressions ([-]), ([|]) Bugs Fix
 
+[|] : Fix de la quantité d'articles dans le panier
 
-[|] : Fix problème des emails publiques/privés sur le profil
-[|] : Fix page nope
-[|] : Fix de la newsletter sur l'inscription d'un compte
-[|] : Fix d'un bug sur la boutique pour certains achats nécessitant d'acheter l'offre A pour débloquer la B
-[|] : Fix des pages infini sur la liste des membres
-[|] : Fix du mode nuit du panel 
-
-[=] : Fixs sécurité sur le cms
+[=] : Ajouts des sites de vote: meilleurs-serveurs.com et yserveur.fr
 [=] : Fautes d'ortographes
-[=] : Modification d'un message d'erreur sur la page chat
-[=] : Modification de l' url rewriting de l'accueil qui redirigé vers /index.php
 
-[+] : Ajout du site de vote serveur-minecraft-vote.fr
+[+] : Ajouts de nouvelles vérifications pour voter
 
 
 
-Contributeurs : Guedesite, Teyir, Emilien52, BadiiiX, MrFlamme26, Dancuo-Lohan
+Contributeurs : Teyir, Emilien52, CapDrake, Nassim-K, WIBORR, Dancuo-Lohan
