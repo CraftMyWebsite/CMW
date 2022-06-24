@@ -587,6 +587,16 @@ function testUrlVoteForTest(url, id, btn) {
 			}
 			btn.disabled = false;
 		});
+	} else if (url.includes("yserveur.fr")) {
+		fetchVote("https://yserveur.fr/api/serveur/verify-id/" + id, function (data, status) {
+			// true -> 'true', false -> 'false'
+			if (data.includes("true")) {
+				notif("success", "yserveur.fr", "Id " + id + " trouvé !");
+			} else {
+				notif("error", "yserveur.fr", "Valeur invalide: " + data);
+			}
+			btn.disabled = false;
+		});
 	}else if(url.includes("serveurs-minecraft.org") & !url.includes("liste-serveurs-minecraft.org")) { // Access-Control-Allow-Origin
 		fetchVote("https://www.serveurs-minecraft.org/api/is_online.php?id="+id+"&format=json", function(data, status) {
 			// true -> 1, false -> -1
