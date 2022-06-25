@@ -589,11 +589,15 @@ function testUrlVoteForTest(url, id, btn) {
 		});
 	} else if (url.includes("yserveur.fr")) {
 		fetchVote("https://yserveur.fr/api/serveur/verify-id/" + id, function (data, status) {
-			// true -> 'true', false -> 'false'
-			if (data.includes("true")) {
-				notif("success", "yserveur.fr", "Id " + id + " trouvé !");
+			// true -> json {"status":true}, false -> {"status":false}
+			if(isJson(data)) {
+				if(JSON.parse(data).status == true) {
+					notif("success", "yserveur.fr", "Id "+id+" trouvé !");
+				} else {
+					notif("error", "yserveur.fr", "Id "+id+" introuvable.");
+				}
 			} else {
-				notif("error", "yserveur.fr", "Valeur invalide: " + data);
+				notif("error", "yserveur.fr", "Valeur invalide: "+data);
 			}
 			btn.disabled = false;
 		});
