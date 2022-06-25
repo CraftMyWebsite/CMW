@@ -293,9 +293,10 @@ class vote {
             {
                 $json = json_decode(self::fetch("https://serveur-prive.net/api/vote/json/".$id."/". $this->get_client_ip()));
                 return $json->status == 1;
-            } else if (strpos($url, 'yserveur.fr')) {
-                $apiUrl = "https://yserveur.fr/api/vote/" . $id . "/" . $this->get_client_ip();
-                return self::fetch($apiUrl) == 'true';
+            } else if (strpos($url, 'yserveur.fr'))
+            {
+                $json = json_decode(self::fetch("https://yserveur.fr/api/vote/" . $id . "/" . $this->get_client_ip()));
+                return $json->vote == true;
             } else if(strpos($url, 'serveurs-minecraft.org') & !strpos($url, 'liste-serveurs-minecraft.org'))
             {
                 $is_valid_vote = self::fetch('https://www.serveurs-minecraft.org/api/is_valid_vote.php?id='.$id.'&ip='. $this->get_client_ip().'&duration=5');
