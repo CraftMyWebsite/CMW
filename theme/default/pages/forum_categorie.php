@@ -57,7 +57,7 @@ if(isset($id_sous_forum))
                     <?php endif; ?>
 
                     <?php if (isset($id_sous_forum)) : ?>
-                        <li class="breadcrumb-item"><?= $sousforumd['nom'] ?></li>;
+                        <li class="breadcrumb-item"><?= $sousforumd['nom'] ?></li>
                     <?php endif; ?>
 
                 </ol>
