@@ -1,27 +1,24 @@
 #Ce fichier contiens la config de base du serveur---
 Main:
-    theme:
-        couleurs:
-            main-color-bg: '#333336'
-            secondary-color-bg: '#c104ff'
-            base-color: '#e0e0e0'
-            main-color: '#e5a0fc'
-            active-color: '#d457fd'
-            darkest: '#3f3f3f'
-            lightest: '#585858'
-        police: "'Electrolize', sans-serif;"
+  theme:
+    couleurs:
+      main-color-bg: '#333336'
+      secondary-color-bg: '#c104ff'
+      base-color: '#e0e0e0'
+      main-color: '#e5a0fc'
+      active-color: '#d457fd'
+      darkest: '#3f3f3f'
+      lightest: '#585858'
+    police: "'Electrolize', sans-serif;"
 Pied:
-    about: 'Bienvenue sur mon site !'
-    social:
-        - 
-            icon: "<i class='fab fa-discord'></i>"
-            link: https://www.discord.com/
-            message: Rejoignez-nous sur Discord !
-        - 
-            icon: "<i class='fab fa-youtube'></i>"
-            link: https://www.youtube.com/
-            message: Rejoignez-nous sur Youtube !
-        - 
-            icon: "<i class='fab fa-twitter'></i>"
-            link: https://www.twitter.com/
-            message: Rejoignez-nous sur Twitter !
+  about: 'Bienvenue sur mon site !'
+  social:
+    - icon: "<i class='fab fa-discord'></i>"
+      link: https://www.discord.com/
+      message: Rejoignez-nous sur Discord !
+    - icon: "<i class='fab fa-youtube'></i>"
+      link: https://www.youtube.com/
+      message: Rejoignez-nous sur Youtube !
+    - icon: "<i class='fab fa-twitter'></i>"
+      link: https://www.twitter.com/
+      message: Rejoignez-nous sur Twitter !

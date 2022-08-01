@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('connect')) {
+if (Permission::getInstance()->verifPerm('connect')) {
     $pseudo = $_Joueur_['pseudo'];
     $commentaire = htmlspecialchars($_POST['commentaire']);
     $id_news = urldecode($_GET['id_news']);
@@ -8,20 +8,20 @@ if(Permission::getInstance()->verifPerm('connect')) {
     $req_ExistNews = new ExistNews($bddConnection);
     $get_ExistNews = $req_ExistNews->GetExistNews($id_news);
     $ExistNews = $get_ExistNews->rowCount();
-	
-	require_once('modele/accueil/countNews.class.php');
-	$req_CountCommentaires = new CountNews($bddConnection);
-	$rep_CountCommentaires = $req_CountCommentaires->GetCountCommentaires();
-    $get_CountCommentaires = $rep_CountCommentaires->fetch(PDO::FETCH_ASSOC);
-	$id = $get_CountCommentaires['id'];
 
-	if($ExistNews == '0') {
+    require_once('modele/accueil/countNews.class.php');
+    $req_CountCommentaires = new CountNews($bddConnection);
+    $rep_CountCommentaires = $req_CountCommentaires->GetCountCommentaires();
+    $get_CountCommentaires = $rep_CountCommentaires->fetch(PDO::FETCH_ASSOC);
+    $id = $get_CountCommentaires['id'];
+
+    if ($ExistNews == '0') {
         header('Location: index.php?page=accueil&NewsNotExist');
-	} else {
-        if(strlen($commentaire) > 255) {
-		    header('Location: index.php?page=accueil&MessageTropLong');
-	    } elseif(strlen($commentaire) < 6) {
-		    header('Location: index.php?page=accueil&MessageTropCourt');
+    } else {
+        if (strlen($commentaire) > 255) {
+            header('Location: index.php?page=accueil&MessageTropLong');
+        } elseif (strlen($commentaire) < 6) {
+            header('Location: index.php?page=accueil&MessageTropCourt');
         } else {
             require_once('modele/accueil/postNews.class.php');
             $req_CommentaireNews = new PostNews($bddConnection);
@@ -30,6 +30,6 @@ if(Permission::getInstance()->verifPerm('connect')) {
         }
     }
 } else {
-	header('Location: index.php?page=accueil&NotOnline');
+    header('Location: index.php?page=accueil&NotOnline');
 }
 ?>

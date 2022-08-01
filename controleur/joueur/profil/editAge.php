@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('modele/joueur/maj.class.php');
 $maj = new Maj($_Joueur_['pseudo'], $bddConnection);
 $age = intval($_POST['age']);

@@ -7,7 +7,7 @@
 
                     <div class="card-header text-center">
                         <h4>
-                        <i class="fas fa-exclamation-triangle"></i> <?= $titre; ?>
+                            <i class="fas fa-exclamation-triangle"></i> <?= $titre; ?>
                         </h4>
                         <h6 class="card-subtitle">
                             <?= $type; ?>
@@ -21,7 +21,8 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="index.php" class="card-link btn btn-main w-100"><i class="fas fa-home"></i> Retourner à l'accueil</a>
+                        <a href="index.php" class="card-link btn btn-main w-100"><i class="fas fa-home"></i> Retourner à
+                            l'accueil</a>
                     </div>
 
                 </div>

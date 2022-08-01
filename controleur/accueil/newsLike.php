@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm('connect')) {
+if (Permission::getInstance()->verifPerm('connect')) {
     $pseudo = $_Joueur_['pseudo'];
     $id_news = urldecode($_GET['id_news']);
 
@@ -10,17 +10,17 @@ if(Permission::getInstance()->verifPerm('connect')) {
     $get_ExistLike = $req_ExistLike->fetch(PDO::FETCH_ASSOC);
     $ExistLike = $get_ExistLike['pseudo'];
     $ExistNews = $get_ExistNews->rowCount();
-    
+
     require_once('modele/accueil/countNews.class.php');
     $req_CountLikes = new CountNews($bddConnection);
     $rep_CountLikes = $req_CountLikes->GetCountLikes();
     $get_CountLikes = $rep_CountLikes->fetch(PDO::FETCH_ASSOC);
     $CountLikes = $get_CountLikes['id'];
 
-    if($ExistNews == '0') {
-    	header('Location: index.php?page=accueil&NewsNotExist');
+    if ($ExistNews == '0') {
+        header('Location: index.php?page=accueil&NewsNotExist');
     } else {
-        if($ExistLike == $pseudo) {
+        if ($ExistLike == $pseudo) {
             header('Location: index.php?page=accueil&LikeExist');
         } else {
             require_once('modele/accueil/postNews.class.php');

@@ -1,13 +1,12 @@
 <?php
-if(isset($_POST) && Permission::getInstance()->verifPerm('connect'))
-{
-	$req = $bddConnection->prepare('INSERT INTO cmw_paysafecard_historique (pseudo, code, offre) VALUES (:pseudo, :code, :offre)');
-	$req->execute(array(
-		'pseudo' => $_Joueur_['pseudo'],
-		'code' => htmlspecialchars($_POST['code']),
-		'offre' => htmlspecialchars($_POST['offre'])
-	));
-	header('Location: index.php?page=token&notif=/2');
+if (isset($_POST) && Permission::getInstance()->verifPerm('connect')) {
+    $req = $bddConnection->prepare('INSERT INTO cmw_paysafecard_historique (pseudo, code, offre) VALUES (:pseudo, :code, :offre)');
+    $req->execute(array(
+        'pseudo' => $_Joueur_['pseudo'],
+        'code' => htmlspecialchars($_POST['code']),
+        'offre' => htmlspecialchars($_POST['offre'])
+    ));
+    header('Location: index.php?page=token&notif=/2');
 }
 
 ?>

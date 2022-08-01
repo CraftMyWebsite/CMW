@@ -1,3 +1,3 @@
-$('#darkSwitch').change(function(){
-  $('#darkForm').submit();
+$('#darkSwitch').change(function () {
+    $('#darkForm').submit();
 });

@@ -1,6 +1,6 @@
 <?php
-if($_Permission_->verifPerm('PermsPanel', 'upload', 'manage')) {
+if ($_Permission_->verifPerm('PermsPanel', 'upload', 'manage')) {
 
-unlink('./theme/upload/panel/'.$_GET['file']);
+    unlink('./theme/upload/panel/' . $_GET['file']);
 
-}?>
+} ?>

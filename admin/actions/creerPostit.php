@@ -1,11 +1,11 @@
 <?php
 
-if($_Permission_->verifPerm('PermsPanel', 'postit', 'actions', 'addPostIt')) {
-	
-	$req = $bddConnection->prepare('INSERT INTO cmw_postit(auteur, message) VALUES (?, ?)');
-	$req->execute(array(
+if ($_Permission_->verifPerm('PermsPanel', 'postit', 'actions', 'addPostIt')) {
+
+    $req = $bddConnection->prepare('INSERT INTO cmw_postit(auteur, message) VALUES (?, ?)');
+    $req->execute(array(
         $_Joueur_['pseudo'],
-        $_POST['message'] ));
+        $_POST['message']));
 }
 
 ?>

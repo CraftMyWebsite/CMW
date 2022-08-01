@@ -5,20 +5,23 @@
             <?php if (isset($_GET['success'])) :
                 if ($_GET['success'] != 'recupTemp') : ?>
                     <div class="alert alert-success alert-dismissible fade show text-shadow-none" role="alert">
-                        Votre récompense arrive, si vous n'avez pas vu de fenêtre s'ouvrir pour voter, la fenêtre à dû s'ouvrir derrière votre navigateur, validez le vote et <strong class="important--text">profitez de votre récompense In-Game</strong> !
+                        Votre récompense arrive, si vous n'avez pas vu de fenêtre s'ouvrir pour voter, la fenêtre à dû
+                        s'ouvrir derrière votre navigateur, validez le vote et <strong class="important--text">profitez
+                            de votre récompense In-Game</strong> !
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 <?php else : ?>
                     <div class="alert alert-success alert-dismissible fade show text-shadow-none" role="alert">
-                        La récompense séléctionnée arrive, <strong class="important--text">Profitez de cette dernière In-Game ! </strong>
+                        La récompense séléctionnée arrive, <strong class="important--text">Profitez de cette dernière
+                            In-Game ! </strong>
                         Votre(vos) récompense(s) arrive(nt), profitez de votre(vos) récompense(s) In-Game !
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-            <?php endif;
+                <?php endif;
             endif; ?>
         </div>
         <div class="row">
@@ -26,7 +29,8 @@
             <div class="d-flex col-12 info-page">
                 <i class="fas fa-info-circle notification-icon"></i>
                 <div class="info-content">
-                    Voter pour le serveur permet d'améliorer son référencement ! Les votes sont récompensés par des items In-Game.
+                    Voter pour le serveur permet d'améliorer son référencement ! Les votes sont récompensés par des
+                    items In-Game.
                 </div>
             </div>
         </div>
@@ -34,19 +38,19 @@
         <!-- Gestion des informations de vote -->
         <div>
             <?php
-            if (Permission::getInstance()->verifPerm('connect') and isset($_GET['player']) and $_Joueur_['pseudo'] == $_GET['player']) {  ?>
-                    <!-- Gestion des Récompenses -->
-                    <div class="alert alert-main w-80 mx-auto" id="disprecompList" style="display:none;">
-                        
-                        <h4 class="alert-heading h4">
-                            Réception de récompense(s) !
-                        </h4>
-                        <hr>
+            if (Permission::getInstance()->verifPerm('connect') and isset($_GET['player']) and $_Joueur_['pseudo'] == $_GET['player']) { ?>
+                <!-- Gestion des Récompenses -->
+                <div class="alert alert-main w-80 mx-auto" id="disprecompList" style="display:none;">
 
-                        <ul id="recompList" class="list-unstyled container">
-                        </ul>
-                        
-                    </div>
+                    <h4 class="alert-heading h4">
+                        Réception de récompense(s) !
+                    </h4>
+                    <hr>
+
+                    <ul id="recompList" class="list-unstyled container">
+                    </ul>
+
+                </div>
             <?php } ?>
         </div>
 
@@ -58,38 +62,48 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 mb-5">
                     <div class="card">
                         <div class="card-header">
-                            <?php if(isset($_SESSION['Player']['id']) && !empty($_SESSION['Player']['id'])){ ?>
-                            <h4>La récompense du vote sera donnée à :</h4>
-                            <div class="card-body">
-                                <form id="forme-vote" role="form" method="GET" action="index.php">
+                            <?php if (isset($_SESSION['Player']['id']) && !empty($_SESSION['Player']['id'])) { ?>
+                                <h4>La récompense du vote sera donnée à :</h4>
+                                <div class="card-body">
+                                    <form id="forme-vote" role="form" method="GET" action="index.php">
+                                        <div>
+                                            <div class="row">
+                                                <input type="text" style="display:none;" name="page" value="voter">
+                                                <div class="col-md-12 col-lg-6 col-sm-12">
+                                                    <input type="text" readonly id="vote-pseudo" style="cursor: unset"
+                                                           class="form-control" name="player" placeholder="Pseudo"
+                                                           value="<?= (Permission::getInstance()->verifPerm('connect')) ? $_Joueur_['pseudo'] : '' ?>"
+                                                           required>
+                                                </div>
+                                                <div class="col-md-12 col-lg-6 col-sm-12">
+                                                    <button class="form-control btn btn-secondary" type="submit">
+                                                        Suivant
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            <?php } else { ?>
+                                <h4>Veuillez vous connecter pour voter</h4>
+                                <div class="card-body">
                                     <div>
                                         <div class="row">
                                             <input type="text" style="display:none;" name="page" value="voter">
                                             <div class="col-md-12 col-lg-6 col-sm-12">
-                                                <input type="text" readonly id="vote-pseudo" style="cursor: unset" class="form-control" name="player" placeholder="Pseudo" value="<?= (Permission::getInstance()->verifPerm('connect')) ? $_Joueur_['pseudo'] : '' ?>" required>
+                                                <a href="#" data-toggle="modal" data-target="#ConnectionSlide">
+                                                    <button class="form-control btn btn-secondary">Se connecter</button>
+                                                </a>
                                             </div>
                                             <div class="col-md-12 col-lg-6 col-sm-12">
-                                                <button class="form-control btn btn-secondary" type="submit">Suivant</button>
+                                                <a href="#" data-toggle="modal" data-target="#InscriptionSlide">
+                                                    <button class="form-control btn btn-secondary">Créer un compte
+                                                    </button>
+                                                </a>
                                             </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <?php } else { ?>
-                            <h4>Veuillez vous connecter pour voter</h4>
-                            <div class="card-body">
-                                <div>
-                                    <div class="row">
-                                        <input type="text" style="display:none;" name="page" value="voter">
-                                        <div class="col-md-12 col-lg-6 col-sm-12">
-                                            <a href="#" data-toggle="modal" data-target="#ConnectionSlide"><button class="form-control btn btn-secondary">Se connecter</button></a>
-                                        </div>
-                                        <div class="col-md-12 col-lg-6 col-sm-12">
-                                            <a href="#" data-toggle="modal" data-target="#InscriptionSlide"><button class="form-control btn btn-secondary">Créer un compte</button></a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -108,28 +122,33 @@
                         <div class="card-body categories">
                             <ul class="categorie-content nav nav-tabs">
                                 <!-- Affichage noms Serveurs -->
-                                <?php if(count($lectureJSON) == 0) { ?>
+                                <?php if (count($lectureJSON) == 0) { ?>
 
-                                    <p>Veuillez relier votre serveur à votre site avec JsonAPI depuis le panel pour avoir les liens de vote !</p>
+                                    <p>Veuillez relier votre serveur à votre site avec JsonAPI depuis le panel pour
+                                        avoir les liens de vote !</p>
 
                                 <?php } else { ?>
 
-                                <?php $first = true; foreach($lectureJSON as $serveur) { ?>
+                                    <?php $first = true;
+                                    foreach ($lectureJSON as $serveur) { ?>
 
-                                    <li class="nav-item categorie-item<?= ($i == 0) ? ' active' : '' ?>">
-                                        <a href="#voter-<?= $serveur['id']; ?>" data-toggle="tab" class="categorie-link nav-link<?= ($first) ? ' active' : '' ?>">
-                                            <?= $serveur['nom']; ?>
-                                        </a>
-                                    </li>
-                                <?php $first = false; } } ?>
+                                        <li class="nav-item categorie-item<?= ($i == 0) ? ' active' : '' ?>">
+                                            <a href="#voter-<?= $serveur['id']; ?>" data-toggle="tab"
+                                               class="categorie-link nav-link<?= ($first) ? ' active' : '' ?>">
+                                                <?= $serveur['nom']; ?>
+                                            </a>
+                                        </li>
+                                        <?php $first = false;
+                                    }
+                                } ?>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <?php
-                require_once('modele/vote.class.php');
-                 $pseudo = htmlspecialchars($_GET['player']); ?>
+            <?php
+            require_once('modele/vote.class.php');
+            $pseudo = htmlspecialchars($_GET['player']); ?>
                 <div class="col-md-12 col-lg-6 col-sm-12 mb-5">
                     <!-- Affichage des sites de vote -->
                     <div class="card">
@@ -142,13 +161,16 @@
 
                                     <?php
 
-                                    if(Permission::getInstance()->verifPerm('connect') AND  isset($_GET['player']) AND $_Joueur_['pseudo'] == $_GET['player'] ) {
+                                    if (Permission::getInstance()->verifPerm('connect') and isset($_GET['player']) and $_Joueur_['pseudo'] == $_GET['player']) {
                                         echo '<script type="application/javascript">isConnect = true;</script>';
                                     }
 
-                                     $first=true; foreach($lectureJSON as $serveur) { ?>
+                                    $first = true;
+                                    foreach ($lectureJSON as $serveur) { ?>
 
-                                        <div id="voter-<?= $serveur['id']; ?>" class="tab-pane fade <?= ($first) ? ' in active show' : ''; ?>" aria-expanded="<?= ($first) ? 'true' : 'false' ?>">
+                                        <div id="voter-<?= $serveur['id']; ?>"
+                                             class="tab-pane fade <?= ($first) ? ' in active show' : ''; ?>"
+                                             aria-expanded="<?= ($first) ? 'true' : 'false' ?>">
                                             <div class="info-page">
                                                 <div class="info-content">
                                                     Bienvenue dans la catégorie de vote pour le serveur : <br>
@@ -156,34 +178,37 @@
                                                 </div>
                                             </div>
                                             <h5 class="title-vote-listing">
-                                                Liste des sites de vote <div class="vote-line"></div>
+                                                Liste des sites de vote
+                                                <div class="vote-line"></div>
                                             </h5>
-                                            <?php 
+                                            <?php
                                             $req_vote->execute(array('serveur' => $serveur['id']));
-                                            while($allvote = $req_vote->fetch(PDO::FETCH_ASSOC)) {
-                                                 $vote = new vote($bddConnection, $pseudo, $allvote['id']);
-    
-                                                  ?>
+                                            while ($allvote = $req_vote->fetch(PDO::FETCH_ASSOC)) {
+                                                $vote = new vote($bddConnection, $pseudo, $allvote['id']);
 
-                                                 <button type="button" style="margin-top:15px;" id="votebtn-<?php echo $allvote['id']; ?>" ></button>
-                                                 <script type="application/javascript">initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>');</script>
+                                                ?>
+
+                                                <button type="button" style="margin-top:15px;"
+                                                        id="votebtn-<?php echo $allvote['id']; ?>"></button>
+                                                <script type="application/javascript">initVoteBouton(document.getElementById('votebtn-<?php echo $allvote['id']; ?>'), '<?php echo $pseudo; ?>', <?php echo $allvote['id']; ?>, <?php echo $vote->getLastVoteTimeMili(); ?>, <?php echo $vote->getTimeVoteTimeMili(); ?>, '<?php echo $vote->getUrl(); ?>', '<?php echo $vote->getTitre(); ?>');</script>
                                             <?php } ?>
-                                         </div>
+                                        </div>
 
-                                    <?php $first=false; } ?>
-                                        
+                                        <?php $first = false;
+                                    } ?>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <script type="application/javascript">
-                <?php 
-                    foreach($topRecompense as $key => $value) {
-                        echo 'topRec.set(' .$key.",JSON.parse('".$value."'));";
+                    <?php
+                    foreach ($topRecompense as $key => $value) {
+                        echo 'topRec.set(' . $key . ",JSON.parse('" . $value . "'));";
                     }
 
-                ?></script>
+                    ?></script>
 
                 <div class="col-md-12 col-lg-3 col-sm-12 mb-5">
                     <!-- Affichage des informations du joueur -->
@@ -195,32 +220,38 @@
 
                                 <h6>Merci d'avance pour votre vote !</h6>
 
-                                <?php  if(isset($dateRec) && $dateRec['valueType'] != 0 && $dateRec['etat'] != 0)
-                                { 
-                                   
-                                    ?><h6> Les votes se rénitialiseront le <?= str_replace(array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'), date('l', $dateRec['etat'])).date(' j \à G\hi', $dateRec['etat']); ?>.</h6>
-                                <?php } if(isset($_Serveur_['vote']['oldDisplay'])) {
+                                <?php if (isset($dateRec) && $dateRec['valueType'] != 0 && $dateRec['etat'] != 0) {
+
+                                    ?><h6> Les votes se rénitialiseront
+                                    le <?= str_replace(array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'), date('l', $dateRec['etat'])) . date(' j \à G\hi', $dateRec['etat']); ?>
+                                    .</h6>
+                                <?php }
+                                if (isset($_Serveur_['vote']['oldDisplay'])) {
                                     $a = 1; ?>
                                     <br/>
                                     <h6>Liste des précédents meilleurs voteurs:</h6>
                                     <table class="table table-dark table-striped table-hover table-sm">
                                         <thead>
-                                            <tr>
-                                                <th><h6>#</h6></th>
-                                                <th><h6>Pseudo</h6></th>
-                                                <th><h6>Votes</h6></th>
-                                            </tr>
+                                        <tr>
+                                            <th><h6>#</h6></th>
+                                            <th><h6>Pseudo</h6></th>
+                                            <th><h6>Votes</h6></th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($oldVote = $oldvote_req->fetch(PDO::FETCH_ASSOC))
-                                        { if(($a-1) < $_Serveur_['vote']['oldDisplay']) { ?>
-                                            <tr>
-                                                <td><h6><?php echo $a; ?></h6></td>
-                                                <td><h6><?php echo $oldVote['pseudo']; ?></h6></td>
-                                                <td><h6><?php echo $oldVote['nbre_votes']; ?></h6></td>
-                                            </tr>
+                                        <?php while ($oldVote = $oldvote_req->fetch(PDO::FETCH_ASSOC)) {
+                                            if (($a - 1) < $_Serveur_['vote']['oldDisplay']) { ?>
+                                                <tr>
+                                                    <td><h6><?php echo $a; ?></h6></td>
+                                                    <td><h6><?php echo $oldVote['pseudo']; ?></h6></td>
+                                                    <td><h6><?php echo $oldVote['nbre_votes']; ?></h6></td>
+                                                </tr>
 
-                                        <?php $a++; } else { break; } } 
+                                                <?php $a++;
+                                            } else {
+                                                break;
+                                            }
+                                        }
                                         ?>
                                         </tbody>
                                     </table>
@@ -238,7 +269,7 @@
         <div class="row">
 
             <table class="table table-dark table-striped table-hover " id="baltop">
-               <!-- theme/default/assets/js/voteControleur.js::updateBaltop -->
+                <!-- theme/default/assets/js/voteControleur.js::updateBaltop -->
             </table>
 
         </div>

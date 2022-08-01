@@ -47,7 +47,8 @@
                             <?php if (!$_Serveur_['Payement']['paypal'] && !$_Serveur_['Payement']['dedipass'] && !$_Serveur_['Payement']['paysafecard']) : ?>
                                 <!-- Aucun moyen de paiement disponible -->
                                 <li class="no-hover bg-danger categorie-item nav-item active">
-                                    <div href="#buy-none" class="text-center nav-link categorie-link disabled" data-toggle="tab">
+                                    <div href="#buy-none" class="text-center nav-link categorie-link disabled"
+                                         data-toggle="tab">
                                         <i class="fas fa-exclamation-triangle"></i> <br> Aucun Moyen de Paiement
                                     </div>
                                 </li>
@@ -65,7 +66,8 @@
                             <div class="info-page">
                                 <div class="text-center">
                                     <h5>Payer par Paypal :</h5>
-                                    <h6>Payer par paypal avec votre solde ou par carte bancaire tout en étant en pleine sécurité !</h6>
+                                    <h6>Payer par paypal avec votre solde ou par carte bancaire tout en étant en pleine
+                                        sécurité !</h6>
                                 </div>
                             </div>
                             <div class="row">
@@ -76,7 +78,8 @@
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5 class="titre-offre">
-                                                        <?= $tab['nom']; ?> <span class="float-right badge badge-main"><?= $tab['prix']; ?>€</span>
+                                                        <?= $tab['nom']; ?> <span
+                                                                class="float-right badge badge-main"><?= $tab['prix']; ?>€</span>
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
@@ -85,9 +88,11 @@
                                                 <div class="card-footer">
                                                     <form action="<?= $lien; ?>" method="post">
                                                         <?php foreach ($tab['paramPaypal'] as $cle => $valeur) : ?>
-                                                            <input type="hidden" name="<?= $cle ?>" value="<?= $valeur ?>" />
+                                                            <input type="hidden" name="<?= $cle ?>"
+                                                                   value="<?= $valeur ?>"/>
                                                         <?php endforeach; ?>
-                                                        <input type="submit" class="btn btn-main w-100" value="Acheter !" />
+                                                        <input type="submit" class="btn btn-main w-100"
+                                                               value="Acheter !"/>
                                                     </form>
                                                 </div>
                                             </div>
@@ -95,7 +100,9 @@
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <div class="info-page bg-danger">
-                                        <div class="text-center">Aucune offre de payement par paypal nest disponible pour le moment... </div>
+                                        <div class="text-center">Aucune offre de payement par paypal nest disponible
+                                            pour le moment...
+                                        </div>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -117,10 +124,12 @@
                                     <h3>Page de paiement Dedipass</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div data-dedipass="<?= $_Serveur_['Payement']['public_key']; ?>" data-dedipass-custom=""></div>
+                                    <div data-dedipass="<?= $_Serveur_['Payement']['public_key']; ?>"
+                                         data-dedipass-custom=""></div>
                                 </div>
                                 <div class="card-footer">
-                                    <small>Support Dedipass en cas de code incorrect : <a href="https://dedipass.com/en/contact/"> SUPPORT DEDIPASS</a></small>
+                                    <small>Support Dedipass en cas de code incorrect : <a
+                                                href="https://dedipass.com/en/contact/"> SUPPORT DEDIPASS</a></small>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +158,10 @@
                                                 <?= $value['description']; ?>
                                             </div>
                                             <div class="card-footer">
-                                                <a class="btn btn-main w-100" data-toggle="collapse" href="#paysafecard<?= $value['id']; ?>" role="button" aria-expanded="false" aria-controls="paysafecard<?= $value['id']; ?>">Acheter !</a>
+                                                <a class="btn btn-main w-100" data-toggle="collapse"
+                                                   href="#paysafecard<?= $value['id']; ?>" role="button"
+                                                   aria-expanded="false"
+                                                   aria-controls="paysafecard<?= $value['id']; ?>">Acheter !</a>
                                             </div>
                                         </div>
                                         <div class="container mt-4">
@@ -161,10 +173,13 @@
                                                             <h5 class="control-label">Entrez votre code</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                            <input type="number" name="code" class="form-control" required size="16" />
+                                                            <input type="number" name="code" class="form-control"
+                                                                   required size="16"/>
                                                         </div>
                                                         <div class="card-footer">
-                                                            <button type="submit" class="btn btn-reverse w-100">Envoyer !</button>
+                                                            <button type="submit" class="btn btn-reverse w-100">Envoyer
+                                                                !
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>

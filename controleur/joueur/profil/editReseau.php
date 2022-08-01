@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('modele/joueur/donneesJoueur.class.php');
 
 $reseau = array();
@@ -8,12 +8,11 @@ $req = $req->fetchAll(PDO::FETCH_ASSOC);
 
 $changementsReseaux = array();
 
-foreach($req as $value) {
-    if($value['Field'] != 'id' && $value['Field'] != 'idJoueur') {
-        if(!empty($_POST[$value['Field']]))
-        {
+foreach ($req as $value) {
+    if ($value['Field'] != 'id' && $value['Field'] != 'idJoueur') {
+        if (!empty($_POST[$value['Field']])) {
             $temp = htmlspecialchars($_POST[$value['Field']]);
-            $changementsReseaux += [ $value['Field'] => $temp ];
+            $changementsReseaux += [$value['Field'] => $temp];
         }
     }
 }
@@ -21,8 +20,7 @@ foreach($req as $value) {
 
 require_once('modele/joueur/maj.class.php');
 $maj = new Maj($_Joueur_['pseudo'], $bddConnection);
-if(!empty($changementsReseaux))
-{
+if (!empty($changementsReseaux)) {
     $maj->setNouvellesDonneesReseaux($changementsReseaux, $_Joueur_['id']);
 }
 header('Location: index.php?page=profil&profil=' . $_Joueur_['pseudo'] . '&status=12');

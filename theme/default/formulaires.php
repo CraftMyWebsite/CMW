@@ -1,6 +1,7 @@
 <!-- Inscription -->
 
-<div class="modal fade" id="InscriptionSlide" tabindex="-1" role="dialog" aria-labelledby="InscriptionSlide" aria-hidden="true">
+<div class="modal fade" id="InscriptionSlide" tabindex="-1" role="dialog" aria-labelledby="InscriptionSlide"
+     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form role="form" method="post" action="?action=inscription">
@@ -26,7 +27,8 @@
                                         <i class="fa fa-user"></i>
                                     </div>
                                 </span>
-                                <input type="text" name="pseudo" class="form-control custom-text-input" id="PseudoInscriptionForm" placeholder="Entrez votre pseudo" required autofocus>
+                                <input type="text" name="pseudo" class="form-control custom-text-input"
+                                       id="PseudoInscriptionForm" placeholder="Entrez votre pseudo" required autofocus>
                             </div>
                         </div>
 
@@ -38,12 +40,14 @@
                                         <i class="fa fa-user"></i>
                                     </div>
                                 </span>
-                                <input type="text" name="email" class="form-control custom-text-input" id="EmailInscriptionForm" placeholder="Entrez votre mail" required>
+                                <input type="text" name="email" class="form-control custom-text-input"
+                                       id="EmailInscriptionForm" placeholder="Entrez votre mail" required>
                             </div>
 
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="show_email" name="show_email">
-                                <label class="custom-control-label" for="show_email">Rendre votre adresse email publique</label>
+                                <label class="custom-control-label" for="show_email">Rendre votre adresse email
+                                    publique</label>
                             </div>
 
                             <div class="custom-control custom-checkbox">
@@ -65,23 +69,29 @@
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </span>
-                                <input type="password" name="mdp" class="form-control custom-text-input" id="MdpInscriptionForm" placeholder="Entrez votre mot de passe" onKeyUp="securPass();" required>
+                                <input type="password" name="mdp" class="form-control custom-text-input"
+                                       id="MdpInscriptionForm" placeholder="Entrez votre mot de passe"
+                                       onKeyUp="securPass();" required>
                                 <div class="input-group-append">
-                                    <span toggle="#MdpInscriptionForm, #MdpConfirmInscriptionForm" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                    <span toggle="#MdpInscriptionForm, #MdpConfirmInscriptionForm"
+                                          class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                 </div>
                             </div>
                         </div>
 
 
                         <div class="col-md-6">
-                            <label for="MdpConfirmInscriptionForm"> Confirmation <span class="star-required"></span></label>
+                            <label for="MdpConfirmInscriptionForm"> Confirmation <span
+                                        class="star-required"></span></label>
                             <div class="input-group">
                                 <span class="input-group-prepend">
                                     <div class="input-group-text bg-main border-0">
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </span>
-                                <input type="password" name="mdpConfirm" class="form-control custom-text-input" id="MdpConfirmInscriptionForm" placeholder="Entrez votre mot de passe" onKeyUp="securPass();" required>
+                                <input type="password" name="mdpConfirm" class="form-control custom-text-input"
+                                       id="MdpConfirmInscriptionForm" placeholder="Entrez votre mot de passe"
+                                       onKeyUp="securPass();" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text mdp-confirm-form" id="correspondance"></span>
                                 </div>
@@ -91,7 +101,8 @@
                         <div class="col-md-12 mt-3">
                             <div class="col-md-12 d-none" id="progress">
                                 <div class="progress">
-                                    <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +119,8 @@
                                         <i class="fas fa-user"></i>
                                     </div>
                                 </span>
-                                <input type="number" name="age" class="form-control custom-text-input" id="MdpageForm" placeholder="Entrez votre Âge" value="0" min="0" max="999">
+                                <input type="number" name="age" class="form-control custom-text-input" id="MdpageForm"
+                                       placeholder="Entrez votre Âge" value="0" min="0" max="999">
                             </div>
                         </div>
 
@@ -120,10 +132,13 @@
                             <label for="CAPTCHA">Captcha <span class="star-required"></span></label>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <img id='captcha' alt="captcha" src='include/purecaptcha/purecaptcha_img.php?t=login_form' style="width: 80%;height: 100px;" />
+                            <img id='captcha' alt="captcha" src='include/purecaptcha/purecaptcha_img.php?t=login_form'
+                                 style="width: 80%;height: 100px;"/>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" onclick='var t=document.getElementById("captcha"); t.src=t.src+"&amp;"+Math.random();' class="btn btn-reverse captcha-btn" style="margin-top:35px">
+                            <button type="button"
+                                    onclick='var t=document.getElementById("captcha"); t.src=t.src+"&amp;"+Math.random();'
+                                    class="btn btn-reverse captcha-btn" style="margin-top:35px">
                                 <i class="fas fa-sync"></i> Recharger le captcha
                             </button>
                         </div>
@@ -135,7 +150,8 @@
                                         <i class="fas fa-lock"></i>
                                     </div>
                                 </span>
-                                <input type='text' name='CAPTCHA' class="form-control custom-text-input" id="captcha" placeholder="Entrez le captcha">
+                                <input type='text' name='CAPTCHA' class="form-control custom-text-input" id="captcha"
+                                       placeholder="Entrez le captcha">
                             </div>
                         </div>
 
@@ -144,7 +160,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-main w-100" id="InscriptionBtn" >S'inscrire</button>
+                    <button type="submit" class="btn btn-main w-100" id="InscriptionBtn">S'inscrire</button>
                 </div>
             </form>
         </div>
@@ -154,7 +170,8 @@
 
 <!-- Connexion -->
 
-<div class="modal fade" id="ConnectionSlide" tabindex="-1" role="dialog" aria-labelledby="ConnectionSlide" aria-hidden="true">
+<div class="modal fade" id="ConnectionSlide" tabindex="-1" role="dialog" aria-labelledby="ConnectionSlide"
+     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form class="form-signin" role="form" method="post" action="?action=connection">
@@ -176,7 +193,8 @@
                                         <i class="fa fa-user"></i>
                                     </div>
                                 </span>
-                                <input type="text" name="pseudo" class="form-control custom-text-input" id="PseudoConectionForm" placeholder="Pseudo" required autofocus>
+                                <input type="text" name="pseudo" class="form-control custom-text-input"
+                                       id="PseudoConectionForm" placeholder="Pseudo" required autofocus>
                             </div>
 
                         </div>
@@ -193,9 +211,11 @@
                                         <i class="fa fa-key"></i>
                                     </div>
                                 </span>
-                                <input type="password" name="mdp" class="form-control custom-text-input" id="MdpConnectionForm" placeholder="Votre mot de passe" required>
+                                <input type="password" name="mdp" class="form-control custom-text-input"
+                                       id="MdpConnectionForm" placeholder="Votre mot de passe" required>
                                 <div class="input-group-append">
-                                    <span toggle="#MdpConnectionForm" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                    <span toggle="#MdpConnectionForm"
+                                          class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                 </div>
                             </div>
 
@@ -211,7 +231,8 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <a href="#" data-target="#passRecover" data-toggle="modal" class="float-right" data-dismiss="modal">Mot de passe oublié ?</a>
+                            <a href="#" data-target="#passRecover" data-toggle="modal" class="float-right"
+                               data-dismiss="modal">Mot de passe oublié ?</a>
                         </div>
                     </div>
 
@@ -230,7 +251,8 @@
 
 <!-- Mot de passe oublié -->
 
-<div class="modal fade" id="passRecover" tabindex="-1" role="dialog" aria-labelledby="passRecover" aria-hidden="true" style="padding-right: 16px;">
+<div class="modal fade" id="passRecover" tabindex="-1" role="dialog" aria-labelledby="passRecover" aria-hidden="true"
+     style="padding-right: 16px;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form role="form" method="post" action="?action=passRecover">
@@ -251,7 +273,8 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                             </span>
-                            <input type="email" name="email" class="form-control custom-text-input" id="EmailRecoverForm" placeholder="Votre mail" required autofocus>
+                            <input type="email" name="email" class="form-control custom-text-input"
+                                   id="EmailRecoverForm" placeholder="Votre mail" required autofocus>
                         </div>
                     </div>
 
@@ -273,11 +296,12 @@
     if (isset($news) && count($news) > 0) :
         for ($i = 0; $i < 10; $i++) :
             if ($i < count($news)) :
-?>
+                ?>
 
                 <!-- Espace commentaire -->
 
-                <div class="modal fade" id="news<?= $news[$i]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="news<?= $news[$i]['id']; ?>" aria-hidden="true">
+                <div class="modal fade" id="news<?= $news[$i]['id']; ?>" tabindex="-1" role="dialog"
+                     aria-labelledby="news<?= $news[$i]['id']; ?>" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -306,17 +330,21 @@
 
                                     <div class="media m-2 pb-4">
                                         <p class="username">
-                                            <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($newsComments['pseudo'], 32); ?>" style="width: 32px; height: 32px;" alt="avatar de <?= $newsComments['pseudo'] ?>" />
-                                            <div class="media-body">
-                                                <h5 class="mt-0">
-                                                    <?= $newsComments['pseudo'] ?>
-                                                    <small class="font-weight-light float-right text-muted">
-                                                        le <?= date('d/m', $newsComments['date_post']) ?> à <?= date('H:i', $newsComments['date_post']); ?>
-                                                    </small> <b></b>
-                                                    <?= Permission::getInstance()->gradeJoueur($newsComments['pseudo']) ?>
-                                                </h5>
-                                                <?php echo $newsComments['commentaire'];?>
-                                            </div>
+                                            <img class="mr-3"
+                                                 src="<?= $_ImgProfil_->getUrlHeadByPseudo($newsComments['pseudo'], 32); ?>"
+                                                 style="width: 32px; height: 32px;"
+                                                 alt="avatar de <?= $newsComments['pseudo'] ?>"/>
+                                        <div class="media-body">
+                                            <h5 class="mt-0">
+                                                <?= $newsComments['pseudo'] ?>
+                                                <small class="font-weight-light float-right text-muted">
+                                                    le <?= date('d/m', $newsComments['date_post']) ?>
+                                                    à <?= date('H:i', $newsComments['date_post']); ?>
+                                                </small> <b></b>
+                                                <?= Permission::getInstance()->gradeJoueur($newsComments['pseudo']) ?>
+                                            </h5>
+                                            <?php echo $newsComments['commentaire']; ?>
+                                        </div>
                                         </p>
 
 
@@ -329,22 +357,28 @@
                                             </span>
 
                                             <div class="dropdown mt-3 ml-5">
-                                                <button class="btn btn-reverse dropdown-toggle" data-toggle="dropdown"> Actions </button>
+                                                <button class="btn btn-reverse dropdown-toggle" data-toggle="dropdown">
+                                                    Actions
+                                                </button>
                                                 <ul class="dropdown-menu">
                                                     <?php if ($newsComments['pseudo'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('createur')) : ?>
 
 
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>-<?= $newsComments['id'] ?>-edit" data-dismiss="modal">
+                                                        <a class="dropdown-item" href="#" data-toggle="modal"
+                                                           data-target="#news<?= $news[$i]['id'] ?>-<?= $newsComments['id'] ?>-edit"
+                                                           data-dismiss="modal">
                                                             Editer
                                                         </a>
-                                                        <a class="dropdown-item text-danger" href="index.php?action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
+                                                        <a class="dropdown-item text-danger"
+                                                           href="index.php?action=delete_news_commentaire&id_comm=<?= $newsComments['id'] ?>&id_news=<?= $news[$i]['id'] ?>&auteur=<?= $newsComments['pseudo'] ?>">
                                                             Supprimer
                                                         </a>
 
                                                     <?php endif; ?>
                                                     <?php if ($newsComments['pseudo'] != $_Joueur_['pseudo']) :
                                                         if ($checkReport == '0') : ?>
-                                                            <a class="dropdown-item" href="index.php?action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
+                                                            <a class="dropdown-item"
+                                                               href="index.php?action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
                                                                 Signaler
                                                             </a>
                                                         <?php else : ?>
@@ -359,11 +393,13 @@
                             </div>
                             <?php if (Permission::getInstance()->verifPerm('connect')) : ?>
                                 <div class="modal-footer w-100">
-                                    <form action="?action=post_news_commentaire&id_news=<?php echo $news[$i]['id']; ?>" method="post" class="w-100">
+                                    <form action="?action=post_news_commentaire&id_news=<?php echo $news[$i]['id']; ?>"
+                                          method="post" class="w-100">
                                         <h5>
                                             Commenter !
                                         </h5>
-                                        <textarea name="commentaire" class="form-control w-100 mb-3" required></textarea>
+                                        <textarea name="commentaire" class="form-control w-100 mb-3"
+                                                  required></textarea>
                                         <small>
                                             <span class="float-left"><b>Min : </b> 6 charactères. </span>
                                             <span class="float-right"><b>Max : </b> 255 charactères.</span>
@@ -373,7 +409,9 @@
                                 </div>
                             <?php else : ?>
                                 <div class="modal-footer text-center">
-                                    <div class="alert alert-danger">Veuillez-vous connecter pour mettre un commentaire.</div>
+                                    <div class="alert alert-danger">Veuillez-vous connecter pour mettre un
+                                        commentaire.
+                                    </div>
                                     <a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-warning">Connexion</a>
                                 </div>
                             <?php endif; ?>
@@ -392,31 +430,43 @@
                         $reqEditCommentaire = $accueilNews->editCommentaire($newsComments['pseudo'], $news[$i]['id'], $newsComments['id']);
                         $getEditCommentaire = $reqEditCommentaire->fetch(PDO::FETCH_ASSOC);
                         $editCommentaire = $getEditCommentaire['commentaire'];
-                        if ($newsComments['pseudo'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('createur')) :  ?>
-                            <div class="modal fade" id="news<?= $news[$i]['id'] . '-' . $newsComments['id'] . '-edit'; ?>" tabindex="-1" role="dialog" aria-labelledby="news<?= $news[$i]['id'] . '-' . $newsComments['id'] . '-edit'; ?>" aria-hidden="true">
+                        if ($newsComments['pseudo'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('createur')) : ?>
+                            <div class="modal fade"
+                                 id="news<?= $news[$i]['id'] . '-' . $newsComments['id'] . '-edit'; ?>" tabindex="-1"
+                                 role="dialog"
+                                 aria-labelledby="news<?= $news[$i]['id'] . '-' . $newsComments['id'] . '-edit'; ?>"
+                                 aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Édition du commentaire</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true" style="color: var(--base-color);">&times;</span>
+                                                <span aria-hidden="true"
+                                                      style="color: var(--base-color);">&times;</span>
                                             </button>
                                         </div>
 
-                                        <form action="?action=edit_news_commentaire&id_news=<?= $news[$i]['id'] . '&auteur=' . $newsComments['pseudo'] . '&id_comm=' . $newsComments['id']; ?>" method="post">
+                                        <form action="?action=edit_news_commentaire&id_news=<?= $news[$i]['id'] . '&auteur=' . $newsComments['pseudo'] . '&id_comm=' . $newsComments['id']; ?>"
+                                              method="post">
                                             <div class="modal-body">
                                                 <h6>Commentaire de base :</h6>
-                                                <textarea name="old_commentaire" id="old_commentaire" rows="3" style="resize: none;" class="form-control disabled mb-5" disabled><?= $editCommentaire; ?></textarea>
+                                                <textarea name="old_commentaire" id="old_commentaire" rows="3"
+                                                          style="resize: none;" class="form-control disabled mb-5"
+                                                          disabled><?= $editCommentaire; ?></textarea>
 
                                                 <h6>Édition de votre commentaire :</h6>
-                                                <textarea name="edit_commentaire" class="form-control" rows="3" style="resize: none;" maxlength="255" required><?= $editCommentaire; ?></textarea>
+                                                <textarea name="edit_commentaire" class="form-control" rows="3"
+                                                          style="resize: none;" maxlength="255"
+                                                          required><?= $editCommentaire; ?></textarea>
                                             </div>
                                             <div class="modal-footer text-center">
                                                 <small class="w-100">
                                                     <span class="float-left"><b>Min : </b> 6 charactères. </span>
                                                     <span class="float-right"><b>Max : </b> 255 caractères.</span>
                                                 </small>
-                                                <button type="submit" class="btn btn-main w-100 btn-block">Valider la modification</button>
+                                                <button type="submit" class="btn btn-main w-100 btn-block">Valider la
+                                                    modification
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -431,94 +481,100 @@
     <?php endif; ?>
 <?php endif; ?>
 
-<?php if(isset($_GET['page']) && $_GET['page'] == 'forum' && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) : ?>
-<div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form class="form-signin" role="form" method="post" action="?action=editForum">
-                <div class="modal-header">
-                    <h5 class="modal-title">Édition du forum "<span id="editForumTitle" ></span>"</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" style="color: var(--base-color);">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <input type="hidden" name="id" value="" id="editForumId"/>
-                    <div class="form-row my-2">
-                        <label for="nomForum">Nom du Forum <span class="star-required"></span></label>
-                        <input type="text" name="nom" id="editForumName" maxlength="40" class="form-control custom-text-input" required />
+<?php if (isset($_GET['page']) && $_GET['page'] == 'forum' && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) : ?>
+    <div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="form-signin" role="form" method="post" action="?action=editForum">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Édition du forum "<span id="editForumTitle"></span>"</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color: var(--base-color);">&times;</span>
+                        </button>
                     </div>
 
-                    <div class="form-row my-2">
-                        <label for="img">Icône</label>
-                            <input type="text" name="img" id="editForumImg" maxlength="300" placeholder='<i class="far fa-comment-dots"></i>' class="form-control custom-text-input" />
+                    <div class="modal-body">
+                        <input type="hidden" name="id" value="" id="editForumId"/>
+                        <div class="form-row my-2">
+                            <label for="nomForum">Nom du Forum <span class="star-required"></span></label>
+                            <input type="text" name="nom" id="editForumName" maxlength="40"
+                                   class="form-control custom-text-input" required/>
+                        </div>
+
+                        <div class="form-row my-2">
+                            <label for="img">Icône</label>
+                            <input type="text" name="img" id="editForumImg" maxlength="300"
+                                   placeholder='<i class="far fa-comment-dots"></i>'
+                                   class="form-control custom-text-input"/>
                             <small id="imgHelp" class="form-text text-muted">
                                 disponible sur : <a href="https://fontawesome.com/icons/" target="_blank">https://fontawesome.com/icons/</a>
                             </small>
+                        </div>
+                        <div class="form-row my-2">
+                            <label for="forumCat">Catégorie <span class="star-required"></span></label>
+                            <select name="forum" id="forumCat" class="form-control custom-text-input" required>
+                                <?php for ($z = 0, $zMax = count($fofo); $z < $zMax; $z++) : ?>
+                                    <option id="editForumCat<?= $fofo[$z]['id']; ?>" value="<?= $fofo[$z]['id']; ?>">
+                                        <?= $fofo[$z]['nom']; ?>
+                                    </option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-row my-2">
-                        <label for="forumCat">Catégorie <span class="star-required"></span></label>
-                        <select name="forum" id="forumCat" class="form-control custom-text-input" required>
-                        <?php for ($z = 0, $zMax = count($fofo); $z < $zMax; $z++) : ?>
-                            <option id="editForumCat<?= $fofo[$z]['id']; ?>" value="<?= $fofo[$z]['id']; ?>">
-                                <?= $fofo[$z]['nom']; ?>
-                            </option>
-                        <?php endfor; ?>
-                        </select>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-main w-100">Valider les changements</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-main w-100">Valider les changements</button>
-                </div>
 
-            </form>
+                </form>
 
+            </div>
         </div>
     </div>
-</div>
 <?php endif ?>
-<?php if(isset($_GET['page']) && ($_GET['page'] == 'forum_categorie' | $_GET['page'] == 'sous_forum_categorie')) : ?>
-<div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form class="form-signin" role="form" method="post" action="?action=editSousForum">
-                <div class="modal-header">
-                    <h5 class="modal-title">Édition du sous-forum "<span id="editForumTitle" ></span>"</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" style="color: var(--base-color);">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <input type="hidden" name="id" value="" id="editForumId"/>
-                     <input type="hidden" name="idSF" value="" id="editForumSFId"/>
-                     <input type="hidden" name="index" value="" id="editForumIndex"/>
-                    <div class="form-row my-2">
-                        <label for="editForumName">Nom du sous-Forum <span class="star-required"></span></label>
-                        <input type="text" name="nom" id="editForumName" maxlength="40" class="form-control custom-text-input" required />
+<?php if (isset($_GET['page']) && ($_GET['page'] == 'forum_categorie' | $_GET['page'] == 'sous_forum_categorie')) : ?>
+    <div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="form-signin" role="form" method="post" action="?action=editSousForum">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Édition du sous-forum "<span id="editForumTitle"></span>"</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color: var(--base-color);">&times;</span>
+                        </button>
                     </div>
 
-                    <div class="form-row my-2">
-                        <label for="editForumImg">Icône</label>
-                            <input type="text" name="img" id="editForumImg" maxlength="300" placeholder='<i class="far fa-comment-dots"></i>' class="form-control custom-text-input" />
+                    <div class="modal-body">
+                        <input type="hidden" name="id" value="" id="editForumId"/>
+                        <input type="hidden" name="idSF" value="" id="editForumSFId"/>
+                        <input type="hidden" name="index" value="" id="editForumIndex"/>
+                        <div class="form-row my-2">
+                            <label for="editForumName">Nom du sous-Forum <span class="star-required"></span></label>
+                            <input type="text" name="nom" id="editForumName" maxlength="40"
+                                   class="form-control custom-text-input" required/>
+                        </div>
+
+                        <div class="form-row my-2">
+                            <label for="editForumImg">Icône</label>
+                            <input type="text" name="img" id="editForumImg" maxlength="300"
+                                   placeholder='<i class="far fa-comment-dots"></i>'
+                                   class="form-control custom-text-input"/>
                             <small id="imgHelp" class="form-text text-muted">
                                 disponible sur : <a href="https://fontawesome.com/icons/" target="_blank">https://fontawesome.com/icons/</a>
                             </small>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-main w-100">Valider les changements</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-main w-100">Valider les changements</button>
+                    </div>
 
-            </form>
+                </form>
 
+            </div>
         </div>
     </div>
-</div>
 <?php endif; ?>
 
 <div id="modal-image" class="img-modal">
-  <div class="modal-img-close" onclick="this.parentElement.style.display='none';"><i class="fas fa-times"  ></i></div>
-  <img class="modal-img-content" alt="image modal" id="modal-image-src" />
+    <div class="modal-img-close" onclick="this.parentElement.style.display='none';"><i class="fas fa-times"></i></div>
+    <img class="modal-img-content" alt="image modal" id="modal-image-src"/>
 </div>

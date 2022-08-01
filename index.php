@@ -12,16 +12,18 @@ ini_set('display_errors', 1);
 require('modele/app/urlRewrite.class.php');
 urlRewrite::call();
 
-if(!isset($_SESSION['mode'])) $_SESSION['mode'] = false; // pour les admins du forum
+if (!isset($_SESSION['mode'])) $_SESSION['mode'] = false; // pour les admins du forum
 
-if(isset($_GET['removeUpdater'])) { unlink('updater.php'); }
+if (isset($_GET['removeUpdater'])) {
+    unlink('updater.php');
+}
 //ini_set('display_errors', 1);
 require('controleur/config.php');
 // On vérifie si le CMS n'a pas été installé, si il ne l'est pas, on redirige vers les fichiers d'installation...
 if (!$_Serveur_['installation']) header('Location: installation/');
 else $return = true;
 // On charge la connection à la base MySQL via l'extention PDO.
-require ('controleur/connection_base.php');
+require('controleur/connection_base.php');
 
 require('modele/app/visit.class.php');
 $visit = new visit($bddConnection);
@@ -45,42 +47,35 @@ $_Joueur_ = $globalJoueur->getUser();
 
 require('modele/json/json.php');
 //le fichier controle des récompenses Auto
-require('controleur/recompenseAuto.php'); 
+require('controleur/recompenseAuto.php');
 // système de Get(tout le site passe par index.php).
 // Les deux types de Get pricipaux utilisés sont les "pages" et les "actions.
 // Les actions n'affichent aucun code html alors que les pages sont dans la theme.
 // Ici une condition pour vérifier si il faut charger le fichier controleur des actions. Ce fichier effectue l'action qu'il faut en
 // faisant appel au bon fichier en fonction de la valeur du get
 
-if(!isset($_Serveur_['General']['createur']))
-{
+if (!isset($_Serveur_['General']['createur'])) {
     $tmp = $_Serveur_;
     $tmp['General']['createur'] = 'Créateur';
     $ecriture = new Ecrire('modele/config/config.yml', $tmp);
 }
 $banned = false;
-if(Ban::isBanned($bddConnection) | isset($_GET['banPreview']))
-{
-    require('theme/'. $_Serveur_['General']['theme'] .'/ban.php');
-}
-else
-{
+if (Ban::isBanned($bddConnection) | isset($_GET['banPreview'])) {
+    require('theme/' . $_Serveur_['General']['theme'] . '/ban.php');
+} else {
     if (isset($_GET['action'])) {
-        require ('controleur/action.php');
-    } elseif (isset($_GET['page']) AND $_GET['page'] == 'maintenance') {
-        include ('theme/' . $_Serveur_['General']['theme'] . '/maintenance.php');
-    }else
-    // On charge l'index uniquement si il n'y a pas d'action, cela permet de choisir la page sur laquelle l'utilisateur sera redirigé après l'action. Sinon, on redirige vers
+        require('controleur/action.php');
+    } elseif (isset($_GET['page']) and $_GET['page'] == 'maintenance') {
+        include('theme/' . $_Serveur_['General']['theme'] . '/maintenance.php');
+    } else // On charge l'index uniquement si il n'y a pas d'action, cela permet de choisir la page sur laquelle l'utilisateur sera redirigé après l'action. Sinon, on redirige vers
     {
         // La base de la page, s'occupe du <head> ainsi que de l'organisation des élements et chargement du javascript --> La theme.
-        include ('theme/' . $_Serveur_['General']['theme'] . '/index.php');
+        include('theme/' . $_Serveur_['General']['theme'] . '/index.php');
         require('controleur/joueur/changerGrade.php');
     }
 }
-if(isset($jsonCon))
-{
-    foreach($jsonCon as $instance)
-    {
+if (isset($jsonCon)) {
+    foreach ($jsonCon as $instance) {
         $instance->close();
     }
 }

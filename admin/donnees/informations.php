@@ -1,6 +1,6 @@
 <?php
 
-if($_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) {
+if ($_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) {
 
     /* Statistiques de la boutique 
         -> $lastachatreq = 10 derniers achats sur la boutique
@@ -17,12 +17,9 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) {
         $console -> La console
         $plugins -> les plugins 
     */
-    if(isset($jsonCon))
-    {
-        foreach($jsonCon as $key => $serveur)
-        {
-            if($conEtablie[$key])
-            {
+    if (isset($jsonCon)) {
+        foreach ($jsonCon as $key => $serveur) {
+            if ($conEtablie[$key]) {
                 $serveurStats[$key] = $serveur->GetServeurInfos();
                 $console[$key] = $serveur->GetConsole();
                 $plugins[$key] = $serveur->getPlugins();
@@ -46,14 +43,14 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) {
     $nbnews = $bddConnection->query('SELECT count(id) as nb FROM `cmw_news`');
     $nbne = $nbnews->fetch(PDO::FETCH_ASSOC);
     $TotalNews = $nbne['nb'];
-    
+
     //Vérification du système de confirmation par mail des inscriptions
     $req_etatMail = $bddConnection->query('SELECT etatMail FROM cmw_sysmail WHERE idMail = 1');
     $get_etatMail = $req_etatMail->fetch(PDO::FETCH_ASSOC);
     $ShowMail = $get_etatMail['etatMail'] == 1;
 
     // <!-- Statistiques des membres -->
-    $lastRegisterMember = $bddConnection->query('SELECT id,pseudo,tokens,email,anciennete'.(($ShowMail)? ',ValidationMail' : '').''.($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP') ? ',ip' : '').' FROM cmw_users ORDER BY id DESC LIMIT 0, 10;');
+    $lastRegisterMember = $bddConnection->query('SELECT id,pseudo,tokens,email,anciennete' . (($ShowMail) ? ',ValidationMail' : '') . '' . ($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP') ? ',ip' : '') . ' FROM cmw_users ORDER BY id DESC LIMIT 0, 10;');
     //Récupération du staff chat
     $all_message_staff = $bddConnection->query('SELECT id, auteur, message FROM cmw_postit ORDER BY id DESC');
 }

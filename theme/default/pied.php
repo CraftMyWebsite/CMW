@@ -7,26 +7,26 @@ $_Theme_ = $_Theme_->GetTableau();
         <div class="container-fluid col-12 mt-3">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-lg-3">
-                    <?php if(isset($_Theme_['Pied']['about']) && !empty(trim($_Theme_['Pied']['about']))) : ?>
-                    <div class="about-title h4">
-                        À Propos
-                    </div>
-                    <div class="about-content">
-                        <?= $_Theme_['Pied']['about']; ?>
-                    </div>
+                    <?php if (isset($_Theme_['Pied']['about']) && !empty(trim($_Theme_['Pied']['about']))) : ?>
+                        <div class="about-title h4">
+                            À Propos
+                        </div>
+                        <div class="about-content">
+                            <?= $_Theme_['Pied']['about']; ?>
+                        </div>
                     <?php endif; ?>
                 </div>
-                <?php if(googleService::isAdsenseEnable($_Serveur_) && googleService::getAdsense()->hasPub()) : ?>
-                <div class="col-md-12 col-sm-12 col-lg-3">
-                   
-                    <div class="about-title h4">
-                        Publicité
+                <?php if (googleService::isAdsenseEnable($_Serveur_) && googleService::getAdsense()->hasPub()) : ?>
+                    <div class="col-md-12 col-sm-12 col-lg-3">
+
+                        <div class="about-title h4">
+                            Publicité
+                        </div>
+                        <div class="about-content">
+                            <?php googleService::getAdsense()->writePub(); ?>
+                        </div>
                     </div>
-                    <div class="about-content">
-                        <?php googleService::getAdsense()->writePub(); ?>
-                    </div>
-                </div>
-				<?php endif; ?>
+                <?php endif; ?>
                 <?php if (isset($_Theme_['Pied']['social']) && !empty($_Theme_['Pied']['social'])) : ?>
                     <div class="col-md-12 col-sm-12 col-lg-5 ml-auto">
                         <div class="social-title h4">
@@ -34,7 +34,7 @@ $_Theme_ = $_Theme_->GetTableau();
                         </div>
                         <div class="social-content">
 
-                             <?php foreach ($_Theme_['Pied']['social'] as $value) : ?>
+                            <?php foreach ($_Theme_['Pied']['social'] as $value) : ?>
 
                                 <a href="<?= $value['link'] ?>" class="col-12 discord-social ml-3">
                                     <span class="social-logo">
@@ -56,8 +56,9 @@ $_Theme_ = $_Theme_->GetTableau();
             <div class="row">
                 <div class="col-7">
                     <div class="copyright">
-                        Tous droits réservés, site créé pour le serveur <?= $_Serveur_['General']['name']; ?> <br />
-                        <small><a href="https://craftmywebsite.fr" target="_blank">CraftMyWebsite.fr</a>#<?= $displayversioncms; ?></small>
+                        Tous droits réservés, site créé pour le serveur <?= $_Serveur_['General']['name']; ?> <br/>
+                        <small><a href="https://craftmywebsite.fr"
+                                  target="_blank">CraftMyWebsite.fr</a>#<?= $displayversioncms; ?></small>
                     </div>
                 </div>
             </div>

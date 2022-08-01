@@ -1,4 +1,5 @@
 <?php
+
 class GetApiMailBdd
 {
     private $reponseConnection;
@@ -9,10 +10,11 @@ class GetApiMailBdd
     }
 
     public function __construct($bdd)
-    {   
+    {
         $reponseConnection = $bdd->prepare('SELECT * FROM cmw_sysmail WHERE idMail = 1');
         $reponseConnection->execute();
         $this->reponseConnection = $reponseConnection;
     }
 }
+
 ?>

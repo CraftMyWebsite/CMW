@@ -1,39 +1,43 @@
 <footer class="footer" style="overflow-x: hidden !important;">
-        <div class="row">
-            <div class="col-md-4  offset-md-2">
-                <p class="text-muted footer-text" style="padding-left: 15px;">
-                    <a href="https://craftmywebsite.fr/" target="_blank">CraftMyWebsite #<?php echo $versioncms; ?></a> | <a href="https://discord.gg/P94b7d5" target="_blank">Discord</a> | <a href="https://github.com/CraftMyWebsite/CMW" target="_blank">GitHub</a>
-                </p>
-            </div>
-            <div class="col-md-6">
-                <p class="gray text-right footer-text" style="padding-right: 15px;">
-                    &copy; 2014 -<script>document.write(new Date().getFullYear())</script> CraftMyWebsite, tous droits réservé
-                </p>
-                <div class="custom-control custom-switch">
-                    <form id="darkForm" method="POST" action="">
-                        <?php
-                            if (isset($_SESSION['darkSwitch'])) {
-                                echo '<input type="hidden" name="removeDarkSwitch" id="removeDarkSwitch" value="1">
+    <div class="row">
+        <div class="col-md-4  offset-md-2">
+            <p class="text-muted footer-text" style="padding-left: 15px;">
+                <a href="https://craftmywebsite.fr/" target="_blank">CraftMyWebsite #<?php echo $versioncms; ?></a> | <a
+                        href="https://discord.gg/P94b7d5" target="_blank">Discord</a> | <a
+                        href="https://github.com/CraftMyWebsite/CMW" target="_blank">GitHub</a>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p class="gray text-right footer-text" style="padding-right: 15px;">
+                &copy; 2014 -
+                <script>document.write(new Date().getFullYear())</script>
+                CraftMyWebsite, tous droits réservé
+            </p>
+            <div class="custom-control custom-switch">
+                <form id="darkForm" method="POST" action="">
+                    <?php
+                    if (isset($_SESSION['darkSwitch'])) {
+                        echo '<input type="hidden" name="removeDarkSwitch" id="removeDarkSwitch" value="1">
                                 <input type="checkbox" class="custom-control-input" id="darkSwitch" name="darkSwitch" value="1" checked>';
-                                
-                            } else {
-                                echo '<input type="checkbox" class="custom-control-input" id="darkSwitch" name="darkSwitch" value="1">';
-                            }
-                        ?>
-                        <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i> Mode Nuit</label>
-                    </form>
-                </div>
+
+                    } else {
+                        echo '<input type="checkbox" class="custom-control-input" id="darkSwitch" name="darkSwitch" value="1">';
+                    }
+                    ?>
+                    <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i> Mode Nuit</label>
+                </form>
             </div>
         </div>
-    </footer>
-    <script src="./admin/assets/js/popper.min.js"></script>
-    <script src="./admin/assets/js/main.js"></script>
-    <?php include './admin/assets/js/ckeditorManager.php'; ?>
-    <script src="./admin/assets/js/bootstrap.js"></script>
-    <script src="./admin/assets/js/dark.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.13.1/js/all.js"></script>
-   
- </body>
+    </div>
+</footer>
+<script src="./admin/assets/js/popper.min.js"></script>
+<script src="./admin/assets/js/main.js"></script>
+<?php include './admin/assets/js/ckeditorManager.php'; ?>
+<script src="./admin/assets/js/bootstrap.js"></script>
+<script src="./admin/assets/js/dark.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.13.1/js/all.js"></script>
+
+</body>
 </html>
 <!-- 
 

@@ -85,19 +85,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body" id="googleAdsenseblock" style="<?=(!googleService::isAdsenseEnable2($_Serveur_)) ? 'display:none;' : 'display:block!important;' ?>">
+                    <div class="card-body" id="googleAdsenseblock"
+                         style="<?= (!googleService::isAdsenseEnable2($_Serveur_)) ? 'display:none;' : 'display:block!important;' ?>">
                         <label class="control-label">ID du compte</label>
-                        <input type="text" name="id" class="form-control" value="<?= isset($_Serveur_['googleService']['adsense']['id']) ? $_Serveur_['googleService']['adsense']['id'] : '' ?>" placeholder="Exemple: pub-3496294583914660" required/>
+                        <input type="text" name="id" class="form-control"
+                               value="<?= isset($_Serveur_['googleService']['adsense']['id']) ? $_Serveur_['googleService']['adsense']['id'] : '' ?>"
+                               placeholder="Exemple: pub-3496294583914660" required/>
                         <label class="control-label">ID de la pub ( à remplir plustard, voir tutoriel)</label>
-                        <input type="text" name="pub" class="form-control" value="<?= isset($_Serveur_['googleService']['adsense']['pub']) ? $_Serveur_['googleService']['adsense']['pub'] : '' ?>" placeholder="Exemple: 3128942591"/>
+                        <input type="text" name="pub" class="form-control"
+                               value="<?= isset($_Serveur_['googleService']['adsense']['pub']) ? $_Serveur_['googleService']['adsense']['pub'] : '' ?>"
+                               placeholder="Exemple: 3128942591"/>
                         <div style="margin-top:10px;">
-                            <a href="https://www.google.com/adsense/" target="_blank"><small>Liens Google Adsense</small></a><br>
-                            <a href="https://support.google.com/adsense/answer/3180977?hl=fr&ref_topic=3136173&visit_id=637570438032031998-3559320501&rd=1" target="_blank"><small>Liens du tutoriel pour installer Google Adsense</small></a>
+                            <a href="https://www.google.com/adsense/" target="_blank"><small>Liens Google
+                                    Adsense</small></a><br>
+                            <a href="https://support.google.com/adsense/answer/3180977?hl=fr&ref_topic=3136173&visit_id=637570438032031998-3559320501&rd=1"
+                               target="_blank"><small>Liens du tutoriel pour installer Google Adsense</small></a>
                         </div>
                     </div>
                     <script>initPost("googleAdsenseblock", "admin.php?action=editGoogleAdsense");</script>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success w-100" onClick="sendPost('googleAdsenseblock')">Envoyer !</button>
+                        <button type="submit" class="btn btn-success w-100" onClick="sendPost('googleAdsenseblock')">
+                            Envoyer !
+                        </button>
                     </div>
                 </div>
             </div>

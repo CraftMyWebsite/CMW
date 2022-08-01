@@ -29,29 +29,29 @@ DataBase:
     dbPassword: ""
     dbPort: ""
 Payement:
-    paypal: true
-    dedipass: false
-    paysafecard: false
-    currency: EUR
-    public_key: ""
-    private_key: ""
-    paypalEmail: ""
+  paypal: true
+  dedipass: false
+  paysafecard: false
+  currency: EUR
+  public_key: ""
+  private_key: ""
+  paypalEmail: ""
 vote:
-    maxDisplay: 10
+  maxDisplay: 10
 color:
-    panel:
-        main: '#ff8040'
-        hover: '#c16100'
-        focus: '#ffbc9b'
-lastCMWCheck: 1621453057
+  panel:
+    main: '#ff8040'
+    hover: '#c16100'
+    focus: '#ffbc9b'
+lastCMWCheck: 1659360576
 googleService:
-    searchConsole:
-        id: ""
-        enable: false
-    analytics:
-        enable: false
-        id: ""
-    adsense:
-        enable: false
-        id: ""
-        pub: ""
+  searchConsole:
+    id: ""
+    enable: false
+  analytics:
+    enable: false
+    id: ""
+  adsense:
+    enable: false
+    id: ""
+    pub: ""

@@ -1,5 +1,3 @@
-
-
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2 gray">
         Historique de la boutique
@@ -7,84 +5,88 @@
 </div>
 
 
+<?php if (!$_Permission_->verifPerm('PermsPanel', 'shop', 'boutiqueList', 'showPage')) { ?>
 
-<?php if(!$_Permission_->verifPerm('PermsPanel', 'shop', 'boutiqueList', 'showPage'))
-{ ?>
-	
-		<div class="alert alert-danger">
-			<strong>Vous avez aucune permission pour accéder à cette page.</strong>
-		</div>
-<?php } 
-else
-{ ?>
+    <div class="alert alert-danger">
+        <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+    </div>
+<?php } else { ?>
 
 
-<div class="row">
+    <div class="row">
 
-    <div class="col-md-12 col-xl-12 col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">
-                    Configuration de la liste des Achats <small id="infoState">(Croissant sur id)</small>
-                </h4>
-            </div>
-            <div class="card-body">
-            	<div class="row" style="margin-bottom:20px;">
-                    <div class="col-lg-12 col-md-12 col-xs-12">
-                    	
-                        <h5>Nombre d'achat/pages: <input style="margin-top:3px;" type="number"
-                                onchange="setMaxShow('input-changemax')" id="input-changemax" min="1"
-                                max="<?php echo $data['count']; ?>" step="1" placeholder="2020 ?" class="input-disabled form-control"
-                                value="<?php echo $data['count']>50 ? '50': $data['count'] ; ?>"> 
-                                <button type="button" onclick="setMaxShow('input-changemax')" class="btn w-100 btn-success d-sm-block d-md-none">Mettre à jour</button></h5>
-                        <h5 style="margin-top:20px;">Rechercher un membre: <input style="margin-top:3px;" type="text"
-                                onkeyup="updateList();" id="input-search" class="input-disabled form-control"
-                                placeholder="ex: Vladimir"></h5>
+        <div class="col-md-12 col-xl-12 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Configuration de la liste des Achats <small id="infoState">(Croissant sur id)</small>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row" style="margin-bottom:20px;">
+                        <div class="col-lg-12 col-md-12 col-xs-12">
+
+                            <h5>Nombre d'achat/pages: <input style="margin-top:3px;" type="number"
+                                                             onchange="setMaxShow('input-changemax')"
+                                                             id="input-changemax" min="1"
+                                                             max="<?php echo $data['count']; ?>" step="1"
+                                                             placeholder="2020 ?" class="input-disabled form-control"
+                                                             value="<?php echo $data['count'] > 50 ? '50' : $data['count']; ?>">
+                                <button type="button" onclick="setMaxShow('input-changemax')"
+                                        class="btn w-100 btn-success d-sm-block d-md-none">Mettre à jour
+                                </button>
+                            </h5>
+                            <h5 style="margin-top:20px;">Rechercher un membre: <input style="margin-top:3px;"
+                                                                                      type="text"
+                                                                                      onkeyup="updateList();"
+                                                                                      id="input-search"
+                                                                                      class="input-disabled form-control"
+                                                                                      placeholder="ex: Vladimir"></h5>
+                        </div>
                     </div>
                 </div>
-             </div>
-         </div>
-     </div>
-
-
-
-    <div class="col-md-12 col-xl-12 col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">
-                    Liste des Achats <small id="infoState">(Croissant sur id)</small>
-                </h4>
             </div>
-            <div class="card-body">
-                  <div class="col-md-12">
+        </div>
+
+
+        <div class="col-md-12 col-xl-12 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Liste des Achats <small id="infoState">(Croissant sur id)</small>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
                         <div class="alert alert-success">
                             <div class="text-center">
                                 <p>
-                                    <i class="fas fa-info-circle"></i> Vous pouvez cliquer sur les noms des colonnes pour obtenir une recherche plus avancé / conforme à vos attentes.
+                                    <i class="fas fa-info-circle"></i> Vous pouvez cliquer sur les noms des colonnes
+                                    pour obtenir une recherche plus avancé / conforme à vos attentes.
                                 </p>
                             </div>
                         </div>
                     </div>
                     <br/>
-                   <table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width:75px;cursor:pointer;" onclick="setAxe('id')">ID</th>
-                                <th style="cursor:pointer;" onclick="setAxe('pseudo');">Pseudo</th>
-                                <th style="cursor:pointer;" onclick="setAxe('offre_id');">Offre</th>
-                                <th style="cursor:pointer;" onclick="setAxe('prix');">Prix Unitaire</th>
-                                <th >Quantité</th>
-                                <th style="cursor:pointer;" onclick="setAxe('prixTotal');">Prix Total</th>
-                                <th style="cursor:pointer;" onclick="setAxe('date_achat');">Date d'achat</th>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th style="width:75px;cursor:pointer;" onclick="setAxe('id')">ID</th>
+                            <th style="cursor:pointer;" onclick="setAxe('pseudo');">Pseudo</th>
+                            <th style="cursor:pointer;" onclick="setAxe('offre_id');">Offre</th>
+                            <th style="cursor:pointer;" onclick="setAxe('prix');">Prix Unitaire</th>
+                            <th>Quantité</th>
+                            <th style="cursor:pointer;" onclick="setAxe('prixTotal');">Prix Total</th>
+                            <th style="cursor:pointer;" onclick="setAxe('date_achat');">Date d'achat</th>
 
-							</tr>
-						</thead>
-						<tbody id="allAchat">
-					
-						</tbody>
-					</table>
-            </div>
-            <div class="card-footer">
+                        </tr>
+                        </thead>
+                        <tbody id="allAchat">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
 
                     <div class="row">
 
@@ -97,17 +99,18 @@ else
                                     <ul class="pagination">
                                         <li class="page-item">
                                             <button class="page-link" onclick="lessIndex();" aria-hidden="true"
-                                                id="left">
+                                                    id="left">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
                                             </button>
                                         </li>
-                                        <input min="0" step="1" class="text-center inputwithoutarrow" max="9999" onchange="setIndex();"
-                                            id="block" type="number" value="0" />
+                                        <input min="0" step="1" class="text-center inputwithoutarrow" max="9999"
+                                               onchange="setIndex();"
+                                               id="block" type="number" value="0"/>
 
                                         <li class="page-item">
                                             <button class="page-link" onclick="moreIndex();" aria-hidden="true"
-                                                id="right">
+                                                    id="right">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
                                             </button>
@@ -119,10 +122,10 @@ else
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-	<?php  include('./admin/assets/js/boutiquelist.php');
+    <?php include('./admin/assets/js/boutiquelist.php');
 } ?>
