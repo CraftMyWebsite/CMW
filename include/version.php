@@ -1,4 +1,4 @@
 <?php
-$versioncms = "1.8.4";
-$displayversioncms = "<span versioncms>".$versioncms."</span>";
+$versioncms = "1.9 LTS";
+$displayversioncms = "<span class='versioncms'>".$versioncms."</span>";
 ?>
