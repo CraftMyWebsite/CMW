@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm("connect")) {
+if(Permission::getInstance()->verifPerm('connect')) {
     $pseudo = $_Joueur_['pseudo'];
     $id_ticket = urldecode($_GET['id_ticket']);
     $id_comm = urldecode($_GET['id_comm']);
@@ -21,10 +21,10 @@ if(Permission::getInstance()->verifPerm("connect")) {
     $AuteurCommentaire = $get_AuteurCommentaire['auteur'];
     $ExistCommentaire = $req_ExistCommentaire->rowCount();
     $ExistTicket = $req_ExistTicket->rowCount();
-    if($ExistTicket == "0") {
+    if($ExistTicket == '0') {
     	header('Location: index.php?page=support&TicketNotExist=true');
     } else {
-    	if($ExistCommentaire == "0") {
+    	if($ExistCommentaire == '0') {
             header('Location: index.php?page=support&CommentaireNotExist=true');
         } else {
             if(!$AuteurCommentaire == $pseudo OR !$adminMode = true) {

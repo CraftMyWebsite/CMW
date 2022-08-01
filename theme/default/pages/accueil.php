@@ -22,7 +22,7 @@
                                 <div class="card">
                                     <div class="card-header d-flex flex-nowrap">
                                         <h4><small>#<?= $news[$i]['id'] ?> </small><?= $news[$i]['titre']; ?></h4>
-                                        <h6 class="ml-auto"><?= date('d/m/Y', $news[$i]['date']) . " &agrave; " . date('H:i:s', $news[$i]['date']) ?></h6>
+                                        <h6 class="ml-auto"><?= date('d/m/Y', $news[$i]['date']) . ' &agrave; ' . date('H:i:s', $news[$i]['date']) ?></h6>
                                     </div>
                                     <div class="card-body">
                                         <?= $news[$i]['message']; ?>
@@ -31,7 +31,7 @@
                                         <h3>Par <a href="index.php?page=profil&profil=<?= $news[$i]['auteur']; ?>"><?= $news[$i]['auteur']; ?></a></h3>
                                         <div class="ml-auto">
                                             <?php
-                                            if (Permission::getInstance()->verifPerm("connect")) :
+                                            if (Permission::getInstance()->verifPerm('connect')) :
                                                 $reqCheckLike = $accueilNews->checkLike($_Joueur_['pseudo'], $news[$i]['id']);
                                                 $getCheckLike = $reqCheckLike->fetch(PDO::FETCH_ASSOC);
                                                 $checkLike = $getCheckLike['pseudo'];

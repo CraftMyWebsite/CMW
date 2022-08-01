@@ -24,7 +24,7 @@ if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editPayment')) 
 	}
 	if(isset($_POST['paysafecardpage']))
 		if(isset($_POST['paysafecard']))
-			$lecture['Payement']["paysafecard"] = true;
+			$lecture['Payement']['paysafecard'] = true;
 		else
 			$lecture['Payement']['paysafecard'] = false;
 

@@ -1,4 +1,4 @@
-<?php if (Permission::getInstance()->verifPerm("connect")) :
+<?php if (Permission::getInstance()->verifPerm('connect')) :
     $req_answer = $_JoueurForum_->get_like_dislike(); ?>
 
     <section id="Alerts">

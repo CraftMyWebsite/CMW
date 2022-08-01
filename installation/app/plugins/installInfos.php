@@ -1,5 +1,5 @@
 <?php
-require_once "utils.php";
+require_once 'utils.php';
 
 $config = new Lire('../modele/config/config.yml');
 $config = $config->GetTableau();

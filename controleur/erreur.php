@@ -81,20 +81,20 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		break;
 
 		case '12':
-			$type = "Erreur: URL invalide";
+			$type = 'Erreur: URL invalide';
 			$titre = "L'URL est invalide.";
 			$contenue = "L'adresse de la page souhaitée est invalide ou inexistant.";
 		break;
 
 		case '13':
-			$type = "Erreur: Compte déjà actif";
-			$titre = "Compte déjà activé.";
-			$contenue = "Votre compte est déjà actif sur le site.";
+			$type = 'Erreur: Compte déjà actif';
+			$titre = 'Compte déjà activé.';
+			$contenue = 'Votre compte est déjà actif sur le site.';
 		break;
 
 		case '14':
-			$type = "Erreur: Compte inactif";
-			$titre = "Compte inactif.";
+			$type = 'Erreur: Compte inactif';
+			$titre = 'Compte inactif.';
 			$contenue = "Votre compte n'est pas activé sur le site.";
 		break;
 
@@ -111,15 +111,15 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		break;
 
 		case '17':
-			$type = "Erreur Fatale";
-			$titre = "Erreur fatale !";
+			$type = 'Erreur Fatale';
+			$titre = 'Erreur fatale !';
 			$contenue = "Une erreur indéterminée est survenue lors de l'exécution du script ! </br> Contactez immédiatement un administrateur !";
 		break;
 
 		case '18':
-			$type = "Erreur Boutique";
-			$titre = "Solde insuffisant";
-			$contenue = "Votre solde n'est pas suffisant pour acheter ces items. <br/> Merci de renouveler votre solde ici : <a href='token' class='btn btn-secondary mx-4 px-3'>Acheter des ".$_Serveur_['General']['moneyName']."</a>";
+			$type = 'Erreur Boutique';
+			$titre = 'Solde insuffisant';
+			$contenue = "Votre solde n'est pas suffisant pour acheter ces items. <br/> Merci de renouveler votre solde ici : <a href='token' class='btn btn-secondary mx-4 px-3'>Acheter des ".$_Serveur_['General']['moneyName']. '</a>';
 		break;
 
 		case '19':
@@ -129,19 +129,19 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		break;
 
 		case '20':
-			$type = "Erreur Forum";
-			$titre = "Topic trop long";
-			$contenue = "Votre message contient trop de caractères";
+			$type = 'Erreur Forum';
+			$titre = 'Topic trop long';
+			$contenue = 'Votre message contient trop de caractères';
 		break;
 
 		case '21':
-			$type = "Erreur mail";
+			$type = 'Erreur mail';
 			$titre = "Le mail n'a pas pu être envoyé";
 			$contenue= "Veuilliez contacter l'administrateur de cette erreur.";
 		break;
 		
 		default:
-			header("HTTP/1.0 404 Not Found");
+			header('HTTP/1.0 404 Not Found');
 			$type = '404 Not Found';
 			$titre = 'Page introuvable';
 			$contenue = 'Nous sommes désolé mais la page que vous avez demmandé n\'existe pas...';

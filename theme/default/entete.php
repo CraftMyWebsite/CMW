@@ -5,7 +5,7 @@
         <div class="container-fluid col-9">
             <!-- Navigation : -->
             <!-- Navigation Left -->
-            <?php if(!isset($maintenanceOn) || Permission::getInstance()->verifPerm("PermsPanel", "maintenance", "actions", "connexionAdmin"))
+            <?php if(!isset($maintenanceOn) || Permission::getInstance()->verifPerm('PermsPanel', 'maintenance', 'actions', 'connexionAdmin'))
             { ?>
             <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
                 
@@ -50,7 +50,7 @@
 
                 <!-- Navigation Right, s'affiche seulement si l'utilisateur n'est pas banni -->
                 <?php if ($banned == false) : ?>
-                    <?php if (Permission::getInstance()->verifPerm("connect")) : //Si nous avons un joueur connecté
+                    <?php if (Permission::getInstance()->verifPerm('connect')) : //Si nous avons un joueur connecté
                         $Img = new ImgProfil($_Joueur_['id']); ?>
                         <li class="nav-item dropdown ml-auto">
 
@@ -104,7 +104,7 @@
 
             <!-- Hero Section -->
             <section id="#Header">
-                <?php if (((!isset($_GET['page']) && !isset($_GET['redirection'])) || $_GET['page'] == "accueil") && ($banned == false)) : //Si c'est la page d'acceuil 
+                <?php if (((!isset($_GET['page']) && !isset($_GET['redirection'])) || $_GET['page'] == 'accueil') && ($banned == false)) : //Si c'est la page d'acceuil
                 ?>
                     <!-- Title & Slogan -->
                     <div class="main-header-text">
@@ -173,11 +173,11 @@
                             ?>
                                 <h1 class="text-uppercase"> Edition d'<?= ($_GET['objet'] == 1) ? 'un topic' : 'une réponse'; ?> </h1>
 
-                            <?php elseif (isset($_GET['page']) && ($_GET['page'] == "forum_categorie" | $_GET['page'] == "sous_forum_categorie")) : //Si c'est la catégorie d'un forum
+                            <?php elseif (isset($_GET['page']) && ($_GET['page'] == 'forum_categorie' | $_GET['page'] == 'sous_forum_categorie')) : //Si c'est la catégorie d'un forum
                             ?>
                                 <h1 class="text-uppercase"> Forum: <?= $_Forum_->infosCategorie($_GET['id'])['nom'] ?> </h1>
 
-                            <?php elseif (isset($_GET['page']) && $_GET['page'] == "post") : //Si c'est la page de post
+                            <?php elseif (isset($_GET['page']) && $_GET['page'] == 'post') : //Si c'est la page de post
                             ?>
                                 <h2 class="text-uppercase"> Post: <?= $_Forum_->getTopic($_GET['id'])['nom'] ?> </h2>
                                 <!-- Fin Forum -->

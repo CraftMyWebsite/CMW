@@ -22,7 +22,7 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre
 
 	for($j = 1;$j <= count($offres);$j++) {
         if($offres[$j]['categorie'] == $_POST['categorie']) {
-        	if(isset($_POST["suppr".$offres[$j]['id']]) && $_POST["suppr".$offres[$j]['id']] == "true") {
+        	if(isset($_POST['suppr' .$offres[$j]['id']]) && $_POST['suppr' .$offres[$j]['id']] == 'true') {
         		$req = $bddConnection->prepare('DELETE FROM `cmw_boutique_offres` WHERE id=:id');
 	        	$req->execute(Array ('id' => $offres[$j]['id']));
 
@@ -31,19 +31,19 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre
 
 	        	for($o = 1;$o <= count($offres);$o++) {
 	        		if(isset($offres[$o]['evo'])) {
-	        			$tp = explode(",",$offres[$o]['evo']);
+	        			$tp = explode(',',$offres[$o]['evo']);
 	        			$flag = false;
-	        			$str = "";
+	        			$str = '';
                         foreach($tp as $value)
                         {
                         	if($value == $offres[$j]['id']) {
                         		$flag=true;
                         	} else {
-                        		$str=$str.$value.",";
+                        		$str=$str.$value. ',';
                         	}           
                         }
                         if($flag) {
-                        	if($str != "") {
+                        	if($str != '') {
                         		$str = substr($str, 0, -1);
                         	} else {
                         		$str = null;

@@ -90,7 +90,7 @@ class MinecraftPing {
 		
 		fgetc($socket);
 		$length = $this->readVarInt($socket);
-		$data = "";
+		$data = '';
 		do {
 			if(microtime(true) - $timestart > $timeout) {
 				throw new Exception('[MinecraftPing] Time out');

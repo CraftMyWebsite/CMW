@@ -134,7 +134,7 @@
 
                 <label class="control-label">Devise monétaire </label>
                 <select class="form-control text-center" name="currency">
-                    <option value="<?= $_Serveur_['Payement']['currency'] ?>" selected ><?php if ($_Serveur_['Payement']['currency'] == "EUR") {echo "Euro";}elseif ($_Serveur_['Payement']['currency'] == "CAD"){echo "Canadian Dollar";} elseif ($_Serveur_['Payement']['currency'] == "CHF"){echo "Swiss Franc";} elseif ($_Serveur_['Payement']['currency'] == "USD"){echo "United States Dollar";} elseif ($_Serveur_['Payement']['currency'] == "GBP"){echo "Pound Sterling";} else {echo $_Serveur_['Payement']['currency'];} ?></option>
+                    <option value="<?= $_Serveur_['Payement']['currency'] ?>" selected ><?php if ($_Serveur_['Payement']['currency'] == 'EUR') {echo 'Euro';}elseif ($_Serveur_['Payement']['currency'] == 'CAD'){echo 'Canadian Dollar';} elseif ($_Serveur_['Payement']['currency'] == 'CHF'){echo 'Swiss Franc';} elseif ($_Serveur_['Payement']['currency'] == 'USD'){echo 'United States Dollar';} elseif ($_Serveur_['Payement']['currency'] == 'GBP'){echo 'Pound Sterling';} else {echo $_Serveur_['Payement']['currency'];} ?></option>
                     <option value="AUD">Australian Dollar</option>
                     <option value="BRL">Brazilian Real</option>
                     <option value="CAD">Canadian Dollar</option>
@@ -469,7 +469,7 @@
                                                             <?php if(isset($offres[$j]['evo'])) { ?> 
                                                                 <script>
                                                                     $(document).ready(function() { <?php
-                                                                        $tp = explode(",",$offres[$j]['evo']);
+                                                                        $tp = explode(',',$offres[$j]['evo']);
                                                                         foreach($tp as $value)
                                                                         {
                                                                             echo "$('#dep-tag".$j.$offres[$j]['id']."').tagsinput('add', { 'value': ".$value." ,'text':'".$offresByGet[$value]."' });";

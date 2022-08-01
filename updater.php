@@ -82,7 +82,7 @@ else
                 </p>
             </div>
             <?php
-                if (! file_exists("update.zip")){
+                if (! file_exists('update.zip')){
                     ?>
                     <div class="alert alert-danger">
                         <p class="text">
@@ -207,39 +207,39 @@ function file181to182() {
 }
 
 function bdd181to182($bddConnection) {
-    $bddConnection->exec("CREATE TABLE IF NOT EXISTS cmw_widgets (
+    $bddConnection->exec('CREATE TABLE IF NOT EXISTS cmw_widgets (
       id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       message varchar(200) DEFAULT NULL,
       titre varchar(100),
       type int(1) DEFAULT 0,
       ordre int(2)
-    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
 
-    $bddConnection->exec("DROP TABLE cmw_menu");
+    $bddConnection->exec('DROP TABLE cmw_menu');
 
-    $bddConnection->exec("CREATE TABLE IF NOT EXISTS cmw_pages (
+    $bddConnection->exec('CREATE TABLE IF NOT EXISTS cmw_pages (
       id int(11) AUTO_INCREMENT,
       titre varchar(100),
       contenu text,
       PRIMARY KEY (id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
 
-    $bddConnection->exec("CREATE TABLE IF NOT EXISTS cmw_miniature (
+    $bddConnection->exec('CREATE TABLE IF NOT EXISTS cmw_miniature (
       id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       message varchar(200) DEFAULT NULL,
       image varchar(100),
       type int(1) DEFAULT 0,
       lien varchar(100),
       ordre int(2)
-    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
 
-    $bddConnection->exec("CREATE TABLE IF NOT EXISTS cmw_menu (
+    $bddConnection->exec('CREATE TABLE IF NOT EXISTS cmw_menu (
       `id` int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       `name` varchar(100),
       `dest` int(11),
       `url` varchar(100) DEFAULT NULL,
       `ordre` int(2)
-    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
 
     $bddConnection->exec("INSERT INTO `cmw_menu` (`id`, `dest`, `url`, `ordre`, `name`) VALUES
         (1, -1, 'index.php', 0, 'Accueil'),
@@ -254,29 +254,29 @@ function bdd181to182($bddConnection) {
 
 
      // Gestion des UUID dans la bdd
-     $bddConnection->exec("ALTER TABLE cmw_users ADD (
+     $bddConnection->exec('ALTER TABLE cmw_users ADD (
         `UUID` varchar(32) DEFAULT NULL,
         `UUIDF` varchar(36) DEFAULT NULL 
         `token` varchar(32) DEFAULT NULL
-    )");
+    )');
 }
 
 function pages181to182($bddConnection) {
-    $req = $bddConnection->query("SELECT * FROM cmw_pages WHERE 1");
+    $req = $bddConnection->query('SELECT * FROM cmw_pages WHERE 1');
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
-    require("modele/app/page.class.php");
+    require('modele/app/page.class.php');
     $page = new page();
 
     if(!empty($req)) {
         foreach($req as $value) {
-            $str = "";
+            $str = '';
 
             $s2 = explode('#µ¤#', $value['contenu']);
             for($j = 0; $j < count($s2); $j++) 
             {
                 $s = explode('|;|', $s2[$j]);
-                $str .= "<h3>".$s[0]."</h3>";
-                $str .= "<div>".$s[1]."</div>";
+                $str .= '<h3>' .$s[0]. '</h3>';
+                $str .= '<div>' .$s[1]. '</div>';
             }
 
             $page->print($value['titre'], $str);
@@ -319,11 +319,11 @@ function accueil181to182($bddConnection) {
             $infos = array();
             $infos['ordre'] = $i;
             $infos['message'] = $value['message'];
-            $infos['type'] = $value['type'] == "lien" ? 0 : 1;
+            $infos['type'] = $value['type'] == 'lien' ? 0 : 1;
             $infos['lien'] = $value['lien'];
-            $infos['image'] = str_replace("miniature-demo-1.jpg", "miniature-demo-1.png",str_replace("miniature-demo-2.jpg", "miniature-demo-1.png",str_replace("miniature-demo-3.jpg", "miniature-demo-1.png",$value['image'])));
+            $infos['image'] = str_replace('miniature-demo-1.jpg', 'miniature-demo-1.png',str_replace('miniature-demo-2.jpg', 'miniature-demo-1.png',str_replace('miniature-demo-3.jpg', 'miniature-demo-1.png',$value['image'])));
 
-            $req = $bddConnection->prepare("INSERT INTO `cmw_miniature` (`message`, `image`, `type`, `lien`, `ordre`) VALUES (:message, :image, :type, :lien, :ordre);");
+            $req = $bddConnection->prepare('INSERT INTO `cmw_miniature` (`message`, `image`, `type`, `lien`, `ordre`) VALUES (:message, :image, :type, :lien, :ordre);');
             $req->execute($infos);
             $i++;
         }
@@ -340,8 +340,8 @@ function undir($dir) {
    if (is_dir($dir)) {
      $objects = scandir($dir);
      foreach ($objects as $object) {
-       if ($object != "." && $object != "..") {
-         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+       if ($object != '.' && $object != '..') {
+         if (filetype($dir. '/' .$object) == 'dir') rrmdir($dir. '/' .$object); else unlink($dir. '/' .$object);
        }
      }
      reset($objects);

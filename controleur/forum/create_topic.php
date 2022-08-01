@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm("connect"))
+if(Permission::getInstance()->verifPerm('connect'))
 {
 	if(!empty($_POST['nom']) AND !empty($_POST['contenue'] AND strlen($_POST['contenue']) <= 15000))
 	{

@@ -34,7 +34,7 @@
         <!-- Gestion des informations de vote -->
         <div>
             <?php
-            if (Permission::getInstance()->verifPerm("connect") and isset($_GET['player']) and $_Joueur_['pseudo'] == $_GET['player']) {  ?>
+            if (Permission::getInstance()->verifPerm('connect') and isset($_GET['player']) and $_Joueur_['pseudo'] == $_GET['player']) {  ?>
                     <!-- Gestion des Récompenses -->
                     <div class="alert alert-main w-80 mx-auto" id="disprecompList" style="display:none;">
                         
@@ -52,13 +52,13 @@
 
 
         <div class="row">
-            <?php if (!isset($_GET['player']) || !isset($_SESSION["Player"]['id']) || empty($_SESSION["Player"]['id']) || $_Joueur_['pseudo'] != $_GET['player']) { ?>
+            <?php if (!isset($_GET['player']) || !isset($_SESSION['Player']['id']) || empty($_SESSION['Player']['id']) || $_Joueur_['pseudo'] != $_GET['player']) { ?>
 
                 <!-- Demande du Pseudonyme -->
                 <div class="col-md-12 col-lg-12 col-sm-12 mb-5">
                     <div class="card">
                         <div class="card-header">
-                            <?php if(isset($_SESSION["Player"]['id']) && !empty($_SESSION["Player"]['id'])){ ?>
+                            <?php if(isset($_SESSION['Player']['id']) && !empty($_SESSION['Player']['id'])){ ?>
                             <h4>La récompense du vote sera donnée à :</h4>
                             <div class="card-body">
                                 <form id="forme-vote" role="form" method="GET" action="index.php">
@@ -66,7 +66,7 @@
                                         <div class="row">
                                             <input type="text" style="display:none;" name="page" value="voter">
                                             <div class="col-md-12 col-lg-6 col-sm-12">
-                                                <input type="text" readonly id="vote-pseudo" style="cursor: unset" class="form-control" name="player" placeholder="Pseudo" value="<?= (Permission::getInstance()->verifPerm("connect")) ? $_Joueur_['pseudo'] : '' ?>" required>
+                                                <input type="text" readonly id="vote-pseudo" style="cursor: unset" class="form-control" name="player" placeholder="Pseudo" value="<?= (Permission::getInstance()->verifPerm('connect')) ? $_Joueur_['pseudo'] : '' ?>" required>
                                             </div>
                                             <div class="col-md-12 col-lg-6 col-sm-12">
                                                 <button class="form-control btn btn-secondary" type="submit">Suivant</button>
@@ -128,7 +128,7 @@
                 </div>
 
                 <?php
-                require_once("modele/vote.class.php");
+                require_once('modele/vote.class.php');
                  $pseudo = htmlspecialchars($_GET['player']); ?>
                 <div class="col-md-12 col-lg-6 col-sm-12 mb-5">
                     <!-- Affichage des sites de vote -->
@@ -142,7 +142,7 @@
 
                                     <?php
 
-                                    if(Permission::getInstance()->verifPerm("connect") AND  isset($_GET['player']) AND $_Joueur_['pseudo'] == $_GET['player'] ) {
+                                    if(Permission::getInstance()->verifPerm('connect') AND  isset($_GET['player']) AND $_Joueur_['pseudo'] == $_GET['player'] ) {
                                         echo '<script type="application/javascript">isConnect = true;</script>';
                                     }
 
@@ -180,7 +180,7 @@
                 <script type="application/javascript">
                 <?php 
                     foreach($topRecompense as $key => $value) {
-                        echo "topRec.set(".$key.",JSON.parse('".$value."'));";
+                        echo 'topRec.set(' .$key.",JSON.parse('".$value."'));";
                     }
 
                 ?></script>
@@ -198,7 +198,7 @@
                                 <?php  if(isset($dateRec) && $dateRec['valueType'] != 0 && $dateRec['etat'] != 0)
                                 { 
                                    
-                                    ?><h6> Les votes se rénitialiseront le <?= str_replace(array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'), date('l', $dateRec['etat'])).date(" j \à G\hi", $dateRec['etat']); ?>.</h6>
+                                    ?><h6> Les votes se rénitialiseront le <?= str_replace(array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'), date('l', $dateRec['etat'])).date(' j \à G\hi', $dateRec['etat']); ?>.</h6>
                                 <?php } if(isset($_Serveur_['vote']['oldDisplay'])) {
                                     $a = 1; ?>
                                     <br/>

@@ -38,7 +38,7 @@
                                 <?php if ($tickets['ticketDisplay'] == 0 or $tickets['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) :
                                     if (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) : ?>
                                         <td>
-                                            <?php if ($tickets['ticketDisplay'] == "0") : ?>
+                                            <?php if ($tickets['ticketDisplay'] == '0') : ?>
                                                 <span>
                                                     <i class="glyphicon glyphicon-eye-open"></i> Publique
                                                 </span>
@@ -73,7 +73,7 @@
                                     <td>
                                         <?php
                                         $ticketstatus = $tickets['etat'];
-                                        if ($ticketstatus == "1") : ?>
+                                        if ($ticketstatus == '1') : ?>
                                             <button class="btn btn-success">
                                                 Résolu <span class="glyphicon glyphicon-ok"></span>
                                             </button>
@@ -105,7 +105,7 @@
 
                             <!-- Système de ticket support -->
 
-                            <?php if ($tickets['ticketDisplay'] == "0" or $tickets['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) :
+                            <?php if ($tickets['ticketDisplay'] == '0' or $tickets['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) :
                                 $ticketstatus = $tickets['etat'];
 
                                 unset($message);
@@ -192,7 +192,7 @@
                                                                                         </ul>
                                                                                     </div>
 
-                                                                                <?php endif; if($tickets['etat'] == "0") { ?>
+                                                                                <?php endif; if($tickets['etat'] == '0') { ?>
                                                                                 <button type="button" onclick="addBlockQuote('ckeditorCom<?= $tickets['id'] ?>','contenueCom<?= $tickets['id'] ?>-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>', '<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
                                                                                 <?php } ?>
                                                                             </div>
@@ -216,7 +216,7 @@
                                             <div class="modal-footer">
 
                                                 <!-- Envoie d'un commentaire -->
-                                                <?php if ($tickets['etat'] == "0") : ?>
+                                                <?php if ($tickets['etat'] == '0') : ?>
 
                                                     <form action="?action=post_ticket_commentaire" method="post">
                                                         <input type="hidden" name="id" value="<?= $tickets['id'] ?>" />
@@ -298,7 +298,7 @@
 
                 <!-- Création de Ticket -->
 
-                <?php if (!Permission::getInstance()->verifPerm("connect")) : ?>
+                <?php if (!Permission::getInstance()->verifPerm('connect')) : ?>
 
                     <a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-main w-100">
                         <i class="fas fa-sign-in-alt"></i> Se connecter pour ouvrir un ticket
@@ -328,14 +328,14 @@
                                             <div class="form-group">
                                                 <label for="vu_ticket">Visibilité</label>
                                                 <?php
-                                                if (!isset($_Serveur_["support"]["visibilite"]) || $_Serveur_["support"]["visibilite"] == "both") : ?>
+                                                if (!isset($_Serveur_['support']['visibilite']) || $_Serveur_['support']['visibilite'] == 'both') : ?>
                                                     <select class="form-control custom-text-input" id="vu_ticket" name="ticketDisplay">
                                                         <option value="0">Publique</option>
                                                         <option value="1">Privée</option>
                                                     </select>
                                                 <?php else : ?>
                                                     <select class="form-control custom-text-input" id="vu_ticket" name="ticketDisplay">
-                                                        <?php if ($_Serveur_["support"]["visibilite"] == "prive") : ?>
+                                                        <?php if ($_Serveur_['support']['visibilite'] == 'prive') : ?>
                                                             <option value="1">Privée</option>
                                                         <?php else : ?>
                                                             <option value="0">Publique</option>

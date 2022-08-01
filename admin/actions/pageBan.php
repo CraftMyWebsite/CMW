@@ -1,5 +1,5 @@
 <?php
-if($_Permission_->verifPerm("createur"))
+if($_Permission_->verifPerm('createur'))
 {
 	if(isset($_POST['titre'], $_POST['texte']))
 	{

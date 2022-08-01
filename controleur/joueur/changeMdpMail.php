@@ -27,14 +27,14 @@ if(isset($_POST['email']) AND !empty($_POST['email']))
 			$maj->setNouvellesDonneesResetToken($resetToken);
 
 			$url = $_SERVER['SERVER_NAME'];
-	    	$ht = $_SERVER["HTTPS"] == "on" ? "https://" : "http://";
+	    	$ht = $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://';
 			
 			$lien = $ht.$url.'/index.php?&action=passRecoverConfirm&token='.urlencode($resetToken);
 
 			$retourligne = "\r\n";
 
             $to = $donneesJoueur['email'];
-            $subject = "[".$_Serveur_['General']['name']."]Recuperation de mot de passe";
+            $subject = '[' .$_Serveur_['General']['name']. ']Recuperation de mot de passe';
             $txt = 'Bonjour, '.$donneesJoueur['pseudo'].$retourligne
                     .$retourligne
                     .'Suite à une demande de récupération de mail, vous recevez ce message.'.$retourligne

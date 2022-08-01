@@ -32,7 +32,7 @@ class googleAdsense
     }
     
     public static function generateAds($id) {
-        file_put_contents ("ads.txt", "google.com, ".$this->id.", DIRECT, f08c47fec0942fa0");
+        file_put_contents ('ads.txt', 'google.com, ' .$this->id. ', DIRECT, f08c47fec0942fa0');
     }
 }
 ?>

@@ -60,16 +60,16 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 			{
 				$mail->IsMail();
 			}
-			$mail->From = $_POST["from"];
+			$mail->From = $_POST['from'];
 			$mail->FromName = $_Serveur_['General']['name'];
 			$mail->addAddress($_POST['email']);   
-			$mail->addReplyTo($_POST["reply"], $_Serveur_['General']['name']);
+			$mail->addReplyTo($_POST['reply'], $_Serveur_['General']['name']);
 			$mail->isHTML(true);                               
-			$mail->Subject = htmlspecialchars($_POST["sujet"]);
+			$mail->Subject = htmlspecialchars($_POST['sujet']);
 			require('modele/app/ckeditor.class.php');
 			$_POST['contenu'] = ckeditor::verif($_POST['contenu'],true);
-			$mail->Body    = $_POST["contenu"];
-			$mail->AltBody = strip_tags($_POST["contenu"]);
+			$mail->Body    = $_POST['contenu'];
+			$mail->AltBody = strip_tags($_POST['contenu']);
 			if(!$mail->send()) {
 				echo 'Erreur: ' . $mail->ErrorInfo;
 			} else {

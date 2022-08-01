@@ -1,6 +1,6 @@
 <?php
 
-if($_Permission_->verifPerm("createur")) {
+if($_Permission_->verifPerm('createur')) {
 
 	$_Serveur_['General']['joueur'] = htmlspecialchars($_POST['nom']);
 	unset($_POST['nom']);
@@ -9,8 +9,8 @@ if($_Permission_->verifPerm("createur")) {
 	unset($_POST['nomCreateur']);
 	$_Serveur_['General']['createur']['effets'] = htmlspecialchars($_POST['effetCreateur']);
 	unset($_POST['effetCreateur']);
-	if(isset($_POST['prefixCreateur-none']) && $_POST['prefixCreateur-none'] == "on")
-		$_Serveur_['General']['createur']['bg'] = "";
+	if(isset($_POST['prefixCreateur-none']) && $_POST['prefixCreateur-none'] == 'on')
+		$_Serveur_['General']['createur']['bg'] = '';
 	else
 		$_Serveur_['General']['createur']['bg'] = htmlspecialchars($_POST['prefixCreateur']);
 	unset($_POST['prefixCreateur']);
@@ -23,18 +23,18 @@ if($_Permission_->verifPerm("createur")) {
 		$allPerm = $_Permission_->readPerm($idGrade[$i]['id']);
 		$editGrade = $idGrade[$i];
 		unset($editGrade['priorite']);
-		$editGrade["nom"] = $_POST["gradeName".$i];
-		if(isset($_POST['prefix'.$i."-none"]) && $_POST['prefix'.$i.'-none'] == "on")
-			$editGrade['prefix'] = "";
+		$editGrade['nom'] = $_POST['gradeName' .$i];
+		if(isset($_POST['prefix'.$i. '-none']) && $_POST['prefix'.$i.'-none'] == 'on')
+			$editGrade['prefix'] = '';
 		else
-			$editGrade["prefix"] = $_POST["prefix".$i];
-		if($_POST['couleur'.$i] == "000000" OR empty($_POST['couleur'.$i]))
-			$editGrade["couleur"] = "";
+			$editGrade['prefix'] = $_POST['prefix' .$i];
+		if($_POST['couleur'.$i] == '000000' OR empty($_POST['couleur'.$i]))
+			$editGrade['couleur'] = '';
 		else
-			$editGrade["couleur"] = $_POST['couleur'.$i];
-		$editGrade["effets"] = $_POST["effet".$i];
+			$editGrade['couleur'] = $_POST['couleur'.$i];
+		$editGrade['effets'] = $_POST['effet' .$i];
 
-        $editGrade = editPerm($i, $editGrade, $allPerm, "", $_POST);
+        $editGrade = editPerm($i, $editGrade, $allPerm, '', $_POST);
         $editGrade['permDefault'] = serialize($editGrade['PermsDefault']);
         unset($editGrade['PermsDefault']);
         $editGrade['permPanel'] = serialize($editGrade['PermsPanel']);

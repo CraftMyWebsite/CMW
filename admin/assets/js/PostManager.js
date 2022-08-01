@@ -204,7 +204,7 @@ function sendPost(idform, callback, sendData) {
     }
     if(isset(callback)) {
         callback();
-    };
+    }
 }
 
 function clearAllInput(idform) {
@@ -253,12 +253,12 @@ function updateCont(action, el, callback) {
             data = data.substring(data.indexOf('[DIV]')+5);
             el.innerHTML = "";
             el.insertAdjacentHTML("afterbegin", data);
-           if(isset(callback)) {callback(true)};
+           if(isset(callback)) {callback(true)}
         } else {
             el.innerHTML = "";
             el.insertAdjacentHTML("afterbegin", el.innerHTML.substring(73));
             notif("error", "Erreur", status);
-             if(isset(callback)) {callback(false)};
+             if(isset(callback)) {callback(false)}
         }
     });
 }

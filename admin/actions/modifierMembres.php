@@ -7,7 +7,7 @@ if($_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) {
 	{
 		echo $id;
 		ValiderChangement($_POST['pseudo'.$id], $_POST['email'.$id], $_POST['rang'.$id], $_POST['tokens'.$id], $id, $bddConnection);
-		if(isset($_POST['password' . $id]) && !empty($_POST['password' . $id]) && $_POST['password' . $id] != "" && $_POST['password' . $id] != " ")
+		if(isset($_POST['password' . $id]) && !empty($_POST['password' . $id]) && $_POST['password' . $id] != '' && $_POST['password' . $id] != ' ')
 		{
 			ChangerMdp($_POST['password' . $id], $id, $bddConnection);
 		}

@@ -4,7 +4,7 @@ if(Permission::getInstance()->verifPerm('PermsPanel', 'theme', 'actions', 'editT
 	$configTheme = new Lire('theme/'.$_Serveur_['General']['theme'].'/config/config.yml');
 	$_Theme_ = $configTheme->GetTableau();
 
-	require_once("modele/app/ckeditor.class.php");
+	require_once('modele/app/ckeditor.class.php');
 
  	$_Theme_['Pied']['about'] = ckeditor::verif($_POST['about'],true);
     $_Theme_['Pied']['social'] = json_decode($_POST['jsonReseau'], true);

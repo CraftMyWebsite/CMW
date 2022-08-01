@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm("connect")) {
+if(Permission::getInstance()->verifPerm('connect')) {
 
     $pseudo = $_Joueur_['pseudo'];
     $id_news = urldecode($_GET['id_news']);
@@ -27,10 +27,10 @@ if(Permission::getInstance()->verifPerm("connect")) {
 
 	if($CheckOwnerCommentaire == $pseudo OR $adminMode == true)
 	{
-		if($ExistNews == "0") {
+		if($ExistNews == '0') {
 			header('Location: index.php?page=accueil&NewsNotExist');
 		} else {
-			if($ExistCommentaire == "0") {
+			if($ExistCommentaire == '0') {
 				header('Location: index.php?page=accueil&CommentaireNotExist');
 			} else {
 					if(!$CheckOwnerCommentaire == $pseudo OR $adminMode != true) {

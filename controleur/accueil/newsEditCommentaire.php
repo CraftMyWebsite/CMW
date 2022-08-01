@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm("connect")) {
+if(Permission::getInstance()->verifPerm('connect')) {
 	$pseudo = $_Joueur_['pseudo'];
 	$commentaire = htmlspecialchars($_POST['edit_commentaire']);
 	$id_news = urldecode($_GET['id_news']);
@@ -25,7 +25,7 @@ if(Permission::getInstance()->verifPerm("connect")) {
 	$get_CountEditCommentaire = $rep_CountEditCommentaire->fetch(PDO::FETCH_ASSOC);
 	$CountEditCommentaire = $get_CountEditCommentaire['nbrEdit'];
 
-	if($ExistNews == "0") {
+	if($ExistNews == '0') {
 		header('Location: index.php?page=accueil&NewsNotExist');
 	} else {
 		if(!$CheckOwnerCommentaire == $pseudo OR $adminMode != true) {

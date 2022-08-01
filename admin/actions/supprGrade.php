@@ -1,5 +1,5 @@
 <?php
-if($_Permission_->verifPerm("createur")) {
+if($_Permission_->verifPerm('createur')) {
 
 	$id = intval($_GET['id']);
 

@@ -56,7 +56,7 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail
         
           <div class="row">
 
-              <div class="col-md-8 offset-md-2" <?php if($sysMail[$i]['etatMail'] == "1") { echo 'style="display:none;"'; }?> id="active<?php echo $sysMail[$i]['idMail']; ?>">
+              <div class="col-md-8 offset-md-2" <?php if($sysMail[$i]['etatMail'] == '1') { echo 'style="display:none;"'; }?>id="active<?php echo $sysMail[$i]['idMail']; ?>">
                 <div class="alert alert-danger text-center">
                   <span style="text-align: center">
                   L'API est actuellement désactivée.
@@ -64,7 +64,7 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail
                 </div>
               </div>
 
-              <div class="col-md-8 offset-md-2" <?php if($sysMail[$i]['etatMail'] == "0") { echo 'style="display:none;"'; }?>id="desact<?php echo $sysMail[$i]['idMail']; ?>">
+              <div class="col-md-8 offset-md-2" <?php if($sysMail[$i]['etatMail'] == '0') { echo 'style="display:none;"'; }?>id="desact<?php echo $sysMail[$i]['idMail']; ?>">
                 <div class="alert alert-success text-center">
                   <span style="text-align: center">
                   L'API est actuellement activé.
@@ -74,8 +74,8 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail
 
             <div class="col-md-12 text-center" id="switch<?php echo $sysMail[$i]['idMail']; ?>">
 
-                        <input type="hidden"  value="<?php if($sysMail[$i]['etatMail'] == "0") { echo '1'; } else { echo '0'; } ?>" id="value-<?php echo $sysMail[$i]['idMail']; ?>" name="etatMail"/>
-                        <button type="submit"  id="btn-<?php echo $sysMail[$i]['idMail']; ?>" onclick="sendPost('switch<?php echo $sysMail[$i]['idMail']; ?>');" class="btn btn-<?php if($sysMail[$i]['etatMail'] == "1") { echo 'success'; } else { echo 'danger'; } ?> center-block w-50" /><?php if($sysMail[$i]['etatMail'] == "1") { echo 'Activer'; } else { echo 'Désactiver'; } ?></button>
+                        <input type="hidden" value="<?php if($sysMail[$i]['etatMail'] == '0') { echo '1'; } else { echo '0'; } ?>" id="value-<?php echo $sysMail[$i]['idMail']; ?>" name="etatMail"/>
+                        <button type="submit"  id="btn-<?php echo $sysMail[$i]['idMail']; ?>" onclick="sendPost('switch<?php echo $sysMail[$i]['idMail']; ?>');" class="btn btn-<?php if($sysMail[$i]['etatMail'] == '1') { echo 'success'; } else { echo 'danger'; } ?> center-block w-50" /><?php if($sysMail[$i]['etatMail'] == '1') { echo 'Activer'; } else { echo 'Désactiver'; } ?></button>
                         <script>initPost("switch<?php echo $sysMail[$i]['idMail']; ?>", "admin.php?&action=switchSysMail&idMail=<?php echo $sysMail[$i]['idMail']; ?>",function(data) { if(data) {
                             if(get("desact<?php echo $sysMail[$i]['idMail']; ?>").style.display == "none") {
                               show("desact<?php echo $sysMail[$i]['idMail']; ?>");

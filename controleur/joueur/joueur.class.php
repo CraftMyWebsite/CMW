@@ -57,11 +57,11 @@ class Joueur
             for ($i = 0; $i < 16; $i++) {
                 $token .= $characters[rand(0, $charactersLength - 1)];
             }
-            $token .= "-".time();
+            $token .= '-' .time();
         } while($this->tokenExist($bdd, $token) != null);
         
-        $req = $bdd->prepare("UPDATE `cmw_users` SET `token`=:token WHERE id=:id");
-        $req->execute(array("id" => $id, "token" => $token));
+        $req = $bdd->prepare('UPDATE `cmw_users` SET `token`=:token WHERE id=:id');
+        $req->execute(array('id' => $id, 'token' => $token));
         setcookie('token', $token, time() + 31536000, '/', null, true,true);
     }
     
@@ -102,8 +102,8 @@ class Joueur
     }
     
     private function tokenExist($bdd, $token) {
-        $req = $bdd->prepare("SELECT * FROM cmw_users WHERE token=:token");
-        $req->execute(array("token"=>$token));
+        $req = $bdd->prepare('SELECT * FROM cmw_users WHERE token=:token');
+        $req->execute(array('token' =>$token));
         if(!empty($req)) {
             return $req->fetch(PDO::FETCH_ASSOC);
         }
@@ -124,8 +124,8 @@ class Joueur
     }
     
     private function pickupUUID($bdd) {
-        require_once("modele/vote.class.php");
-        $UUID = vote::fetch("https://api.mojang.com/users/profiles/minecraft/".$_SESSION['Player']['pseudo']);
+        require_once('modele/vote.class.php');
+        $UUID = vote::fetch('https://api.mojang.com/users/profiles/minecraft/' .$_SESSION['Player']['pseudo']);
         
         if ($UUID != NULL) {
             $obj = json_decode($UUID);
@@ -133,14 +133,14 @@ class Joueur
         }
         
         //CONVERSION UUIDF
-        if ($UUID != "INVALIDE") {
-            $UUIDF = substr_replace($UUID, "-", 8, 0);
-            $UUIDF = substr_replace($UUIDF, "-", 13, 0);
-            $UUIDF = substr_replace($UUIDF, "-", 18, 0);
-            $UUIDF = substr_replace($UUIDF, "-", 23, 0);
+        if ($UUID != 'INVALIDE') {
+            $UUIDF = substr_replace($UUID, '-', 8, 0);
+            $UUIDF = substr_replace($UUIDF, '-', 13, 0);
+            $UUIDF = substr_replace($UUIDF, '-', 18, 0);
+            $UUIDF = substr_replace($UUIDF, '-', 23, 0);
         }else{
-            $UUIDF = "INVALIDE";
-            $UUID = "INVALIDE";
+            $UUIDF = 'INVALIDE';
+            $UUID = 'INVALIDE';
         }
         
         $requetebdduuid2 = $bdd->prepare('UPDATE cmw_users SET UUID = :uuid, UUIDF = :uuidf WHERE pseudo = :pseudo;');

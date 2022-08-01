@@ -1,5 +1,5 @@
 <?php 
-if(Permission::getInstance()->verifPerm("connect") && isset($_GET['offre']) && isset($_GET['quantite']))
+if(Permission::getInstance()->verifPerm('connect') && isset($_GET['offre']) && isset($_GET['quantite']))
 {
 	if($_GET['quantite'] > 0)
 	{
@@ -10,7 +10,7 @@ if(Permission::getInstance()->verifPerm("connect") && isset($_GET['offre']) && i
 		$fetch = $req->fetch(PDO::FETCH_ASSOC);
 		if($fetch['nbre_vente'] == 0 )
 		{
-			header('Location: index.php?page=erreur&erreur=19&type='.htmlspecialchars("Erreur Boutique").'&titre='.htmlspecialchars("Stock insufisant !"). '&contenue='.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( !"));
+			header('Location: index.php?page=erreur&erreur=19&type='.htmlspecialchars('Erreur Boutique').'&titre='.htmlspecialchars('Stock insufisant !'). '&contenue='.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( !"));
 				exit();
 		}
 		$execution = $_Panier_->ajouterProduit(htmlspecialchars($_GET['offre']), htmlspecialchars($_GET['quantite']), $fetch['prix']);

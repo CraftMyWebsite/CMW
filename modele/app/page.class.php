@@ -3,7 +3,7 @@
 class page
 {
 
-    private $dir = "include/CustomPage/";
+    private $dir = 'include/CustomPage/';
     private $pages = [];
     
     public function __construct()
@@ -13,8 +13,8 @@ class page
             $pages = scandir($this->dir);
             foreach($pages as $value)
             {
-                if($value != "." && $value != "..") {
-                    if(strtolower(substr($value, -4)) == ".php" && strlen($value) > 4) {
+                if($value != '.' && $value != '..') {
+                    if(strtolower(substr($value, -4)) == '.php' && strlen($value) > 4) {
                         array_push($this->pages, substr($value, 0, -4));
                     } else {
                         $this->removePage(substr($value, 0, -4));
@@ -50,7 +50,7 @@ class page
         $return = array();
         foreach($this->pages as $value)
         {
-            array_push($return, array("titre" => $value, "content" => $this->traitPHP(file_get_contents($this->getPath($value)))));
+            array_push($return, array('titre' => $value, 'content' => $this->traitPHP(file_get_contents($this->getPath($value)))));
         }
         
         return $return;
@@ -61,10 +61,10 @@ class page
     }
     
     public function traitPHP($c) {
-        $p = strpos($c, "<?php");
+        $p = strpos($c, '<?php');
         while($p !== false) {
             $p2 = $p;
-            $p = strpos($c, "?>", $p);
+            $p = strpos($c, '?>', $p);
             if($p !== false) {
                 $p2--;
                 while($p2 <= $p) {
@@ -87,14 +87,14 @@ class page
                         $p = $p + 2;
                     }
                 }
-                $p = strpos($c, "<?php", $p);
+                $p = strpos($c, '<?php', $p);
             }
         }
         return $c;
     }
     
     public function getPath($name) {
-        return $this->dir.$name.".php";
+        return $this->dir.$name. '.php';
     }
     
     public function removePage($filename) {

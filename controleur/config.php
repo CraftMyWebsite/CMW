@@ -8,7 +8,7 @@
 	require_once('./include/MinecraftPing/MinecraftPing.class.php');
 
 	//Récupération de la classe Permission
-	require_once("modele/grades/perms.class.php");
+	require_once('modele/grades/perms.class.php');
 	
 	// On lit le fichier de config et on récupère les information dans un tableau. Celui-ci contiens la config générale.
 	$configLecture = new Lire('modele/config/config.yml');
@@ -17,10 +17,10 @@
 
 	if(!isset($_Serveur_['lastCMWCheck']) || (isset($_Serveur_['lastCMWCheck']) && $_Serveur_['lastCMWCheck'] < time())) {
 		$_Serveur_['lastCMWCheck'] = time() + 3600;
-		$URLWEBSITE = "http://".$_SERVER['HTTP_HOST']; 
-		require_once("modele/vote.class.php");
+		$URLWEBSITE = 'http://' .$_SERVER['HTTP_HOST'];
+		require_once('modele/vote.class.php');
 		$SYSTEMINFO = vote::fetch('https://craftmywebsite.fr/information/website.php?href='. $URLWEBSITE);
-        if($SYSTEMINFO != "" && !empty($SYSTEMINFO)) {
+        if($SYSTEMINFO != '' && !empty($SYSTEMINFO)) {
         	$_Serveur_['SYSTEMINFO'] = $SYSTEMINFO;
         } else if(isset($_Serveur_['SYSTEMINFO'])) {
         	unset($_Serveur_['SYSTEMINFO']);

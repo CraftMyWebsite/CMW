@@ -1,0 +1,10 @@
+#exclude config file
+modele/config/config.yml
+
+#exclude .htpasswd
+admin/actions/.htpasswd
+controleur/.htpasswd
+modele/.htpasswd
+
+#Exclude idea folder
+.idea/

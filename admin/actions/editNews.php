@@ -1,8 +1,8 @@
 <?php
 if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'editNews')) {
-	if(isset($_POST["pinned"])) {
+	if(isset($_POST['pinned'])) {
 		$req = $bddConnection->prepare('UPDATE cmw_news SET titre = :titre, message = :contenu, pinned = 1 WHERE id = :id');
-		$bddConnection->query("UPDATE cmw_news SET pinned = 0");
+		$bddConnection->query('UPDATE cmw_news SET pinned = 0');
 	} else {
 		$req = $bddConnection->prepare('UPDATE cmw_news SET titre = :titre, message = :contenu WHERE id = :id');
 	}

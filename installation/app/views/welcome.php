@@ -6,12 +6,12 @@
 <?php
 $distant = file_get_contents('http://craftmywebsite.fr/release/version.txt');
 if($distant == $versioncms){
-    $typeversion = "stable";
+    $typeversion = 'stable';
 }else{
     if($distant < $versioncms){
-        $typeversion = "beta";
+        $typeversion = 'beta';
     }else{
-        $typeversion = "outdated"; ?>
+        $typeversion = 'outdated'; ?>
         <div class="modal blur show" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" id="modal" style="">
             <div class="modal-dialog modal-xl" role="document">
                     <div class="alert alert-danger">

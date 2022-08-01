@@ -3,7 +3,7 @@
         Upload - Gestion des images
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm('PermsPanel', "upload","showPage")) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'upload', 'showPage')) { ?>
     
     <div class="row">
         <div class="col-md-12 text-center">
@@ -16,8 +16,8 @@
 <div class="row">
 
     <div class="col-md-12">
-    <?php if(isset($_GET["erreur"])){
-	switch($_GET["erreur"]){
+    <?php if(isset($_GET['erreur'])){
+	switch($_GET['erreur']){
 		case 0:
 			echo "<script>notif('error', 'Erreur', 'L\'extension n\'est pas correcte.');</script>";
 			break;
@@ -36,7 +36,7 @@
     echo "<script>notif('success', 'Image stocké !', '');</script>";
 }?>
     </div>
-    <?php if($_Permission_->verifPerm('PermsPanel', "upload","manager")) { ?>
+    <?php if($_Permission_->verifPerm('PermsPanel', 'upload', 'manager')) { ?>
     <div class="col-md-12 col-xl-6 col-12">
         <div class="card">
             <div class="card-header">
@@ -75,7 +75,7 @@
                                 <br>
                                 <div class="well mt-3">
                                     <p class="pt-2">
-                                       <?= (isset($_SERVER['HTTPS']) ? "https" : "http") . "://".$_SERVER["HTTP_HOST"]?>/theme/upload/panel/<?=$fichier?>
+                                       <?= (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' .$_SERVER['HTTP_HOST']?>/theme/upload/panel/<?=$fichier?>
                                     </p>
                                 </div>
                             </div>

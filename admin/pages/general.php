@@ -257,12 +257,12 @@
 
                         <label for="tlsradio" class="control-label">Protocole d'envoie:</label>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="tlsradio" name="protocol" value="tls" class="custom-control-input" <?=(isset($_Serveur_['SMTP']['Protocol']) && $_Serveur_['SMTP']['Protocol'] == "tls") ? 'checked': ((isset($_Serveur_['SMTP']['Protocol']) && $_Serveur_['SMTP']['Protocol'] == "ssl") ? '': 'checked');?> >
+                            <input type="radio" id="tlsradio" name="protocol" value="tls" class="custom-control-input" <?=(isset($_Serveur_['SMTP']['Protocol']) && $_Serveur_['SMTP']['Protocol'] == 'tls') ? 'checked': ((isset($_Serveur_['SMTP']['Protocol']) && $_Serveur_['SMTP']['Protocol'] == 'ssl') ? '': 'checked');?> >
                             <label class="custom-control-label" for="tlsradio">TLS (Par default)</label>
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="sslradio" name="protocol" value="ssl" class="custom-control-input" <?=(isset($_Serveur_['SMTP']['Protocol']) && $_Serveur_['SMTP']['Protocol'] == "ssl") ? 'checked': '';?>>
+                            <input type="radio" id="sslradio" name="protocol" value="ssl" class="custom-control-input" <?=(isset($_Serveur_['SMTP']['Protocol']) && $_Serveur_['SMTP']['Protocol'] == 'ssl') ? 'checked': '';?>>
                             <label class="custom-control-label" for="sslradio">SSL</label>
                         </div>
                         <label class="control-label" for="ckeditor">Footer des mails</label>

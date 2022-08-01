@@ -1,6 +1,6 @@
 <?php
 if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
-    require("modele/accueil/miniature.class.php");
+    require('modele/accueil/miniature.class.php');
     $Minia = new miniature($bddConnection);
     
 
@@ -13,7 +13,7 @@ if($_Permission_->verifPerm('PermsPanel', 'home', 'actions', 'editMiniature')) {
             $data['type'] = intval($_POST['type'.$i]);
             if($data['type'] == 1)
             {
-                $data['lien'] = !empty($_POST['lien'.$i]) ? $_POST['lien'.$i] : "index.php";
+                $data['lien'] = !empty($_POST['lien'.$i]) ? $_POST['lien'.$i] : 'index.php';
             } else {
                 $data['lien'] = '?&page='. urlencode($_POST['page'.$i]);
             }

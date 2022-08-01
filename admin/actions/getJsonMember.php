@@ -61,7 +61,7 @@ if($_Permission_->verifPerm('PermsPanel', 'members', 'showPage')) {
 		}
 	} else {
 		$i = 0;
-		$allmembresReq = $bddConnection->query('SELECT id, id as \'id2\', pseudo, email, rang, tokens, ValidationMail FROM cmw_users WHERE pseudo LIKE \'%'.$_POST['search'].'%\' ORDER BY '.$_POST["axe"].' '.$_POST["axeType"]);
+		$allmembresReq = $bddConnection->query('SELECT id, id as \'id2\', pseudo, email, rang, tokens, ValidationMail FROM cmw_users WHERE pseudo LIKE \'%'.$_POST['search'].'%\' ORDER BY '.$_POST['axe'].' '.$_POST['axeType']);
 		while($allmembresDonnees = $allmembresReq->fetch(PDO::FETCH_ASSOC))
 		{
 			$i++;

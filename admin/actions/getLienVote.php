@@ -48,7 +48,7 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
                                                 </div>
                                               </div>
 
-                                            <div class="row" style="margin:30px; <?php  if(str_replace(" ", "", $donnees[$o]['action']) == "[]") { echo 'display:none;'; } ?>" id="all-new-rec-<?=$o;?>vote">
+                                            <div class="row" style="margin:30px; <?php  if(str_replace(' ', '', $donnees[$o]['action']) == '[]') { echo 'display:none;'; } ?>" id="all-new-rec-<?=$o;?>vote">
                                                 <div class="col-md-12 row" id="list-new-rec-<?=$o;?>vote">
                                                     <?php  $json = json_decode($donnees[$o]['action'], true); 
                                                     foreach($json as $value) { $idcs++; ?>
@@ -62,27 +62,27 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
                                                             </div>
                                                         </div>
 
-                                                          <?php if($value['type'] == "commande") { ?>
+                                                          <?php if($value['type'] == 'commande') { ?>
                                                                 <label class="control-label">Commande à éxecuter (SANS /)</label>
                                                                 <input type="text" data-type="value" value="<?php echo $value['value']; ?>"class="form-control"/>
-                                                         <?php } else  if($value['type'] == "message") { ?>
+                                                         <?php } else  if($value['type'] == 'message') { ?>
                                                                 <label class="control-label">Message à afficher lors du vote</label>
                                                                 <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
-                                                         <?php } else  if($value['type'] == "jeton") { ?>
+                                                         <?php } else  if($value['type'] == 'jeton') { ?>
                                                                 <label class="control-label">Quantité de <?=$_Serveur_['General']['moneyName'];?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
                                                                 <input type="number" data-type="value" min="1" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
-                                                         <?php } else  if($value['type'] == "item") { ?>
+                                                         <?php } else  if($value['type'] == 'item') { ?>
                                                                 <label class="control-label">Id de l\'item à donner</label>
                                                                 <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
 
                                                                 <label class="control-label">Nombre d\'item à donner</label>
                                                                 <input type="number" data-type="value2" min="1" value="<?php echo $value['value2']; ?>" max="64"  class="form-control"/>
-                                                         <?php } if($value['type'] != "jeton" && $value['type'] != "jetonAlea") { ?>
+                                                         <?php } if($value['type'] != 'jeton' && $value['type'] != 'jetonAlea') { ?>
                                                             <label class="control-label">Obtention de la récompense</label>
-                                                            <select data-type="methode" class="form-control" style="margin-bottom:20px;<?php if($value['type'] == "jeton") { echo 'display:none'; } ?>">
-                                                                <option value="1"  <?php if($value['methode'] == "1") { echo 'selected'; }?>> Le serveur où il est en ligne </option>
-                                                                <option value="2" <?php if($value['methode'] == "2") { echo 'selected'; }?>> Le serveur de la catégorie </option>
-                                                                <option value="3" <?php if($value['methode'] == "3") { echo 'selected'; }?>> Tous les serveurs </option>
+                                                            <select data-type="methode" class="form-control" style="margin-bottom:20px;<?php if($value['type'] == 'jeton') { echo 'display:none'; } ?>">
+                                                                <option value="1"  <?php if($value['methode'] == '1') { echo 'selected'; }?>> Le serveur où il est en ligne </option>
+                                                                <option value="2" <?php if($value['methode'] == '2') { echo 'selected'; }?>> Le serveur de la catégorie </option>
+                                                                <option value="3" <?php if($value['methode'] == '3') { echo 'selected'; }?>> Tous les serveurs </option>
                                                             </select>
                                                             <?php } ?>
 

@@ -72,24 +72,24 @@ class RecompenseAuto
 		if($type != 0) {
 			$next = 0;
 			if($type == 1) {
-					$day[0] = "sunday";
-					$day[1] = "monday";
-					$day[2] = "tuesday";
-					$day[3] = "wednesday";
-					$day[4] = "thursday";
-					$day[5] = "friday";
-					$day[6] = "saturday";
-				$next = strtotime("next ".$day[$data['jour']]) + $data['heur'] * 3600 + $data['min'] * 60 - 12 * 3600;
+					$day[0] = 'sunday';
+					$day[1] = 'monday';
+					$day[2] = 'tuesday';
+					$day[3] = 'wednesday';
+					$day[4] = 'thursday';
+					$day[5] = 'friday';
+					$day[6] = 'saturday';
+				$next = strtotime('next ' .$day[$data['jour']]) + $data['heur'] * 3600 + $data['min'] * 60 - 12 * 3600;
 			} else if($type == 2) {
 				$month = $data['mois'];
-				if($month > cal_days_in_month(CAL_GREGORIAN,intval(date("j")),intval(date("Y")))) {
-					$month = cal_days_in_month(CAL_GREGORIAN,intval(date("j")),intval(date("Y")));
+				if($month > cal_days_in_month(CAL_GREGORIAN,intval(date('j')),intval(date('Y')))) {
+					$month = cal_days_in_month(CAL_GREGORIAN,intval(date('j')),intval(date('Y')));
 				}
-				$years = intval(date("Y"));
-				if(intval(date("n")) == 12 && intval(date("n", strtotime("next month"))) == 1) {
-					$years = intval(date("Y")) + 1;
+				$years = intval(date('Y'));
+				if(intval(date('n')) == 12 && intval(date('n', strtotime('next month'))) == 1) {
+					$years = intval(date('Y')) + 1;
 				} 
-				$next = strtotime($month." ".date("F", strtotime("next month"))." ".$years );
+				$next = strtotime($month. ' ' .date('F', strtotime('next month')). ' ' .$years );
 				$next += $data['heur'] * 3600 + $data['min'] * 60 + 3600;
 			}
 			return $next;

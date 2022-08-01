@@ -18,7 +18,7 @@
             <div class="col-12 col-sm-5">
                <div class="card" style="margin-top:30px" >
                   <div class="card-body">
-                    <h6><?=$_Profil_->isOnline() ? "Actuellement connecté sur le serveur Minecraft." : "Actuellement déconnecté du serveur Minecraft."?></h6>
+                    <h6><?=$_Profil_->isOnline() ? 'Actuellement connecté sur le serveur Minecraft.' : 'Actuellement déconnecté du serveur Minecraft.' ?></h6>
                     <h6>Inscrit le : <?=date('d/m/Y', $_Profil_->getPlayer()['anciennete'])?></h6>
                     <h6>Nombre de votes : <?=$_Profil_->getPlayer()['votes']?></h6>
                     <h6>Messages sur le forum : <?=$_Profil_->getPlayer()['forum']?></h6>
@@ -231,7 +231,7 @@
                                 foreach($_Profil_->getReseau() as $key => $value) { ?>
 
                                     <label class="control-label">Votre compte <?=$key?>:</label>
-                                    <input type="text" <?=isset($value) & $value != "?" ? 'value="'.$value.'"' : '' ?> class="form-control" name="<?=$key?>">
+                                    <input type="text" <?=isset($value) & $value != '?' ? 'value="'.$value.'"' : '' ?>class="form-control" name="<?=$key?>">
                                 <?php }
                             } ?>
 
