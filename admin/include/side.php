@@ -6,9 +6,9 @@
             <!-- Petite carte profil (afficher sur pc only)-->
             <div class="row pb-2 pt-2" id="profiladmin">
                 <div class="col-4">
-                    <img src="https://api.craftmywebsite.fr/skin/face.php?u=<?php echo $_Joueur_['pseudo']; ?>&s=64"
+                    <img src="https://minotar.net/avatar/<?= $_Joueur_['pseudo']; ?>/64"
                          class="rounded-circle imageusercard"
-                         style="max-width: 64px;max-height: 64px;margin-left: 15px;">
+                         style="max-width: 64px;max-height: 64px;margin-left: 15px;" alt="Skin de <?= $_Joueur_['pseudo']?> ">
                 </div>
                 <div class="col-5">
                     <p class="text-left text-white">

@@ -19,7 +19,7 @@ class ImgProfil
             if (isset($info[1]) && file_exists('utilisateurs/' . $info[0] . '/profil.' . $info[1])) {
                 return 'utilisateurs/' . $info[0] . '/profil.' . $info[1];
             } else {
-                return 'https://api.craftmywebsite.fr/skin/face.php?u=' . $pseudo . '&s=' . $s;
+                return 'https://minotar.net/avatar/' . $pseudo . '/' . $s;
             }
 
         }
@@ -28,9 +28,9 @@ class ImgProfil
     public function getUrlBodyByPseudo($pseudo, $s = 64)
     {
         if ($pseudo == 'CraftMyWebsite' or $pseudo == '') {
-            return 'https://craftmywebsite.fr/favicon.ico';
+            return '/favicon.ico';
         } else {
-            return 'https://api.craftmywebsite.fr/skin/face.php?u=' . $pseudo . '&t=body&s=' . $s;
+            return 'https://minotar.net/body/' . $pseudo . '/' . $s;
         }
     }
 

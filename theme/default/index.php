@@ -95,7 +95,7 @@ $_Theme_ = $configTheme->GetTableau();
 <?php
 //Verif Version
 include('include/version.php');
-include('include/version_distant.php');
+
 
 if (Permission::getInstance()->verifPerm('PermsPanel', 'update', 'showPage')) : ?>
 
