@@ -97,13 +97,14 @@ $_Theme_ = $configTheme->GetTableau();
 include('include/version.php');
 include('include/version_distant.php');
 
-if ($versioncms != $versioncmsrelease && Permission::getInstance()->verifPerm('PermsPanel', 'update', 'showPage')) : ?>
+if (Permission::getInstance()->verifPerm('PermsPanel', 'update', 'showPage')) : ?>
 
     <div class=" mb-0 rounded-0 text-center alert alert-main bg-lightest alert-dismissible text-shadow-none fade show sticky-top"
          role="alert">
         <h5 class="m-0">
-            Une mise à jour est disponible <strong>(<a href="https://craftmywebsite.fr/telecharger" target="_blank"
-                                                       class="alert-link"><?= $versioncmsrelease ?></a>)</strong> !
+            Cette version ne recevra plus de mis à jour, merci de télécharger notre dernière version en cliquant
+            <strong><a href="https://craftmywebsite.fr/telecharger" target="_blank"
+                                                       class="alert-link">ici</a></strong> !
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"
                     style="color: var(--base-color);">
                 <span aria-hidden="true">&times;</span>
