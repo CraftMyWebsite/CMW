@@ -19,7 +19,7 @@
             pages par la suite dans diverses configurations du CMS. Le PHP est autorisé exclusivement pour la création
             des pages et doit être activé dans la barre de menus de l'éditeur, mais à vos risques et périls ! Le nom de
             la page que vous inscrirez ( peut être modifié par la suite ) sera celle que vous utiliserez pour retrouver
-            votre page, exemple: https://votreSite.fr/index.php?page=LeNomDeLaPage. Et pour finir, vous pouvez créer vos
+            votre page, exemple: https://votreSite.fr/LeNomDeLaPage. Et pour finir, vous pouvez créer vos
             pages manuellement ( conseillé pour les pages complexes ) en créant simplement un fichier (.php obligatoire)
             dans le dossier 'include/CustomPage/' tout simplement.</strong>
     </div>

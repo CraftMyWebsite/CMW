@@ -59,7 +59,7 @@ if (isset($_GET['page'])) {
 
         case 'slidemini':
             require_once('./admin/donnees/accueil.php');
-            include('./admin/pages/accueil.php');
+            include('./admin/pages/miniatures.php');
             break;
 
         case 'reglagejsonapi':

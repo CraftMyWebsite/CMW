@@ -32,24 +32,18 @@
     <div class="row">
 
         <div class="col-md-12">
-            <?php include('./include/version.php');
-            include('./include/version_distant.php');
-            if ($versioncms == $versioncmsrelease) { ?>
-                <div class="alert alert-success">
-                    <strong>Votre CMS CraftMyWebsite est bien a jours en version <?php echo $versioncms; ?> !</strong>
-                </div>
-            <?php } else { ?>
+            <?php include('./include/version.php'); ?>
+
                 <div class="alert alert-danger">
-                    <strong>Votre CMS CraftMyWebsite n'est PAS à jour ! Vous êtes en <?php echo $versioncms; ?> et la
-                        dernière
-                        version est la <?php echo $versioncmsrelease; ?> ! Attention, les mises à jour ne se font pas
-                        automatiquement !</strong><strong>Cliquez ici pour télécharger la mise à jour de la dernière
-                        version :
-                        <a href="http://craftmywebsite.fr/release/CraftMyWebsite-<?php echo $versioncmsrelease; ?>MAJ.php"
-                           class="btn btn-warning">CraftMyWebsite V<?php echo $versioncmsrelease; ?> </a></strong>
+                    <strong>Votre CMS CraftMyWebsite ne sera plus mise à jour ! La version 2.0 de CraftMyWebsite étant sortie
+                        vous ne pourrez plus obtenir de support ni même de nouveautés, nous vous invitons à télécharger et installer cette
+                        nouvelle version
+                        <a href="https://craftmywebsite.fr/telecharger"
+                           class="btn btn-warning" target="_blank">ICI</a>
+                    </strong>
 
                 </div>
-            <?php } ?>
+
         </div>
 
     </div>

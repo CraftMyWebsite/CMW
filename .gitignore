@@ -8,3 +8,6 @@ modele/.htpasswd
 
 #Exclude idea folder
 .idea/
+
+#Ignore upload folder
+theme/upload/

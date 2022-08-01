@@ -22,7 +22,7 @@
 
                         <select class="form-control" name="image">
                             <?php for ($j = 2; $j < count($images); $j++) { ?>
-                                <option value="<?php echo $images[$j]; ?>"><?php echo $images[$j]; ?></option>
+                                <option value="<?= $images[$j]; ?>"><?= $images[$j]; ?></option>
                             <?php } ?>
                         </select>
 
@@ -55,7 +55,7 @@
                                 <?php $i = 0;
                                 while ($i < count($pages)) { ?>
                                     <option id=""
-                                            value="<?php echo $pages[$i]; ?>"><?php echo $pages[$i]; ?></option><?php $i++;
+                                            value="<?= $pages[$i]; ?>"><?= $pages[$i]; ?></option><?php $i++;
                                 } ?>
                             </select>
                         </div>
@@ -89,107 +89,109 @@
                     <div class="card-body" id="allMinia">
 
                         <?php if (!empty($Miniature)) { ?>
-                            <input type="hidden" name="count" value="<?php echo count($Miniature); ?>">
+                            <input type="hidden" name="count" value="<?= count($Miniature); ?>">
                             <ul class="nav nav-tabs">
                                 <?php for ($i = 0; $i < count($Miniature); $i++) { ?>
-                                    <li class="nav-item" id="li-minia-<?php echo $Miniature[$i]['id']; ?>"><a
-                                                class="<?php if ($i == 0) echo 'active'; ?> nav-link"
-                                                href="#minia-<?php echo $Miniature[$i]['id']; ?>" data-toggle="tab"
-                                                style="color: black !important">Miniature #<?php echo $i + 1; ?></a>
+                                    <li class="nav-item <?= ($i == 0) ? 'active' : ''; ?>">
+                                        <a class="nav-link"
+                                                href="#minia-<?= $Miniature[$i]['id']; ?>" data-toggle="tab"
+                                        >
+                                            Miniature #<?= $i + 1; ?>
+                                        </a>
                                     </li>
                                 <?php } ?>
                             </ul>
                             <div class="tab-content">
                                 <?php for ($i = 0; $i < count($Miniature); $i++) { ?>
-                                    <div class="tab-pane well <?php if ($i == 0) echo 'active'; ?>"
-                                         id="minia-<?php echo $Miniature[$i]['id']; ?>">
+                                    <div class="tab-pane well <?= ($i == 0) ? 'active' : ''; ?>"
+                                         id="minia-<?=  $Miniature[$i]['id']; ?>">
                                         <div style="width: 100%;display: inline-block">
                                             <div class="float-left">
-                                                <h3>Miniature #<?php echo $i + 1; ?></h3>
+                                                <h3>Miniature #<?= $i + 1; ?></h3>
                                             </div>
                                             <div class="float-right">
                                                 <button <?php if ($i == 0) {
                                                     echo 'style="display:none;"';
-                                                } ?> type="button" id="li-minia-<?php echo $Miniature[$i]['id']; ?>-up"
-                                                     onclick="sendDirectPost('admin.php?&action=mooveMinia&type=0&id=<?php echo $Miniature[$i]['id']; ?>', function(data) { if(data) { menuMooveUp(get('li-minia-<?php echo $Miniature[$i]['id']; ?>')); }});"
+                                                } ?> type="button" id="li-minia-<?= $Miniature[$i]['id']; ?>-up"
+                                                     onclick="sendDirectPost('admin.php?&action=mooveMinia&type=0&id=<?= $Miniature[$i]['id']; ?>', function(data) { if(data) { menuMooveUp(get('li-minia-<?= $Miniature[$i]['id']; ?>')); }});"
                                                      class="btn btn-sm btn-outline-secondary"><i
                                                             class="fas fa-angle-up"></i></button>
                                                 <button <?php if ($i == count($Miniature) - 1) {
                                                     echo 'style="display:none;"';
                                                 } ?> type="button"
-                                                     id="li-minia-<?php echo $Miniature[$i]['id']; ?>-down"
-                                                     onclick="sendDirectPost('admin.php?&action=mooveMinia&type=1&id=<?php echo $Miniature[$i]['id']; ?>', function(data) { if(data) { menuMooveDown(get('li-minia-<?php echo $Miniature[$i]['id']; ?>')); }});"
+                                                     id="li-minia-<?= $Miniature[$i]['id']; ?>-down"
+                                                     onclick="sendDirectPost('admin.php?&action=mooveMinia&type=1&id=<?= $Miniature[$i]['id']; ?>', function(data) { if(data) { menuMooveDown(get('li-minia-<?= $Miniature[$i]['id']; ?>')); }});"
                                                      class="btn btn-sm btn-outline-secondary"><i
                                                             class="fas fa-angle-down"></i></button>
 
-                                                <button onclick="sendDirectPost('admin.php?action=supprMiniature&id=<?php echo $Miniature[$i]['id']; ?>', function(data) { if(data) { hide('minia-<?php echo $Miniature[$i]['id']; ?>'); hide('li-minia-<?php echo $Miniature[$i]['id']; ?>',true, function() { checkMenuForMoove(); }); } });"
+                                                <button onclick="sendDirectPost('admin.php?action=supprMiniature&id=<?= $Miniature[$i]['id']; ?>', function(data) { if(data) { hide('minia-<?= $Miniature[$i]['id']; ?>'); hide('li-minia-<?= $Miniature[$i]['id']; ?>',true, function() { checkMenuForMoove(); }); } });"
                                                         class="btn btn-sm btn-outline-secondary">Supprimer
                                                 </button>
                                             </div>
                                         </div>
 
-                                        <input type="hidden" name="id<?php echo $i; ?>"
-                                               value="<?php echo $Miniature[$i]['id']; ?>">
+                                        <input type="hidden" name="id<?= $i; ?>"
+                                               value="<?= $Miniature[$i]['id']; ?>">
 
-                                        <img class="col-md-12 thumbnail" id="minia-img-<?php echo $i; ?>"
-                                             src="theme/upload/navRap/<?php echo $Miniature[$i]['image']; ?>"/>
+                                        <img class="col-md-12 thumbnail" id="minia-img-<?= $i; ?>"
+                                             src="theme/upload/navRap/<?= $Miniature[$i]['image']; ?>"/>
 
                                         <label class="control-label">Image</label>
-                                        <select class="form-control" name="image<?php echo $i; ?>"
-                                                onchange="get('minia-img-<?php echo $i; ?>').src = 'theme/upload/navRap/'+this.value;">
+                                        <select class="form-control" name="image<?= $i; ?>"
+                                                onchange="get('minia-img-<?= $i; ?>').src = 'theme/upload/navRap/'+this.value;">
                                             <?php for ($j = 2; $j < count($images); $j++) { ?>
-                                                <option value="<?php echo $images[$j]; ?>" <?php if ($images[$j] == $Miniature[$i]['image']) {
+                                                <option value="<?= $images[$j]; ?>" <?php if ($images[$j] == $Miniature[$i]['image']) {
                                                     echo 'selected';
-                                                } ?>><?php echo $images[$j]; ?></option>
+                                                } ?>><?= $images[$j]; ?></option>
                                             <?php } ?>
                                         </select>
 
                                         <label class="control-label">Message sous l'image</label>
-                                        <textarea id="ckeditor" data-UUID="03<?php echo $Miniature[$i]['id']; ?>"
-                                                  class="form-control" name="message<?php echo $i; ?>"
-                                                  maxlength="200"><?php echo $Miniature[$i]['message']; ?></textarea>
+                                        <textarea id="ckeditor" data-UUID="03<?= $Miniature[$i]['id']; ?>"
+                                                  class="form-control" name="message<?= $i; ?>"
+                                                  maxlength="200"><?= $Miniature[$i]['message']; ?></textarea>
 
                                         <div class="custom-control custom-radio" style="margin-top:20px;">
-                                            <input type="radio" name="type<?php echo $i; ?>" value="0"
-                                                   id="radiominia0<?php echo $i; ?>" class="custom-control-input"
-                                                   onclick="show('lienpage<?php echo $i; ?>');hide('lienurl<?php echo $i; ?>');" <?php if ($Miniature[$i]['type'] == 0) {
+                                            <input type="radio" name="type<?= $i; ?>" value="0"
+                                                   id="radiominia0<?= $i; ?>" class="custom-control-input"
+                                                   onclick="show('lienpage<?= $i; ?>');hide('lienurl<?= $i; ?>');" <?php if ($Miniature[$i]['type'] == 0) {
                                                 echo 'checked';
                                             } ?>>
-                                            <label class="custom-control-label" for="radiominia0<?php echo $i; ?>">Je
+                                            <label class="custom-control-label" for="radiominia0<?= $i; ?>">Je
                                                 souhaite rediriger vers une page existante</label>
                                         </div>
 
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" name="type<?php echo $i; ?>" value="1"
-                                                   id="radiominia1<?php echo $i; ?>"
-                                                   onclick="hide('lienpage<?php echo $i; ?>');show('lienurl<?php echo $i; ?>');"
+                                            <input type="radio" name="type<?= $i; ?>" value="1"
+                                                   id="radiominia1<?= $i; ?>"
+                                                   onclick="hide('lienpage<?= $i; ?>');show('lienurl<?= $i; ?>');"
                                                    class="custom-control-input" <?php if ($Miniature[$i]['type'] == 1) {
                                                 echo 'checked';
                                             } ?>>
-                                            <label class="custom-control-label" for="radiominia1<?php echo $i; ?>">Je
+                                            <label class="custom-control-label" for="radiominia1<?= $i; ?>">Je
                                                 souhaite rediriger vers un lien personnalisé</label>
                                         </div>
 
-                                        <div id="lienurl<?php echo $i; ?>" <?php if ($Miniature[$i]['type'] == 0) {
+                                        <div id="lienurl<?= $i; ?>" <?php if ($Miniature[$i]['type'] == 0) {
                                             echo 'style="display:none;"';
                                         } ?>>
                                             <label class="control-label">Lien</label>
                                             <input type="text" class="form-control"
-                                                   name="lien<?php echo $i; ?>" <?php if ($Miniature[$i]['type'] == 1) {
+                                                   name="lien<?= $i; ?>" <?php if ($Miniature[$i]['type'] == 1) {
                                                 echo 'value="' . $Miniature[$i]['lien'] . '"';
                                             } ?> maxlength="100" placeholder="ex: http://minecraft.net/">
                                         </div>
-                                        <div id="lienpage<?php echo $i; ?>" <?php if ($Miniature[$i]['type'] == 1) {
+                                        <div id="lienpage<?= $i; ?>" <?php if ($Miniature[$i]['type'] == 1) {
                                             echo 'style="display:none;"';
                                         } ?>>
                                             <label class="control-label">Page</label>
-                                            <select class="form-control" name="page<?php echo $i; ?>">
+                                            <select class="form-control" name="page<?= $i; ?>">
                                                 <?php $o = 0;
                                                 while ($o < count($pages)) { ?>
                                                     <option id=""
-                                                            value="<?php echo $pages[$o]; ?>" <?php if (str_replace('?&page=', '', $Miniature[$i]['lien']) == urlencode($pages[$o])) {
+                                                            value="<?= $pages[$o]; ?>" <?php if (str_replace('?&page=', '', $Miniature[$i]['lien']) == urlencode($pages[$o])) {
                                                         echo 'selected';
-                                                    } ?>><?php echo $pages[$o]; ?></option><?php $o++;
+                                                    } ?>><?= $pages[$o]; ?></option><?php $o++;
                                                 } ?>
                                             </select>
                                         </div>

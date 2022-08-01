@@ -15,25 +15,12 @@ $configLecture = new Lire('modele/config/config.yml');
 $_Serveur_ = $configLecture->GetTableau();
 
 
-if (!isset($_Serveur_['lastCMWCheck']) || (isset($_Serveur_['lastCMWCheck']) && $_Serveur_['lastCMWCheck'] < time())) {
-    $_Serveur_['lastCMWCheck'] = time() + 3600;
-    $URLWEBSITE = 'http://' . $_SERVER['HTTP_HOST'];
-    require_once('modele/vote.class.php');
-    $SYSTEMINFO = vote::fetch('https://craftmywebsite.fr/information/website.php?href=' . $URLWEBSITE);
-    if ($SYSTEMINFO != '' && !empty($SYSTEMINFO)) {
-        $_Serveur_['SYSTEMINFO'] = $SYSTEMINFO;
-    } else if (isset($_Serveur_['SYSTEMINFO'])) {
-        unset($_Serveur_['SYSTEMINFO']);
-    }
-    $ecriture = new Ecrire('modele/config/config.yml', $_Serveur_);
-}
-
 $configLecture = new Lire('modele/config/configWidgets.yml');
 $_Widgets_ = $configLecture->GetTableau();
 
 require_once('controleur/tempMess.class.php');
 
-if (isset($_COOKIE['playeronline'], $_COOKIE['maxPlayers'], $_COOKIE['servOnline']) && $_COOKIE['servOnline'] == true) {
+if (isset($_COOKIE['playeronline'], $_COOKIE['maxPlayers'], $_COOKIE['servOnline']) && $_COOKIE['servOnline']) {
     $playeronline = htmlspecialchars($_COOKIE['playeronline']);
     $maxPlayers = htmlspecialchars($_COOKIE['maxPlayers']);
     $servEnLigne = true;
@@ -42,10 +29,7 @@ if (isset($_COOKIE['playeronline'], $_COOKIE['maxPlayers'], $_COOKIE['servOnline
     $playeronline = $pingClass->Players;
     $maxPlayers = $pingClass->MaxPlayer;
     $servEnLigne = $pingClass->Online;
-    setcookie('playeronline', $playeronline, time() + 120, null, null, true, true);
-    setcookie('maxPlayers', $maxPlayers, time() + 120, null, null, true, true);
-    setcookie('servOnline', $servEnLigne, time() + 120, null, null, true, true);
+    setcookie('playeronline', $playeronline, time() + 120, '', '', true, true);
+    setcookie('maxPlayers', $maxPlayers, time() + 120, '', '', true, true);
+    setcookie('servOnline', $servEnLigne, time() + 120, '', '', true, true);
 }
-
-
-?>
