@@ -1,8 +1,9 @@
-Changelog CraftMyWebsite 1.8.4 - Fixs sécurité IMPORTANT
+Changelog CraftMyWebsite 1.9 - LTS - Dernière version de CMW 1.X (Long Term Support)
 
 Ajouts ([+]), modifications ([=]) et suppressions ([-]), ([|]) Bugs Fix
 
 [|] : Fix de la quantité d'articles dans le panier
+[|] : Les CMS peut être installé sur Windows (Uniquement pour un environnement de dev)
 
 [=] : Ajouts des sites de vote: meilleurs-serveurs.com et yserveur.fr
 [=] : Fautes d'ortographes
