@@ -1,4 +1,6 @@
 <?php
+require_once "utils.php";
+
 $config = new Lire('../modele/config/config.yml');
 $config = $config->GetTableau();
 
@@ -8,6 +10,7 @@ $config['General']['description'] = $_POST['description'];
 $config['General']['ipTexte'] = $_POST['ipTexte'];
 $config['General']['ip'] = $_POST['ip'];
 $config['General']['port'] = $_POST['port'];
+$config['General']['Windows'] = isWindows();
 
 $config = new Ecrire('../modele/config/config.yml', $config);
 
