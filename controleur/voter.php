@@ -2,8 +2,8 @@
 echo '[DIV]';
 if (isset($_POST['id']) and isset($_POST['pseudo'])) {
 
-    $id = $_POST['id'];
-    $pseudo = $_POST['pseudo'];
+    $id = htmlspecialchars($_POST['id']);
+    $pseudo = htmlspecialchars($_POST['pseudo']);
     require_once('modele/joueur/maj.class.php');
     $joueurMaj = new Maj($pseudo, $bddConnection);
     $playerData = $joueurMaj->getReponseConnection();
