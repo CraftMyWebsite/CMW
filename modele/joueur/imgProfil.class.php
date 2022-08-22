@@ -9,29 +9,31 @@ class ImgProfil
         $this->bdd = $bddConnection;
 	}
 
-	public function getUrlHeadByPseudo($pseudo, $s=64) {
-	    if($pseudo == 'CraftMyWebsite' OR $pseudo == ''){
-	        return 'https://craftmywebsite.fr/favicon.ico';
-	    } else {
-	        $info = $this->getInfoByPseudo($pseudo);
-	        if(isset($info[1]) && file_exists('utilisateurs/' .$info[0]. '/profil.' .$info[1])) {
-	            return 'utilisateurs/' .$info[0]. '/profil.' .$info[1];
-	        } else  {
-	        	return 'https://api.craftmywebsite.fr/skin/face.php?u=' .$pseudo. '&s=' .$s;
-	        }
-	           
+	public function getUrlHeadByPseudo($pseudo, $s=64): string
+    {
+	    if($pseudo === 'CraftMyWebsite' || $pseudo === ''){
+	        return '/favicon.ico';
 	    }
-	}
+
+        $info = $this->getInfoByPseudo($pseudo);
+        if(isset($info[1]) && file_exists('utilisateurs/' .$info[0]. '/profil.' .$info[1])) {
+            return 'utilisateurs/' .$info[0]. '/profil.' .$info[1];
+        }
+
+        return 'https://minotar.net/avatar/' . $pseudo . '/' .$s;
+    }
 	
-	public function getUrlBodyByPseudo($pseudo, $s=64) {
-	    if($pseudo == 'CraftMyWebsite' OR $pseudo == ''){
-	        return 'https://craftmywebsite.fr/favicon.ico';
-	    } else {
-	    	return 'https://api.craftmywebsite.fr/skin/face.php?u=' .$pseudo. '&t=body&s=' .$s;
+	public function getUrlBodyByPseudo($pseudo, $s=64): string
+    {
+	    if($pseudo === 'CraftMyWebsite' || $pseudo === ''){
+	        return '/favicon.ico';
 	    }
-	}
+
+        return 'https://minotar.net/avatar/' .$pseudo. '/' .$s;
+    }
 	
-	private function getInfoByPseudo($pseudo) {
+	private function getInfoByPseudo($pseudo): array
+    {
 	    $req = $this->bdd->prepare('SELECT id, img_extension FROM cmw_users WHERE pseudo = :pseudo');
 	    $req->execute(array( 
 	        'pseudo' => $pseudo
@@ -45,7 +47,8 @@ class ImgProfil
 	    return $return;
 	} 
 	
-	public function defineExt($pseudo, $ext)  {
+	public function defineExt($pseudo, $ext): void
+    {
 	    $req = $this->bdd->prepare('UPDATE cmw_users SET img_extension = :ext WHERE pseudo = :pseudo');
 	    $req->execute(array(
 	        'ext' => $ext,
@@ -54,8 +57,8 @@ class ImgProfil
 	}
 	
 
-	public function removeImg($pseudo)
-	{
+	public function removeImg($pseudo): void
+    {
 	    $info = $this->getInfoByPseudo($pseudo);
 	    if(file_exists('utilisateurs/'.$info[0].'/profil.'.$info[1]))
 	    {
@@ -67,4 +70,3 @@ class ImgProfil
 	    }
 	}
 }
-?>

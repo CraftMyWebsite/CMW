@@ -1,6 +1,6 @@
 <?php
 echo '[DIV]';
-if (isset($_POST['id']) and isset($_POST['pseudo'])) {
+if (isset($_POST['id'], $_POST['pseudo'])) {
 
     $id = htmlspecialchars($_POST['id']);
     $pseudo = htmlspecialchars($_POST['pseudo']);
@@ -17,12 +17,12 @@ if (isset($_POST['id']) and isset($_POST['pseudo'])) {
         if ($vote->canVote()) {
             if ($vote->hasVote()) {
                 $vote->confirmVote($bddConnection);
-                if (isset($_Joueur_) && $_Joueur_['pseudo'] == $pseudo) {
+                if (isset($_Joueur_) && $_Joueur_['pseudo'] === $pseudo) {
                     $vote->stockVote($bddConnection, null, null);
                     if (!empty($topVoteurs) && isset($topVoteurs)) {
 
                         foreach ($topVoteurs as $value) {
-                            if ($value['pseudo'] == $pseudo) {
+                            if ($value['pseudo'] === $pseudo) {
                                 $verif = $RecompenseAuto->verifRecVotes($value['nbre_votes'] + 1);
                                 if (!empty($verif)) {
                                     foreach ($verif as $action) {
@@ -49,5 +49,3 @@ if (isset($_POST['id']) and isset($_POST['pseudo'])) {
 } else {
     echo 'erreur-4';
 }
-
-?>

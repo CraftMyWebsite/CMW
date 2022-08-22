@@ -55,16 +55,13 @@ if(isset($_GET['page']))
 		case 'editForum':
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/editForum.php');
 		break;
-		
-		case 'forum_categorie':
+
+        case 'sous_forum_categorie':
+        case 'forum_categorie':
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/forum_categorie.php');
 		break;
 
-		case 'sous_forum_categorie':
-			include('theme/' .$_Serveur_['General']['theme']. '/pages/forum_categorie.php');
-		break;
-		
-		case 'post':
+        case 'post':
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/post.php');
 		break;
 		
@@ -85,10 +82,8 @@ if(isset($_GET['page']))
 		case 'erreur':
 		    include('controleur/erreur.php'); 
 			$erreur = (!isset($_GET['erreur'])) ? 1500879564 : (int)$_GET['erreur'];
-			unset($type);
-			unset($titre);
-			unset($contenue);
-			get_erreur($erreur, $type, $titre, $contenue);
+            unset($type, $titre, $contenue);
+            get_erreur($erreur, $type, $titre, $contenue);
 			include('theme/' .$_Serveur_['General']['theme']. '/pages/erreur.php');
 		break;
 
@@ -133,10 +128,8 @@ if(isset($_GET['page']))
 			} else {
 			    include('controleur/erreur.php');
 			    $erreur = (!isset($_GET['erreur'])) ? 1500879564 : (int)$_GET['erreur'];
-			    unset($type);
-			    unset($titre);
-			    unset($contenue);
-			    get_erreur($erreur, $type, $titre, $contenue);
+                unset($type, $titre, $contenue);
+                get_erreur($erreur, $type, $titre, $contenue);
 			    include('theme/' .$_Serveur_['General']['theme']. '/pages/erreur.php');
 			}
 	}
