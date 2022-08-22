@@ -1,6 +1,6 @@
 [DIV]
 <?php
-if(Permission::getInstance()->verifPerm("connect"))
+if(Permission::getInstance()->verifPerm('connect'))
 {
 	$req_vote_temp = $bddConnection->prepare('SELECT * FROM cmw_votes_temp WHERE pseudo = :pseudo');
 	$req_vote_temp->execute(array(

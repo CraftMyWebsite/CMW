@@ -5,15 +5,18 @@ $tempGrades = new TempGrades($bddConnection);
 
 $joueurGradesReq = $tempGrades->GetPlayer();
 
-while ($joueurGrades = $joueurGradesReq->fetch(PDO::FETCH_ASSOC)) {
-    $tempGrades->SetPseudo($joueurGrades['pseudo']);
-    $gradeJoueur = $tempGrades->RecupDonnees();
-    if ($gradeJoueur['grade_temps'] < time() and $gradeJoueur['is_active'] == 1) {
-        foreach ($jsonCon as $serveur) {
-            $serveur->ResetPlayer($joueurGrades['pseudo'], $gradeJoueur['grade_vie']);
-        }
-        $tempGrades->MajJoueurTimeOut();
-    }
+while($joueurGrades = $joueurGradesReq->fetch(PDO::FETCH_ASSOC))
+{
+	$tempGrades->SetPseudo($joueurGrades['pseudo']);
+	$gradeJoueur = $tempGrades->RecupDonnees();
+	if($gradeJoueur['grade_temps']< time() AND $gradeJoueur['is_active'] == 1)
+	{		
+		foreach($jsonCon as $serveur)
+		{
+			$serveur->ResetPlayer($joueurGrades['pseudo'], $gradeJoueur['grade_vie']);
+		}
+		$tempGrades->MajJoueurTimeOut();
+	}
 }
 
 // Pour la vérif des tokens en cas d'achat

@@ -28,20 +28,16 @@ if (Permission::getInstance()->verifPerm("connect") and isset($_GET['id'], $_GET
 
                             <div class="card-body">
 
-                                <input type="hidden" name="id" value="<?= $id; ?>"/>
-                                <input type="hidden" name="objet" value="<?= $objet; ?>"/>
+                                <input type="hidden" name="id" value="<?= $id; ?>" />
+                                <input type="hidden" name="objet" value="<?= $objet; ?>" />
 
-                                <?php if ($objet == 1) : ?>
-                                    <div class="form-row py-3"><label for="titre">Modifier le titre: </label>
-                                        <input type="text" name="titre" maxlength="40" id="titre"
-                                               class="form-control custom-text-input" value="<?= $donnee['nom']; ?>"/>
-                                    </div>
-                                <?php endif; ?>
+                                    <?php if ($objet == 1) : ?>
+                                        <div class="form-row py-3"><label for="titre">Modifier le titre: </label>
+                                        <input type="text" name="titre" maxlength="40" id="titre" class="form-control custom-text-input" value="<?= $donnee['nom']; ?>" /></div>
+                                    <?php endif; ?>
 
-                                <label for="contenue">Editez
-                                    votre <?= ($objet == 1) ? 'topic !' : 'réponse !'; ?></label>
-                                <textarea data-UUID="0002" id="ckeditor" name="contenue"
-                                          style="height: 275px; margin: 0px; width: 100%;"><?= $donnee['contenue']; ?></textarea>
+                                    <label for="contenue">Editez votre <?= ($objet == 1) ? 'topic !' : 'réponse !'; ?></label>
+                                    <textarea  data-UUID="0002" id="ckeditor" name="contenue" style="height: 275px; margin: 0px; width: 100%;"><?= $donnee['contenue']; ?></textarea>
 
                             </div>
                         </div>
@@ -56,4 +52,4 @@ if (Permission::getInstance()->verifPerm("connect") and isset($_GET['id'], $_GET
     <?php endif; ?>
 <?php else :
     header('Location: index.php?page=erreur&erreur=0');
-endif; ?>
+endif;  ?>

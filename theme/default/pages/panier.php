@@ -5,7 +5,7 @@ if (Permission::getInstance()->verifPerm("connect")) :
     //Création du Panier : 
     $nbArticles = $_Panier_->compterOffre();
     $precedent = 0;
-    ?>
+?>
     <section id="Panier">
         <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
             <div class="row">
@@ -23,54 +23,52 @@ if (Permission::getInstance()->verifPerm("connect")) :
                 <!-- Affichage du panier -->
                 <table class="table table-dark table-striped table-hover">
                     <thead>
-                    <tr>
-                        <th scope="col">Item/Grade</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Quantite</th>
-                        <th scope="col">Prix Unitaire</th>
-                        <th scope="col">Sous-Total</th>
-                        <th scope="col">Actions</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Item/Grade</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Quantite</th>
+                            <th scope="col">Prix Unitaire</th>
+                            <th scope="col">Sous-Total</th>
+                            <th scope="col">Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <?php if ($nbArticles == 0) : ?>
-                        <tr class="p-0 no-hover">
-                            <td colspan="6" class="p-0 no-hover">
-                                <div class="m-0 info-page bg-danger">
-                                    <div class="text-center">Votre panier est vide.</div>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php else :
-                        //Affichage de l'offre
-
-                        for ($i = 0; $i < $nbArticles; $i++) :
-                            $_Panier_->infosArticle(htmlspecialchars($_SESSION['panier']['id'][$i]), $nom, $infos);
-                            $precedent += htmlspecialchars($_SESSION['panier']['prix'][$i]) * htmlspecialchars($_SESSION['panier']['quantite'][$i]); ?>
-                            <tr>
-                                <td scope="row">
-                                    <?= $nom; ?>
-                                </td>
-                                <td>
-                                    <?= htmlspecialchars_decode($infos); ?>
-                                </td>
-                                <td>
-                                    <?= htmlspecialchars($_SESSION['panier']['quantite'][$i]); ?>
-                                </td>
-                                <td>
-                                    <?= htmlspecialchars($_SESSION['panier']['prix'][$i]); ?> <i
-                                            class="fa fa-diamond"></i>
-                                </td>
-                                <td>
-                                    <?= $precedent; ?> <i class="fas fa-gem"></i>
-                                </td>
-                                <td>
-                                    <a href="index.php?action=supprItemPanier&id=<?= htmlspecialchars($_SESSION['panier']['id'][$i]); ?>"
-                                       class="btn btn-danger link no-hover"><i class="fa fa-trash"></i></a>
+                        <?php if ($nbArticles == 0) : ?>
+                            <tr class="p-0 no-hover">
+                                <td colspan="6" class="p-0 no-hover">
+                                    <div class="m-0 info-page bg-danger">
+                                        <div class="text-center">Votre panier est vide.</div>
+                                    </div>
                                 </td>
                             </tr>
-                        <?php endfor; ?>
-                    <?php endif; ?>
+                            <?php else :
+                            //Affichage de l'offre
+
+                            for ($i = 0; $i < $nbArticles; $i++) :
+                                $_Panier_->infosArticle(htmlspecialchars($_SESSION['panier']['id'][$i]), $nom, $infos);
+                                $precedent += htmlspecialchars($_SESSION['panier']['prix'][$i]) * htmlspecialchars($_SESSION['panier']['quantite'][$i]); ?>
+                                <tr>
+                                    <td scope="row">
+                                        <?= $nom; ?>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars_decode($infos); ?>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars($_SESSION['panier']['quantite'][$i]); ?>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars($_SESSION['panier']['prix'][$i]); ?> <i class="fa fa-diamond"></i>
+                                    </td>
+                                    <td>
+                                        <?= $precedent; ?> <i class="fas fa-gem"></i>
+                                    </td>
+                                    <td>
+                                        <a href="index.php?action=supprItemPanier&id=<?= htmlspecialchars($_SESSION['panier']['id'][$i]); ?>" class="btn btn-danger link no-hover"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            <?php endfor; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
 
@@ -87,8 +85,7 @@ if (Permission::getInstance()->verifPerm("connect")) :
                                 <form action="?action=ajouterCode" method="POST">
                                     <div class="form-group">
                                         <label for="codepromo"> Entrez votre code de promotion</label>
-                                        <input type="text" class="form-control" id="codepromo" name="codepromo"
-                                               placeholder="Code promo">
+                                        <input type="text" class="form-control" id="codepromo" name="codepromo" placeholder="Code promo">
                                     </div>
                                     <button type="submit" class="btn btn-reverse w-100">Envoyer</button>
                                 </form>
@@ -126,8 +123,7 @@ if (Permission::getInstance()->verifPerm("connect")) :
 
                                     <div class="vote-line mt-2"></div>
 
-                                    <?= number_format($_Panier_->montantGlobal(), 0, ',', ' '); ?> <i
-                                            class="fas fa-gem ml-2"></i>
+                                    <?= number_format($_Panier_->montantGlobal(), 0, ',', ' '); ?> <i class="fas fa-gem ml-2"></i>
                                 </h5>
                             </div>
                         </div>
@@ -137,7 +133,7 @@ if (Permission::getInstance()->verifPerm("connect")) :
                                     Vider le panier
                                 </a>
                                 <a href="index.php?action=achat" class="btn btn-reverse w-100 mb-2 no-hover">
-                                    Passer à l'achat
+                                    Passer à l'achat 
                                 </a>
                             </div>
                         </div>

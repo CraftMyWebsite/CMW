@@ -20,87 +20,87 @@
                 <div class="col-md-12 col-lg9 col-sm-12">
                     <table class="table table-dark table-striped table-hover">
                         <thead>
-                        <tr>
-                            <th scope="col">Topic suivi</th>
-                            <th scope="col">Type d'alerte</th>
-                            <th scope="col">Auteur de l'alerte</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">Topic suivi</th>
+                                <th scope="col">Type d'alerte</th>
+                                <th scope="col">Auteur de l'alerte</th>
+                            </tr>
                         </thead>
 
                         <tbody>
 
-                        <?php if ($req_answer->fetch()) : ?>
-                            <?php while ($answer_liked = $req_answer->fetch(PDO::FETCH_ASSOC)) :
-                                if ($answer_liked['vu'] == '0') :
+                            <?php if ($req_answer->fetch()) : ?>
+                                <?php while ($answer_liked = $req_answer->fetch(PDO::FETCH_ASSOC)) :
+                                    if ($answer_liked['vu'] == '0') :
 
-                                    $a = $bddConnection->prepare('SELECT * FROM cmw_forum_answer WHERE id_topic = :id');
-                                    $a->execute(array(
-                                        'id' => $answer_liked['id_topic']
-                                    ));
-                                    $da = $a->fetchAll(PDO::FETCH_ASSOC);
+                                        $a = $bddConnection->prepare('SELECT * FROM cmw_forum_answer WHERE id_topic = :id');
+                                        $a->execute(array(
+                                            'id' => $answer_liked['id_topic']
+                                        ));
+                                        $da = $a->fetchAll(PDO::FETCH_ASSOC);
 
-                                    foreach ($da as $key => $value) {
-                                        if ($da[$key]['id'] == $answer_liked['id_answer']) {
-                                            $ligne = $key;
+                                        foreach ($da as $key => $value) {
+                                            if ($da[$key]['id'] == $answer_liked['id_answer']) {
+                                                $ligne = $key;
+                                            }
                                         }
-                                    }
-                                    $ligne++;
-                                    unset($page);
-                                    unset($d);
+                                        $ligne++;
+                                        unset($page);
+                                        unset($d);
 
-                                    $tour = 1;
-                                    while ($d == FALSE) {
-                                        $nb = 20 * $tour;
-                                        if ($ligne <= $nb) {
-                                            $page = $tour;
-                                            $d = TRUE;
-                                        } else {
-                                            $tour++;
-                                        }
-                                    } ?>
+                                        $tour = 1;
+                                        while ($d == FALSE) {
+                                            $nb = 20 * $tour;
+                                            if ($ligne <= $nb) {
+                                                $page = $tour;
+                                                $d = TRUE;
+                                            } else {
+                                                $tour++;
+                                            }
+                                        } ?>
 
-                                    <tr>
-                                        <td>
-                                            <?php $topic = $bddConnection->prepare('SELECT * FROM cmw_forum_post WHERE id = :id');
-                                            $topic->execute(array(
-                                                'id' => $answer_liked['id_topic']
-                                            ));
-                                            $topicd = $topic->fetch(PDO::FETCH_ASSOC); ?>
+                                        <tr>
+                                            <td>
+                                                <?php $topic = $bddConnection->prepare('SELECT * FROM cmw_forum_post WHERE id = :id');
+                                                $topic->execute(array(
+                                                    'id' => $answer_liked['id_topic']
+                                                ));
+                                                $topicd = $topic->fetch(PDO::FETCH_ASSOC); ?>
 
-                                            <?= $topicd['nom']; ?>
-                                        </td>
-
-
-                                        <td><?php if ($answer_liked['Appreciation'] == 1) : ?>
-                                                <div> Quelqu'un a aimé votre réponse</div>
-                                            <?php else : ?>
-                                                <div> Quelqu'un n'a pas aimé votre réponse</div>
-                                            <?php endif; ?>
-                                        </td>
+                                                <?= $topicd['nom']; ?>
+                                            </td>
 
 
-                                        <td>
-                                            <a href="index.php?action=alerts_vu&page=post&id=<?= $answer_liked['id_topic']; ?>&page_post=<?= $page; ?>&id_answer=<?= $answer_liked['id_answer']; ?>&likeur=<?= $answer_liked['pseudo_likeur']; ?>#<?= $answer_liked['id_answer']; ?>">
-                                                <?= $answer_liked['pseudo_likeur']; ?>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                            <td><?php if ($answer_liked['Appreciation'] == 1) : ?>
+                                                    <div> Quelqu'un a aimé votre réponse </div>
+                                                <?php else : ?>
+                                                    <div> Quelqu'un n'a pas aimé votre réponse </div>
+                                                <?php endif; ?>
+                                            </td>
 
-                                <?php endif; ?>
-                            <?php endwhile; ?>
-                        <?php else : ?>
 
-                            <!-- Aucune alerte -->
+                                            <td>
+                                                <a href="index.php?action=alerts_vu&page=post&id=<?= $answer_liked['id_topic']; ?>&page_post=<?= $page; ?>&id_answer=<?= $answer_liked['id_answer']; ?>&likeur=<?= $answer_liked['pseudo_likeur']; ?>#<?= $answer_liked['id_answer']; ?>">
+                                                    <?= $answer_liked['pseudo_likeur']; ?>
+                                                </a>
+                                            </td>
+                                        </tr>
 
-                            <tr class="p-0 no-hover">
-                                <td colspan="3" class="p-0 no-hover">
-                                    <div class="m-0 info-page bg-danger">
-                                        <div class="text-center">Aucune alerte reçue pour l'instant</div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    <?php endif; ?>
+                                <?php endwhile; ?>
+                            <?php else : ?>
 
-                        <?php endif; ?>
+                                <!-- Aucune alerte -->
+
+                                <tr class="p-0 no-hover">
+                                    <td colspan="3" class="p-0 no-hover">
+                                        <div class="m-0 info-page bg-danger">
+                                            <div class="text-center">Aucune alerte reçue pour l'instant</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                            <?php endif; ?>
 
                         </tbody>
                     </table>
@@ -110,5 +110,5 @@
 
 <?php else :
     header('Location: index.php');
-    ?>
+?>
 <?php endif; ?>

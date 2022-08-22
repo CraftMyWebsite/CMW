@@ -1,121 +1,110 @@
 {
-  "1.9 - LTS": {
-    "Développeur": [
-      "Teyir",
-      "CapDRAKE",
-      "Noxeg"
-    ],
-    "Support": [
-      "Emilien52",
-      "CapDRAKE"
-    ]
-  },
-  "1.8.3": {
-    "Développeur": [
-      "guedesite",
-      "Teyir",
-      "BadiiiX",
-      "MrFlamme26",
-      "Noxeg"
-    ],
-    "Support": [
-      "Emilien52",
-      "CapDRAKE"
-    ]
-  },
-  "1.8.2": {
-    "Développeur": [
-      "LoGuardiaN",
-      "guedesite",
-      "Teyir",
-      "MrFlamme26"
-    ],
-    "Support": [
-      "Emilien52"
-    ],
-    "Autres": [
-      "CapDRAKE",
-      "Akira_Shacho"
-    ]
-  },
-  "1.8.1": {
-    "Développeur": [
-      "Florentlife",
-      "guedesite",
-      "BadiiiX",
-      "deadfire",
-      "PinglsDzn"
-    ],
-    "Support": [
-      "Emilien52"
-    ],
-    "Autres": [
-      "MrSheepSheep",
-      "Humanist"
-    ]
-  },
-  "1.8": {
-    "Développeur": [
-      "Florentlife",
-      "guedesite",
-      "BadiiiX",
-      "Amjido",
-      "PinglsDzn"
-    ],
-    "Support": [
-      "Emilien52"
-    ],
-    "Autres": [
-      "PandaxCSGO",
-      "X3RO",
-      "RedBoard",
-      "AnackKel"
-    ]
-  },
-  "1.7.3": {
-    "Développeur": [
-      "Florentlife",
-      "Guedesite",
-      "BadiiiX"
-    ],
-    "Support": [
-      "Emilien52"
-    ]
-  },
-  "1.7.2": {
-    "Développeur": [
-      "Florentlife",
-      "Guedesite",
-      "PinglsDzn",
-      "Ethanox",
-      "Mario359"
-    ],
-    "Support": [
-      "Emilien52"
-    ]
-  },
-  "1.7.1": {
-    "Développeur": [
-      "Florentlife"
-    ],
-    "Support": [
-      "Emilien52"
-    ]
-  },
-  "1.7.0": {
-    "Développeur": [
-      "Florentlife",
-      "Ethanox",
-      "Oxykis"
-    ]
-  },
-  "1.6": {
-    "Développeur": [
-      "TheTueurCity",
-      "Cersus",
-      "SawnFx",
-      "DogeMVP",
-      "Lucerno"
-    ]
-  }
+	"1.8.3": {
+		"Développeur": [
+			"guedesite",
+			"Teyir",
+			"BadiiiX",
+			"MrFlamme26",
+			"Noxeg"
+		],
+		"Support": [
+			"Emilien52",
+			"CapDRAKE"
+		]
+	},	
+	"1.8.2": {
+		"Développeur": [
+			"LoGuardiaN",
+			"guedesite",
+			"Teyir",
+			"MrFlamme26"
+		],
+		"Support": [
+			"Emilien52"
+		],
+		"Autres":[
+			"CapDRAKE",
+			"Akira_Shacho"
+		]
+	},
+	"1.8.1": {
+		"Développeur": [
+			"Florentlife",
+			"guedesite",
+			"BadiiiX",
+			"deadfire",
+			"PinglsDzn"
+		],
+		"Support": [
+			"Emilien52"
+		],
+		"Autres":[
+			"MrSheepSheep",
+			"Humanist"
+		]
+	},
+	"1.8": {
+		"Développeur": [
+			"Florentlife",
+			"guedesite",
+			"BadiiiX",
+			"Amjido",
+			"PinglsDzn"
+		],
+		"Support": [
+			"Emilien52"
+		],
+		"Autres":[
+			"PandaxCSGO",
+			"X3RO",
+			"RedBoard",
+			"AnackKel"
+		]
+	},
+	"1.7.3": {
+		"Développeur": [
+			"Florentlife",
+			"Guedesite",
+			"BadiiiX"
+		],
+		"Support": [
+			"Emilien52"
+		]
+	},
+	"1.7.2": {
+		"Développeur": [
+			"Florentlife",
+			"Guedesite",
+			"PinglsDzn",
+			"Ethanox",
+			"Mario359"
+		],
+		"Support": [
+			"Emilien52"
+		]
+	},
+	"1.7.1": {
+		"Développeur": [
+			"Florentlife"
+		],
+		"Support": [
+			"Emilien52"
+		]
+	},
+	"1.7.0": {
+		"Développeur": [
+			"Florentlife",
+			"Ethanox",
+			"Oxykis"
+		]
+	},
+	"1.6": {
+		"Développeur": [
+			"TheTueurCity",
+			"Cersus",
+			"SawnFx",
+			"DogeMVP",
+			"Lucerno"
+		]
+	}
 }

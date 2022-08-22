@@ -157,18 +157,18 @@ function updateBaltop(loop = false) {
                     f += rec;
                 }
 
-                f += '</td>'
-                    + '<td>'
-                    + '<img alt="' + ar.pseudo + '" src="' + ar.url + '" style="height:25px;width:25px" /> <strong class="important--text">'
-                    + '<a href="index.php?page=profil&profil=' + ar.pseudo + '">'
-                    + ar.pseudo
-                    + '</a>'
-                    + '</strong>'
-                    + '</td>'
-                    + '<td>'
-                    + (ar.nombre != null ? ar.nombre : 0)
-                    + '</td>'
-                    + '</tr>';
+                        f+='</td>'
+                        +'<td>'
+                            +'<img alt="'+ar.pseudo+'" src="'+ar.url+'" style="height:25px;width:25px" /> <strong class="important--text">'
+                                +'<a href="index.php?page=profil&profil='+ar.pseudo+'">'
+                                        +ar.pseudo
+                                +'</a>'
+                            +'</strong>'
+                        +'</td>'
+                        +'<td>'
+                            + (ar.nombre != null ? ar.nombre : 0)
+                        +'</td>'
+                    +'</tr>';
 
             });
         } else {

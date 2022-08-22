@@ -103,18 +103,18 @@ class JsonCon
 	
 	public function GetConnection()
 	{
-		$key = $this->verifyReq("server.version");
+		$key = $this->verifyReq('server.version');
 		unset($c);
 		if($key !== false)
 			$c =  $key;
 		elseif($this->TryMode())
-			$c = $this->api->call("server.version");
+			$c = $this->api->call('server.version');
 		elseif($this->api != null && $this->api['query'] != null)
 			$c = $this->api['query']->GetInfo();
 		if(!isset($c))
 			return false;
-		$this->updateReq("server.version", $c);
-		if(isset($c[0]['result']) && $c[0]['result'] == "success")
+		$this->updateReq('server.version', $c);
+		if(isset($c[0]['result']) && $c[0]['result'] == 'success')
 			return true;
 		if(isset($c['HostName']) && !empty($c['HostName']))
 			return true;
@@ -133,12 +133,12 @@ class JsonCon
 			$message = str_replace('&', '§', $message);
 			if($this->TryMode())
 			{
-				$this->api->call("chat.broadcast", array($message));
+				$this->api->call('chat.broadcast', array($message));
 			}
 			else
 			{
 				if($this->api != null && $this->api['rcon']->isConnected())
-					$this->api['rcon']->Rcon("say ".$message);
+					$this->api['rcon']->Rcon('say ' .$message);
 			}
 		}
 	}
@@ -148,7 +148,7 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				return $this->api->call("streams.chat.latest", $donnees);
+				return $this->api->call('streams.chat.latest', $donnees);
 			}
 			else
 			{
@@ -160,15 +160,15 @@ class JsonCon
 	public function getPlugins()
 	{
 		if($this->isConnected()) {
-			$key = $this->verifyReq("getPlugins");
+			$key = $this->verifyReq('getPlugins');
 			if($key !== false)
 			{
 				return $key;
 			}
 			if($this->TryMode())
 			{
-				$plugins['Test'] = $this->api->call("getPlugins");
-				$plugins['Test'] = $plugins['Test'][0]["success"];
+				$plugins['Test'] = $this->api->call('getPlugins');
+				$plugins['Test'] = $plugins['Test'][0]['success'];
 			}
 			else
 			{
@@ -178,7 +178,7 @@ class JsonCon
 					$plugins['Test'] = $data['Plugins'];
 				}
 			}
-			$this->updateReq("getPlugins", $plugins);
+			$this->updateReq('getPlugins', $plugins);
 			return $plugins;
 		} else {
 			return false;
@@ -188,18 +188,18 @@ class JsonCon
 	public function GetConsole()
 	{
 		if($this->isConnected()) {
-			$key = $this->verifyReq("getLatestConsoleLogsWithLimit");
+			$key = $this->verifyReq('getLatestConsoleLogsWithLimit');
 			if($key !== false)
 				return $key;
 			$msg = 12;
 			if($this->TryMode())
 			{
-				$console['Test'] = $this->api->call("getLatestConsoleLogsWithLimit", array($msg));
-				$console['Test'] = $console['Test'][0]["success"];
+				$console['Test'] = $this->api->call('getLatestConsoleLogsWithLimit', array($msg));
+				$console['Test'] = $console['Test'][0]['success'];
 			}
 			else
-				$console['Test'] = "Impossible de récupérer les données de la console en RCON/QUERY";
-			$this->updateReq("getLatestConsoleLogsWithLimit", $console);
+				$console['Test'] = 'Impossible de récupérer les données de la console en RCON/QUERY';
+			$this->updateReq('getLatestConsoleLogsWithLimit', $console);
 			return $console;
 		} else {
 			return false;
@@ -210,7 +210,7 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				return $this->api->call("reloadServer");
+				return $this->api->call('reloadServer');
 			}
 			else
 			{
@@ -223,7 +223,7 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				return $this->api->call("server.power.restart");
+				return $this->api->call('server.power.restart');
 			}
 			else
 			{
@@ -234,15 +234,15 @@ class JsonCon
 
 	public function getPermissionsGroups($pseudo) {
 		if($this->isConnected()) {
-			$key = $this->verifyReq("permissions.getGroups.".$pseudo);
+			$key = $this->verifyReq('permissions.getGroups.' .$pseudo);
 			if($key !== false)
 			{
 				return $key;
 			}
 			if($this->TryMode())
 			{
-				$return = $this->api->call("permissions.getGroups", Array($pseudo));
-				$this->updateReq("permissions.getGroups.".$pseudo, $return);
+				$return = $this->api->call('permissions.getGroups', Array($pseudo));
+				$this->updateReq('permissions.getGroups.' .$pseudo, $return);
 				return $return;
 			}
 			else
@@ -259,7 +259,7 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				$this->api->call("players.name.send_message", $donnees);
+				$this->api->call('players.name.send_message', $donnees);
 			}
 			else {
 				if($this->api != null && $this->api['rcon']->isConnected())	
@@ -271,13 +271,13 @@ class JsonCon
 	public function getMonnaie()
 	{
 		if($this->isConnected()) {
-			$key = $this->verifyReq("economy.currency.name_plural");
+			$key = $this->verifyReq('economy.currency.name_plural');
 			if($key !==false)
 				return $key;
 			if($this->TryMode())
 			{
-				$return = $this->api->call("economy.currency.name_plural");
-				$this->updateReq("economy.currency.name_plural", $return);
+				$return = $this->api->call('economy.currency.name_plural');
+				$this->updateReq('economy.currency.name_plural', $return);
 				return $return;
 			}
 		}
@@ -291,7 +291,7 @@ class JsonCon
 			$message = str_replace('&', '§', $message);
 			if($this->TryMode())
 			{
-				$this->api->call("runConsoleCommand", array($message));
+				$this->api->call('runConsoleCommand', array($message));
 			}
 			else
 			{
@@ -307,8 +307,8 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				$this->api->call("runConsoleCommand", array('manudel '.$this->pseudo));
-				$this->api->call("permissions.addPlayerToGroup", array($this->pseudo, $message));
+				$this->api->call('runConsoleCommand', array('manudel '.$this->pseudo));
+				$this->api->call('permissions.addPlayerToGroup', array($this->pseudo, $message));
 				require_once('modele/boutique/tempgrades.class.php');
 				$tempGrade = new TempGrades($this->bdd, $this->pseudo, $duree, $message);
 				if($tempGrade->ExistPlayer())
@@ -334,9 +334,9 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				$this->api->call("runConsoleCommand", array('manudel '.$pseudo));
+				$this->api->call('runConsoleCommand', array('manudel '.$pseudo));
 				if(!empty($grade))
-					$this->api->call("permissions.addPlayerToGroup", array($pseudo, $grade));	
+					$this->api->call('permissions.addPlayerToGroup', array($pseudo, $grade));
 			}
 		}
 	}
@@ -346,7 +346,7 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				$this->api->call("runConsoleCommand", array('give '.$this->pseudo . ' '. $commande));	
+				$this->api->call('runConsoleCommand', array('give '.$this->pseudo . ' '. $commande));
 			}
 			else
 			{
@@ -360,7 +360,7 @@ class JsonCon
 	{
 		if($this->isConnected()) {
 			if($this->TryMode()) {
-				$this->api->call("givePlayerXp", array($message));
+				$this->api->call('givePlayerXp', array($message));
 			}
 		}
 	}
@@ -370,7 +370,7 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				$this->api->call("econ.depositPlayer", array($this->pseudo, $message));
+				$this->api->call('econ.depositPlayer', array($this->pseudo, $message));
 			}
 		}
 	}
@@ -378,13 +378,13 @@ class JsonCon
 	public function GetBanList()
 	{
 		if($this->isConnected()) {
-			$key = $this->verifyReq("files.read.banlist");
+			$key = $this->verifyReq('files.read.banlist');
 			if($key !== false)
 				return $key;
 			if($this->TryMode())
 			{
-				$return = $this->api->call("files.read", array("banned-players.json"));
-				$this->updateReq("files.read.banlist", $return);
+				$return = $this->api->call('files.read', array('banned-players.json'));
+				$this->updateReq('files.read.banlist', $return);
 				return $return;
 			}
 		}
@@ -396,23 +396,23 @@ class JsonCon
 		if($this->isConnected()) {
 			if($this->TryMode())
 			{
-				$key = $this->verifyReq("getPlayerNames");
+				$key = $this->verifyReq('getPlayerNames');
 				if($key !== false)
 					return $key;
-				$req = $this->api->call("getPlayerNames");
+				$req = $this->api->call('getPlayerNames');
 				$return = $req[0]['success'];
-				$this->updateReq("getPlayerNames", $return);
+				$this->updateReq('getPlayerNames', $return);
 				return $return;
 			}
 			else
 			{
-				$key = $this->verifyReq("query.getPlayers");
+				$key = $this->verifyReq('query.getPlayers');
 				if($key !== false)
 				{
 					return $key;
 				}
 				$req = $this->api['query']->GetPlayers();
-				$this->updateReq("query.getPlayers", $req);
+				$this->updateReq('query.getPlayers', $req);
 				return $req;
 			}
 		} else {
@@ -468,7 +468,7 @@ class JsonCon
 			{
 				if($this->api != null && $this->api['query'] != null)
 				{
-					$key = $this->verifyReq("query.getInfo");
+					$key = $this->verifyReq('query.getInfo');
 					if($key !== false)
 					{
 						$data = $key;
@@ -482,15 +482,15 @@ class JsonCon
 						$serveurStats['enLignes'] = $data['Players'];
 						$serveurStats['maxJoueurs'] = $data['MaxPlayers'];
 						$serveurStats['version'] = $data['Version'];
-						$this->updateReq("query.getInfo", $data);
+						$this->updateReq('query.getInfo', $data);
 					}
-					$key = $this->verifyReq("query.getPlayers");
+					$key = $this->verifyReq('query.getPlayers');
 					if($key !== false)
 						$serveurStats['joueurs'] = $key;
 					else
 					{
 						$serveurStats['joueurs'] = $this->api['query']->GetPlayers();
-						$this->updateReq("query.getPlayers", $serveurStats['joueurs']);
+						$this->updateReq('query.getPlayers', $serveurStats['joueurs']);
 					}
 				}
 			}
@@ -510,7 +510,7 @@ class JsonCon
 
 	private function verifyReq($req, $time = 60)
 	{
-		if($req == "getLatestConsoleLogsWithLimit")
+		if($req == 'getLatestConsoleLogsWithLimit')
 			return false;
 		$select = $this->bdd->prepare('SELECT valeur, temp FROM cmw_cache_json WHERE requete = :req LIMIT 0,1');
 		$select->execute(array(
@@ -559,14 +559,14 @@ class JsonCon
 			return true;
 		} else {
 			$stack = debug_backtrace();
-			$error_msg = "Action annulé, la connection (".($this->mode == 1 ? "JSONAPI" : "RCON/QUERY") .") au serveur ".($this->mode == 1 ? $this->api['adresse'] : $this->api['data']['adresse'])." n'a pas été établie.";
+			$error_msg = 'Action annulé, la connection (' .($this->mode == 1 ? 'JSONAPI' : 'RCON/QUERY') . ') au serveur ' .($this->mode == 1 ? $this->api['adresse'] : $this->api['data']['adresse'])." n'a pas été établie.";
 		    for ($i = 0; $i < 5; $i++)
 		    {
 		        if (false === ($frame = next($stack)))
 		        {
 		            break;
 		        }
-		        $error_msg .= " <br/> " . $frame['function'] . ':' . $frame['file'] . ' line ' . $frame['line'];
+		        $error_msg .= ' <br/> ' . $frame['function'] . ':' . $frame['file'] . ' line ' . $frame['line'];
 		    }
 		    trigger_error($error_msg, E_USER_NOTICE);
 			return false;

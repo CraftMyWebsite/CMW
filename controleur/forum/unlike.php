@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['id_answer']) && Permission::getInstance()->verifPerm("connect"))
+if(isset($_POST['id_answer']) && Permission::getInstance()->verifPerm('connect'))
 {
 	$id = htmlspecialchars($_POST['id_answer']);
 	if(isset($_POST['type']))

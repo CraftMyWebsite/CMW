@@ -154,7 +154,7 @@
                                     <?php
                                     $fontactubrute = $_Theme_['Main']['theme']['police'];
 
-                                    $fontactu = str_replace(array("'", ";"), '', $fontactubrute);
+                                    $fontactu = str_replace(array("'", ';'), '', $fontactubrute);
                                     ?>
 
                                     <div class="tab-pane fade mx-auto" id="policeEdition" role="tabpanel" aria-labelledby="policeEdition-tab">

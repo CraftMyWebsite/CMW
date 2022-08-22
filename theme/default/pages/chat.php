@@ -34,7 +34,7 @@
                                     <div style="<?= ($i == 0) ? '' : 'display: none;';?>" id="joueur<?=$i;?>">
                                         <?php $joueurs = $jsonCon[$i]->GetPlayers(); 
                                         if(empty($joueurs))
-                                            echo "Pas de joueurs connectés";
+                                            echo 'Pas de joueurs connectés';
                                         else
                                             foreach($joueurs as $value)
                                             {
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="card-body" id="msgChat<?=$i;?>">
                                         <!-- Affichage du message -->
-                                        <?php if ($messages != false && $messages != "erreur" && $messages != "query") {
+                                        <?php if ($messages != false && $messages != 'erreur' && $messages != 'query') {
                                             $messages = array_slice($messages, -10, 10);
                                             foreach ($messages as $value) { ?>
 
@@ -81,7 +81,7 @@
 
                                             <?php } ?>
                                             <!-- Affichage des erreurs -->
-                                        <?php } elseif ($messages == "query") { ?>
+                                        <?php } elseif ($messages == 'query') { ?>
                                             <div class="tab-pane fade in show" aria-expanded="false">
                                                 <div class="info-page bg-danger">
                                                     <div class="text-center">
@@ -89,7 +89,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php } elseif ($messages == "erreur") { ?>
+                                        <?php } elseif ($messages == 'erreur') { ?>
                                             <div class="tab-pane fade in show" aria-expanded="false">
                                                 <div class="info-page bg-info">
                                                     <div class="text-center">
@@ -115,7 +115,7 @@
                         <?php } ?>
                     </div>
 
-                    <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
+                    <?php if (Permission::getInstance()->verifPerm('connect')) : ?>
                         <!-- Envoie du message -->
                         <form action="?action=sendChat" method="POST">
                             <div class="card-footer">

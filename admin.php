@@ -20,7 +20,7 @@ ini_set('display_errors', 1);
 	$globalJoueur = new Joueur($bddConnection);
 	$_Joueur_ = $globalJoueur->getUser();
 
-	if(Permission::getInstance()->verifPerm("PermsPanel","access"))
+	if(Permission::getInstance()->verifPerm('PermsPanel', 'access'))
 	{
 		require_once('modele/json/json.php');
 		$_Permission_ = Permission::getInstance();

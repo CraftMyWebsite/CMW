@@ -9,35 +9,35 @@ require ('include/version.php');
 <head>
 
 	<title>
-		<?=$_Serveur_['General']['name'] . " | MAINTENANCE " ?>
+		<?=$_Serveur_['General']['name'] . ' | MAINTENANCE ' ?>
 	</title>
 
-	<base href="https://<?= $_SERVER["SERVER_NAME"] ?>/" />
+	<base href="https://<?= $_SERVER['SERVER_NAME'] ?>/" />
 
 	<!-- Meta -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
-    <meta name="msapplication-navbutton-color" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
-    <meta name="apple-mobile-web-app-statut-bar-style" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
-    <meta name="apple-mobile-web-app-capable" content="<?= $_Serveur_["color"]["theme"]["main"]; ?>">
+    <meta name="theme-color" content="<?= $_Serveur_['color']['theme']['main']; ?>">
+    <meta name="msapplication-navbutton-color" content="<?= $_Serveur_['color']['theme']['main']; ?>">
+    <meta name="apple-mobile-web-app-statut-bar-style" content="<?= $_Serveur_['color']['theme']['main']; ?>">
+    <meta name="apple-mobile-web-app-capable" content="<?= $_Serveur_['color']['theme']['main']; ?>">
 
     <!-- SEO -->
     <meta property="og:title" content="<?= $_Serveur_['General']['name'] ?>">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://<?= $_SERVER["SERVER_NAME"] ?>">
-    <meta property="og:image" content="https://<?= $_SERVER["SERVER_NAME"] ?>/favicon.ico">
+    <meta property="og:url" content="https://<?= $_SERVER['SERVER_NAME'] ?>">
+    <meta property="og:image" content="https://<?= $_SERVER['SERVER_NAME'] ?>/favicon.ico">
     <meta property="og:image:alt" content="<?= $_Serveur_['General']['description'] ?>">
     <meta property="og:description" content="<?= $_Serveur_['General']['description'] ?>">
     <meta property="og:site_name" content="<?= $_Serveur_['General']['name'] ?>" />
 
     <meta name="twitter:title" content="<?= $_Serveur_['General']['name'] ?>">
     <meta name="twitter:description" content="<?= $_Serveur_['General']['description'] ?>">
-    <meta name="twitter:image" content="https://<?= $_SERVER["SERVER_NAME"] ?>/favicon.ico">
+    <meta name="twitter:image" content="https://<?= $_SERVER['SERVER_NAME'] ?>/favicon.ico">
 
     <meta name="author" content="CraftMyWebsite, TheTueurCiTy, <?= $_Serveur_['General']['name']; ?>" />
-    <meta name="publisher" content="<?= $_SERVER["SERVER_NAME"] ?>"/>
+    <meta name="publisher" content="<?= $_SERVER['SERVER_NAME'] ?>"/>
     <meta name="description" content="<?= $_Serveur_['General']['description'] ?>">
     <meta name="keywords" content="<?= isset($_Serveur_['General']['keywords']) & !empty($_Serveur_['General']['keywords']) ? $_Serveur_['General']['keywords'] : 'Minecraft CraftMyWebSite Vote' ?>">
 
@@ -56,8 +56,8 @@ require ('include/version.php');
 <body>
 	<?php
 //Verif Version
-include ("./include/version.php");
-include ("./include/version_distant.php");
+include ('./include/version.php');
+include ('./include/version_distant.php');
 ?>
 
 	<?php
@@ -90,7 +90,7 @@ tempMess(); ?>
             'maintenanceEtat' => 0,
             'maintenanceId' => $donnees['maintenanceId']
         ));
-        header("Location: /");
+        header('Location: /');
     } ?>
 
 					<div class="col-sm-10 col-md-9 col-lg-7 mx-auto mt-5">
@@ -125,7 +125,7 @@ tempMess(); ?>
 endif; ?>
 
 				<!-- Connexion -->
-				<div class="<?=(!empty($donnees['dateFin'])) ? "col-sm-9 col-md-8 col-lg-5 mt-3 mx-md-auto mx-sm-auto" : "col-8 mx-auto mt-3" ?>">
+				<div class="<?=(!empty($donnees['dateFin'])) ? 'col-sm-9 col-md-8 col-lg-5 mt-3 mx-md-auto mx-sm-auto' : 'col-8 mx-auto mt-3' ?>">
 
 					<div class="card">
 
@@ -137,7 +137,7 @@ endif; ?>
 							<h5><?=$donnees['maintenanceMsgAdmin']; ?></h5>
 						</div>
 
-						<?php if (Permission::getInstance()->verifPerm("PermsPanel", "maintenance", "actions", "connexionAdmin"))
+						<?php if (Permission::getInstance()->verifPerm('PermsPanel', 'maintenance', 'actions', 'connexionAdmin'))
 { ?>
 
 							<div class="card-footer">
@@ -147,7 +147,7 @@ endif; ?>
 						<?php
 }
 elseif (Permission::getInstance()
-    ->verifPerm("connect"))
+    ->verifPerm('connect'))
 { ?>
 							<div class="card-footer">
 								<a class="btn btn-main w-100">Vous n'avez pas la permission d'accéder au site pendant la maintenance ! </a>
@@ -243,7 +243,7 @@ include ('theme/' . $_Serveur_['General']['theme'] . '/pied.php'); //Footer incl
 			var timeinterval = setInterval(updateClock, 1000);
 		}
 
-		var deadline = new Date(Date.parse(new Date()) + <?=($donnees["dateFin"] - time()) ?> * 1000);
+		var deadline = new Date(Date.parse(new Date()) + <?=($donnees['dateFin'] - time()) ?> * 1000);
 		initializeClock('clockdiv', deadline);
 	</script>
 </body>

@@ -32,16 +32,16 @@ require_once('./admin/donnees/widgets.php'); ?>
 
 		                <label class="control-label">Type de Widget</label>
 		                <select class="form-control" onchange="if(this.value == '3' | this.value == 3) { show('ck-ct<?php echo $i; ?>'); } else { hide('ck-ct<?php echo $i; ?>'); }" name="type<?php echo $i; ?>">
-		                    <option value="0" <?=$widgets[$i]['type'] == 0 ? "selected": ""?>>Gestion du compte</option>
-		                    <option value="1" <?=$widgets[$i]['type'] == 1 ? "selected": ""?>>Status Serveurs</option>
-		                    <option value="2" <?=$widgets[$i]['type'] == 2 ? "selected": ""?>>Joueurs en ligne</option>
-		                    <option value="3" <?=$widgets[$i]['type'] == 3 ? "selected": ""?>>Champ Texte</option>
+		                    <option value="0" <?=$widgets[$i]['type'] == 0 ? 'selected' : '' ?>>Gestion du compte</option>
+		                    <option value="1" <?=$widgets[$i]['type'] == 1 ? 'selected' : '' ?>>Status Serveurs</option>
+		                    <option value="2" <?=$widgets[$i]['type'] == 2 ? 'selected' : '' ?>>Joueurs en ligne</option>
+		                    <option value="3" <?=$widgets[$i]['type'] == 3 ? 'selected' : '' ?>>Champ Texte</option>
 		                </select>
 
-		                <div id="ck-ct<?php echo $i; ?>" <?=$widgets[$i]['type'] == 3 ? "" : 'style="display:none;"' ?>  >
+		                <div id="ck-ct<?php echo $i; ?>" <?=$widgets[$i]['type'] == 3 ? '' : 'style="display:none;"' ?>  >
 			                <label class="control-label">Message du widget</label>
 			                <textarea class="form-control" id="ckeditor" data-UUID="0009" name="message<?php echo $i; ?>">
-			                	<?=$widgets[$i]['type'] == 3 ? $widgets[$i]['message'] : "" ?> 
+			                	<?=$widgets[$i]['type'] == 3 ? $widgets[$i]['message'] : '' ?>
 			                </textarea>
 		            	</div>
                       

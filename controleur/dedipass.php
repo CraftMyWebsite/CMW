@@ -35,7 +35,7 @@ else {
 	$joueurMaj->setNouvellesDonneesTokens($playerData);
 	$_Joueur_['tokens'] = $_Joueur_['tokens'] + $virtual_currency;
 	
-  header("Location: index.php?page=token&successDedipass");
+  header('Location: index.php?page=token&successDedipass');
   } 
   else { 
     // Le code est invalide 

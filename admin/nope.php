@@ -30,7 +30,7 @@
         }
 
         body {
-            background: -webkit-linear-gradient(to right, #2F0743, #41295a); /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #2F0743, #41295a);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #2F0743, #41295a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             height: 100vh;
         }
@@ -84,12 +84,11 @@
             color: #81a2be;
         }
 
-        strong {
+        strong{
             font-size: 20px;
             color: #7bacd6;;
         }
-
-        strong:hover {
+        strong:hover{
             color: #b0becb;
         }
 
@@ -110,30 +109,24 @@
 <body>
 
 
-<h1>NOPE</h1>
+    <h1>NOPE</h1>
 
-<div><p>> <span>CODE D'ERREUR</span>: "<i>Accès non autorisé</i>"</p>
-    <p>> <span>DESCRIPTION DE L'ERREUR</span>: "<i>Vous n'avez pas le droit d'être ici</i>"</p>
-    <p>> <span>CAUSE DE L'ERREUR</span>: [<b>execute access forbidden, read access forbidden, write access forbidden,
-            ssl required, ssl 128 required, ip address rejected, client certificate required, site access denied, too
-            many users, invalid configuration, password change, mapper denied access, client certificate revoked,
-            directory listing denied, client access licenses exceeded, client certificate is untrusted or invalid,
-            client certificate has expired or is not yet valid, passport logon failed, source access denied, infinite
-            depth is denied, too many requests from the same client ip <strong>ptdr t'as juste pas les droits !</strong>
-        </b>]</p>
-    <p>> <span>Merci de revenir à l'accueil !</span>: [<a href="../index.php">Accueil</a>]</p>
-    <p><i>- CraftMyWebsite</i></p>
-</div>
+    <div><p>> <span>CODE D'ERREUR</span>: "<i>Accès non autorisé</i>"</p>
+        <p>> <span>DESCRIPTION DE L'ERREUR</span>: "<i>Vous n'avez pas le droit d'être ici</i>"</p>
+        <p>> <span>CAUSE DE L'ERREUR</span>: [<b>execute access forbidden, read access forbidden, write access forbidden, ssl required, ssl 128 required, ip address rejected, client certificate required, site access denied, too many users, invalid configuration, password change, mapper denied access, client certificate revoked, directory listing denied, client access licenses exceeded, client certificate is untrusted or invalid, client certificate has expired or is not yet valid, passport logon failed, source access denied, infinite depth is denied, too many requests from the same client ip <strong>ptdr t'as juste pas les droits !</strong> </b>]</p>
+        <p>> <span>Merci de revenir à l'accueil !</span>: [<a href="../index.php">Accueil</a>]</p>
+        <p><i>- CraftMyWebsite</i></p>
+    </div>
 
 
-<!-- Script pour l'écriture -->
+    <!-- Script pour l'écriture -->
 <script type="text/javascript">
     var str = document.getElementsByTagName('div')[0].innerHTML.toString();
     var i = 0;
     document.getElementsByTagName('div')[0].innerHTML = "";
 
-    setTimeout(function () {
-        var se = setInterval(function () {
+    setTimeout(function() {
+        var se = setInterval(function() {
             i++;
             document.getElementsByTagName('div')[0].innerHTML = str.slice(0, i) + "|";
             if (i == str.length) {
@@ -141,7 +134,7 @@
                 document.getElementsByTagName('div')[0].innerHTML = str;
             }
         }, 10);
-    }, 0);
+    },0);
 
 </script>
 </body>

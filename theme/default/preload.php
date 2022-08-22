@@ -1,13 +1,13 @@
 <?php
-require("modele/menu.class.php");
+require('modele/menu.class.php');
 $_Menu_ = new menu($bddConnection);
 $_Menu_ = $_Menu_->getMenuGroup();
 
-require("modele/accueil/miniature.class.php");
+require('modele/accueil/miniature.class.php');
 $_Minia_ = new miniature($bddConnection);
 $_Minia_ = $_Minia_->getMinia();
 
-require("modele/widgets.class.php");
+require('modele/widgets.class.php');
 $_Widgets_ = new widgets($bddConnection);
 $_Widgets_ = $_Widgets_->getWidgets();
 
@@ -32,7 +32,7 @@ if($maintenance[$i]['maintenanceEtat'] == 1){
 	header('Location: index.php?page=maintenance');
 }
 }
-if(Permission::getInstance()->verifPerm("connect"))
+if(Permission::getInstance()->verifPerm('connect'))
 {
 	require('modele/forum/joueurforum.class.php');
 	$_JoueurForum_ = new JoueurForum($_Joueur_['pseudo'], $_Joueur_['id'], $bddConnection);

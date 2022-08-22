@@ -125,7 +125,7 @@
                           <div id="lienpage<?php echo $i; ?>" <?php if($Miniature[$i]['type'] == 1) { echo 'style="display:none;"'; }?>>
                             <label class="control-label">Page</label>
                             <select class="form-control" name="page<?php echo $i; ?>">
-                              <?php $o = 0;  while($o < count($pages)) { ?><option id="" value="<?php echo $pages[$o]; ?>" <?php if(str_replace("?&page=", "", $Miniature[$i]['lien']) == urlencode($pages[$o])) { echo 'selected'; } ?>><?php echo $pages[$o]; ?></option><?php $o++; } ?>
+                              <?php $o = 0;  while($o < count($pages)) { ?><option id="" value="<?php echo $pages[$o]; ?>" <?php if(str_replace('?&page=', '', $Miniature[$i]['lien']) == urlencode($pages[$o])) { echo 'selected'; } ?>><?php echo $pages[$o]; ?></option><?php $o++; } ?>
                             </select>
                           </div>
                     </div>

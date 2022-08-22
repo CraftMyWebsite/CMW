@@ -51,7 +51,7 @@ class Permission {
 		else
 		{
 			$TableauPerm = array();
-			if($perm[0] == "connect")
+			if($perm[0] == 'connect')
 			{
 				return true;
 			}
@@ -131,7 +131,7 @@ class Permission {
 			{
 				$this->_Perm_ = $this->readPerm($this->grade);
 			}
-			return "<span class='prefix ".$this->_Perm_['prefix']." ".$this->_Perm_['effets']."'>".$this->_Perm_['Grade']."</span>";
+			return "<span class='prefix ".$this->_Perm_['prefix']. ' ' .$this->_Perm_['effets']."'>".$this->_Perm_['Grade']. '</span>';
 		}
 		elseif($grade != -1)
 		{
@@ -141,10 +141,10 @@ class Permission {
 			}
 			if($grade == 1)
 			{
-				return "<span class='prefix ".$_Serveur_['General']['createur']['prefix']." ".$_Serveur_['General']['createur']['effets']." ''>".$_Serveur_['General']['createur']['nom']."</span></p>";
+				return "<span class='prefix ".$_Serveur_['General']['createur']['prefix']. ' ' .$_Serveur_['General']['createur']['effets']." ''>".$_Serveur_['General']['createur']['nom']. '</span></p>';
 			}
 			$recup = $this->readPerm($grade);
-			return "<span class='prefix ".$recup['prefix']." ".$recup['effets']."'>".$recup['Grade']."</span>";
+			return "<span class='prefix ".$recup['prefix']. ' ' .$recup['effets']."'>".$recup['Grade']. '</span>';
 		}
 	}
 
@@ -221,7 +221,7 @@ class Permission {
                 $gradeSite = $_Serveur_['General']['joueur'];
             } elseif ($joueur['rang'] == 1) {
 
-            	$gradeSite = "<span style='".(isset($_Serveur_['General']['createur']['bg']) && !empty($_Serveur_['General']['createur']['bg']) ? "background-color:".$_Serveur_['General']['createur']['bg'] : "" )."; ".(isset($_Serveur_['General']['createur']['couleur']) && !empty($_Serveur_['General']['createur']['couleur']) ? "color:".$_Serveur_['General']['createur']['couleur'] : "" )."; ' class='prefix " . $_Serveur_['General']['createur']['effets'] . "'>" . $_Serveur_['General']['createur']['nom'] . "</span>";
+            	$gradeSite = "<span style='".(isset($_Serveur_['General']['createur']['bg']) && !empty($_Serveur_['General']['createur']['bg']) ? 'background-color:' .$_Serveur_['General']['createur']['bg'] : ''). '; ' .(isset($_Serveur_['General']['createur']['couleur']) && !empty($_Serveur_['General']['createur']['couleur']) ? 'color:' .$_Serveur_['General']['createur']['couleur'] : '')."; ' class='prefix " . $_Serveur_['General']['createur']['effets'] . "'>" . $_Serveur_['General']['createur']['nom'] . '</span>';
 
             } else {
                 $req = $this->bdd->prepare('SELECT prefix, effets, nom FROM cmw_grades WHERE id = :id');
@@ -231,7 +231,7 @@ class Permission {
                 if (!empty($grade)) {
 
 
-                    $gradeSite = "<span style='".(isset($grade['prefix']) && !empty($grade['prefix']) ? "background-color:".$grade['prefix'] : "" )."; ".(isset($grade['couleur']) && !empty($grade['couleur']) ? "color:".$grade['couleur'] : "" )."; ' class='prefix " . $grade['effets'] . "'>" . $grade['nom'] . "</span>";
+                    $gradeSite = "<span style='".(isset($grade['prefix']) && !empty($grade['prefix']) ? 'background-color:' .$grade['prefix'] : ''). '; ' .(isset($grade['couleur']) && !empty($grade['couleur']) ? 'color:' .$grade['couleur'] : '')."; ' class='prefix " . $grade['effets'] . "'>" . $grade['nom'] . '</span>';
                 } else {
                     $gradeSite = $_Serveur_['General']['joueur'];
                 }

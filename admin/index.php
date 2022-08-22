@@ -6,10 +6,10 @@ $_Serveur_ = $_Serveur_->GetTableau();
 
 $_Permission_=Permission::getInstance();
 
-include("./include/version.php");
-include("./include/version_distant.php");
+include('./include/version.php');
+include('./include/version_distant.php');
 include('./admin/include/entete.php');
-if(isset($_GET['page']) AND $_GET['page'] != "accueil"){
+if(isset($_GET['page']) AND $_GET['page'] != 'accueil'){
     echo '
     <style>
 .card-columns {

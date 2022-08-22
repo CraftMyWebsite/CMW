@@ -2,392 +2,395 @@
 /*
 	Ce fichier PHP effectue telle ou telle action selon le contenu des gets envoyés par la theme(selon le lien sur lequel l'utilisateur à cliqué etc...).
 */
-if (isset($_GET['action'])) {
-    switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
-    {
+if(isset($_GET['action']))
+{
+	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
+	{ 		
+	    
+	    case 'editAge':
+	        include('controleur/joueur/profil/editAge.php');
+	       break;
+	    
+	    case 'editImgProfil':
+	        include('controleur/joueur/profil/editImgProfil.php');
+	        break;
+	        
+	    case 'editMail':
+	        include('controleur/joueur/profil/editMail.php');
+	        break;
+	        
+	    case 'editMailVisibility':
+	        include('controleur/joueur/profil/editMailVisibility.php');
+	        break;
+	        
+	    case 'editMdp':
+	        include('controleur/joueur/profil/editMdp.php');
+	        break;
+	        
+	    case 'editNewsletter':
+	        include('controleur/joueur/profil/editNewsletter.php');
+	        break;
+	        
+	    case 'editReseau':
+	        include('controleur/joueur/profil/editReseau.php');
+	        break;
+	        
+	    case 'editSignature':
+	        include('controleur/joueur/profil/editSignature.php');
+	        break;
+		// Appellée quand on clique sur un bouton de déconnection (bouton disponible quand connecté.
+		case 'deco': 
+			// Destruction des sessions + redirection sur l'accueil.
+		    $globalJoueur->destroy();
+			header('Location: index.php');
+		break;
+		case 'searchTopic':
+			include('controleur/forum/searchTopic.php');
+			exit();
+		case 'uploadCKImg':
+			echo '[DIV]';
+			require('modele/UploadImage.class.php');
+			echo UploadImage::upload($_FILES['upload'], $_Serveur_);
+			exit();
+		case 'editForumCat':
+			include('controleur/forum/editForumCat.php');
+			exit();
+		case 'editForum':
+			include('controleur/forum/editForum.php');
+		break;
+		case  'editSousForum':
+			include('controleur/forum/editSousForum.php');
+		break;
+		case 'getBaltopVote':
+			include('controleur/BaltopVote.php');
+			exit();
+		case 'getRecompenseList':
+			include('controleur/recompenseList.php');
+			exit();
+		case 'voteCron':
+			include('controleur/voteCron.php');
+			exit();
+		break;
 
-        case 'editAge':
-            include('controleur/joueur/profil/editAge.php');
-            break;
+		case 'dedipass':
+			include('controleur/dedipass.php');
+		break;
 
-        case 'editImgProfil':
-            include('controleur/joueur/profil/editImgProfil.php');
-            break;
+		case 'buyPaysafecard':
+			include('controleur/tokens/paysafecard.php');
+		break;
 
-        case 'editMail':
-            include('controleur/joueur/profil/editMail.php');
-            break;
+		case 'changeNomForum':
+			require('modele/forum/adminForum.class.php');
+			include('controleur/forum/changeNomForum.php');
+		break;
 
-        case 'editMailVisibility':
-            include('controleur/joueur/profil/editMailVisibility.php');
-            break;
+		case 'recupVotesTemp':
+			include('controleur/recupVotesTemp.php');
+			exit();
+		break;
 
-        case 'editMdp':
-            include('controleur/joueur/profil/editMdp.php');
-            break;
+		case 'rechercheMembre':
+			require('modele/app/membres.class.php');
+			include('controleur/app/rechercheMembre.php');
+		break;
 
-        case 'editNewsletter':
-            include('controleur/joueur/profil/editNewsletter.php');
-            break;
+		case 'modifPermsForum':
+			require('modele/forum/adminForum.class.php');
+			$entite = 1; //Forum
+			include('controleur/forum/modifPerms.php');
+		break;
 
-        case 'editReseau':
-            include('controleur/joueur/profil/editReseau.php');
-            break;
+		case 'modifPermsCategorie':
+			require('modele/forum/adminForum.class.php');
+			$entite = 2; //Categorie
+			include('controleur/forum/modifPerms.php');
+		break;
 
-        case 'editSignature':
-            include('controleur/joueur/profil/editSignature.php');
-            break;
-        // Appellée quand on clique sur un bouton de déconnection (bouton disponible quand connecté.
-        case 'deco':
-            // Destruction des sessions + redirection sur l'accueil.
-            $globalJoueur->destroy();
-            header('Location: index.php');
-            break;
-        case 'searchTopic':
-            include('controleur/forum/searchTopic.php');
-            exit();
-        case 'uploadCKImg':
-            echo '[DIV]';
-            require('modele/UploadImage.class.php');
-            echo UploadImage::upload($_FILES['upload'], $_Serveur_);
-            exit();
-        case 'editForumCat':
-            include('controleur/forum/editForumCat.php');
-            exit();
-        case 'editForum':
-            include('controleur/forum/editForum.php');
-            break;
-        case  'editSousForum':
-            include('controleur/forum/editSousForum.php');
-            break;
-        case 'getBaltopVote':
-            include('controleur/BaltopVote.php');
-            exit();
-        case 'getRecompenseList':
-            include('controleur/recompenseList.php');
-            exit();
-        case 'voteCron':
-            include('controleur/voteCron.php');
-            exit();
-            break;
+		case 'modifPermsSousForum':
+			require('modele/forum/adminForum.class.php');
+			$entite = 3; //Sous-Forum
+			include('controleur/forum/modifPerms.php');
+		break;
 
-        case 'dedipass':
-            include('controleur/dedipass.php');
-            break;
+		case 'modifPermsTopics':
+			require('modele/forum/adminForum.class.php');
+			$entite = 4; //Sous-Forum
+			include('controleur/forum/modifPerms.php');
+		break;
 
-        case 'buyPaysafecard':
-            include('controleur/tokens/paysafecard.php');
-            break;
+		case 'chatActu':
+			require('modele/app/chat.class.php');
+			include('controleur/chat/actu.php');
+		break;
 
-        case 'changeNomForum':
-            require('modele/forum/adminForum.class.php');
-            include('controleur/forum/changeNomForum.php');
-            break;
+		case 'sendChat':
+			require('modele/app/chat.class.php');
+			include('controleur/chat/send.php');
+		break;
+				
+		case 'supprInstall':
+			include('controleur/supprInstall.php');
+		break;
+		
+		case 'give_jetons':
+			include('controleur/profil/give_jetons.php');
+		break;
+		
+		// Appellée lors d'une action pour le forum  
+		case 'selTopic':
+			include('controleur/forum/selTopic.php');
+		break;
 
-        case 'recupVotesTemp':
-            include('controleur/recupVotesTemp.php');
-            exit();
-            break;
+		case 'ordreForum':
+			include('controleur/forum/ordre.php');
+		break;
 
-        case 'rechercheMembre':
-            require('modele/app/membres.class.php');
-            include('controleur/app/rechercheMembre.php');
-            break;
+		case 'ordreCat':
+			include('controleur/forum/ordreCat.php');
+		break;
 
-        case 'modifPermsForum':
-            require('modele/forum/adminForum.class.php');
-            $entite = 1; //Forum
-            include('controleur/forum/modifPerms.php');
-            break;
+		case 'ordreSousForum':
+			include('controleur/forum/ordreSF.php');
+		break;
 
-        case 'modifPermsCategorie':
-            require('modele/forum/adminForum.class.php');
-            $entite = 2; //Categorie
-            include('controleur/forum/modifPerms.php');
-            break;
+		case 'lock_cat':
+			include('controleur/forum/lock_cat.php');
+		break;
+		
+		case 'unlock_cat':
+			include('controleur/forum/lock_cat.php');
+		break;
 
-        case 'modifPermsSousForum':
-            require('modele/forum/adminForum.class.php');
-            $entite = 3; //Sous-Forum
-            include('controleur/forum/modifPerms.php');
-            break;
+		case 'lock_sf':
+			include('controleur/forum/lock_sf.php');
+		break;
+		
+		case 'unlock_sf':
+			include('controleur/forum/lock_sf.php');
+		break;
+		
+		case 'get_alerts':
+			include('modele/forum/alerts.php');
+		break;
+		
+		case 'new_alert':
+			include('modele/forum/new_alert.php');
+		break;
+		
+		case 'get_signalement':
+			include('modele/forum/get_signalement.php');
+		break;
+		
+		case 'create_forum':
+			include('controleur/forum/create_forum.php');
+		break;
+		
+		case 'remove_forum':
+			include('controleur/forum/remove_forum.php');
+		break;
+		
+		case 'remove_cat':
+			include('controleur/forum/remove_cat.php');
+		break;
+		
+		case 'remove_sf':
+			include('controleur/forum/remove_sf.php');
+		break;
+		
+		case 'create_cat':
+			include('controleur/forum/create_cat.php');
+		break;
+		
+		case 'create_sf':
+			include('controleur/forum/create_sf.php');
+		break;
+		
+		case 'alerts_vu':
+			include('controleur/forum/vu.php');
+		break;
+		
+		case 'remove_topic':
+			include('controleur/forum/remove_topic.php');
+		break;
+		
+		case 'remove_answer':
+			include('controleur/forum/remove_answer.php');
+		break;
+		
+		case 'alerts_rep':
+			include('controleur/forum/rep.php');
+		break;
+		
+		case 'editPost':
+			include('controleur/forum/edit.php');
+		break;
+		
+		case 'r_t_vu':
+			include('controleur/forum/r_t_vu.php');
+		break;
+		
+		case 'r_a_vu':
+			include('controleur/forum/r_a_vu.php');
+		break;
+		
+		case 'create_topic':
+			require('controleur/forum/create_topic.php');
+		break;
+	
+		case 'post_answer':
+			require('controleur/forum/post_answer.php');
+		break;
+		
+		case 'unlike':
+			require('controleur/forum/unlike.php');
+		break;
+		
+		case 'unfollow':
+			require('controleur/forum/unfollow.php');
+		break;
+		
+		case 'follow':
+			require('controleur/forum/follow.php');
+		break;
+		
+		case 'like':
+			require('controleur/forum/like.php');
+		break;
+		
+		case 'forum_moderation':
+			require('controleur/forum/forum_moderation.php');
+		break;
+		
+		case 'signalement':
+			require('controleur/forum/forum_signalement.php');
+		break;
+		
+		case 'signalement_topic':
+			require('controleur/forum/forum_signalement_topic.php');
+		break;
+		
+		case 'mode_joueur':
+			if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur'))
+			{
+				$_SESSION['mode'] = ($_SESSION['mode'] == 1) ? false : true;
+				header('Location: index.php?page=forum');
+			}
+			else
+				header('Location: index.php?page=erreur&erreur=7');
+		break;
+		// Fin d'appel en cas d'action forum
 
-        case 'modifPermsTopics':
-            require('modele/forum/adminForum.class.php');
-            $entite = 4; //Sous-Forum
-            include('controleur/forum/modifPerms.php');
-            break;
+		case 'addOffrePanier':
+			include('controleur/boutique/addOffrePanier.php');
+		break;
 
-        case 'chatActu':
-            require('modele/app/chat.class.php');
-            include('controleur/chat/actu.php');
-            break;
+		case 'supprItemPanier':
+			$exec = $_Panier_->supprimerProduit(htmlspecialchars($_GET['id']));
+			if($exec !== false)
+				header('Location: index.php?page=panier');
+			else
+				header('Location: index.php?page=erreur&erreur=17');
+		break;
 
-        case 'sendChat':
-            require('modele/app/chat.class.php');
-            include('controleur/chat/send.php');
-            break;
+		case 'viderPanier':
+			$_Panier_->supprimerPanier();
+			header('Location: index.php?page=panier');
+		break;
 
-        case 'supprInstall':
-            include('controleur/supprInstall.php');
-            break;
+		case 'retirerReduction':
+			$_Panier_->retirerReduction();
+			header('Location: index.php?page=panier');
+		break;
 
-        case 'give_jetons':
-            include('controleur/profil/give_jetons.php');
-            break;
+		case 'ajouterCode':
+			$_Panier_->ajouterReduction($_POST['codepromo']);
+			header('Location: index.php?page=panier');
+		break;
 
-        // Appellée lors d'une action pour le forum
-        case 'selTopic':
-            include('controleur/forum/selTopic.php');
-            break;
+		// Appellé lorsqu'on envoie un formulaire de conneciton.
+		case 'connection': 
+			// On appelle la classe qui gère la connection et redirection...
+			require_once('controleur/joueur/connection.php');
+		break;
+		
+		// Comme connection mais pour les inscriptions
+		case 'inscription':
+			include('controleur/joueur/inscription.php');
+		break;
 
-        case 'ordreForum':
-            include('controleur/forum/ordre.php');
-            break;
-
-        case 'ordreCat':
-            include('controleur/forum/ordreCat.php');
-            break;
-
-        case 'ordreSousForum':
-            include('controleur/forum/ordreSF.php');
-            break;
-
-        case 'lock_cat':
-            include('controleur/forum/lock_cat.php');
-            break;
-
-        case 'unlock_cat':
-            include('controleur/forum/lock_cat.php');
-            break;
-
-        case 'lock_sf':
-            include('controleur/forum/lock_sf.php');
-            break;
-
-        case 'unlock_sf':
-            include('controleur/forum/lock_sf.php');
-            break;
-
-        case 'get_alerts':
-            include('modele/forum/alerts.php');
-            break;
-
-        case 'new_alert':
-            include('modele/forum/new_alert.php');
-            break;
-
-        case 'get_signalement':
-            include('modele/forum/get_signalement.php');
-            break;
-
-        case 'create_forum':
-            include('controleur/forum/create_forum.php');
-            break;
-
-        case 'remove_forum':
-            include('controleur/forum/remove_forum.php');
-            break;
-
-        case 'remove_cat':
-            include('controleur/forum/remove_cat.php');
-            break;
-
-        case 'remove_sf':
-            include('controleur/forum/remove_sf.php');
-            break;
-
-        case 'create_cat':
-            include('controleur/forum/create_cat.php');
-            break;
-
-        case 'create_sf':
-            include('controleur/forum/create_sf.php');
-            break;
-
-        case 'alerts_vu':
-            include('controleur/forum/vu.php');
-            break;
-
-        case 'remove_topic':
-            include('controleur/forum/remove_topic.php');
-            break;
-
-        case 'remove_answer':
-            include('controleur/forum/remove_answer.php');
-            break;
-
-        case 'alerts_rep':
-            include('controleur/forum/rep.php');
-            break;
-
-        case 'editPost':
-            include('controleur/forum/edit.php');
-            break;
-
-        case 'r_t_vu':
-            include('controleur/forum/r_t_vu.php');
-            break;
-
-        case 'r_a_vu':
-            include('controleur/forum/r_a_vu.php');
-            break;
-
-        case 'create_topic':
-            require('controleur/forum/create_topic.php');
-            break;
-
-        case 'post_answer':
-            require('controleur/forum/post_answer.php');
-            break;
-
-        case 'unlike':
-            require('controleur/forum/unlike.php');
-            break;
-
-        case 'unfollow':
-            require('controleur/forum/unfollow.php');
-            break;
-
-        case 'follow':
-            require('controleur/forum/follow.php');
-            break;
-
-        case 'like':
-            require('controleur/forum/like.php');
-            break;
-
-        case 'forum_moderation':
-            require('controleur/forum/forum_moderation.php');
-            break;
-
-        case 'signalement':
-            require('controleur/forum/forum_signalement.php');
-            break;
-
-        case 'signalement_topic':
-            require('controleur/forum/forum_signalement_topic.php');
-            break;
-
-        case 'mode_joueur':
-            if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur')) {
-                $_SESSION['mode'] = ($_SESSION['mode'] == 1) ? false : true;
-                header('Location: index.php?page=forum');
-            } else
-                header('Location: index.php?page=erreur&erreur=7');
-            break;
-        // Fin d'appel en cas d'action forum
-
-        case 'addOffrePanier':
-            include('controleur/boutique/addOffrePanier.php');
-            break;
-
-        case 'supprItemPanier':
-            $exec = $_Panier_->supprimerProduit(htmlspecialchars($_GET['id']));
-            if ($exec !== false)
-                header('Location: index.php?page=panier');
-            else
-                header('Location: index.php?page=erreur&erreur=17');
-            break;
-
-        case 'viderPanier':
-            $_Panier_->supprimerPanier();
-            header('Location: index.php?page=panier');
-            break;
-
-        case 'retirerReduction':
-            $_Panier_->retirerReduction();
-            header('Location: index.php?page=panier');
-            break;
-
-        case 'ajouterCode':
-            $_Panier_->ajouterReduction($_POST['codepromo']);
-            header('Location: index.php?page=panier');
-            break;
-
-        // Appellé lorsqu'on envoie un formulaire de conneciton.
-        case 'connection':
-            // On appelle la classe qui gère la connection et redirection...
-            require_once('controleur/joueur/connection.php');
-            break;
-
-        // Comme connection mais pour les inscriptions
-        case 'inscription':
-            include('controleur/joueur/inscription.php');
-            break;
-
-        case 'passRecoverConfirm':
+		case 'passRecoverConfirm':
             include('controleur/joueur/recuperationMailLink.php');
-            break;
+        break;
 
-        case 'passRecover':
+		case 'passRecover':
             include('controleur/joueur/changeMdpMail.php');
-            break;
-        // Appellé lorsqu'on appuie sur le bouton "acheter" d'un produit. L'id de l'offre est aussi passé en argument(sinon une erreur doit être gérée pour éviter que ça plante).
-        case 'achat':
-            include('controleur/boutique/achat.php');
-            break;
+        break;
+		// Appellé lorsqu'on appuie sur le bouton "acheter" d'un produit. L'id de l'offre est aussi passé en argument(sinon une erreur doit être gérée pour éviter que ça plante).
+		case 'achat':
+			include('controleur/boutique/achat.php');
+		break;
+		
+		// Même principe que la boutique, mais sur la page "tokens" dans la section PayPal.
+		case 'verif_paypal':
+			include('controleur/paypal/verif_paypal_curl.php');
+		break;
+		
+		// Appellé quand le joueur valide son vote. Action issue d'un formulaire. Les autres infos sont en POST et non en GET.
+		case 'voter':
+			include('controleur/voter.php');
+		break;
+		
+		case 'post_ticket':
+			include('controleur/support/ticket.php');
+			header('Location: index.php?page=support');
+		break;
+		
+		case 'post_ticket_commentaire':
+			include('controleur/support/ticketCommentaire.php');
+			header('Location: index.php?page=support');
+		break;
+		
+		case 'ticketEtat':
+			include('controleur/support/ticketEtat.php');
+			header('Location: index.php?page=support');
+		break;
 
-        // Même principe que la boutique, mais sur la page "tokens" dans la section PayPal.
-        case 'verif_paypal':
-            include('controleur/paypal/verif_paypal_curl.php');
-            break;
+		case 'post_news_commentaire':
+			include('controleur/accueil/newsCommentaire.php');
+		break;
 
-        // Appellé quand le joueur valide son vote. Action issue d'un formulaire. Les autres infos sont en POST et non en GET.
-        case 'voter':
-            include('controleur/voter.php');
-            break;
+		case 'edit_news_commentaire':
+			include('controleur/accueil/newsEditCommentaire.php');
+		break;
 
-        case 'post_ticket':
-            include('controleur/support/ticket.php');
-            header('Location: index.php?page=support');
-            break;
+		case 'delete_news_commentaire':
+			include('controleur/accueil/newsDeleteCommentaire.php');
+		break;
 
-        case 'post_ticket_commentaire':
-            include('controleur/support/ticketCommentaire.php');
-            header('Location: index.php?page=support');
-            break;
+		case 'report_news_commentaire':
+			include('controleur/accueil/newsReport.php');
+		break;
 
-        case 'ticketEtat':
-            include('controleur/support/ticketEtat.php');
-            header('Location: index.php?page=support');
-            break;
-
-        case 'post_news_commentaire':
-            include('controleur/accueil/newsCommentaire.php');
-            break;
-
-        case 'edit_news_commentaire':
-            include('controleur/accueil/newsEditCommentaire.php');
-            break;
-
-        case 'delete_news_commentaire':
-            include('controleur/accueil/newsDeleteCommentaire.php');
-            break;
-
-        case 'report_news_commentaire':
-            include('controleur/accueil/newsReport.php');
-            break;
-
-        case 'likeNews':
+		case 'likeNews':
             include('controleur/accueil/newsLike.php');
-            break;
+        break;
+        
+		case 'validationMail':
+			include('controleur/joueur/validationMail.php');
+		break;
 
-        case 'validationMail':
-            include('controleur/joueur/validationMail.php');
-            break;
+		case 'delete_support_commentaire':
+		    include('controleur/support/ticketCommentaireDelete.php');
+		break;
 
-        case 'delete_support_commentaire':
-            include('controleur/support/ticketCommentaireDelete.php');
-            break;
-
-        case 'edit_support_commentaire':
-            include('controleur/support/ticketCommentaireEdit.php');
-            break;
-
-        // Si le joueur a rentré un url contenant une valeur d'action innexistant?
-        default:
-            header('Location: index.php?page=accueil');
-    }
+		case 'edit_support_commentaire':
+		    include('controleur/support/ticketCommentaireEdit.php');
+		break;
+		
+		// Si le joueur a rentré un url contenant une valeur d'action innexistant?
+		default:
+			header('Location: index.php?page=accueil');
+	}
 }
 ?>

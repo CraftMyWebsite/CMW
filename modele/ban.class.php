@@ -12,7 +12,7 @@ class Ban
 			$reqVerif = $bdd->prepare('SELECT * FROM cmw_ban WHERE ip = :ip OR pseudo LIKE :pseudo');
 			$reqVerif->execute(array(
 				'ip' => $ip,
-				'pseudo' => "%".$_Joueur_['pseudo']."%"
+				'pseudo' => '%' .$_Joueur_['pseudo']. '%'
 			));
 		}
 		else

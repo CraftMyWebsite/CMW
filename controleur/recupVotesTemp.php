@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm("connect"))
+if(Permission::getInstance()->verifPerm('connect'))
 {
 
 	echo '[DIV]';

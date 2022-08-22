@@ -32,8 +32,8 @@
 <div class="row">
 
 	<div class="col-md-12">
-		<?php include("./include/version.php");
-		include("./include/version_distant.php");
+		<?php include('./include/version.php');
+		include('./include/version_distant.php');
 		if($versioncms == $versioncmsrelease) { ?>
 		<div class="alert alert-success">
 			<strong>Votre CMS CraftMyWebsite est bien a jours en version <?php echo $versioncms; ?> !</strong>

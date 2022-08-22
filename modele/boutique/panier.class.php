@@ -70,7 +70,7 @@ class Panier
 			));
 			$fetch = $req->fetch(PDO::FETCH_ASSOC);
 			if(isset($fetch['evo']) && !empty($fetch['evo'])) {
-				foreach(explode(",",$fetch['evo']) as $el2) {
+				foreach(explode(',',$fetch['evo']) as $el2) {
 					if(intval($el2) == $id) {
 						unset($allcopy['id'][$key]);
 						unset($allcopy['quantite'][$key]);

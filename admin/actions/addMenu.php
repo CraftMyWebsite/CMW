@@ -1,7 +1,7 @@
 <?php
 if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) {
     
-    require("modele/menu.class.php");
+    require('modele/menu.class.php');
     $Menu = new menu($bddConnection);
     
     $data = array();
@@ -11,7 +11,7 @@ if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'addLinkMenu')) {
     if(isset($_POST['methode'])) {
         if($_POST['methode'] == 1)
         {
-            $data['url'] = !empty($_POST['lien']) ? $_POST['lien'] : "index.php";
+            $data['url'] = !empty($_POST['lien']) ? $_POST['lien'] : 'index.php';
         } else {
             $data['url'] = '?page='. urlencode($_POST['page']);
         }

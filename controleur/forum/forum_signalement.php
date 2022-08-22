@@ -4,7 +4,7 @@ if(isset($_POST['id_answer']) AND isset($_Joueur_) )
 	$id = htmlspecialchars($_POST['id_answer']);
 	if(!isset($_GET['confirmation']))
 	{
-		header("Location: confirmation&id_topic=".$_POST['id_answer']."&choix=4");
+		header('Location: confirmation&id_topic=' .$_POST['id_answer']. '&choix=4');
 	}
 	else
 	{

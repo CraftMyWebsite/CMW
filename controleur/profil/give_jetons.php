@@ -30,7 +30,7 @@ if (isset($_POST['pseudo']) && isset($_POST['montant'])) {
                 $req->execute(array("from" => $_Joueur_["pseudo"], "to" => $pseudo, "amount" => $_POST['montant'], "date" => time()));
                 header('Location: index.php?page=profil&profil=' . $_Joueur_['pseudo'] . '&pseudo=' . $pseudo . '&montant=' . $_POST['montant']);
             } else {
-                header('Location: index.php?page=profil&profil=' . $_Joueur_['pseudo'] . '&status=16');
+                header('Location: index.php?page=profil&profil='. $_Joueur_['pseudo'] . '&status=16');
             }
         } else {
             header('Location: index.php?page=profil&profil=' . $_Joueur_['pseudo'] . '&status=15');

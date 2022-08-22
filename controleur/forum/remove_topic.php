@@ -1,6 +1,6 @@
 <?php 
 
-if(isset($_POST['id_topic']) AND Permission::getInstance()->verifPerm("connect"))
+if(isset($_POST['id_topic']) AND Permission::getInstance()->verifPerm('connect'))
 {
 	$id = htmlspecialchars($_POST['id_topic']);
 	$pseudo = htmlspecialchars($_Joueur_['pseudo']);
@@ -10,7 +10,7 @@ if(isset($_POST['id_topic']) AND Permission::getInstance()->verifPerm("connect")
 	}
 	else
 	{
-		$reason = "Aucune / Non Renseigné";
+		$reason = 'Aucune / Non Renseigné';
 	}
 	$select = $bddConnection->prepare('SELECT * FROM cmw_forum_post WHERE id = :id');
 	$select->execute(array(

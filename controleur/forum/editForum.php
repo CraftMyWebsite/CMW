@@ -6,7 +6,7 @@
 		if(!empty($_POST['img']) AND strlen($_POST['img']) <= 300)
 		{
 			if(startsWith($_POST['img'], '<i class="') && endsWith($_POST['img'], '"></i>')) {
-				$img = htmlspecialchars(str_replace('<i class="', '', str_replace('"></i>', "", $_POST['img'])));
+				$img = htmlspecialchars(str_replace('<i class="', '', str_replace('"></i>', '', $_POST['img'])));
 			} 
 		}
 		$insert = $bddConnection->prepare('UPDATE cmw_forum_categorie SET nom=:nom, img=:img, forum=:forum WHERE id=:id');

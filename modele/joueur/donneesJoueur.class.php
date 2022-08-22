@@ -32,7 +32,7 @@ class JoueurDonnees
 		foreach($this->reseaux as $value)
 		{
 			if(empty($data[$value['nom']]))
-				$this->donnees[$value['nom']] = "inconnu";
+				$this->donnees[$value['nom']] = 'inconnu';
 			else
 				$this->donnees[$value['nom']] = $data[$value['nom']];
 		}

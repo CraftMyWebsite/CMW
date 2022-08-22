@@ -12,7 +12,8 @@
 	
 	namespace xPaw\SourceQuery;
 	
-	use xPaw\SourceQuery\Exception\InvalidPacketException;
+	use RuntimeException;
+    use xPaw\SourceQuery\Exception\InvalidPacketException;
 	
 	/**
 	 * Base socket interface
@@ -108,7 +109,7 @@
 					// Let's make sure this function exists, it's not included in PHP by default
 					if( !Function_Exists( 'bzdecompress' ) )
 					{
-						throw new \RuntimeException( 'Received compressed packet, PHP doesn\'t have Bzip2 library installed, can\'t decompress.' );
+						throw new RuntimeException( 'Received compressed packet, PHP doesn\'t have Bzip2 library installed, can\'t decompress.' );
 					}
 					
 					$Data = bzdecompress( $Data );

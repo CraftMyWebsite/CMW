@@ -10,24 +10,24 @@ class ImgProfil
 	}
 
 	public function getUrlHeadByPseudo($pseudo, $s=64) {
-	    if($pseudo == 'CraftMyWebsite' OR $pseudo == ""){
-	        return "https://craftmywebsite.fr/favicon.ico";
+	    if($pseudo == 'CraftMyWebsite' OR $pseudo == ''){
+	        return 'https://craftmywebsite.fr/favicon.ico';
 	    } else {
 	        $info = $this->getInfoByPseudo($pseudo);
-	        if(isset($info[1]) && file_exists("utilisateurs/".$info[0]."/profil.".$info[1])) {
-	            return "utilisateurs/".$info[0]."/profil.".$info[1];
+	        if(isset($info[1]) && file_exists('utilisateurs/' .$info[0]. '/profil.' .$info[1])) {
+	            return 'utilisateurs/' .$info[0]. '/profil.' .$info[1];
 	        } else  {
-	        	return "https://api.craftmywebsite.fr/skin/face.php?u=".$pseudo."&s=".$s;
+	        	return 'https://api.craftmywebsite.fr/skin/face.php?u=' .$pseudo. '&s=' .$s;
 	        }
 	           
 	    }
 	}
 	
 	public function getUrlBodyByPseudo($pseudo, $s=64) {
-	    if($pseudo == 'CraftMyWebsite' OR $pseudo == ""){
-	        return "https://craftmywebsite.fr/favicon.ico";
+	    if($pseudo == 'CraftMyWebsite' OR $pseudo == ''){
+	        return 'https://craftmywebsite.fr/favicon.ico';
 	    } else {
-	    	return "https://api.craftmywebsite.fr/skin/face.php?u=".$pseudo."&t=body&s=".$s;
+	    	return 'https://api.craftmywebsite.fr/skin/face.php?u=' .$pseudo. '&t=body&s=' .$s;
 	    }
 	}
 	

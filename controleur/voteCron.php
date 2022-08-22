@@ -17,7 +17,7 @@ if(isset($_GET['mdp']) && isset($_Serveur_['VoteCron']['mdp']) && $_Serveur_['Vo
 				$lienInfo = $bddConnection->query('SELECT id, lien, titre, temps FROM cmw_votes_config');
 			} else {
 				$lienInfo = $bddConnection->prepare('SELECT id, lien, titre, temps FROM cmw_votes_config WHERE serveur = :serveur');
-				$lienInfo->execute(array("serveur" => $s['id']));
+				$lienInfo->execute(array('serveur' => $s['id']));
 			}
 			if(!empty($_Serveur_['VoteCron']['entete']))
 			{

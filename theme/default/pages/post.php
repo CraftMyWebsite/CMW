@@ -7,8 +7,8 @@ if (isset($_GET['id'])) :
     $topicd = $_Forum_->getTopic($id);
     $titleHTML = $topicd['nom'];
     if (!empty($topicd['id'])) :
-        if ((Permission::getInstance()->verifPerm("createur") or (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['perms'] and Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['permsCat']) and !$_SESSION['mode']) or ($topicd['perms'] == 0 and $topicd['permsCat'] == 0)) : ?>
-            <script type="application/javascript">  document.title = "<?=$_Serveur_['General']['name'] . " | " . $titleHTML;?>"; </script>
+        if ((Permission::getInstance()->verifPerm('createur') or (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['perms'] and Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd['permsCat']) and !$_SESSION['mode']) or ($topicd['perms'] == 0 and $topicd['permsCat'] == 0)) : ?>
+            <script type="application/javascript">  document.title = "<?=$_Serveur_['General']['name'] . ' | ' . $titleHTML;?>"; </script>
             <section id="Post">
                 <div class="container-fluid col-md-9 col-lg-9 col-sm-10 mt-4">
 
@@ -59,7 +59,7 @@ if (isset($_GET['id'])) :
 
                                 <div class="card-body categories">
                                     <ul class="nav nav-pills nav-fill">
-                                        <?php if (Permission::getInstance()->verifPerm("connect") && $_JoueurForum_->is_followed($id)) : ?>
+                                        <?php if (Permission::getInstance()->verifPerm('connect') && $_JoueurForum_->is_followed($id)) : ?>
 
                                             <li class="categorie-item nav-item">
                                                 <a class="nav-link categorie-link" href="index.php?action=unfollow&id_topic=<?= $topicd['id']; ?>">
@@ -67,7 +67,7 @@ if (isset($_GET['id'])) :
                                                 </a>
                                             </li>
 
-                                        <?php elseif (Permission::getInstance()->verifPerm("connect")) : ?>
+                                        <?php elseif (Permission::getInstance()->verifPerm('connect')) : ?>
 
                                             <li class="categorie-item nav-item">
                                                 <a class="nav-link categorie-link" href="index.php?action=follow&id_topic=<?= $topicd['id']; ?>">
@@ -78,7 +78,7 @@ if (isset($_GET['id'])) :
                                         <?php endif; ?>
 
                                         <li class="categorie-item nav-item">
-                                            <a class="nav-link categorie-link" href="index.php?page=<?= (isset($topicd['sous_forum'])) ? "sous_" : ""; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
+                                            <a class="nav-link categorie-link" href="index.php?page=<?= (isset($topicd['sous_forum'])) ? 'sous_' : ''; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd['sous_forum'] : ''; ?>">
                                                 Revenir à l'accueil de la catégorie
                                             </a>
                                         </li>
@@ -269,7 +269,7 @@ if (isset($_GET['id'])) :
                                 Posté le <?=  $_Forum_->conversionDate($topicd['date_creation']); 
                                  if($topicd['d_edition'] != NULL) {
                                        
-                                        echo " et édité le ".  $_Forum_->conversionDate($topicd['d_edition']);
+                                        echo ' et édité le ' .  $_Forum_->conversionDate($topicd['d_edition']);
                                     }?>
                             </p>
 
@@ -307,13 +307,13 @@ if (isset($_GET['id'])) :
 
                                         <?php if ($count1 > 0) : ?>
                                             <p>
-                                                <span class="font-weight-bold"><?= $count1 ?></span> personne<?= ($count1 > 1 ? "s" : "") ?> aime<?= ($count1 > 1 ? "s" : "") ?> ça.
+                                                <span class="font-weight-bold"><?= $count1 ?></span> personne<?= ($count1 > 1 ? 's' : '') ?> aime<?= ($count1 > 1 ? 's' : '') ?> ça.
                                             </p>
                                         <?php endif; ?>
 
                                         <?php if ($count2 > 0) : ?>
                                             <p>
-                                                <?= $count2 ?> personne<?= ($count2 > 1 ? "s" : "") ?> n'aime<?= ($count2 > 1 ? "nt" : "") ?> pas ça.
+                                                <?= $count2 ?> personne<?= ($count2 > 1 ? 's' : '') ?> n'aime<?= ($count2 > 1 ? 'nt' : '') ?> pas ça.
                                             </p>
                                         <?php endif; ?>
 
@@ -323,7 +323,7 @@ if (isset($_GET['id'])) :
                             <?php endif; ?>
 
                             <!-- Système de like/dislike (action) -->
-                            <?php if (Permission::getInstance()->verifPerm("connect")) :
+                            <?php if (Permission::getInstance()->verifPerm('connect')) :
 
                                 if (array_search($_Joueur_['pseudo'], array_column($countlike, 'pseudo')) === FALSE and array_search($_Joueur_['pseudo'], array_column($countdislike, 'pseudo')) === FALSE and $_Joueur_['pseudo'] != $topicd['pseudo']) : ?>
 
@@ -482,7 +482,7 @@ if (isset($_GET['id'])) :
                                     <?php 
                                     echo 'Posté le  '.$_Forum_->conversionDate($answerd[$i]['date_post']); 
                                     if($answerd[$i]['d_edition'] != NULL) {
-                                        echo " et édité le ". $_Forum_->conversionDate($answerd[$i]['d_edition']);
+                                        echo ' et édité le ' . $_Forum_->conversionDate($answerd[$i]['d_edition']);
                                     }?>
                                 </p>
 
@@ -519,13 +519,13 @@ if (isset($_GET['id'])) :
 
                                             <?php if ($count3 > 0) : ?>
                                                 <p>
-                                                    <span class="font-weight-bold"><?= $count3 ?></span> personne<?= ($count3 > 1 ? "s" : "") ?> aime<?= ($count3 > 1 ? "s" : "") ?> ça.
+                                                    <span class="font-weight-bold"><?= $count3 ?></span> personne<?= ($count3 > 1 ? 's' : '') ?> aime<?= ($count3 > 1 ? 's' : '') ?> ça.
                                                 </p>
                                             <?php endif; ?>
 
                                             <?php if ($count4 > 0) : ?>
                                                 <p>
-                                                    <?= $count4 ?> personne<?= ($count4 > 1 ? "s" : "") ?> n'aime<?= ($count4 > 1 ? "nt" : "") ?> pas ça.
+                                                    <?= $count4 ?> personne<?= ($count4 > 1 ? 's' : '') ?> n'aime<?= ($count4 > 1 ? 'nt' : '') ?> pas ça.
                                                 </p>
                                             <?php endif; ?>
 
@@ -535,7 +535,7 @@ if (isset($_GET['id'])) :
                                 <?php endif; ?>
 
                                 <!-- Système de like/dislike (action) -->
-                                <?php if (Permission::getInstance()->verifPerm("connect")) :
+                                <?php if (Permission::getInstance()->verifPerm('connect')) :
 
                                     if (array_search($_Joueur_['pseudo'], array_column($countlike, 'pseudo')) === FALSE and array_search($_Joueur_['pseudo'], array_column($countdislike, 'pseudo')) === FALSE and $_Joueur_['pseudo'] != $answerd[$i]['pseudo']) : ?>
 
@@ -645,7 +645,7 @@ if (isset($_GET['id'])) :
                                 </form>
 
 
-                            <?php elseif (!Permission::getInstance()->verifPerm("connect")) : ?>
+                            <?php elseif (!Permission::getInstance()->verifPerm('connect')) : ?>
                                 <div class="d-flex col-12 info-page">
                                     <i class="fas fa-sign-in-alt notification-icon"></i>
                                     <div class="info-content">

@@ -94,7 +94,7 @@ if(isset($_GET['page']))
 
 		
 		case 'token': 
-			if(Permission::getInstance()->verifPerm("connect"))
+			if(Permission::getInstance()->verifPerm('connect'))
 			{
 				if($_Serveur_['Payement']['paypal'])
 					require_once('modele/tokens/paypal.php'); 
@@ -103,7 +103,7 @@ if(isset($_GET['page']))
 				include('theme/' .$_Serveur_['General']['theme']. '/pages/tokens.php');
 			}
 			else
-				header('Location: index.php?page=erreur&erreur=19&type='.urlencode("Erreur d'accès")."&titre=".urlencode("Connexion requise")."&contenue=".urlencode("Vous devez être connecté pour accéder à cette page !"));
+				header('Location: index.php?page=erreur&erreur=19&type='.urlencode("Erreur d'accès"). '&titre=' .urlencode('Connexion requise'). '&contenue=' .urlencode('Vous devez être connecté pour accéder à cette page !'));
 		break;
 		
 		case 'voter': 

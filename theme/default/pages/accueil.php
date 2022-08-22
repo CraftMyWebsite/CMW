@@ -16,7 +16,7 @@
                             $namesOfPlayers = $getcountLikesPlayers->fetchAll(PDO::FETCH_ASSOC);
 
                             $getNewsCommentaires = $accueilNews->newsCommentaires($news[$i]['id']);
-                            ?>
+                ?>
 
                             <article class="col-md-12 col-lg-12 col-sm-12 news-content">
                                 <div class="card">
@@ -28,9 +28,7 @@
                                         <?= $news[$i]['message']; ?>
                                     </div>
                                     <div class="card-footer d-flex">
-                                        <h3>Par
-                                            <a href="index.php?page=profil&profil=<?= $news[$i]['auteur']; ?>"><?= $news[$i]['auteur']; ?></a>
-                                        </h3>
+                                        <h3>Par <a href="index.php?page=profil&profil=<?= $news[$i]['auteur']; ?>"><?= $news[$i]['auteur']; ?></a></h3>
                                         <div class="ml-auto">
                                             <?php
                                             if (Permission::getInstance()->verifPerm("connect")) :
@@ -38,23 +36,14 @@
                                                 $getCheckLike = $reqCheckLike->fetch(PDO::FETCH_ASSOC);
                                                 $checkLike = $getCheckLike['pseudo'];
                                                 if ($_Joueur_['pseudo'] == $checkLike) : ?>
-                                                    <a href="#" class="h5 mr-3" data-toggle="modal"
-                                                       data-target="#news<?= $news[$i]['id'] ?>">Commenter
-                                                        (<?= $countCommentaires ?>)</a> <i
-                                                            class="fa fa-thumbs-up"></i> <?= $countLikesPlayers ?>
+                                                    <a href="#" class="h5 mr-3" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>">Commenter (<?= $countCommentaires ?>)</a> <i class="fa fa-thumbs-up"></i> <?= $countLikesPlayers ?>
                                                 <?php else : ?>
-                                                    <a href="#" class="h5 mr-3" data-toggle="modal"
-                                                       data-target="#news<?= $news[$i]['id'] ?>">Commenter
-                                                        (<?= $countCommentaires ?>)</a>
-                                                    <a href="index.php?action=likeNews&id_news=<?= $news[$i]['id'] ?>"
-                                                       class="h5 mx-3">J'aime</a>
+                                                    <a href="#" class="h5 mr-3" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>">Commenter (<?= $countCommentaires ?>)</a>
+                                                    <a href="index.php?action=likeNews&id_news=<?= $news[$i]['id'] ?>" class="h5 mx-3">J'aime</a>
                                                     <i class="fa fa-thumbs-up"></i> <?= $countLikesPlayers ?>
                                                 <?php endif; ?>
                                             <?php else : ?>
-                                                <a href="#" class="h5 mr-3" data-toggle="modal"
-                                                   data-target="#news<?= $news[$i]['id'] ?>">Commenter
-                                                    (<?= $countCommentaires ?>)</a> <i
-                                                        class="fa fa-thumbs-up"></i> <?= $countLikesPlayers ?>
+                                                <a href="#" class="h5 mr-3" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>">Commenter (<?= $countCommentaires ?>)</a> <i class="fa fa-thumbs-up"></i> <?= $countLikesPlayers ?>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -76,11 +65,10 @@
 
             <div class="row info-articles col-md-12 col-lg-4 col-sm-12 mx-auto">
                 <!-- Informations Articles -->
-                <?php foreach ($_Minia_ as $value) : ?>
+                <?php foreach($_Minia_ as $value) : ?>
                     <article class="col-12 info-content">
                         <div class="card">
-                            <img class="card-img-top" src="theme/upload/navRap/<?= $value['image'] ?>"
-                                 alt="<?= $value['image'] ?>">
+                            <img class="card-img-top" src="theme/upload/navRap/<?= $value['image'] ?>" alt="<?= $value['image'] ?>">
                             <div class="card-body">
                                 <p class="card-text">
                                     <?= $value['message']; ?>

@@ -28,9 +28,7 @@
                             <ul class="categorie-content nav nav-tabs">
                                 <?php for ($i = 0; $i < count($jsonCon); $i++) : ?>
                                     <li class="categorie-item nav-item<?= ($i == 0) ? ' active' : '' ?>">
-                                        <a href="#server-<?= $i ?>"
-                                           class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>"
-                                           data-toggle="tab">
+                                        <a href="#server-<?= $i ?>" class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>" data-toggle="tab">
                                             <?= $lectureJSON[$i]['nom']; ?>
                                         </a>
                                     </li>
@@ -44,29 +42,27 @@
                     <!-- Liste des joueurs banni -->
                     <div class="tab-content">
                         <?php for ($i = 0; $i < count($jsonCon); $i++) : ?>
-                            <div id="server-<?= $i ?>"
-                                 class="tab-pane fade <?php if ($i == 0) echo 'in active show'; ?>"
-                                 aria-expanded="false">
+                            <div id="server-<?= $i ?>" class="tab-pane fade <?php if ($i == 0) echo 'in active show'; ?>" aria-expanded="false">
                                 <table class="table table-dark table-striped table-hover">
                                     <thead>
-                                    <tr>
-                                        <th>Pseudo</th>
-                                        <th>Date</th>
-                                        <th>Source</th>
-                                        <th>Durée</th>
-                                        <th>Raison</th>
-                                    </tr>
+                                        <tr>
+                                            <th>Pseudo</th>
+                                            <th>Date</th>
+                                            <th>Source</th>
+                                            <th>Durée</th>
+                                            <th>Raison</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($banlist[$i] as $element) : ?>
-                                        <tr>
-                                            <td title="<?= $element->uuid ?>"><?= $element->name ?></td>
-                                            <td><?= $element->created ?></td>
-                                            <td><?= $Chat->formattage($element->source); ?></td>
-                                            <td><?= $element->expires ?></td>
-                                            <td><?= $element->reason ?></td>
-                                        </tr>
-                                    <?php endforeach ?>
+                                        <?php foreach ($banlist[$i] as $element) : ?>
+                                            <tr>
+                                                <td title="<?= $element->uuid ?>"><?= $element->name ?></td>
+                                                <td><?= $element->created ?></td>
+                                                <td><?= $Chat->formattage($element->source); ?></td>
+                                                <td><?= $element->expires ?></td>
+                                                <td><?= $element->reason ?></td>
+                                            </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>

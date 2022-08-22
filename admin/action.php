@@ -4,7 +4,7 @@
 */
 
 unset($_SESSION['referrerAdmin']);
-if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
+if(isset($_GET['action']) AND $_Permission_->verifPerm('PermsPanel', 'access'))
 {
 	switch ($_GET['action']) // on utilise ici un switch pour inclure telle ou telle page selon l'action.
 	{ 
@@ -118,7 +118,7 @@ if(isset($_GET['action']) AND $_Permission_->verifPerm("PermsPanel", "access"))
 			require('admin/actions/changeVoteCron.php');
 		break;
 		case 'dropVisits':
-			if($_Permission_->verifPerm("PermsPanel", "info", "stats", "visitors", "showTable"))
+			if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'visitors', 'showTable'))
 				$bddConnection->exec('TRUNCATE cmw_visits');
 			exit();
 		break;

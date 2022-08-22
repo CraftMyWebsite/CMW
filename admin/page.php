@@ -132,7 +132,7 @@ if(isset($_GET['page']))
 		break;
 
         case 'googleService':
-        	require_once("./modele/google/googleService.class.php");
+        	require_once('./modele/google/googleService.class.php');
             include('./admin/pages/googleService.php');
         break;
 

@@ -24,7 +24,7 @@ if(Permission::getInstance()->verifPerm('createur')) {
 	$tabInsertion['couleur'] = '';
 	$tabInsertion['effets'] = '';
 	$tabPerm = createTab($tabPerm);
-	$tabPerm["PermsDefault"]["forum"]["perms"] = "0";
+	$tabPerm['PermsDefault']['forum']['perms'] = '0';
 	$tabInsertion['permDefault'] = serialize($tabPerm['PermsDefault']);
 	$tabInsertion['permPanel'] = serialize($tabPerm['PermsPanel']);
 	$tabInsertion['permForum'] = serialize($tabPerm['PermsForum']);
