@@ -2,7 +2,7 @@
 error_reporting(0);
 ini_set('display_errors', 1);
 require_once('../modele/config/yml.class.php');
-require_once 'app/plugins/utils.php';
+require_once "app/plugins/utils.php";
 $configLecture = new Lire('../modele/config/config.yml');
 $_Serveur_ = $configLecture->GetTableau();
 
@@ -57,17 +57,17 @@ include '../include/version.php';
         </div>
         <?php
         $retour = VerifieExtension();
-        if ($retour != '') {
-            $extensionok = 'false';
+        if ($retour != "") {
+            $extensionok = "false";
         } else {
-            $extensionok = 'true';
+            $extensionok = "true";
         }
 
-        if ($chmodok == 'false') {
+        if ($chmodok == "false") {
             $retourchmod = VerifieChmod();
             DrawChmod($retourchmod);
         }
-        if ($extensionok != 'true') {
+        if ($extensionok != "true") {
             echo AfficherExtension($retour);
         }
 
@@ -98,7 +98,7 @@ include '../include/version.php';
         </div>
         <?php
     }
-    if ($chmodok == 'true' && $extensionok == 'true' && (!isset($htaccess) or $htaccess == true))
+    if ($chmodok == "true" && $extensionok == "true" && (!isset($htaccess) or $htaccess == true))
     {
     ?>
 
@@ -367,7 +367,7 @@ function verifyPDO($hote, $nomBase, $utilisateur, $mdp, $port)
 {
     try {
         $sql = new PDO('mysql:host=' . $hote . ';dbname=' . $nomBase . ';port=' . $port, $utilisateur, $mdp);
-        $sql->exec('SET CHARACTER SET utf8');
+        $sql->exec("SET CHARACTER SET utf8");
         $req = $sql->query('SELECT @@GLOBAL.sql_mode AS sql_mode_global, @@SESSION.sql_mode AS sql_mode_session');
         $data = $req->fetch(PDO::FETCH_ASSOC);
         if ((!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_TRANS_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_TRANS_TABLES') === FALSE)) {
@@ -385,7 +385,7 @@ function getPDO($hote, $nomBase, $utilisateur, $mdp, $port)
 {
     try {
         $sql = new PDO('mysql:host=' . $hote . ';dbname=' . $nomBase . ';port=' . $port, $utilisateur, $mdp);
-        $sql->exec('SET CHARACTER SET utf8');
+        $sql->exec("SET CHARACTER SET utf8");
         return $sql;
     } catch (Exception $e) {
     }

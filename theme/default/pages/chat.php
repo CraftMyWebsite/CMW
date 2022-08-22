@@ -28,26 +28,22 @@
                             <ul class="categorie-content nav nav-tabs" id="servEnLigne">
                                 <?php foreach ($lectureJSON as $i => $serveur) : ?>
                                     <li class="categorie-item nav-item<?= ($i == 0) ? ' active' : '' ?>">
-                                        <a href="#server-<?= $i ?>" onclick="setTimeout(switchEnLigne, 500);"
-                                           class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>"
-                                           data-toggle="tab" data-id="<?= $i; ?>">
+                                        <a href="#server-<?= $i ?>" onclick="setTimeout(switchEnLigne, 500);" class="nav-link categorie-link<?= ($i == 0) ? ' active' : '' ?>" data-toggle="tab" data-id="<?=$i;?>">
                                             <?= $serveur['nom']; ?>
                                         </a>
-                                        <div style="<?= ($i == 0) ? '' : 'display: none;'; ?>" id="joueur<?= $i; ?>">
-                                            <?php $joueurs = $jsonCon[$i]->GetPlayers();
-                                            if (empty($joueurs))
-                                                echo 'Pas de joueurs connectés';
-                                            else
-                                                foreach ($joueurs as $value) {
-                                                    ?><img class="mr-3" alt="profil de <?= $_Joueur_['pseudo']; ?>"
-                                                           src="<?= $_ImgProfil_->getUrlHeadByPseudo($value, 16); ?>"
-                                                           style="width: 16px; height: 16px;"/><?= $value; ?> <?= Permission::getInstance()->gradeJoueur($value); ?>
-                                                    <br/>
-                                                    <?php
-                                                }
-                                            ?>
-                                        </div>
-                                    </li>
+                                    <div style="<?= ($i == 0) ? '' : 'display: none;';?>" id="joueur<?=$i;?>">
+                                        <?php $joueurs = $jsonCon[$i]->GetPlayers(); 
+                                        if(empty($joueurs))
+                                            echo "Pas de joueurs connectés";
+                                        else
+                                            foreach($joueurs as $value)
+                                            {
+                                                ?><img class="mr-3" alt="profil de <?= $_Joueur_['pseudo']; ?>" src="<?=$_ImgProfil_->getUrlHeadByPseudo($value, 16);?>" style="width: 16px; height: 16px;"/><?=$value;?> <?=Permission::getInstance()->gradeJoueur($value);?><br/>
+                                                <?php
+                                            }
+                                        ?>
+                                    </div>
+                                </li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -59,47 +55,41 @@
                     <div class="tab-content">
                         <?php for ($i = 0; $i < count($jsonCon); $i++) {
                             $messages = $Chat->getMessages($i); ?>
-                            <div id="server-<?= $i ?>"
-                                 class="tab-pane fade <?php if ($i == 0) echo 'in active show'; ?>"
-                                 aria-expanded="false">
+                            <div id="server-<?= $i ?>" class="tab-pane fade <?php if ($i == 0) echo 'in active show'; ?>" aria-expanded="false">
                                 <div class="card">
                                     <div class="card-header">
                                         <h4> Chat : </h4>
                                     </div>
-                                    <div class="card-body" id="msgChat<?= $i; ?>">
+                                    <div class="card-body" id="msgChat<?=$i;?>">
                                         <!-- Affichage du message -->
-                                        <?php if ($messages != false && $messages != 'erreur' && $messages != 'query') {
+                                        <?php if ($messages != false && $messages != "erreur" && $messages != "query") {
                                             $messages = array_slice($messages, -10, 10);
                                             foreach ($messages as $value) { ?>
 
                                                 <div class="media">
                                                     <p class="username">
-                                                        <img class="mr-3"
-                                                             src="<?= $_ImgProfil_->getUrlHeadByPseudo($value['player'], 32); ?>"
-                                                             style="width: 32px; height: 32px;"
-                                                             alt="avatar de l'auteur"/>
-                                                    <div class="media-body">
-                                                        <h5 class="mt-0">
-                                                            <?= (empty($value['player'])) ? 'Console' : $value['player'] . ', ' . Permission::getInstance()->gradeJoueur($value['player']); ?>
-                                                            <small class="font-weight-light float-right text-muted"><?= date('H:i', $value['time']); ?></small>
-                                                        </h5>
-                                                        <?= $Chat->formattage(htmlspecialchars($value['message'])); ?>
-                                                    </div>
+                                                        <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($value['player'], 32); ?>" style="width: 32px; height: 32px;" alt="avatar de l'auteur" />
+                                                        <div class="media-body">
+                                                            <h5 class="mt-0">
+                                                                <?= (empty($value['player'])) ? 'Console' : $value['player'] . ', ' . Permission::getInstance()->gradeJoueur($value['player']); ?>
+                                                                <small class="font-weight-light float-right text-muted"><?= date('H:i', $value['time']); ?></small>
+                                                            </h5>
+                                                            <?= $Chat->formattage(htmlspecialchars($value['message'])); ?>
+                                                        </div>
                                                     </p>
                                                 </div>
 
                                             <?php } ?>
                                             <!-- Affichage des erreurs -->
-                                        <?php } elseif ($messages == 'query') { ?>
+                                        <?php } elseif ($messages == "query") { ?>
                                             <div class="tab-pane fade in show" aria-expanded="false">
                                                 <div class="info-page bg-danger">
                                                     <div class="text-center">
-                                                        La connexion au serveur ne peut pas être établie avec ce
-                                                        protocole.
+                                                        La connexion au serveur ne peut pas être établie avec ce protocole.
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php } elseif ($messages == 'erreur') { ?>
+                                        <?php } elseif ($messages == "erreur") { ?>
                                             <div class="tab-pane fade in show" aria-expanded="false">
                                                 <div class="info-page bg-info">
                                                     <div class="text-center">
@@ -125,14 +115,13 @@
                         <?php } ?>
                     </div>
 
-                    <?php if (Permission::getInstance()->verifPerm('connect')) : ?>
+                    <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
                         <!-- Envoie du message -->
                         <form action="?action=sendChat" method="POST">
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <input type="text" name="message" placeholder="Envoyez votre message..."
-                                               max="100" class="form-control">
+                                        <input type="text" name="message" placeholder="Envoyez votre message..." max="100" class="form-control">
                                     </div>
                                     <div class="col-md-4">
                                         <select name="i" class="form-control">
@@ -152,7 +141,7 @@
                     <?php else : ?>
                         <div class="card-footer">
                             <h5 class="text-center">
-                                Connectez-vous pour utiliser le chat : <br/>
+                                Connectez-vous pour utiliser le chat : <br />
                                 <a data-toggle="modal" data-target="#ConnectionSlide" class="btn btn-main mt-2">
                                     <span class="glyphicon glyphicon-user"></span>Connexion
                                 </a>
@@ -162,7 +151,7 @@
 
                 </div>
             </div>
-        <?php else : ?>
+            <?php else : ?>
             <div class="tab-pane fade in show" aria-expanded="false">
                 <div class="info-page bg-danger">
                     <div class="text-center">

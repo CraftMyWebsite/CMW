@@ -20,8 +20,6 @@
 
 namespace PHPMailer\PHPMailer;
 
-use Psr\Log\LoggerInterface;
-
 /**
  * PHPMailer - PHP email creation and transport class.
  *
@@ -887,7 +885,7 @@ class PHPMailer
             return;
         }
         //Is this a PSR-3 logger?
-        if ($this->Debugoutput instanceof LoggerInterface) {
+        if ($this->Debugoutput instanceof \Psr\Log\LoggerInterface) {
             $this->Debugoutput->debug($str);
 
             return;

@@ -2,7 +2,7 @@
 require('modele/forum/forum.class.php');
 $_Forum_ = new Forum($bddConnection);
 $fofo = $_Forum_->affichageForum();
-if (((Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $fofo[$_POST['index']]['perms'] or Permission::getInstance()->verifPerm('createur')) and !$_SESSION['mode']) or $fofo[$_POST['index']]['perms'] == 0) {
+if (((Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $fofo[$_POST['index']]['perms'] or Permission::getInstance()->verifPerm("createur")) and !$_SESSION['mode']) or $fofo[$_POST['index']]['perms'] == 0) {
 
     $nom = htmlspecialchars($_POST['nom']);
 

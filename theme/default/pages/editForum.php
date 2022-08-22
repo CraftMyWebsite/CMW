@@ -1,7 +1,7 @@
 <?php
 require('modele/forum/adminForum.class.php');
 
-if (Permission::getInstance()->verifPerm('connect') and isset($_GET['id'], $_GET['objet'])) :
+if (Permission::getInstance()->verifPerm("connect") and isset($_GET['id'], $_GET['objet'])) :
     $AdminForum = new AdminForum($bddConnection);
     $objet = htmlentities($_GET['objet']);
     $id = htmlentities($_GET['id']);

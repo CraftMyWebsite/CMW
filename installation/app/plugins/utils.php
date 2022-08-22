@@ -2,7 +2,7 @@
 
 function isWindows(): bool
 {
-    return PHP_OS_FAMILY === 'Windows' ? 'true' : 'false';
+    return PHP_OS_FAMILY === "Windows" ? "true" : "false";
 }
 
 function setWindows(): void

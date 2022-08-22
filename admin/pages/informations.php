@@ -1,41 +1,112 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2 class="h2 gray">
-        Informations Générales
-    </h2>
-</div>
 
-<?php if (!$_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) { ?>
-    <div class="col-lg-6 col-lg-offset-3 text-center">
-        <div class="alert alert-danger">
-            <strong>Vous avez aucune permission pour accéder à cette page.</strong>
-        </div>
-    </div>
-<?php } else {
-    if ($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'visitor', 'showTable')) { ?>
-        <div class="card">
-            <div class="card-header">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h2 class="h2 gray">
+                        Informations Générales
+                    </h2>
+                </div>
 
-                    <a data-toggle="collapse" data-target="#stats" aria-expanded="true" aria-controls="stats">
-                        <h2 class="h2 gray">
-                            <i class="fas fa-chart-area"></i> Statistiques des visiteurs
-                        </h2>
-                    </a>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <a style="cursor:pointer;" onClick="sendPost('dropVisits')" ;
-                           class="btn btn-sm btn-outline-secondary">
-                            Supprimer les visites
-                        </a>
-                        <script>initPost("dropVisits", "admin.php?action=dropVisits",
-                                function (data) {
-                                    if (data) {
+                <?php if(!$_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) { ?>
+                  <div class="col-lg-6 col-lg-offset-3 text-center">
+                    <div class="alert alert-danger">
+                      <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+                    </div>
+                  </div>
+                <?php } else { if($_Permission_->verifPerm('PermsPanel', 'info', "stats","visitor","showTable")) { ?>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+
+                            <a data-toggle="collapse" data-target="#stats" aria-expanded="true" aria-controls="stats">
+                                <h2 class="h2 gray">
+                                    <i class="fas fa-chart-area"></i> Statistiques des visiteurs
+                                </h2>
+                            </a>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <a style="cursor:pointer;"onClick="sendPost('dropVisits')"; class="btn btn-sm btn-outline-secondary">
+                                    Supprimer les visites
+                                </a>
+                                <script>initPost("dropVisits", "admin.php?action=dropVisits",
+                                            function (data) { if(data) {
+                                                var ctx = get('visitsChart')
+                                                var myChart = new Chart(ctx, {
+                                                    type: 'line',
+                                                    data: {
+                                                        labels: [],
+                                                        datasets: [{
+                                                            data: [],
+                                                            lineTension: 0,
+                                                            backgroundColor: '#343A40',
+                                                            borderColor: '#2F3136',
+                                                            borderWidth: 4,
+                                                            pointBackgroundColor: '#2F3136'
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
+                                                        scales: {
+                                                            yAxes: [{
+                                                                ticks: {
+                                                                    beginAtZero: false,
+                                                                    precision: 0
+                                                                }
+                                                            }],
+                                                            xAxes: [{
+                                                              ticks: {
+                                                                precision: 0
+                                                              }
+                                                            }]
+                                                        },
+                                                        legend: {
+                                                            display: false,
+                                                            labels: {
+                                                                text: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%=datasets[i].label%></li><%}%></ul>",
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                            } })</script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body ollapse show" id="stats">
+                        <div class="chart-container">
+                            <canvas id="visitsChart" ></canvas>
+                        </div>
+                                  <script>
+                                   <?php
+                                   $req = $bddConnection->query('SELECT count(dates) as total, UNIX_TIMESTAMP(dates) as time FROM cmw_visits GROUP BY dates ORDER BY dates ASC LIMIT 0, 7');
+                                   $dailyVisite = $req->fetchAll(PDO::FETCH_ASSOC); ?>
+
                                         var ctx = get('visitsChart')
                                         var myChart = new Chart(ctx, {
                                             type: 'line',
                                             data: {
-                                                labels: [],
+                                                labels: [
+                                                <?php 
+                                                $actual = date('N', time());
+                                                $yesterday = date('N', time() - 86400);
+                                                $dayofweek = array('', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
+
+                                                foreach ($dailyVisite as $value) 
+                                                {
+                                                    echo '"';
+                                                    $day = date('N', $value['time']);
+                                                    if($day == $actual) {
+                                                        echo "Aujourd'hui";
+                                                    } else if($day == $yesterday){
+                                                        echo "Hier";
+                                                    } else {
+                                                        echo $dayofweek[$day];
+                                                    }
+                                                    echo '",';
+                                                } ?>],
                                                 datasets: [{
-                                                    data: [],
+                                                    data: [
+                                                    <?php foreach ($dailyVisite as $value)  
+                                                    {
+                                                        echo '"'.$value['total'].'",';
+                                                    } ?>],
                                                     lineTension: 0,
                                                     backgroundColor: '#343A40',
                                                     borderColor: '#2F3136',
@@ -52,11 +123,11 @@
                                                             beginAtZero: false,
                                                             precision: 0
                                                         }
-                                                    }],
+                                                    }], 
                                                     xAxes: [{
-                                                        ticks: {
-                                                            precision: 0
-                                                        }
+                                                      ticks: {
+                                                        precision: 0
+                                                      }
                                                     }]
                                                 },
                                                 legend: {
@@ -67,624 +138,493 @@
                                                 }
                                             }
                                         });
-                                    }
-                                })</script>
+                                  </script>
+                            </canvas>
                     </div>
+
                 </div>
-            </div>
-            <div class="card-body ollapse show" id="stats">
-                <div class="chart-container">
-                    <canvas id="visitsChart"></canvas>
-                </div>
-                <script>
-                    <?php
-                    $req = $bddConnection->query('SELECT count(dates) as total, UNIX_TIMESTAMP(dates) as time FROM cmw_visits GROUP BY dates ORDER BY dates ASC LIMIT 0, 7');
-                    $dailyVisite = $req->fetchAll(PDO::FETCH_ASSOC); ?>
+                <br/>
+            <?php  }  ?>
 
-                    var ctx = get('visitsChart')
-                    var myChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: [
-                                <?php
-                                $actual = date('N', time());
-                                $yesterday = date('N', time() - 86400);
-                                $dayofweek = array('', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
+                <div class="card-columns">
+                    <div class="card">
 
-                                foreach ($dailyVisite as $value) {
-                                    echo '"';
-                                    $day = date('N', $value['time']);
-                                    if ($day == $actual) {
-                                        echo "Aujourd'hui";
-                                    } else if ($day == $yesterday) {
-                                        echo 'Hier';
-                                    } else {
-                                        echo $dayofweek[$day];
-                                    }
-                                    echo '",';
-                                } ?>],
-                            datasets: [{
-                                data: [
-                                    <?php foreach ($dailyVisite as $value) {
-                                    echo '"' . $value['total'] . '",';
-                                } ?>],
-                                lineTension: 0,
-                                backgroundColor: '#343A40',
-                                borderColor: '#2F3136',
-                                borderWidth: 4,
-                                pointBackgroundColor: '#2F3136'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: false,
-                                        precision: 0
-                                    }
-                                }],
-                                xAxes: [{
-                                    ticks: {
-                                        precision: 0
-                                    }
-                                }]
-                            },
-                            legend: {
-                                display: false,
-                                labels: {
-                                    text: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%=datasets[i].label%></li><%}%></ul>",
-                                }
-                            }
-                        }
-                    });
-                </script>
-                </canvas>
-            </div>
-
-        </div>
-        <br/>
-    <?php } ?>
-
-    <div class="card-columns">
-        <div class="card">
-
-            <div class="card-body bg-info">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h4 class="card-title">Nouveautés</h4>
-                        <p class="card-category">
-                            ›› <?php echo isset($TotalNews) && $TotalNews > 0 ? 'Il y a actuellement ' . $TotalNews . ' news.' : "Il n'y a pas de news posté."; ?></p>
-                    </div>
-                    <div class="col-md-4">
-                        <i class="fas fa-comments fa-5x"></i>
-                    </div>
-                </div>
-            </div>
-            <a href="?page=news">
-                <div class="card-footer">
-                    <button type="button" onclick="" class="btn btn-info btn-block w-100"> Voir en détails
-                        <i class="fas fa-arrow-circle-right"></i></button>
-                </div>
-            </a>
-
-        </div>
-        <div class="card">
-
-            <div class="card-body bg-success">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h4 class="card-title">Support</h4>
-                        <p class="card-category">
-                            ›› <?php echo isset($TotalSupport) && $TotalSupport > 0 ? 'Il y a ' . $TotalSupport . " demande(s) d'aide." : "Il n'y a aucune demande d'aide."; ?></p>
-                    </div>
-                    <div class="col-md-4">
-                        <i class="fas fa-life-ring fa-5x"></i>
-                    </div>
-                </div>
-            </div>
-            <a href="?page=support">
-                <div class="card-footer">
-                    <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en
-                        détails <i class="fas fa-arrow-circle-right"></i></button>
-                </div>
-            </a>
-
-        </div>
-        <div class="card">
-
-            <div class="card-body bg-danger">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h4 class="card-title">Boutique</h4>
-                        <p class="card-category">
-                            ›› <?php echo isset($TotalOffre) && $TotalOffre > 0 ? 'Il y a ' . $TotalOffre . ' offre(s) dans la boutique.' : "Il n'y a pas d'offre dans la boutique."; ?></p>
-                    </div>
-                    <div class="col-md-4">
-                        <i class="fas fa-shopping-cart fa-5x"></i>
-                    </div>
-                </div>
-            </div>
-            <a href="?page=boutique">
-                <div class="card-footer">
-                    <button type="button" onclick="" class="btn btn-danger btn-block w-100"> Voir en détails
-                        <i class="fas fa-arrow-circle-right"></i></button>
-                </div>
-            </a>
-
-
-        </div>
-
-    </div>
-    <br/>
-    <div class="card-columns">
-        <?php
-        foreach ($lectureJSON as $j => $serveur) {
-            if ($conEtablie[$j] == true) { ?>
-                <div class="card">
-                    <div class="card-header bg-success">
-                        <div class="row">
-                            <div class="col-md-8 offset-col-md-4">
-                                <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?= $j ?></h4>
-                                <p class="card-category">
-                                    En ligne - <?= $serveur['nom']; ?>
-                                </p>
+                        <div class="card-body bg-info">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 class="card-title">Nouveautés</h4>
+                                    <p class="card-category"> ›› <?php echo isset($TotalNews)&& $TotalNews >0 ? 'Il y a actuellement '.$TotalNews.' news.' : "Il n'y a pas de news posté." ; ?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fas fa-comments fa-5x"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Détecte si le serveur est connecté en JSONAPI ou en RCON-->
-                    <?php if ($serveur['protocole'] == 0) { ?>
-                        <a href="#" data-toggle="modal" data-target="#infoServeur<?= $conEtablie[$j] ?>">
+                        <a href="?page=news">
                             <div class="card-footer">
-
-                                <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en
-                                    détails
+                                <button type="button" onclick="" class="btn btn-info btn-block w-100"> Voir en détails
                                     <i class="fas fa-arrow-circle-right"></i></button>
-
                             </div>
                         </a>
-                    <?php } else { ?>
 
-                        <div class="card-footer text-center">
-
-                            <span class="alert-warning">Cette fonctionnalité n'est pas disponible avec la connexion RCON, merci de choisir la connexion JSONAPI</span>
-
-                        </div>
-
-                    <?php } ?>
-                </div>
-                <?php if ($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'player') or $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console') or $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'command') or $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins') or $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) {
-                    ?>
-
-                <div class="modal fade" id="infoServeur<?= $conEtablie[$j] ?>" tabindex="-1" role="dialog"
-                     aria-labelledby="#infoServeur<?= $conEtablie[$j] ?>" aria-hidden="true">
-                    <div class="modal-dialog  modal-lg" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Serveur JsonAPI/Rcon</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
-                    <div class="modal-body" style="height: 500px;overflow-y:scroll!important">
+                    <div class="card">
 
-                    <?php if ($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console')) { ?>
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">
-                                    Console
-                                </h4>
+                        <div class="card-body bg-success">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 class="card-title">Support</h4>
+                                    <p class="card-category"> ›› <?php echo isset($TotalSupport) && $TotalSupport >0 ? 'Il y a '.$TotalSupport." demande(s) d'aide." : "Il n'y a aucune demande d'aide." ; ?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fas fa-life-ring fa-5x"></i>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <script type="text/javascript">
-                                    function updateConsole() {
-                                        var $console = $("#console");
-                                        $console.load("admin.php #console");
-                                    }
+                        </div>
+                        <a href="?page=support">
+                            <div class="card-footer">
+                                <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en
+                                    détails <i class="fas fa-arrow-circle-right"></i></button>
+                            </div>
+                        </a>
 
-                                    setInterval("updateConsole()", 10000);
-                                </script>
-                                <?php
-                                $date = date('Y-m-d');
-                                echo '<div id="console"><div style="background-color: #373737;color: #8F8F8F;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:solid 2px #8F8F8F;overflow: hidden;">';
-                                foreach ($console[$j]['Test'] as $value) {
-                                    $console[$j]['Test'] = $value['line'];
-                                    $console[$j]['Test'] = str_replace($date, '', $console[$j]['Test']);
-                                    $msg_prefix = array('INFO', 'WARN', 'SEVERE', '[0;31;22m', '[0;32;22m', '[0;33;22m', '[0;34;22m', '[0;35;22m', '[0;36;22m', '[0;37;22m', '[0;30;1m', '[0;31;1m', '[0;32;1m', '[0;33;1m', '[0;34;1m', '[0;35;1m', '[0;36;1m', '[0;37;1m', '[1;31m', '[21m', '[9m', '[5m', '[3m', '[0m', '[m', '<span><span', '</span></span>');
-                                    $color_prefix = array('<span style="color: #5555FF;">INFO</span>', '<span style="color: #FFAA00;">WARN</span>', '<span style="color: #FF5555;">SEVERE</span>', "</span><span style=\"color:#aa0000\">", "</span><span style=\"color:#00aa00\">", "</span><span style=\"color:#ffaa00\">", "</span><span style=\"color:#0000aa\">", "</span><span style=\"color:#aa00aa\">", "</span><span style=\"color:#00aaaa\">", "</span><span style=\"color:#aaaaaa\">", "</span><span style=\"color:#555555\">", "</span><span style=\"color:#ff5555\">", "</span><span style=\"color:#55ff55\">", "</span><span style=\"color:#ffffff\">", "</span><span style=\"color:#5555ff\">", "</span><span style=\"color:#ff55ff\">", "</span><span style=\"color:#55ffff\">", "</span><span style=\"color:#ffff55\">", '', '', '', '', '', '', '</span>', '<span', '</span>');
-                                    $console[$j]['Test'] = str_replace($msg_prefix, $color_prefix, $console[$j]['Test']);
-                                    echo '<div style="text-align: left;">';
-                                    echo '<div>';
-                                    echo $console[$j]['Test'];
-                                    echo '<br/>
+                    </div>
+                    <div class="card">
+
+                        <div class="card-body bg-danger">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 class="card-title">Boutique</h4>
+                                    <p class="card-category"> ›› <?php echo isset($TotalOffre) && $TotalOffre >0 ? 'Il y a '.$TotalOffre.' offre(s) dans la boutique.' : "Il n'y a pas d'offre dans la boutique." ; ?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fas fa-shopping-cart fa-5x"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="?page=boutique">
+                            <div class="card-footer">
+                                <button type="button" onclick="" class="btn btn-danger btn-block w-100"> Voir en détails
+                                    <i class="fas fa-arrow-circle-right"></i></button>
+                            </div>
+                        </a>
+
+
+                    </div>
+
+                </div>
+                <br/>
+                <div class="card-columns">
+                    <?php
+                    foreach($lectureJSON as $j => $serveur)
+                    {
+                    if($conEtablie[$j] == true)
+                        { ?>
+                        <div class="card">
+                            <div class="card-header bg-success">
+                                <div class="row">
+                                    <div class="col-md-8 offset-col-md-4">
+                                        <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$j?></h4>
+                                        <p class="card-category">
+                                            En ligne - <?=$serveur['nom'];?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Détecte si le serveur est connecté en JSONAPI ou en RCON-->
+                            <?php if($serveur['protocole'] == 0){?>
+                                <a href="#" data-toggle="modal" data-target="#infoServeur<?=$conEtablie[$j]?>">
+                                    <div class="card-footer">
+
+                                        <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en détails
+                                            <i class="fas fa-arrow-circle-right"></i></button>
+
+                                    </div>
+                                </a>
+                            <?php }else{ ?>
+
+                                <div class="card-footer text-center">
+
+                                    <span class="alert-warning">Cette fonctionnalité n'est pas disponible avec la connexion RCON, merci de choisir la connexion JSONAPI</span>
+
+                                </div>
+
+                            <?php }?>
+                        </div>
+                        <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'player') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'command') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins') OR $_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) {
+                            ?>
+
+                            <div class="modal fade" id="infoServeur<?=$conEtablie[$j]?>" tabindex="-1" role="dialog"
+                                aria-labelledby="#infoServeur<?=$conEtablie[$j]?>" aria-hidden="true">
+                                <div class="modal-dialog  modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Serveur JsonAPI/Rcon</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" style="height: 500px;overflow-y:scroll!important">
+
+                                        <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'console')) { ?>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">
+                                                        Console
+                                                    </h4>
+                                                </div>
+                                                <div class="card-body">
+                                                <script type="text/javascript">
+                                                    function updateConsole() {
+                                                        var $console = $("#console");
+                                                        $console.load("admin.php #console");
+                                                    }
+                                                    setInterval("updateConsole()", 10000);
+                                                </script>
+                                                <?php
+                                                $date = date("Y-m-d");
+                                                echo '<div id="console"><div style="background-color: #373737;color: #8F8F8F;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:solid 2px #8F8F8F;overflow: hidden;">';
+                                                foreach($console[$j]['Test'] as $value) {
+                                                    $console[$j]['Test'] = $value["line"];
+                                                    $console[$j]['Test'] = str_replace($date, '', $console[$j]['Test']);
+                                                    $msg_prefix = array('INFO', 'WARN', 'SEVERE', "[0;31;22m", "[0;32;22m", "[0;33;22m", "[0;34;22m", "[0;35;22m", "[0;36;22m", "[0;37;22m", "[0;30;1m", "[0;31;1m", "[0;32;1m", "[0;33;1m", "[0;34;1m", "[0;35;1m", "[0;36;1m", "[0;37;1m", "[1;31m", "[21m", "[9m", "[5m", "[3m", "[0m", "[m", "<span><span", "</span></span>");
+                                                    $color_prefix = array('<span style="color: #5555FF;">INFO</span>', '<span style="color: #FFAA00;">WARN</span>', '<span style="color: #FF5555;">SEVERE</span>', "</span><span style=\"color:#aa0000\">", "</span><span style=\"color:#00aa00\">", "</span><span style=\"color:#ffaa00\">", "</span><span style=\"color:#0000aa\">", "</span><span style=\"color:#aa00aa\">", "</span><span style=\"color:#00aaaa\">", "</span><span style=\"color:#aaaaaa\">", "</span><span style=\"color:#555555\">", "</span><span style=\"color:#ff5555\">", "</span><span style=\"color:#55ff55\">", "</span><span style=\"color:#ffffff\">", "</span><span style=\"color:#5555ff\">", "</span><span style=\"color:#ff55ff\">", "</span><span style=\"color:#55ffff\">", "</span><span style=\"color:#ffff55\">", "", "", "", "", "", "", "</span>", "<span", "</span>");
+                                                    $console[$j]['Test'] = str_replace($msg_prefix, $color_prefix, $console[$j]['Test']);
+                                                    echo '<div style="text-align: left;">';
+                                                    echo '<div>';
+                                                    echo $console[$j]['Test'];
+                                                    echo '<br/>
                                                             </div>';
-                                    echo '</div>';
-                                }
-                                echo '</div>
-                                                </div>'; ?>
-                            </div>
-                            <div class="card-footer">
-                                <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        $("#sendCommand").click(function (e) {
-                                            $("#sendCommand").prop('disabled',
-                                                true);
-                                            e.preventDefault();
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: '?&action=commandeConsole',
-                                                data: $('#commandeExec')
-                                                    .serialize(),
-                                                success: function () {
-                                                    $('input[name=commandeConsole]')
-                                                        .val('');
-                                                    $("#sendCommand")
-                                                        .prop(
-                                                            'disabled',
-                                                            false);
-                                                    toastr["success"]("Commande executer !");
-                                                },
-                                                error: function () {
-                                                    $('input[name=commandeConsole]')
-                                                        .val('');
-                                                    $("#sendCommand")
-                                                        .prop(
-                                                            'disabled',
-                                                            false);
-                                                    toastr["success"]("Erreur: Impossible d\'executer la commande");
+                                                    echo '</div>';
                                                 }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                <form id="commandeExec" method="POST"
-                                      action="?&action=commandeConsole">
-                                    <input class="form-control w-100" type="text"
-                                           name="commandeConsole" id="commandeConsole" value=""
-                                           placeholder="Mettre une commande sans /" required/>
-                                    <button id="sendCommand" class="btn btn-info btn-block w-100">Exécuter la
-                                        commande
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                                                echo '</div>
+                                                </div>'; ?>
+                                                </div>
+                                                <div class="card-footer">
+                                                <script type="text/javascript">
+                                                $(document).ready(function () {
+                                                    $("#sendCommand").click(function (e) {
+                                                        $("#sendCommand").prop('disabled',
+                                                            true);
+                                                        e.preventDefault();
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: '?&action=commandeConsole',
+                                                            data: $('#commandeExec')
+                                                                .serialize(),
+                                                            success: function () {
+                                                                $('input[name=commandeConsole]')
+                                                                    .val('');
+                                                                $("#sendCommand")
+                                                                    .prop(
+                                                                        'disabled',
+                                                                        false);
+                                                                        toastr["success"]("Commande executer !");
+                                                            },
+                                                            error: function () {
+                                                                $('input[name=commandeConsole]')
+                                                                    .val('');
+                                                                $("#sendCommand")
+                                                                    .prop(
+                                                                        'disabled',
+                                                                        false);
+                                                                        toastr["success"]("Erreur: Impossible d\'executer la commande");
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                                </script>
+                                                <form id="commandeExec" method="POST"
+                                                            action="?&action=commandeConsole">
+                                                            <input class="form-control w-100" type="text"
+                                                                name="commandeConsole" id="commandeConsole" value=""
+                                                                placeholder="Mettre une commande sans /" required />
+                                                            <button id="sendCommand" class="btn btn-info btn-block w-100">Exécuter la
+                                                                commande</button>
+                                                        </form>
+                                                </div>
+                                            </div>
 
-                        <div class="row">
-                            <div class="col-md-4 offset-md-4">
-                                <button class="btn btn-block btn-primary w-100" data-toggle="modal"
-                                        data-target="#giveSpec<?= $conEtablie[$j] ?>" disabled
-                                        style="background-color: gray;border-color:gray;cursor: not-allowed;">Give
-                                    d'items spéciaux
-                                </button>
-                            </div>
-                        </div>
-                        <br/>
-
-                    <?php }
-                    if ($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins')) { ?>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">
-                                    Plugins
-                                </h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>Nom</th>
-                                        <th>Version</th>
-                                        <th>Etat</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach ($plugins[$j]['Test'] as $value) { ?>
-                                        <tr>
-                                            <td><?php echo $value['name']; ?></td>
-                                            <td><?php echo $value['version'] ?></td>
-                                            <td><?php if ($value['enabled'] == 'true') {
-                                                    echo '<center><img src="theme/upload/true.png"></img></center>';
-                                                } else {
-                                                    echo '<center><img src="theme/upload/cross.png"></img></center>';
-                                                } ?>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-footer">
-                                <?php
-                                if ($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) { ?>
-                                    <div class="row">
-                                        <div class="col-md-4 text-center">
-                                            <button type="button" class="btn btn-warning"
-                                                    onclick="window.location.replace('?&action=commandeRechargementPlugins')">
-                                                Recharger
-                                                les plugins
-                                            </button>
+                                        <div class="row">
+                                            <div class="col-md-4 offset-md-4">
+                                                <button class="btn btn-block btn-primary w-100" data-toggle="modal" data-target="#giveSpec<?=$conEtablie[$j]?>" disabled style="background-color: gray;border-color:gray;cursor: not-allowed;">Give d'items spéciaux</button>
+                                            </div>
                                         </div>
-                                        <div class="col-md-4 text-center">
-                                            <form method="post" action="?&action=commandeConsole">
-                                                <button id="commandeConsolestop" name="commandeConsole"
-                                                        type="submit" class="btn btn-danger"
-                                                        value="stop">Arrêter le serveur
-                                                </button>
-                                            </form>
+                                        <br/>
+
+                                        <?php }
+                                        if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'plugins')) { ?>
+
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">
+                                                        Plugins
+                                                    </h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nom</th>
+                                                                <th>Version</th>
+                                                                <th>Etat</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($plugins[$j]['Test'] as $value) { ?>
+                                                            <tr>
+                                                                <td><?php echo $value['name']; ?></td>
+                                                                <td><?php echo $value['version'] ?></td>
+                                                                <td><?php if($value['enabled']== "true") { echo '<center><img src="theme/upload/true.png"></img></center>'; } else { echo '<center><img src="theme/upload/cross.png"></img></center>'; } ?>
+                                                                </td>
+                                                            </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="card-footer">
+                                                <?php
+                                               if($_Permission_->verifPerm('PermsPanel', 'info', 'details', 'server')) { ?>
+                                                    <div class="row">
+                                                        <div class="col-md-4 text-center">
+                                                            <button type="button" class="btn btn-warning"
+                                                                onclick="window.location.replace('?&action=commandeRechargementPlugins')">Recharger
+                                                                les plugins</button>
+                                                        </div>
+                                                        <div class="col-md-4 text-center">
+                                                            <form method="post" action="?&action=commandeConsole">
+                                                                <button id="commandeConsolestop" name="commandeConsole"
+                                                                    type="submit" class="btn btn-danger"
+                                                                    value="stop">Arrêter le serveur</button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-md-4 text-center" style="margin-left: -4.5%">
+                                                            <button type="button" class="btn btn-success"
+                                                                onclick="window.location.replace('?&action=commandeRedemarrageServer')"
+                                                                disabled>Redémarrer le serveur</button>
+                                                        </div>
+                                                    </div>
+                                               <?php } ?>
+                                                </div>
+                                            </div>
+
+
                                         </div>
-                                        <div class="col-md-4 text-center" style="margin-left: -4.5%">
-                                            <button type="button" class="btn btn-success"
-                                                    onclick="window.location.replace('?&action=commandeRedemarrageServer')"
-                                                    disabled>Redémarrer le serveur
-                                            </button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">Fermer</button>
                                         </div>
                                     </div>
-                                <?php } ?>
+                                </div>
                             </div>
-                        </div>
+                        <?php }?>
 
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger"
-                                    data-dismiss="modal">Fermer
-                            </button>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-                    <?php } ?>
-
-                <?php } ?>
-            <?php } else {
-                ?>
-                <div class="card">
-                    <div class="card-header bg-danger">
-                        <div class="row">
-                            <div class="col-md-8 offset-col-md-4">
-                                <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?= $j ?></h4>
-                                <p class="card-category">
-                                    Hors Ligne - <?= $serveur['nom']; ?>
-                                </p>
+                        <?php } ?>
+                    <?php }else{?>
+                        <div class="card">
+                            <div class="card-header bg-danger">
+                                <div class="row">
+                                    <div class="col-md-8 offset-col-md-4">
+                                        <h4 class="card-title"><i class="fas fa-server"></i> Serveur #<?=$j?></h4>
+                                        <p class="card-category">
+                                            Hors Ligne - <?=$serveur['nom'];?>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <a href="#">
-                        <div class="card-footer">
-                            <button type="button" onclick="" class="btn btn-danger btn-block w-100"> Serveur Hors Ligne
-                                !
-                                <i class="fas fa-arrow-circle-right"></i></button>
-                        </div>
-                    </a>
-                </div>
-            <?php } ?>
-        <?php } ?>
-    </div>
-    <br/>
-    <div class="row">
-
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">
-                        <i class="fas fa-user-friends"></i> Inscriptions
-                    </h4>
-                </div>
-                <div class="card-body" style="overflow-x: scroll;padding: 0px;">
-
-                    <div class="table-responsive">
-                        <table class="table table-striped w-100">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Pseudo</th>
-                                <th>Email</th>
-                                <th><?= $_Serveur_['General']['moneyName']; ?></th>
-                                <th>Inscrit le</th>
-                                <?php if ($ShowMail) {
-                                    echo '<th>Etat</th>';
-                                } ?>
-                                <?php if ($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) {
-                                    echo '<th>IP</th>';
-                                } ?>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-
-                            while ($lastMembre = $lastRegisterMember->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<tr>';
-                                echo '<td>' . $lastMembre['id'] . '</td>';
-                                echo '<td>' . $lastMembre['pseudo'] . '</td>';
-                                echo '<td>' . $lastMembre['email'] . '</td>';
-                                echo '<td>' . $lastMembre['tokens'] . '</td>';
-                                echo '<td>' . date('d/m/Y', $lastMembre['anciennete']) . ' &agrave; ' . date('H:i:s', $lastMembre['anciennete']) . '</td>';
-                                if ($ShowMail) {
-                                    echo '<td>' . ($lastMembre['ValidationMail'] == 1 ? 'valide' : 'invalide') . '</td>';
-                                }
-                                if ($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) {
-                                    if (filter_var($lastMembre['ip'], FILTER_VALIDATE_IP)) {
-                                        echo '<td>' . $lastMembre['ip'] . '</td>';
-                                    } else {
-                                        echo '<td>' . htmlspecialchars($lastMembre['ip']) . ' <a title="Impossible de vérifier la validité de cette adresse ip"><i class="fas fa-exclamation-circle animation-wow" style="color: darkred;"></i></a></td>';
-                                    }
-                                }
-                                echo '</tr>';
-                            } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <small>Ceci sont les derniers 10 membres inscrits.</small>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">
-                        <div class="float-left">
-                            <i class="fas fa-user-friends"></i> Staff-Chat
-                        </div>
-                        <div class="float-right">
-                            <button type="submit" class="btn btn-sm btn-outline-secondary"
-                                    onClick="sendPost('clearStaffMessage')"
-                                    title="Cliquer ici pour supprimer à jamais tous les messages"><i
-                                        class="fas fa-trash" style="color: #bf0a0a;"></i></button>
-                            <script>initPost("clearStaffMessage", "admin.php?action=clearPostit",
-                                    function (data) {
-                                        if (data) {
-                                            get('allStaffMessage').innerHTML = "";
-                                        }
-                                    });</script>
-                        </div>
-                    </h4>
-                </div>
-                <div class="card-body postit" id="allStaffMessage"
-                     style="overflow-y: scroll;padding: 0px;height: 155px; width: 100%;">
-                    <?php
-                    while ($message_postit = $all_message_staff->fetch(PDO::FETCH_ASSOC)) { ?>
-                        <p id="StaffMessage-<?= $message_postit['id']; ?>">
-                            [<strong><?php echo $message_postit['auteur']; ?></strong>]:
-                            <?php echo $message_postit['message']; ?>&nbsp;&nbsp;
-                            <a id="suppStaffMessage-<?= $message_postit['id']; ?>" style="cursor:pointer;"
-                               onClick="sendPost('suppStaffMessage-<?= $message_postit['id']; ?>')">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                <input type="number" style="display:none;" value="<?= $message_postit['id']; ?>"
-                                       name="id">
+                            <a href="#">
+                                <div class="card-footer">
+                                    <button type="button" onclick="" class="btn btn-danger btn-block w-100"> Serveur Hors Ligne !
+                                        <i class="fas fa-arrow-circle-right"></i></button>
+                                </div>
                             </a>
-                            <script>initPost("suppStaffMessage-<?=$message_postit['id'];?>", "admin.php?action=supprPostit",
-                                    function (data) {
-                                        if (data) {
-                                            hide("StaffMessage-<?=$message_postit['id'];?>")
-                                        }
-                                    });</script>
-                        </p>
-                    <?php } ?>
+                        </div>
+                   <?php } ?>
+                <?php } ?>
                 </div>
-                <div class="card-footer" id="sendStaffMessage">
-                    <input type="text" name="message" id="message" placeholder="Message (max 50 caractères)"
-                           class="form-control" maxlength="50">
-                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('sendStaffMessage')">Envoyer
-                        !
-                    </button>
-                    <script>initPost("sendStaffMessage", "admin.php?action=creerPostit",
-                            function (data) {
-                                if (data) {
-                                    console.log('message envoyé');
-                                    get('allStaffMessage').innerHTML = "<p>[<strong><?php echo $_Joueur_['pseudo']?></strong>]: " + getValueByName('sendStaffMessage', 'message') + "</p>" + get('allStaffMessage').innerHTML;
-                                    clearAllInput('sendStaffMessage');
-                                }
-                            })</script>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <?php if ($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'activity', 'showTable')) { ?>
-            <div class="col-md-4">
-                <div class="card end">
-                    <div class="card-header">
-                        <h4 class="card-title">
-                            <i class="fas fa-heartbeat"></i> Activité
-                        </h4>
+                <br/>
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <i class="fas fa-user-friends"></i> Inscriptions
+                                </h4>
+                            </div>
+                            <div class="card-body" style="overflow-x: scroll;padding: 0px;">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Pseudo</th>
+                                                <th>Email</th>
+                                                <th><?=$_Serveur_['General']['moneyName'];?></th>
+                                                <th>Inscrit le</th>
+                                                <?php if($ShowMail) { echo '<th>Etat</th>'; } ?>
+                                                <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) { echo '<th>IP</th>'; } ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+
+                                            while($lastMembre = $lastRegisterMember->fetch(PDO::FETCH_ASSOC))
+                                            {
+                                                echo '<tr>';
+                                                echo '<td>'.$lastMembre['id'].'</td>';
+                                                echo '<td>'.$lastMembre['pseudo'].'</td>';
+                                                echo '<td>'.$lastMembre['email'].'</td>';
+                                                echo '<td>'.$lastMembre['tokens'].'</td>';
+                                                echo '<td>'.date('d/m/Y', $lastMembre['anciennete']).' &agrave; '.date('H:i:s',$lastMembre['anciennete']).'</td>';
+                                                if($ShowMail) { echo '<td>'.($lastMembre['ValidationMail'] == 1 ? "valide" : "invalide").'</td>'; }
+                                                if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) {
+                                                    if (filter_var($lastMembre['ip'], FILTER_VALIDATE_IP)){
+                                                        echo '<td>'.$lastMembre['ip'].'</td>';
+                                                    }else{
+                                                        echo '<td>'.htmlspecialchars($lastMembre['ip']).' <a title="Impossible de vérifier la validité de cette adresse ip"><i class="fas fa-exclamation-circle animation-wow" style="color: darkred;"></i></a></td>';
+                                                    }
+                                                }
+                                                 echo '</tr>';
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small>Ceci sont les derniers 10 membres inscrits.</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
 
-                        <div class="list-group">
-                            <?php if ($LastTicket != false && isset($LastTicket)) { ?>
-                                <li class="list-group-item">
-                                    <?php if ($LastTicket['etat'] == 1) { ?><span class="badge"
-                                                                                  style="background-color: rgb(0, 151, 0);">Résolu</span><?php } else { ?>
-                                        <span class="badge"
-                                              style="background-color: rgb(139, 24, 40);">Non résolu</span><?php } ?>
-                                    <i class="fas fa-life-ring"></i> Dernier ticket :
-                                    <strong><?php echo $LastTicket['titre']; ?></strong> par
-                                    <strong><?php echo $LastTicket['auteur']; ?></strong>
-                                </li>
-                            <?php } ?>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <div class="float-left">
+                                        <i class="fas fa-user-friends"></i> Staff-Chat
+                                    </div>
+                                    <div class="float-right">
+                                        <button type="submit"  class="btn btn-sm btn-outline-secondary" onClick="sendPost('clearStaffMessage')" title="Cliquer ici pour supprimer à jamais tous les messages"><i class="fas fa-trash" style="color: #bf0a0a;"></i></button>
+                                         <script>initPost("clearStaffMessage", "admin.php?action=clearPostit",
+                                            function (data) { if(data) { get('allStaffMessage').innerHTML = "";} });</script>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="card-body postit" id="allStaffMessage" style="overflow-y: scroll;padding: 0px;height: 155px; width: 100%;">
+                                <?php
+                                    while ($message_postit = $all_message_staff->fetch(PDO::FETCH_ASSOC)) { ?>
+                                        <p id="StaffMessage-<?=$message_postit['id'];?>">
+                                                [<strong><?php echo $message_postit['auteur']; ?></strong>]:
+                                            <?php echo $message_postit['message']; ?>&nbsp;&nbsp;
+                                            <a id="suppStaffMessage-<?=$message_postit['id'];?>" style="cursor:pointer;"onClick="sendPost('suppStaffMessage-<?=$message_postit['id'];?>')">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                <input type="number" style="display:none;" value="<?=$message_postit['id'];?>" name="id">
+                                            </a>
+                                            <script>initPost("suppStaffMessage-<?=$message_postit['id'];?>", "admin.php?action=supprPostit",
+                                            function (data) { if(data) { hide("StaffMessage-<?=$message_postit['id'];?>")} });</script>
+                                        </p>
+                                   <?php } ?>
+                            </div>
+                            <div class="card-footer" id="sendStaffMessage">
+                                    <input type="text" name="message" id="message" placeholder="Message (max 50 caractères)" class="form-control" maxlength="50">
+                                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('sendStaffMessage')">Envoyer !</button>
+                                    <script>initPost("sendStaffMessage", "admin.php?action=creerPostit",
+                                            function (data) { if(data) { console.log('message envoyé'); get('allStaffMessage').innerHTML = "<p>[<strong><?php echo $_Joueur_['pseudo']?></strong>]: "+getValueByName('sendStaffMessage', 'message')+"</p>"+get('allStaffMessage').innerHTML; clearAllInput('sendStaffMessage');}})</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <?php if($_Permission_->verifPerm('PermsPanel', 'info', "stats","activity","showTable")) { ?>
+                    <div class="col-md-4">
+                        <div class="card end">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <i class="fas fa-heartbeat"></i> Activité
+                                </h4>
+                            </div>
+                            <div class="card-body">
 
-                            <?php if ($LastNews != false && isset($LastNews)) { ?>
-                                <li class="list-group-item">
-                                    <i class="fas fa-fw fa-wrench"></i> Dernier news :
-                                    <strong><?php echo $LastNews['titre']; ?></strong> par
-                                    <strong><?php echo $LastNews['auteur']; ?></strong>
-                                </li>
-                            <?php } ?>
-                            <?php if (isset($LastMaintenance)) { ?>
-                                <li class="list-group-item">
-                                    <?php if ($LastMaintenance['maintenanceEtat'] == 0) { ?><span class="badge"
-                                                                                                  style="background-color: #d9534f">Inactif</span><?php } else { ?>
-                                        <span class="badge" style="background-color:rgb(0, 151, 0);">Actif</span>
+                                <div class="list-group">
+			<?php if($LastTicket != false && isset($LastTicket)) { ?>
+                                    <li class="list-group-item">
+                                        <?php if($LastTicket['etat'] == 1) {?><span class="badge" style="background-color: rgb(0, 151, 0);">Résolu</span><?php } else { ?><span class="badge" style="background-color: rgb(139, 24, 40);">Non résolu</span><?php } ?>
+                                        <i class="fas fa-life-ring"></i> Dernier ticket :
+                                        <strong><?php echo $LastTicket['titre']; ?></strong> par <strong><?php echo $LastTicket['auteur']; ?></strong>
+                                    </li>
                                     <?php } ?>
-                                    <i class="fas fa-fw fa-wrench"></i> Dernière maintenance effectuée
-                                    le <?php if ($LastMaintenance['maintenanceTime'] != '0') {
-                                        echo date('d-m-Y H:i:s', $LastMaintenance['maintenanceTime']);
-                                    } else {
-                                        echo 'jamais';
-                                    } ?>
-                                </li>
-                            <?php } ?>
 
-                        </div>
+                                    <?php if($LastNews != false && isset($LastNews)) { ?>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-fw fa-wrench"></i> Dernier news :
+                                        <strong><?php echo $LastNews['titre']; ?></strong> par <strong><?php echo $LastNews['auteur']; ?></strong>
+                                    </li>
+                                    <?php } ?>
+                                    <?php if(isset($LastMaintenance)) { ?>
+                                    <li class="list-group-item">
+                                        <?php if($LastMaintenance['maintenanceEtat'] == 0) { ?><span class="badge" style="background-color: #d9534f">Inactif</span><?php } else { ?>
+                                        <span class="badge" style="background-color:rgb(0, 151, 0);">Actif</span>
+                                        <?php } ?>
+                                        <i class="fas fa-fw fa-wrench"></i> Dernière maintenance effectuée le  <?php if($LastMaintenance['maintenanceTime'] != "0") { echo date('d-m-Y H:i:s', $LastMaintenance['maintenanceTime']);} else { echo 'jamais';}?>
+                                    </li>
+                                    <?php } ?>
 
-                    </div>
-                    <div class="card-footer">
-                        <small>Ceci sont les dernières actions d'activité.</small>
-                    </div>
-                </div>
-            </div>
-        <?php }
-        if ($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'shop', 'showTable')) { ?>
+                                </div>
 
-            <div class="col-md-8">
-                <div class="card end">
-                    <div class="card-header">
-                        <h4 class="card-title">
-                            <i class="fas fa-shopping-basket"></i> Boutique
-                        </h4>
-                    </div>
-                    <div class="card-body" style="overflow-x: scroll;padding: 0px;">
-
-                        <div class="table-responsive">
-                            <table class="table table-striped w-100">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Pseudo</th>
-                                    <th>Date</th>
-                                    <th>Offre acheté</th>
-                                    <th>Dépenses</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php while ($LastAchat = $lastachatreq->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '<tr>';
-                                    echo '<td>' . $LastAchat['id'] . '</td>';
-                                    echo '<td>' . $LastAchat['pseudo'] . '</td>';
-                                    echo '<td>' . $LastAchat['date_achat'] . '</td>';
-                                    echo '<td>' . $LastAchat['offre_id'] . '</td>';
-                                    echo '<td>' . $LastAchat['prix'] . '</td>';
-                                    echo '</tr>';
-                                }
-                                ?>
-
-
-                                </tbody>
-                            </table>
+                            </div>
+                            <div class="card-footer">
+                                <small>Ceci sont les dernières actions d'activité.</small>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <small>Ceci sont les dernières achats dans la boutique.</small>
+                <?php } if($_Permission_->verifPerm('PermsPanel', 'info', "stats","shop","showTable")) { ?>
+
+                    <div class="col-md-8">
+                        <div class="card end">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <i class="fas fa-shopping-basket"></i> Boutique
+                                </h4>
+                            </div>
+                            <div class="card-body" style="overflow-x: scroll;padding: 0px;">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Pseudo</th>
+                                                <th>Date</th>
+                                                <th>Offre acheté</th>
+                                                <th>Dépenses</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php while($LastAchat = $lastachatreq->fetch(PDO::FETCH_ASSOC)) {
+                                                echo '<tr>';
+                                                echo '<td>'.$LastAchat['id'].'</td>';
+                                                echo '<td>'.$LastAchat['pseudo'].'</td>';
+                                                echo '<td>'.$LastAchat['date_achat'].'</td>';
+                                                echo '<td>'.$LastAchat['offre_id'].'</td>';
+                                                echo '<td>'.$LastAchat['prix'].'</td>';
+                                                echo '</tr>';
+                                            }
+                                            ?>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small>Ceci sont les dernières achats dans la boutique.</small>
+                            </div>
+                        </div>
                     </div>
+                <?php } ?>
                 </div>
-            </div>
-        <?php } ?>
-    </div>
-    <br/>
-<?php } ?>
+                <br/>
+                 <?php } ?>

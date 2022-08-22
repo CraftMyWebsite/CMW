@@ -1,17 +1,17 @@
 <?php
 if (isset($_GET['action']) and $_GET['action'] == 'setchmod') {
 
-    chmod('app/data/install.yml', 0777);
+    chmod("app/data/install.yml", 0777);
 
-    chmod('../modele/config/config.yml', 0755);
-    chmod('../modele/.htpasswd', 0755);
-    chmod('../controleur/.htpasswd', 0755);
-    chmod('../admin/actions/.htpasswd', 0755);
+    chmod("../modele/config/config.yml", 0755);
+    chmod("../modele/.htpasswd", 0755);
+    chmod("../controleur/.htpasswd", 0755);
+    chmod("../admin/actions/.htpasswd", 0755);
 
-    exec('chmod 0777 ../theme/upload');
-    exec('chmod 0777 ../theme/upload/navRap/');
-    exec('chmod 0777 ../theme/upload/panel/');
-    exec('chmod 0777 ../utilisateurs/');
+    exec("chmod 0777 ../theme/upload");
+    exec("chmod 0777 ../theme/upload/navRap/");
+    exec("chmod 0777 ../theme/upload/panel/");
+    exec("chmod 0777 ../utilisateurs/");
 }
 
 if (isset($_GET['action']) and $_GET['action'] == 'windowsforceinstall') {

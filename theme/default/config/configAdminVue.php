@@ -7,7 +7,7 @@
         -> Tout se fait en AJAX donc vous devez conservé le onClick="sendPost('configThemeAdmin');" sur le bouton d'envoie + ne pas mettre de balise <form> + conserver le <script>...</script> + conserver une div id="configThemeAdmin" qui doit englober tout les input de votre formulaire (sinon ils ne seront pas recupérés). N'hésitez pas à demander de l'aide sur le discord !
 -->
 <style id="themeEdition">
-    .theme .nav-item > .nav-link {
+    .theme .nav-item>.nav-link {
         color: black !important;
     }
 
@@ -41,19 +41,15 @@
                             <ul class="nav nav-tabs mb-3" id="defaultTheme" role="tablist">
 
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="colorsEdition-tab" data-toggle="tab"
-                                       href="#colorsEdition" role="tab" aria-controls="colorsEdition"
-                                       aria-selected="true">Couleurs</a>
+                                    <a class="nav-link active" id="colorsEdition-tab" data-toggle="tab" href="#colorsEdition" role="tab" aria-controls="colorsEdition" aria-selected="true">Couleurs</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" id="policeEdition-tab" data-toggle="tab" href="#policeEdition"
-                                       role="tab" aria-controls="policeEdition" aria-selected="false">Police</a>
+                                    <a class="nav-link" id="policeEdition-tab" data-toggle="tab" href="#policeEdition" role="tab" aria-controls="policeEdition" aria-selected="false">Police</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" id="footerEdition-tab" data-toggle="tab" href="#footerEdition"
-                                       role="tab" aria-controls="footerEdition" aria-selected="false">Footer</a>
+                                    <a class="nav-link" id="footerEdition-tab" data-toggle="tab" href="#footerEdition" role="tab" aria-controls="footerEdition" aria-selected="false">Footer</a>
                                 </li>
 
                             </ul>
@@ -61,63 +57,55 @@
                             <div class="tab-content" id="defaultThemeContent">
 
 
-                                <div class="tab-pane fade show active" id="colorsEdition" role="tabpanel"
-                                     aria-labelledby="colorsEdition-tab">
+                                <div class="tab-pane fade show active" id="colorsEdition" role="tabpanel" aria-labelledby="colorsEdition-tab">
 
                                     <div class="col-11 mx-auto my-2">
 
                                         <h4>Modifier les couleurs du thème</h4>
 
                                         <div class="col-10 mx-auto">
-
+                                          
                                             <h4> Présentation du thème :</h4>
 
                                             <div class="col-9 mx-auto mt-5">
                                                 <table class="table table-responsive table-striped table-hover">
                                                     <thead>
-                                                    <th></th>
-                                                    <th>Fond principal</th>
-                                                    <th>Fond secondaire</th>
-                                                    <th>Couleur du texte</th>
-                                                    <th>Couleur foncée du texte</th>
-                                                    <th>Couleur importante du texte</th>
-                                                    <th>Fond clair</th>
-                                                    <th>Fond foncé</th>
+                                                        <th></th>
+                                                        <th>Fond principal</th>
+                                                        <th>Fond secondaire</th>
+                                                        <th>Couleur du texte</th>
+                                                        <th>Couleur foncée du texte</th>
+                                                        <th>Couleur importante du texte</th>
+                                                        <th>Fond clair</th>
+                                                        <th>Fond foncé</th>
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        <td><b> Modifier les couleurs </b></td>
+                                                        <td> <b> Modifier les couleurs </b> </td>
                                                         <td class="text-center">
-                                                            <input type="color" id="selColor" name="main-color-bg"
-                                                                   value="<?php echo $_Theme_['Main']['theme']['couleurs']['main-color-bg']; ?>">
+                                                            <input type="color" id="selColor" name="main-color-bg" value="<?php echo $_Theme_['Main']['theme']['couleurs']['main-color-bg']; ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="color" id="selColor" name="secondary-color-bg"
-                                                                   value="<?php echo $_Theme_['Main']['theme']['couleurs']['secondary-color-bg']; ?>">
+                                                            <input type="color" id="selColor" name="secondary-color-bg" value="<?php echo $_Theme_['Main']['theme']['couleurs']['secondary-color-bg']; ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="color" id="selColor" name="base-color"
-                                                                   value="<?php echo $_Theme_['Main']['theme']['couleurs']['base-color']; ?>">
+                                                            <input type="color" id="selColor" name="base-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['base-color']; ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="color" id="selColor" name="main-color"
-                                                                   value="<?php echo $_Theme_['Main']['theme']['couleurs']['main-color']; ?>">
+                                                            <input type="color" id="selColor" name="main-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['main-color']; ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="color" id="selColor" name="active-color"
-                                                                   value="<?php echo $_Theme_['Main']['theme']['couleurs']['active-color']; ?>">
+                                                            <input type="color" id="selColor" name="active-color" value="<?php echo $_Theme_['Main']['theme']['couleurs']['active-color']; ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="color" id="selColor" name="darkest"
-                                                                   value="<?php echo $_Theme_['Main']['theme']['couleurs']['darkest']; ?>">
+                                                            <input type="color" id="selColor" name="darkest" value="<?php echo $_Theme_['Main']['theme']['couleurs']['darkest']; ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="color" id="selColor" name="lightest"
-                                                                   value="<?php echo $_Theme_['Main']['theme']['couleurs']['lightest']; ?>">
+                                                            <input type="color" id="selColor" name="lightest" value="<?php echo $_Theme_['Main']['theme']['couleurs']['lightest']; ?>">
                                                         </td>
                                                     </tr>
                                                     <tr id="selColor">
-                                                        <td><b> Couleur présentée </b></td>
+                                                        <td> <b> Couleur présentée </b> </td>
                                                         <td class="text-center p-0">
                                                             <div style="background-color: <?php echo $_Theme_['Main']['theme']['couleurs']['main-color-bg']; ?>; width: 100%; padding: 0.75rem">
                                                                 &nbsp;
@@ -161,69 +149,49 @@
                                         </div>
                                     </div>
 
-                                </div>
+                            </div>
 
-                                <?php
-                                $fontactubrute = $_Theme_['Main']['theme']['police'];
+                                    <?php
+                                    $fontactubrute = $_Theme_['Main']['theme']['police'];
 
-                                $fontactu = str_replace(array("'", ';'), '', $fontactubrute);
-                                ?>
+                                    $fontactu = str_replace(array("'", ";"), '', $fontactubrute);
+                                    ?>
 
-                                <div class="tab-pane fade mx-auto" id="policeEdition" role="tabpanel"
-                                     aria-labelledby="policeEdition-tab">
+                                    <div class="tab-pane fade mx-auto" id="policeEdition" role="tabpanel" aria-labelledby="policeEdition-tab">
 
-                                    <div class="col-11 mx-auto my-2">
+                                        <div class="col-11 mx-auto my-2">
 
-                                        <h4>Modification de la police du thème :</h4>
+                                            <h4>Modification de la police du thème :</h4>
 
-                                        <label class="control-label">Séléction de la police </label>
-                                        <select class="form-control text-center" name="police"
-                                                style="font-family: <?= $fontactubrute ?>">
-                                            <option value="<?= $fontactubrute ?>" selected><?= $fontactu ?></option>
+                                            <label class="control-label">Séléction de la police </label>
+                                            <select class="form-control text-center" name="police" style="font-family: <?= $fontactubrute?>">
+                                                <option value="<?= $fontactubrute ?>" selected ><?= $fontactu ?></option>
 
-                                            <option value="'Electrolize', sans-serif;"
-                                                    style="font-family: 'Electrolize', sans-serif;">Electrolize,
-                                                sans-serif
-                                            </option>
-                                            <option value="'Brush Script MT', cursive;"
-                                                    style="font-family: 'Brush Script MT', cursive;">Brush Script MT,
-                                                cursive
-                                            </option>
-                                            <option value="'Courier New', monospace;"
-                                                    style="font-family: 'Courier New', monospace;">Courier New,
-                                                monospace
-                                            </option>
-                                            <option value="'Georgia', serif;" style="font-family: 'Georgia', serif;">
-                                                Georgia, serif
-                                            </option>
-                                            <option value="'Trebuchet MS', sans-serif;"
-                                                    style=" font-family: 'Trebuchet MS', sans-serif;">Trebuchet MS,
-                                                sans-serif
-                                            </option>
-                                            <option value="'Tahoma', sans-serif;"
-                                                    style=" font-family: 'Tahoma', sans-serif;">Tahoma, sans-serif
-                                            </option>
-                                            <option value="'Cursive';" style="font-family: 'Cursive';">Cursive</option>
-                                            <option value="'Arial';" style="font-family: 'Arial';">Arial</option>
-                                            <option value="'Palatino';" style="font-family: 'Palatino';">Palatino
-                                            </option>
+                                                <option value="'Electrolize', sans-serif;" style="font-family: 'Electrolize', sans-serif;">Electrolize, sans-serif</option>
+                                                <option value="'Brush Script MT', cursive;" style="font-family: 'Brush Script MT', cursive;">Brush Script MT, cursive</option>
+                                                <option value="'Courier New', monospace;" style="font-family: 'Courier New', monospace;">Courier New, monospace</option>
+                                                <option value="'Georgia', serif;" style="font-family: 'Georgia', serif;">Georgia, serif</option>
+                                                <option value="'Trebuchet MS', sans-serif;" style=" font-family: 'Trebuchet MS', sans-serif;">Trebuchet MS, sans-serif</option>
+                                                <option value="'Tahoma', sans-serif;" style=" font-family: 'Tahoma', sans-serif;">Tahoma, sans-serif</option>
+                                                <option value="'Cursive';" style="font-family: 'Cursive';">Cursive</option>
+                                                <option value="'Arial';" style="font-family: 'Arial';">Arial</option>
+                                                <option value="'Palatino';" style="font-family: 'Palatino';">Palatino</option>
 
-                                        </select>
+                                            </select>
+
+                                        </div>
 
                                     </div>
 
-                                </div>
 
-
-                                <div class="tab-pane fade mx-auto" id="footerEdition" role="tabpanel"
-                                     aria-labelledby="footerEdition-tab">
+                                <div class="tab-pane fade mx-auto" id="footerEdition" role="tabpanel" aria-labelledby="footerEdition-tab">
 
                                     <div class="col-11 mx-auto my-2">
 
                                         <h4>Vos Résaux Sociaux</h4>
 
                                         <div class="col-10 mx-auto">
-                                            <input type="hidden" id="jsonReseau" name="jsonReseau"/>
+                                            <input type="hidden" id="jsonReseau" name="jsonReseau" />
                                             <div id="all-reseau">
 
                                                 <?php if (isset($_Theme_['Pied']['social']) && !empty($_Theme_['Pied']['social'])) foreach ($_Theme_['Pied']['social'] as $value) : ?>
@@ -231,32 +199,23 @@
                                                     <div class="form-row well py-1" data-reseau>
                                                         <div class="col-12">
                                                             <label class="control-label">Icone du réseau</label>
-                                                            <input type="text" data-type="icon" class="form-control"
-                                                                   placeholder='<i class="fab fa-discord"></i>'
-                                                                   value="<?= str_replace('"', "'", $value['icon']); ?>">
-                                                            <small>Disponible sur : <a
-                                                                        href="https://fontawesome.com/icons/">
+                                                            <input type="text" data-type="icon" class="form-control" placeholder='<i class="fab fa-discord"></i>' value="<?= str_replace('"', "'", $value['icon']); ?>">
+                                                            <small>Disponible sur : <a href="https://fontawesome.com/icons/">
                                                                     https://fontawesome.com/icons/</a></small>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label class="control-label">Lien vers le réseau</label>
-                                                            <input type="text" data-type="link" class="form-control"
-                                                                   value="<?= str_replace('"', "'", $value['link']) ?>">
+                                                            <input type="text" data-type="link" class="form-control" value="<?= str_replace('"', "'", $value['link']) ?>">
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label class="control-label">Message à mettre à côté</label>
-                                                            <input type="text" data-type="message" class="form-control"
-                                                                   placeholder="Rejoingnez-nous sur Discord !"
-                                                                   value="<?= str_replace('"', "'", $value['message']) ?>">
+                                                            <input type="text" data-type="message" class="form-control" placeholder="Rejoingnez-nous sur Discord !" value="<?= str_replace('"', "'", $value['message']) ?>">
                                                         </div>
 
                                                         <div class="col-4 my-4">
-                                                            <button class="btn btn-danger form-control"
-                                                                    onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement); genJsonReseau(); sendPost('configThemeAdmin');">
-                                                                Supprimer
-                                                            </button>
+                                                            <button class="btn btn-danger form-control" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement); genJsonReseau(); sendPost('configThemeAdmin');">Supprimer</button>
                                                         </div>
 
                                                     </div>
@@ -268,21 +227,19 @@
                                                 <h5 class="col-12 my-1">Réseau social personnalisé</h5>
                                                 <div class="col-12">
                                                     <label class="control-label">Icone du réseau</label>
-                                                    <input type="text" class="form-control" id="new-s-icone"
-                                                           placeholder='<i class="fab fa-discord"></i>'>
+                                                    <input type="text" class="form-control" id="new-s-icone" placeholder='<i class="fab fa-discord"></i>'>
                                                     <small>Disponible sur : <a href="https://fontawesome.com/icons/">
                                                             https://fontawesome.com/icons/</a></small>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <label class="control-label">Lien vers le réseau</label>
-                                                    <input type="text" id="new-s-link" class="form-control"/>
+                                                    <input type="text" id="new-s-link" class="form-control" />
                                                 </div>
 
                                                 <div class="col-12">
                                                     <label class="control-label">Message à mettre à côté</label>
-                                                    <input type="text" class="form-control" id="new-s-message"
-                                                           placeholder="Rejoingnez-nous sur Discord !">
+                                                    <input type="text" class="form-control" id="new-s-message" placeholder="Rejoingnez-nous sur Discord !">
                                                 </div>
 
                                                 <div class="col-4 my-4">
@@ -292,11 +249,12 @@
 
                                             </div>
 
-                                            <button class="float-right btn btn-primary my-2"
-                                                    onclick="createNewReseau();">
+                                            <button class="float-right btn btn-primary my-2" onclick="createNewReseau();">
                                                 Ajouter un réseau social
                                             </button>
                                             <div class="clearfix"></div>
+
+
 
 
                                             <h4>A Propos</h4>
@@ -326,23 +284,19 @@
 
             <div class="card-footer">
                 <div class="form-group text-center">
-                    <input type="submit" onClick="genJsonReseau(); sendPost('configThemeAdmin');"
-                           class="btn btn-success" value="Sauvegarder">
+                    <input type="submit" onClick="genJsonReseau(); sendPost('configThemeAdmin');" class="btn btn-success" value="Sauvegarder">
                 </div>
 
                 <script>
-                    initPost("configThemeAdmin", "admin.php?action=configTheme", function (data) {
-                        if (data) {
-                            setTimeout(function () {
-                            }, 1500);
-                        }
-                    });
+                    initPost("configThemeAdmin", "admin.php?action=configTheme", function(data) { if(data) { setTimeout(function() { },1500); }});
                 </script>
             </div>
 
         </div>
     </div>
 </div>
+
+
 
 
 <script>

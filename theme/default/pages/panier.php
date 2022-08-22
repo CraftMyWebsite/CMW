@@ -1,6 +1,6 @@
 <?php
 
-if (Permission::getInstance()->verifPerm('connect')) :
+if (Permission::getInstance()->verifPerm("connect")) :
 
     //Création du Panier : 
     $nbArticles = $_Panier_->compterOffre();

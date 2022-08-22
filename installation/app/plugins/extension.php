@@ -1,23 +1,23 @@
 <?php
 function VerifieExtension() {
 
-    $extension[0] = 'curl';
-    $extension[1] = 'pdo';
-    $extension[2] = 'zip';
+    $extension[0] = "curl";
+    $extension[1] = "pdo";
+    $extension[2] = "zip";
 	$i2 = 0;
 	for($i=0;$i < count($extension);$i++){
 		if(!extension_loaded($extension[$i])){
-			$erreur[$i2] = '' .$extension[$i]. '';
+			$erreur[$i2] = "".$extension[$i]."";
 			$i2++;
 		}
 	}
     if(PHP_VERSION_ID < 50400)
     {
-        $erreur[$i2]= 'Version de PHP obsolète requis 7.0 minimum, vous avez :  ' .phpversion();
+        $erreur[$i2]="Version de PHP obsolète requis 7.0 minimum, vous avez :  ".phpversion();
     }
 	
     if(empty($erreur)){
-        return '';
+        return "";
     }else{
         return $erreur;
 	}

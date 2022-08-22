@@ -1,5 +1,5 @@
 <?php
-$_Theme_ = new Lire('theme/' . $_Serveur_['General']['theme'] . '/config/config.yml');
+$_Theme_ = new Lire('theme/' . $_Serveur_['General']['theme'] . "/config/config.yml");
 $_Theme_ = $_Theme_->GetTableau();
 ?>
 <footer id="Footer">

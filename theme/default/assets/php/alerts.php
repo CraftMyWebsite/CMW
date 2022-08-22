@@ -1,7 +1,7 @@
 <?php
 //Vérification d'alerte ^^
 
-if (Permission::getInstance()->verifPerm('connect')) :
+if (Permission::getInstance()->verifPerm("connect")) :
 
     $req_topic = $bddConnection->prepare('SELECT cmw_forum_topic_followed.pseudo, vu, cmw_forum_post.last_answer AS last_answer_pseudo 
     FROM cmw_forum_topic_followed
