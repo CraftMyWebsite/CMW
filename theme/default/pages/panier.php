@@ -146,7 +146,7 @@ if (Permission::getInstance()->verifPerm("connect")) :
                                 <?php } else { ?>
                                 <td><a href="/token" class="btn btn-warning mb-2">
                                             <i class="fa-solid fa-coins"></i>
-                                            Acheter des coins
+                                            Acheter des <?= $_Serveur_['General']['moneyName'] ?>
                                     </a>   
                                 </td>
                                 <?php }
