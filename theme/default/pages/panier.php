@@ -94,27 +94,70 @@ if (Permission::getInstance()->verifPerm("connect")) :
                     </div>
 
                     <!-- Affichage du récapitulatif -->
-                    <div class="col-lg-4 col-md-12 col-sm-12 align-self-center mb-2 ml-auto">
+                    <div class="col-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Récapitulatif</h4>
+                                Récapitulatif
                             </div>
-                        </div>
+ 
                         <div class="card-body">
-
+ 
+                        <div class="text-center">
                             <?php if (!empty($_SESSION['panier']['reduction'])) : ?>
                                 <div class="remises">
                                     <div class="title-vote-listing">
-                                        <?= htmlspecialchars($_SESSION['panier']['reduction_titre']) ?>
-
-                                        <div class="vote-line mt-2"></div>
-
-                                        <small class="text-muted mr-2">
-                                            (<?= htmlspecialchars($_SESSION['panier']['code']) ?>)
-                                        </small>
-                                        - <?= $_SESSION['panier']['reduction'] * 100 ?> %
+                                        <h6 class="text-muted">
+                                            Code promotionnel "<?= htmlspecialchars($_SESSION['panier']['code']) ?>"
+ 
+                                        de <?= $_SESSION['panier']['reduction'] * 100 ?> % appliqué !
+                                    </h6>
                                     </div>
                                 </div>
+                            <?php endif; ?>
+ 
+                                <h6 class="mt-4">Votre solde : <b><?= number_format($_Joueur_['tokens'], 0, ',', ' '); ?></b> <i class="fa-solid fa-coins"></i><h6>
+                                <h5 class="title-vote-listing">
+                                    Total :
+                                    <?= number_format($_Panier_->montantGlobal(), 0, ',', ' '); ?> <i class="fa-solid fa-coins"></i>
+                                </h5>
+                                <h6>Solde après achat : 
+                                    <?php
+                                        if($_Joueur_['tokens'] >= $_Panier_->montantGlobal())
+                                        {
+                                    echo $_Joueur_['tokens'] - $_Panier_->montantGlobal();
+                                    } else {
+                                        echo "<span class='bg-warning px-2'>Vous n'avez pas assez de token !</span>";
+                                    }
+ 
+                                    ?>
+                                </h6>
+ 
+                            </div>
+                        </div>
+ 
+                            <table class="text-center">
+                                <?php
+                                    if($_Joueur_['tokens'] >= $_Panier_->montantGlobal())
+                                { ?>
+                                <tr>
+                                    <td><a href="index.php?action=achat" class="btn btn-primary mb-2 no-hover">
+                                    Passer à l'achat 
+                                </a></td>
+                                <?php } else { ?>
+                                <td><a href="/token" class="btn btn-warning mb-2">
+                                            <i class="fa-solid fa-coins"></i>
+                                            Acheter des <?= $_Serveur_['General']['moneyName'] ?>
+                                    </a>   
+                                </td>
+                                <?php }
+                                ?>
+                                    <td><a href="index.php?action=viderPanier" class="btn btn-danger mb-2 no-hover">
+                                    Vider le panier
+                                </a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                             <?php endif; ?>
 
                             <div class="total-panier">
