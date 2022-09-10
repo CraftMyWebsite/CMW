@@ -18,7 +18,7 @@ if(isset($_GET['removeUpdater'])) { unlink('updater.php'); }
 //ini_set('display_errors', 1);
 require('controleur/config.php');
 // On vérifie si le CMS n'a pas été installé, si il ne l'est pas, on redirige vers les fichiers d'installation...
-if (!$_Serveur_['installation']) header('Location: installation/');
+if (!$_Serveur_['installation']) header('Location: /installation/');
 else $return = true;
 // On charge la connection à la base MySQL via l'extention PDO.
 require ('controleur/connection_base.php');

@@ -397,7 +397,7 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
   `rang` int(2) DEFAULT 1,
   `tokens` int(11) default 0,
   `age` int(11),
-  `resettoken` varchar(32),
+  `resettoken` varchar(500),
   `ip` varchar(40),
   `CleUnique` varchar(32),
   `ValidationMail` int(1),
