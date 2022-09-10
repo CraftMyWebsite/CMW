@@ -2,14 +2,14 @@
 if(isset($_GET['page']))
 {
 	switch ($_GET['page']) // on utilise ici un switch pour inclure telle ou telle page selon.
-	{ 		
-		
+	{
+
 		case 'voteHistory':
-			require_once('./admin/donnees/voteHistory.php'); 
+			require_once('./admin/donnees/voteHistory.php');
 			include('./admin/pages/voteHistory.php');
 		break;
 		case 'accueil':
-			require_once('./admin/donnees/informations.php'); 
+			require_once('./admin/donnees/informations.php');
 			include('./admin/pages/informations.php');
 		break;
 
@@ -43,24 +43,24 @@ if(isset($_GET['page']))
 			require_once('./admin/donnees/forum.php');
 			include('./admin/pages/forum.php');
 		break;
-		case 'configsite':  
+		case 'configsite':
 			require_once('./admin/donnees/general.php');
 			include('./admin/pages/general.php');
 		break;
 
 		case 'theme':
-		require_once('./admin/donnees/theme.php'); 
+		require_once('./admin/donnees/theme.php');
 		include('./admin/pages/theme.php');
 		break;
 
 		case 'grade':
-		require_once('./admin/donnees/grades.php'); 
+		require_once('./admin/donnees/grades.php');
 		include('./admin/pages/grades.php');
 		break;
 
 		case 'slidemini':
-		require_once('./admin/donnees/accueil.php'); 
-		include('./admin/pages/accueil.php');
+		require_once('./admin/donnees/miniatures.php');
+		include('./admin/pages/miniatures.php');
 		break;
 
 		case 'reglagejsonapi':
@@ -68,58 +68,58 @@ if(isset($_GET['page']))
 		break;
 
 		case 'custompages':
-		require_once('./admin/donnees/pages.php'); 
+		require_once('./admin/donnees/pages.php');
 		include('./admin/pages/pages.php');
 		break;
 
 		case 'news':
-		require_once('./admin/donnees/news.php'); 
+		require_once('./admin/donnees/news.php');
 		include('./admin/pages/news.php');
 		break;
 
 		case 'boutique':
 		require('./admin/donnees/grades.php');
-		require_once('./admin/donnees/boutique.php'); 
+		require_once('./admin/donnees/boutique.php');
 		include('./admin/pages/boutique.php');
 		break;
 
 		case 'paiement':
-		require_once('./admin/donnees/payement.php'); 
+		require_once('./admin/donnees/payement.php');
 		include('./admin/pages/payement.php');
 		break;
 
 		case 'menus':
-		require_once('./admin/donnees/menu.php'); 
+		require_once('./admin/donnees/menu.php');
 		include('./admin/pages/menu.php');
 		break;
 
 		case 'voter':
-		require_once('./admin/donnees/voter.php'); 
+		require_once('./admin/donnees/voter.php');
 		include('./admin/pages/voter.php');
 		break;
 
 		case 'membres':
-		require_once('./admin/donnees/membres.php'); 
+		require_once('./admin/donnees/membres.php');
 		include('./admin/pages/membres.php');
 		break;
 
 		case 'widgets':
-		require_once('./admin/donnees/widgets.php'); 
+		require_once('./admin/donnees/widgets.php');
 		include('./admin/pages/widgets.php');
 		break;
 
 		case 'support':
-		require_once('./admin/donnees/support.php'); 
+		require_once('./admin/donnees/support.php');
 		include('./admin/pages/support.php');
 		break;
 
 		case 'maintenance':
-		require_once('./admin/donnees/maintenance.php'); 
+		require_once('./admin/donnees/maintenance.php');
 		include('./admin/pages/maintenance.php');
 		break;
 
 		case 'newsletter':
-		require_once('./admin/donnees/newsletter.php'); 
+		require_once('./admin/donnees/newsletter.php');
 		include('./admin/pages/newsletter.php');
 		break;
 
@@ -127,12 +127,12 @@ if(isset($_GET['page']))
 		include('./admin/pages/upload.php');
 		break;
 
-		case 'maj':  
+		case 'maj':
 		include('./admin/pages/update.php');
 		break;
 
         case 'googleService':
-        	require_once("./modele/google/googleService.class.php");
+        	require_once('./modele/google/googleService.class.php');
             include('./admin/pages/googleService.php');
         break;
 
@@ -158,7 +158,7 @@ if(isset($_GET['page']))
 
 	}
 } else {
-	require_once('./admin/donnees/informations.php'); 
+	require_once('./admin/donnees/informations.php');
 	include('./admin/pages/informations.php');
-} 
+}
 ?>

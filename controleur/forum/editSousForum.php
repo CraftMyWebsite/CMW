@@ -2,7 +2,7 @@
 require('modele/forum/forum.class.php');
 $_Forum_ = new Forum($bddConnection);
 $sousforumd = $_Forum_->infosSousForum($_POST['id'], 1); 
-if (((Permission::getInstance()->verifPerm("createur") or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $sousforumd[$_POST['index']]['perms']) and !$_SESSION['mode']) or $sousforumd[$_POST['index']]['perms'] == 0) { 
+if (((Permission::getInstance()->verifPerm('createur') or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $sousforumd[$_POST['index']]['perms']) and !$_SESSION['mode']) or $sousforumd[$_POST['index']]['perms'] == 0) {
 
 
 		$nom = htmlspecialchars($_POST['nom']);
@@ -10,7 +10,7 @@ if (((Permission::getInstance()->verifPerm("createur") or Permission::getInstanc
 		if(!empty($_POST['img']) AND strlen($_POST['img']) <= 300)
 		{
 			if(startsWith($_POST['img'], '<i class="') && endsWith($_POST['img'], '"></i>')) {
-				$img = htmlspecialchars(str_replace('<i class="', '', str_replace('"></i>', "", $_POST['img'])));
+				$img = htmlspecialchars(str_replace('<i class="', '', str_replace('"></i>', '', $_POST['img'])));
 			} 
 		}
 		$insert = $bddConnection->prepare('UPDATE cmw_forum_sous_forum SET nom=:nom, img=:img WHERE id=:id');

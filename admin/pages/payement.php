@@ -1,11 +1,11 @@
 <?php
 unset($affichage);
 if(isset($_GET['paypal'])){
-    $affichage = "paypal";
+    $affichage = 'paypal';
 }elseif(isset($_GET['dedipass'])){
-    $affichage = "dedipass";
+    $affichage = 'dedipass';
 }else{
-    $affichage = "paysafecard";
+    $affichage = 'paysafecard';
 }    
 ?>
 <style>
@@ -37,19 +37,19 @@ if(isset($_GET['paypal'])){
     <div class="col-md-12 col-xl-12 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
-                <h3 class="card-title"><?php if($affichage == "paypal"){ echo 'PayPal'; }elseif($affichage == "dedipass"){echo 'Dedipass';}else{echo 'PaySafeCard';}?></h3>
+                <h3 class="card-title"><?php if($affichage == 'paypal'){ echo 'PayPal'; }elseif($affichage == 'dedipass'){echo 'Dedipass';}else{echo 'PaySafeCard';}?></h3>
             </div>
         <div class="card-body" id="payementinfo">
             <div class="col-md-12">
                 <div class="row">
-                <?php if($affichage == "paypal"){ ?>
+                <?php if($affichage == 'paypal'){ ?>
                     <div class="offset-md-4 col-md-4">
                         <label class="custom-control custom-switch">
                             <input onclick="sendPost('payementinfo');" type="checkbox" class="custom-control-input" name="paypal" id="paypallabel" <?php if($lectureP['paypal'] == true) echo 'checked'; ?>/> 
                             <label for="paypallabel" class="custom-control-label">Activé</label>
                         </label>
                     </div>
-                <?php }elseif($affichage == "dedipass"){?>
+                <?php }elseif($affichage == 'dedipass'){?>
                     <div class="offset-md-4 col-md-4">
                         <label class="custom-control custom-switch">
                             <input onclick="sendPost('payementinfo');" type="checkbox" name="dedipass" id="dedipasslabel" class="custom-control-input" <?php if($lectureP['dedipass'] == true) echo 'checked'; ?>>
@@ -66,7 +66,7 @@ if(isset($_GET['paypal'])){
                 <?php } ?>
                 <input style="visibility: hidden;display: inline;" type="text" value="<?=$affichage;?>" id="quelretour" />
                 </div>
-                <?php if($affichage == "dedipass") { ?>
+                <?php if($affichage == 'dedipass') { ?>
                     <!-- Dedipass -->
                     <div class="alert alert-success">
                         <p class="text-center">
@@ -87,7 +87,7 @@ if(isset($_GET['paypal'])){
                             <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements !" />
                         </div>
                     </div>
-                <?php } else if($affichage == "paypal")
+                <?php } else if($affichage == 'paypal')
                 { ?>
                 <!-- PayPal  -->
                 <div class="row">
@@ -116,7 +116,7 @@ if(isset($_GET['paypal'])){
     </div>
 </div>
     <?php }
-    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal') AND $affichage == "paypal") { ?>
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'addOffrePaypal') AND $affichage == 'paypal') { ?>
     <div class="col-md-12 col-xl-6 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
@@ -157,7 +157,7 @@ if(isset($_GET['paypal'])){
         </div>
     </div>
     <?php }
-    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND $affichage == "paypal") { ?>
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaypal') AND $affichage == 'paypal') { ?>
     <div class="col-md-12 col-xl-6 col-12 text-center">
         <div class="card  " >
             <div class="card-header ">
@@ -222,7 +222,7 @@ if(isset($_GET['paypal'])){
         </div>
     </div>
     <?php } 
-    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaysafeCard') AND $affichage != "paypal" AND $affichage != "dedipass") { ?>
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'editOffrePaysafeCard') AND $affichage != 'paypal' AND $affichage != 'dedipass') { ?>
     <div class="col-md-12 col-xl-12 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
@@ -273,7 +273,7 @@ if(isset($_GET['paypal'])){
         </div>
     </div>
     <?php } 
-    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'verifPaysafecard') && !empty($tabPaysafe) AND $affichage != "paypal" AND $affichage != "dedipass") { ?>
+    if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'verifPaysafecard') && !empty($tabPaysafe) AND $affichage != 'paypal' AND $affichage != 'dedipass') { ?>
     <div class="col-md-12 col-xl-12 col-12 text-center">
         <div class="card  ">
             <div class="card-header ">
@@ -313,7 +313,7 @@ if(isset($_GET['paypal'])){
             </div>
         </div>
     </div>
-    <?php } if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'seePaypalHisto') && $affichage == "paypal" && !empty($paypalHistorique) ) {  ?> 
+    <?php } if($_Permission_->verifPerm('PermsPanel', 'payment', 'actions', 'seePaypalHisto') && $affichage == 'paypal' && !empty($paypalHistorique) ) {  ?>
 
     <div class="col-md-12 col-xl-12 col-12 text-center">
         <div class="card  ">

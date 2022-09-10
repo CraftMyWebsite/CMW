@@ -3,13 +3,13 @@ require('modele/joueur/donneesJoueur.class.php');
 
 $reseau = array();
 
-$req = $bddConnection->query("DESCRIBE cmw_reseaux");
+$req = $bddConnection->query('DESCRIBE cmw_reseaux');
 $req = $req->fetchAll(PDO::FETCH_ASSOC);
 
 $changementsReseaux = array();
 
 foreach($req as $value) {
-    if($value['Field'] != "id" && $value['Field'] != "idJoueur") {
+    if($value['Field'] != 'id' && $value['Field'] != 'idJoueur') {
         if(!empty($_POST[$value['Field']]))
         {
             $temp = htmlspecialchars($_POST[$value['Field']]);

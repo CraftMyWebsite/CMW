@@ -1,5 +1,5 @@
 <?php
- if($_Permission_->verifPerm('PermsPanel',"maintenance","showPage")) {
+ if($_Permission_->verifPerm('PermsPanel', 'maintenance', 'showPage')) {
     $req = $bddConnection->query('SELECT * FROM cmw_maintenance WHERE maintenanceId');
 
     $i = 0;

@@ -11,7 +11,7 @@
                       <strong>Vous avez aucune permission pour accéder à cette page.</strong>
                     </div>
                   </div>
-                <?php } else { if($_Permission_->verifPerm('PermsPanel', 'info', "stats","visitor","showTable")) { ?>
+                <?php } else { if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'visitor', 'showTable')) { ?>
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
@@ -95,7 +95,7 @@
                                                     if($day == $actual) {
                                                         echo "Aujourd'hui";
                                                     } else if($day == $yesterday){
-                                                        echo "Hier";
+                                                        echo 'Hier';
                                                     } else {
                                                         echo $dayofweek[$day];
                                                     }
@@ -282,13 +282,13 @@
                                                     setInterval("updateConsole()", 10000);
                                                 </script>
                                                 <?php
-                                                $date = date("Y-m-d");
+                                                $date = date('Y-m-d');
                                                 echo '<div id="console"><div style="background-color: #373737;color: #8F8F8F;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:solid 2px #8F8F8F;overflow: hidden;">';
                                                 foreach($console[$j]['Test'] as $value) {
-                                                    $console[$j]['Test'] = $value["line"];
+                                                    $console[$j]['Test'] = $value['line'];
                                                     $console[$j]['Test'] = str_replace($date, '', $console[$j]['Test']);
-                                                    $msg_prefix = array('INFO', 'WARN', 'SEVERE', "[0;31;22m", "[0;32;22m", "[0;33;22m", "[0;34;22m", "[0;35;22m", "[0;36;22m", "[0;37;22m", "[0;30;1m", "[0;31;1m", "[0;32;1m", "[0;33;1m", "[0;34;1m", "[0;35;1m", "[0;36;1m", "[0;37;1m", "[1;31m", "[21m", "[9m", "[5m", "[3m", "[0m", "[m", "<span><span", "</span></span>");
-                                                    $color_prefix = array('<span style="color: #5555FF;">INFO</span>', '<span style="color: #FFAA00;">WARN</span>', '<span style="color: #FF5555;">SEVERE</span>', "</span><span style=\"color:#aa0000\">", "</span><span style=\"color:#00aa00\">", "</span><span style=\"color:#ffaa00\">", "</span><span style=\"color:#0000aa\">", "</span><span style=\"color:#aa00aa\">", "</span><span style=\"color:#00aaaa\">", "</span><span style=\"color:#aaaaaa\">", "</span><span style=\"color:#555555\">", "</span><span style=\"color:#ff5555\">", "</span><span style=\"color:#55ff55\">", "</span><span style=\"color:#ffffff\">", "</span><span style=\"color:#5555ff\">", "</span><span style=\"color:#ff55ff\">", "</span><span style=\"color:#55ffff\">", "</span><span style=\"color:#ffff55\">", "", "", "", "", "", "", "</span>", "<span", "</span>");
+                                                    $msg_prefix = array('INFO', 'WARN', 'SEVERE', '[0;31;22m', '[0;32;22m', '[0;33;22m', '[0;34;22m', '[0;35;22m', '[0;36;22m', '[0;37;22m', '[0;30;1m', '[0;31;1m', '[0;32;1m', '[0;33;1m', '[0;34;1m', '[0;35;1m', '[0;36;1m', '[0;37;1m', '[1;31m', '[21m', '[9m', '[5m', '[3m', '[0m', '[m', '<span><span', '</span></span>');
+                                                    $color_prefix = array('<span style="color: #5555FF;">INFO</span>', '<span style="color: #FFAA00;">WARN</span>', '<span style="color: #FF5555;">SEVERE</span>', "</span><span style=\"color:#aa0000\">", "</span><span style=\"color:#00aa00\">", "</span><span style=\"color:#ffaa00\">", "</span><span style=\"color:#0000aa\">", "</span><span style=\"color:#aa00aa\">", "</span><span style=\"color:#00aaaa\">", "</span><span style=\"color:#aaaaaa\">", "</span><span style=\"color:#555555\">", "</span><span style=\"color:#ff5555\">", "</span><span style=\"color:#55ff55\">", "</span><span style=\"color:#ffffff\">", "</span><span style=\"color:#5555ff\">", "</span><span style=\"color:#ff55ff\">", "</span><span style=\"color:#55ffff\">", "</span><span style=\"color:#ffff55\">", '', '', '', '', '', '', '</span>', '<span', '</span>');
                                                     $console[$j]['Test'] = str_replace($msg_prefix, $color_prefix, $console[$j]['Test']);
                                                     echo '<div style="text-align: left;">';
                                                     echo '<div>';
@@ -375,7 +375,7 @@
                                                             <tr>
                                                                 <td><?php echo $value['name']; ?></td>
                                                                 <td><?php echo $value['version'] ?></td>
-                                                                <td><?php if($value['enabled']== "true") { echo '<center><img src="theme/upload/true.png"></img></center>'; } else { echo '<center><img src="theme/upload/cross.png"></img></center>'; } ?>
+                                                                <td><?php if($value['enabled']== 'true') { echo '<center><img src="theme/upload/true.png"></img></center>'; } else { echo '<center><img src="theme/upload/cross.png"></img></center>'; } ?>
                                                                 </td>
                                                             </tr>
                                                             <?php } ?>
@@ -478,7 +478,7 @@
                                                 echo '<td>'.$lastMembre['email'].'</td>';
                                                 echo '<td>'.$lastMembre['tokens'].'</td>';
                                                 echo '<td>'.date('d/m/Y', $lastMembre['anciennete']).' &agrave; '.date('H:i:s',$lastMembre['anciennete']).'</td>';
-                                                if($ShowMail) { echo '<td>'.($lastMembre['ValidationMail'] == 1 ? "valide" : "invalide").'</td>'; }
+                                                if($ShowMail) { echo '<td>'.($lastMembre['ValidationMail'] == 1 ? 'valide' : 'invalide').'</td>'; }
                                                 if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showIP')) {
                                                     if (filter_var($lastMembre['ip'], FILTER_VALIDATE_IP)){
                                                         echo '<td>'.$lastMembre['ip'].'</td>';
@@ -538,7 +538,7 @@
                 </div>
                 <br/>
                 <div class="row">
-                    <?php if($_Permission_->verifPerm('PermsPanel', 'info', "stats","activity","showTable")) { ?>
+                    <?php if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'activity', 'showTable')) { ?>
                     <div class="col-md-4">
                         <div class="card end">
                             <div class="card-header">
@@ -568,7 +568,7 @@
                                         <?php if($LastMaintenance['maintenanceEtat'] == 0) { ?><span class="badge" style="background-color: #d9534f">Inactif</span><?php } else { ?>
                                         <span class="badge" style="background-color:rgb(0, 151, 0);">Actif</span>
                                         <?php } ?>
-                                        <i class="fas fa-fw fa-wrench"></i> Dernière maintenance effectuée le  <?php if($LastMaintenance['maintenanceTime'] != "0") { echo date('d-m-Y H:i:s', $LastMaintenance['maintenanceTime']);} else { echo 'jamais';}?>
+                                        <i class="fas fa-fw fa-wrench"></i> Dernière maintenance effectuée le  <?php if($LastMaintenance['maintenanceTime'] != '0') { echo date('d-m-Y H:i:s', $LastMaintenance['maintenanceTime']);} else { echo 'jamais';}?>
                                     </li>
                                     <?php } ?>
 
@@ -580,7 +580,7 @@
                             </div>
                         </div>
                     </div>
-                <?php } if($_Permission_->verifPerm('PermsPanel', 'info', "stats","shop","showTable")) { ?>
+                <?php } if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'shop', 'showTable')) { ?>
 
                     <div class="col-md-8">
                         <div class="card end">

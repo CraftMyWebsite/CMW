@@ -1,5 +1,10 @@
 <?php
-function VerifieChmod() {
+function VerifieChmod(): ?array
+{
+    require_once('../modele/config/yml.class.php');
+    $configLecture = new Lire('../modele/config/config.yml');
+    $_Serveur_ = $configLecture->GetTableau();
+
     $err = null;
     $errDossier = null;
     $errInstall = null;
@@ -84,12 +89,14 @@ function VerifieChmod() {
 
     if ($err == null and $errDossier == null and $errInstall == null)
         return null;
+    else if ($_Serveur_['General']['Windows'])
+        return null;
     else
         return $return;
 }
 
-function DrawChmod($return) {
-
+function DrawChmod($return): void
+{
     if ($return['chmodDossier'] != null or $return['chmod'] != null or $return['chmodInstall'] != null) { ?>
         <div class="pt-3">
             <div class="alert alert-danger">
@@ -113,13 +120,13 @@ function DrawChmod($return) {
 
                         <tbody>
                         <?php if (isset($return['chmodInstall'])) {
-                        for ($i = 0; $i < count($return['chmodInstall']); $i++) { ?>
-                        <tr>
-                            <td><?php echo $return['dirInstallAbsolu'][$i]; ?></td>
-                            <td><?php echo $return['chmodInstall'][$i]; ?></td>
-                            <td>777</td>
-                        </tr>
-                        <?php }
+                            for ($i = 0; $i < count($return['chmodInstall']); $i++) { ?>
+                                <tr>
+                                    <td><?php echo $return['dirInstallAbsolu'][$i]; ?></td>
+                                    <td><?php echo $return['chmodInstall'][$i]; ?></td>
+                                    <td>777</td>
+                                </tr>
+                            <?php }
                         }
 
                         if (isset($return['chmodDossier'])) {
@@ -135,7 +142,7 @@ function DrawChmod($return) {
                         if (isset($return['chmod'])) {
                             for ($i = 0; $i < count($return['chmod']); $i++) { ?>
                                 <tr>
-                                    <td><?php echo substr($return['dir'][$i],2); ?></td>
+                                    <td><?php echo substr($return['dir'][$i], 2); ?></td>
                                     <td><?php echo $return['chmod'][$i]; ?></td>
                                     <td>755</td>
                                 </tr>
@@ -149,6 +156,10 @@ function DrawChmod($return) {
                                 modifier les chmod automatiquement</a>
                             <a href="index.php" class="btn btn-primary btn-block minecrafter">Relancer la
                                 verification</a><br/>
+                            <?php if (isWindows()): ?>
+                                <a onclick="windows_force_install()"
+                                   class="btn btn-danger btn-block minecrafter">WINDOWS - FORCER INSTALLATION</a><br/>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

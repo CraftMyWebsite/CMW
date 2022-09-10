@@ -11,24 +11,24 @@ class UploadImage {
 					if(in_array($extensionFichier, array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico')))
 					{
 						// NETTOYAGE DE L'URL
-						$pathwaitclean = self::findFreePath(".".$extensionFichier);
+						$pathwaitclean = self::findFreePath('.' .$extensionFichier);
 						$path = preg_replace("/(\t|\n|\v|\f|\r| |\xC2\x85|\xc2\xa0|\xe1\xa0\x8e|\xe2\x80[\x80-\x8D]|\xe2\x80\xa8|\xe2\x80\xa9|\xe2\x80\xaF|\xe2\x81\x9f|\xe2\x81\xa0|\xe3\x80\x80|\xef\xbb\xbf)+/",
-							"", $pathwaitclean);
+                            '', $pathwaitclean);
 
 						move_uploaded_file($file['tmp_name'], $path);
 						self::checkOlderFile($_Serveur_);
 						echo $path;
 					} else {
-						return "error Extension non réglementaire.";
+						return 'error Extension non réglementaire.';
 					}
 				} else {
-					return "error Votre image est trop volumineuse.";
+					return 'error Votre image est trop volumineuse.';
 				}
 			} else {
-				return "error Contenue invalide.";
+				return 'error Contenue invalide.';
 			}
 		} else {
-			return "error Service désactivé.";
+			return 'error Service désactivé.';
 		}
 	}
 
@@ -61,7 +61,7 @@ class UploadImage {
 	}
 
 	private static function removeOldestFile() {
-		$directory= "include/UploadImage/";
+		$directory= 'include/UploadImage/';
 		$smallest_time=INF;
 		$oldest_file=null;
 		if ($handle = opendir($directory)) {

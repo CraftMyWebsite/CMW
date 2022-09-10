@@ -22,10 +22,10 @@ if(isset($_Joueur_) && ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_J
 	{
 		$ExistCommentaire = $req_ExistCommentaire->rowCount();
 		$ExistTicket = $req_ExistTicket->rowCount();
-		if($ExistTicket == "0") {
+		if($ExistTicket == '0') {
 			header('Location: index.php?page=support&TicketNotExist');
 		} else {
-			if($ExistCommentaire == "0") {
+			if($ExistCommentaire == '0') {
 				header('Location: index.php?page=support&CommentaireNotExist');
 			} else {
 				if($AuteurCommentaire != $pseudo OR $adminMode != true) {

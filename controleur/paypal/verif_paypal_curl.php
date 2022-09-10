@@ -20,7 +20,7 @@ foreach ($PostData as $key => $value) {
   } else {
     $value = urlencode($value);
   }
-  $req .= "&".$key."=".$value;
+  $req .= '&' .$key. '=' .$value;
 }
 
 
@@ -38,7 +38,7 @@ if ( !($res = curl_exec($ch)) ) {
   curl_close($ch);
   exit;
 }
-if (strcmp ($res, "VERIFIED") == 0) {
+if (strcmp ($res, 'VERIFIED') == 0) {
 	
 	$return = explode(',', $_POST['custom']);
 	
@@ -46,7 +46,7 @@ if (strcmp ($res, "VERIFIED") == 0) {
 	$recupOpffresPaypal->execute(array('id' => $return[1]));
 	$donneesActions = $recupOpffresPaypal->fetch(PDO::FETCH_ASSOC);
 	
-	if ($_POST['payment_status']=="Completed" AND $_POST['receiver_email']==$_Serveur_['Payement']['paypalEmail'] AND (string)$_POST['mc_gross']==(string)$donneesActions['prix'] AND (string)$_POST['mc_currency']=="EUR")
+	if ($_POST['payment_status']== 'Completed' AND $_POST['receiver_email']==$_Serveur_['Payement']['paypalEmail'] AND (string)$_POST['mc_gross']==(string)$donneesActions['prix'] AND (string)$_POST['mc_currency']== 'EUR')
 	{
 		require_once('modele/joueur/maj.class.php');
 		$joueurMaj = new Maj($return[0], $bddConnection);

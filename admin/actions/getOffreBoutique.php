@@ -135,7 +135,7 @@
                                                                 <?php } }?> 
                                                             </select>
                                                             <?php if(isset($offres[$j]['evo'])) {  
-                                                                $tp = explode(",",$offres[$j]['evo']);
+                                                                $tp = explode(',',$offres[$j]['evo']);
                                                                 foreach($tp as $value)
                                                                 {
                                                                     echo '<div  data-boutique-tagsinput="dep-tag'.$j.$offres[$j]['id'].'"  data-boutique-tagsinput-value="'.$value.'"  data-boutique-tagsinput-text="'.$offresByGet[$value].'"></div>';

@@ -1,7 +1,7 @@
 <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) { 
 
 	if($_POST['axe'] == 'nombre') {
-		$_POST['axe'] = "nbre_votes";
+		$_POST['axe'] = 'nbre_votes';
 	}
 	$VoteHistoryReq = $bddConnection->query('SELECT id as id, id AS \'id2\', ip, nbre_votes, site, date_dernier, pseudo FROM cmw_votes WHERE pseudo LIKE \'%'.$_POST['search'].'%\' AND isOld=0 ORDER BY \''.$_POST['axe'].'\' \''.$_POST['axeType'].'\'');
 
@@ -31,22 +31,22 @@
 						if(isset($lienData[$VoteHistoryData['site']]['lien'])) {
 							$allHistory[$key]['all'][$VoteHistoryData['site']]['site'] = $lienData[$VoteHistoryData['site']]['lien'];
 						} else {
-							$allHistory[$key]['all'][$VoteHistoryData['site']]['site'] = "inconnue";
+							$allHistory[$key]['all'][$VoteHistoryData['site']]['site'] = 'inconnue';
 						}
 
 						$allHistory[$key]['all'][$VoteHistoryData['site']]['nbre_votes'] = $VoteHistoryData['nbre_votes'];
-						$allHistory[$key]['all'][$VoteHistoryData['site']]['date_dernier'] = date("F j, Y, G:i",$VoteHistoryData['date_dernier']); // a mettre en francais
+						$allHistory[$key]['all'][$VoteHistoryData['site']]['date_dernier'] = date('F j, Y, G:i',$VoteHistoryData['date_dernier']); // a mettre en francais
 
 						$allHistory[$key]['nbre_votes'] += $VoteHistoryData['nbre_votes'];
 						if($VoteHistoryData['date_dernier'] > $allHistory[$key]['date_dernier']) {
 
 							$allHistory[$key]['date_dernier'] = $VoteHistoryData['date_dernier'];
-							$allHistory[$key]['date_dernier2'] = date("F j, Y, G:i",$VoteHistoryData['date_dernier']);
+							$allHistory[$key]['date_dernier2'] = date('F j, Y, G:i',$VoteHistoryData['date_dernier']);
 
 							if(isset($lienData[$VoteHistoryData['site']]['lien'])) {
 								$allHistory[$key]['site'] = $lienData[$VoteHistoryData['site']]['lien'];
 							} else {
-								$allHistory[$key]['site'] = "inconnue";
+								$allHistory[$key]['site'] = 'inconnue';
 							}
 							$allHistory[$key]['ip'] = $VoteHistoryData['ip'];
 						}
@@ -63,22 +63,22 @@
 						if(isset($lienData[$VoteHistoryData['site']]['lien'])) {
 							$allHistory[$key]['all'][$VoteHistoryData['site']]['site'] = $lienData[$VoteHistoryData['site']]['lien'];
 						} else {
-							$allHistory[$key]['all'][$VoteHistoryData['site']]['site'] = "inconnue";
+							$allHistory[$key]['all'][$VoteHistoryData['site']]['site'] = 'inconnue';
 						}
 						$allHistory[$key]['all'][$VoteHistoryData['site']]['nbre_votes'] = $VoteHistoryData['nbre_votes'];
-						$allHistory[$key]['all'][$VoteHistoryData['site']]['date_dernier'] = date("F j, Y, G:i",$VoteHistoryData['date_dernier']);
+						$allHistory[$key]['all'][$VoteHistoryData['site']]['date_dernier'] = date('F j, Y, G:i',$VoteHistoryData['date_dernier']);
 
 						$flag = true;
 						$i--;
 						$allHistory[$key]['nbre_votes'] += $VoteHistoryData['nbre_votes'];
 						if($VoteHistoryData['date_dernier'] > $allHistory[$key]['date_dernier']) {
 							$allHistory[$key]['date_dernier'] = $VoteHistoryData['date_dernier'];
-							$allHistory[$key]['date_dernier2'] = date("F j, Y, G:i",$VoteHistoryData['date_dernier']); // a mettre en francais
+							$allHistory[$key]['date_dernier2'] = date('F j, Y, G:i',$VoteHistoryData['date_dernier']); // a mettre en francais
 
 							if(isset($lienData[$VoteHistoryData['site']]['lien'])) {
 								$allHistory[$key]['site'] = $lienData[$VoteHistoryData['site']]['lien'];
 							} else {
-								$allHistory[$key]['site'] = "inconnue";
+								$allHistory[$key]['site'] = 'inconnue';
 							}
 							$allHistory[$key]['ip'] = $VoteHistoryData['ip'];
 						}
@@ -91,15 +91,15 @@
 					if(isset($lienData[$VoteHistoryData['site']]['lien'])) {
 						$VoteHistoryData['all'][$VoteHistoryData['site']]['site'] = $lienData[$VoteHistoryData['site']]['lien'];
 					} else {
-						$VoteHistoryData['all'][$VoteHistoryData['site']]['site'] = "inconnue";
+						$VoteHistoryData['all'][$VoteHistoryData['site']]['site'] = 'inconnue';
 					}
 					$VoteHistoryData['all'][$VoteHistoryData['site']]['nbre_votes'] = $VoteHistoryData['nbre_votes'];
-					$VoteHistoryData['all'][$VoteHistoryData['site']]['date_dernier'] = date("F j, Y, G:i",$VoteHistoryData['date_dernier']); // a mettre en francais
+					$VoteHistoryData['all'][$VoteHistoryData['site']]['date_dernier'] = date('F j, Y, G:i',$VoteHistoryData['date_dernier']); // a mettre en francais
 					
 					if(isset($lienData[$VoteHistoryData['site']]['lien'])) {
 						$VoteHistoryData['site'] = $lienData[$VoteHistoryData['site']]['lien'];
 					} else {
-						$VoteHistoryData['site'] = "inconnue";
+						$VoteHistoryData['site'] = 'inconnue';
 					}
 
 					$allHistory[$i] =$VoteHistoryData;

@@ -55,12 +55,12 @@ $fofo = $_Forum_->affichageForum();
         <div class="row">
             <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur')) : ?>
                 <p class="text-center">
-                    <a href="index.php?action=mode_joueur" class="btn btn-main w-100">Passer en mode visuel <?= ($_SESSION['mode']) ? "Administrateur" : "Joueur"; ?></a>
+                    <a href="index.php?action=mode_joueur" class="btn btn-main w-100">Passer en mode visuel <?= ($_SESSION['mode']) ? 'Administrateur' : 'Joueur'; ?></a>
                 </p>
             <?php endif; ?>
 
             <?php for ($i = 0; $i < count($fofo); $i++) :
-                if (((Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $fofo[$i]['perms'] or Permission::getInstance()->verifPerm("createur")) and !$_SESSION['mode']) or $fofo[$i]['perms'] == 0) : ?>
+                if (((Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $fofo[$i]['perms'] or Permission::getInstance()->verifPerm('createur')) and !$_SESSION['mode']) or $fofo[$i]['perms'] == 0) : ?>
 
                     <table class="table table-hover table-dark table-responsive mb-0">
 
@@ -141,10 +141,10 @@ $fofo = $_Forum_->affichageForum();
                             for ($j = 0; $j < count($categorie); $j++) :
                                 $derniereReponse = $_Forum_->derniereReponseForum($categorie[$j]['id']);
 
-                                if (((Permission::getInstance()->verifPerm("createur") or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > $categorie[$j]['perms']) and !$_SESSION['mode']) or $categorie[$j]['perms'] == 0) :
+                                if (((Permission::getInstance()->verifPerm('createur') or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > $categorie[$j]['perms']) and !$_SESSION['mode']) or $categorie[$j]['perms'] == 0) :
 
                                     
-                                    if (Permission::getInstance()->verifPerm("createur") and !$_SESSION['mode'])
+                                    if (Permission::getInstance()->verifPerm('createur') and !$_SESSION['mode'])
                                         $perms = 100;
                                     elseif (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > 0)
                                         $perms = Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms');
@@ -184,7 +184,7 @@ $fofo = $_Forum_->affichageForum();
                                                         <a class="dropdown-toggle" href="sous-forum<?= $categorie[$j]['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 99.5%;">
                                                             Sous-forum :<?= count($sousforum); ?>
                                                         </a>
-                                                        <?php if (count($sousforum) != "0") : ?>
+                                                        <?php if (count($sousforum) != '0') : ?>
                                                             <div class="dropdown-menu" aria-labelledby="sous-forum<?php echo $categorie[$j]['id']; ?>">
                                                                 <?php for ($s = 0; $s < count($sousforum); $s++) : ?>
                                                                     <a class="dropdown-item" href="index.php?page=sous_forum_categorie&id=<?= $categorie[$j]['id']; ?>&id_sous_forum=<?= $sousforum[$s]['id']; ?>">

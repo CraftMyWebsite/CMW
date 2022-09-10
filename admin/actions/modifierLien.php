@@ -10,7 +10,7 @@ if($_Permission_->verifPerm('PermsPanel', 'menus', 'actions', 'editDropAndLinkMe
 	{
 		$lien = '?page=' .$_POST['page'];
 	} else {
-		$lien = "-divider-";
+		$lien = '-divider-';
 	}
 
 

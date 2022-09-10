@@ -6,21 +6,9 @@ CraftMyWebsite est un CMS Minecraft 100% gratuit créé en 2014 (première versi
 Présent depuis maintenant 6ans sur internet, le projet open-source depuis le début est aujourd'hui toujours maintenu par des passionnés !
 Profitez d'un site stable pour votre serveur minecraft en utilisant notre cms !
 
-### Les fonctionalitées sur la version 1.8.2
+### Les fonctionalitées sur la version 1.9 - LTS
 
--   Boutique supportant Dedipass/Paypal en validation automatique et Paysafecard en validation manuelle 
--   Des rangs temporaires (boutique et site)
--   Système de news
--   Votes avec récompenses et systèmes de vérifications intégrés !
--   Gestion multi-serveur grâce à JSONAPI et à RCON/Query
--   Ticket support
--   Forum complet !
--   Newsletter 
--   Vérifications des inscriptions automatisé
--   Mode maintenance (avec chrono + inscription)
--   Thèmes créé par la communauté
--   Services google implanté dans le cms (adsense ...)
--   Et pleins d'autres !
+-   ??????????????
 
 Une démo est disponible sur notre [site internet](http://demo.craftmywebsite.fr/).
 Les thèmes sont téléchargeable depuis notre forum [site internet](https://craftmywebsite.fr/forum/index.php?resources/featured)

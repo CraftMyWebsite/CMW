@@ -20,15 +20,15 @@ if (isset($id_sous_forum)) {
     $sousforumd = $_Forum_->infosSousForum($id, 0);
 }
 
-if (!(((Permission::getInstance()->verifPerm("createur") || Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $categoried['perms']) && !$_SESSION['mode']) or $categoried['perms'] == 0)) {
+if (!(((Permission::getInstance()->verifPerm('createur') || Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $categoried['perms']) && !$_SESSION['mode']) or $categoried['perms'] == 0)) {
     header('Location: index.php?page=erreur&erreur=7');
 }
 
 $titleHTML = $categoried['nom'];
 if(isset($id_sous_forum))
-    $titleHTML .= " > ".$sousforumd['nom'];
+    $titleHTML .= ' > ' .$sousforumd['nom'];
 ?>
-<script type="application/javascript">  document.title = "<?=$_Serveur_['General']['name'] . " | " . $titleHTML;?>"; </script>
+<script type="application/javascript">  document.title = "<?=$_Serveur_['General']['name'] . ' | ' . $titleHTML;?>"; </script>
 <section id="ForumCategorie">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
         <div class="row">
@@ -57,7 +57,7 @@ if(isset($id_sous_forum))
                     <?php endif; ?>
 
                     <?php if (isset($id_sous_forum)) : ?>
-                        <li class="breadcrumb-item"><?= $sousforumd['nom'] ?></li>;
+                        <li class="breadcrumb-item"><?= $sousforumd['nom'] ?></li>
                     <?php endif; ?>
 
                 </ol>
@@ -94,7 +94,7 @@ if(isset($id_sous_forum))
 
                         <?php for ($a = 0; $a < count($sousforumd); $a++) : ?>
 
-                            <?php if (((Permission::getInstance()->verifPerm("createur") or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $sousforumd[$a]['perms']) and !$_SESSION['mode']) or $sousforumd[$a]['perms'] == 0) : ?>
+                            <?php if (((Permission::getInstance()->verifPerm('createur') or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $sousforumd[$a]['perms']) and !$_SESSION['mode']) or $sousforumd[$a]['perms'] == 0) : ?>
 
                                 <tr>
 
@@ -287,7 +287,7 @@ if(isset($id_sous_forum))
                     <tbody>
                         <?php
                         for ($i = 0; $i < count($topicd); $i++) :
-                            if (((Permission::getInstance()->verifPerm("createur") or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd[$i]['perms']) and !$_SESSION['mode']) or $topicd[$i]['perms'] == 0) : ?>
+                            if (((Permission::getInstance()->verifPerm('createur') or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $topicd[$i]['perms']) and !$_SESSION['mode']) or $topicd[$i]['perms'] == 0) : ?>
 
                                 <tr>
                                     <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'selTopic') && !$_SESSION['mode']) : ?>
@@ -445,7 +445,7 @@ if(isset($id_sous_forum))
                         <?php
                         for ($i = 1; $i <= $count_topic_nbrOfPages2; $i++) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="index.php?page=<?= (isset($id_sous_forum)) ? "sous_" : ""; ?>forum_categorie&id=<?= $id ?><?= (isset($id_sous_forum)) ? "&id_sous_forum=$id_sous_forum" : ""; ?>&page_topic=<?= $i; ?>">
+                                <a class="page-link" href="index.php?page=<?= (isset($id_sous_forum)) ? 'sous_' : ''; ?>forum_categorie&id=<?= $id ?><?= (isset($id_sous_forum)) ? "&id_sous_forum=$id_sous_forum" : ''; ?>&page_topic=<?= $i; ?>">
                                     <?= $i; ?>
                                 </a>
                             </li>
@@ -464,7 +464,7 @@ if(isset($id_sous_forum))
         </div>
 
         <div class="row">
-            <?php if (Permission::getInstance()->verifPerm("connect") && ((($categoried['close'] == 0 and $sousforumd['close'] == 0) or Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide')) and !$_SESSION['mode'])) : ?>
+            <?php if (Permission::getInstance()->verifPerm('connect') && ((($categoried['close'] == 0 and $sousforumd['close'] == 0) or Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide')) and !$_SESSION['mode'])) : ?>
 
                 <div class="card col-8 mx-auto">
                     <form action="?action=create_topic" method="post">
@@ -499,7 +499,7 @@ if(isset($id_sous_forum))
                     </form>
                 </div>
             <?php
-            elseif (!Permission::getInstance()->verifPerm("connect")) :
+            elseif (!Permission::getInstance()->verifPerm('connect')) :
                 echo '<div class="alert alert-warning text-center">Connectez-vous pour pouvoir interragir ! </div>';
             endif; ?>
         </div>

@@ -30,7 +30,7 @@ else
 	$retourligne = "\r\n";
 	
 	$to = $donneesJoueur['email'];
-	$subject = "[".$_Serveur_['General']['name']."]Confirmation : Recuperation de mot de passe";
+	$subject = '[' .$_Serveur_['General']['name']. ']Confirmation : Recuperation de mot de passe';
 	$txt = 'Bonjour, '.$donneesJoueur['pseudo'].$retourligne
 			.$retourligne
 			.'Vous avez bien confirmé votre demande de changement de mot de passe.'.$retourligne

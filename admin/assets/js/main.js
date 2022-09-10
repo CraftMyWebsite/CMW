@@ -587,6 +587,20 @@ function testUrlVoteForTest(url, id, btn) {
 			}
 			btn.disabled = false;
 		});
+	} else if (url.includes("yserveur.fr")) {
+		fetchVote("https://yserveur.fr/api/serveur/verify-id/" + id, function (data, status) {
+			// true -> json {"status":true}, false -> {"status":false}
+			if(isJson(data)) {
+				if(JSON.parse(data).status == true) {
+					notif("success", "yserveur.fr", "Id "+id+" trouvé !");
+				} else {
+					notif("error", "yserveur.fr", "Id "+id+" introuvable.");
+				}
+			} else {
+				notif("error", "yserveur.fr", "Valeur invalide: "+data);
+			}
+			btn.disabled = false;
+		});
 	}else if(url.includes("serveurs-minecraft.org") & !url.includes("liste-serveurs-minecraft.org")) { // Access-Control-Allow-Origin
 		fetchVote("https://www.serveurs-minecraft.org/api/is_online.php?id="+id+"&format=json", function(data, status) {
 			// true -> 1, false -> -1
@@ -721,8 +735,18 @@ function testUrlVoteForTest(url, id, btn) {
 			}
 			btn.disabled = false;
 		});
+	}else if(url.includes("meilleurs-serveurs.com")) {
+		fetchVote("https://meilleurs-serveurs.com/api/v1/server/"+id+"/vote/check?ip_address=0.0.0.0", function(data, status) {
+			// true -> ?, false -> Server not found
+			if(!data.includes("Server not found")) {
+				notif("success", "meilleurs-serveurs.com", "Id "+id+" trouvé !");
+			} else {
+				notif("error", "meilleurs-serveurs.com", "Id "+id+" introuvable.");
+			}
+			btn.disabled = false;
+		});
 	} else {
-		notif("warning", url, "Aucune API enregistré pour se site.");
+		notif("warning", url, "Aucune API enregistrée pour ce site.");
 		btn.disabled = false;
 	}
 }

@@ -185,53 +185,53 @@
 
     //Notifications
 
-    <?php if(isset($_GET["ActivateSuccess"])){ ?>
+    <?php if(isset($_GET['ActivateSuccess'])){ ?>
         notif('success','Votre compte vient d\'être activé avec succès.');
-    <?php } elseif(isset($_GET["WaitActivate"])) { ?>
+    <?php } elseif(isset($_GET['WaitActivate'])) { ?>
             notif('warning', 'Un mail vient de vous être envoyé pour l\'activation de votre compte. Vérifiez dans les courriers indésirables.');
-    <?php } elseif(isset($_GET["ActivateImpossible"])) { ?>
+    <?php } elseif(isset($_GET['ActivateImpossible'])) { ?>
             notif('error', 'Votre compte ne peut être activé.');
-    <?php } elseif(isset($_GET["MessageEnvoyer"])) { ?>
+    <?php } elseif(isset($_GET['MessageEnvoyer'])) { ?>
             notif('success','Votre commentaire vient d\'être envoyée.');
-    <?php } elseif(isset($_GET["MessageTropLong"])) { ?>
+    <?php } elseif(isset($_GET['MessageTropLong'])) { ?>
             notif('error', 'Votre commentaire est trop long.');
-    <?php } elseif(isset($_GET["MessageTropCourt"])) { ?>
+    <?php } elseif(isset($_GET['MessageTropCourt'])) { ?>
             notif('error','Votre commentaire est trop court.');
-    <?php } elseif(isset($_GET["NotOnline"])) { ?>
+    <?php } elseif(isset($_GET['NotOnline'])) { ?>
             notif('error','Vous n\'êtes pas connecté.');
-    <?php } elseif(isset($_GET["NewsNotExist"])) { ?>
+    <?php } elseif(isset($_GET['NewsNotExist'])) { ?>
             notif('error', 'Cette nouveauté n\'existe pas.');
-    <?php } elseif(isset($_GET["TicketNotExist"])) { ?>
+    <?php } elseif(isset($_GET['TicketNotExist'])) { ?>
             notif('error','Ce ticket n\'existe pas.');
-    <?php }elseif(isset($_GET["EditCommentaire"]) ) { ?>
+    <?php }elseif(isset($_GET['EditCommentaire']) ) { ?>
             notif('success','Le commentaire a été édité !');
-    <?php } elseif(isset($_GET["CommentaireNotExist"])) { ?>
+    <?php } elseif(isset($_GET['CommentaireNotExist'])) { ?>
             notif('error','Ce commentaire n\'existe pas.');
-    <?php } elseif(isset($_GET["LikeExist"])) { ?>
+    <?php } elseif(isset($_GET['LikeExist'])) { ?>
             notif('error','Votre mention j\'aime est déjà existante.');
-    <?php } elseif(isset($_GET["LikeAdd"])) { ?>
+    <?php } elseif(isset($_GET['LikeAdd'])) { ?>
             notif('success', 'Votre mention j\'aime vient d\'être envoyée.');
-    <?php } elseif(isset($_GET["SuppressionCommentaire"])) { ?>
+    <?php } elseif(isset($_GET['SuppressionCommentaire'])) { ?>
             notif('success','Votre commentaire vient d\'être supprimé.');
-    <?php } elseif(isset($_GET["SuppressionImpossible"])) { ?>
+    <?php } elseif(isset($_GET['SuppressionImpossible'])) { ?>
             notif('error','Le commentaire ne peut être supprimé.');
-    <?php }elseif(isset($_GET["MessageEditer"])) { ?>
+    <?php }elseif(isset($_GET['MessageEditer'])) { ?>
             notif('success','Le commentaire a été édité.');
-    <?php }elseif(isset($_GET["EditImpossible"])) { ?>
+    <?php }elseif(isset($_GET['EditImpossible'])) { ?>
             notif('error','Le commentaire ne peut pas être édité.');
-    <?php }elseif(isset($_GET["NotReportYourSelf"])) { ?>
+    <?php }elseif(isset($_GET['NotReportYourSelf'])) { ?>
             notif('error','You are stupid.');
-    <?php }elseif(isset($_GET["ReportVictimeExist"])) { ?>
+    <?php }elseif(isset($_GET['ReportVictimeExist'])) { ?>
             notif('error','Vous ne pouvez pas rapporter plusieurs fois la même personne.');
-    <?php }elseif(isset($_GET["ReportEnvoyer"])) { ?>
+    <?php }elseif(isset($_GET['ReportEnvoyer'])) { ?>
             notif('success','Rapport envoyer !');
-    <?php }elseif(isset($_GET["PlayerNotExist"])) { ?>
+    <?php }elseif(isset($_GET['PlayerNotExist'])) { ?>
             notif('error','L\'utilisateur n\'existe pas.');
-    <?php }  elseif(isset($_GET["postSignalement"])) { ?>
+    <?php }  elseif(isset($_GET['postSignalement'])) { ?>
             notif('success','Le signalement a bien été envoyé.');
-    <?php }  elseif(isset($_GET["Connection"])) { ?>
+    <?php }  elseif(isset($_GET['Connection'])) { ?>
             notif('success','Connexion réussie !');
-     <?php }  elseif(isset($_GET["Register"])) { ?>
+     <?php }  elseif(isset($_GET['Register'])) { ?>
             notif('success','Bienvenue sur <?=$_Serveur['General']['name']?> !');
         <?php } ?>
 
@@ -292,61 +292,61 @@
             notif2("Message Système", "Un mail de récupération a bien été envoyé !", "success");
         });
 
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['successDedipass'])) {
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'token' && isset($_GET['successDedipass'])) {
     ?>
         $(document).ready(function() {
             notif2("Dedipass", "Votre paiement a bien été effectué !", "success");
         });
 
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "token" && isset($_GET['errorDedipass'])) {
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'token' && isset($_GET['errorDedipass'])) {
     ?>
         $(document).ready(function() {
             notif2("Dedipass", "Votre paiement n'a pas pu être effectué.", "error");
         });
 
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['success'])) {
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'panier' && isset($_GET['success'])) {
     ?>
         $(document).ready(function() {
             notif2("Boutique", "Vos achats ont été validé.", "success");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['dependances'])) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'panier' && isset($_GET['dependances'])) {
     ?>
         $(document).ready(function() {
             notif2("Panier", "Suite à des dépendances de l'article que vous avez supprimé, d'autres articles ont pu se faire supprimer de votre panier", "error");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "boutique" && isset($_GET['ajout'])) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'boutique' && isset($_GET['ajout'])) {
     ?>
         $(document).ready(function() {
             notif2("Boutique", "Article ajouté dans le panier.", "success");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['success'])) { 
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'chat' && isset($_GET['success'])) {
     ?>
         $(document).ready(function() {
             notif2("Chat", "Message envoyé.", "success");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['erreur'])) {  
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'chat' && isset($_GET['erreur'])) {
     ?>
         $(document).ready(function() {
             notif2("Chat", "Le message n'a pas pu être envoyé.", "error");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "chat" && isset($_GET['msgErreur'])) {
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'chat' && isset($_GET['msgErreur'])) {
     ?>
         $(document).ready(function() {
             notif2("Chat", "Message trop long ou trop court.", "error");
         });
-    <?php } if (isset($_GET['page']) && $_GET['page'] == "forum" && isset($_GET['postSignalement'])) {  
+    <?php } if (isset($_GET['page']) && $_GET['page'] == 'forum' && isset($_GET['postSignalement'])) {
     ?>
         $(document).ready(function() {
             notif2("Forum", "Signalement envoyé !", "success");
         });
-     <?php } if (isset($_GET['page']) && $_GET['page'] == "panier" && isset($_GET['notOnline'])) {
+     <?php } if (isset($_GET['page']) && $_GET['page'] == 'panier' && isset($_GET['notOnline'])) {
     ?>
         $(document).ready(function() {
             notif2("Boutique", "Vous devez être connecté sur le serveur en question pour finaliser vos achats !", "error");
         });
     <?php } ?>
 
-    <?php if(isset($_GET['page']) && $_GET['page'] == "profil" && isset($_GET['status'])) {
+    <?php if(isset($_GET['page']) && $_GET['page'] == 'profil' && isset($_GET['status'])) {
         switch(intval($_GET['status'])) {
             case 0:
                 echo '$(document).ready(function() {
@@ -441,7 +441,7 @@
 
     } }?>
 
-    <?php if(isset($_GET['page']) && $_GET['page'] == "profil" && isset($_GET['montant']) && isset($_GET['pseudo'])) {
+    <?php if(isset($_GET['page']) && $_GET['page'] == 'profil' && isset($_GET['montant']) && isset($_GET['pseudo'])) {
         echo '$(document).ready(function() {
             notif2("Profil", "Vous venez de donner '.$_GET['montant'].' '.$_Serveur_['General']['moneyName'].' à '.$_GET['pseudo'].'", "success");
             $(\'#profilspec\').hide(500);$(\'#editProfil\').show(500);

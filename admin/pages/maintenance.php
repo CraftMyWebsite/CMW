@@ -5,7 +5,7 @@
     </h2>
 </div>
 <div class="row">
-<?php if(!$_Permission_->verifPerm('PermsPanel',"maintenance","showPage")) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'maintenance', 'showPage')) { ?>
         <div class="col-md-12 text-center">
             <div class="alert alert-danger">
                 <strong>Vous avez aucune permission pour accéder à la maintenance.</strong>
@@ -100,7 +100,7 @@
                                             <div class="card-body" id="maintenance">
                                                 <center>Vous souhaitez rendre le site accessible uniquement aux administrateurs ? Il vous suffit d'appuyer sur le bouton ci-dessous. Les visiteurs seront redirigés vers la page de maintenance.</center>
                                                 <label>Définir une date de fin de maintenance: <small>Laissez vide si aucune</small></label>
-                                                <input type="date" name="date" <?php if(!empty($maintenance[$i]['dateFin']) && $maintenance[$i]['dateFin'] > time()) echo 'value="'.date("Y-m-d", $maintenance[$i]["dateFin"]).'"';?> class="form-control" placeholder="format: jj/mm/aaaa">
+                                                <input type="date" name="date" <?php if(!empty($maintenance[$i]['dateFin']) && $maintenance[$i]['dateFin'] > time()) echo 'value="'.date('Y-m-d', $maintenance[$i]['dateFin']).'"';?>class="form-control" placeholder="format: jj/mm/aaaa">
                                                 <?php if($maintenance[$i]['maintenanceEtat'] == 1) { 
                                                     ?>
                                                     <button onclick="sendPost('maintenance', null, true);" type="submit" id="maintenanceBtn" class="btn btn-danger btn-block" />Désactiver la maintenance</button>
@@ -110,7 +110,7 @@
                                                     <button onclick="sendPost('maintenance', null, true);" id="maintenanceBtn" type="submit" class="btn btn-success btn-block" />Activer la maintenance</button>
                                                     <?php
                                                 } ?> 
-                                                <script>initPost('maintenance', 'admin.php?action=switchMaintenance&maintenanceId=<?=$maintenance[$i]["maintenanceId"];?>', function(data, otherData){
+                                                <script>initPost('maintenance', 'admin.php?action=switchMaintenance&maintenanceId=<?=$maintenance[$i]['maintenanceId'];?>', function(data, otherData){
                                                     if(data) {
                                                         update = JSON.parse(otherData);
                                                         btn = document.getElementById('maintenanceBtn');

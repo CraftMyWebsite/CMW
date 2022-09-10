@@ -9,17 +9,17 @@ if($_Permission_->verifPerm('PermsPanel', 'upload', 'manage')) {
 	$extension = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION); 
 	if(!in_array(strtolower($extension), $extensions))
 	{
-		header ("location: admin.php?page=upload&erreur=0");
+		header ('location: admin.php?page=upload&erreur=0');
 		exit();
 	}
 	if($taille > $taille_maxi)
 	{
-		header ("location: admin.php?page=upload&erreur=1");
+		header ('location: admin.php?page=upload&erreur=1');
 		exit();
 	}
 	if (file_exists($dossier.$fichier))
 	{
-		header ("location: admin.php?page=upload&erreur=2");
+		header ('location: admin.php?page=upload&erreur=2');
 		exit();
 	}
 	
@@ -30,10 +30,10 @@ if($_Permission_->verifPerm('PermsPanel', 'upload', 'manage')) {
 	$fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
 	if(!move_uploaded_file($_FILES['img']['tmp_name'], $dossier . $fichier))
 	{
-		header ("location: admin.php?page=upload&erreur=3");
+		header ('location: admin.php?page=upload&erreur=3');
 		exit();
 	}
 	
-	header ("location: admin.php?page=upload&success");
+	header ('location: admin.php?page=upload&success');
 	exit();
 }?>

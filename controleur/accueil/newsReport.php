@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm("connect")) {
+if(Permission::getInstance()->verifPerm('connect')) {
     $pseudo = $_Joueur_['pseudo'];
     $message = '';
     $id_news = urldecode($_GET['id_news']);
@@ -23,19 +23,19 @@ if(Permission::getInstance()->verifPerm("connect")) {
     $get_CountReportNews = $rep_CountReportNews->fetch(PDO::FETCH_ASSOC);
     $id = $get_CountReportNews['id'];
 
-    if($ExistNews == "0") {
+    if($ExistNews == '0') {
         header('Location: index.php?page=accueil&NewsNotExist');
     } else {
         if($pseudo == $victime) {
     	    header('Location: index.php?page=accueil&NotReportYourSelf');
     	} else {
-            if($ExistReport == "1") {
+            if($ExistReport == '1') {
                 header('Location: index.php?page=accueil&ReportVictimeExist');
             } else {
-                if($ExistVictime == "0") {
+                if($ExistVictime == '0') {
     	            header('Location: index.php?page=accueil&PlayerNotExist');
                 } else {
-                    if($ExistCommentaire == "0") {
+                    if($ExistCommentaire == '0') {
                         header('Location: index.php?page=accueil&CommentaireNotExist');
                     } else {
     	                require_once('modele/accueil/postNews.class.php');

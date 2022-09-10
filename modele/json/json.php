@@ -12,10 +12,10 @@ $lectureJSON = $reqRecup->fetchAll(PDO::FETCH_ASSOC);
 		if($serveur['protocole'] == 1)
 		{
 			$ports = array(
-				"query" => $serveur['port'],
-				"rcon" => $serveur['port2']
+				'query' => $serveur['port'],
+				'rcon' => $serveur['port2']
 			);
-			$jsonCon[$key] = new JsonCon($serveur["adresse"], $ports, null, $serveur['mdp'], $bddConnection, $key);
+			$jsonCon[$key] = new JsonCon($serveur['adresse'], $ports, null, $serveur['mdp'], $bddConnection, $key);
 		}
 		else
 			$jsonCon[$key] = new JsonCon($serveur['adresse'], $serveur['port'], $serveur['utilisateur'], $serveur['mdp'], $bddConnection, $key);

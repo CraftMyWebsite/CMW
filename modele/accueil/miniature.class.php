@@ -7,7 +7,7 @@ class miniature {
 
 	public function __construct($bdd) {
         $this->bdd = $bdd;
-        $req = $bdd->query("SELECT * FROM cmw_miniature ORDER BY ordre ASC");
+        $req = $bdd->query('SELECT * FROM cmw_miniature ORDER BY ordre ASC');
         $this->minia = $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -31,11 +31,11 @@ class miniature {
         if(!empty($this->minia)) {
             foreach($this->minia as $value) {
                 if($value['ordre'] == $m['ordre'] +1) {
-                    $req = $this->bdd->prepare("UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id");
-                    $req->execute(array("ordre" => $m['ordre'] +1, "id" => $id));
+                    $req = $this->bdd->prepare('UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id');
+                    $req->execute(array('ordre' => $m['ordre'] +1, 'id' => $id));
                     
-                    $req = $this->bdd->prepare("UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id");
-                    $req->execute(array("ordre" => $m['ordre'], "id" => $value['id']));
+                    $req = $this->bdd->prepare('UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id');
+                    $req->execute(array('ordre' => $m['ordre'], 'id' => $value['id']));
                     return;
                 }
             }
@@ -49,11 +49,11 @@ class miniature {
         if(!empty($this->minia)) {
             foreach($this->minia as $value) {
                 if($value['ordre'] == $m['ordre'] -1) {
-                    $req = $this->bdd->prepare("UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id");
-                    $req->execute(array("ordre" => $m['ordre'] -1, "id" => $id));
+                    $req = $this->bdd->prepare('UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id');
+                    $req->execute(array('ordre' => $m['ordre'] -1, 'id' => $id));
                     
-                    $req = $this->bdd->prepare("UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id");
-                    $req->execute(array("ordre" => $m['ordre'], "id" => $value['id']));
+                    $req = $this->bdd->prepare('UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id');
+                    $req->execute(array('ordre' => $m['ordre'], 'id' => $value['id']));
                     return;
                 }
             }
@@ -72,10 +72,10 @@ class miniature {
     }
     
     public function createMinia($data) {
-        $req = $this->bdd->prepare("INSERT INTO cmw_miniature (message, image, type, lien, ordre) VALUES (:message, :image, :type, :lien, :ordre);");
-        $req->execute(array("message" => $data['message'], "image" => $data['image'], "type" => $data['type'], "lien" => $data['lien'], "ordre" => $this->getMax()));
+        $req = $this->bdd->prepare('INSERT INTO cmw_miniature (message, image, type, lien, ordre) VALUES (:message, :image, :type, :lien, :ordre);');
+        $req->execute(array('message' => $data['message'], 'image' => $data['image'], 'type' => $data['type'], 'lien' => $data['lien'], 'ordre' => $this->getMax()));
         
-        $req = $this->bdd->query("SELECT id FROM cmw_miniature WHERE id= LAST_INSERT_ID()");
+        $req = $this->bdd->query('SELECT id FROM cmw_miniature WHERE id= LAST_INSERT_ID()');
         $req = $req->fetch(PDO::FETCH_ASSOC);
         return $req['id'];
     }
@@ -84,18 +84,18 @@ class miniature {
         $m = $this->getMiniaById($id);
         foreach($this->minia as $value) {
             if($value['ordre'] > $m['ordre']) {
-                $req = $this->bdd->prepare("UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id");
-                $req->execute(array("ordre" => $value['ordre'] -1, "id" => $value['id']));
+                $req = $this->bdd->prepare('UPDATE cmw_miniature SET ordre=:ordre WHERE id=:id');
+                $req->execute(array('ordre' => $value['ordre'] -1, 'id' => $value['id']));
             }
         }
         
-        $req = $this->bdd->prepare("DELETE FROM cmw_miniature WHERE id=:id");
-        $req->execute(array("id" => $id));
+        $req = $this->bdd->prepare('DELETE FROM cmw_miniature WHERE id=:id');
+        $req->execute(array('id' => $id));
     }
     
     public function editMinia($data, $id) {
-        $req = $this->bdd->prepare("UPDATE cmw_miniature SET message=:message, image=:image, type=:type, lien=:lien WHERE id=:id");
-        $req->execute(array("id" => $id, "message" => $data['message'], "image" => $data['image'], "type" => $data['type'], "lien" => $data['lien']));
+        $req = $this->bdd->prepare('UPDATE cmw_miniature SET message=:message, image=:image, type=:type, lien=:lien WHERE id=:id');
+        $req->execute(array('id' => $id, 'message' => $data['message'], 'image' => $data['image'], 'type' => $data['type'], 'lien' => $data['lien']));
     }
 
 }

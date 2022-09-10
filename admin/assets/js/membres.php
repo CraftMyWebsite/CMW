@@ -12,7 +12,7 @@ var PlayerTotal = <?php echo count($membres); ?>;
 var axe = "id";
 var grade = new Map();
 var axeType = "ASC"; /* ASC = croissant && DESC = !ASC */
-var canEdit = <?php echo $_Permission_->verifPerm('PermsPanel', 'members', "actions","editMember") ? 'true' : 'false'; ?>
+var canEdit = <?php echo $_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember') ? 'true' : 'false'; ?>
 
 
 $(window).on('load', function () {

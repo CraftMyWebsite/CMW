@@ -6,7 +6,7 @@ if(isset($_POST['id'], $_POST['objet'], $_Joueur_))
 	if(isset($_POST['contenue']))
 		$objet = htmlspecialchars($_POST['objet']);
 	else
-		$objet = ($_POST['objet'] == "topic") ? 1 : 2;
+		$objet = ($_POST['objet'] == 'topic') ? 1 : 2;
 	$id = htmlentities($_POST['id']);
 	if($AdminForum->verifEdit($objet, $id, $_Joueur_) && !isset($_POST['contenue']))
 	{

@@ -66,7 +66,7 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) {
 				if($donnees['commande_valeur'] == 0) {
 					$action[$i]['commande_valeur'] = 'Joueur';
 				} elseif($donnees['commande_valeur'] == 1) {
-					$action[$i]['commande_valeur'] = "Créateur";
+					$action[$i]['commande_valeur'] = 'Créateur';
 				} else  {
 					$perm = $_Permission_->readPerm($donnees['commande_valeur']);
 					if(!isset($perm) || empty($perm))

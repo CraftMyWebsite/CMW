@@ -122,12 +122,12 @@ else
 
 
 						<div class="custom-control custom-switch" style="padding-top: 20px">
-							<input type="checkbox" value="tls" class="custom-control-input" id="protocolTls" name="protocolTls" OnClick="if(get('protocolTls').checked) { get('protocolSsl').checked = false; } else { get('protocolSsl').checked = true; }" <?=(isset($_Serveur_['SMTPNEWS']['Protocol'])) ? ($_Serveur_['SMTPNEWS']['Protocol'] == "tls" ? 'checked': '') : 'checked';?>>
+							<input type="checkbox" value="tls" class="custom-control-input" id="protocolTls" name="protocolTls" OnClick="if(get('protocolTls').checked) { get('protocolSsl').checked = false; } else { get('protocolSsl').checked = true; }" <?=(isset($_Serveur_['SMTPNEWS']['Protocol'])) ? ($_Serveur_['SMTPNEWS']['Protocol'] == 'tls' ? 'checked': '') : 'checked';?>>
 							<label class="custom-control-label" for="protocolTls">Protocole TLS (à cocher par défaut)</label>
 						</div>
 
 						<div class="custom-control custom-switch" style="padding-top: 20px">
-							<input type="checkbox" value="ssl" class="custom-control-input" id="protocolSsl" name="protocolSsl" OnClick="if(get('protocolSsl').checked) { get('protocolTls').checked = false; } else { get('protocolTls').checked = true; }" <?=(isset($_Serveur_['SMTPNEWS']['Protocol']) && $_Serveur_['SMTPNEWS']['Protocol'] == "ssl") ? 'checked': '';?>>
+							<input type="checkbox" value="ssl" class="custom-control-input" id="protocolSsl" name="protocolSsl" OnClick="if(get('protocolSsl').checked) { get('protocolTls').checked = false; } else { get('protocolTls').checked = true; }" <?=(isset($_Serveur_['SMTPNEWS']['Protocol']) && $_Serveur_['SMTPNEWS']['Protocol'] == 'ssl') ? 'checked': '';?>>
 							<label class="custom-control-label" for="protocolSsl">Protocole SSL (si vous êtes sur de vous !)</label>
 						</div>
 					</div>

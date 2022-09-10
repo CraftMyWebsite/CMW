@@ -1,24 +1,24 @@
 <?php // On appelle les classes du controleur qui instancies les objets principaux (BDD, config, JSONAPI...).
 ob_start();
-session_set_cookie_params(0, "/", null, true, true);
+session_set_cookie_params(0, '/', null, true, true);
 session_start();
 
 error_reporting(0);
 date_default_timezone_set('Europe/Paris');
-setlocale(LC_TIME, "fr_FR");
+setlocale(LC_TIME, 'fr_FR');
 ini_set('display_errors', 1);
 
 
-require("modele/app/urlRewrite.class.php");
+require('modele/app/urlRewrite.class.php');
 urlRewrite::call();
 
-if(!isset($_SESSION["mode"])) $_SESSION["mode"] = false; // pour les admins du forum
+if(!isset($_SESSION['mode'])) $_SESSION['mode'] = false; // pour les admins du forum
 
 if(isset($_GET['removeUpdater'])) { unlink('updater.php'); }
 //ini_set('display_errors', 1);
 require('controleur/config.php');
 // On vérifie si le CMS n'a pas été installé, si il ne l'est pas, on redirige vers les fichiers d'installation...
-if (!$_Serveur_['installation']) header('Location: installation/');
+if (!$_Serveur_['installation']) header('Location: /installation/');
 else $return = true;
 // On charge la connection à la base MySQL via l'extention PDO.
 require ('controleur/connection_base.php');
@@ -27,7 +27,7 @@ require('modele/app/visit.class.php');
 $visit = new visit($bddConnection);
 
 
-require("modele/google/googleService.class.php");
+require('modele/google/googleService.class.php');
 googleService::initialise($_Serveur_, $bddConnection);
 
 //la class Panier pour la boutique

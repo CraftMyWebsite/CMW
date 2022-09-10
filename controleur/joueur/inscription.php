@@ -11,9 +11,9 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 			$get_Pseudo = $_POST['pseudo'];
 			$get_Mail = $_POST['email'];
 			$_POST['age'] = (int) htmlspecialchars($_POST['age']);
-			if($_POST["age"] > 9999 || $_POST["age"] < 0) $_POST["age"] = 0;
+			if($_POST['age'] > 9999 || $_POST['age'] < 0) $_POST['age'] = 0;
 
-			$_POST["show_email"] = !empty($_POST['show_email']) ? true : false;
+			$_POST['show_email'] = !empty($_POST['show_email']) ? true : false;
 			$get_Lien = 'http://'.$_SERVER['HTTP_HOST'].'/index.php?&action=validationMail&pseudo='.urlencode($get_Pseudo).'&cle='.urldecode($get_CleUnique).'';
 
 			if (filter_var(get_client_ip_env(), FILTER_VALIDATE_IP)){
@@ -69,22 +69,22 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 							$CountEmailBdd = $rep_countEmailBdd->rowCount();
 
 							//Gestion UUID
-							require_once("modele/vote.class.php");
-							$UUID = vote::fetch("https://api.mojang.com/users/profiles/minecraft/".$_POST['pseudo']);
+							require_once('modele/vote.class.php');
+							$UUID = vote::fetch('https://api.mojang.com/users/profiles/minecraft/' .$_POST['pseudo']);
 							$obj = json_decode($UUID);
 							$UUID = $obj->{'id'};
 							
 							//CONVERSION UUIDF
-							if ($UUID != "INVALIDE" && $UUID != null) {
-							    $UUIDF = substr_replace($UUID, "-", 8, 0);
-							    $UUIDF = substr_replace($UUIDF, "-", 13, 0);
-							    $UUIDF = substr_replace($UUIDF, "-", 18, 0);
-							    $UUIDF = substr_replace($UUIDF, "-", 23, 0);
+							if ($UUID != 'INVALIDE' && $UUID != null) {
+							    $UUIDF = substr_replace($UUID, '-', 8, 0);
+							    $UUIDF = substr_replace($UUIDF, '-', 13, 0);
+							    $UUIDF = substr_replace($UUIDF, '-', 18, 0);
+							    $UUIDF = substr_replace($UUIDF, '-', 23, 0);
 							}else{
-							    $UUIDF = "INVALIDE";
+							    $UUIDF = 'INVALIDE';
 							}
 							
-							if ($ApiMailBdd['etatMail'] == "1") {
+							if ($ApiMailBdd['etatMail'] == '1') {
 
 								if($CountEmailBdd > $ApiMailBdd['strictMail'])
 								{
@@ -94,14 +94,14 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 
 								require_once('modele/joueur/inscription.class.php');
 								$souvenir = !empty($_POST['souvenir']) ? true : false;
-								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), $souvenir, 0, $_POST["age"], $getIp, $_POST["show_email"], $UUID, $UUIDF, $bddConnection);
+								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), $souvenir, 0, $_POST['age'], $getIp, $_POST['show_email'], $UUID, $UUIDF, $bddConnection);
 
 								require_once('modele/joueur/ScriptBySprik07/inscriptionCleUnique.class.php');
 								$userInsertIP = new InsertCleUnique($get_CleUnique, $get_Pseudo, $bddConnection);
 
 								$destinataire = $get_Mail;
 
-								if(!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $destinataire))
+								if(!preg_match('#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#', $destinataire))
 								{
 									$next_line = "\r\n";
 								}
@@ -132,7 +132,7 @@ if(isset($_POST['pseudo']) AND isset($_POST['mdp']) AND isset($_POST['mdpConfirm
 							} else {
 
 								require_once('modele/joueur/inscription.class.php');
-								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), 1, 0, $_POST["age"], $getIp, $_POST["show_email"], $UUID, $UUIDF, $bddConnection);
+								$userInscription = new Inscription($_POST['pseudo'], $get_Mdp, $_POST['email'], time(), 1, 0, $_POST['age'], $getIp, $_POST['show_email'], $UUID, $UUIDF, $bddConnection);
 
 
 								require_once('modele/joueur/ScriptBySprik07/inscriptionValidateMail.class.php');

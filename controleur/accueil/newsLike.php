@@ -1,5 +1,5 @@
 <?php
-if(Permission::getInstance()->verifPerm("connect")) {
+if(Permission::getInstance()->verifPerm('connect')) {
     $pseudo = $_Joueur_['pseudo'];
     $id_news = urldecode($_GET['id_news']);
 
@@ -17,7 +17,7 @@ if(Permission::getInstance()->verifPerm("connect")) {
     $get_CountLikes = $rep_CountLikes->fetch(PDO::FETCH_ASSOC);
     $CountLikes = $get_CountLikes['id'];
 
-    if($ExistNews == "0") {
+    if($ExistNews == '0') {
     	header('Location: index.php?page=accueil&NewsNotExist');
     } else {
         if($ExistLike == $pseudo) {
