@@ -1,6 +1,6 @@
 <nav class="col-md-2 col-sm-12 col-xs-12 bg-img sidebar collapse show navbar-collapse"
      id="navbarSupportedContent">
-    <div class="sidebar-sticky filter-opacity" style="background-color: rgba('0, 0, 0, 0.7')">
+    <div class="sidebar-sticky filter-opacity" style="background-color: rgba(0, 0, 0, 0.7)">
         <ul class="nav flex-column" id="scrollnav" data-navbar="leftside">
 
             <!-- Petite carte profil (afficher sur pc only)-->
@@ -22,61 +22,61 @@
             <!-- Début des items de navigation-->
 
             <?php  if($_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) { ?>
-                <li class="nav-item <?php if((isset($_GET['page'])&&$_GET['page']=='accueil')|!isset($_GET['page'])){echo 'active';}?>">
+                <li class="nav-item <?php if((isset($_GET['page'])&&$_GET['page'] === 'accueil')|!isset($_GET['page'])){echo 'active';}?>">
                     <a class="nav-link"  href="?page=accueil">
                         <i class="fas fa-home"></i>
                         Accueil / Statistiques
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'general', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='configsite'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'configsite'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=configsite">
                         <i class="fas fa-wrench"></i>
                         Réglages du site
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'theme', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='theme'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'theme'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=theme">
                         <i class="fas fa-paint-roller"></i>
                         Thèmes
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'home', 'showPage')) { ?>
-                <li class="nav-item  <?php if(isset($_GET['page'])&&$_GET['page']=='slidemini'){echo 'active';}?>">
+                <li class="nav-item  <?php if(isset($_GET['page'])&&$_GET['page'] === 'slidemini'){echo 'active';}?>">
                     <a class="nav-link" href="?page=slidemini">
                         <i class="far fa-images"></i>
                         Miniatures
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'server', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='reglagejsonapi'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'reglagejsonapi'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=reglagejsonapi">
                         <i class="fas fa-terminal"></i>
                         Réglage JsonAPI/Rcon
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'pages', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='custompages'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'custompages'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=custompages">
                         <i class="fas fa-pencil-ruler"></i>
                         Création / Edition de pages
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'shop', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&($_GET['page']=='boutique' | $_GET['page']=='boutiquelist')){echo 'active';}?>">
-                    <a class="nav-link  " <?php if(isset($_GET['page'])&&($_GET['page']=='boutique' | $_GET['page']=='boutiquelist')){echo 'active';}?> href="#collapseBoutique" data-toggle="collapse">
+                <li class="nav-item <?php if(isset($_GET['page'])&&($_GET['page'] === 'boutique' | $_GET['page'] === 'boutiquelist')){echo 'active';}?>">
+                    <a class="nav-link  " <?php if(isset($_GET['page'])&&($_GET['page'] === 'boutique' | $_GET['page'] === 'boutiquelist')){echo 'active';}?>href="#collapseBoutique" data-toggle="collapse">
                         <i class="fas fa-store-alt"></i>
                         Boutique
                     </a>
                     <div id="collapseBoutique" class="collapse nav-link">
 
-                        <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='boutique'){echo 'active';}?>"  href="?page=boutique">
+                        <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'boutique'){echo 'active';}?>" href="?page=boutique">
                             <i class="fas fa-cash-register"></i>
                             Réglages
                         </a>
                         <?php if($_Permission_->verifPerm('PermsPanel', 'shop', 'boutiqueList', 'showPage')) { ?>
-                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='boutiquelist'){echo 'active';}?>"  href="?page=boutiquelist">
+                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'boutiquelist'){echo 'active';}?>" href="?page=boutiquelist">
                                 <i class="fas fa-shipping-fast"></i>
                                 Historique des achats
                             </a>
@@ -84,7 +84,7 @@
                     </div>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'menus', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='menus'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'menus'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=menus">
                         <i class="fas fa-bars"></i>
                         Menus personnalisés
@@ -92,7 +92,7 @@
                 </li>
 
             <?php } if($_Permission_->verifPerm('PermsPanel', 'googleService', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='googleService'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'googleService'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=googleService">
                         <i class="fab fa-searchengin"></i>
                         Services Google
@@ -108,14 +108,14 @@
                 </h6>
 
             <?php } if($_Permission_->verifPerm('createur')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='grade'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'grade'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=grade">
                         <i class="fas fa-crown"></i>
                         Grades
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'news', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='news'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'news'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=news">
                         <i class="far fa-newspaper"></i>
                         Nouveautées
@@ -123,20 +123,20 @@
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) { ?>
                 <li class="nav-item ">
-                    <a class="nav-link <?php if(isset($_GET['page'])&&($_GET['page']=='paiement' |isset($_GET['paypal'])|isset($_GET['dedipass']))){echo 'collapseaactive';}?>" href="#collapsePaiement" data-toggle="collapse">
+                    <a class="nav-link <?php if(isset($_GET['page'])&&($_GET['page'] === 'paiement' |isset($_GET['paypal'])|isset($_GET['dedipass']))){echo 'collapseaactive';}?>" href="#collapsePaiement" data-toggle="collapse">
                         <i class="far fa-credit-card"></i>
                         Moyens de paiement
                     </a>
-                    <div id="collapsePaiement" class="collapse nav-link <?php if(isset($_GET['paypal']) OR $_GET['page'] == 'paiement' OR isset($_GET['paypal']) OR isset($_GET['dedipass'])){echo 'show';}?>">
+                    <div id="collapsePaiement" class="collapse nav-link <?php if(isset($_GET['paypal']) OR $_GET['page'] === 'paiement' OR isset($_GET['paypal']) OR isset($_GET['dedipass'])){echo 'show';}?>">
                         <a class="nav-link <?php if(isset($_GET['paypal'])){echo 'active';}?>" href="?page=paiement&paypal">
                             <i class="fab fa-paypal"></i>
                             PayPal
                         </a>
-                        <a class="nav-link <?php if(isset($_GET['dedipass'])&&$_GET['page']=='paiement'){echo 'active';}?>" href="?page=paiement&dedipass">
+                        <a class="nav-link <?php if(isset($_GET['dedipass'])&&$_GET['page'] === 'paiement'){echo 'active';}?>" href="?page=paiement&dedipass">
                             <i class="fas fa-sms"></i>
                             DediPass
                         </a>
-                        <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='paiement'&&(!isset($_GET['paypal']) && (!isset($_GET['dedipass'])))){echo 'active';}?>" href="?page=paiement">
+                        <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'paiement'&&(!isset($_GET['paypal']) && (!isset($_GET['dedipass'])))){echo 'active';}?>" href="?page=paiement">
                             <i class="fas fa-file-invoice-dollar"></i>
                             PaySafeCard
                         </a>
@@ -144,24 +144,24 @@
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'vote', 'showPage')) { ?>
                 <li class="nav-item">
-                    <a class="nav-link <?php if(isset($_GET['page']) AND $_GET['page'] == 'voter'|$_GET['page']=='configVoter'){echo'collapseaactive'; }?>" href="#collapseVotes" data-toggle="collapse"  <?php if(isset($_GET['page'])&&$_GET['page']=='voter'|$_GET['page']=='configVoter'){echo 'aria-expanded="true" aria-controls="collapseVotes"';}?>>
+                    <a class="nav-link <?php if(isset($_GET['page']) AND $_GET['page'] === 'voter'|$_GET['page'] === 'configVoter'){echo'collapseaactive'; }?>" href="#collapseVotes" data-toggle="collapse"  <?php if(isset($_GET['page'])&&$_GET['page'] === 'voter'|$_GET['page'] === 'configVoter'){echo 'aria-expanded="true" aria-controls="collapseVotes"';}?>>
                         <i class="fas fa-vote-yea"></i>
                         Votes
                     </a>
-                    <div id="collapseVotes" class="collapse nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='voter'|$_GET['page']=='configVoter'){echo 'show';}?>">
+                    <div id="collapseVotes" class="collapse nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'voter'|$_GET['page'] === 'configVoter'){echo 'show';}?>">
 
-                        <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='voter'){echo 'active';}?>" href="?page=voter">
+                        <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'voter'){echo 'active';}?>" href="?page=voter">
                             <i class="fas fa-cogs"></i>
                             Réglages des sites
                         </a>
                         <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'showPage')) { ?>
-                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='configVoter'){echo 'active';}?>" href="?page=configVoter">
+                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'configVoter'){echo 'active';}?>" href="?page=configVoter">
                                 <i class="fas fa-ruler"></i>
                                 Récompenses automatique
                             </a>
                         <?php } ?>
                         <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'voteHistory', 'showPage')) { ?>
-                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='voteHistory'){echo 'active';}?>" href="?page=voteHistory">
+                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'voteHistory'){echo 'active';}?>" href="?page=voteHistory">
                                 <i class="fas fa-history"></i>
                                 Historique des votes
                             </a>
@@ -170,27 +170,27 @@
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'members', 'showPage') OR $_Permission_->verifPerm('PermsPanel', 'social', 'showPage') OR $_Permission_->verifPerm('PermsPanel', 'ban', 'showPage')) { ?>
                 <li class="nav-item ">
-                    <a class="nav-link <?php if(isset($_GET['page'])&&($_GET['page']=='membres' |$_GET['page']=='social' |$_GET['page']=='modifIP'|$_GET['page']=='ban')){echo 'collapseaactive';}?>" href="#collapseMembres" data-toggle="collapse" <?php if(isset($_GET['page'])&&($_GET['page']=='membres' |$_GET['page']=='social' |$_GET['page']=='modifIP'|$_GET['page']=='ban')){echo 'aria-expanded="true" aria-controls="collapseMembres"';}?>>
+                    <a class="nav-link <?php if(isset($_GET['page'])&&($_GET['page'] === 'membres' |$_GET['page'] === 'social' |$_GET['page'] === 'modifIP'|$_GET['page'] === 'ban')){echo 'collapseaactive';}?>" href="#collapseMembres" data-toggle="collapse" <?php if(isset($_GET['page'])&&($_GET['page'] === 'membres' |$_GET['page'] === 'social' |$_GET['page'] === 'modifIP'|$_GET['page'] === 'ban')){echo 'aria-expanded="true" aria-controls="collapseMembres"';}?>>
                         <i class="fas fa-user-friends"></i>
                         Membres
                     </a>
-                    <div id="collapseMembres" class="collapse nav-link <?php if(isset($_GET['page'])&&($_GET['page']=='membres' |$_GET['page']=='social' |$_GET['page']=='modifIP'|$_GET['page']=='ban')){echo 'show';}?>">
-                        <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='membres'){echo 'active';}?>" href="?page=membres">
+                    <div id="collapseMembres" class="collapse nav-link <?php if(isset($_GET['page'])&&($_GET['page'] === 'membres' |$_GET['page'] === 'social' |$_GET['page'] === 'modifIP'|$_GET['page'] === 'ban')){echo 'show';}?>">
+                        <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'membres'){echo 'active';}?>" href="?page=membres">
                             <i class="fas fa-users-cog"></i>
                             Liste des utilisateurs
                         </a>
                         <?php if($_Permission_->verifPerm('PermsPanel', 'social', 'showPage')) { ?>
-                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='social'){echo 'active';}?>" href="?page=social">
+                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'social'){echo 'active';}?>" href="?page=social">
                                 <i class="fas fa-screwdriver"></i>
                                 Réglages des champs personnalisées
                             </a>
                         <?php } if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'showTable') && ($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editLimitIp') || $_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail'))) { ?>
-                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='modifIP'){echo 'active';}?>" href="?page=modifIP">
+                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'modifIP'){echo 'active';}?>" href="?page=modifIP">
                                 <i class="fas fa-toolbox"></i>
                                 Limitations IP/Email
                             </a>
                         <?php } if($_Permission_->verifPerm('PermsPanel', 'ban', 'showPage')) { ?>
-                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page']=='ban'){echo 'active';}?>" href="?page=ban">
+                            <a class="nav-link <?php if(isset($_GET['page'])&&$_GET['page'] === 'ban'){echo 'active';}?>" href="?page=ban">
                                 <i class="fas fa-wrench"></i>
                                 Bannissement
                             </a>
@@ -198,49 +198,49 @@
                     </div>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='forum'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'forum'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=forum">
                         <i class="fas fa-comments"></i>
                         Forum
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'widgets', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='widgets'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'widgets'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=widgets">
                         <i class="fas fa-share-square"></i>
                         Widgets
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='support'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'support'){echo 'active';}?>">
                     <a class="nav-link" href="?page=support">
                         <i class="fas fa-life-ring"></i>
                         Support
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='maintenance'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'maintenance'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=maintenance">
                         <i class="fas fa-wrench"></i>
                         Maintenance
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'newsletter', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='newsletter'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'newsletter'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=newsletter">
                         <i class="fas fa-newspaper"></i>
                         NewsLetter
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'support', 'maintenance','showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='upload'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'upload'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=upload">
                         <i class="fas fa-cloud-upload-alt"></i>
                         Upload
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'update', 'showPage')) { ?>
-                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page']=='maj'){echo 'active';}?>">
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'maj'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=maj">
                         <i class="fas fa-box-open"></i>
                         Mise à jour
