@@ -8,6 +8,9 @@ date_default_timezone_set('Europe/Paris');
 setlocale(LC_TIME, 'fr_FR');
 ini_set('display_errors', 1);
 
+//Load security tools
+require_once ('controleur/security/security.php');
+
 
 require('modele/app/urlRewrite.class.php');
 urlRewrite::call();

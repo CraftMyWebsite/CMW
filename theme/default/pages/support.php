@@ -35,10 +35,10 @@
 
                             <!-- Listing des tickets -->
                             <tr class="no-hover">
-                                <?php if ($tickets['ticketDisplay'] == 0 or $tickets['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) :
+                                <?php if (htmlspecialchars($tickets['ticketDisplay']) === 0 || htmlspecialchars($tickets['auteur']) === $_Joueur_['pseudo'] || Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) :
                                     if (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) : ?>
                                         <td>
-                                            <?php if ($tickets['ticketDisplay'] == '0') : ?>
+                                            <?php if (htmlspecialchars($tickets['ticketDisplay']) === '0') : ?>
                                                 <span>
                                                     <i class="glyphicon glyphicon-eye-open"></i> Publique
                                                 </span>
@@ -51,29 +51,29 @@
                                     <?php endif; ?>
 
                                     <td>
-                                        <a href="index.php?page=profil&profil=<?= $tickets['auteur'] ?>">
-                                            <img alt="Avatar de l'auteur <?= $_Joueur_['pseudo']; ?>" class="icon-player-topbar" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32) ?>" style="width: 32px; height: 32px" />
-                                            <?= $tickets['auteur'] ?>
+                                        <a href="index.php?page=profil&profil=<?= htmlspecialchars($tickets['auteur']) ?>">
+                                            <img alt="Avatar de l'auteur <?= htmlspecialchars($_Joueur_['pseudo']) ?>" class="icon-player-topbar" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32) ?>" style="width: 32px; height: 32px" />
+                                            <?= htmlspecialchars($tickets['auteur']) ?>
                                         </a>
                                     </td>
 
                                     <td>
-                                        <?= $tickets['titre'] ?>​
+                                        <?= htmlspecialchars($tickets['titre']) ?>
                                     </td>
 
-                                    <td><?php echo $_Forum_->conversionDate($tickets['date_post']); ?>
+                                    <td><?= $_Forum_->conversionDate($tickets['date_post']) ?>
                                     </td>
 
                                     <td>
-                                            <a class="btn btn-reverse no-hover" data-toggle="modal" data-target="#slide-<?= $tickets['id']; ?>" data-dismiss="modal">
+                                            <a class="btn btn-reverse no-hover" data-toggle="modal" data-target="#slide-<?= htmlspecialchars($tickets['id']) ?>" data-dismiss="modal">
                                             <i class="fa fa-eye"></i> Voir
                                         </a>
                                     </td>
 
                                     <td>
                                         <?php
-                                        $ticketstatus = $tickets['etat'];
-                                        if ($ticketstatus == '1') : ?>
+                                        $ticketstatus = htmlspecialchars($tickets['etat']);
+                                        if ($ticketstatus === '1') : ?>
                                             <button class="btn btn-success">
                                                 Résolu <span class="glyphicon glyphicon-ok"></span>
                                             </button>
@@ -86,8 +86,8 @@
 
                                     <?php if (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'closeTicket')) : ?>
                                         <td style="text-align: center;">
-                                            <form class="form-horizontal default-form" method="post" action="?action=ticketEtat&id=<?= $tickets['id']; ?>">
-                                                <?php if ($tickets['etat'] == 0) : ?>
+                                            <form class="form-horizontal default-form" method="post" action="?action=ticketEtat&id=<?= htmlspecialchars($tickets['id']) ?>">
+                                                <?php if (htmlspecialchars($tickets['etat']) == 0) : ?>
                                                     <button type="submit" name="etat" class="btn btn-main" value="1">
                                                         Fermer le ticket
                                                     </button>
@@ -105,15 +105,15 @@
 
                             <!-- Système de ticket support -->
 
-                            <?php if ($tickets['ticketDisplay'] == '0' or $tickets['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) :
-                                $ticketstatus = $tickets['etat'];
+                            <?php if (htmlspecialchars($tickets['ticketDisplay']) === '0' || htmlspecialchars($tickets['auteur']) === $_Joueur_['pseudo'] || Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) :
+                                $ticketstatus = htmlspecialchars($tickets['etat']);
 
                                 unset($message);
                                 $message = $tickets['message'];
 
                                 $commentaires = 0; ?>
 
-                                <div class="modal fade" id="slide-<?= $tickets['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="slide-<?= $tickets['id']; ?>" aria-hidden="true">
+                                <div class="modal fade" id="slide-<?= htmlspecialchars($tickets['id']) ?>" tabindex="-1" role="dialog" aria-labelledby="slide-<?= htmlspecialchars($tickets['id']) ?>" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -121,7 +121,7 @@
                                                     <span aria-hidden="true" style="color: var(--base-color);">&times;</span>
                                                 </button>
                                                 <h5 class="modal-title mr-auto">
-                                                    Support : <?= $tickets['titre']; ?>
+                                                    Support : <?= htmlspecialchars($tickets['titre']) ?>
 
                                                     <?php if ($ticketstatus == 1) : ?>
                                                         <div class="ribbon-wrapper ">
@@ -138,20 +138,20 @@
 
                                                 <div class="media">
                                                     <p class="username">
-                                                        <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo($tickets['auteur'], 32); ?>" style="width: 32px; height: 32px;" alt="Avatar de <?= $tickets['auteur'] ?>" />
+                                                        <img class="mr-3" src="<?= $_ImgProfil_->getUrlHeadByPseudo(htmlspecialchars($tickets['auteur']), 32); ?>" style="width: 32px; height: 32px;" alt="Avatar de <?= htmlspecialchars($tickets['auteur']) ?>" />
                                                         <div class="media-body">
                                                             <h6 class="mt-0 mb-2 font-weight-bold">
-                                                                <?= $tickets['auteur']; ?> | le <?= $_Forum_->conversionDate($tickets['date_post']); ?>
+                                                                <?= htmlspecialchars($tickets['auteur']) ?> | le <?= $_Forum_->conversionDate(htmlspecialchars($tickets['date_post'])) ?>
                                                             </h6>
-                                                            <?= $message; ?>
-                                                               
+                                                            <?= $message ?>
+
 
                                                             <hr class="bg-main w-100">
 
                                                             <!-- Commentaires -->
                                                             <?php if (isset($ticketCommentaires[$tickets['id']])) :
 
-                                                                for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) :
+                                                                for ($i = 0, $iMax = count($ticketCommentaires[$tickets['id']]); $i < $iMax; $i++) :
 
                                                                     unset($message);
                                                                     $message = $ticketCommentaires[$tickets['id']][$i]['message'];
@@ -168,13 +168,13 @@
                                                                                 <div id="contenueCom<?= $tickets['id'] ?>-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>" style="margin-bottom:10px;"><?= $message; ?></div>
 
                                                                                 <!-- Actions possible sur les commentaires -->
-                                                                                <?php if ((isset($_Joueur_))  &&  (($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] || Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) || ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] || Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')))) : ?>
+                                                                                <?php if ((isset($_Joueur_))  &&  (($ticketCommentaires[$tickets['id']][$i]['auteur'] === $_Joueur_['pseudo'] || Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) || (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')))) : ?>
 
                                                                                     <div class="dropdown">
                                                                                         <a class="btn btn-reverse no-hover float-right" data-toggle="dropdown">Action <b class="caret"></b></a>
                                                                                         <ul class="dropdown-menu">
 
-                                                                                            <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) : ?>
+                                                                                            <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] === $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'deleteMemberComm')) : ?>
 
                                                                                                 <li>
                                                                                                     <a href="index.php?action=delete_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>&id_ticket=<?= $tickets['id'] ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>" class="dropdown-item">
@@ -184,7 +184,7 @@
 
                                                                                             <?php endif; ?>
 
-                                                                                            <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) : ?>
+                                                                                            <?php if ($ticketCommentaires[$tickets['id']][$i]['auteur'] === $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) : ?>
                                                                                                 <li>
                                                                                                     <a href="#editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>" data-toggle="modal" data-target="#editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>" class="dropdown-item" data-dismiss="modal">Editer</a>
                                                                                                 </li>
@@ -192,7 +192,7 @@
                                                                                         </ul>
                                                                                     </div>
 
-                                                                                <?php endif; if($tickets['etat'] == '0') { ?>
+                                                                                <?php endif; if($tickets['etat'] === '0') { ?>
                                                                                 <button type="button" onclick="addBlockQuote('ckeditorCom<?= $tickets['id'] ?>','contenueCom<?= $tickets['id'] ?>-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>', '<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
                                                                                 <?php } ?>
                                                                             </div>
@@ -216,13 +216,13 @@
                                             <div class="modal-footer">
 
                                                 <!-- Envoie d'un commentaire -->
-                                                <?php if ($tickets['etat'] == '0') : ?>
+                                                <?php if ($tickets['etat'] === '0') : ?>
 
                                                     <form action="?action=post_ticket_commentaire" method="post">
-                                                        <input type="hidden" name="id" value="<?= $tickets['id'] ?>" />
+                                                        <input type="hidden" name="id" value="<?= htmlspecialchars($tickets['id']) ?>" />
                                                             <div style="width:100%;">
-                                                            
-                                                                <textarea  data-UUID="0006<?= $tickets['id'] ?>" id="ckeditorCom<?= $tickets['id'] ?>" name="message" style="height: 275px;"></textarea>
+
+                                                                <textarea  data-UUID="0006<?= htmlspecialchars($tickets['id']) ?>" id="ckeditorCom<?= htmlspecialchars($tickets['id']) ?>" name="message" style="height: 275px;"></textarea>
                                                             </div>
                                                         <button type="submit" class="btn btn-main mt-4 w-100">Commenter</button>
                                                     </form>
@@ -244,12 +244,12 @@
 
                             <!-- Edition d'un commentaire -->
 
-                            <?php if (isset($ticketCommentaires[$tickets['id']][$i]['auteur']) && $ticketCommentaires[$tickets['id']][$i]['auteur'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) :
+                            <?php if ((isset($ticketCommentaires[$tickets['id']][$i]['auteur']) && $ticketCommentaires[$tickets['id']][$i]['auteur'] === $_Joueur_['pseudo']) || Permission::getInstance()->verifPerm('PermsDefault', 'support', 'editMemberComm')) :
                                 if (!empty($ticketCommentaires[$tickets['id']])) :
-                                    for ($i = 0; $i < count($ticketCommentaires[$tickets['id']]); $i++) : ?>
+                                    for ($i = 0, $iMax = count($ticketCommentaires[$tickets['id']]); $i < $iMax; $i++) : ?>
 
-                                        <div class="modal fade" id="editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editComm">
-                                            <form method="POST" action="?action=edit_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>&id_ticket=<?= $tickets['id']; ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>">
+                                        <div class="modal fade" id="editComm-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="editComm">
+                                            <form method="POST" action="?action=edit_support_commentaire&id_comm=<?= $ticketCommentaires[$tickets['id']][$i]['id']; ?>&id_ticket=<?= $tickets['id'] ?>&auteur=<?= $ticketCommentaires[$tickets['id']][$i]['auteur'] ?>">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
 
@@ -267,7 +267,7 @@
                                                                 <div class="row mt-4">
                                                                     <div style="width:100%;">
                                                                         <textarea data-UUID="0015" name="editMessage" class="form-control custom-text-input" style="height: 275px; ">
-                                                                        <?= $ticketCommentaires[$tickets['id']][$i]['message']; ?></textarea>
+                                                                        <?= $ticketCommentaires[$tickets['id']][$i]['message'] ?></textarea>
                                                                     </div>
                                                                 </div>
 
@@ -328,14 +328,14 @@
                                             <div class="form-group">
                                                 <label for="vu_ticket">Visibilité</label>
                                                 <?php
-                                                if (!isset($_Serveur_['support']['visibilite']) || $_Serveur_['support']['visibilite'] == 'both') : ?>
+                                                if (!isset($_Serveur_['support']['visibilite']) || $_Serveur_['support']['visibilite'] === 'both') : ?>
                                                     <select class="form-control custom-text-input" id="vu_ticket" name="ticketDisplay">
                                                         <option value="0">Publique</option>
                                                         <option value="1">Privée</option>
                                                     </select>
                                                 <?php else : ?>
                                                     <select class="form-control custom-text-input" id="vu_ticket" name="ticketDisplay">
-                                                        <?php if ($_Serveur_['support']['visibilite'] == 'prive') : ?>
+                                                        <?php if ($_Serveur_['support']['visibilite'] === 'prive') : ?>
                                                             <option value="1">Privée</option>
                                                         <?php else : ?>
                                                             <option value="0">Publique</option>
@@ -346,9 +346,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group mb-0">
-                                       
+
                                         <label for="message_ticket">Description détaillée</label>
-                                        <textarea  data-UUID="0007" id="ckeditor" name="message" style="height: 275px; margin: 0px; width: 100%;"></textarea>
+                                        <textarea  data-UUID="0007" id="ckeditor" name="message" style="height: 275px; margin: 0; width: 100%;"></textarea>
                                     </div>
                                 </div>
                                 <div class="card-footer text-center">
