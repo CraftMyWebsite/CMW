@@ -35,9 +35,9 @@
             <?php include('./include/version.php'); ?>
 
             <div class="alert alert-danger">
-                <strong>Votre CMS CraftMyWebsite ne sera plus mise à jour ! La version 2.0 de CraftMyWebsite étant sortie
+                <strong>Votre version de CraftMyWebsite ne sera plus mise à jour ! La version 2.0 de CraftMyWebsite étant déjà sortie ou ne devrait tarder à sortir,
                     vous ne pourrez plus obtenir de support ni même de nouveautés, nous vous invitons à télécharger et installer cette
-                    nouvelle version
+                    nouvelle version (Si elle est déjà disponible)
                     <a href="https://craftmywebsite.fr/telecharger"
                        class="btn btn-warning" target="_blank">ICI</a>
                 </strong>
