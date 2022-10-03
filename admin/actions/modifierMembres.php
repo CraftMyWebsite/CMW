@@ -1,4 +1,12 @@
 <?php
+$token=filter_input(INPUT_POST, 'token');
+var_dump($token);
+die();
+if ($token !== $_SESSION['token']){
+    header('Location: accueil');
+    die();
+}
+
 if($_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) { 
 
 	$allChange= explode('_', $_POST['allid']);

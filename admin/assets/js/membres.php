@@ -1,4 +1,9 @@
 <script>
+    <?php
+    $token = random_int(0, 10000000000);
+
+    $_SESSION['token'] = $token;
+    ?>
 var maxShow;
 var oldmaxShow;
 var index;
@@ -12,7 +17,9 @@ var PlayerTotal = <?php echo count($membres); ?>;
 var axe = "id";
 var grade = new Map();
 var axeType = "ASC"; /* ASC = croissant && DESC = !ASC */
-var canEdit = <?php echo $_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember') ? 'true' : 'false'; ?>
+var canEdit = <?php echo $_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember') ? 'true' : 'false'; ?>;
+var uniqueToken = <?= $token ?>
+
 
 
 $(window).on('load', function () {
@@ -116,6 +123,7 @@ async function showAll(allPlayer) {
         for(let i = 0; i < allPlayer.length; i++) {
             all += '<tr class="ligneMembres" id="user'+allPlayer[i].id2+'">';
             all += '<td><input type="number"  class="form-control membres-form" style="padding:1px;text-align:center;"value="'+allPlayer[i].id2+'" disabled></td>';
+            all += '<input type="hidden" name="token" class="form-control membres-form" value="'+uniqueToken+'" hidden>';
             if (typeof allChange["id"+allPlayer[i].id2] === 'undefined') {
                 all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-pseudo' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form"  value="' + allPlayer[i].pseudo + '" placeholder="Pseudo"></td>';
                 all += '<td><input type="text" onkeyup="addChange('+allPlayer[i].id2+')" name="input-email' + allPlayer[i].id2 + '" class="input-disabled form-control membres-form" value="' + allPlayer[i].email + '" placeholder="Email"></td>';
@@ -171,6 +179,7 @@ function addChange(id) {
                 allChange["allid"] += id+"_";
             }
         }
+        allChange["token"] = uniqueToken;
         allChange["id"+id] = id;
         allChange["pseudo"+id] = document.getElementsByName("input-pseudo"+id)[0].value;
         allChange["email"+id] = document.getElementsByName("input-email"+id)[0].value;
@@ -187,7 +196,7 @@ function sendChange() {
     });
 
     $.post("admin.php?action=modifierMembres", allChange, function(data, status){
-        if(status != "success") {
+        if(status !== "success") {
             ChangeButton.disabled = false;
              notif("error", "Erreur", status);
         }else {
