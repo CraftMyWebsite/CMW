@@ -38,7 +38,7 @@ if (isset($_POST['go']) and $_POST['go'] == 1) {
                 max-width: 960px;
             }
         </style>
-        <title>CraftMyWebsite | Mise à jour - 1.19 - LTS</title>
+        <title>CraftMyWebsite | Mise à jour - 1.9 - LTS</title>
     </head>
 
     <body class="bg-light2">
@@ -66,8 +66,8 @@ if (isset($_POST['go']) and $_POST['go'] == 1) {
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <p class="text">
                     Cette version réinitialisera votre choix thème (Défault), les thèmes autre que Default sont pas
-                    forcément compatible avec cette version - en cas de doute contacter le créateur du thème que vous
-                    souaither utilisé !
+                    forcément compatible avec cette version - en cas de doute contactez le créateur du thème que vous
+                    souaithez utilisé !
                 </p>
             </div>
             <div class="alert alert-danger">
@@ -102,7 +102,7 @@ if (isset($_POST['go']) and $_POST['go'] == 1) {
                             <h2 class="mb-3">
                                 <button class="btn btn-block btn-primary" type="button" data-toggle="collapse"
                                         data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Changlog
+                                    Changelog
                                 </button>
                             </h2>
                             <div id="collapseOne" class="collapse bg-light" aria-labelledby="headingOne"
