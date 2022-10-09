@@ -83,7 +83,7 @@ include '../include/version.php';
                 <strong>ATTENTION</strong> : Erreur Critique, votre serveur est soumis aux failles htaccess. Veuillez
                 les corriger, en suivant <a
                         href="https://www.aidoweb.com/tutoriaux/fichier-htaccess-qui-ne-fonctionne-pas-solutions-configuration-apache-648"
-                        target="_blank">ce tuto</a> ou nous contactez-nous sur <a href="https://discord.gg/wMVAeug"
+                        target="_blank">ce tuto</a> ou contactez-nous sur <a href="https://discord.gg/wMVAeug"
                                                                              target="_blank">Discord</a>
                 <div class="row">
                     <div class="col-md-6">
