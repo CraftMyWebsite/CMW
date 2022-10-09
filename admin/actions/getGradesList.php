@@ -49,7 +49,7 @@
                             <input type="color" name="couleurCreateur" id="couleurCrea" onchange="updatePrevisu('Crea');" value="<?=(empty($_Serveur_['General']['createur']['couleur'])) ? '#000000' : $_Serveur_['General']['createur']['couleur'];?>" />
 
                             <br/>
-                            <label class="control-label">Prévisulation : <span id="previsuCrea" class="prefix <?=$_Serveur_['General']['createur']['effets'];?>" style="background-color: <?=$_Serveur_['General']['createur']['bg'];?>; color: <?=(empty($_Serveur_['General']['createur']['couleur'])) ? '#000000' : $_Serveur_['General']['createur']['couleur'];?>"><?=$_Serveur_['General']['createur']['nom'];?></span>
+                            <label class="control-label">Prévisualisation : <span id="previsuCrea" class="prefix <?=$_Serveur_['General']['createur']['effets'];?>" style="background-color: <?=$_Serveur_['General']['createur']['bg'];?>; color: <?=(empty($_Serveur_['General']['createur']['couleur'])) ? '#000000' : $_Serveur_['General']['createur']['couleur'];?>"><?=$_Serveur_['General']['createur']['nom'];?></span>
                             <div id="effetsCrea">
                             	<label class="control-label">Effets</label>
 	                            <?php for($a =0; $a < count($effets); $a++) { ?>
@@ -95,7 +95,7 @@
 	                            <input type="color" name="couleur<?=$i;?>" id="couleur<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=(empty($idGrade[$i]['couleur'])) ? '#000000' : $idGrade[$i]['couleur'];?>" />
 
 	                            <br/>
-	                            <label class="control-label">Prévisulation : <span id="previsu<?=$i;?>" class="prefix <?=$idGrade[$i]['effets'];?>" style="background-color: <?=$idGrade[$i]['prefix'];?>; color: <?=(empty($idGrade[$i]['couleur'])) ? '#000000' : $idGrade[$i]['couleur'];?>"><?=$idGrade[$i]['nom'];?></span>
+	                            <label class="control-label">Prévisualisation : <span id="previsu<?=$i;?>" class="prefix <?=$idGrade[$i]['effets'];?>" style="background-color: <?=$idGrade[$i]['prefix'];?>; color: <?=(empty($idGrade[$i]['couleur'])) ? '#000000' : $idGrade[$i]['couleur'];?>"><?=$idGrade[$i]['nom'];?></span>
 	                            <div id="effets<?=$i;?>">
 	                            	<label class="control-label">Effets</label>
 		                            <?php for($a =0; $a < count($effets); $a++) { ?>

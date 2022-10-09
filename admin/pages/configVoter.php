@@ -1,4 +1,3 @@
-
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h2 class="h2 gray">
                     Gestion des récompenses automatiques
@@ -7,7 +6,7 @@
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'showPage')) { ?>
   <div class="col-lg-6 col-lg-offset-3 text-center">
     <div class="alert alert-danger">
-      <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+      <strong>Vous n'avez aucune permission pour accéder à cette page.</strong>
     </div>
   </div>
 <?php }
@@ -33,7 +32,7 @@ else
           <div id="recsem" <?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 2) { echo 'style="display:none;"';} ?>>
             <label class="control-label">Le jour de la semaine:</label>
             <select style="width:175px;margin-bottom:10px;" name="jour" class="form-control form-control-sm">
-                <option value="1" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 1) { echo 'selected';}?> >lundi</option>
+                <option value="1" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 1) { echo 'selected';}?>>lundi</option>
                 <option value="2" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 2) { echo 'selected';}?>>mardi</option>
                 <option value="3" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 3) { echo 'selected';}?>>mercredi</option>
                 <option value="4" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 4) { echo 'selected';}?>>jeudi</option>

@@ -8,7 +8,7 @@
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'maintenance', 'showPage')) { ?>
         <div class="col-md-12 text-center">
             <div class="alert alert-danger">
-                <strong>Vous avez aucune permission pour accéder à la maintenance.</strong>
+                <strong>Vous n'avez aucune permission pour accéder à la maintenance.</strong>
             </div>
         </div>
     <?php } else { ?>
@@ -33,7 +33,7 @@
                                 <div id="msg1<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Modification du message principal</strong></span>
                                     <textarea data-UUID="0014" id="ckeditor" name="maintenanceMsg" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsg']; ?></textarea>
-                                    <input onclick="sendPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>', null);"  type="submit" class="btn btn-success maintenance_msg_btn" value="Modifier le message !" />
+                                    <input onclick="sendPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>', null);"  type="submit" class="btn btn-success maintenance_msg_btn" value="Modifier le message" />
                                 </div>
 
                                 <script>initPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessage&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
@@ -42,7 +42,7 @@
                                 <div id="msg2<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Message d'administration</strong></span>
                                     <textarea  data-UUID="0015" id="ckeditor" name="maintenanceMsgAdmin" class="form-control" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsgAdmin']; ?></textarea>
-                                    <input onclick="sendPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>', null);" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message !" />
+                                    <input onclick="sendPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>', null);" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message" />
                                 </div>
 
                                 <script>initPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageAdmin&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
@@ -52,7 +52,7 @@
                                 <div id="msg3<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Message d'inscription</strong></span>
                                     <textarea  data-UUID="0016" id="ckeditor" name="maintenanceMsgInscr" class="form-control" style="height: 275px; margin: 0px; width: 20%;required"><?php echo $maintenance[$i]['maintenanceMsgInscr']; ?> </textarea>
-                                    <input onclick="sendPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>');" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message !" />
+                                    <input onclick="sendPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>');" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message" />
                                 </div>
 
                                 <script>initPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageInscr&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>');</script>
@@ -75,7 +75,7 @@
                                     <?php if($maintenance[$i]['maintenanceEtat'] == 1) { ?> 
                                         <button class="btn btn-block" style="background: #18bc9c;color: white;" disabled><strong>INFO :</strong> Maintenance activée</button>
                                     <?php } else { ?>
-                                        <button class="btn btn-block" style="background: #e74c3c;color: white;" disabled><strong>INFO :</strong> Maintenance  désactivée</button>
+                                        <button class="btn btn-block" style="background: #e74c3c;color: white;" disabled><strong>INFO :</strong> Maintenance désactivée</button>
                                     <?php } ?>
                                 <?php } ?>
                                 </div>

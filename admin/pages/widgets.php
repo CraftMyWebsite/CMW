@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
-				<strong>Vous avez aucune permission pour accéder aux widgets..</strong>
+				<strong>Vous n\'avez aucune permission pour accéder aux widgets..</strong>
 			</div>
 		</div>
 	</div>';
@@ -49,7 +49,7 @@
 	            <div class="card-footer">
 	                <div class="row text-center">
 	                    <input type="submit" onclick="sendPost('addWidgets', null );" class="btn btn-success w-100"
-	                        value="Envoyer !" />
+	                        value="Envoyer" />
 	                </div>
 	            </div>
 	        </div>
@@ -118,7 +118,7 @@
 				</div>
 				<script>initPost("allWidgets", "admin.php?action=editWidgets");</script>
 	            <div class="card-footer">
-	                <button type="submit" class="btn btn-success w-100" onClick="sendPost('allWidgets')">Envoyer!</button>
+	                <button type="submit" class="btn btn-success w-100" onClick="sendPost('allWidgets')">Envoyer</button>
 	            </div>
 			</div>
 		</div>

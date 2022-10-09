@@ -1,5 +1,3 @@
-
-
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 	<h2 class="h2 gray">
 		Réglages Forum
@@ -9,7 +7,7 @@
 { ?>
 	<div class="col-lg-6 col-lg-offset-3 text-center">
 		<div class="alert alert-danger">
-			<strong>Vous avez aucune permission pour accéder aux réglages de cette page.</strong>
+			<strong>Vous n'avez aucune permission pour accéder aux réglages de cette page.</strong>
 		</div>
 	</div>
 <?php }  else { ?>

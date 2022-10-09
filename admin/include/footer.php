@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-6">
             <p class="gray text-right footer-text" style="padding-right: 15px;">
-                &copy; 2014 -<?= date('Y') ?> CraftMyWebsite, tous droits réservé
+                &copy; 2014 -<?= date('Y') ?> CraftMyWebsite, tous droits réservés
             </p>
             <div class="custom-control custom-switch">
                 <form id="darkForm" method="POST" action="">

@@ -1,4 +1,4 @@
-AuthName "Page d'administration protégée"
+AuthName "Page d'administration protÃ©gÃ©e"
 AuthType Basic
 AuthUserFile "."
 Require valid-user

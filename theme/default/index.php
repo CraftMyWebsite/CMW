@@ -95,7 +95,7 @@ if (Permission::getInstance()->verifPerm('PermsPanel', 'update', 'showPage')) : 
 
     <div class=" mb-0 rounded-0 text-center alert alert-main bg-lightest alert-dismissible text-shadow-none fade show sticky-top" role="alert">
         <h5 class="m-0">
-            Cette version ne recevra plus de mises à jour, merci d'anticiper la migration vers notre nouvelle version (2.0)
+            Cette version ne recevra plus de mise à jour, merci d'anticiper la migration vers notre nouvelle version (2.0)
             <strong><a href="https://craftmywebsite.fr/telecharger" target="_blank"
                        class="alert-link">ici</a></strong> !
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: var(--base-color);">
@@ -111,14 +111,14 @@ include('theme/' . $_Serveur_['General']['theme'] . '/entete.php'); //Header inc
 tempMess(); ?>
 
 <?php
-//Verif Installation Folder is deleted
+// Vérification que le dossier d'installation à bien été supprimé
 if (is_dir('installation')) {
     include('theme/' . $_Serveur_['General']['theme'] . '/pages/fichier_installation.php');
 } else {
-    include('controleur/page.php'); //Page included
+    include('controleur/page.php'); // Page included
 }
-include('theme/' . $_Serveur_['General']['theme'] . '/pied.php');  //Footer included
-include('theme/' . $_Serveur_['General']['theme'] . '/formulaires.php'); //Forms included
+include('theme/' . $_Serveur_['General']['theme'] . '/pied.php');  // Footer included
+include('theme/' . $_Serveur_['General']['theme'] . '/formulaires.php'); // Forms included
 ?>
 
 <div id="divScroll" class="btn btn-main" onclick="goToTop()"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
@@ -136,7 +136,7 @@ include('theme/' . $_Serveur_['General']['theme'] . '/formulaires.php'); //Forms
 <?php include 'theme/' . $_Serveur_['General']['theme'] . '/assets/php/ckeditorManager.php'; ?>
 <script type="application/javascript" src="theme/<?= $_Serveur_['General']['theme']; ?>/assets//js/toastr.min.js"></script>
 <?php include 'theme/' . $_Serveur_['General']['theme'] . '/assets/php/custom.php'; ?>
-<?php if ($_Serveur_['Payement']['dedipass']) : //API DEDIPASS
+<?php if ($_Serveur_['Payement']['dedipass']) : // API DEDIPASS
     ?>
     <script type="application/javascript" src="//api.dedipass.com/v1/pay.js"></script>
 <?php endif; ?>

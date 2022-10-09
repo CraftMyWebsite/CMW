@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
-				<strong>Vous avez aucune permission pour accéder aux newsletter.</strong>
+				<strong>Vous n\'avez aucune permission pour accéder aux newsletter.</strong>
 			</div>
 		</div>
 	</div>';
@@ -88,7 +88,7 @@ else
             </div>
 
 			<div class="card-footer">
-				<h5 class="card-title">Dernière NewsLetter envoyé: <span id="lastdate"><?=(isset($_Serveur_['Mail']['last'])) ? date('d/m/Y H:i:s', $_Serveur_['Mail']['last']): 'jamais.';?></span></h5>
+				<h5 class="card-title">Dernière newsletter envoyée : <span id="lastdate"><?=(isset($_Serveur_['Mail']['last'])) ? date('d/m/Y H:i:s', $_Serveur_['Mail']['last']): 'jamais.';?></span></h5>
 			</div>
         </div>
    	</div>
@@ -123,7 +123,7 @@ else
 
 						<div class="custom-control custom-switch" style="padding-top: 20px">
 							<input type="checkbox" value="tls" class="custom-control-input" id="protocolTls" name="protocolTls" OnClick="if(get('protocolTls').checked) { get('protocolSsl').checked = false; } else { get('protocolSsl').checked = true; }" <?=(isset($_Serveur_['SMTPNEWS']['Protocol'])) ? ($_Serveur_['SMTPNEWS']['Protocol'] == 'tls' ? 'checked': '') : 'checked';?>>
-							<label class="custom-control-label" for="protocolTls">Protocole TLS (à cocher par défaut)</label>
+							<label class="custom-control-label" for="protocolTls">Protocole TLS (par défaut)</label>
 						</div>
 
 						<div class="custom-control custom-switch" style="padding-top: 20px">
@@ -147,7 +147,7 @@ else
 		</div>
 		<div class="card-footer">
 	        <div class="row text-center">
-	            <button type="button" class="circle-btn-start btn btn-success w-100" >Envoyer la newsletter !</button>
+	            <button type="button" class="circle-btn-start btn btn-success w-100" >Envoyer la newsletter</button>
 	        </div>
 	    </div>
 	</div>

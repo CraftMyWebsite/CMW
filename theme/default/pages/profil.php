@@ -47,7 +47,7 @@
             <div class="col-12 col-sm-12">
                 <div class="card text-center" style="margin-top:30px" >
                     <div class="card-body">
-                        <h5 class="card-title">Signature:</h5>
+                        <h5 class="card-title">Signature :</h5>
                         <div><?=$_Profil_->getPlayer()['signature']?></div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                             <label class="control-label">Votre âge (Mettre 0 pour cacher):</label>
                             <input type="number" class="form-control" value="<?=$_Profil_->getPlayer()['age'] ?>" name="age" placeholder="17" required>
 
-                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                                     <input class="form-control" id="file-text" type="text" placeholder="Aucun fichier sélectionné" readonly>
                                     <input type="file" name="img_profil" id="File" style="display:none;" required>
                                     <div class="input-group-append">
-                                        <label class="btn btn-secondary mb-0" for="File">Choisir un fichier</label>
+                                        <label class="btn btn-secondary mb-0" for="File">Parcourir</label>
                                     </div>
                                 </div>
                                 <script>
@@ -109,7 +109,7 @@
                                         }
                                 </script>
 
-                                <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                                <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
 
                             <label class="control-label">Votre mot de passe:</label>
                             <input type="password" class="form-control" name="mdp" required>
-                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                               </label>
                             </div>
 
-                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                             <label class="control-label">Confirmer le mot de passe:</label>
                             <input type="password" class="form-control" name="mdpConfirme" required>
 
-                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                               </label>
                             </div>
 
-                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>
@@ -235,7 +235,7 @@
                                 <?php }
                             } ?>
 
-                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>
@@ -253,10 +253,10 @@
                 <div id="editsign" class="collapse">
                     <div class="card-body">
                         <form method="post" action="?action=editSignature" role="form">
-                            <label class="control-label">Votre signature (afficher après vos messages sur le forum et sur votre profil):</label>
+                            <label class="control-label">Votre signature (Placé automatiquement à la fin de vos messages sur le forum et sur votre profil):</label>
                             <textarea  data-UUID="1003" name="signature" style="height: 750px; margin: 0px; width: 100%;"><?=$_Profil_->getPlayer()['signature']?></textarea>
 
-                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
                              <label class="control-label">Montant à donner:</label>
                             <input type="number" min="0" max="999999999999999999999" class="form-control" name="montant" required>
 
-                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer!</button>
+                            <button type="submit" style="margin-top:30px;" class="btn btn-success w-100" >Envoyer</button>
                         </form>
                     </div>
                 </div>

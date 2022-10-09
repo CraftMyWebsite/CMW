@@ -11,7 +11,7 @@ $fofo = $_Forum_->affichageForum();
                     <i class="fas fa-info-circle notification-icon"></i>
                     <div class="info-content">
                         Bienvenue sur le forum de <?= $_Serveur_['General']['name']; ?>, <br>
-                        Ici vous pourrez échanger et partager avec toute la communauté du serveur !
+                        Ici vous pouvez échanger et partager avec toute la communauté du serveur !
                     </div>
                 </div>
                 <div class="d-flex col-12 col-sm-6 col-lg-4" style="margin:auto;">

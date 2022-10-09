@@ -22,7 +22,7 @@ if(isset($_GET['paypal'])){
     <?php if(!$_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) { ?>
     <div class="col-md-12 text-center">
         <div class="alert alert-danger">
-            <strong>Vous avez aucune permission pour accéder aux réglages des paiements.</strong>
+            <strong>Vous n'avez aucune permission pour accéder aux réglages des paiements.</strong>
         </div>
     </div>
     <?php } else { ?>
@@ -84,7 +84,7 @@ if(isset($_GET['paypal'])){
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements !" />
+                            <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements" />
                         </div>
                     </div>
                 <?php } else if($affichage == 'paypal')
@@ -97,7 +97,7 @@ if(isset($_GET['paypal'])){
                 <input type="hidden" name="paypalpage" value="1">
                 <div class="card-footer">
                     <div class="row">
-                        <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements !" />
+                        <input type="submit" class="btn btn-success w-100" onclick="sendPost('payementinfo');" value="Valider les changements" />
                     </div>
                 </div>
             <?php } else {
@@ -207,7 +207,7 @@ if(isset($_GET['paypal'])){
                                                 <button onclick="sendDirectPost('?&action=supprimerPaypalOffre&id=<?php echo $paypalOffres[$i]['id']; ?>',function(data) { if(data) { hide('payementPaypal<?php echo $i; ?>'); hide('tab-payementPaypal<?php echo $i; ?>');}});" class="btn btn-danger w-100">Supprimer</button>                                        
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="submit"  onclick="sendPost('payementPaypal<?php echo $i; ?>');" class="btn btn-success w-100" value="Valider les changements !"/>
+                                                <input type="submit"  onclick="sendPost('payementPaypal<?php echo $i; ?>');" class="btn btn-success w-100" value="Valider les changements"/>
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@ if(isset($_GET['paypal'])){
                                 </div><hr>
                                 <div class="row">
                                     <div class="offset-md-4 col-md-4">
-                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Valider les changements !"/>
+                                        <input type="submit" onclick="sendPost('payementPaysafecard<?php echo $i; ?>');" class="btn btn-success align-center w-75" value="Valider les changements"/>
                                     </div>
                                 </div>
                                  <script>initPost('payementPaysafecard<?php echo $i; ?>', 'admin.php?&action=modifierOffrePaysafecard&id=<?php echo $paysafecard[$i]['id']; ?>',null);</script>

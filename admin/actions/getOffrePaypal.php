@@ -2,7 +2,7 @@
 	require_once('./admin/donnees/payement.php'); ?>
 	<?php if(!isset($paypalOffres) OR empty($paypalOffres)) { ?>
             <div class="alert alert-warning">
-                <strong>Vous devez créer une offre paypal !</strong>
+                <strong>Vous devez créer une offre PayPal !</strong>
             </div>
         <?php } else { ?>
             <div class="alert alert-success">

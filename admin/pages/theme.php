@@ -8,7 +8,7 @@
 </div>
 <?php if (!$_Permission_->verifPerm('PermsPanel', 'theme', 'showPage')) { ?>
 <div class="alert alert-danger">
-    <strong>Vous avez aucune permission pour accéder aux thèmes.</strong>
+    <strong>Vous n'avez aucune permission pour accéder aux thèmes.</strong>
 </div>
 <div class="row">
     <?php } else {
@@ -77,7 +77,7 @@
                             </script>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success w-100">Envoyer!</button>
+                            <button type="submit" class="btn btn-success w-100">Envoyer</button>
                         </div>
                     </form>
                 </div>
