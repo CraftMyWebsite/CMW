@@ -44,7 +44,7 @@ include '../include/version.php';
             <div class="col-md-12">
                 <div class="wrapper-progressBar">
                     <ul class="progressBar">
-                        <li <?php if ($installEtape >= 1) echo 'class="active"'; ?>><span class="d-none d-md-block">Configuration de la base de donnée</span>
+                        <li <?php if ($installEtape >= 1) echo 'class="active"'; ?>><span class="d-none d-md-block">Configuration de la base de données</span>
                         </li>
                         <li <?php if ($installEtape >= 2) echo 'class="active"'; ?>><span class="d-none d-md-block">Paramétrage du site</span>
                         </li>
@@ -81,9 +81,9 @@ include '../include/version.php';
         <div class="pt-3">
             <div class="alert alert-danger">
                 <strong>ATTENTION</strong> : Erreur Critique, votre serveur est soumis aux failles htaccess. Veuillez
-                les activer, en suivant <a
+                les corriger, en suivant <a
                         href="https://www.aidoweb.com/tutoriaux/fichier-htaccess-qui-ne-fonctionne-pas-solutions-configuration-apache-648"
-                        target="_blank">ce tuto</a> ou nous contacter sur <a href="https://discord.gg/wMVAeug"
+                        target="_blank">ce tuto</a> ou nous contactez-nous sur <a href="https://discord.gg/wMVAeug"
                                                                              target="_blank">Discord</a>
                 <div class="row">
                     <div class="col-md-6">
