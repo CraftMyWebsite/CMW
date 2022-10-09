@@ -175,7 +175,7 @@
                 <div id="editmdp" class="collapse">
                     <div class="card-body">
                         <form method="post" action="?action=editMdp" role="form">
-                            <label class="control-label">Ancien mot de passe:</label>
+                            <label class="control-label">Mot de passe actuel:</label>
                             <input type="password" class="form-control" name="mdpAncien" required>
 
                             <label class="control-label" style="margin-top:30px;">Nouveau mot de passe:</label>
