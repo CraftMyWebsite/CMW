@@ -11,9 +11,9 @@ function VerifieExtension() {
 			$i2++;
 		}
 	}
-    if(PHP_VERSION_ID < 50400)
+    if(PHP_VERSION_ID < 70400)
     {
-        $erreur[$i2]="Version de PHP obsolète requis 7.0 minimum, vous avez :  ".phpversion();
+        $erreur[$i2]="Version de PHP obsolète requis 7.4 minimum, vous avez :  ".phpversion();
     }
 	
     if(empty($erreur)){
