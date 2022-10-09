@@ -24,7 +24,7 @@ if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignale
                             <tr>
                                 <th scope="col">Type de report</th>
                                 <th scope="col">Raison</th>
-                                <th scope="col">Reporteur</th>
+                                <th scope="col">Auteur</th>
                                 <th scope="col">Lien</th>
                             </tr>
                         </thead>
