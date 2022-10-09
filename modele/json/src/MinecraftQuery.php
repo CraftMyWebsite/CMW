@@ -70,7 +70,7 @@ class MinecraftQuery
 
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( 'Impossible de recevoir les challanges.' );
+			throw new MinecraftQueryException( 'Impossible de recevoir les challenges.' );
 		}
 
 		return Pack( 'N', $Data );
@@ -93,7 +93,7 @@ class MinecraftQuery
 
 		if( Count( $Data ) !== 2 )
 		{
-			throw new MinecraftQueryException( 'Failed to parse server\'s response.' );
+			throw new MinecraftQueryException( 'Échec de l\'analyse de la réponse du serveur.' );
 		}
 
 		$Players = SubStr( $Data[ 1 ], 0, -2 );
