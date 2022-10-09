@@ -91,8 +91,8 @@
                                 <i class="fa fa-user"></i> Compte
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item hvr-forward" href="#" data-toggle="modal" data-target="#InscriptionSlide"><i class="fa fa-user-plus"></i> Inscription</a>
                                 <a class="dropdown-item hvr-forward" href="#" data-toggle="modal" data-target="#ConnectionSlide"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+                                <a class="dropdown-item hvr-forward" href="#" data-toggle="modal" data-target="#InscriptionSlide"><i class="fa fa-user-plus"></i> Inscription</a>
                             </div>
                         </li>
                     <?php endif; ?>
