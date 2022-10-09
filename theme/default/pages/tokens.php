@@ -95,7 +95,7 @@
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <div class="info-page bg-danger">
-                                        <div class="text-center">Aucune offre de payement par paypal nest disponible pour le moment... </div>
+                                        <div class="text-center">Aucune offre de paiement par paypal nest disponible pour le moment... </div>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -108,7 +108,7 @@
                             <div class="info-page">
                                 <div class="text-center">
                                     <h5>Payer par Dedipass :</h5>
-                                    <h6>Payer par Dedipass avec votre forfait téléphonique tout en simplicité !</h6>
+                                    <h6>Payer par Dedipass avec votre forfait téléphonique en toute simplicité !</h6>
                                 </div>
                             </div>
 
