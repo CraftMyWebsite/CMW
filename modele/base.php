@@ -16,7 +16,7 @@ class base
 		}
 		catch (Exception $e)
 		{
-				die('Erreur BDD, revoyez votre fichier de config: ' . $e->getMessage() . "</br> Ou alors vous n'avez pas installé le CMS ? Cliquez ici : <a href='installation/'>INSTALLATION</a>");
+				die('Erreur BDD, merci de vérifier votre fichier de configuration: ' . $e->getMessage() . "</br> Ou alors vous n'avez pas installé le CMS ? Cliquez ici : <a href='installation/'>INSTALLATION</a>");
 		}
 	}
 	
