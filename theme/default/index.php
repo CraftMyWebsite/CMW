@@ -95,7 +95,7 @@ if (Permission::getInstance()->verifPerm('PermsPanel', 'update', 'showPage')) : 
 
     <div class=" mb-0 rounded-0 text-center alert alert-main bg-lightest alert-dismissible text-shadow-none fade show sticky-top" role="alert">
         <h5 class="m-0">
-            Cette version ne recevra plus de mis à jour, merci d'anticiper la migration vers notre nouvelle version (2.0)
+            Cette version ne recevra plus de mises à jour, merci d'anticiper la migration vers notre nouvelle version (2.0)
             <strong><a href="https://craftmywebsite.fr/telecharger" target="_blank"
                        class="alert-link">ici</a></strong> !
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: var(--base-color);">
