@@ -5,7 +5,7 @@ class JoueurForum {
 	private $_JoueurForum_;
 	private $bdd;
 	
-	//Fonction de création de la classe ( initialisation de la variable $_JoueurForum_ disponible sur toutes les pages du theme
+	//Fonction de création de la classe (initialisation de la variable $_JoueurForum_ disponible sur toutes les pages du theme)
 	// et initialisation de la variable $bdd uniquement disponible dans la class avec le $this->bdd 
 	public function __construct($pseudo, $id, $bdd)
 	{
@@ -45,7 +45,7 @@ class JoueurForum {
 		}
 	}
 	
-	//Fonction vérifiant si le topic a déjà été lu ou pas ( appelé sur la page forum_categorie et permettant de savoir notamment quelle icône afficher dans le tableau des posts)
+	//Fonction vérifiant si le topic a déjà été lu ou pas (appelé sur la page forum_categorie et permettant de savoir notamment quelle icône afficher dans le tableau des posts)
 	public function is_read($id_topic)
 	{
 		$req = $this->bdd->prepare('SELECT vu FROM cmw_forum_lu WHERE pseudo = :pseudo AND id_topic = :id_topic');

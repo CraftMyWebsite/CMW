@@ -65,9 +65,9 @@ if (isset($_POST['go']) and $_POST['go'] == 1) {
             <div class="alert alert-warning alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <p class="text">
-                    Cette version réinitialisera votre choix thème (Défault), les thèmes autre que Default sont pas
+                    Cette version réinitialisera votre choix thème (Défault), les thèmes autre que Default ne seront pas
                     forcément compatible avec cette version - en cas de doute contactez le créateur du thème que vous
-                    souaithez utilisé !
+                    souhaitez utiliser !
                 </p>
             </div>
             <div class="alert alert-danger">

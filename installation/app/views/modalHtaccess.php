@@ -7,7 +7,7 @@
                     <div class="alert alert-danger">
                         <strong>Attention : Vous pouvez vous exposez à des failles critiques !</strong>
                         <br/>
-                        Il semble que votre site soit susceptible de provoquer des failles htaccess rendant plusieurs informations sensibles visibles à la vue de tous ! Le test peut cependant être un faux positif, pour en être sur dirigez-vous vers notre <a href="https://discord.gg/wMVAeug" target="_blank">Discord</a> ou sur notre <a href="https://craftmywebsite.fr/forum" target="_blank">forum</a> pour vous aider. Sinon vous pouvez essayer par vous même en allant sur <a href="../modele/config/config.yml" target="_blank">ce lien</a>, si vous atterrissez sur une demande d'authentification, alors c'est un faux positif, si vous voyez du texte c'est que votre site est réellement exposé à des failles critiques.
+                        Il semble que votre site soit susceptible de provoquer des failles htaccess rendant plusieurs informations sensibles visibles à la vue de tous ! Le test peut cependant être un faux positif, pour en être sur dirigez-vous vers notre <a href="https://discord.gg/wMVAeug" target="_blank">Discord</a> ou sur notre <a href="https://craftmywebsite.fr/forum" target="_blank">forum</a> obtenir de l'aide. Sinon vous pouvez essayer par vous même en allant sur <a href="../modele/config/config.yml" target="_blank">ce lien</a>, si vous atterrissez sur une demande d'authentification, alors c'est un faux positif, si vous voyez du texte c'est que votre site est réellement exposé à des failles critiques.
                     </div>
                 </p>
                 <h3 class="modal-title text-center center">Que voulez-vous faire ?</h3>

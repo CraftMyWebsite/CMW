@@ -121,7 +121,7 @@ const PERMS = array(
 			)
 		),
 		'payment' => array(
-			'showPage' => 'Accès à la page Paiement',
+			'showPage' => 'Accès à la page paiement',
 			'actions' => array(
 				'editPayment' => 'Edition des paiements',
 				'addOffrePaypal' => 'Ajouter une offre PayPal',

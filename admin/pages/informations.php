@@ -8,7 +8,7 @@
                 <?php if(!$_Permission_->verifPerm('PermsPanel', 'info', 'showPage')) { ?>
                   <div class="col-lg-6 col-lg-offset-3 text-center">
                     <div class="alert alert-danger">
-                      <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+                      <strong>Vous n'avez aucune permission pour accéder à cette page.</strong>
                     </div>
                   </div>
                 <?php } else { if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'visitor', 'showTable')) { ?>
@@ -162,7 +162,7 @@
                         </div>
                         <a href="?page=news">
                             <div class="card-footer">
-                                <button type="button" onclick="" class="btn btn-info btn-block w-100"> Voir en détails
+                                <button type="button" onclick="" class="btn btn-info btn-block w-100"> Voir en détail
                                     <i class="fas fa-arrow-circle-right"></i></button>
                             </div>
                         </a>
@@ -184,7 +184,7 @@
                         <a href="?page=support">
                             <div class="card-footer">
                                 <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en
-                                    détails <i class="fas fa-arrow-circle-right"></i></button>
+                                    détail <i class="fas fa-arrow-circle-right"></i></button>
                             </div>
                         </a>
 
@@ -204,7 +204,7 @@
                         </div>
                         <a href="?page=boutique">
                             <div class="card-footer">
-                                <button type="button" onclick="" class="btn btn-danger btn-block w-100"> Voir en détails
+                                <button type="button" onclick="" class="btn btn-danger btn-block w-100"> Voir en détail
                                     <i class="fas fa-arrow-circle-right"></i></button>
                             </div>
                         </a>
@@ -236,7 +236,7 @@
                                 <a href="#" data-toggle="modal" data-target="#infoServeur<?=$conEtablie[$j]?>">
                                     <div class="card-footer">
 
-                                        <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en détails
+                                        <button type="button" onclick="" class="btn btn-success btn-block w-100"> Voir en détail
                                             <i class="fas fa-arrow-circle-right"></i></button>
 
                                     </div>
@@ -529,7 +529,7 @@
                             </div>
                             <div class="card-footer" id="sendStaffMessage">
                                     <input type="text" name="message" id="message" placeholder="Message (max 50 caractères)" class="form-control" maxlength="50">
-                                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('sendStaffMessage')">Envoyer !</button>
+                                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('sendStaffMessage')">Envoyer</button>
                                     <script>initPost("sendStaffMessage", "admin.php?action=creerPostit",
                                             function (data) { if(data) { console.log('message envoyé'); get('allStaffMessage').innerHTML = "<p>[<strong><?php echo $_Joueur_['pseudo']?></strong>]: "+getValueByName('sendStaffMessage', 'message')+"</p>"+get('allStaffMessage').innerHTML; clearAllInput('sendStaffMessage');}})</script>
                             </div>
@@ -559,7 +559,7 @@
 
                                     <?php if($LastNews != false && isset($LastNews)) { ?>
                                     <li class="list-group-item">
-                                        <i class="fas fa-fw fa-wrench"></i> Dernier news :
+                                        <i class="fas fa-fw fa-wrench"></i> Derniere news :
                                         <strong><?php echo $LastNews['titre']; ?></strong> par <strong><?php echo $LastNews['auteur']; ?></strong>
                                     </li>
                                     <?php } ?>
@@ -620,7 +620,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <small>Ceci sont les dernières achats dans la boutique.</small>
+                                <small>Ceci sont les derniers achats dans la boutique.</small>
                             </div>
                         </div>
                     </div>

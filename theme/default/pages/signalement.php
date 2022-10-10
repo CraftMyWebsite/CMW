@@ -22,7 +22,7 @@ if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignale
                         <thead>
                             <!-- Affichage des signalements -->
                             <tr>
-                                <th scope="col">Type de report</th>
+                                <th scope="col">Type de signalement</th>
                                 <th scope="col">Raison</th>
                                 <th scope="col">Auteur</th>
                                 <th scope="col">Lien</th>
@@ -105,14 +105,14 @@ if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignale
                                 <tr class="p-0 no-hover">
                                     <td colspan="4" class="p-0 no-hover">
                                         <div class="m-0 info-page bg-danger">
-                                            <div class="text-center">Aucun signalement actuellement !</div>
+                                            <div class="text-center">Aucun signalement pour le moment</div>
                                         </div>
                                     </td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
                         <caption>
-                            Nombre de signalements : <?= $nbr_signalement ?>
+                            Nombre de signalement : <?= $nbr_signalement ?>
                         </caption>
                     </table>
                 </div>

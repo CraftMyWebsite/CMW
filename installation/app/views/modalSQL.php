@@ -17,7 +17,7 @@
                         <a href="?forceInstallSQL=true"class="btn btn-danger btn-block minecrafter">Forcer l'installation</a>
                     </div>
                     <div class="col-md-4">
-                        <a href="?dropSQL=true" class="btn btn-success btn-block minecrafter">Vider la base de donnéees et forcer l'installation (Recommandé) <strong>[Irréversible]</strong></a>
+                        <a href="?dropSQL=true" class="btn btn-success btn-block minecrafter">Vider la base de donnéees puis forcer l'installation (Recommandé) <strong>[Irréversible]</strong></a>
                     </div>
                     <div class="col-md-4">
                         <button class="btn btn-primary btn-block minecrafter" data-dismiss="modal">Annuler</button>

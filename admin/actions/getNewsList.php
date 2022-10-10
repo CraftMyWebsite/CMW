@@ -28,7 +28,7 @@
                             value="<?php echo $tableauNews[$i]['titre']; ?>">
 
 
-                        <label class="control-label">Text de la news</label>
+                        <label class="control-label">Contenu de la news</label>
                         <?php echo '<textarea id="ckeditor" data-UUID="0002" name="message" style="height: 275px; margin: 0px; width: 50%;">' . $tableauNews[$i]['message'] . '</textarea>';?>
 
                         <div class="row" style="margin-top:20px;">

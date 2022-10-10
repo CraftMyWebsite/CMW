@@ -7,7 +7,7 @@
 { ?>
   <div class="col-md-12 text-center">
             <div class="alert alert-danger">
-                <strong>Vous avez aucune permission pour accéder aux menus.</strong>
+                <strong>Vous n'avez aucune permission pour accéder aux menus.</strong>
             </div>
         </div>
 <?php }

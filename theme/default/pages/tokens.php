@@ -65,7 +65,7 @@
                             <div class="info-page">
                                 <div class="text-center">
                                     <h5>Payer par Paypal :</h5>
-                                    <h6>Payer par paypal avec votre solde ou par carte bancaire tout en étant en pleine sécurité !</h6>
+                                    <h6>Payer par Paypal avec votre solde ou par carte bancaire de façon sécurisé</h6>
                                 </div>
                             </div>
                             <div class="row">
@@ -164,7 +164,7 @@
                                                             <input type="number" name="code" class="form-control" required size="16" />
                                                         </div>
                                                         <div class="card-footer">
-                                                            <button type="submit" class="btn btn-reverse w-100">Envoyer !</button>
+                                                            <button type="submit" class="btn btn-reverse w-100">Envoyer</button>
                                                         </div>
                                                     </form>
                                                 </div>

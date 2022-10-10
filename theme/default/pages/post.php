@@ -110,7 +110,7 @@ if (isset($_GET['id'])) :
                                             <li class="categorie-item nav-item">
                                                 <div class="dropdown">
                                                     <a class="nav-link categorie-link dropdown-toggle text-center" type="button" id="Actions-Modération" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Actions de Modération ....
+                                                        Actions de Modération
                                                     </a>
                                                     <div class="dropdown-menu" aria-labeledby="Actions-Modérations">
 
@@ -134,7 +134,7 @@ if (isset($_GET['id'])) :
 
                                                         <?php if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic')) : ?>
 
-                                                            <a class="dropdown-item" href="index.php?action=forum_moderation&id_topic=<?= $id; ?>&choix=2">Supprimer le topic</a>
+                                                            <a class="dropdown-item" href="index.php?action=forum_moderation&id_topic=<?= $id; ?>&choix=2">Supprimer la discussion</a>
 
                                                         <?php endif; ?>
 
@@ -229,7 +229,7 @@ if (isset($_GET['id'])) :
 
                                                         <div class="modal-body bg-danger rounded py-4">
                                                             <h5>Voulez-vous vraiment <span class="font-weight-bolder">Supprimer</span> ce topic ?</h5>
-                                                            <h6>Plus aucune données de ce topic ne pourra être récupérées.</h6>
+                                                            <h6>Aucune données de ce topic ne pourra être récupérées.</h6>
                                                         </div>
 
                                                         <div class="modal-footer bg-danger">
@@ -290,9 +290,9 @@ if (isset($_GET['id'])) :
                                 <?php if (isset($_Joueur_)) : ?>
                                         <form action="?action=signalement_topic" method="post">
                                             <input type="hidden" name="id_topic2" value='<?= $id; ?>' />
-                                            <button type="submit" class="btn btn-danger float-right mb-5">Signaler !</button>
+                                            <button type="submit" class="btn btn-danger float-right mb-5">Signaler</button>
                                         </form>
-                                        <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost', '<?= $topicd['pseudo']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
+                                        <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost', '<?= $topicd['pseudo']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer</button>
                                 <?php endif; ?>
 
                             </div>
@@ -441,12 +441,12 @@ if (isset($_GET['id'])) :
 
                                                             <div class="modal-body bg-danger rounded py-4">
                                                                 <h5>Voulez-vous vraiement <span class="font-weight-bolder">Supprimer</span> ce message ?</h5>
-                                                                <h6>Plus aucune donnée de ce message ne pourra être récupéré.</h6>
+                                                                <h6>Aucune donnée de ce message ne pourra être récupéré.</h6>
                                                             </div>
 
                                                             <div class="modal-footer bg-danger">
                                                                 <button type="submit" class="btn btn-secondary w-100">
-                                                                    Confirmer la suppression de ce message !
+                                                                    Confirmer la suppression de ce message
                                                                 </button>
                                                             </div>
 
@@ -502,9 +502,9 @@ if (isset($_GET['id'])) :
                                     <?php if (isset($_Joueur_)) : ?>
                                             <form action="?action=signalement_topic" method="post">
                                                 <input type="hidden" name="id_topic2" value='<?= $answerd[$i]['id']; ?>' />
-                                                <button type="submit" class="btn btn-danger float-right mb-5">Signaler !</button>
+                                                <button type="submit" class="btn btn-danger float-right mb-5">Signaler</button>
                                             </form>
-                                            <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost<?=$i?>', '<?= $answerd[$i]['pseudo']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
+                                            <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost<?=$i?>', '<?= $answerd[$i]['pseudo']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer</button>
                                     <?php endif; ?>
 
                                 </div>

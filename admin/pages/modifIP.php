@@ -7,7 +7,7 @@
 {
   echo '<div class="col-lg-6 col-lg-offset-3 text-center">
     <div class="alert alert-danger">
-      <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+      <strong>Vous n\'avez aucune permission pour accéder à cette page.</strong>
     </div>
   </div>';
 }
@@ -118,7 +118,7 @@ if($_Permission_->verifPerm('PermsPanel', 'info', 'stats', 'members', 'editEmail
                       <div class="alert alert-success">
                         <strong><i class="fas fa-question-circle"></i> Syntaxe</strong>
                         <p>
-                          Voici les variables disponible pour customisé le mail de validation / bienvenue :<br>
+                          Voici les variables disponible pour personnaliser le mail de validation / bienvenue :<br>
                           <ul>
                             <li>
                               <code>{LIEN}</code> equivaut et affichera le lien pour confirmer l'inscription ( <span

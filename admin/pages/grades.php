@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
-				<strong>Vous avez aucune permission pour accéder aux réglages des grades.</strong>
+				<strong>Vous n'avez aucune permission pour accéder aux réglages des grades.</strong>
 			</div>
 		</div>
 	</div>
@@ -42,7 +42,7 @@ else
 	            <div class="card-footer">
 	                <div class="row text-center">
 	                    <input type="submit" onclick="if(checkGrade()){ sendPost('addGrade', null);}" class="btn btn-success w-100"
-	                        value="Envoyer !" />
+	                        value="Envoyer" />
 	                </div>
 	            </div>
 	        </div>
@@ -102,7 +102,7 @@ else
                             <input type="color" name="couleurCreateur" id="couleurCrea" onchange="updatePrevisu('Crea');" value="<?=(empty($_Serveur_['General']['createur']['couleur'])) ? '#000000' : $_Serveur_['General']['createur']['couleur'];?>" />
 
                             <br/>
-                            <label class="control-label">Prévisulation : <span id="previsuCrea" class="prefix <?=$_Serveur_['General']['createur']['effets'];?>" style="background-color: <?=$_Serveur_['General']['createur']['bg'];?>; color: <?=(empty($_Serveur_['General']['createur']['couleur'])) ? '#000000' : $_Serveur_['General']['createur']['couleur'];?>"><?=$_Serveur_['General']['createur']['nom'];?></span>
+                            <label class="control-label">Prévisualisation : <span id="previsuCrea" class="prefix <?=$_Serveur_['General']['createur']['effets'];?>" style="background-color: <?=$_Serveur_['General']['createur']['bg'];?>; color: <?=(empty($_Serveur_['General']['createur']['couleur'])) ? '#000000' : $_Serveur_['General']['createur']['couleur'];?>"><?=$_Serveur_['General']['createur']['nom'];?></span>
                             <div id="effetsCrea">
                             	<label class="control-label">Effets</label>
 	                            <?php for($a =0; $a < count($effets); $a++) { ?>
@@ -184,7 +184,7 @@ else
 	            <div class="card-footer">
 	                <div class="row text-center">
 	                    <input type="submit" onclick="sendPost('allGrade'); " class="btn btn-success w-100"
-	                        value="Valider les changements !" />
+	                        value="Valider les changements" />
 	                </div>
 	            </div>
 	        </div>

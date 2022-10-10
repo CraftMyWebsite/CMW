@@ -202,7 +202,7 @@
                     </div>
                     <script>initPost("allMinia", "admin.php?action=editMiniature", null);</script>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success w-100" onClick="sendPost('allMinia')">Envoyer!
+                        <button type="submit" class="btn btn-success w-100" onClick="sendPost('allMinia')">Envoyer
                         </button>
                     </div>
                 </div>
@@ -241,7 +241,7 @@
 
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success w-100">Envoyer!</button>
+                            <button type="submit" class="btn btn-success w-100">Envoyer</button>
                         </div>
                     </form>
                 </div>

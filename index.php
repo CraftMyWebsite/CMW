@@ -8,14 +8,14 @@ date_default_timezone_set('Europe/Paris');
 setlocale(LC_TIME, 'fr_FR');
 ini_set('display_errors', 1);
 
-//Load security tools
+// Chargement des outils de sécurité
 require_once ('controleur/security/security.php');
 
 
 require('modele/app/urlRewrite.class.php');
 urlRewrite::call();
 
-if(!isset($_SESSION['mode'])) $_SESSION['mode'] = false; // pour les admins du forum
+if(!isset($_SESSION['mode'])) $_SESSION['mode'] = false; // Pour les admins du forum
 
 if(isset($_GET['removeUpdater'])) { unlink('updater.php'); }
 //ini_set('display_errors', 1);
@@ -23,7 +23,7 @@ require('controleur/config.php');
 // On vérifie si le CMS n'a pas été installé, si il ne l'est pas, on redirige vers les fichiers d'installation...
 if (!$_Serveur_['installation']) header('Location: /installation/');
 else $return = true;
-// On charge la connection à la base MySQL via l'extention PDO.
+// On charge la connexion à la base MySQL via l'extention PDO.
 require ('controleur/connection_base.php');
 
 require('modele/app/visit.class.php');
@@ -38,9 +38,9 @@ require('modele/joueur/imgProfil.class.php');
 $_ImgProfil_ = new ImgProfil($bddConnection);
 require('modele/boutique/panier.class.php');
 $_Panier_ = new Panier($bddConnection);
-// On démarre les sessions sur la page pour récupérer les variables globales(les données du joueur...).*
-/* Si l'utilisateur est connecté, on met ses informations dans un tableau global, qui sera utilisable que
- le laps de temps du chargement de la page contrairement aux sessions. */
+// On démarre les sessions sur la page pour récupérer les variables globales (les données du joueur...).
+// Si l'utilisateur est connecté, on met ses informations dans un tableau global, qui sera utilisable que
+// le laps de temps du chargement de la page contrairement aux sessions.
 
 require('controleur/joueur/joueur.class.php');
 $globalJoueur = new Joueur($bddConnection);
@@ -49,7 +49,7 @@ $_Joueur_ = $globalJoueur->getUser();
 require('modele/json/json.php');
 //le fichier controle des récompenses Auto
 require('controleur/recompenseAuto.php'); 
-// système de Get(tout le site passe par index.php).
+// système de Get (tout le site passe par index.php).
 // Les deux types de Get pricipaux utilisés sont les "pages" et les "actions.
 // Les actions n'affichent aucun code html alors que les pages sont dans la theme.
 // Ici une condition pour vérifier si il faut charger le fichier controleur des actions. Ce fichier effectue l'action qu'il faut en

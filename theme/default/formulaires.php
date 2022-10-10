@@ -35,10 +35,10 @@
                             <div class="input-group">
                                 <span class="input-group-prepend">
                                     <div class="input-group-text bg-main border-0">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-at"></i>
                                     </div>
                                 </span>
-                                <input type="text" name="email" class="form-control custom-text-input" id="EmailInscriptionForm" placeholder="Entrez votre mail" required>
+                                <input type="text" name="email" class="form-control custom-text-input" id="EmailInscriptionForm" placeholder="xyz@example.com" required>
                             </div>
 
                             <div class="custom-control custom-checkbox">
@@ -65,7 +65,7 @@
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </span>
-                                <input type="password" name="mdp" class="form-control custom-text-input" id="MdpInscriptionForm" placeholder="Entrez votre mot de passe" onKeyUp="securPass();" required>
+                                <input type="password" name="mdp" class="form-control custom-text-input" id="MdpInscriptionForm" placeholder="Entrer votre mot de passe" onKeyUp="securPass();" required>
                                 <div class="input-group-append">
                                     <span toggle="#MdpInscriptionForm, #MdpConfirmInscriptionForm" class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                 </div>

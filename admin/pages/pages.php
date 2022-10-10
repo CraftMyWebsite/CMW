@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
-				<strong>Vous avez aucune permission pour accéder aux réglages des pages.</strong>
+				<strong>Vous n\'avez aucune permission pour accéder aux réglages des pages.</strong>
 			</div>
 		</div>
 	</div>';
@@ -41,7 +41,7 @@ else
 	            <div class="card-footer">
 	                <div class="row text-center">
 	                    <input type="submit" onclick="sendPost('addPage', null, true);" class="btn btn-success w-100"
-	                        value="Envoyer !" />
+	                        value="Envoyer" />
 	                </div>
 	            </div>
 	        </div>

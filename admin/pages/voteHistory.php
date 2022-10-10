@@ -42,7 +42,7 @@
                                 <button type="button" onclick="setMaxShow('input-changemax')" class="btn w-100 btn-success d-sm-block d-md-none">Mettre à jour</button></h5>
                         <h5 style="margin-top:20px;">Rechercher un voteur: <input style="margin-top:3px;" type="text"
                                 onkeyup="updateList();" id="input-search" class="input-disabled form-control"
-                                placeholder="ex: Vladimir"></h5>
+                                placeholder="ex: Vladort"></h5>
                     </div>
                 </div>
             </div>

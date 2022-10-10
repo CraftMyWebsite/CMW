@@ -80,7 +80,7 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 		{
 			echo 'FATAL ERREUR: '.  $e->getMessage();
 			if(strpos($e->getMessage(), 'connect() failed')) {
-				echo '\r\n Vos logins sont incorectes';
+				echo '\r\n Vos identifiants sont incorectes';
 			} else if(strpos( $e->getMessage(), 'instantiate mail function')) {
 				echo "\r\n Vous n'avez pas accès à cette fonction sur votre hébergeur, dirigez vous plutôt vers les mails SMTP.";
 			}
