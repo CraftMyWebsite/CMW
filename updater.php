@@ -172,6 +172,9 @@ function bdd182to19($bddConnection): void
 {
     //Update resettoken for the new reset system
     $bddConnection->exec('ALTER TABLE `cmw_users` CHANGE `resettoken` `resettoken` VARCHAR(500);');
+    //Fix support default value
+    $bddConnection->exec('ALTER TABLE `cmw_support` CHANGE `etat` `etat` INT(1) NULL DEFAULT '0';');
+    $bddConnection->exec('UPDATE cmw_support SET etat = 0 WHERE etat = null;');
 
 }
 
