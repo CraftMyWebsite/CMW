@@ -11,7 +11,7 @@ if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignale
                 <div class="d-flex col-12 info-page">
                     <i class="fas fa-info-circle notification-icon"></i>
                     <div class="info-content">
-                        Voici tous les signalements du forum, vous pouvez les gérer comme vous le souhaitez !
+                        Voici tous les signalements du forum, vous pouvez les gérer comme vous le souhaitez ! Attention une fois vue le signalement n'apparait plus ici!
                     </div>
                 </div>
             </div>
@@ -22,9 +22,9 @@ if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignale
                         <thead>
                             <!-- Affichage des signalements -->
                             <tr>
-                                <th scope="col">Type de signalement</th>
+                                <th scope="col">Type de report</th>
                                 <th scope="col">Raison</th>
-                                <th scope="col">Auteur</th>
+                                <th scope="col">Reporteur</th>
                                 <th scope="col">Lien</th>
                             </tr>
                         </thead>
@@ -105,14 +105,14 @@ if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignale
                                 <tr class="p-0 no-hover">
                                     <td colspan="4" class="p-0 no-hover">
                                         <div class="m-0 info-page bg-danger">
-                                            <div class="text-center">Aucun signalement pour le moment</div>
+                                            <div class="text-center">Aucun signalement actuellement !</div>
                                         </div>
                                     </td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
                         <caption>
-                            Nombre de signalement : <?= $nbr_signalement ?>
+                            Nombre de signalements : <?= $nbr_signalement ?>
                         </caption>
                     </table>
                 </div>

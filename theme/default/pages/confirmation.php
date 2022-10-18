@@ -164,7 +164,7 @@
 
                                             <div class="card-body">
 
-                                                <input type="hidden" name="id_answer" value="<?= $id; ?>" />
+                                                <input type="" name="id_topic" value="<?= $id; ?>" />
                                                 <div class="form-group">
                                                     <label for="reason">Indiquez une raison</label>
                                                     <input type="text" class="form-control" name="reason" id="reason" placeholder="Indiquez une raison" required />

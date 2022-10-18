@@ -204,6 +204,13 @@
                         Forum
                     </a>
                 </li>
+                <?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'showPage')) { ?>
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'forum'){echo 'active';}?>">
+                    <a class="nav-link"  href="./signalement">
+                        <i class="fas fa-comments"></i>
+                        Verifier les signalement
+                    </a>
+                </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'widgets', 'showPage')) { ?>
                 <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'widgets'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=widgets">
