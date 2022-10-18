@@ -346,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `cmw_support` (
   `titre` varchar(100),
   `message` text,
   `date_post` datetime,
-  `etat` int(1),
+  `etat` int(1) NULL DEFAULT '0',
   `ticketDisplay` int(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
