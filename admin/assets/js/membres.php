@@ -2,7 +2,7 @@
     <?php
     $token = random_int(0, 10000000000);
 
-    $_SESSION['token'] = $token;
+    $_SESSION['xss_token'] = $token;
     ?>
 var maxShow;
 var oldmaxShow;
@@ -53,13 +53,13 @@ function setIndex(){
 }
 
 function setAxe(a) {
-    if(a != axe)
+    if(a !== axe)
     {
         axe = a;
         axeType = "DESC";
     }
     else {
-        axeType = axeType == "DESC" ? "ASC" : "DESC";
+        axeType = axeType === "DESC" ? "ASC" : "DESC";
     }
     updateList();
 }
@@ -83,7 +83,7 @@ function moreIndex() {
 }
 
 function updateState() {
-	get("infoState").innerHTML="("+(axeType == "DESC" ? "Décroissant" : "Croissant")+" sur "+axe+")";
+	get("infoState").innerHTML="("+(axeType === "DESC" ? "Décroissant" : "Croissant")+" sur "+axe+")";
 }
 
 function updateList()
@@ -98,14 +98,14 @@ function updateList()
         max: maxShow
     }, function(data, status){
         console.log(data);
-        if(status != "success")
+        if(status !== "success")
         {
               notif("error", "Erreur lors du chargement", status);
         } else {
             try {
                 if(data.includes('[DIV]')) {
                     let cont = data.substring(data.indexOf('[DIV]')+5);
-                    if(isset(cont) && cont != "") {
+                    if(isset(cont) && cont !== "") {
                          showAll(JSON.parse(cont));
                     }
                 }
@@ -118,7 +118,7 @@ function updateList()
 
 async function showAll(allPlayer) {
     let el = get("allUser");
-    var all = '';
+    let all = '';
     if(isset(allPlayer)) {
         for(let i = 0; i < allPlayer.length; i++) {
             all += '<tr class="ligneMembres" id="user'+allPlayer[i].id2+'">';
@@ -132,7 +132,7 @@ async function showAll(allPlayer) {
                 all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabled form-control">';
                 let it = grade.keys();
                 for (let key of it) {
-                    all += '<option value="' + key + '" ' + (key == allPlayer[i].rang ? 'selected' : '') + '>' + grade.get(key) + '</option>';
+                    all += '<option value="' + key + '" ' + (key === allPlayer[i].rang ? 'selected' : '') + '>' + grade.get(key) + '</option>';
                 }
                 all += '</select></td>';
 
@@ -146,7 +146,7 @@ async function showAll(allPlayer) {
                 all += '<td><select size="1"  onchange="addChange('+allPlayer[i].id2+')" name="input-rang' + allPlayer[i].id2 + '" class="input-disabledform-control">';
                 let it = grade.keys();
                 for (let key of it) {
-                    all += '<option value="' + key + '" ' + (key == allChange["rang"+allPlayer[i].id2] ? 'selected' : '') + '>' + grade.get(key) + '</option>';
+                    all += '<option value="' + key + '" ' + (key === allChange["rang"+allPlayer[i].id2] ? 'selected' : '') + '>' + grade.get(key) + '</option>';
                 }
                 all += '</select></td>';
 
@@ -154,7 +154,7 @@ async function showAll(allPlayer) {
 
             }
             if(canEdit) {
-                if (allPlayer[i].ValidationMail == 0) {
+                if (allPlayer[i].ValidationMail === 0) {
                     all += '<td><button class="input-disabled btn btn-danger w-100" style="display: block !important" onclick="validMail(' + allPlayer[i].id2 + ')" id="validmail' + allPlayer[i].id2 + '" type="button" title="Cliquer pour valider l\'email de cette personne manuellement"><i class="fas fa-exclamation-triangle"></i></button>';
                     all += '<button class="input-disabled btn btn-block btn-success" style="display:block;" id="validmail2' + allPlayer[i].id22 + '" type="button" disabled>Validé</button></td>';
                 } else {
@@ -179,7 +179,7 @@ function addChange(id) {
                 allChange["allid"] += id+"_";
             }
         }
-        allChange["token"] = uniqueToken;
+        allChange["xss_token"] = uniqueToken;
         allChange["id"+id] = id;
         allChange["pseudo"+id] = document.getElementsByName("input-pseudo"+id)[0].value;
         allChange["email"+id] = document.getElementsByName("input-email"+id)[0].value;
@@ -209,13 +209,14 @@ function sendChange() {
             input.disabled=false;
         });
     });
+
 }
 
 function removePlayer(id, pseudo)
 {
     get("suppplayer"+id).disabled = true;
     let r = confirm("Vous êtes sur le point de supprimé le compte de "+pseudo+",\n Vous ne pourrez pas revenir en arrière.");
-    if(r == true)
+    if(r === true)
     {
         $.get("admin.php", {
             action: "supprMembre",

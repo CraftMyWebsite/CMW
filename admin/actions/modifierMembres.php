@@ -1,9 +1,8 @@
 <?php
-$token=filter_input(INPUT_POST, 'token');
-var_dump($token);
-die();
-if ($token !== $_SESSION['token']){
-    header('Location: accueil');
+$token = filter_input(INPUT_POST, 'xss_token');
+
+if ($token != $_SESSION['xss_token']){
+    http_response_code(403);
     die();
 }
 
@@ -13,7 +12,6 @@ if($_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) {
 	
 	foreach ($allChange as $id)
 	{
-		echo $id;
 		ValiderChangement($_POST['pseudo'.$id], $_POST['email'.$id], $_POST['rang'.$id], $_POST['tokens'.$id], $id, $bddConnection);
 		if(isset($_POST['password' . $id]) && !empty($_POST['password' . $id]) && $_POST['password' . $id] != '' && $_POST['password' . $id] != ' ')
 		{
