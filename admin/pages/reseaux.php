@@ -9,7 +9,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="alert alert-danger">
-					<strong>Vous avez aucune permission pour accéder aux réseaux sociaux</strong>
+					<strong>Vous n\'avez aucune permission pour accéder aux réseaux sociaux</strong>
 				</div>
 			</div>
 		</div>
@@ -71,7 +71,7 @@ else
             	 <script>initPost("addSocial", "admin.php?action=addSocial",function (data) { if(data) { 
                     get('cont-res').innerHTML+='<tr><td>'+getValueByName("addSocial","nom")+'</td><td></td></tr>';clearAllInput('addSocial');
                     }});</script>
-                <input type="submit" onclick="sendPost('addSocial')" class="btn btn-success w-100" value="Ajouter le réseau social !" />
+                <input type="submit" onclick="sendPost('addSocial')" class="btn btn-success w-100" value="Ajouter le réseau social" />
             </div>
         </div>
    	</div>

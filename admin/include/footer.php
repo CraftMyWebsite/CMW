@@ -3,11 +3,12 @@
         <div class="col-md-4  offset-md-2">
             <p class="text-muted footer-text" style="padding-left: 15px;">
                 <a href="https://craftmywebsite.fr/" target="_blank">CraftMyWebsite #<?php echo $versioncms; ?></a> | <a href="https://discord.gg/P94b7d5" target="_blank">Discord</a> | <a href="https://github.com/CraftMyWebsite/CMW" target="_blank">GitHub</a>
+                <small>Les projets sont bons pour les gens heureux ou ceux qui espèrent. - Anne Bernard</small
             </p>
         </div>
         <div class="col-md-6">
             <p class="gray text-right footer-text" style="padding-right: 15px;">
-                &copy; 2014 -<?= date('Y') ?> CraftMyWebsite, tous droits réservé
+                &copy; 2014 -<?= date('Y') ?> CraftMyWebsite, tous droits réservés
             </p>
             <div class="custom-control custom-switch">
                 <form id="darkForm" method="POST" action="">

@@ -109,14 +109,14 @@
 					// Let's make sure this function exists, it's not included in PHP by default
 					if( !Function_Exists( 'bzdecompress' ) )
 					{
-						throw new RuntimeException( 'Received compressed packet, PHP doesn\'t have Bzip2 library installed, can\'t decompress.' );
+						throw new RuntimeException( 'Réception d\'un paquet compressé, PHP n\'a pas la bibliothèque Bzip2 installée, il ne peut pas le décompresser.' );
 					}
 					
 					$Data = bzdecompress( $Data );
 					
 					if( CRC32( $Data ) !== $PacketChecksum )
 					{
-						throw new InvalidPacketException( 'CRC32 checksum mismatch of uncompressed packet data.', InvalidPacketException::CHECKSUM_MISMATCH );
+						throw new InvalidPacketException( 'Mauvaise concordance de la somme de contrôle CRC32 des données du paquet non compressé.', InvalidPacketException::CHECKSUM_MISMATCH );
 					}
 				}
 				
@@ -124,7 +124,7 @@
 			}
 			else
 			{
-				throw new InvalidPacketException( 'Socket read: Raw packet header mismatch. (0x' . DecHex( $Header ) . ')', InvalidPacketException::PACKET_HEADER_MISMATCH );
+				throw new InvalidPacketException( 'Socket read : Incohérence de l\'en-tête du paquet brut. (0x' . DecHex( $Header ) . ')', InvalidPacketException::PACKET_HEADER_MISMATCH );
 			}
 			
 			return $Buffer;

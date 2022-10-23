@@ -110,7 +110,7 @@ class Forum {
 		return $topic->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
-	//récupération de la table cmw_sous_forum pour le fofo si on se trouve dans un sousForum
+	//Récupération de la table cmw_sous_forum pour le forum si on se trouve dans un sous-forum
 	public function SousForum($id)
 	{
 		$sousforum = $this->bdd->prepare('SELECT * FROM cmw_forum_sous_forum WHERE id = :id');

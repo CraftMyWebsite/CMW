@@ -12,8 +12,8 @@
                     </div>
                 <?php else : ?>
                     <div class="alert alert-success alert-dismissible fade show text-shadow-none" role="alert">
-                        La récompense séléctionnée arrive, <strong class="important--text">Profitez de cette dernière In-Game ! </strong>
-                        Votre(vos) récompense(s) arrive(nt), profitez de votre(vos) récompense(s) In-Game !
+                        La récompense séléctionnée arrive, <strong class="important--text">Profitez de cette dernière en jeu ! </strong>
+                        Votre(vos) récompense(s) arrive(nt), profitez de votre(vos) récompense(s) en jeu !
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -26,7 +26,7 @@
             <div class="d-flex col-12 info-page">
                 <i class="fas fa-info-circle notification-icon"></i>
                 <div class="info-content">
-                    Voter pour le serveur permet d'améliorer son référencement ! Les votes sont récompensés par des items In-Game.
+                    Voter pour le serveur permet d'améliorer son référencement ! Les votes sont récompensés par des items en jeu.
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                     <div class="alert alert-main w-80 mx-auto" id="disprecompList" style="display:none;">
                         
                         <h4 class="alert-heading h4">
-                            Réception de récompense(s) !
+                            Réception de(s) récompense(s) !
                         </h4>
                         <hr>
 

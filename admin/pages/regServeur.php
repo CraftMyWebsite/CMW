@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <div class="alert alert-danger">
-                <strong>Vous avez aucune permission pour accéder aux réglages du serveur</strong>
+                <strong>Vous n\'avez aucune permission pour accéder aux réglages du serveur</strong>
             </div>
         </div>
     </div>';
@@ -75,7 +75,7 @@ else
             <script>initPost('newServer', 'admin.php?&action=serveurJsonNew', function(data) { if(data) {  clearAllInput('newServer'); serverUpdate(); }});</script>
             <div class="card-footer">
                 <div class="row text-center">
-                    <input type="submit" onclick="sendPost('newServer');" class="btn btn-success w-100" value="Envoyer !" />
+                    <input type="submit" onclick="sendPost('newServer');" class="btn btn-success w-100" value="Envoyer" />
                 </div>
             </div>
         </div>
@@ -156,7 +156,7 @@ else
             <script>initPost('modifServer', 'admin.php?&action=serveurConfig');</script>
             <div class="card-footer">
                 <div class="row text-center">
-                    <input type="submit" onclick="sendPost('modifServer', null);" class="btn btn-success w-100" value="Valider les changements !" />
+                    <input type="submit" onclick="sendPost('modifServer', null);" class="btn btn-success w-100" value="Valider les changements" />
                 </div>
             </div>
         </div>

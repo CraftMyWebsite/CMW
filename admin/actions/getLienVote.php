@@ -69,7 +69,7 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
                                                                 <label class="control-label">Message à afficher lors du vote</label>
                                                                 <input type="text" data-type="value" value="<?php echo $value['value']; ?>" class="form-control"/>
                                                          <?php } else  if($value['type'] == 'jeton') { ?>
-                                                                <label class="control-label">Quantité de <?=$_Serveur_['General']['moneyName'];?> à donner (forcera le joueur à être connecter sur le serveur pour voter)</label>
+                                                                <label class="control-label">Quantité de <?=$_Serveur_['General']['moneyName'];?> à donner (forcera le joueur à être connecté sur le serveur pour voter)</label>
                                                                 <input type="number" data-type="value" min="1" value="<?php echo $value['value']; ?>" max="99999999" class="form-control"/>
                                                          <?php } else  if($value['type'] == 'item') { ?>
                                                                 <label class="control-label">Id de l\'item à donner</label>
@@ -115,7 +115,7 @@ if($_Permission_->verifPerm('PermsPanel', 'vote', 'actions', 'editSettings')) {
                                                 </div>
                                        
 
-                                              <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
+                                              <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web (cela aura pour conséquence de stocker ces récompenses) &nbsp;</label>
                                                 <div class="custom-control custom-switch" style="margin-bottom:15px;" >
                                                     <input type="checkbox" class="custom-control-input" value="1" id="doisetreenligne<?=$o;?>" name="enligne<?=$o;?>" <? if($donnees[$o]['enligne']==1) { echo 'checked' ; } ?>>
                                                     <label class="custom-control-label" for="doisetreenligne<?=$o;?>">Oui</label>

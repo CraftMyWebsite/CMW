@@ -68,7 +68,7 @@
             var copyText = document.getElementById("iptexte");
             copyText.select();
             document.execCommand("copy");
-            notif("success", "Vous avez copié l\'adresse IP du serveur !");
+            notif("success", "Adresse du serveur copiée !");
         }
 
     <?php endif; ?>
@@ -98,7 +98,7 @@
             });
         }
 
-    <?php elseif (isset($_GET['page']) && $_GET['page'] == 'chat') : //Gestion du tchat minecraft
+    <?php elseif (isset($_GET['page']) && $_GET['page'] == 'chat') : //Gestion du chat minecraft
     ?>
         setInterval(AJAXActuChat, 10000);
 
@@ -188,11 +188,11 @@
     <?php if(isset($_GET['ActivateSuccess'])){ ?>
         notif('success','Votre compte vient d\'être activé avec succès.');
     <?php } elseif(isset($_GET['WaitActivate'])) { ?>
-            notif('warning', 'Un mail vient de vous être envoyé pour l\'activation de votre compte. Vérifiez dans les courriers indésirables.');
+            notif('warning', 'Un mail vient de vous être envoyé pour l\'activation de votre compte. Pensez à Vérifier dans vos spams.');
     <?php } elseif(isset($_GET['ActivateImpossible'])) { ?>
-            notif('error', 'Votre compte ne peut être activé.');
+            notif('error', 'Votre compte ne peut pas être activé.');
     <?php } elseif(isset($_GET['MessageEnvoyer'])) { ?>
-            notif('success','Votre commentaire vient d\'être envoyée.');
+            notif('success','Votre commentaire vient d\'être envoyé.');
     <?php } elseif(isset($_GET['MessageTropLong'])) { ?>
             notif('error', 'Votre commentaire est trop long.');
     <?php } elseif(isset($_GET['MessageTropCourt'])) { ?>
@@ -222,7 +222,7 @@
     <?php }elseif(isset($_GET['NotReportYourSelf'])) { ?>
             notif('error','You are stupid.');
     <?php }elseif(isset($_GET['ReportVictimeExist'])) { ?>
-            notif('error','Vous ne pouvez pas rapporter plusieurs fois la même personne.');
+            notif('error','Vous ne pouvez pas signaler plusieurs fois la même personne.');
     <?php }elseif(isset($_GET['ReportEnvoyer'])) { ?>
             notif('success','Rapport envoyer !');
     <?php }elseif(isset($_GET['PlayerNotExist'])) { ?>
@@ -236,14 +236,14 @@
         <?php } ?>
 
 
-    <?php if (isset($_GET['setTemp']) && $_GET['setTemp'] == 1) { //Envoie d'un mot de passe nouveau
+    <?php if (isset($_GET['setTemp']) && $_GET['setTemp'] == 1) { // Envoie d'un nouveau mot de passe
     ?>
         window.onload = function() {
-            notif("success", "Votre nouveau mot de passe vous a été envoyé par mail !");
+            notif("success", "Votre nouveau mot de passe viens de vous être envoyé par mail !");
         }
     <?php } ?>
 
-    <?php if (isset($_Joueur_)) { //Système d'alerte
+    <?php if (isset($_Joueur_)) { // Système d'alerte
     ?>
         setInterval(ajax_alerts, 10000);
 
@@ -301,7 +301,7 @@
     <?php } if (isset($_GET['page']) && $_GET['page'] == 'token' && isset($_GET['errorDedipass'])) {
     ?>
         $(document).ready(function() {
-            notif2("Dedipass", "Votre paiement n'a pas pu être effectué.", "error");
+            notif2("Dedipass", "Votre paiement a échoué.", "error");
         });
 
     <?php } if (isset($_GET['page']) && $_GET['page'] == 'panier' && isset($_GET['success'])) {
@@ -327,7 +327,7 @@
     <?php } if (isset($_GET['page']) && $_GET['page'] == 'chat' && isset($_GET['erreur'])) {
     ?>
         $(document).ready(function() {
-            notif2("Chat", "Le message n'a pas pu être envoyé.", "error");
+            notif2("Chat", "L'envoi du message a échoué.", "error");
         });
     <?php } if (isset($_GET['page']) && $_GET['page'] == 'chat' && isset($_GET['msgErreur'])) {
     ?>
@@ -405,12 +405,12 @@
                 break;
             case 10:
                 echo '$(document).ready(function() {
-                    notif2("Profil", "Visibilité de votre email mis à jour ! Etat: activé", "success");
+                    notif2("Profil", "Visibilité de votre email mis à jour ! Etat: Publique", "success");
                 });';
                 break;
             case 11:
                 echo '$(document).ready(function() {
-                    notif2("Profil", "Visibilité de votre email mis à jour ! Etat: désactivé", "success");
+                    notif2("Profil", "Visibilité de votre email mis à jour ! Etat: Privée", "success");
                 });';
                 break;
             case 12:

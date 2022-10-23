@@ -6,47 +6,47 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '0':
 			$type = 'Erreur: Action quelconque';
 			$titre = 'Un des champs est invalide ou incomplet';
-			$contenue = 'Nous sommes désolé mais le formulaire n\'a pas été rempli correctement, merci de réessayer...';
+			$contenue = 'Nous sommes désolé mais le formulaire n\'a pas été rempli correctement, merci de réessayer.';
 		break;
 
 		case '1':
 			$type = 'Erreur: Création du compte';
-			$titre = 'Cet utilisateur existe déjà...';
+			$titre = 'Cet utilisateur existe déjà.';
 			$contenue = 'Si vous disposez du compte avec le pseudo que vous avez inscrit et qu\'un joueur vous a volé votre compte, signalez le à un administrateur.';
 		break;
 
 		case '2':
 			$type = 'Erreur: Création du compte';
 			$titre = 'Pseudo trop long';
-			$contenue = 'Votre pseudo ne doit pas dépasser les 16 caractères... Utilisez un pseudo plus court !';
+			$contenue = 'Votre pseudo ne doit pas dépasser les 16 caractères. Utilisez un pseudo plus court !';
 		break;
 
 		case '3':
 			$type = 'Erreur: Création du compte';
 			$titre = 'Mot de passe';
-			$contenue = 'Les deux mots de passes entrés ne correspondent pas...';
+			$contenue = 'Le mot de passe et sa confirmation ne correspondent pas.';
 		break;
 
 		case '4':
 			$type = 'Erreur: Connexion';
 			$titre = 'Un des champs est invalide ou incomplet';
-			$contenue = 'Nous sommes désolé mais le formulaire n\'a pas été rempli correctement, merci de réessayer...';
+			$contenue = 'Nous sommes désolé mais le formulaire n\'a pas été rempli correctement, merci de réessayer.';
 		break;
 
 		case '5':
 			$type = 'Erreur: Connexion';
 			$titre = 'Utilisateur Inexistant';
-			$contenue = 'Le pseudo que vous avez entré n\'existe pas, si c\'est le votre, inscrivez-vous avec !';
+			$contenue = 'Le pseudo que vous avez entré n\'est associé à aucun compte, si c\'est le votre, inscrivez-vous !';
 		break;
 
 		case '6':
 			$type = 'Erreur: Connexion';
-			$titre = 'Mauvais mot de passe...';
-			$contenue = 'Le mot de passe entré est incorrect... Si vous êtes le propriétaire du compte, vous pouvez changer votre mot de passe en suivant les étapes suivantes:
+			$titre = 'Mauvais mot de passe.';
+			$contenue = 'Le mot de passe entré est incorrect. Si vous avez oublié votre mot de passe, changez-le en suivant les étapes suivantes:
 						<ul>
-							<li>Inscrivez votre adresse mail ici : <form action="?action=passRecover" method="post"><input type="email" name="email" class="form-control custom-text-input w-50 d-inline-block"><input type="submit" value="Valider" class="btn btn-secondary ml-3 px-5"></form></li>
-							<li>Le mail peut mettre jusqu\'à 5 minutes pour arriver !</li>
-							<li>Vous recevrez d\'abord un mail de confirmation de changement du mot de passe puis un nouveau mot de passe toujours par mail vous sera adressé ! </li>
+							<li>Adresse mail associée à votre compte : <form action="?action=passRecover" method="post"><input type="email" name="email" class="form-control custom-text-input w-50 d-inline-block"><input type="submit" value="Valider" class="btn btn-secondary ml-3 px-5"></form></li>
+							<li>Le mail peut mettre jusqu\'à 5 minutes pour arriver.</li>
+							<li>Vous recevrez d\'abord un mail de confirmation de changement du mot de passe puis un nouveau mot de passe toujours par mail vous sera adressé.</li>
 						</ul>';
 		break;
 
@@ -59,19 +59,19 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '8':
 			$type = 'Erreur: Création du compte';
 			$titre = 'Captcha incorrect';
-			$contenue = 'Le captcha entré est incorrect...';
+			$contenue = 'Le captcha entré est incorrect.';
 		break;
 
 		case '9':
 			$type = 'Erreur: Récupération de mot de passe';
 			$titre = 'Le token entré est invalide';
-			$contenue = 'Votre token de récupération est invalide, veuillez réessayez la récupération.';
+			$contenue = 'Votre token de récupération est invalide, veuillez réessayer la récupération.';
 		break;
 
 		case '10':
 			$type = 'Erreur: Création du compte';
-			$titre = 'Adresse IP déjà inscrit.';
-			$contenue = 'Interdiction d\'avoir un double compte.';
+			$titre = 'Adresse IP déjà inscrite.';
+			$contenue = 'L\'utilisation de double compte n\'est pas autorisée.';
 		break;
 
 		case '11':
@@ -83,7 +83,7 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '12':
 			$type = 'Erreur: URL invalide';
 			$titre = "L'URL est invalide.";
-			$contenue = "L'adresse de la page souhaitée est invalide ou inexistant.";
+			$contenue = "L'adresse de la page souhaitée est invalide ou inexistante.";
 		break;
 
 		case '13':
@@ -101,7 +101,7 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '15':
 			$type = 'Erreur: Création du compte';
 			$titre = 'Email déjà en utilisation.';
-			$contenue = 'L\'adresse email que vous avez entré est déjà utilisée.';
+			$contenue = 'Un compte existe déjà avec cette adresse mail.';
 		break;
 
 		case '16':
@@ -137,14 +137,14 @@ function get_erreur($erreur, &$type, &$titre, &$contenue)
 		case '21':
 			$type = 'Erreur mail';
 			$titre = "Le mail n'a pas pu être envoyé";
-			$contenue= "Veuilliez contacter l'administrateur de cette erreur.";
+			$contenue= "Veuillez contacter un administrateur.";
 		break;
 		
 		default:
 			header('HTTP/1.0 404 Not Found');
 			$type = '404 Not Found';
 			$titre = 'Page introuvable';
-			$contenue = 'Nous sommes désolé mais la page que vous avez demmandé n\'existe pas...';
+			$contenue = 'Nous sommes désolé mais la page que vous avez demmandé n\'existe pas.';
 		break;
 	}
 }

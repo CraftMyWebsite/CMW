@@ -7,7 +7,7 @@
 
     <div class="col-lg-12 text-justify">
         <div class="alert alert-danger">
-            <strong>Vous avez aucune permission pour accéder aux réglages généraux.</strong>
+            <strong>Vous n'avez aucune permission pour accéder aux réglages généraux.</strong>
         </div>
     </div>
 
@@ -55,7 +55,7 @@
                     <script>initPost("changeInfo", "admin.php?action=general",null);</script>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeInfo')">Envoyer !</button>
+                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeInfo')">Envoyer</button>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
                     <script>initPost("changeBdd", "admin.php?action=editBdd",null);</script>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" id="sendconfbdd" class="btn btn-success w-100" onClick="sendPost('changeBdd')">Envoyer!</button>
+                    <button type="submit" id="sendconfbdd" class="btn btn-success w-100" onClick="sendPost('changeBdd')">Envoyer</button>
                 </div>
             </div>
 
@@ -157,7 +157,7 @@
                         registerEvent(get('rangeInput2'), ["change", "keyup", "input"], function(evt) { let nb = parseInt(evt.target.value);if(nb>=1000) { if(nb>=1000000){get('rangValue2').innerText = (nb / 1000000)+"GB";} else {get('rangValue2').innerText = (nb / 1000)+"MB";}} else {get('rangValue2').innerText = nb+"KB";}});
                         initPost("panel-upload", "admin.php?action=editUploadImage");</script>
                     <div class="card-footer">
-                        <button type="submit" onclick="sendPost('panel-upload');"  class="btn btn-success w-100">Envoyer !</button>
+                        <button type="submit" onclick="sendPost('panel-upload');"  class="btn btn-success w-100">Envoyer</button>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                         </script>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success w-100">Envoyer !</button>
+                        <button type="submit" class="btn btn-success w-100">Envoyer</button>
                     </div>
                 </div>
             </form>
@@ -272,10 +272,10 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-6">
-                                <button type="submit" id="btn-mail" class="btn btn-primary w-100" onClick="sendPost('changeSmtp',testMail()); ">Tester !</button>
+                                <button type="submit" id="btn-mail" class="btn btn-primary w-100" onClick="sendPost('changeSmtp',testMail()); ">Tester</button>
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeSmtp')">Envoyer !</button>
+                                <button type="submit" class="btn btn-success w-100" onClick="sendPost('changeSmtp')">Envoyer</button>
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@
 
               <div class="col-md-6 mb-3 form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name="description" placeholder="Exemple: Serveur full vanilla survival en 1.10.2">
+                <input type="text" class="form-control" id="description" name="description" placeholder="Exemple: Serveur full vanilla survival en 1.19.2">
               </div>
 
               <div class="col-md-12 mb-6 form-group">

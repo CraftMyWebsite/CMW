@@ -53,7 +53,7 @@
                 <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'reglagejsonapi'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=reglagejsonapi">
                         <i class="fas fa-terminal"></i>
-                        Réglage JsonAPI/Rcon
+                        Réglage JsonAPI / Rcon
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'pages', 'showPage')) { ?>
@@ -118,7 +118,7 @@
                 <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'news'){echo 'active';}?>">
                     <a class="nav-link"  href="?page=news">
                         <i class="far fa-newspaper"></i>
-                        Nouveautées
+                        Nouveautés
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) { ?>
@@ -202,6 +202,13 @@
                     <a class="nav-link"  href="?page=forum">
                         <i class="fas fa-comments"></i>
                         Forum
+                    </a>
+                </li>
+                <?php } if($_Permission_->verifPerm('PermsPanel', 'forum', 'showPage')) { ?>
+                <li class="nav-item <?php if(isset($_GET['page'])&&$_GET['page'] === 'forum'){echo 'active';}?>">
+                    <a class="nav-link"  href="./signalement">
+                        <i class="fas fa-comments"></i>
+                        Verifier les signalement
                     </a>
                 </li>
             <?php } if($_Permission_->verifPerm('PermsPanel', 'widgets', 'showPage')) { ?>

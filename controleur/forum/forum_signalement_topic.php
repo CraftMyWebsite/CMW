@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['id_topic']) AND isset($_Joueur_))
+if(isset($_POST['id_topic']) AND isset($_Joueur_['pseudo']))
 {
 	if(!isset($_GET['confirmation']))
 	{

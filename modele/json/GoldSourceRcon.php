@@ -82,7 +82,7 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
 				{
 					if( $Buffer->GetByte( ) !== SourceQuery::S2A_RCON )
 					{
-						throw new InvalidPacketException( 'Invalid rcon response.', InvalidPacketException::PACKET_HEADER_MISMATCH );
+						throw new InvalidPacketException( 'Réponse Rcon invalide.', InvalidPacketException::PACKET_HEADER_MISMATCH );
 					}
 					
 					$Packet = $Buffer->Get( );

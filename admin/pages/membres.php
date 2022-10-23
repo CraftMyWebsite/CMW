@@ -128,7 +128,7 @@
                             </div>
                             <div class="from-group" style="display: block !important">
                                 <button class="btn btn-success w-100" id="confirm-change" onclick="sendChange()"
-                                    disabled>Modifier le / les comptes</button>
+                                    disabled>Modifier le / les compte(s)</button>
                             </div>
                         </div>
 

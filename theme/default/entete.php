@@ -91,8 +91,8 @@
                                 <i class="fa fa-user"></i> Compte
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item hvr-forward" href="#" data-toggle="modal" data-target="#InscriptionSlide"><i class="fa fa-user-plus"></i> Inscription</a>
                                 <a class="dropdown-item hvr-forward" href="#" data-toggle="modal" data-target="#ConnectionSlide"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+                                <a class="dropdown-item hvr-forward" href="#" data-toggle="modal" data-target="#InscriptionSlide"><i class="fa fa-user-plus"></i> Inscription</a>
                             </div>
                         </li>
                     <?php endif; ?>
@@ -139,7 +139,7 @@
                                             <span class="badge badge-danger">Hors-Ligne</span>
                                         <?php elseif ($_Serveur_['General']['statut'] == 1 && $servEnLigne == true) : ?>
                                             <span class="badge badge-success">En Ligne</span>
-                                            <div class="card-text">Nombres de Joueurs : <strong><?= $playeronline ?></strong>/<?= $maxPlayers; ?></div>
+                                            <div class="card-text">Nombre de Joueurs : <strong><?= $playeronline ?></strong>/<?= $maxPlayers; ?></div>
                                         <?php else : ?>
                                             <span class="badge badge-warning">En Maintenance</span>
                                         <?php endif; ?>

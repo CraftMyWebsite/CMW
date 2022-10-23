@@ -40,7 +40,7 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
             . $retourligne
             . 'Si vous n\'avez pas fait de demande de récupération veuillez ignorer cet e-mail...' . $retourligne
             . 'Adresse IP de l\'envoyeur de la demande : ' . $_SERVER['REMOTE_ADDR'] . $retourligne
-            . 'Il est inutile de répondre à ce mail automatique.' . $retourligne
+            . 'Ceci est un mail automatique, merci de ne pas y répondre.' . $retourligne
             . $retourligne
             . 'Cordialement, ' . $_Serveur_['General']['name'] . '.';
 

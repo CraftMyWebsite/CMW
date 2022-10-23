@@ -7,7 +7,7 @@
 	<?php if(!$_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'showPage')) { ?>
 	    <div class="col-md-12 text-center">
 	    	<div class="alert alert-danger">
-	            <strong>Vous avez aucune permission pour accéder aux tickets.</strong>
+	            <strong>Vous n'avez aucune permission pour accéder aux tickets.</strong>
 	        </div>
 	    </div>
 	<?php }else {  if($aucunTicket) { ?>

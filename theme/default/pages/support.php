@@ -17,7 +17,7 @@
                     <thead>
                         <tr>
                             <?php if (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) : ?>
-                                <th scope="col">Visibilité</th>
+                                <th scope="col" data-toggle="collapse">Visibilité</th>
                             <?php endif; ?>
                             <th scope="col">Pseudo</th>
                             <th scope="col">Titre</th>
@@ -193,7 +193,7 @@
                                                                                     </div>
 
                                                                                 <?php endif; if($tickets['etat'] === '0') { ?>
-                                                                                <button type="button" onclick="addBlockQuote('ckeditorCom<?= $tickets['id'] ?>','contenueCom<?= $tickets['id'] ?>-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>', '<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
+                                                                                <button type="button" onclick="addBlockQuote('ckeditorCom<?= $tickets['id'] ?>','contenueCom<?= $tickets['id'] ?>-<?= $ticketCommentaires[$tickets['id']][$i]['id'] ?>', '<?= $ticketCommentaires[$tickets['id']][$i]['auteur']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer</button>
                                                                                 <?php } ?>
                                                                             </div>
                                                                         </p>
@@ -306,7 +306,7 @@
                 <?php else : ?>
 
                     <button data-toggle="collapse" href="#ticketCree" role="button" aria-expanded="false" aria-controls="ticketCree" class="btn btn-reverse w-100 mb-3">
-                        <i class="fas fa-pen-square"></i> Poster un ticket !
+                        <i class="fas fa-pen-square"></i> Poster un ticket
                     </button>
 
                     <div class="collapse" id="ticketCree">

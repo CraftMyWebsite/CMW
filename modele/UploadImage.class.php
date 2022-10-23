@@ -25,7 +25,7 @@ class UploadImage {
 					return 'error Votre image est trop volumineuse.';
 				}
 			} else {
-				return 'error Contenue invalide.';
+				return 'error Contenu invalide.';
 			}
 		} else {
 			return 'error Service désactivé.';

@@ -11,10 +11,10 @@ ini_set('display_errors', 1);
 	
 	require('modele/joueur/imgProfil.class.php');
 	$_ImgProfil_ = new ImgProfil($bddConnection);
-	/* Si l'utilisateur est connecté, on met ses informations dans un tableau global, qui sera utilisable que 
-	   le laps de temps du chargement de la page contrairement aux sessions. */
-  /* On instancie un joueur, et on récupère le tableau de données. $_Joueur_ sera donc utilisable 
-	   sur toutes les pages grâce au système de GET sur l'index.*/
+	// Si l'utilisateur est connecté, on met ses informations dans un tableau global, qui sera utilisable que 
+	// le laps de temps du chargement de la page contrairement aux sessions.
+  	// On instancie un joueur, et on récupère le tableau de données. $_Joueur_ sera donc utilisable 
+	// sur toutes les pages grâce au système de GET sur l'index.
 	
 	require('controleur/joueur/joueur.class.php');
 	$globalJoueur = new Joueur($bddConnection);

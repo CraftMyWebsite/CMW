@@ -59,9 +59,9 @@ const PERMS = array(
 		'general' => array(
 			'showPage' => 'Accès à la page Réglage Site',
 			'actions' => array(
-				'editGeneral' => 'Edition des réglages sites (base de donnée, IP minecraft ...)',
+				'editGeneral' => 'Edition des réglages sites (base de données, IP minecraft ...)',
 				'editFavicon' => 'Edition du favicon',
-				'editUploadImg' => "Editer l'upload d'image sur l'éditeur de text"
+				'editUploadImg' => "Editer l'upload d'image sur l'éditeur de texte"
 			)
 		),
 		'theme' => array(
@@ -121,14 +121,14 @@ const PERMS = array(
 			)
 		),
 		'payment' => array(
-			'showPage' => 'Accès à la page Payement',
+			'showPage' => 'Accès à la page paiement',
 			'actions' => array(
 				'editPayment' => 'Edition des paiements',
 				'addOffrePaypal' => 'Ajouter une offre PayPal',
 				'editOffrePaypal' => 'Edition des offres PayPal',
 				'editOffrePaysafeCard' => 'Edition des offres Paysafecard',
 				'verifPaysafecard' => 'Vérifier les transactions Paysafecard',
-				'seePaypalHisto' => "Voir l'historique des achâts paypal"
+				'seePaypalHisto' => "Voir l'historique des achats paypal"
 			)
 		),
 		'menus' => array(
@@ -158,7 +158,7 @@ const PERMS = array(
 				)
 			),
 			'voteHistory' => array(
-				'showPage' => 'Accès à la page des historique de vote',
+				'showPage' => 'Accès à la page des historiques de vote',
 				'actions' => array(
 					'removeVote' => "Supprimer les votes d'un joueur"
 				)
@@ -213,7 +213,7 @@ const PERMS = array(
 			'showPage' => 'Accès à la page Membres=>Social'
 		),
 		'newsletter' => array(
-			'showPage' => 'Accès à la page Newsletter',
+			'showPage' => 'Accès à la page newsletter',
 			'actions' => array(
 				'send' => 'Peut envoyer une newsletter'
 			)
@@ -221,7 +221,7 @@ const PERMS = array(
 		'ban' => array(
 			'showPage' => 'Accès à la page Bannissement',
 			'actions' => array(
-				'showBan' => 'Permet de voir la liste des joueurs banni',
+				'showBan' => 'Permet de voir la liste des utilisateurs banni',
 				'removeBan' => 'Permet de supprimer un utilisateur banni',
 				'addBan' => "Permet d'ajouter un utilisateur à la banlist",
 				'editBanPage' => "Permet l'édition de la page des bannis"

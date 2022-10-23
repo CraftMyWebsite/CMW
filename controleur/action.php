@@ -38,7 +38,7 @@ if(isset($_GET['action']))
 	    case 'editSignature':
 	        include('controleur/joueur/profil/editSignature.php');
 	        break;
-		// Appellée quand on clique sur un bouton de déconnection (bouton disponible quand connecté.
+		// Appellée quand on clique sur un bouton de déconnection (bouton disponible quand connecté).
 		case 'deco': 
 			// Destruction des sessions + redirection sur l'accueil.
 		    $globalJoueur->destroy();
@@ -308,13 +308,13 @@ if(isset($_GET['action']))
 			header('Location: index.php?page=panier');
 		break;
 
-		// Appellé lorsqu'on envoie un formulaire de conneciton.
+		// Appellé lorsqu'on envoie un formulaire de connexion.
 		case 'connection': 
-			// On appelle la classe qui gère la connection et redirection...
+			// On appelle la classe qui gère la connexion et redirection...
 			require_once('controleur/joueur/connection.php');
 		break;
 		
-		// Comme connection mais pour les inscriptions
+		// Comme connexion mais pour les inscriptions
 		case 'inscription':
 			include('controleur/joueur/inscription.php');
 		break;
@@ -326,7 +326,7 @@ if(isset($_GET['action']))
 		case 'passRecover':
             include('controleur/joueur/changeMdpMail.php');
         break;
-		// Appellé lorsqu'on appuie sur le bouton "acheter" d'un produit. L'id de l'offre est aussi passé en argument(sinon une erreur doit être gérée pour éviter que ça plante).
+		// Appellé lorsqu'on appuie sur le bouton "acheter" d'un produit. L'id de l'offre est aussi passé en argument (sinon une erreur doit être gérée pour éviter que ça plante).
 		case 'achat':
 			include('controleur/boutique/achat.php');
 		break;
@@ -388,7 +388,7 @@ if(isset($_GET['action']))
 		    include('controleur/support/ticketCommentaireEdit.php');
 		break;
 		
-		// Si le joueur a rentré un url contenant une valeur d'action innexistant?
+		// Si le joueur a rentré un url contenant une valeur d'action innexistant ?
 		default:
 			header('Location: index.php?page=accueil');
 	}

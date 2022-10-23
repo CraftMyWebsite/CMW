@@ -96,7 +96,7 @@ tempMess(); ?>
 					<div class="col-sm-10 col-md-9 col-lg-7 mx-auto mt-5">
 						<div class="rounded bg-lightest text-white shadow p-5 text-center mb-5">
 							<h3 class="mb-4 font-weight-bold text-uppercase">Temps restant :</h3>
-							<h5>Voici le temps restant avant le retour de votre site !</h5>
+							<h5>Voici le temps restant avant le retour du site</h5>
 
 							<div id="clockdiv" class="countdown-circles d-flex flex-wrap justify-content-center pt-4">
 

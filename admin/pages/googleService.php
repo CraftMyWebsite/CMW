@@ -8,7 +8,7 @@
 
         echo '<div class="col-md-12 text-center">
             <div class="alert alert-danger">
-                <strong>Vous avez aucune permission pour accéder aux réglages des services Google</strong>
+                <strong>Vous n\'avez aucune permission pour accéder aux réglages des services Google</strong>
             </div>
         </div>';
     } else { ?>
@@ -58,7 +58,7 @@
                     <script>initPost("googleAnalytics", "admin.php?action=editGoogleAnalytics");</script>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success w-100" onClick="sendPost('googleAnalytics')">
-                            Envoyer !
+                            Envoyer
                         </button>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                     <div class="card-body" id="googleAdsenseblock" style="<?=(!googleService::isAdsenseEnable2($_Serveur_)) ? 'display:none;' : 'display:block!important;' ?>">
                         <label class="control-label">ID du compte</label>
                         <input type="text" name="id" class="form-control" value="<?= isset($_Serveur_['googleService']['adsense']['id']) ? $_Serveur_['googleService']['adsense']['id'] : '' ?>" placeholder="Exemple: pub-3496294583914660" required/>
-                        <label class="control-label">ID de la pub ( à remplir plustard, voir tutoriel)</label>
+                        <label class="control-label">ID de la pub (à remplir plus tard, voir tutoriel)</label>
                         <input type="text" name="pub" class="form-control" value="<?= isset($_Serveur_['googleService']['adsense']['pub']) ? $_Serveur_['googleService']['adsense']['pub'] : '' ?>" placeholder="Exemple: 3128942591"/>
                         <div style="margin-top:10px;">
                             <a href="https://www.google.com/adsense/" target="_blank"><small>Liens Google Adsense</small></a><br>
@@ -97,7 +97,7 @@
                     </div>
                     <script>initPost("googleAdsenseblock", "admin.php?action=editGoogleAdsense");</script>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success w-100" onClick="sendPost('googleAdsenseblock')">Envoyer !</button>
+                        <button type="submit" class="btn btn-success w-100" onClick="sendPost('googleAdsenseblock')">Envoyer</button>
                     </div>
                 </div>
             </div>

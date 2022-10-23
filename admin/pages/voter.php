@@ -157,7 +157,7 @@
                  <script>initPost("new-vote", "admin.php?&action=creerLienVote", function(data) { if(data) {  voteUpdate(); }});</script>
                 <div class="card-footer">
                         <div class="row text-center">
-                            <input type="submit" onclick="genVoteJson('list-new-rec-vote','vote-action-json');sendPost('new-vote'); " class="btn btn-success w-100" value="Valider les changements !"/>
+                            <input type="submit" onclick="genVoteJson('list-new-rec-vote','vote-action-json');sendPost('new-vote'); " class="btn btn-success w-100" value="Valider les changements"/>
                         </div>
                     </div>
             </div>
@@ -177,8 +177,8 @@
                                     <div id="usablephrase">
                                     Syntaxe:
                                         <ul>
-                                            <li> <strong>{LIEN}</strong> : url du site</li>
-                                            <li> <strong>{TEMPS}</strong> : temps restant avant que le joueur puisse voter</li>
+                                            <li> <strong>{LIEN}</strong> : Url du site</li>
+                                            <li> <strong>{TEMPS}</strong> : Temps restant avant que le joueur puisse voter</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -207,11 +207,11 @@
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="col-md-12 col-12">
-                                    <label class="control-label">Envoyé la notification même aux personnes qui n'ont jamais voté.
+                                    <label class="control-label">Envoyer la notification même aux personnes qui n'ont jamais voté.
                                     <input type="checkbox" name="sendtoall"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoall']) && $_Serveur_['VoteCron']['sendtoall'] == 1) { echo 'checked'; }  ?>></label>
                                 </div>
                                 <div class="col-md-12 col-12">
-                                    <label class="control-label">Envoyé la notification sur tous les serveurs (inclus donc les serveur n'ayant pas de site de vote attribué).
+                                    <label class="control-label">Envoyer la notification sur tous les serveurs (inclus donc les serveur n'ayant pas de site de vote attribué).
                                     <input type="checkbox" name="sendtoallserv"  value="1"  <?php if(isset($_Serveur_['VoteCron']['sendtoallserv']) && $_Serveur_['VoteCron']['sendtoallserv'] == 1) { echo 'checked'; }  ?>></label>
                                 </div>
                             </div>
@@ -388,7 +388,7 @@
                                                 </div>
                                        
 
-                                              <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web ( cela aura pour conséquence de stocker ces récompenses ) &nbsp;</label>
+                                              <label class="control-label" for="doisetreenligne">Le joueur doit être connecté sur le serveur pour voter sur ce lien excepté si le pseudo rentré sur la page est le même que celui du compte du joueur sur votre site web (cela aura pour conséquence de stocker ses récompenses) &nbsp;</label>
                                                 <div class="custom-control custom-switch" style="margin-bottom:15px;" >
                                                     <input type="checkbox" class="custom-control-input" value="1" id="doisetreenligne<?=$o;?>" name="enligne<?=$o;?>" <?php if($donnees[$o]['enligne']==1) { echo 'checked' ; } ?>>
                                                     <label class="custom-control-label" for="doisetreenligne<?=$o;?>">Oui</label>
