@@ -46,7 +46,7 @@
                     } ?>>
                         <label class="control-label">ID de suivi (voir tutoriel)</label>
                         <input type="text" name="id" class="form-control"
-                               value="<?= isset($_Serveur_['googleService']['analytics']['id']) ? $_Serveur_['googleService']['analytics']['id'] : '' ?>"
+                               value="<?= $_Serveur_['googleService']['analytics']['id'] ?? '' ?>"
                                placeholder="Exemple: G-BTTGMMY3YH" required/>
                         <div style="margin-top:10px;">
                             <a href="https://analytics.google.com/analytics/web/" target="_blank"><small>Liens Google
@@ -115,7 +115,7 @@
                                 <label class="switch">
                                     <input type="checkbox" value="true" name="enable"
                                            onClick="if(get('googleSearchConsole').style.display == 'none') { show('googleSearchConsole'); } else { hide('googleSearchConsole'); } sendDirectPost('admin.php?action=switchGoogleSearchConsole');"
-                                        <?= (googleService::isSearchConsoleEnable($_Serveur_)) ? 'checked' : ''; ?>>
+                                        <?= (googleService::isSearchConsoleEnable($_Serveur_)) ? 'checked' : '' ?>>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -132,10 +132,13 @@
 
                         googleSearchConsole::call($_Serveur_, $bddConnection, false);
                         ?>
-                        <h6><?php echo urlRewrite::getSiteUrl(); ?><span
-                                    id=""><?php if (isset($_Serveur_['googleService']['searchConsole']['id'])) {
-                                    echo $_Serveur_['googleService']['searchConsole']['id'] . '.xml';
-                                } ?></span></h6>
+                        <h6><?= urlRewrite::getSiteUrl() ?>
+                            <span id="">
+                                <?=  empty($_Serveur_['googleService']['searchConsole']['id']) ?
+                                    $_Serveur_['googleService']['searchConsole']['id'] . '.xml' : ''
+                                 ?>
+                            </span>
+                        </h6>
                         <div style="margin-top:10px;">
                             <a href="https://search.google.com/search-console" target="_blank"><small>Liens Google
                                     Search Console</small></a><br>
