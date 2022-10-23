@@ -208,7 +208,7 @@ if (isset($_GET['id'])) :
                                             <input type="hidden" name="objet" value="topic" />
                                             <input type="hidden" name="id" value="<?= $id; ?>" />
                                             <button type="submit" class="btn btn-secondary">
-                                                <i class="fa-solid fa-pen"></i>
+                                                <i class="fa fa-pen"></i>
                                             </button>
                                         </form>
                                     <?php endif; ?>
@@ -219,7 +219,7 @@ if (isset($_GET['id'])) :
                                         <form action="?action=remove_topic" method="post">
                                             <input type="hidden" name="id_topic" value="<?= $id; ?>" />
                                             <a class="btn btn-danger no-hover" role="button" data-toggle="modal" href="#topic_<?= $id; ?>" aria-expanded="false" aria-controls="modalConfirmation">
-                                                <i class="fa-solid fa-trash"></i>
+                                                <i class="fa fa-trash"></i>
                                             </a>
 
                                             <div class="modal fade" id="topic_<?= $id; ?>" tabindex="-1" role="dialog" aria-labelledby="modalConfirmation" aria-hidden="true">
