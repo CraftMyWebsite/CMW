@@ -165,15 +165,18 @@ if (isset($_POST['go']) and $_POST['go'] == 1) {
 // https://github.com/guedesite/CMWListDeleteFile
 function file182to19(): void
 {
-    /* TODO */
+    unlink('/admin/donnees/accueil.php');
+    unlink('/admin/pages/accueil.php');
+    unlink('/include/note_dev.php');
+
 }
 
 function bdd182to19($bddConnection): void
 {
     //Update resettoken for the new reset system
-    $bddConnection->exec('ALTER TABLE `cmw_users` CHANGE `resettoken` `resettoken` VARCHAR(500);');
+    $bddConnection->exec('ALTER TABLE `cmw_users` CHANGE `resettoken` `resettoken` VARCHAR(500)');
     //Fix support default value
-    $bddConnection->exec('ALTER TABLE `cmw_support` CHANGE `etat` `etat` INT(1) NULL DEFAULT '0';');
+    $bddConnection->exec('ALTER TABLE `cmw_support` CHANGE `etat` `etat` INT(1) NULL DEFAULT 0');
     $bddConnection->exec('UPDATE cmw_support SET etat = 0 WHERE etat = null;');
 
 }
