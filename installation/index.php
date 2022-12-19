@@ -373,7 +373,7 @@ function verifyPDO($hote, $nomBase, $utilisateur, $mdp, $port)
         if ((!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_TRANS_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_TRANS_TABLES') === FALSE)) {
             return true;
         } else {
-            return '([GLOBAL.sql_mode: ' . $data['sql_mode_globall'] . '],[SESSION.sql_mode:' . $data['sql_mode_session'] . '])';
+            return '([GLOBAL.sql_mode: ' . $data['sql_mode_global'] . '],[SESSION.sql_mode:' . $data['sql_mode_session'] . '])';
         }
     } catch (Exception $e) {
         return 3;
