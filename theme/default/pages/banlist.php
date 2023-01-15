@@ -6,15 +6,6 @@
 
 <section id="Banlist">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
-        <div class="row">
-            <!-- Présentation -->
-            <div class="d-flex col-12 info-page">
-                <i class="fas fa-info-circle notification-icon"></i>
-                <div class="info-content">
-                    Voici la liste des joueurs bannis de nos serveurs de jeu.
-                </div>
-            </div>
-        </div>
 
         <?php if (count($jsonCon) > 0) : ?>
             <div class="row">

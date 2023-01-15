@@ -1,16 +1,7 @@
 <section id="Shop">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
-        <div class="row">
-            <!-- Présentation -->
-            <div class="d-flex col-12 info-page">
-                <i class="fas fa-info-circle notification-icon"></i>
-                <div class="info-content">
-                    La boutique permet d'acheter du contenu In-Game depuis le site grâce à de l'argent réel, cela sert à financer l'hébergement du serveur. <br>
-                    La monnaie virtuelle utilisée sur la boutique est le "<?=$_Serveur_['General']['moneyName'];?>", vous pouvez obtenir des <?=$_Serveur_['General']['moneyName'];?> en échange de dons sur <a href="index.php?page=token"> cette page</a>.
-                </div>
-            </div>
-        </div>
-        <div class="row">
+
+        <div class="row mt-4">
             <div class="col-md-12 col-lg-2 col-sm-12 mb-3">
                 <!-- Catégories -->
                 <div class="card">
