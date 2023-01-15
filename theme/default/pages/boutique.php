@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-lg-3 col-sm-12 mb-3">
+            <div class="col-md-12 col-lg-2 col-sm-12 mb-3">
                 <!-- Catégories -->
                 <div class="card">
                     <div class="card-header">
@@ -41,7 +41,7 @@
             </div>
 
             <!-- Offres -->
-            <div class="col-md-12 col-lg-6 col-sm-12 mb-5">
+            <div class="col-md-12 col-lg-8 col-sm-12 mb-5">
                 <?php if (isset($categories)) : ?>
                     <div class="offres tab-content">
                         <!-- Affichage de la catégorie -->
@@ -116,8 +116,14 @@
                                             $categories[$j]['showNumber'] = ($categories[$j]['showNumber'] == 0) ? 1 : $categories[$j]['showNumber']; ?>
                                             <div class="col-12 card mx-3 col-md-<?php echo ((12/$categories[$j]['showNumber'])-1); ?>">
                                                 <div class="card-header">
-                                                    <?= (($offresTableau[$i]['nbre_vente'] == 0) ? '<s>' . $offresTableau[$i]['nom'] . '</s>' : $offresTableau[$i]['nom']); ?>
-                                                    <br /><small>
+                                                    <div class="text-center">
+                                                    <img class="p-2" alt="Images non trouvé !" src="<?= ($offresTableau[$i]['images']) ?>" style="width: 160px; height: 160px">
+                                                </div>
+                                                    
+                                                    <h3 class="text-center">
+                                                    <?= (($offresTableau[$i]['nbre_vente'] == 0) ? '<s>' . $offresTableau[$i]['nom'] . '</s>' : $offresTableau[$i]['nom']); ?></h3>
+                                                    <br />
+                                                    <small>
                                                         <?php
                                                         if ($offresTableau[$i]['nbre_vente'] == 0) {
                                                             echo 'vide';
@@ -148,7 +154,7 @@
                                                             <span class="fas fa-user"></span> Se connecter
                                                         </a>
                                                     <?php endif; ?>
-                                                    <button class="btn btn-main">Prix : <?= ($offresTableau[$i]['prix'] == '0' ? 'gratuit' : $offresTableau[$i]['prix']) ?> <i class="fas fa-gem"></i></button>
+                                                    <button class="btn btn-main">Prix : <?= ($offresTableau[$i]['prix'] == '0' ? 'gratuit' : $offresTableau[$i]['prix']) ?> <i class='fa-solid fa-coins'></i></button>
                                                 </div>
                                                 <?php $categories[$j]['offres']++; ?>
                                             </div>
@@ -179,25 +185,23 @@
             </div>
 
             <!-- Compte -->
-            <div class="col-md-12 col-lg-3 col-sm-12 mb-3">
+            <div class="col-md-12 col-lg-2 col-sm-12 mb-3">
                 <!-- Affichage du compte -->
                 <div class="card">
                     <div class="card-header">
-                        <h4> Vos Informations :</h4>
+                        <h4><?= $_Joueur_['pseudo']; ?> :</h4>
                     </div>
                     <div class="card-body player-shop">
                         <?php if (Permission::getInstance()->verifPerm('connect')) : ?>
                             <!-- Affichage nom, panier, crédits -->
-                            <div class="player-shop-person h5 mb-2">
-                                Bonjour <?= $_Joueur_['pseudo']; ?>,
-                            </div>
-                            <div class="categorie-content">
-                                <div class="categorie-item no-hover">
+                            <div class="categorie-content" >
+                                <a href="../token" class="categorie-link">
+                                    <div class="categorie-item">
                                     Crédits :
                                     <div class="text-center">
-                                        <?= $_Joueur_['tokens']; ?> <i class="fas fa-gem"></i>
+                                        <?= $_Joueur_['tokens']; ?> <i class='fa-solid fa-coins'></i></i>
                                     </div>
-                                </div>
+                                </div></a>
                                 <div class="categorie-item">
                                     <a href="<?= $_Panier_->compterArticle() > 0 ? '?page=panier' : '#' ?>" class="categorie-link">
                                         Panier :

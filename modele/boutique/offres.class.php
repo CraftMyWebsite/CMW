@@ -29,6 +29,7 @@ class OffresList
 			$offres[$i] = array(
 				'id' => $tableauOffres['id'],
 				'nom' => $tableauOffres['nom'],
+				'images' => $tableauOffres['images'],
 				'description' => $tableauOffres['description'],
 				'nbre_vente' => $tableauOffres['nbre_vente'],
 				'prix' => $tableauOffres['prix'],

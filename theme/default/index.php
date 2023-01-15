@@ -75,7 +75,7 @@ $_Theme_ = $configTheme->GetTableau();
 
     <!-- CSS links -->
     <link rel="stylesheet" type="text/css" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/fa-all.min.css">
+    <script src="https://kit.fontawesome.com/eced519d56.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/custom.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
     <link rel="stylesheet" type="text/css" href="theme/<?= $_Serveur_['General']['theme']; ?>/assets/css/toastr.min.css">
