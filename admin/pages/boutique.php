@@ -81,6 +81,9 @@
                         <label class="control-label">Titre de l'offre</label>
                         <input type="text" class="form-control" name="nom" placeholder="ex: 64 x Diamants" required> 
                 
+                        <label class="control-label">Image de l'offre (160*160 recommandé)</label>
+                        <input type="text" class="form-control" name="images" placeholder="ex: http://craftmywebsite.fr/images.png" required> 
+
                         <label class="control-label">Description</label>
                          <textarea class="form-control" id="ckeditor" data-UUID="CATBOUTIQUENEW2" name="description"></textarea>
                 
@@ -375,6 +378,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
+                                                <th>Image (160*160)</th>
                                                 <th>Description</th>
                                                 <th>Prix</th>
                                                 <th>Catégorie</th>
@@ -389,6 +393,7 @@
                                                 if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                                     <tr id="ligneoffre-<?php echo $offres[$j]['id']; ?>">
                                                 <td><input type="text" name="offresNom<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nom']; ?>" /></td>
+                                                <td><input type="text" name="offresImages<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['images']; ?>" /></td>
                                                 <td>
                                                     <button class="btn btn-primary" data-toggle="modal" type="button" data-target="#description_offre<?php echo $offres[$j]['id']; ?>">
                                                     <i class="fas fa-pen"></i> / <i class="far fa-eye"></i>

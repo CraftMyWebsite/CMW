@@ -156,15 +156,16 @@ class Panier
 		unset($_SESSION['panier']);
 	}
 
-	public function infosArticle($id, &$nom, &$infos)
+	public function infosArticle($id, &$nom, &$infos, &$images)
 	{
-			$req = $this->bdd->prepare('SELECT nom, description FROM cmw_boutique_offres WHERE id = :id');
+			$req = $this->bdd->prepare('SELECT nom, description, images FROM cmw_boutique_offres WHERE id = :id');
 			$req->execute(array(
 				'id' => $id
 			));
 			$fetch = $req->fetch(PDO::FETCH_ASSOC);
 			$nom = $fetch['nom'];
 			$infos = $fetch['description'];
+			$images = $fetch['images'];
 	}
 
 	public function ajouterReduction($code)

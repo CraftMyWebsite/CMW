@@ -21,15 +21,6 @@
             <?php endif;
             endif; ?>
         </div>
-        <div class="row">
-            <!-- Présentation -->
-            <div class="d-flex col-12 info-page">
-                <i class="fas fa-info-circle notification-icon"></i>
-                <div class="info-content">
-                    Voter pour le serveur permet d'améliorer son référencement ! Les votes sont récompensés par des items en jeu.
-                </div>
-            </div>
-        </div>
 
         <!-- Gestion des informations de vote -->
         <div>

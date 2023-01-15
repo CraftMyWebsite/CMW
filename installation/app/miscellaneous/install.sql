@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_offres` (
   `ordre` int(11),
   `evo` text NULL,
   `max_vente` int(11),
+  `images` text NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

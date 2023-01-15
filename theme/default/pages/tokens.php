@@ -1,15 +1,7 @@
 <section id="Token">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
 
-        <div class="row">
-            <!-- Présentation -->
-            <div class="d-flex col-12 info-page">
-                <i class="fas fa-info-circle notification-icon"></i>
-                <div class="info-content">
-                    Transformez votre argent en crédit afin d'effectuer vos achats tranquillement !
-                </div>
-            </div>
-        </div>
+
         <div class="row">
             <div class="col-md-12 col-lg-3 col-sm-12 mb-3">
                 <!-- Moyens de Paiement -->

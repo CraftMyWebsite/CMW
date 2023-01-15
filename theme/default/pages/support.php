@@ -1,19 +1,10 @@
 <section id="Support">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
-        <div class="row">
-            <!-- Présentation -->
-            <div class="d-flex col-12 info-page">
-                <i class="fas fa-info-circle notification-icon"></i>
-                <div class="info-content">
-                    Postez des tickets, lisez ceux des autres, répondez à la communauté et discutez avec l'équipe du serveur !
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
+        <div class="row mt-4">
             <!-- Tableau des Tickets  -->
-            <div class="col-md-12 col-lg9 col-sm-12">
-                <table class="table table-hover table-responsive mb-0 mt-4">
+            
+                <table class="table table-dark table-hover  mb-4 mt-4">
                     <thead>
                         <tr>
                             <?php if (Permission::getInstance()->verifPerm('PermsDefault', 'support', 'displayTicket')) : ?>
@@ -216,7 +207,7 @@
                                             <div class="modal-footer">
 
                                                 <!-- Envoie d'un commentaire -->
-                                                <?php if ($tickets['etat'] === '0') : ?>
+                                                <?php if ($tickets['etat'] == '0') : ?>
 
                                                     <form action="?action=post_ticket_commentaire" method="post">
                                                         <input type="hidden" name="id" value="<?= htmlspecialchars($tickets['id']) ?>" />
@@ -359,7 +350,7 @@
                     </div>
 
                 <?php endif; ?>
-            </div>
+            
         </div>
     </div>
 </section>

@@ -3,28 +3,8 @@ $fofo = $_Forum_->affichageForum();
 ?>
 
 <section id="Forum" style="overflow-y: hidden">
-    <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
-        <div class="row">
-            <!-- Présentation -->
-            <div class="info-page col-12">
-                <div class="d-flex">
-                    <i class="fas fa-info-circle notification-icon"></i>
-                    <div class="info-content">
-                        Bienvenue sur le forum de <?= $_Serveur_['General']['name']; ?>, <br>
-                        Ici vous pouvez échanger et partager avec toute la communauté du serveur !
-                    </div>
-                </div>
-                <div class="d-flex col-12 col-sm-6 col-lg-4" style="margin:auto;">
-                     <div class="input-group" >
-                        <input type="text" id="search-topic" class="form-control" placeholder="Rechercher un topic ou un message" />
-                            <div class="input-group-append" >
-                                 <span onclick="searchForum(document.getElementById('search-topic').value, document.getElementById('all-search'), document.getElementById('table-search'),document.getElementById('title-search'))" style="border: none;" class="input-group-text btn btn-main" style="cursor:pointer;"><i class="fas fa-search"></i>
-                                </span>
-                        </div>
-                    </div>
-                </div>
-             </div>
-        </div>
+    <div class="container-fluid col-md-9 col-lg-9 col-sm-10 pt-4">
+        
         <div class="row" style="display:none;" id="all-search">
             <table class="table table-dark table-striped" style="display:none;">
                 <thead>
