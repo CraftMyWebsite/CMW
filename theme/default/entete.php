@@ -62,7 +62,7 @@
 
                                 <?php if (Permission::getInstance()->verifPerm('PermsPanel', 'access')) : ?>
                                     <!-- Administration -->
-                                    <a href="admin.php" class="dropdown-item text-success"><i class="fas fa-tachometer-alt"></i> Administration</a>
+                                    <a target="_blank" href="admin.php" class="dropdown-item text-success"><i class="fas fa-tachometer-alt"></i> Administration</a>
                                     <div class="dropdown-divider"></div>
                                 <?php endif; ?>
 
