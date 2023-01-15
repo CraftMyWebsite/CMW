@@ -4,12 +4,19 @@ Ajouts ([+]), modifications ([=]) et suppressions ([-]), ([|]) Bugs Fix
 
 [|] : Fix de la quantité d'articles dans le panier
 [|] : Les CMS peut être installé sur Windows (Uniquement pour un environnement de dev)
+[|] : Affichage résolu/non résolu dans l'espace support
 
 [=] : Ajouts des sites de vote: meilleurs-serveurs.com et yserveur.fr
 [=] : Fautes d'ortographes
+[=] : Amélioration de la compatibilité avec certaines bases de données
+[=] : Plusieurs modifications dans la boutique
+[=] : Fix sécurité 
 
 [+] : Ajouts de nouvelles vérifications pour voter
+[+] : Prise en charge d'images sur les articles en boutique
+[+] : Affichage du solde restant dans l'espace panier
+[+] : Ajout d'un message si pas assez de token lors d'un achat
 
 
 
-Contributeurs : Teyir, Emilien52, CapDrake, Nassim-K, WIBORR, Dancuo-Lohan
+Contributeurs : Teyir, Emilien52, CapDrake, Nassim-K, WIBORR, Dancuo-Lohan, Zomb, Florentlife
