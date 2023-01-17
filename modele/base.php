@@ -12,7 +12,7 @@ class base
 			
 			// Cette requette SQL permet d'encoder correctement tout ce qui rentre / sort de la base.
 			$bdd->exec('SET CHARACTER SET utf8');
-			$bdd->exec('SET SESSION sql_mode = ''");
+			$bdd->exec('SET SESSION sql_mode = ""');
 			$this->bdd = $bdd;
 		}
 		catch (Exception $e)
