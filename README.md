@@ -6,12 +6,12 @@ CraftMyWebsite est un CMS Minecraft 100% gratuit créé en 2014 (première versi
 Présent depuis maintenant 6ans sur internet, le projet open-source depuis le début est aujourd'hui toujours maintenu par des passionnés !
 Profitez d'un site stable pour votre serveur minecraft en utilisant notre cms !
 
-### Les fonctionalitées sur la version 1.9 - LTS
-
--   ??????????????
 
 Une démo est disponible sur notre [site internet](http://demo.craftmywebsite.fr/).
 Les thèmes sont téléchargeable depuis notre forum [site internet](https://craftmywebsite.fr/forum/index.php?resources/featured)
+
+# Pourquoi le repo est-il archivé ?
+## La version 1.9 - LTS de CMW annonce la fin de CraftMyWebsite que vous connaissez, toute l'équipe est maintenant concentrée sur la version 2.0 du CMS.
 
 ### Support, infos et communauté
 
@@ -33,6 +33,36 @@ La Branche Archive et un service de stockage de l'ensemble des versions que nous
 -   [WebStrator.fr](WebStrator.fr): Hébergeur web
 -   [MineStrator.com](MineStrator.com): Hébergeur de serveurs Minecraft
 -   [Serveurs-minecraft.net](Serveurs-minecraft.net): Référencement de serveurs Minecraft
+
+
+### Le mot de la fin pour annoncer la fin de CMW 1.X avant de vous présenter la 2.0
+
+Aujourd'hui nous vous présentons officiellement la nouvelle version 1.9 de CraftMyWebsite !
+
+**Nous vous conseillons fortement de migrer rapidement sur cette dernière version suite à une faille de sécurité détectée sur la 1.8.3.**
+
+Cette nouvelle version tourne la page d'un chapitre de CraftMyWebsite, en effet c'étais la dernière version pour le CMS que vous connaissez et que vous avez apprecié.
+
+Je tiens vraiment à remercier toutes les personnes qui ont travaillé sur CMW 1.X depuis les débuts de ce merveilleux projet.
+
+TheTueurCity, Lucerno, DogeMVP, SawnFx, Cersus, Florentlife, Oxykis, Ethanox, Emilien52, PinglsDzn, Mario359, Guedesite, BadiiiX, Pandax, deadfire, Teyir,  MrFlamme26, Noxeg, CapDRAKE, Z0mblard, vasilidev et bien d'autres...
+
+On se retrouve prochainement pour l'arrivée de la 2.0 !
+
+
+Pour découvrir cette nouvelle version c'est par ici que ça ce passe → https://craftmywebsite.fr/telecharger
+
+Si vous avez besoin d'un hébergeur web, n'oubliez pas : https://webstrator.fr/ 
+et pour un hébergeur Minecraft : https://minestrator.com/
+
+Un grand merci à notre fidèle communauté qui nous soutient depuis le début.
+
+Pour conclure ce chapitre de CMW 1.X, toutes nos pensées se tournent vers Ping.
+
+Merci à tous pour votre confiance !
+L'équipe de CraftMyWebsite.fr
+
+
 
 ### Copyright
 
