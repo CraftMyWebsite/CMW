@@ -29,6 +29,7 @@ class OffresList
 			$offres[$i] = array(
 				'id' => $tableauOffres['id'],
 				'nom' => $tableauOffres['nom'],
+				'images' => $tableauOffres['images'],
 				'description' => $tableauOffres['description'],
 				'nbre_vente' => $tableauOffres['nbre_vente'],
 				'prix' => $tableauOffres['prix'],
@@ -49,14 +50,14 @@ class OffresList
 			                }
 			            }
 			        } else {
-			            array_push($info, array("id2" => $_SESSION['panier']['id'][$key], "nombre" => $_SESSION['panier']['quantite'][$key]));
+			            array_push($info, array('id2' => $_SESSION['panier']['id'][$key], 'nombre' => $_SESSION['panier']['quantite'][$key]));
 			        }
 			    }
 			}
 			if(isset($info) & !empty($info)) {
 				$temp = array();
-				if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != "" ) {
-					foreach(explode(",",$tableauOffres['evo']) as $value)
+				if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != '') {
+					foreach(explode(',',$tableauOffres['evo']) as $value)
 					{
 						$temp[$value] = in_array($value, $_SESSION['panier']['id']);
 					} 
@@ -69,7 +70,7 @@ class OffresList
        					}
        				}
        			}
-       			if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != "" ) {
+       			if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != '') {
 	       			foreach($temp as $key => $value)
 					{
 						if(!$value) {
@@ -82,8 +83,8 @@ class OffresList
 					}
 				}
 
-			} else if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != "" ) {
-				$offres[$i]['buy'] = explode(",",$tableauOffres['evo']);
+			} else if(isset($tableauOffres['evo']) && !empty($tableauOffres['evo']) && $tableauOffres['evo'] != '') {
+				$offres[$i]['buy'] = explode(',',$tableauOffres['evo']);
 			}
 
 			$i++;

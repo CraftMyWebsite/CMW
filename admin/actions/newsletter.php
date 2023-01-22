@@ -60,16 +60,16 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 			{
 				$mail->IsMail();
 			}
-			$mail->From = $_POST["from"];
+			$mail->From = $_POST['from'];
 			$mail->FromName = $_Serveur_['General']['name'];
 			$mail->addAddress($_POST['email']);   
-			$mail->addReplyTo($_POST["reply"], $_Serveur_['General']['name']);
+			$mail->addReplyTo($_POST['reply'], $_Serveur_['General']['name']);
 			$mail->isHTML(true);                               
-			$mail->Subject = htmlspecialchars($_POST["sujet"]);
+			$mail->Subject = htmlspecialchars($_POST['sujet']);
 			require('modele/app/ckeditor.class.php');
 			$_POST['contenu'] = ckeditor::verif($_POST['contenu'],true);
-			$mail->Body    = $_POST["contenu"];
-			$mail->AltBody = strip_tags($_POST["contenu"]);
+			$mail->Body    = $_POST['contenu'];
+			$mail->AltBody = strip_tags($_POST['contenu']);
 			if(!$mail->send()) {
 				echo 'Erreur: ' . $mail->ErrorInfo;
 			} else {
@@ -80,7 +80,7 @@ if($_Permission_->verifPerm('PermsPanel', 'news', 'actions', 'addNews')) {
 		{
 			echo 'FATAL ERREUR: '.  $e->getMessage();
 			if(strpos($e->getMessage(), 'connect() failed')) {
-				echo '\r\n Vos logins sont incorectes';
+				echo '\r\n Vos identifiants sont incorectes';
 			} else if(strpos( $e->getMessage(), 'instantiate mail function')) {
 				echo "\r\n Vous n'avez pas accès à cette fonction sur votre hébergeur, dirigez vous plutôt vers les mails SMTP.";
 			}

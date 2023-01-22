@@ -22,7 +22,7 @@
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <label class="control-label">Titre de la catégorie</label>
-                                                <input type="text" class="form-control" onkeyup="get('titlecat<?=$i?>').innerText = this.value" name="categorieNom" value="<?php echo $categories[$i]['titre']; ?>" placeholder="Remise spécial CMW V1.8" required maxlength="60">
+                                                <input type="text" class="form-control" onkeyup="get('titlecat<?=$i?>').innerText = this.value" name="categorieNom" value="<?php echo $categories[$i]['titre']; ?>" placeholder="Remise spécial CMW V1.9" required maxlength="60">
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
@@ -109,7 +109,7 @@
                                             <?php } } }?>
                                         </tbody>
                                     </table>
-                                    <button type="submit" class="btn btn-success w-100" style="margin-top:10px;" onClick="sendPost('navRap<?=$i?>');">Envoyer!</button>
+                                    <button type="submit" class="btn btn-success w-100" style="margin-top:10px;" onClick="sendPost('navRap<?=$i?>');">Envoyer</button>
                                     <?php for($j = 1;$j <= count($offres);$j++) { if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                     <div class="modal fade" id="OffreAction<?php echo $offres[$j]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Modal-<?php echo $offres[$j]['id']; ?>" aria-hidden="true">
                                         <div class="modal-dialog " role="document">
@@ -135,7 +135,7 @@
                                                                 <?php } }?> 
                                                             </select>
                                                             <?php if(isset($offres[$j]['evo'])) {  
-                                                                $tp = explode(",",$offres[$j]['evo']);
+                                                                $tp = explode(',',$offres[$j]['evo']);
                                                                 foreach($tp as $value)
                                                                 {
                                                                     echo '<div  data-boutique-tagsinput="dep-tag'.$j.$offres[$j]['id'].'"  data-boutique-tagsinput-value="'.$value.'"  data-boutique-tagsinput-text="'.$offresByGet[$value].'"></div>';
@@ -232,7 +232,7 @@
                                                         <input type="hidden" name="id_offre" value="<?php echo $offres[$j]['id']; ?>" />
                                                     </div>
 
-                                                    <button type="button" onclick="sendPost('new-action-<?php echo $offres[$j]['id']; ?>', function() { boutiqueActionUpdate('<?php echo $offres[$j]['id']; ?>'); });" class="btn btn-secondary w-100">Envoyer!</button>
+                                                    <button type="button" onclick="sendPost('new-action-<?php echo $offres[$j]['id']; ?>', function() { boutiqueActionUpdate('<?php echo $offres[$j]['id']; ?>'); });" class="btn btn-secondary w-100">Envoyer</button>
 
                                                      <button type="button" style="margin-top:15px;" onclick="SwitchDisplay(get('allaction-<?php echo $offres[$j]['id']; ?>'))" class="btn btn-danger w-100">Editer actions</button>
 

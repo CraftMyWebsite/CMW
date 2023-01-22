@@ -1,4 +1,3 @@
-
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h2 class="h2 gray">
                     Gestion des récompenses automatiques
@@ -7,7 +6,7 @@
 <?php if(!$_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'showPage')) { ?>
   <div class="col-lg-6 col-lg-offset-3 text-center">
     <div class="alert alert-danger">
-      <strong>Vous avez aucune permission pour accéder à cette page.</strong>
+      <strong>Vous n'avez aucune permission pour accéder à cette page.</strong>
     </div>
   </div>
 <?php }
@@ -24,7 +23,7 @@ else
         </ul>
         Le cycle peut être définis ci dessous, il représente quand les votes vont être réinitialisé et par conséquent les récompenses enregistrées pour les meilleurs voteurs vont être distribués. Le joueur pourra les récupérer comme n'importe quelles récompenses après un vote. 
 
-        <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'editReset')) { ?>
+        <?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'editReset')) { ?>
          <select name="type" name="type" style="margin-top:10px;margin-bottom:10px;width:200px;" class="form-control form-control-sm" onChange="if(this.value==0) { hide('recsem');hide('recmoi');hide('recheur'); } else if(this.value==1) { show('recsem');hide('recmoi'); show('recheur');} else if(this.value==2) { hide('recsem');show('recmoi');show('recheur'); }" >
                 <option value="0" <?php if($dateRec['valueType'] == 0) { echo 'selected';} ?>> Désactivé</option>
                 <option value="1" <?php if($dateRec['valueType'] == 1) { echo 'selected';} ?>> Toutes les semaines</option>
@@ -33,7 +32,7 @@ else
           <div id="recsem" <?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 2) { echo 'style="display:none;"';} ?>>
             <label class="control-label">Le jour de la semaine:</label>
             <select style="width:175px;margin-bottom:10px;" name="jour" class="form-control form-control-sm">
-                <option value="1" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 1) { echo 'selected';}?> >lundi</option>
+                <option value="1" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 1) { echo 'selected';}?>>lundi</option>
                 <option value="2" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 2) { echo 'selected';}?>>mardi</option>
                 <option value="3" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 3) { echo 'selected';}?>>mercredi</option>
                 <option value="4" <?php if($dateRec['valueType'] == 1 && $dateRec['jour'] == 4) { echo 'selected';}?>>jeudi</option>
@@ -43,7 +42,7 @@ else
               </select>
           </div>
           <div id="recmoi" <?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo 'style="display:none;"';} ?>>
-            <label class="control-label">le <input name="mois" style="width:auto;display:inline" type="number" min="1" max="31" class="form-control form-control-sm" value="<?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo '1';} else { echo $dateRec['mois']; } ?>"><span id="recmoi2"><?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo 'ier';} else { echo $dateRec['mois'] != 1 ? "ième" : "ier"; } ?></span> du mois</label>
+            <label class="control-label">le <input name="mois" style="width:auto;display:inline" type="number" min="1" max="31" class="form-control form-control-sm" value="<?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo '1';} else { echo $dateRec['mois']; } ?>"><span id="recmoi2"><?php if($dateRec['valueType'] == 0 || $dateRec['valueType'] == 1) { echo 'ier';} else { echo $dateRec['mois'] != 1 ? 'ième' : 'ier'; } ?></span> du mois</label>
             
           </div>
            <div id="recheur" <?php if($dateRec['valueType'] == 0) { echo 'style="display:none;"';} ?>>
@@ -121,7 +120,7 @@ else
           var topRec = new Map();
           <?php 
             foreach($topRecompense as $key => $value) {
-              echo "topRec.set(".$key.",'".$value."');";
+              echo 'topRec.set(' .$key.",'".$value."');";
             }
 
           ?>
@@ -175,21 +174,21 @@ else
                                 ?>
                             </td>
                             <td><?php  $json = json_decode($donnees[$o]['action'], true); 
-                                $f = "";
+                                $f = '';
                                 foreach($json as $value) { 
-                                  if($value['type'] == "item") {
-                                    $f= $f.'Give '.$value['value2'].' item ID '.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
-                                  } else if($value['type'] == "commande") {
-                                    $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
-                                  } else if($value['type'] == "jeton") {
+                                  if($value['type'] == 'item') {
+                                    $f= $f.'Give '.$value['value2'].' item ID '.$value['value'].' sur '.($value['methode'] == '1' ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
+                                  } else if($value['type'] == 'commande') {
+                                    $f= $f.'Éxécute la commande /'.$value['value'].' sur '.($value['methode'] == '1' ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
+                                  } else if($value['type'] == 'jeton') {
                                      $f= $f.'Give '.$value['value'].' '.$_Serveur_['General']['moneyName'].'(s) ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
-                                  } else if($value['type'] == "jetonAlea") {
+                                  } else if($value['type'] == 'jetonAlea') {
                                      $f= $f.'Give entre '.$value['value'].' et '.$value['value2'].' '.$_Serveur_['General']['moneyName'].'(s) ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
-                                  } else if($value['type'] == "message") {
-                                    $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == "1" ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
+                                  } else if($value['type'] == 'message') {
+                                    $f= $f.'Envoie le message "'.$value['value'].'" sur '.($value['methode'] == '1' ? 'le serveur où il est en ligne' : 'tous les serveurs').' ('.$value['pourcentage'].'%'.(isset($value['inst']) & intval($value['inst'])==1 ? ', instantané' : '').')<br/>';
                                   } 
                                 }  
-                                if($f != "" && !empty($f)) {
+                                if($f != '' && !empty($f)) {
                                    echo substr($f, 0, -5);
                                 } ?>
                             </td>

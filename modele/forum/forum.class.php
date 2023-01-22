@@ -110,7 +110,7 @@ class Forum {
 		return $topic->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
-	//récupération de la table cmw_sous_forum pour le fofo si on se trouve dans un sousForum
+	//Récupération de la table cmw_sous_forum pour le forum si on se trouve dans un sous-forum
 	public function SousForum($id)
 	{
 		$sousforum = $this->bdd->prepare('SELECT * FROM cmw_forum_sous_forum WHERE id = :id');
@@ -303,8 +303,8 @@ class Forum {
 
 	public function conversionDate($last_answer)
 	{
-		$last_answer = substr_replace($last_answer,"h",strpos($last_answer,":"),strlen(":"));
-        $last_answer = str_replace(" ", " à ", substr($last_answer, 0, strpos($last_answer,":")));
+		$last_answer = substr_replace($last_answer, 'h',strpos($last_answer, ':'),strlen(':'));
+        $last_answer = str_replace(' ', ' à ', substr($last_answer, 0, strpos($last_answer, ':')));
 		return $last_answer;
 	}
 

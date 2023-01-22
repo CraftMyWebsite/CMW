@@ -1,17 +1,8 @@
 <section id="Shop">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
-        <div class="row">
-            <!-- Présentation -->
-            <div class="d-flex col-12 info-page">
-                <i class="fas fa-info-circle notification-icon"></i>
-                <div class="info-content">
-                    La boutique permet d'acheter du contenu In-Game depuis le site grâce à de l'argent réel, cela sert à payer l'hébergement du serveur. <br>
-                    La monnaie virtuelle utilisée sur la boutique est le "<?=$_Serveur_['General']['moneyName'];?>", vous pouvez obtenir des <?=$_Serveur_['General']['moneyName'];?> en échange de dons sur <a href="index.php?page=token"> cette page</a>.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-3 col-sm-12 mb-3">
+
+        <div class="row mt-4">
+            <div class="col-md-12 col-lg-2 col-sm-12 mb-3">
                 <!-- Catégories -->
                 <div class="card">
                     <div class="card-header">
@@ -41,7 +32,7 @@
             </div>
 
             <!-- Offres -->
-            <div class="col-md-12 col-lg-6 col-sm-12 mb-5">
+            <div class="col-md-12 col-lg-8 col-sm-12 mb-5">
                 <?php if (isset($categories)) : ?>
                     <div class="offres tab-content">
                         <!-- Affichage de la catégorie -->
@@ -62,14 +53,14 @@
                                     if(isset($offresTableau) && !empty($offresTableau)) : for ($i = 1; $i <= count($offresTableau); $i++) :
                                         if(isset($_SESSION['panier']['id']) && !empty($_SESSION['panier']['id'])) {
                                             foreach($_SESSION['panier']['id'] as $itemId) {
-                                                $req = $bddConnection->prepare("SELECT id FROM cmw_boutique_offres WHERE evo = :evo");
-                                                $req->execute(array("evo" => $itemId));
+                                                $req = $bddConnection->prepare('SELECT id FROM cmw_boutique_offres WHERE evo = :evo');
+                                                $req->execute(array('evo' => $itemId));
                                                 $d = $req->fetch(PDO::FETCH_ASSOC);
                                                 if (isset($d['id']) && !empty($d['id'])) {
                                                     unset($offresTableau[($d['id'])]['buy']);
                                                 }
-                                                $req = $bddConnection->prepare("SELECT max_vente FROM cmw_boutique_offres WHERE id = :id");
-                                                $req->execute(array("id" => $itemId));
+                                                $req = $bddConnection->prepare('SELECT max_vente FROM cmw_boutique_offres WHERE id = :id');
+                                                $req->execute(array('id' => $itemId));
                                                 $s = $req->fetch(PDO::FETCH_ASSOC);
                                                 if ($offresTableau[$i]['id'] == $d['id']) {
                                                     $keyPanier = array_search($d['id'], $_SESSION['panier']['id']);
@@ -82,33 +73,33 @@
                                             }
                                         }
 
-                                        if(isset($_SESSION["Player"]["id"])) {
-                                            $req = $bddConnection->prepare("SELECT achats FROM cmw_users WHERE id = :id");
-                                            $req->execute(array("id" => $_SESSION["Player"]["id"]));
+                                        if(isset($_SESSION['Player']['id'])) {
+                                            $req = $bddConnection->prepare('SELECT achats FROM cmw_users WHERE id = :id');
+                                            $req->execute(array('id' => $_SESSION['Player']['id']));
                                             $e = $req->fetch(PDO::FETCH_ASSOC);
                                             if (isset($e['achats']) && !empty($e['achats'])) {
                                                 $arrayAchat = array();
                                                 $arrayAchat = (json_decode($e['achats'], true));
                                                 foreach($arrayAchat as $achats) {
-                                                    $req = $bddConnection->prepare("SELECT id FROM cmw_boutique_offres WHERE evo = :evo");
-                                                    $req->execute(array("evo" => $achats['id2']));
+                                                    $req = $bddConnection->prepare('SELECT id FROM cmw_boutique_offres WHERE evo = :evo');
+                                                    $req->execute(array('evo' => $achats['id2']));
                                                     $d = $req->fetch(PDO::FETCH_ASSOC);
                                                     if (isset($d['id']) && !empty($d['id']) && $offresTableau[$i]['id'] == $d['id']) {
-                                                        $_SESSION["bddachat"][$i] = 1;
+                                                        $_SESSION['bddachat'][$i] = 1;
                                                     } else {
-                                                        unset($_SESSION["bddachat"][$i]);
+                                                        unset($_SESSION['bddachat'][$i]);
                                                     }
-                                                    $req = $bddConnection->prepare("SELECT max_vente FROM cmw_boutique_offres WHERE id = :id");
-                                                    $req->execute(array("id" => $achats["id2"]));
+                                                    $req = $bddConnection->prepare('SELECT max_vente FROM cmw_boutique_offres WHERE id = :id');
+                                                    $req->execute(array('id' => $achats['id2']));
                                                     $s = $req->fetch(PDO::FETCH_ASSOC);
-                                                    if($achats["nombre"]>=$s["max_vente"]) {
-                                                        if ($offresTableau[$i]['id'] == $achats["id2"]) {
+                                                    if($achats['nombre']>=$s['max_vente'] && $s['max_vente'] != -1) {
+                                                        if ($offresTableau[$i]['id'] == $achats['id2']) {
                                                             $offresTableau[$i]['maxbuy'] = 1;
                                                         }
                                                     }
                                                 }
                                             } else {
-                                                unset($_SESSION["bddachat"][$i]);
+                                                unset($_SESSION['bddachat'][$i]);
                                             }
                                         }
 
@@ -116,11 +107,17 @@
                                             $categories[$j]['showNumber'] = ($categories[$j]['showNumber'] == 0) ? 1 : $categories[$j]['showNumber']; ?>
                                             <div class="col-12 card mx-3 col-md-<?php echo ((12/$categories[$j]['showNumber'])-1); ?>">
                                                 <div class="card-header">
-                                                    <?= (($offresTableau[$i]['nbre_vente'] == 0) ? "<s>" . $offresTableau[$i]['nom'] . "</s>" : $offresTableau[$i]['nom']); ?>
-                                                    <br /><small>
+                                                    <div class="text-center">
+                                                    <img class="p-2" alt="Images non trouvé !" src="<?= ($offresTableau[$i]['images']) ?>" style="width: 160px; height: 160px">
+                                                </div>
+                                                    
+                                                    <h3 class="text-center">
+                                                    <?= (($offresTableau[$i]['nbre_vente'] == 0) ? '<s>' . $offresTableau[$i]['nom'] . '</s>' : $offresTableau[$i]['nom']); ?></h3>
+                                                    <br />
+                                                    <small>
                                                         <?php
                                                         if ($offresTableau[$i]['nbre_vente'] == 0) {
-                                                            echo "vide";
+                                                            echo 'vide';
                                                         } else {
                                                             echo ($offresTableau[$i]['nbre_vente'] == -1) ? 'Stock Non limité' : 'Stock : ' . $offresTableau[$i]['nbre_vente'];
                                                         }
@@ -131,8 +128,8 @@
                                                     <?= htmlspecialchars_decode($offresTableau[$i]['description']) ?>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
-                                                        <?php if (isset($offresTableau[$i]['buy']) && !isset($_SESSION["bddachat"][$i])) { ?>
+                                                    <?php if (Permission::getInstance()->verifPerm('connect')) : ?>
+                                                        <?php if (isset($offresTableau[$i]['buy']) && !isset($_SESSION['bddachat'][$i])) { ?>
                                                             <a href="#" class="btn btn-main disabled" disabled>Vous devez d'abord acheter: <?php foreach($offresTableau[$i]['buy'] as $value) { echo $offresByGet[$value]; } ?></a>
                                                         <?php } else if (isset($offresTableau[$i]['maxbuy'])) { ?>
                                                             <a href="#" class="btn btn-main disabled" disabled>Vous avez dépassé le nombre d'achat maximum de cette offre</a>
@@ -148,7 +145,7 @@
                                                             <span class="fas fa-user"></span> Se connecter
                                                         </a>
                                                     <?php endif; ?>
-                                                    <button class="btn btn-main">Prix : <?= ($offresTableau[$i]['prix'] == '0' ? 'gratuit' : $offresTableau[$i]['prix']) ?> <i class="fas fa-gem"></i></button>
+                                                    <button class="btn btn-main">Prix : <?= ($offresTableau[$i]['prix'] == '0' ? 'gratuit' : $offresTableau[$i]['prix']) ?> <i class='fa-solid fa-coins'></i></button>
                                                 </div>
                                                 <?php $categories[$j]['offres']++; ?>
                                             </div>
@@ -179,25 +176,23 @@
             </div>
 
             <!-- Compte -->
-            <div class="col-md-12 col-lg-3 col-sm-12 mb-3">
+            <div class="col-md-12 col-lg-2 col-sm-12 mb-3">
                 <!-- Affichage du compte -->
                 <div class="card">
                     <div class="card-header">
-                        <h4> Vos Informations :</h4>
+                        <h4><?= $_Joueur_['pseudo']; ?> :</h4>
                     </div>
                     <div class="card-body player-shop">
-                        <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
+                        <?php if (Permission::getInstance()->verifPerm('connect')) : ?>
                             <!-- Affichage nom, panier, crédits -->
-                            <div class="player-shop-person h5 mb-2">
-                                Bonjour <?= $_Joueur_['pseudo']; ?>,
-                            </div>
-                            <div class="categorie-content">
-                                <div class="categorie-item no-hover">
+                            <div class="categorie-content" >
+                                <a href="../token" class="categorie-link">
+                                    <div class="categorie-item">
                                     Crédits :
                                     <div class="text-center">
-                                        <?= $_Joueur_['tokens']; ?> <i class="fas fa-gem"></i>
+                                        <?= $_Joueur_['tokens']; ?> <i class='fa-solid fa-coins'></i></i>
                                     </div>
-                                </div>
+                                </div></a>
                                 <div class="categorie-item">
                                     <a href="<?= $_Panier_->compterArticle() > 0 ? '?page=panier' : '#' ?>" class="categorie-link">
                                         Panier :

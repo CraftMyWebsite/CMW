@@ -6,17 +6,17 @@ class googleService {
     
     public static function initialise($config, $bdd) {
         if(self::isSearchConsoleEnable($config)) {
-            require("modele/google/googleSearchConsole.class.php");
+            require('modele/google/googleSearchConsole.class.php');
             googleSearchConsole::call($config, $bdd);
         }
         
         if(self::isAdsenseEnable($config)) {
-            require("modele/google/googleAdsense.class.php");
+            require('modele/google/googleAdsense.class.php');
             self::$adsense = new googleAdsense($config);
         }
         
         if(self::isAnalyticsEnable($config)) {
-            require("modele/google/googleAnalytics.class.php");
+            require('modele/google/googleAnalytics.class.php');
             self::$analytics = new googleAnalytics($config);
         }
         

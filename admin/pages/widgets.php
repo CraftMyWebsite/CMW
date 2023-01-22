@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
-				<strong>Vous avez aucune permission pour accéder aux widgets..</strong>
+				<strong>Vous n\'avez aucune permission pour accéder aux widgets..</strong>
 			</div>
 		</div>
 	</div>';
@@ -49,7 +49,7 @@
 	            <div class="card-footer">
 	                <div class="row text-center">
 	                    <input type="submit" onclick="sendPost('addWidgets', null );" class="btn btn-success w-100"
-	                        value="Envoyer !" />
+	                        value="Envoyer" />
 	                </div>
 	            </div>
 	        </div>
@@ -96,16 +96,16 @@
 
 		                <label class="control-label">Type de Widget</label>
 		                <select class="form-control" onchange="if(this.value == '3' | this.value == 3) { show('ck-ct<?php echo $i; ?>'); } else { hide('ck-ct<?php echo $i; ?>'); }" name="type<?php echo $i; ?>">
-		                    <option value="0" <?=$widgets[$i]['type'] == 0 ? "selected": ""?>>Gestion du compte</option>
-		                    <option value="1" <?=$widgets[$i]['type'] == 1 ? "selected": ""?>>Status Serveurs</option>
-		                    <option value="2" <?=$widgets[$i]['type'] == 2 ? "selected": ""?>>Joueurs en ligne</option>
-		                    <option value="3" <?=$widgets[$i]['type'] == 3 ? "selected": ""?>>Champ Texte</option>
+		                    <option value="0" <?=$widgets[$i]['type'] == 0 ? 'selected' : '' ?>>Gestion du compte</option>
+		                    <option value="1" <?=$widgets[$i]['type'] == 1 ? 'selected' : '' ?>>Status Serveurs</option>
+		                    <option value="2" <?=$widgets[$i]['type'] == 2 ? 'selected' : '' ?>>Joueurs en ligne</option>
+		                    <option value="3" <?=$widgets[$i]['type'] == 3 ? 'selected' : '' ?>>Champ Texte</option>
 		                </select>
 
-		                <div id="ck-ct<?php echo $i; ?>" <?=$widgets[$i]['type'] == 3 ? "" : 'style="display:none;"' ?>  >
+		                <div id="ck-ct<?php echo $i; ?>" <?=$widgets[$i]['type'] == 3 ? '' : 'style="display:none;"' ?>  >
 			                <label class="control-label">Message du widget</label>
 			                <textarea class="form-control" id="ckeditor" data-UUID="0009" name="message<?php echo $i; ?>">
-			                	<?=$widgets[$i]['type'] == 3 ? $widgets[$i]['message'] : "" ?> 
+			                	<?=$widgets[$i]['type'] == 3 ? $widgets[$i]['message'] : '' ?>
 			                </textarea>
 		            	</div>
                       
@@ -118,7 +118,7 @@
 				</div>
 				<script>initPost("allWidgets", "admin.php?action=editWidgets");</script>
 	            <div class="card-footer">
-	                <button type="submit" class="btn btn-success w-100" onClick="sendPost('allWidgets')">Envoyer!</button>
+	                <button type="submit" class="btn btn-success w-100" onClick="sendPost('allWidgets')">Envoyer</button>
 	            </div>
 			</div>
 		</div>

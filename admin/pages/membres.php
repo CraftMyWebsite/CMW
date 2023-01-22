@@ -82,7 +82,7 @@
                                 <th style="cursor:pointer;" onclick="setAxe('tokens');"><?=$_Serveur_['General']['moneyName'];?></th>
                                 <th style="cursor:pointer;" onclick="setAxe('rang');">Rang</th>
                                 <th>Mot de passe</th>
-                                <?php if($_Permission_->verifPerm('PermsPanel', 'members', "actions","editMember")) { ?>
+                                <?php if($_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) { ?>
                                     <th style="cursor:pointer;" onclick="setAxe('ValidationMail');">Valid. manuelle</th>    
                                     <th>Suppression</th>
                                 <?php } ?>
@@ -128,7 +128,7 @@
                             </div>
                             <div class="from-group" style="display: block !important">
                                 <button class="btn btn-success w-100" id="confirm-change" onclick="sendChange()"
-                                    disabled>Modifier le / les comptes</button>
+                                    disabled>Modifier le / les compte(s)</button>
                             </div>
                         </div>
 

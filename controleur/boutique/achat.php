@@ -15,12 +15,12 @@
 		$nb = $_Panier_->compterArticle();
 		for($a = 0; $a < $nb; $a++)
 		{
-			$req = $bddConnection->prepare("SELECT categorie_id FROM cmw_boutique_offres WHERE id = :id");
-			$req->execute(array("id" => $_SESSION['panier']['id'][$a]));
+			$req = $bddConnection->prepare('SELECT categorie_id FROM cmw_boutique_offres WHERE id = :id');
+			$req->execute(array('id' => $_SESSION['panier']['id'][$a]));
 			$d = $req->fetch(PDO::FETCH_ASSOC);
 
-			$req = $bddConnection->prepare("SELECT serveur, connection FROM cmw_boutique_categories WHERE id = :id");
-			$req->execute(array("id" => $d['categorie_id']));
+			$req = $bddConnection->prepare('SELECT serveur, connection FROM cmw_boutique_categories WHERE id = :id');
+			$req->execute(array('id' => $d['categorie_id']));
 			$d2 = $req->fetch(PDO::FETCH_ASSOC);
 
 			if($d2['connection'] == 1) {
@@ -54,11 +54,11 @@
 
 		for($a = 0; $a < $nb; $a++)
 		{
-			$req = $bddConnection->prepare("SELECT nbre_vente FROM cmw_boutique_offres WHERE id = :id");
-			$req->execute(array("id" => $_SESSION['panier']['id'][$a]));
+			$req = $bddConnection->prepare('SELECT nbre_vente FROM cmw_boutique_offres WHERE id = :id');
+			$req->execute(array('id' => $_SESSION['panier']['id'][$a]));
 			$d = $req->fetch(PDO::FETCH_ASSOC);
-			if($d["nbre_vente"] == "0"){
-				header('Location: index.php?page=erreur&erreur=19&type='.htmlspecialchars("Erreur Boutique").'&titre='.htmlspecialchars("Stock insufisant !"). '&contenue='.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( !"));
+			if($d['nbre_vente'] == '0'){
+				header('Location: index.php?page=erreur&erreur=19&type='.htmlspecialchars('Erreur Boutique').'&titre='.htmlspecialchars('Stock insufisant !'). '&contenue='.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( !"));
 				exit();
 			}
 			if($_SESSION['panier']['prix'][$a] >= 0 && $_SESSION['panier']['quantite'][$a] > 0)
@@ -68,8 +68,8 @@
 				{
 					if($d['nbre_vente'] - $_SESSION['panier']['quantite'][$a] >= 0)
 					{
-						$req = $bddConnection->prepare("UPDATE cmw_boutique_offres SET nbre_vente = :nbre_vente WHERE id = :id");
-						$req->execute(array("nbre_vente" => $d['nbre_vente']-$_SESSION['panier']['quantite'][$a], "id" => $_SESSION['panier']['id'][$a]));
+						$req = $bddConnection->prepare('UPDATE cmw_boutique_offres SET nbre_vente = :nbre_vente WHERE id = :id');
+						$req->execute(array('nbre_vente' => $d['nbre_vente']-$_SESSION['panier']['quantite'][$a], 'id' => $_SESSION['panier']['id'][$a]));
 					}
 					else
 					{
@@ -127,25 +127,36 @@
 						{
 							foreach($jsonCon as $serveur)
 							{
-								SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
+								//On exécute la commande autant de fois que nécessaire par rapport à la quantité de l'article
+								for($z=0; $z < $_SESSION['panier']['quantite'][$a]; $z++)
+								{
+									SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_);
+								}
 							}
 						}
 						elseif($infosCategories['serveurId'] == -2)
 						{
 							foreach($jsonCon as $key => $serveur)
 							{
-								if($enligne[$key])
-								{
-									SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+								//On exécute la commande autant de fois que nécessaire par rapport à la quantité de l'article
+								for($z = 0; $z < $_SESSION['panier']['quantite'][$a]; $z++){
+									if($enligne[$key])
+									{
+										SendCommand($serveur, $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+									}
 								}
+	
 							}
 						}
 						else {
 							foreach($lectureJSON as $key => $s)
 							{
-								if($s['id'] == $infosCategories['serveurId'] && $enligne[$key])
-								{
-									SendCommand($jsonCon[$key], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+								//On exécute la commande autant de fois que nécessaire par rapport à la quantité de l'article
+								for($z = 0; $z < $_SESSION['panier']['quantite'][$a]; $z++){
+									if($s['id'] == $infosCategories['serveurId'] && $enligne[$key])
+									{
+										SendCommand($jsonCon[$key], $donneesActions['methode'], $donneesActions['commande_valeur'], $donneesActions['duree'], $bddConnection, $_Joueur_['pseudo'], $_Joueur_);
+									}
 								}
 							}
 						}
@@ -196,7 +207,7 @@
 		}
 		$_Panier_->supprimerPanier();
 		if(array_search('1', $probleme))
-			header('Location: index.php?page=erreur&erreur=19&type='.htmlspecialchars("Erreur Boutique").'&titre='.htmlspecialchars("Stock insufisant !"). '&contenue)'.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( ! Vos autres articles ont été livrés correctement."));
+			header('Location: index.php?page=erreur&erreur=19&type='.htmlspecialchars('Erreur Boutique').'&titre='.htmlspecialchars('Stock insufisant !'). '&contenue)'.htmlspecialchars("Désolé, mais un des articles que vous souhaitez acheter est indisponible pour l'instant :( ! Vos autres articles ont été livrés correctement."));
 		else
 			header('Location: index.php?page=panier&success');
 	}

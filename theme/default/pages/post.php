@@ -62,7 +62,7 @@ if (isset($_GET['id'])) :
                                         <?php if (Permission::getInstance()->verifPerm("connect") && $_JoueurForum_->is_followed($id)) : ?>
 
                                             <li class="categorie-item nav-item">
-                                                <a class="nav-link categorie-link" href="index.php?action=unfollow&id_topic=<?= $topicd['id']; ?>">
+                                                <a class="btn btn-warning" href="index.php?action=unfollow&id_topic=<?= $topicd['id']; ?>">
                                                     Ne plus suivre cette discussion
                                                 </a>
                                             </li>
@@ -70,7 +70,7 @@ if (isset($_GET['id'])) :
                                         <?php elseif (Permission::getInstance()->verifPerm("connect")) : ?>
 
                                             <li class="categorie-item nav-item">
-                                                <a class="nav-link categorie-link" href="index.php?action=follow&id_topic=<?= $topicd['id']; ?>">
+                                                <a class="btn btn-primary" href="index.php?action=follow&id_topic=<?= $topicd['id']; ?>">
                                                     Suivre cette discussion
                                                 </a>
                                             </li>
@@ -78,13 +78,13 @@ if (isset($_GET['id'])) :
                                         <?php endif; ?>
 
                                         <li class="categorie-item nav-item">
-                                            <a class="nav-link categorie-link" href="index.php?page=<?= (isset($topicd['sous_forum'])) ? "sous_" : ""; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
+                                            <a class="btn btn-primary" href="index.php?page=<?= (isset($topicd['sous_forum'])) ? "sous_" : ""; ?>forum_categorie&id=<?= $topicd['id_categorie']; ?><?= (isset($topicd['sous_forum'])) ? '&id_sous_forum=' . $topicd["sous_forum"] : ""; ?>">
                                                 Revenir à l'accueil de la catégorie
                                             </a>
                                         </li>
 
                                         <li class="categorie-item nav-item">
-                                            <a class="nav-link categorie-link" href="index.php?page=forum">
+                                            <a class="btn btn-primary" href="index.php?page=forum">
                                                 Revenir à l'index du forum
                                             </a>
                                         </li>
@@ -185,12 +185,12 @@ if (isset($_GET['id'])) :
                     <h3>Sujet : <?= $topicd['nom']; ?></h3>
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-12 col-sm-12 m-3 border-1">
+                        <div class="col-lg-3 col-md-12 col-sm-12">
 
                             <div class="col-12 text-center">
-                                <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd['pseudo'],192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $topicd['pseudo']; ?>" />
+                                <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($topicd['pseudo'],128); ?>" style="width: 128px; height: 128px;" alt="avatar de <?= $topicd['pseudo']; ?>" />
                             </div>
-                            <div class="col-12 mx-auto bg-darkest" style="width: 192px; height: 192px;">
+                            <div class="col-12 mx-auto bg-darkest" style="width: 128px; height: 128px;">
                                 <div class="text-center py-3">
                                     <h4 class="text-active">
                                         <?= $topicd['pseudo']; ?>
@@ -201,20 +201,25 @@ if (isset($_GET['id'])) :
 
                                     <!-- Edition -->
                                     <?php if (isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] || Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'editTopic') && !$_SESSION['mode'])) : ?>
+<table class="text-center w-100">
+    <tr>
+        <td>
                                         <form action="?action=editPost" method="post">
                                             <input type="hidden" name="objet" value="topic" />
                                             <input type="hidden" name="id" value="<?= $id; ?>" />
-                                            <button type="submit" class="btn btn-secondary w-100 mb-2">
-                                                Editer
+                                            <button type="submit" class="btn btn-secondary">
+                                                <i class="fa fa-pen"></i>
                                             </button>
                                         </form>
                                     <?php endif; ?>
 
                                     <?php if (isset($_Joueur_) && ($_Joueur_['pseudo'] == $topicd['pseudo'] || Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteTopic') && !$_SESSION['mode'])) : ?>
+        </td>
+        <td>
                                         <form action="?action=remove_topic" method="post">
                                             <input type="hidden" name="id_topic" value="<?= $id; ?>" />
-                                            <a class="btn btn-danger w-100 no-hover" role="button" data-toggle="modal" href="#topic_<?= $id; ?>" aria-expanded="false" aria-controls="modalConfirmation">
-                                                Supprimer
+                                            <a class="btn btn-danger no-hover" role="button" data-toggle="modal" href="#topic_<?= $id; ?>" aria-expanded="false" aria-controls="modalConfirmation">
+                                                <i class="fa fa-trash"></i>
                                             </a>
 
                                             <div class="modal fade" id="topic_<?= $id; ?>" tabindex="-1" role="dialog" aria-labelledby="modalConfirmation" aria-hidden="true">
@@ -243,14 +248,16 @@ if (isset($_GET['id'])) :
                                             </div>
                                         </form>
                                     <?php endif; ?>
-
+        </td>
+    </tr>
+</table>
                                 </div>
                             </div>
 
                         </div>
 
                         <!-- Contenue du topic de l'auteur -->
-                        <div class="col-lg-8 col-md-12 col-sm-12 mt-3 p-4 bg-lightest rounded ml-auto">
+                        <div class="col-lg-8 col-md-12 col-sm-12 mt-3 p-4 bg-lightest border border-1 shadow rounded ml-auto">
 
                             <?php
                             unset($contenue);
@@ -265,18 +272,10 @@ if (isset($_GET['id'])) :
 
                             ?>
 
-                            <p class="text-right h6 mt-3">
-                                Posté le <?=  $_Forum_->conversionDate($topicd['date_creation']); 
-                                 if($topicd['d_edition'] != NULL) {
-                                       
-                                        echo " et édité le ".  $_Forum_->conversionDate($topicd['d_edition']);
-                                    }?>
-                            </p>
-
+                            <h4>Contenue du message :</h4>
                             <hr class="bg-darkest mt-0" style="border-top-style: dotted;">
 
-                            <div class="m-4 h5" id="contenuePost" style="text-overflow: clip; word-wrap: break-word;">
-
+                            <div class="m-2 h5" id="contenuePost" style="text-overflow: clip; word-wrap: break-word;">
                                 <?= $contenue; ?>
                             </div>
 
@@ -286,92 +285,24 @@ if (isset($_GET['id'])) :
                                 <div class="ml-3">
                                     <?= $signature; ?>
                                 </div>
-
                                 <?php if (isset($_Joueur_)) : ?>
-                                        <form action="?action=signalement_topic" method="post">
-                                            <input type="hidden" name="id_topic2" value='<?= $id; ?>' />
-                                            <button type="submit" class="btn btn-danger float-right mb-5">Signaler !</button>
+                                        <form class="text-center" action="?action=signalement_topic" method="post">
+                                            <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost', '<?= $topicd['pseudo']; ?>');" class="mb-2 btn btn-dark float-right" style="margin-right:15px;">Citer le message</button>
+                                            <input type="hidden" name="id_topic" value='<?= $id; ?>' />
+                                            <button  type="submit" class="mb-2 btn btn-danger float-right">Signaler !</button>
                                         </form>
-                                        <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost', '<?= $topicd['pseudo']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
+                                        
                                 <?php endif; ?>
-
                             </div>
-                            <div class="clearfix"></div>
-
-                            <!-- Système de like/dislike (information) -->
-
-                            <?php if ($count1 > 0 or $count2 > 0) : ?>
-
-                                <div class="row mt-5 mb-2">
-                                    <div class="col-md-6 ml-auto text-right">
-
-                                        <?php if ($count1 > 0) : ?>
-                                            <p>
-                                                <span class="font-weight-bold"><?= $count1 ?></span> personne<?= ($count1 > 1 ? "s" : "") ?> aime<?= ($count1 > 1 ? "s" : "") ?> ça.
-                                            </p>
-                                        <?php endif; ?>
-
-                                        <?php if ($count2 > 0) : ?>
-                                            <p>
-                                                <?= $count2 ?> personne<?= ($count2 > 1 ? "s" : "") ?> n'aime<?= ($count2 > 1 ? "nt" : "") ?> pas ça.
-                                            </p>
-                                        <?php endif; ?>
-
-                                    </div>
-                                </div>
-
-                            <?php endif; ?>
-
-                            <!-- Système de like/dislike (action) -->
-                            <?php if (Permission::getInstance()->verifPerm("connect")) :
-
-                                if (array_search($_Joueur_['pseudo'], array_column($countlike, 'pseudo')) === FALSE and array_search($_Joueur_['pseudo'], array_column($countdislike, 'pseudo')) === FALSE and $_Joueur_['pseudo'] != $topicd['pseudo']) : ?>
-
-                                    <div class="row justify-content-end">
-
-                                        <div class="col-1">
-
-                                            <form class="form-inline" action="?action=like" method="post">
-                                                <input type="hidden" name="choix" value="1" />
-                                                <input type="hidden" name="type" value="1" />
-                                                <input type="hidden" name="id_answer" value="<?= $topicd['id']; ?>" />
-                                                <button type="submit" class="btn btn-main" title="J'aime"><i class="far fa-thumbs-up"></i></button>
-                                            </form>
-
-                                        </div>
-
-                                        <div class="col-2">
-
-                                            <form class="form-inline" action="?action=like" method="post">
-                                                <input type="hidden" name="choix" value="2" />
-                                                <input type="hidden" name="type" value="1" />
-                                                <input type="hidden" name="id_answer" value="<?= $topicd['id']; ?>" />
-                                                <button type="submit" class="btn btn-main" title="Je n'aime pas"><i class="far fa-thumbs-down"></i></button>
-                                            </form>
-
-                                        </div>
-
-                                    </div>
-
-                                <?php
-                                elseif (array_search($_Joueur_['pseudo'], array_column($countlike, 'pseudo')) !== FALSE or array_search($_Joueur_['pseudo'], array_column($countdislike, 'pseudo')) !== FALSE) :
-                                ?>
-                                    <div class="row justify-content-end">
-                                        <div class="col">
-
-                                            <form class='form' action="?action=unlike" method="post">
-                                                <input type="hidden" name="id_answer" value="<?= $topicd['id']; ?>" />
-                                                <input type="hidden" name="type" value="1" />
-                                                <button type="submit" class="btn btn-main float-right" title="Ne plus aimer">
-                                                    Retirer mon <span class="font-weight-bold">Appréciation</span>
-                                                </button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-
-                                <?php endif; ?>
-                            <?php endif; ?>
+                            <div class="text-center w-100">
+                            <p class="h6">
+                                Posté le <?=  $_Forum_->conversionDate($topicd['date_creation']); 
+                                 if($topicd['d_edition'] != NULL) {
+                                       
+                                        echo " et édité le ".  $_Forum_->conversionDate($topicd['d_edition']);
+                                    }?>
+                            </p>
+                            </div>
 
                         </div>
                     </div>
@@ -399,7 +330,7 @@ if (isset($_GET['id'])) :
                             <div class="col-lg-3 col-md-12 col-sm-12 m-3 border-1">
 
                                 <div class="col-12 text-center">
-                                    <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($answerd[$i]['pseudo'], 192); ?>" style="width: 192px; height: 192px;" alt="avatar de <?= $answerd[$i]['pseudo']; ?>"/>
+                                    <img class="mx-auto p-3 bg-lightest" src="<?= $_ImgProfil_->getUrlHeadByPseudo($answerd[$i]['pseudo'], 128); ?>" style="width: 128px; height: 128px;" alt="avatar de <?= $answerd[$i]['pseudo']; ?>"/>
                                 </div>
                                 <div class="col-12 mx-auto bg-darkest" style="width: 192px; height: 192px;">
                                     <div class="text-center py-3">
@@ -412,21 +343,29 @@ if (isset($_GET['id'])) :
 
                                         <!-- Edition -->
                                         <?php if ($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] or Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'editMessage') and !$_SESSION['mode']) : ?>
+
+
+<table class="text-center w-100">
+    <tr>
+        <td>
+
                                             <form action="?action=editPost" method="post">
                                                 <input type="hidden" name="objet" value="answer" />
                                                 <input type="hidden" name="id" value="<?= $answerd[$i]['id']; ?>" />
-                                                <button type="submit" class="btn btn-secondary w-100 mb-2">
-                                                    Editer
+                                                <button type="submit" class="btn btn-secondary">
+                                                    <i class="fa-solid fa-pen"></i>
                                                 </button>
                                             </form>
                                         <?php endif; ?>
 
                                         <?php if ($_Joueur_['pseudo'] === $answerd[$i]['pseudo'] or Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'deleteMessage') and !$_SESSION['mode']) : ?>
-                                            <form action="?action=remove_answer" method="post">
+        </td>
+        <td>
+<form action="?action=remove_answer" method="post">
                                                 <input type="hidden" name="id_answer" value="<?= $answerd[$i]['id']; ?>" />
                                                 <input type="hidden" name="page" value="<?= (isset($_GET['page_post'])) ? $_GET['page_post'] : 1; ?>" />
-                                                <a class="btn btn-danger w-100 no-hover" role="button" data-toggle="modal" href="#awnser_<?= $answerd[$i]['id']; ?>" aria-expanded="false" aria-controls="modalConfirmation">
-                                                    Supprimer
+                                                <a class="btn btn-danger no-hover" role="button" data-toggle="modal" href="#awnser_<?= $answerd[$i]['id']; ?>" aria-expanded="false" aria-controls="modalConfirmation">
+                                                    <i class="fa-solid fa-trash"></i>
                                                 </a>
 
                                                 <div class="modal fade" id="awnser_<?= $answerd[$i]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modalConfirmation" aria-hidden="true">
@@ -456,13 +395,19 @@ if (isset($_GET['id'])) :
                                             </form>
                                         <?php endif; ?>
 
+        </td>
+    </tr>
+</table>
+
+                                            
+
                                     </div>
                                 </div>
 
                             </div>
 
                             <!-- Contenue du topic de l'auteur -->
-                            <div class="col-lg-8 col-md-12 col-sm-12 mt-3 p-4 bg-lightest rounded ml-auto">
+                            <div class="col-lg-8 col-md-12 col-sm-12 mt-3 p-4 bg-lightest border border-1 shadow rounded">
 
                                 <?php
                                 $answere = $answerd[$i]['contenue'];
@@ -478,112 +423,36 @@ if (isset($_GET['id'])) :
                                 $count2 += 1;
                                 ?>
 
-                                <p class="text-right h6 mt-3">
+                                <h4>Contenue du message :</h4>
+                                <hr class="bg-darkest mt-0" style="border-top-style: dotted;">
+
+                                <div class="m-2 h5" id="contenuePost<?=$i?>" style="text-overflow: clip; word-wrap: break-word;">
+                                    <?= $answere; ?>
+                                </div>
+
+                                <hr class="bg-main mt-3 w-80">
+
+                                <div class="col-12 text-center">
+                                    <div class="ml-3">
+                                        <?= $signature; ?>
+                                    </div>
+
+                                    <?php if (isset($_Joueur_)) : ?>
+                                            <form action="?action=signalement" method="post">
+                                                <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost<?=$i?>', '<?= $answerd[$i]['pseudo']; ?>');" class="btn btn-dark float-right mb-2" style="margin-right:15px;">Citer le message</button>
+                                                <input type="hidden" name="id_topic" value='<?= $answerd[$i]['id']; ?>' />
+                                                <button type="submit" class="btn btn-danger float-right mb-2">Signaler le message !</button>
+                                            </form>
+                                            
+                                    <?php endif; ?>
+                                <p class="text-right h6">
                                     <?php 
                                     echo 'Posté le  '.$_Forum_->conversionDate($answerd[$i]['date_post']); 
                                     if($answerd[$i]['d_edition'] != NULL) {
                                         echo " et édité le ". $_Forum_->conversionDate($answerd[$i]['d_edition']);
                                     }?>
                                 </p>
-
-                                <hr class="bg-darkest mt-0" style="border-top-style: dotted;">
-
-                                <div class="m-4 h5" id="contenuePost<?=$i?>" style="text-overflow: clip; word-wrap: break-word;">
-                                    <?= $answere; ?>
                                 </div>
-
-                                <hr class="bg-main mt-3 w-80">
-
-                                <div class="col-12">
-                                    <div class="ml-3">
-                                        <?= $signature; ?>
-                                    </div>
-
-                                    <?php if (isset($_Joueur_)) : ?>
-                                            <form action="?action=signalement_topic" method="post">
-                                                <input type="hidden" name="id_topic2" value='<?= $answerd[$i]['id']; ?>' />
-                                                <button type="submit" class="btn btn-danger float-right mb-5">Signaler !</button>
-                                            </form>
-                                            <button type="button" onclick="addBlockQuote('ckeditorPost','contenuePost<?=$i?>', '<?= $answerd[$i]['pseudo']; ?>');" class="btn btn-dark float-right mb-5" style="margin-right:15px;">Citer !</button>
-                                    <?php endif; ?>
-
-                                </div>
-                                <div class="clearfix"></div>
-
-                                <!-- Système de like/dislike (information) -->
-
-                                <?php if ($count3 > 0 or $count4 > 0) : ?>
-
-                                    <div class="row mt-5 mb-2">
-                                        <div class="col-md-6 ml-auto text-right">
-
-                                            <?php if ($count3 > 0) : ?>
-                                                <p>
-                                                    <span class="font-weight-bold"><?= $count3 ?></span> personne<?= ($count3 > 1 ? "s" : "") ?> aime<?= ($count3 > 1 ? "s" : "") ?> ça.
-                                                </p>
-                                            <?php endif; ?>
-
-                                            <?php if ($count4 > 0) : ?>
-                                                <p>
-                                                    <?= $count4 ?> personne<?= ($count4 > 1 ? "s" : "") ?> n'aime<?= ($count4 > 1 ? "nt" : "") ?> pas ça.
-                                                </p>
-                                            <?php endif; ?>
-
-                                        </div>
-                                    </div>
-
-                                <?php endif; ?>
-
-                                <!-- Système de like/dislike (action) -->
-                                <?php if (Permission::getInstance()->verifPerm("connect")) :
-
-                                    if (array_search($_Joueur_['pseudo'], array_column($countlike, 'pseudo')) === FALSE and array_search($_Joueur_['pseudo'], array_column($countdislike, 'pseudo')) === FALSE and $_Joueur_['pseudo'] != $answerd[$i]['pseudo']) : ?>
-
-                                        <div class="row justify-content-end">
-
-                                            <div class="col-1">
-
-                                                <form class="form-inline" action="?action=like" method="post">
-                                                    <input type="hidden" name="choix" value="1" />
-                                                    <input type="hidden" name="type" value="1" />
-                                                    <input type="hidden" name="id_answer" value="<?= $answerd[$i]['id']; ?>" />
-                                                    <button type="submit" class="btn btn-main" title="J'aime"><i class="far fa-thumbs-up"></i></button>
-                                                </form>
-
-                                            </div>
-
-                                            <div class="col-2">
-
-                                                <form class="form-inline" action="?action=like" method="post">
-                                                    <input type="hidden" name="choix" value="2" />
-                                                    <input type="hidden" name="type" value="1" />
-                                                    <input type="hidden" name="id_answer" value="<?= $answerd[$i]['id']; ?>" />
-                                                    <button type="submit" class="btn btn-main" title="Je n'aime pas"><i class="far fa-thumbs-down"></i></button>
-                                                </form>
-
-                                            </div>
-
-                                        </div>
-
-                                    <?php
-                                    elseif (array_search($_Joueur_['pseudo'], array_column($countlike, 'pseudo')) !== FALSE or array_search($_Joueur_['pseudo'], array_column($countdislike, 'pseudo')) !== FALSE) : ?>
-                                        <div class="row justify-content-end">
-                                            <div class="col">
-
-                                                <form class='form' action="?action=unlike" method="post">
-                                                    <input type="hidden" name="id_answer" value="<?= $answerd[$i]['id']; ?>" />
-                                                    <input type="hidden" name="type" value="1" />
-                                                    <button type="submit" class="btn btn-main float-right" title="Ne plus aimer">
-                                                        Retirer mon <span class="font-weight-bold">Appréciation</span>
-                                                    </button>
-                                                </form>
-
-                                            </div>
-                                        </div>
-
-                                    <?php endif; ?>
-                                <?php endif; ?>
-
                             </div>
                         </div>
 
@@ -617,7 +486,7 @@ if (isset($_GET['id'])) :
 
                         <hr class="my-2 bg-lightest w-80" />
 
-                        <div class="col-12 mx-auto">
+                        <div class="col-12 mb-4 mx-auto">
 
                             <?php $data = $_Forum_->isLock($topicd['id_categorie']);
                             if ($data['close'] == 0 or Permission::getInstance()->verifPerm('PermsForum', 'general', 'seeForumHide') and !$_SESSION['mode']) : ?>
@@ -636,9 +505,9 @@ if (isset($_GET['id'])) :
 
                                     </div>
 
-                                    <div class="form-row" style="margin-top:15px;">
+                                    <div class="form-row text-center" style="margin-top:15px;">
                                         <div class="col-12">
-                                            <button type="submit" class="btn btn-main w-100">Poster votre réponse</button>
+                                            <button type="submit" class="btn btn-primary">Poster votre réponse</button>
                                         </div>
                                     </div>
 

@@ -8,8 +8,8 @@ Chaque joueur aura un dossier prévu pour lui dont le nom sera son id.
 				Dossier : 1, 2 
 Dans ces dossier, de multiples informations pourront être stockés.
 
-Actuellement, l'information stocker est une image de profil, sous la forme d'un fichier dans le  dossier du joueur, nommé : profil.extension
+Actuellement, l'information stockée est une image de profil, sous la forme d'un fichier dans le dossier du joueur, nommé : profil.extension
 
-L'extension de l'image de profil est conservé dans la base de donnée (voir modele/joueur/imgProfil.class.php)
+L'extension de l'image de profil est conservé dans la base de données (voir modele/joueur/imgProfil.class.php)
 
-D'autres informations peuvent être stockés au désir des développeurs. Merci de modifier et d'expliquer votre architecture à chaque fois que vous souhaitez intégré une nouvelle fonctionnalité pour cette partie.
+D'autres informations peuvent être stockées au désir des développeurs. Merci de modifier et d'expliquer votre architecture à chaque fois que vous souhaitez intégrer une nouvelle fonctionnalité pour cette partie.

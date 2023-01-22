@@ -13,10 +13,15 @@ if (isset($_GET['action']) and $_GET['action'] == 'setchmod') {
     exec("chmod 0777 ../theme/upload/panel/");
     exec("chmod 0777 ../utilisateurs/");
 }
+
+if (isset($_GET['action']) and $_GET['action'] == 'windowsforceinstall') {
+    setWindows();
+}
 // On essaie de se connecté et d'écrire les premiéres données histoire de voir si la base de données répond bien
 if (isset($_GET['action']) and $_GET['action'] == 'sql' and isset($_POST['hote']) and isset($_POST['nomBase']) and isset($_POST['utilisateur']) and isset($_POST['mdp']) and isset($_POST['port'])) {
     if (($testPDO = verifyPDO($_POST['hote'], $_POST['nomBase'], $_POST['utilisateur'], $_POST['mdp'], $_POST['port'])) === TRUE) {
         $sql = getPDO($_POST['hote'], $_POST['nomBase'], $_POST['utilisateur'], $_POST['mdp'], $_POST['port']);
+        $sql->exec("SET SESSION sql_mode = ''");
         require_once('app/plugins/installSQL.php');
     } else if ($testPDO == 3) {
         $erreur['type'] = 'pass';
@@ -40,7 +45,8 @@ if (isset($_GET['action']) and $_GET['action'] == 'cgu') {
 }
 if (isset($_GET['action']) and $_GET['action'] == 'compte' and isset($_POST['pseudo']) and isset($_POST['mdp']) and isset($_POST['email'])) {
     $sql = getPDO($_Serveur_['DataBase']['dbAdress'], $_Serveur_['DataBase']['dbName'], $_Serveur_['DataBase']['dbUser'], $_Serveur_['DataBase']['dbPassword'], $_Serveur_['DataBase']['dbPort']);
-
+    $sql->exec("SET SESSION sql_mode = ''");
+    
     require_once('app/plugins/compteAdmin.php');
     $compte = new CompteAdmin($sql, $_POST['pseudo'], $_POST['mdp'], $_POST['email']); //Création du compte admin
 

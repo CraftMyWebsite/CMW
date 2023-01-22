@@ -12,7 +12,8 @@
 
 	namespace xPaw\SourceQuery;
 
-	use xPaw\SourceQuery\Exception\AuthenticationException;
+	use RuntimeException;
+    use xPaw\SourceQuery\Exception\AuthenticationException;
 use xPaw\SourceQuery\Exception\InvalidArgumentException;
 	use xPaw\SourceQuery\Exception\InvalidPacketException;
 use xPaw\SourceQuery\Exception\SocketException;
@@ -315,7 +316,7 @@ use xPaw\SourceQuery\Exception\SocketException;
 						}
 						else
 						{
-							throw new \RuntimeException( 'Either 64-bit PHP installation or "gmp" module is required to correctly parse server\'s steamid.' );
+							throw new RuntimeException( 'Either 64-bit PHP installation or "gmp" module is required to correctly parse server\'s steamid.' );
 						}
 					}
 					else
@@ -394,7 +395,7 @@ use xPaw\SourceQuery\Exception\SocketException;
 				$Player[ 'Name' ]  = $Buffer->GetString( );
 				$Player[ 'Frags' ] = $Buffer->GetLong( );
 				$Player[ 'Time' ]  = (int)$Buffer->GetFloat( );
-				$Player[ 'TimeF' ] = GMDate( ( $Player[ 'Time' ] > 3600 ? "H:i:s" : "i:s" ), $Player[ 'Time' ] );
+				$Player[ 'TimeF' ] = GMDate( ( $Player[ 'Time' ] > 3600 ? 'H:i:s' : 'i:s'), $Player[ 'Time' ] );
 				
 				$Players[ ] = $Player;
 			}

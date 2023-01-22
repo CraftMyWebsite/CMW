@@ -1,6 +1,6 @@
 [DIV]
 <?php
-if(Permission::getInstance()->verifPerm("connect"))
+if(Permission::getInstance()->verifPerm('connect'))
 {
 	$req_vote_temp = $bddConnection->prepare('SELECT * FROM cmw_votes_temp WHERE pseudo = :pseudo');
 	$req_vote_temp->execute(array(
@@ -14,8 +14,14 @@ if(Permission::getInstance()->verifPerm("connect"))
 			$tojs[$i] = $data['action'];
 			$i++;
 		}
-		 echo json_encode(array_values($tojs)); 
-	} else {
-		echo json_encode(array_values(array()));
-	}
+        try {
+            echo json_encode(array_values($tojs), JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+        }
+    } else {
+        try {
+            echo json_encode(array_values(array()), JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+        }
+    }
 }?>

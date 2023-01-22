@@ -28,7 +28,7 @@
             </div>
             <div class="card-body" id="createCate">
                     <div class="alert alert-success">
-                        <strong>Avant de créer une catégorie sachez d'abord à quoi servent ces catégories, en effet en plus de permettre de ne pas tout mettre en vrac et d'avoir un minimum d'organisation, les catégories vous permettent de gérer le multiserveur! Vous avez trois choix pour le serveur d'action d'une catégorie: tous les serveurs(la commande est envoyée sur tous les serveurs), le serveur où le joueur est en ligne(par exemple pour un give d'item) ou un serveur spécifique que vous choisissez à l'avance. L'ordre de la catégorie est l'ordre d'affichage, il ne sert qu'à titre d'organisation.</strong>
+                        <strong>Avant de créer une catégorie sachez d'abord à quoi servent-elles, en effet en plus de permettre de ne pas tout mettre en vrac et d'avoir un minimum d'organisation, les catégories vous permettent de gérer le multiserveur! Vous avez trois choix pour le serveur d'action d'une catégorie: tous les serveurs(la commande est envoyée sur tous les serveurs), le serveur où le joueur est en ligne(par exemple pour un give d'item) ou un serveur spécifique que vous choisissez à l'avance. L'ordre de la catégorie est l'ordre d'affichage, il ne sert qu'à titre d'organisation.</strong>
                     </div>
 
                         <label class="control-label">Titre de la catégorie</label>
@@ -40,7 +40,7 @@
                         <label class="control-label">Nombre d'offre par ligne dans la catégorie (min: 1, max: 4)</label>
                         <input class="form-control" required type="number" name="number"  min ="1" max="4" value="3" />
                     
-                        <label class="control-label">Connexion In-Game (le joueur devra être connecté pour finaliser son payement)</label>
+                        <label class="control-label">Connexion In-Game (le joueur devra être connecté pour finaliser son achat)</label>
                         <select name="connection"class="form-control" required>
                             <option value="0">Désactivé</option>
                             <option value="1">Activé</option>
@@ -60,7 +60,7 @@
             </div>
              <script>initPost("createCate", "admin.php?action=creerCategorie",function (data) { if(data) { show('card-minia'); boutiqueUpdate();}});</script>
             <div class="card-footer">
-                <button type="submit" class="btn btn-success w-100" onClick="sendPost('createCate');">Envoyer!</button>
+                <button type="submit" class="btn btn-success w-100" onClick="sendPost('createCate');">Envoyer</button>
             </div>
         </div>
     </div>
@@ -75,12 +75,15 @@
             <div class="card-body" id="createOffre">
 
                 <div class="alert alert-success">
-                    <strong>Après avoir créé une catégorie, vous pouvez y insérer une offre. L'offre est dans un premier temps composée d'un titre, d'un message(ou image) et appartient à une catégorie, vous pourrez par la suite attribuer à une offre une "action"(=commande). Pour mettre une image rien de plus simple, il vous suffit d'activer l'option dans Réglages du site et d'utiliser l'éditeur de texte.</strong>
+                    <strong>Après avoir créé une catégorie, vous pouvez y insérer une offre. L'offre est dans un premier temps composée d'un titre, d'un message (ou image) et appartient à une catégorie, vous pourrez par la suite attribuer à une offre une "action"(=commande). Pour mettre une image rien de plus simple, il vous suffit d'activer l'option dans "Réglages du site" et d'utiliser l'éditeur de texte.</strong>
                 </div>
 
                         <label class="control-label">Titre de l'offre</label>
                         <input type="text" class="form-control" name="nom" placeholder="ex: 64 x Diamants" required> 
                 
+                        <label class="control-label">Image de l'offre (160*160 recommandé)</label>
+                        <input type="text" class="form-control" name="images" placeholder="ex: http://craftmywebsite.fr/images.png" required> 
+
                         <label class="control-label">Description</label>
                          <textarea class="form-control" id="ckeditor" data-UUID="CATBOUTIQUENEW2" name="description"></textarea>
                 
@@ -113,7 +116,7 @@
              <script>
              initPost("createOffre", "admin.php?action=creerOffre",function (data) { if(data) { boutiqueUpdate();}});</script>
             <div class="card-footer">
-                <button type="submit" class="btn btn-success w-100" onClick="sendPost('createOffre');">Envoyer!</button>
+                <button type="submit" class="btn btn-success w-100" onClick="sendPost('createOffre');">Envoyer</button>
             </div>
         </div>
     </div>
@@ -129,12 +132,12 @@
             </div>
             <div class="card-body" id="moneyName">
 
-                <label class="control-label">Noms de la monnaie </label>
+                <label class="control-label">Nom de la monnaie </label>
                 <input type="text" class="form-control" name="moneyName" placeholder="Jetons" value="<?php echo $_Serveur_['General']['moneyName']; ?>" required>
 
                 <label class="control-label">Devise monétaire </label>
                 <select class="form-control text-center" name="currency">
-                    <option value="<?= $_Serveur_['Payement']['currency'] ?>" selected ><?php if ($_Serveur_['Payement']['currency'] == "EUR") {echo "Euro";}elseif ($_Serveur_['Payement']['currency'] == "CAD"){echo "Canadian Dollar";} elseif ($_Serveur_['Payement']['currency'] == "CHF"){echo "Swiss Franc";} elseif ($_Serveur_['Payement']['currency'] == "USD"){echo "United States Dollar";} elseif ($_Serveur_['Payement']['currency'] == "GBP"){echo "Pound Sterling";} else {echo $_Serveur_['Payement']['currency'];} ?></option>
+                    <option value="<?= $_Serveur_['Payement']['currency'] ?>" selected ><?php if ($_Serveur_['Payement']['currency'] == 'EUR') {echo 'Euro';}elseif ($_Serveur_['Payement']['currency'] == 'CAD'){echo 'Canadian Dollar';} elseif ($_Serveur_['Payement']['currency'] == 'CHF'){echo 'Swiss Franc';} elseif ($_Serveur_['Payement']['currency'] == 'USD'){echo 'United States Dollar';} elseif ($_Serveur_['Payement']['currency'] == 'GBP'){echo 'Pound Sterling';} else {echo $_Serveur_['Payement']['currency'];} ?></option>
                     <option value="AUD">Australian Dollar</option>
                     <option value="BRL">Brazilian Real</option>
                     <option value="CAD">Canadian Dollar</option>
@@ -166,7 +169,7 @@
 
                 <script>initPost("moneyName", "admin.php?action=boutique",null);</script>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('moneyName');">Envoyer!</button>
+                    <button type="submit" class="btn btn-success w-100" onClick="sendPost('moneyName');">Envoyer</button>
                 </div>
             </div>
         </div>
@@ -183,7 +186,7 @@
             <div class="card-body" id="createCoupon">
 
                 <div class="alert alert-success">
-                    <strong>Ici vous pouvez créer des coupons de réduction pour votre boutique. La valeur des coupons est en %age. Il ne peut y avoir qu'un seul coupon utilisé par paiement, les coupons sont valables jusqu'à ce que vous les supprimiez et ils sont réutilisables. Il vous suffit simplement de rentrer un code de maximum 8 lettres, un pourcentage ainsi qu'un titre pour décrire votre remise, il apparaîtra dans la description du produit dans le panier.</strong>
+                    <strong>Ici vous pouvez créer des coupons de réduction pour votre boutique. La valeur des coupons est en pourcentage. Il ne peut y avoir qu'un seul coupon utilisé par paiement, les coupons sont valables jusqu'à ce que vous les supprimiez et ils sont réutilisables. Il vous suffit simplement de rentrer un code de maximum 8 lettres, un pourcentage ainsi qu'un titre pour décrire votre remise, il apparaîtra dans la description du produit dans le panier.</strong>
                 </div>
                     <label class="control-label">Titre de la remise (description)</label>
                     <input type="text" class="form-control" name="titre" placeholder="Remise spécial CMW V1.8" required maxlength="60">
@@ -274,7 +277,7 @@
                 get("allCoupon").innerHTML += str;
              }});</script>
             <div class="card-footer">
-                <button type="submit" class="btn btn-success w-100" onClick="sendPost('createCoupon');">Envoyer!</button>
+                <button type="submit" class="btn btn-success w-100" onClick="sendPost('createCoupon');">Envoyer</button>
             </div>
         </div>
     </div>
@@ -294,7 +297,7 @@
                             <th >Code de réduction</th>
                             <th>Pourcentage de réduction</th>
                             <th>Options avancées</th>
-                            <th>Actions ...</th>
+                            <th>Actions...</th>
                             </tr>
                         </thead>
                         <tbody id="allCoupon">
@@ -375,6 +378,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
+                                                <th>Image (160*160)</th>
                                                 <th>Description</th>
                                                 <th>Prix</th>
                                                 <th>Catégorie</th>
@@ -389,6 +393,7 @@
                                                 if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                                     <tr id="ligneoffre-<?php echo $offres[$j]['id']; ?>">
                                                 <td><input type="text" name="offresNom<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['nom']; ?>" /></td>
+                                                <td><input type="text" name="offresImages<?php echo $offres[$j]['id']; ?>" class="form-control" value="<?php echo $offres[$j]['images']; ?>" /></td>
                                                 <td>
                                                     <button class="btn btn-primary" data-toggle="modal" type="button" data-target="#description_offre<?php echo $offres[$j]['id']; ?>">
                                                     <i class="fas fa-pen"></i> / <i class="far fa-eye"></i>
@@ -441,7 +446,7 @@
                                         </tbody>
                                     </table>
                                     <script>initPost("navRap<?=$i?>", "admin.php?action=editBoutique", function(data) { if(data) { boutiqueCheck(); } } );</script>
-                                    <button type="submit" class="btn btn-success w-100" style="margin-top:10px;" onClick="sendPost('navRap<?=$i?>');">Envoyer!</button>
+                                    <button type="submit" class="btn btn-success w-100" style="margin-top:10px;" onClick="sendPost('navRap<?=$i?>');">Envoyer</button>
                                     <?php for($j = 1;$j <= count($offres);$j++) { if($offres[$j]['categorie'] == $categories[$i]['id']) {?>
                                     <div class="modal fade" id="OffreAction<?php echo $offres[$j]['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Modal-<?php echo $offres[$j]['id']; ?>" aria-hidden="true">
                                         <div class="modal-dialog " role="document">
@@ -469,7 +474,7 @@
                                                             <?php if(isset($offres[$j]['evo'])) { ?> 
                                                                 <script>
                                                                     $(document).ready(function() { <?php
-                                                                        $tp = explode(",",$offres[$j]['evo']);
+                                                                        $tp = explode(',',$offres[$j]['evo']);
                                                                         foreach($tp as $value)
                                                                         {
                                                                             echo "$('#dep-tag".$j.$offres[$j]['id']."').tagsinput('add', { 'value': ".$value." ,'text':'".$offresByGet[$value]."' });";
@@ -568,7 +573,7 @@
                                                         <input type="hidden" name="id_offre" value="<?php echo $offres[$j]['id']; ?>" />
                                                     </div>
                                                     <script>initPost("new-action-<?php echo $offres[$j]['id']; ?>", "admin.php?action=creerAction");</script>
-                                                    <button type="button" onclick="sendPost('new-action-<?php echo $offres[$j]['id']; ?>', function() { boutiqueActionUpdate('<?php echo $offres[$j]['id']; ?>'); });" class="btn btn-secondary w-100">Envoyer!</button>
+                                                    <button type="button" onclick="sendPost('new-action-<?php echo $offres[$j]['id']; ?>', function() { boutiqueActionUpdate('<?php echo $offres[$j]['id']; ?>'); });" class="btn btn-secondary w-100">Envoyer</button>
 
                                                      <button type="button" style="margin-top:15px;" onclick="SwitchDisplay(get('allaction-<?php echo $offres[$j]['id']; ?>'))" class="btn btn-danger w-100">Editer actions</button>
 

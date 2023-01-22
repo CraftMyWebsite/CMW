@@ -11,7 +11,7 @@ if (Permission::getInstance()->verifPerm('PermsForum', 'moderation', 'seeSignale
                 <div class="d-flex col-12 info-page">
                     <i class="fas fa-info-circle notification-icon"></i>
                     <div class="info-content">
-                        Voici tous les signalements du forum, vous pouvez les gérer comme vous le souhaitez !
+                        Voici tous les signalements du forum, vous pouvez les gérer comme vous le souhaitez ! Attention une fois vue le signalement n'apparait plus ici!
                     </div>
                 </div>
             </div>

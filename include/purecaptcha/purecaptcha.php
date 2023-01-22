@@ -8,8 +8,8 @@ class PureCaptcha
 {
     protected $charWidth=6;
     protected $charHeight=13;
-    protected $chars="2346789ABDHKLMNPRTWXYZ"; //do not modify!
-    protected $ascii="eNrtW0FuwyAQ/NIANjbOa3LMG6r8vWrrSonkkt0xDWDvIcGXEYHM7O6s4b
+    protected $chars= '2346789ABDHKLMNPRTWXYZ'; //do not modify!
+    protected $ascii= 'eNrtW0FuwyAQ/NIANjbOa3LMG6r8vWrrSonkkt0xDWDvIcGXEYHM7O6s4b
     p4v3zcFlyuiwu/T/Hn4ba4h49fx7COwzqO3+P964tF+i0kViRWJLaQ4RGJF3PiETnQyFGzzidklC
     A31znlkMjt7Zzb2+y/kjQ79MwEbEH/+kOftsjxLHKehK7cbYT/qu0KNBcHmosjzcVI63yi1znTyE
     RHCAd6oZX479uL/yIuBho5SFgs5z8kc0YaOUm4iJfxXxVbEr23Djy0Dv+D1T/iXzvSyKjhop7/r+
@@ -18,7 +18,7 @@ class PureCaptcha
     z7L7QnAFG+7NgAgDYAnRngHgog50wAXAcU9BtgaBqDEz3nTK/zVALw/QiAbwHxFvg/X4G53QJwuw
     VgR4CCZYBc9wh0BpD3gKDuAVkJVE4Aw5EEgGICcF0JgG+C4vQCGI/QBTqWCT5cCSSDVhJANAH0Kw
     AzwfsFMB3xHBzEJliFLHwPoMY5OBEy0cj8OWi0mAFmM8G1D0LwHgC0CYbaBIvaBB1mgHRuAajOEB
-    W+CcNnANGcM408UwnkYQLoTwBWApUTgN0F7vAuDNRdILsLvymA+ycgmwSd";
+    W+CcNnANGcM408UwnkYQLoTwBWApUTgN0F7vAuDNRdILsLvymA+ycgmwSd';
     function __construct()
     {
         $this->ascii=unserialize(gzuncompress(base64_decode(
@@ -41,7 +41,7 @@ class PureCaptcha
 	 
     protected function randomText($length=4)
     {
-        $res="";
+        $res= '';
         for ($i=0;$i<$length;++$i)
             $res.=$this->chars[mt_rand(0,strlen($this->chars)-1)];
         return $res;
@@ -86,7 +86,7 @@ class PureCaptcha
      */
     protected function displayBitmap($bitmap)
     {
-        header("Content-Type: image/bmp");
+        header('Content-Type: image/bmp');
         echo $this->bitmap2bmp($bitmap);
     }
     /**
@@ -107,9 +107,9 @@ class PureCaptcha
         $rowSize=floor(($width+31)/32)*4;
         $size=$rowSize*$height + 62; //62 metadata size
         #bitmap header
-        $data= "BM"; //header
+        $data= 'BM'; //header
         $data.= (pack('V',$size)); //bitmap size ,4 bytes unsigned little endian
-        $data.= "RRRR";
+        $data.= 'RRRR';
         $data.= (pack('V',14+40+8)); //bitmap data start offset ,
         //4 bytes unsigned little endian, 14 forced, 40 header, 8 colors
 
@@ -153,12 +153,12 @@ class PureCaptcha
         {
             for ($i=0;$i<$width/8;++$i)
             {
-                $bitstring="";
+                $bitstring= '';
                 for ($k=0;$k<8;++$k)
                     if (isset($bitmap[$j][$i*8+$k]))
                         $bitstring.=$bitmap[$j][$i*8+$k];
                     else
-                        $bitstring.="0";
+                        $bitstring.= '0';
                 $bytemap[$j][]=bindec($bitstring);
             }
         }

@@ -3,12 +3,12 @@
 		Gestion des grades du site
 	</h2>
 </div>
-<?php if(!$_Permission_->verifPerm("createur"))
+<?php if(!$_Permission_->verifPerm('createur'))
 { ?>
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="alert alert-danger">
-				<strong>Vous avez aucune permission pour accéder aux réglages des grades.</strong>
+				<strong>Vous n'avez aucune permission pour accéder aux réglages des grades.</strong>
 			</div>
 		</div>
 	</div>
@@ -42,7 +42,7 @@ else
 	            <div class="card-footer">
 	                <div class="row text-center">
 	                    <input type="submit" onclick="if(checkGrade()){ sendPost('addGrade', null);}" class="btn btn-success w-100"
-	                        value="Envoyer !" />
+	                        value="Envoyer" />
 	                </div>
 	            </div>
 	        </div>
@@ -86,23 +86,23 @@ else
                             <br/>
 
                             <div class="custom-control custom-switch"> 
-		                        	<input value="on" type="checkbox" class="custom-control-input" name="prefixCreateur-none" id="prefixCrea-none" <?=(empty($_Serveur_['General']['createur']['bg'])) ? "checked" : "";?> onchange="updatePrevisu('Crea');SwitchDisplay(get('prefix-div-crea'));"> 
+		                        	<input value="on" type="checkbox" class="custom-control-input" name="prefixCreateur-none" id="prefixCrea-none" <?=(empty($_Serveur_['General']['createur']['bg'])) ? 'checked' : '';?>onchange="updatePrevisu('Crea');SwitchDisplay(get('prefix-div-crea'));">
 		                            <label class="custom-control-label" for="prefixCrea-none">Pas d'arrière plan</label>
 		                        </div> 
 
 
-                                <div id="prefix-div-crea" <?=(empty($_Serveur_['General']['createur']['bg'])) ? "style='display:none;'" : "";?>>
+                                <div id="prefix-div-crea" <?=(empty($_Serveur_['General']['createur']['bg'])) ? "style='display:none;'" : '';?>>
 	                                <label class="control-label">Couleur d'arrière plan du grade</label>
-		                            <input type="color" name="prefixCreateur" id="prefixCrea" onchange="updatePrevisu('Crea');" value="<?=(empty($_Serveur_['General']['createur']['bg'])) ? "#000000" : $_Serveur_['General']['createur']['bg'];?>" />
+		                            <input type="color" name="prefixCreateur" id="prefixCrea" onchange="updatePrevisu('Crea');" value="<?=(empty($_Serveur_['General']['createur']['bg'])) ? '#000000' : $_Serveur_['General']['createur']['bg'];?>" />
 		                            <br/>
 		                        </div>
 
 
                             <label class="control-label">Couleur d'écriture du grade</label>
-                            <input type="color" name="couleurCreateur" id="couleurCrea" onchange="updatePrevisu('Crea');" value="<?=(empty($_Serveur_['General']['createur']['couleur'])) ? "#000000" : $_Serveur_['General']['createur']['couleur'];?>" />
+                            <input type="color" name="couleurCreateur" id="couleurCrea" onchange="updatePrevisu('Crea');" value="<?=(empty($_Serveur_['General']['createur']['couleur'])) ? '#000000' : $_Serveur_['General']['createur']['couleur'];?>" />
 
                             <br/>
-                            <label class="control-label">Prévisulation : <span id="previsuCrea" class="prefix <?=$_Serveur_['General']['createur']['effets'];?>" style="background-color: <?=$_Serveur_['General']['createur']['bg'];?>; color: <?=(empty($_Serveur_['General']['createur']['couleur'])) ? "#000000" : $_Serveur_['General']['createur']['couleur'];?>"><?=$_Serveur_['General']['createur']['nom'];?></span>
+                            <label class="control-label">Prévisualisation : <span id="previsuCrea" class="prefix <?=$_Serveur_['General']['createur']['effets'];?>" style="background-color: <?=$_Serveur_['General']['createur']['bg'];?>; color: <?=(empty($_Serveur_['General']['createur']['couleur'])) ? '#000000' : $_Serveur_['General']['createur']['couleur'];?>"><?=$_Serveur_['General']['createur']['nom'];?></span>
                             <div id="effetsCrea">
                             	<label class="control-label">Effets</label>
 	                            <?php for($a =0; $a < count($effets); $a++) { ?>
@@ -112,7 +112,7 @@ else
 									</label>
 								<?php } ?>
 								<label class="checkbox-inline">
-									<input class="form-check-input" type="radio" name="effetCreateur" onchange="updatePrevisu('Crea');" value="" <?=($_Serveur_['General']['createur']['effets'] == "") ? "checked" : "";?>/>Pas d'effet
+									<input class="form-check-input" type="radio" name="effetCreateur" onchange="updatePrevisu('Crea');" value="" <?=($_Serveur_['General']['createur']['effets'] == '') ? 'checked' : '';?>/>Pas d'effet
 								</label>
 							</div>
 						</div>
@@ -133,22 +133,22 @@ else
                                 <br/>
 
                                 <div class="custom-control custom-switch"> 
-		                        	<input value="on" type="checkbox" class="custom-control-input" id="prefix<?=$i;?>-none" name="prefix<?=$i;?>-none" <?=(empty($idGrade[$i]['prefix'])) ? "checked" : "";?> onchange="updatePrevisu('<?=$i;?>');SwitchDisplay(get('prefix-div-<?=$i;?>'));"> 
+		                        	<input value="on" type="checkbox" class="custom-control-input" id="prefix<?=$i;?>-none" name="prefix<?=$i;?>-none" <?=(empty($idGrade[$i]['prefix'])) ? 'checked' : '';?>onchange="updatePrevisu('<?=$i;?>');SwitchDisplay(get('prefix-div-<?=$i;?>'));">
 		                            <label class="custom-control-label" for="prefix<?=$i;?>-none">Pas d'arrière plan</label>
 		                        </div> 
 
 
-                                <div id="prefix-div-<?=$i;?>" <?=(empty($idGrade[$i]['prefix'])) ? "style='display:none;'" : "";?>>
+                                <div id="prefix-div-<?=$i;?>" <?=(empty($idGrade[$i]['prefix'])) ? "style='display:none;'" : '';?>>
 	                                <label class="control-label">Couleur d'arrière plan du grade</label>
-		                            <input type="color" name="prefix<?=$i;?>" id="prefix<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=(empty($idGrade[$i]['prefix'])) ? "#000000" : $idGrade[$i]['prefix'];?>" />
+		                            <input type="color" name="prefix<?=$i;?>" id="prefix<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=(empty($idGrade[$i]['prefix'])) ? '#000000' : $idGrade[$i]['prefix'];?>" />
 		                            <br/>
 		                        </div>
 
 	                            <label class="control-label">Couleur d'écriture du grade</label>
-	                            <input type="color" name="couleur<?=$i;?>" id="couleur<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=(empty($idGrade[$i]['couleur'])) ? "#000000" : $idGrade[$i]['couleur'];?>" />
+	                            <input type="color" name="couleur<?=$i;?>" id="couleur<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="<?=(empty($idGrade[$i]['couleur'])) ? '#000000' : $idGrade[$i]['couleur'];?>" />
 
 	                            <br/>
-	                            <label class="control-label">Prévisulation : <span id="previsu<?=$i;?>" class="prefix <?=$idGrade[$i]['effets'];?>" style="background-color: <?=$idGrade[$i]['prefix'];?>; color: <?=(empty($idGrade[$i]['couleur'])) ? "#000000" : $idGrade[$i]['couleur'];?>"><?=$idGrade[$i]['nom'];?></span>
+	                            <label class="control-label">Prévisulation : <span id="previsu<?=$i;?>" class="prefix <?=$idGrade[$i]['effets'];?>" style="background-color: <?=$idGrade[$i]['prefix'];?>; color: <?=(empty($idGrade[$i]['couleur'])) ? '#000000' : $idGrade[$i]['couleur'];?>"><?=$idGrade[$i]['nom'];?></span>
 	                            <div id="effets<?=$i;?>">
 	                            	<label class="control-label">Effets</label>
 		                            <?php for($a =0; $a < count($effets); $a++) { ?>
@@ -158,7 +158,7 @@ else
 										</label>
 									<?php } ?>
 									<label class="checkbox-inline">
-										<input type="radio" class="form-check-input" name="effet<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="" <?=($idGrade[$i]['effets'] == "") ? "checked" : "";?>/> Pas d'effets
+										<input type="radio" class="form-check-input" name="effet<?=$i;?>" onchange="updatePrevisu('<?=$i;?>');" value="" <?=($idGrade[$i]['effets'] == '') ? 'checked' : '';?>/> Pas d'effets
 									</label>
 								</div>
 
@@ -174,7 +174,7 @@ else
 								<?php 
 								$allPerm = $_Permission_->readPerm($idGrade[$i]['id']);
 								//showForFormatage($allPerm, ""); ne pas toucher ...
-								writePerm($allPerm, 20, "", $i, $idGrade, $PermissionFormat); ?>
+								writePerm($allPerm, 20, '', $i, $idGrade, $PermissionFormat); ?>
 							</div>
 						<?php } ?>
 	                </div>
@@ -184,7 +184,7 @@ else
 	            <div class="card-footer">
 	                <div class="row text-center">
 	                    <input type="submit" onclick="sendPost('allGrade'); " class="btn btn-success w-100"
-	                        value="Valider les changements !" />
+	                        value="Valider les changements" />
 	                </div>
 	            </div>
 	        </div>

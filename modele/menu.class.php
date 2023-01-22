@@ -6,7 +6,7 @@ class menu {
     
     public function __construct($bdd) {
         $this->bdd = $bdd;
-        $req = $bdd->query("SELECT * FROM cmw_menu ORDER BY ordre ASC");
+        $req = $bdd->query('SELECT * FROM cmw_menu ORDER BY ordre ASC');
         $this->menu = $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -44,11 +44,11 @@ class menu {
         if(!empty($this->menu)) {
             foreach($this->menu as $value) {
                 if($value['ordre'] == $m['ordre'] +1 && $m['dest'] == $value['dest']) {
-                    $req = $this->bdd->prepare("UPDATE cmw_menu SET ordre=:ordre WHERE id=:id");
-                    $req->execute(array("ordre" => $m['ordre'] +1, "id" => $id));
+                    $req = $this->bdd->prepare('UPDATE cmw_menu SET ordre=:ordre WHERE id=:id');
+                    $req->execute(array('ordre' => $m['ordre'] +1, 'id' => $id));
                     
-                    $req = $this->bdd->prepare("UPDATE cmw_menu SET ordre=:ordre WHERE id=:id");
-                    $req->execute(array("ordre" => $m['ordre'], "id" => $value['id']));
+                    $req = $this->bdd->prepare('UPDATE cmw_menu SET ordre=:ordre WHERE id=:id');
+                    $req->execute(array('ordre' => $m['ordre'], 'id' => $value['id']));
                     return;
                 }
             }
@@ -62,11 +62,11 @@ class menu {
         if(!empty($this->menu)) {
             foreach($this->menu as $value) {
                 if($value['ordre'] == $m['ordre'] -1 && $m['dest'] == $value['dest']) {
-                    $req = $this->bdd->prepare("UPDATE cmw_menu SET ordre=:ordre WHERE id=:id");
-                    $req->execute(array("ordre" => $m['ordre'] -1, "id" => $id));
+                    $req = $this->bdd->prepare('UPDATE cmw_menu SET ordre=:ordre WHERE id=:id');
+                    $req->execute(array('ordre' => $m['ordre'] -1, 'id' => $id));
                     
-                    $req = $this->bdd->prepare("UPDATE cmw_menu SET ordre=:ordre WHERE id=:id");
-                    $req->execute(array("ordre" => $m['ordre'], "id" => $value['id']));
+                    $req = $this->bdd->prepare('UPDATE cmw_menu SET ordre=:ordre WHERE id=:id');
+                    $req->execute(array('ordre' => $m['ordre'], 'id' => $value['id']));
                     return;
                 }
             }
@@ -95,10 +95,10 @@ class menu {
     }
     
     public function createMenu($data) {
-        $req = $this->bdd->prepare("INSERT INTO cmw_menu (name, dest, url, ordre) VALUES (:name, :dest, :url, :ordre);");
-        $req->execute(array("name" => $data['name'], "dest" => $data['dest'], "url" => $data['url'], "ordre" => $this->getMaxOfDest($data['dest'])));
+        $req = $this->bdd->prepare('INSERT INTO cmw_menu (name, dest, url, ordre) VALUES (:name, :dest, :url, :ordre);');
+        $req->execute(array('name' => $data['name'], 'dest' => $data['dest'], 'url' => $data['url'], 'ordre' => $this->getMaxOfDest($data['dest'])));
         
-        $req = $this->bdd->query("SELECT id FROM cmw_menu WHERE id= LAST_INSERT_ID()");
+        $req = $this->bdd->query('SELECT id FROM cmw_menu WHERE id= LAST_INSERT_ID()');
         $req = $req->fetch(PDO::FETCH_ASSOC);
         return $req['id'];
     }
@@ -107,18 +107,18 @@ class menu {
         $m = $this->getMenuById($id);
         foreach($this->menu as $value) {
             if($value['dest'] == $m['dest'] && $value['ordre'] > $m['ordre']) {
-                $req = $this->bdd->prepare("UPDATE cmw_menu SET ordre=:ordre WHERE id=:id");
-                $req->execute(array("ordre" => $value['ordre'] -1, "id" => $value['id']));
+                $req = $this->bdd->prepare('UPDATE cmw_menu SET ordre=:ordre WHERE id=:id');
+                $req->execute(array('ordre' => $value['ordre'] -1, 'id' => $value['id']));
             }
         }
         
-        $req = $this->bdd->prepare("DELETE FROM cmw_menu WHERE id=:id OR dest=:id");
-        $req->execute(array("id" => $id));
+        $req = $this->bdd->prepare('DELETE FROM cmw_menu WHERE id=:id OR dest=:id');
+        $req->execute(array('id' => $id));
     }
     
     public function editMenu($data, $id) {
-        $req = $this->bdd->prepare("UPDATE cmw_menu SET url=:url, name=:name WHERE id=:id");
-        $req->execute(array("id" => $id, "name" => $data['name'], "url" => $data['url']));
+        $req = $this->bdd->prepare('UPDATE cmw_menu SET url=:url, name=:name WHERE id=:id');
+        $req->execute(array('id' => $id, 'name' => $data['name'], 'url' => $data['url']));
     }
     
 }

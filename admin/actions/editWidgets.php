@@ -1,6 +1,6 @@
 <?php
 if($_Permission_->verifPerm('PermsPanel', 'widgets', 'actions', 'editWidgets')) {
-    require("modele/widgets.class.php");
+    require('modele/widgets.class.php');
     $widgets = new widgets($bddConnection);
     
 

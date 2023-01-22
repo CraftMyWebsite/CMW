@@ -10,9 +10,9 @@ if(isset($_POST['ajax'])){
 	<tr>
 		<td scope="row"> <?= $value['id']; ?> </td>
 		<td>
-                	<img src='<?= $_ImgProfil_->getUrlHeadByPseudo($value['pseudo'], 32); ?>' style='width: 32px; height: 32px;' alt='image de profile de <?= $value["pseudo"] ?>' /> <?= $value["pseudo"]; ?>
+                	<img src='<?= $_ImgProfil_->getUrlHeadByPseudo($value['pseudo'], 32); ?>' style='width: 32px; height: 32px;' alt='image de profile de <?= $value['pseudo'] ?>' /> <?= $value['pseudo']; ?>
             	</td>
-		<td> <?= Permission::getInstance()->gradeJoueur($value["pseudo"]); ?> </td>
+		<td> <?= Permission::getInstance()->gradeJoueur($value['pseudo']); ?> </td>
 		<td> <?= $value['tokens']; ?> </td>
 		<td>
 			<a href="profil/<?= $value['pseudo']; ?>" class="btn btn-reverse">Voir le compte</a>

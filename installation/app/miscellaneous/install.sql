@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `cmw_boutique_offres` (
   `ordre` int(11),
   `evo` text NULL,
   `max_vente` int(11),
+  `images` text NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -346,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `cmw_support` (
   `titre` varchar(100),
   `message` text,
   `date_post` datetime,
-  `etat` int(1),
+  `etat` int(1) NULL DEFAULT '0',
   `ticketDisplay` int(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -397,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `cmw_users` (
   `rang` int(2) DEFAULT 1,
   `tokens` int(11) default 0,
   `age` int(11),
-  `resettoken` varchar(32),
+  `resettoken` varchar(500),
   `ip` varchar(40),
   `CleUnique` varchar(32),
   `ValidationMail` int(1),

@@ -8,14 +8,14 @@
 <div class="row">
     <div class="col-md-12 text-center">
         <div class="alert alert-danger">
-            <strong>Vous avez aucune permission pour accéder aux nouveautés.</strong>
+            <strong>Vous n'avez aucune permission pour accéder aux nouveautés.</strong>
         </div>
     </div>
 </div>
 <?php } else { ?>
 <div class="alert alert-success">
     <strong>Les news sont visibles sur l'accueil, elles informent vos joueurs des nouveautés relatives à votre
-        communauté, pensez à rédiger des news souvent, cela prouve votre activité, ça fait toujours plaisir à un joueur
+        communauté, pensez à rédiger des news régulièrement, cela montre votre activité, ça fait toujours plaisir aux joueurs
         de voir un nouveau message!</strong>
 </div>
 <div class="row">
@@ -52,7 +52,7 @@
                             value="<?php echo $tableauNews[$i]['titre']; ?>">
 
 
-                        <label class="control-label">Text de la news</label>
+                        <label class="control-label">Texte de la news</label>
                         <?php echo '<textarea data-UUID="0002" id="ckeditor" name="message" style="height: 275px; margin: 0px; width: 50%;">' . $tableauNews[$i]['message'] . '</textarea>';?>
 
                         <div class="row" style="margin-top:20px;">
@@ -104,7 +104,7 @@
             <div class="card-footer">
                 <div class="row text-center">
                     <input type="submit" onclick="sendPost('postNews', null);" class="btn btn-success w-100"
-                        value="Envoyer !" />
+                        value="Envoyer" />
                 </div>
             </div>
         </div>

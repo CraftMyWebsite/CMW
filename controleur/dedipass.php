@@ -6,7 +6,7 @@ if( empty($code) ) {
 else { 
   $dedipass = file_get_contents('http://api.dedipass.com/v1/pay/?public_key=' . $_Serveur_['Payement']['public_key'] . '&private_key=' . $_Serveur_['Payement']['private_key'] . '&code=' . $code);
   $dedipass = json_decode($dedipass); 
-  if($dedipass->status == 'success') { 
+  if($dedipass->status === 'success') {
     // Le transaction est validée et payée. 
     // Vous pouvez utiliser la variable $virtual_currency 
     // pour créditer le nombre de Jetons. 
@@ -14,7 +14,7 @@ else {
 	$rate = $dedipass->rate;
 	$payout = $dedipass->payout;
 	$code = $dedipass->code;
-	if($virtual_currency == 0 OR $virtual_currency == NULL)
+	if($virtual_currency === 0 || $virtual_currency === NULL)
 	{
 		$virtual_currency = 1;
 	}
@@ -30,12 +30,12 @@ else {
 	$joueurMaj = new Maj($_Joueur_['pseudo'], $bddConnection);
 	$playerData = $joueurMaj->getReponseConnection();
 	$playerData = $playerData->fetch(PDO::FETCH_ASSOC);
-	$playerData['tokens'] = $playerData['tokens'] + $virtual_currency;
+	$playerData['tokens'] += $virtual_currency;
 	$joueurMaj->setReponseConnection($playerData);
 	$joueurMaj->setNouvellesDonneesTokens($playerData);
-	$_Joueur_['tokens'] = $_Joueur_['tokens'] + $virtual_currency;
+	$_Joueur_['tokens'] += $virtual_currency;
 	
-  header("Location: index.php?page=token&successDedipass");
+  header('Location: index.php?page=token&successDedipass');
   } 
   else { 
     // Le code est invalide 

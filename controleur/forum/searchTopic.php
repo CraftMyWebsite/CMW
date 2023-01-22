@@ -9,14 +9,14 @@
         echo '[DIV]';
         $req = $bddConnection->prepare('SELECT id as id2, nom, pseudo, date_creation, perms, last_answer FROM cmw_forum_post WHERE nom LIKE :nom OR contenue LIKE :contenue OR last_answer LIKE :last LIMIT 20');
         $req->execute(array(
-            'nom' => "%".$recherche.'%',
+            'nom' => '%' .$recherche.'%',
             'contenue' => '%'.$recherche.'%',
             'last' => '%'.$recherche.'%'
         ));
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
         $img = new ImgProfil($bddConnection);
         foreach($data as $key => $value) {
-            if((Permission::getInstance()->verifPerm('connect') & Permission::getInstance()->verifPerm("createur")) OR ( Permission::getInstance()->verifPerm('connect') & Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $data[$key]['perms']) OR $data[$key]['perms'] == 0)
+            if((Permission::getInstance()->verifPerm('connect') & Permission::getInstance()->verifPerm('createur')) OR ( Permission::getInstance()->verifPerm('connect') & Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $data[$key]['perms']) OR $data[$key]['perms'] == 0)
             {
                 $data[$key]['compte'] = $_Forum_->compteReponse($data[$key]['id2']);
                 $data[$key]['img'] = $img->getUrlHeadByPseudo($data[$key]['pseudo'], 42);

@@ -35,10 +35,10 @@
                             <div class="input-group">
                                 <span class="input-group-prepend">
                                     <div class="input-group-text bg-main border-0">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-at"></i>
                                     </div>
                                 </span>
-                                <input type="text" name="email" class="form-control custom-text-input" id="EmailInscriptionForm" placeholder="Entrez votre mail" required>
+                                <input type="text" name="email" class="form-control custom-text-input" id="EmailInscriptionForm" placeholder="xyz@example.com" required>
                             </div>
 
                             <div class="custom-control custom-checkbox">
@@ -65,7 +65,7 @@
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </span>
-                                <input type="password" name="mdp" class="form-control custom-text-input" id="MdpInscriptionForm" placeholder="Entrez votre mot de passe" onKeyUp="securPass();" required>
+                                <input type="password" name="mdp" class="form-control custom-text-input" id="MdpInscriptionForm" placeholder="Entrer votre mot de passe" onKeyUp="securPass();" required>
                                 <div class="input-group-append">
                                     <span toggle="#MdpInscriptionForm, #MdpConfirmInscriptionForm" class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                 </div>
@@ -292,7 +292,7 @@
                                 <?php
                                 $getNewsCommentaires = $accueilNews->newsCommentaires($news[$i]['id']);
                                 while ($newsComments = $getNewsCommentaires->fetch(PDO::FETCH_ASSOC)) :
-                                    if (Permission::getInstance()->verifPerm("connect")) :
+                                    if (Permission::getInstance()->verifPerm('connect')) :
 
                                         $getCheckReport = $accueilNews->checkReport($_Joueur_['pseudo'], $newsComments['pseudo'], $news[$i]['id'], $newsComments['id']);
                                         $checkReport = $getCheckReport->rowCount();
@@ -321,17 +321,17 @@
 
 
                                         <!-- Gestion du message -->
-                                        <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
+                                        <?php if (Permission::getInstance()->verifPerm('connect')) : ?>
 
                                             <span style="color: red;">
-                                                <?= ($newsComments['nbrEdit'] != "0") ? 'Nombre d\'édition: ' . $newsComments['nbrEdit'] . ' <br> ' : '' ?>
-                                                <?= ($countReportsVictimes != "0") ? $countReportsVictimes . ' Signalement <br> ' : '' ?>
+                                                <?= ($newsComments['nbrEdit'] != '0') ? 'Nombre d\'édition: ' . $newsComments['nbrEdit'] . ' <br> ' : '' ?>
+                                                <?= ($countReportsVictimes != '0') ? $countReportsVictimes . ' Signalement <br> ' : '' ?>
                                             </span>
 
                                             <div class="dropdown mt-3 ml-5">
                                                 <button class="btn btn-reverse dropdown-toggle" data-toggle="dropdown"> Actions </button>
                                                 <ul class="dropdown-menu">
-                                                    <?php if ($newsComments['pseudo'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm("createur")) : ?>
+                                                    <?php if ($newsComments['pseudo'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('createur')) : ?>
 
 
                                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#news<?= $news[$i]['id'] ?>-<?= $newsComments['id'] ?>-edit" data-dismiss="modal">
@@ -343,7 +343,7 @@
 
                                                     <?php endif; ?>
                                                     <?php if ($newsComments['pseudo'] != $_Joueur_['pseudo']) :
-                                                        if ($checkReport == "0") : ?>
+                                                        if ($checkReport == '0') : ?>
                                                             <a class="dropdown-item" href="index.php?action=report_news_commentaire&id_news=<?= $news[$i]['id'] ?>&id_comm=<?= $newsComments['id'] ?>&victime=<?= $newsComments['pseudo'] ?>">
                                                                 Signaler
                                                             </a>
@@ -357,7 +357,7 @@
                                     </div>
                                 <?php endwhile; ?>
                             </div>
-                            <?php if (Permission::getInstance()->verifPerm("connect")) : ?>
+                            <?php if (Permission::getInstance()->verifPerm('connect')) : ?>
                                 <div class="modal-footer w-100">
                                     <form action="?action=post_news_commentaire&id_news=<?php echo $news[$i]['id']; ?>" method="post" class="w-100">
                                         <h5>
@@ -365,8 +365,8 @@
                                         </h5>
                                         <textarea name="commentaire" class="form-control w-100 mb-3" required></textarea>
                                         <small>
-                                            <span class="float-left"><b>Min : </b> 6 charactères. </span>
-                                            <span class="float-right"><b>Max : </b> 255 charactères.</span>
+                                            <span class="float-left"><b>Min : </b> 6 caractères. </span>
+                                            <span class="float-right"><b>Max : </b> 255 caractères.</span>
                                         </small>
                                         <button type="submit" class="btn btn-main w-100 mt-3">Commenter</button>
                                     </form>
@@ -385,14 +385,14 @@
                 <!-- Edition d'un commentaire -->
 
                 <?php unset($Img);
-                if (Permission::getInstance()->verifPerm("connect")) :
+                if (Permission::getInstance()->verifPerm('connect')) :
                     $getNewsCommentaires = $accueilNews->newsCommentaires($news[$i]['id']);
 
                     while ($newsComments = $getNewsCommentaires->fetch(PDO::FETCH_ASSOC)) :
                         $reqEditCommentaire = $accueilNews->editCommentaire($newsComments['pseudo'], $news[$i]['id'], $newsComments['id']);
                         $getEditCommentaire = $reqEditCommentaire->fetch(PDO::FETCH_ASSOC);
                         $editCommentaire = $getEditCommentaire['commentaire'];
-                        if ($newsComments['pseudo'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm("createur")) :  ?>
+                        if ($newsComments['pseudo'] == $_Joueur_['pseudo'] or Permission::getInstance()->verifPerm('createur')) :  ?>
                             <div class="modal fade" id="news<?= $news[$i]['id'] . '-' . $newsComments['id'] . '-edit'; ?>" tabindex="-1" role="dialog" aria-labelledby="news<?= $news[$i]['id'] . '-' . $newsComments['id'] . '-edit'; ?>" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
@@ -413,7 +413,7 @@
                                             </div>
                                             <div class="modal-footer text-center">
                                                 <small class="w-100">
-                                                    <span class="float-left"><b>Min : </b> 6 charactères. </span>
+                                                    <span class="float-left"><b>Min : </b> 6 caractères. </span>
                                                     <span class="float-right"><b>Max : </b> 255 caractères.</span>
                                                 </small>
                                                 <button type="submit" class="btn btn-main w-100 btn-block">Valider la modification</button>
@@ -431,7 +431,7 @@
     <?php endif; ?>
 <?php endif; ?>
 
-<?php if(isset($_GET['page']) && $_GET['page'] == "forum" && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) : ?>
+<?php if(isset($_GET['page']) && $_GET['page'] == 'forum' && Permission::getInstance()->verifPerm('PermsForum', 'general', 'deleteCategorie') && !$_SESSION['mode']) : ?>
 <div class="modal fade" id="editForum" tabindex="-1" role="dialog" aria-labelledby="editForum" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -478,7 +478,7 @@
     </div>
 </div>
 <?php endif ?>
-<?php if(isset($_GET['page']) && ($_GET['page'] == "forum_categorie" | $_GET['page'] == "sous_forum_categorie")) : ?>
+<?php if(isset($_GET['page']) && ($_GET['page'] == 'forum_categorie' | $_GET['page'] == 'sous_forum_categorie')) : ?>
 <div class="modal fade" id="editSForum" tabindex="-1" role="dialog" aria-labelledby="editSForum" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

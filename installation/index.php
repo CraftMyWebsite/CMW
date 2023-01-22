@@ -2,6 +2,7 @@
 error_reporting(0);
 ini_set('display_errors', 1);
 require_once('../modele/config/yml.class.php');
+require_once "app/plugins/utils.php";
 $configLecture = new Lire('../modele/config/config.yml');
 $_Serveur_ = $configLecture->GetTableau();
 
@@ -43,7 +44,7 @@ include '../include/version.php';
             <div class="col-md-12">
                 <div class="wrapper-progressBar">
                     <ul class="progressBar">
-                        <li <?php if ($installEtape >= 1) echo 'class="active"'; ?>><span class="d-none d-md-block">Configuration de la base de donnée</span>
+                        <li <?php if ($installEtape >= 1) echo 'class="active"'; ?>><span class="d-none d-md-block">Configuration de la base de données</span>
                         </li>
                         <li <?php if ($installEtape >= 2) echo 'class="active"'; ?>><span class="d-none d-md-block">Paramétrage du site</span>
                         </li>
@@ -80,9 +81,9 @@ include '../include/version.php';
         <div class="pt-3">
             <div class="alert alert-danger">
                 <strong>ATTENTION</strong> : Erreur Critique, votre serveur est soumis aux failles htaccess. Veuillez
-                les activer, en suivant <a
+                les corriger, en suivant <a
                         href="https://www.aidoweb.com/tutoriaux/fichier-htaccess-qui-ne-fonctionne-pas-solutions-configuration-apache-648"
-                        target="_blank">ce tuto</a> ou nous contacter sur <a href="https://discord.gg/wMVAeug"
+                        target="_blank">ce tuto</a> ou contactez-nous sur <a href="https://discord.gg/wMVAeug"
                                                                              target="_blank">Discord</a>
                 <div class="row">
                     <div class="col-md-6">
@@ -372,7 +373,7 @@ function verifyPDO($hote, $nomBase, $utilisateur, $mdp, $port)
         if ((!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_ALL_TABLES') === FALSE) && (!isset($data['sql_mode_global']) || empty($data['sql_mode_global']) || strpos($data['sql_mode_global'], 'STRICT_TRANS_TABLES') === FALSE) && (!isset($data['sql_mode_session']) || empty($data['sql_mode_session']) || strpos($data['sql_mode_session'], 'STRICT_TRANS_TABLES') === FALSE)) {
             return true;
         } else {
-            return '([GLOBAL.sql_mode: ' . $data['sql_mode_globall'] . '],[SESSION.sql_mode:' . $data['sql_mode_session'] . '])';
+            return '([GLOBAL.sql_mode: ' . $data['sql_mode_global'] . '],[SESSION.sql_mode:' . $data['sql_mode_session'] . '])';
         }
     } catch (Exception $e) {
         return 3;

@@ -2,6 +2,8 @@
 
 namespace xPaw;
 
+use InvalidArgumentException;
+
 class MinecraftQuery
 {
 	/*
@@ -22,7 +24,7 @@ class MinecraftQuery
 	{
 		if( !is_int( $Timeout ) || $Timeout < 0 )
 		{
-			throw new \InvalidArgumentException( "Le délai d'expiration doit être un entier." );
+			throw new InvalidArgumentException( "Le délai d'expiration doit être un entier." );
 		}
 
 		if( $ResolveSRV )
@@ -68,7 +70,7 @@ class MinecraftQuery
 
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( 'Impossible de recevoir les challanges.' );
+			throw new MinecraftQueryException( 'Impossible de recevoir les challenges.' );
 		}
 
 		return Pack( 'N', $Data );
@@ -91,7 +93,7 @@ class MinecraftQuery
 
 		if( Count( $Data ) !== 2 )
 		{
-			throw new MinecraftQueryException( 'Failed to parse server\'s response.' );
+			throw new MinecraftQueryException( 'Échec de l\'analyse de la réponse du serveur.' );
 		}
 
 		$Players = SubStr( $Data[ 1 ], 0, -2 );
@@ -139,14 +141,14 @@ class MinecraftQuery
 		// Parse "plugins", if any
 		if( $Info[ 'Plugins' ] )
 		{
-			$Data = Explode( ": ", $Info[ 'Plugins' ], 2 );
+			$Data = Explode( ': ', $Info[ 'Plugins' ], 2 );
 
 			$Info[ 'RawPlugins' ] = $Info[ 'Plugins' ];
 			$Info[ 'Software' ]   = $Data[ 0 ];
 
 			if( Count( $Data ) == 2 )
 			{
-				$Info[ 'Plugins' ] = Explode( "; ", $Data[ 1 ] );
+				$Info[ 'Plugins' ] = Explode( '; ', $Data[ 1 ] );
 			}
 		}
 		else
@@ -166,7 +168,7 @@ class MinecraftQuery
 		}
 	}
 
-	private function WriteData( $Command, $Append = "" )
+	private function WriteData( $Command, $Append = '')
 	{
 		$Command = Pack( 'c*', 0xFE, 0xFD, $Command, 0x01, 0x02, 0x03, 0x04 ) . $Append;
 		$Length  = StrLen( $Command );
@@ -180,7 +182,7 @@ class MinecraftQuery
 
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( "Impossible de lire sur le socket." );
+			throw new MinecraftQueryException('Impossible de lire sur le socket.');
 		}
 
 		if( StrLen( $Data ) < 5 || $Data[ 0 ] != $Command[ 2 ] )

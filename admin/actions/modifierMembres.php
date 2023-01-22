@@ -1,13 +1,19 @@
 <?php
+$token = filter_input(INPUT_POST, 'xss_token');
+
+if ($token != $_SESSION['xss_token']){
+    http_response_code(403);
+    die();
+}
+
 if($_Permission_->verifPerm('PermsPanel', 'members', 'actions', 'editMember')) { 
 
 	$allChange= explode('_', $_POST['allid']);
 	
 	foreach ($allChange as $id)
 	{
-		echo $id;
 		ValiderChangement($_POST['pseudo'.$id], $_POST['email'.$id], $_POST['rang'.$id], $_POST['tokens'.$id], $id, $bddConnection);
-		if(isset($_POST['password' . $id]) && !empty($_POST['password' . $id]) && $_POST['password' . $id] != "" && $_POST['password' . $id] != " ")
+		if(isset($_POST['password' . $id]) && !empty($_POST['password' . $id]) && $_POST['password' . $id] != '' && $_POST['password' . $id] != ' ')
 		{
 			ChangerMdp($_POST['password' . $id], $id, $bddConnection);
 		}

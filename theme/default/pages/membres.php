@@ -12,17 +12,9 @@ if (isset($_GET['page_membre'])) {
 
 <section id="Members">
     <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
-        <div class="row">
-            <!-- Présentation -->
-            <div class="d-flex col-12 info-page">
-                <i class="fas fa-info-circle notification-icon"></i>
-                <div class="info-content">
-                    Ici, vous pourrez consulter la liste des membres du site, voir leur profil...
-                </div>
-            </div>
-        </div>
+
         <!-- Membres -->
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
                 <div class="form-group row searchPlayer">
                     <label for="searchPlayer" class="col-lg-4 col-md-12 col-sm-12 col-form-label">Rechercher un joueur : </label>
@@ -50,11 +42,11 @@ if (isset($_GET['page_membre'])) {
                                 <td scope="row">
                                     <?= $value['id']; ?></td>
                                 <td>
-                                    <img src='<?= $_ImgProfil_->getUrlHeadByPseudo($value['pseudo'], 32); ?>' style='width: 32px; height: 32px;' alt='image de profile de <?= $value["pseudo"] ?>' /> <?= $value["pseudo"]; ?>
+                                    <img src='<?= $_ImgProfil_->getUrlHeadByPseudo($value['pseudo'], 32); ?>' style='width: 32px; height: 32px;' alt='image de profile de <?= $value['pseudo'] ?>' /> <?= $value['pseudo']; ?>
                                 </td>
 
                                 <td>
-                                    <?= Permission::getInstance()->gradeJoueur($value["pseudo"]); ?>
+                                    <?= Permission::getInstance()->gradeJoueur($value['pseudo']); ?>
                                 </td>
 
                                 <td>

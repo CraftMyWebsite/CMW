@@ -22,7 +22,7 @@ class Copie
 	{
 		$extension = strtolower(substr(strrchr($this->file['name'], '.'),1));
 		
-		if(in_array($extension, $this->types))
+		if(in_array($extension, $this->types, true))
 			$dimension = getimagesize($this->file['tmp_name']);
 		else
 			return 1;

@@ -7,7 +7,7 @@
 	<?php if(!$_Permission_->verifPerm('PermsPanel', 'support', 'tickets', 'showPage')) { ?>
 	    <div class="col-md-12 text-center">
 	    	<div class="alert alert-danger">
-	            <strong>Vous avez aucune permission pour accéder aux tickets.</strong>
+	            <strong>Vous n'avez aucune permission pour accéder aux tickets.</strong>
 	        </div>
 	    </div>
 	<?php }else {  if($aucunTicket) { ?>
@@ -24,9 +24,9 @@
 				</div>
 				<div class="card-body" id="change-support">
 					<select name="visibilite" class="form-control" required>
-						<option value="both"<?php if(isset($_Serveur_["support"]["visibilite"]) && $_Serveur_["support"]["visibilite"] == "both") echo " selected"?>> Au choix</option>
-						<option value="prive"<?php if(isset($_Serveur_["support"]["visibilite"]) && $_Serveur_["support"]["visibilite"] == "prive") echo " selected"?>> Privée</option>
-						<option value="public"<?php if(isset($_Serveur_["support"]["visibilite"]) && $_Serveur_["support"]["visibilite"] == "public") echo " selected"?>> Publique</option>
+						<option value="both"<?php if(isset($_Serveur_['support']['visibilite']) && $_Serveur_['support']['visibilite'] == 'both') echo ' selected' ?>> Au choix</option>
+						<option value="prive"<?php if(isset($_Serveur_['support']['visibilite']) && $_Serveur_['support']['visibilite'] == 'prive') echo ' selected' ?>> Privée</option>
+						<option value="public"<?php if(isset($_Serveur_['support']['visibilite']) && $_Serveur_['support']['visibilite'] == 'public') echo ' selected' ?>> Publique</option>
 					</select>
 	            </div>
 	            <script>initPost('change-support', 'admin.php?&action=switchTypeSupport', null);</script>

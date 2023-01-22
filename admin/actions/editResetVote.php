@@ -1,4 +1,4 @@
-<?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', "actions", 'editReset')) { 
+<?php if($_Permission_->verifPerm('PermsPanel', 'vote', 'recompenseAuto', 'actions', 'editReset')) {
 
 
 	$type = intval(htmlspecialchars($_POST['type']));

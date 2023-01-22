@@ -9,7 +9,7 @@ if($_POST['ajax'] == true)
 	for($i=0; $i < count($jsonCon); $i++)
 	{
 		$messages = $Chat->getMessages($i);
-		if($messages != false && $messages != "erreur" && $messages != "query")
+		if($messages != false && $messages != 'erreur' && $messages != 'query')
 		{
 			$messages = array_slice($messages, -10, 10);
 			foreach($messages as $key => $value)
@@ -21,12 +21,12 @@ if($_POST['ajax'] == true)
 					$retour[$i]['msg'][$key]['message'] = $Chat->formattage(htmlspecialchars($value['message']));
 				}
 			}
-			$retour[$i]['success'] = "true";
+			$retour[$i]['success'] = 'true';
 		}
-		elseif($messages == "query")
-			$retour[$i]['success'] = "query";
-		elseif($messages == "erreur")
-			$retour[$i]['success'] = "erreur";
+		elseif($messages == 'query')
+			$retour[$i]['success'] = 'query';
+		elseif($messages == 'erreur')
+			$retour[$i]['success'] = 'erreur';
 		else
 			$retour[$i]['success'] = 'false';
 	}

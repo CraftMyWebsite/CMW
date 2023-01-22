@@ -5,10 +5,10 @@
     </h2>
 </div>
 <div class="row">
-<?php if(!$_Permission_->verifPerm('PermsPanel',"maintenance","showPage")) { ?>
+<?php if(!$_Permission_->verifPerm('PermsPanel', 'maintenance', 'showPage')) { ?>
         <div class="col-md-12 text-center">
             <div class="alert alert-danger">
-                <strong>Vous avez aucune permission pour accéder à la maintenance.</strong>
+                <strong>Vous n'avez aucune permission pour accéder à la maintenance.</strong>
             </div>
         </div>
     <?php } else { ?>
@@ -33,7 +33,7 @@
                                 <div id="msg1<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Modification du message principal</strong></span>
                                     <textarea data-UUID="0014" id="ckeditor" name="maintenanceMsg" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsg']; ?></textarea>
-                                    <input onclick="sendPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>', null);"  type="submit" class="btn btn-success maintenance_msg_btn" value="Modifier le message !" />
+                                    <input onclick="sendPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>', null);"  type="submit" class="btn btn-success maintenance_msg_btn" value="Modifier le message" />
                                 </div>
 
                                 <script>initPost('msg1<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessage&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
@@ -42,7 +42,7 @@
                                 <div id="msg2<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Message d'administration</strong></span>
                                     <textarea  data-UUID="0015" id="ckeditor" name="maintenanceMsgAdmin" class="form-control" style="height: 275px; margin: 0px; width: 20%;" required ><?php echo $maintenance[$i]['maintenanceMsgAdmin']; ?></textarea>
-                                    <input onclick="sendPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>', null);" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message !" />
+                                    <input onclick="sendPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>', null);" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message" />
                                 </div>
 
                                 <script>initPost('msg2<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageAdmin&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>',null );</script>
@@ -52,7 +52,7 @@
                                 <div id="msg3<?php echo $maintenance[$i]['maintenanceId']; ?>" class="maintenance_msg_desc">
                                     <span><strong>Message d'inscription</strong></span>
                                     <textarea  data-UUID="0016" id="ckeditor" name="maintenanceMsgInscr" class="form-control" style="height: 275px; margin: 0px; width: 20%;required"><?php echo $maintenance[$i]['maintenanceMsgInscr']; ?> </textarea>
-                                    <input onclick="sendPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>');" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message !" />
+                                    <input onclick="sendPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>');" type="submit" class="btn btn-success  maintenance_msg_btn" value="Modifier le message" />
                                 </div>
 
                                 <script>initPost('msg3<?php echo $maintenance[$i]['maintenanceId']; ?>','admin.php?&action=editMessageInscr&maintenanceId=<?php echo $maintenance[$i]['maintenanceId']; ?>');</script>
@@ -75,7 +75,7 @@
                                     <?php if($maintenance[$i]['maintenanceEtat'] == 1) { ?> 
                                         <button class="btn btn-block" style="background: #18bc9c;color: white;" disabled><strong>INFO :</strong> Maintenance activée</button>
                                     <?php } else { ?>
-                                        <button class="btn btn-block" style="background: #e74c3c;color: white;" disabled><strong>INFO :</strong> Maintenance  désactivée</button>
+                                        <button class="btn btn-block" style="background: #e74c3c;color: white;" disabled><strong>INFO :</strong> Maintenance désactivée</button>
                                     <?php } ?>
                                 <?php } ?>
                                 </div>
@@ -100,7 +100,7 @@
                                             <div class="card-body" id="maintenance">
                                                 <center>Vous souhaitez rendre le site accessible uniquement aux administrateurs ? Il vous suffit d'appuyer sur le bouton ci-dessous. Les visiteurs seront redirigés vers la page de maintenance.</center>
                                                 <label>Définir une date de fin de maintenance: <small>Laissez vide si aucune</small></label>
-                                                <input type="date" name="date" <?php if(!empty($maintenance[$i]['dateFin']) && $maintenance[$i]['dateFin'] > time()) echo 'value="'.date("Y-m-d", $maintenance[$i]["dateFin"]).'"';?> class="form-control" placeholder="format: jj/mm/aaaa">
+                                                <input type="date" name="date" <?php if(!empty($maintenance[$i]['dateFin']) && $maintenance[$i]['dateFin'] > time()) echo 'value="'.date('Y-m-d', $maintenance[$i]['dateFin']).'"';?>class="form-control" placeholder="format: jj/mm/aaaa">
                                                 <?php if($maintenance[$i]['maintenanceEtat'] == 1) { 
                                                     ?>
                                                     <button onclick="sendPost('maintenance', null, true);" type="submit" id="maintenanceBtn" class="btn btn-danger btn-block" />Désactiver la maintenance</button>
@@ -110,7 +110,7 @@
                                                     <button onclick="sendPost('maintenance', null, true);" id="maintenanceBtn" type="submit" class="btn btn-success btn-block" />Activer la maintenance</button>
                                                     <?php
                                                 } ?> 
-                                                <script>initPost('maintenance', 'admin.php?action=switchMaintenance&maintenanceId=<?=$maintenance[$i]["maintenanceId"];?>', function(data, otherData){
+                                                <script>initPost('maintenance', 'admin.php?action=switchMaintenance&maintenanceId=<?=$maintenance[$i]['maintenanceId'];?>', function(data, otherData){
                                                     if(data) {
                                                         update = JSON.parse(otherData);
                                                         btn = document.getElementById('maintenanceBtn');

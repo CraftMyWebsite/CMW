@@ -60,9 +60,10 @@ if($_Permission_->verifPerm('PermsPanel', 'shop', 'actions', 'editCategorieOffre
 
 	        	$_POST['offresNom'.$offres[$j]['id']] = htmlspecialchars($_POST['offresNom'.$offres[$j]['id']]);
 				$_POST['offresDescription'.$offres[$j]['id']] = ckeditor::verif($_POST['offresDescription'.$offres[$j]['id']],true);
-	        	$req = $bddConnection->prepare('UPDATE `cmw_boutique_offres` SET `nom`=:nom,`description`=:description,`prix`=:prix,`nbre_vente`=:nbre_vente,`categorie_id`=:categorie_id,`ordre`=:ordre,`evo`=:evo,`max_vente`=:max_vente WHERE id=:id');
+	        	$req = $bddConnection->prepare('UPDATE `cmw_boutique_offres` SET `nom`=:nom,`images`=:images,`description`=:description,`prix`=:prix,`nbre_vente`=:nbre_vente,`categorie_id`=:categorie_id,`ordre`=:ordre,`evo`=:evo,`max_vente`=:max_vente WHERE id=:id');
 	        	$req->execute(Array (
 						'nom' => $_POST['offresNom'.$offres[$j]['id']],
+						'images' => $_POST['offresImages'.$offres[$j]['id']],
 						'description' => $_POST['offresDescription'.$offres[$j]['id']],
 						'prix' => $_POST['offresPrix'.$offres[$j]['id']],
 						'nbre_vente' => $_POST['nbre_vente'.$offres[$j]['id']],

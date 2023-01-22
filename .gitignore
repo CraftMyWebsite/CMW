@@ -1,0 +1,25 @@
+#exclude config file
+modele/config/config.yml
+
+#exclude .htpasswd
+admin/actions/.htpasswd
+controleur/.htpasswd
+modele/.htpasswd
+
+#Exclude idea folder
+.idea/
+
+#Ignore upload folder
+theme/upload/
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# Mac/OSX
+.DS_Store

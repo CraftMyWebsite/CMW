@@ -11,12 +11,13 @@ class base
 			$bdd = new PDO('mysql:host=' .$_Serveur_['dbAdress'] .';dbname=' .$_Serveur_['dbName'].';port=' .$_Serveur_['dbPort'], $_Serveur_['dbUser'], $_Serveur_['dbPassword']);
 			
 			// Cette requette SQL permet d'encoder correctement tout ce qui rentre / sort de la base.
-			$bdd->exec("SET CHARACTER SET utf8");
+			$bdd->exec('SET CHARACTER SET utf8');
+			$bdd->exec('SET SESSION sql_mode = ""');
 			$this->bdd = $bdd;
 		}
 		catch (Exception $e)
 		{
-				die("Erreur BDD, revoyez votre fichier de config: " . $e->getMessage() . "</br> Ou alors vous n'avez pas installé le CMS ? Cliquez ici : <a href='installation/'>INSTALLATION</a>");
+				die('Erreur BDD, merci de vérifier votre fichier de configuration: ' . $e->getMessage() . "</br> Ou bien le CMS n'a pas été installé ? Cliquez ici : <a href='installation/'>INSTALLATION</a>");
 		}
 	}
 	

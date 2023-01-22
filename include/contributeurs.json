@@ -1,4 +1,19 @@
 {
+	"1.9-LTS": {
+		"Développeur": [
+			"Teyir",
+			"CapDRAKE",
+			"Noxeg",
+			"Z0mblard",
+			"vassilidev",
+			"Florentlife"
+		],
+		"Support": [
+			"Emilien52",
+			"CapDRAKE",
+			"X3R0"
+		]
+	},
 	"1.8.3": {
 		"Développeur": [
 			"guedesite",
@@ -11,7 +26,7 @@
 			"Emilien52",
 			"CapDRAKE"
 		]
-	},	
+	},
 	"1.8.2": {
 		"Développeur": [
 			"LoGuardiaN",
@@ -56,7 +71,7 @@
 		],
 		"Autres":[
 			"PandaxCSGO",
-			"X3RO",
+			"X3R0",
 			"RedBoard",
 			"AnackKel"
 		]

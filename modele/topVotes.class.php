@@ -15,9 +15,9 @@ class TopVotes
 	}
 	
 	public function getNbreVotes($pseudo){
-        $req = $this->bdd->prepare("SELECT SUM(nbre_votes) AS nbre_votes FROM cmw_votes WHERE pseudo = :pseudo and isOld=0");
-        $req->execute(array("pseudo" => $pseudo));
-        $nbre = $req->fetch(PDO::FETCH_ASSOC)["nbre_votes"];
+        $req = $this->bdd->prepare('SELECT SUM(nbre_votes) AS nbre_votes FROM cmw_votes WHERE pseudo = :pseudo and isOld=0');
+        $req->execute(array('pseudo' => $pseudo));
+        $nbre = $req->fetch(PDO::FETCH_ASSOC)['nbre_votes'];
         return (empty($nbre)) ? 0 : $nbre;
     }
 }

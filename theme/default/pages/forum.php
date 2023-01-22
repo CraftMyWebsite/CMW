@@ -3,28 +3,8 @@ $fofo = $_Forum_->affichageForum();
 ?>
 
 <section id="Forum" style="overflow-y: hidden">
-    <div class="container-fluid col-md-9 col-lg-9 col-sm-10">
-        <div class="row">
-            <!-- Présentation -->
-            <div class="info-page col-12">
-                <div class="d-flex">
-                    <i class="fas fa-info-circle notification-icon"></i>
-                    <div class="info-content">
-                        Bienvenue sur le forum de <?= $_Serveur_['General']['name']; ?>, <br>
-                        Ici vous pourrez échanger et partager avec toute la communauté du serveur !
-                    </div>
-                </div>
-                <div class="d-flex col-12 col-sm-6 col-lg-4" style="margin:auto;">
-                     <div class="input-group" >
-                        <input type="text" id="search-topic" class="form-control" placeholder="Rechercher un topic ou un message" />
-                            <div class="input-group-append" >
-                                 <span onclick="searchForum(document.getElementById('search-topic').value, document.getElementById('all-search'), document.getElementById('table-search'),document.getElementById('title-search'))" style="border: none;" class="input-group-text btn btn-main" style="cursor:pointer;"><i class="fas fa-search"></i>
-                                </span>
-                        </div>
-                    </div>
-                </div>
-             </div>
-        </div>
+    <div class="container-fluid col-md-9 col-lg-9 col-sm-10 pt-4">
+        
         <div class="row" style="display:none;" id="all-search">
             <table class="table table-dark table-striped" style="display:none;">
                 <thead>
@@ -55,12 +35,12 @@ $fofo = $_Forum_->affichageForum();
         <div class="row">
             <?php if (Permission::getInstance()->verifPerm('PermsForum', 'general', 'modeJoueur')) : ?>
                 <p class="text-center">
-                    <a href="index.php?action=mode_joueur" class="btn btn-main w-100">Passer en mode visuel <?= ($_SESSION['mode']) ? "Administrateur" : "Joueur"; ?></a>
+                    <a href="index.php?action=mode_joueur" class="btn btn-main w-100">Passer en mode visuel <?= ($_SESSION['mode']) ? 'Administrateur' : 'Joueur'; ?></a>
                 </p>
             <?php endif; ?>
 
             <?php for ($i = 0; $i < count($fofo); $i++) :
-                if (((Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $fofo[$i]['perms'] or Permission::getInstance()->verifPerm("createur")) and !$_SESSION['mode']) or $fofo[$i]['perms'] == 0) : ?>
+                if (((Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') >= $fofo[$i]['perms'] or Permission::getInstance()->verifPerm('createur')) and !$_SESSION['mode']) or $fofo[$i]['perms'] == 0) : ?>
 
                     <table class="table table-hover table-dark table-responsive mb-0">
 
@@ -141,10 +121,10 @@ $fofo = $_Forum_->affichageForum();
                             for ($j = 0; $j < count($categorie); $j++) :
                                 $derniereReponse = $_Forum_->derniereReponseForum($categorie[$j]['id']);
 
-                                if (((Permission::getInstance()->verifPerm("createur") or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > $categorie[$j]['perms']) and !$_SESSION['mode']) or $categorie[$j]['perms'] == 0) :
+                                if (((Permission::getInstance()->verifPerm('createur') or Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > $categorie[$j]['perms']) and !$_SESSION['mode']) or $categorie[$j]['perms'] == 0) :
 
                                     
-                                    if (Permission::getInstance()->verifPerm("createur") and !$_SESSION['mode'])
+                                    if (Permission::getInstance()->verifPerm('createur') and !$_SESSION['mode'])
                                         $perms = 100;
                                     elseif (Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms') > 0)
                                         $perms = Permission::getInstance()->verifPerm('PermsDefault', 'forum', 'perms');
@@ -184,7 +164,7 @@ $fofo = $_Forum_->affichageForum();
                                                         <a class="dropdown-toggle" href="sous-forum<?= $categorie[$j]['id']; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 99.5%;">
                                                             Sous-forum :<?= count($sousforum); ?>
                                                         </a>
-                                                        <?php if (count($sousforum) != "0") : ?>
+                                                        <?php if (count($sousforum) != '0') : ?>
                                                             <div class="dropdown-menu" aria-labelledby="sous-forum<?php echo $categorie[$j]['id']; ?>">
                                                                 <?php for ($s = 0; $s < count($sousforum); $s++) : ?>
                                                                     <a class="dropdown-item" href="index.php?page=sous_forum_categorie&id=<?= $categorie[$j]['id']; ?>&id_sous_forum=<?= $sousforum[$s]['id']; ?>">

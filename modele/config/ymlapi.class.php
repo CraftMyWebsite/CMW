@@ -242,7 +242,7 @@ class Spyc {
     }
 
     // New YAML document
-    $string = "";
+    $string = '';
     if (!$no_opening_dashes) $string = "---\n";
 
     // Start at the base of the array and move through it.
@@ -317,9 +317,9 @@ class Spyc {
      */
   private function _dumpNode($key, $value, $indent, $previous_key = -1, $first_key = 0, $source_array = null) {
     // do some folding here, for blocks
-    if (is_string ($value) && ((strpos($value,"\n") !== false || strpos($value,": ") !== false || strpos($value,"- ") !== false ||
-      strpos($value,"*") !== false || strpos($value,"#") !== false || strpos($value,"<") !== false || strpos($value,">") !== false || strpos ($value, '%') !== false || strpos ($value, '  ') !== false ||
-      strpos($value,"[") !== false || strpos($value,"]") !== false || strpos($value,"{") !== false || strpos($value,"}") !== false) || strpos($value,"&") !== false || strpos($value, "'") !== false || strpos($value, "!") === 0 ||
+    if (is_string ($value) && ((strpos($value,"\n") !== false || strpos($value, ': ') !== false || strpos($value, '- ') !== false ||
+      strpos($value, '*') !== false || strpos($value, '#') !== false || strpos($value, '<') !== false || strpos($value, '>') !== false || strpos ($value, '%') !== false || strpos ($value, '  ') !== false ||
+      strpos($value, '[') !== false || strpos($value, ']') !== false || strpos($value, '{') !== false || strpos($value, '}') !== false) || strpos($value, '&') !== false || strpos($value, "'") !== false || strpos($value, '!') === 0 ||
       substr ($value, -1, 1) == ':')
     ) {
       $value = $this->_doLiteralBlock($value,$indent);
@@ -328,7 +328,7 @@ class Spyc {
     }
 
     if ($value === array()) $value = '[ ]';
-    if ($value === "") $value = '""';
+    if ($value === '') $value = '""';
     if (self::isTranslationWord($value)) {
       $value = $this->_doLiteralBlock($value, $indent);
     }
@@ -336,7 +336,7 @@ class Spyc {
        $value = $this->_doLiteralBlock($value,$indent);
 
     if (is_bool($value)) {
-       $value = $value ? "true" : "false";
+       $value = $value ? 'true' : 'false';
     }
 
     if ($value === null) $value = 'null';
@@ -351,7 +351,7 @@ class Spyc {
     } else {
       // if ($first_key===0)  throw new Exception('Keys are all screwy.  The first one was zero, now it\'s "'. $key .'"');
       // It's mapped
-      if (strpos($key, ":") !== false || strpos($key, "#") !== false) { $key = '"' . $key . '"'; }
+      if (strpos($key, ':') !== false || strpos($key, '#') !== false) { $key = '"' . $key . '"'; }
       $string = rtrim ($spaces.$key.': '.$value)."\n";
     }
     return $string;
@@ -374,7 +374,7 @@ class Spyc {
     }
     $exploded = explode("\n",$value);
     $newValue = '|';
-    if (isset($exploded[0]) && ($exploded[0] == "|" || $exploded[0] == "|-" || $exploded[0] == ">")) {
+    if (isset($exploded[0]) && ($exploded[0] == '|' || $exploded[0] == '|-' || $exploded[0] == '>')) {
         $newValue = $exploded[0];
         unset($exploded[0]);
     }
@@ -598,7 +598,7 @@ class Spyc {
      * @return mixed
      */
   private function _toType($value) {
-    if ($value === '') return "";
+    if ($value === '') return '';
     $first_character = $value[0];
     $last_character = substr($value, -1, 1);
 
@@ -959,7 +959,7 @@ class Spyc {
       return rtrim ($literalBlock, " \t") . "\n";
     }
     if ($line != "\n")
-      $line = trim ($line, "\r\n ") . " ";
+      $line = trim ($line, "\r\n ") . ' ';
     return $literalBlock . $line;
   }
 

@@ -12,11 +12,11 @@ if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) {
 	
 	$paypalHistorique = $query->fetchAll(PDO::FETCH_ASSOC);
 
-	$req = $bddConnection->query("SELECT * FROM cmw_paysafecard_offres");
+	$req = $bddConnection->query('SELECT * FROM cmw_paysafecard_offres');
 
 	$paysafecard = $req->fetchAll(PDO::FETCH_ASSOC);
 
-	$req = $bddConnection->query("SELECT cmw_paysafecard_historique.id AS id, pseudo, code, cmw_paysafecard_historique.statut AS statut, cmw_paysafecard_offres.montant AS montant, cmw_paysafecard_offres.jetons AS jetons  FROM cmw_paysafecard_historique INNER JOIN cmw_paysafecard_offres ON offre = cmw_paysafecard_offres.id");
+	$req = $bddConnection->query('SELECT cmw_paysafecard_historique.id AS id, pseudo, code, cmw_paysafecard_historique.statut AS statut, cmw_paysafecard_offres.montant AS montant, cmw_paysafecard_offres.jetons AS jetons  FROM cmw_paysafecard_historique INNER JOIN cmw_paysafecard_offres ON offre = cmw_paysafecard_offres.id');
 
 	$tabPaysafe = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -24,8 +24,8 @@ if($_Permission_->verifPerm('PermsPanel', 'payment', 'showPage')) {
 
 function conversionDate($last_answer)
 {
-	$last_answer = substr_replace($last_answer,"h",strpos($last_answer,":"),strlen(":"));
-    $last_answer = str_replace(" ", " à ", substr($last_answer, 0, strpos($last_answer,":")));
+	$last_answer = substr_replace($last_answer, 'h',strpos($last_answer, ':'),strlen(':'));
+    $last_answer = str_replace(' ', ' à ', substr($last_answer, 0, strpos($last_answer, ':')));
 	return $last_answer;
 }
 ?>
