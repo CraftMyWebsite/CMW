@@ -32,15 +32,25 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addSousForum')
 	));
 
 
+	//Verificaion de l'ordre actuelle 
+	//$recup_ordre = $bddConnection->prepare('SELECT MAX(ordre) FROM `cmw_forum_sous_forum` WHERE `id_categorie` = :id');
+	$recup_ordre = $bddConnection->prepare('SELECT * FROM `cmw_forum_sous_forum` WHERE `id_categorie` = :id ORDER BY ordre DESC');
+	$recup_ordre->execute(array(
+		'id' => $id
+	));
+	$data_recup_ordre = $recup_ordre->fetch(PDO::FETCH_ASSOC);
 
-	$insert = $bddConnection->prepare('INSERT INTO cmw_forum_sous_forum (id_categorie, nom, img) VALUES (:id, :nom, :img) ');
+	$current_order = $data_recup_ordre['ordre'];
+	//FIn de verification
+
+	$insert = $bddConnection->prepare('INSERT INTO cmw_forum_sous_forum (id_categorie, nom, img, ordre) VALUES (:id, :nom, :img, :ordre) ');
 	$insert->execute(array(
 		'id' => $id,
 		'nom' => $nom,
-		'img' => $img
+		'img' => $img,
+		'ordre' => $current_order + 1
 	));
 	header('Location: index.php?page=forum_categorie&id=' .$id. '');
-
 }
 else {
 	header('Location: index.php?page=erreur&erreur=0');
