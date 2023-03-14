@@ -1,6 +1,5 @@
 <?php 
 
-
 if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addSousForum') AND isset($_POST['nom']) AND strlen($_POST['nom']) <= 40 AND isset($_POST['id_categorie']))
 {
 	$nom = htmlspecialchars($_POST['nom']);
@@ -12,24 +11,46 @@ if(Permission::getInstance()->verifPerm('PermsForum', 'general', 'addSousForum')
 				$img = htmlspecialchars(str_replace('<i class="', '', str_replace('"></i>', '', $_POST['img'])));
 			} 
 		}
+
+
 	$recup = $bddConnection->prepare('SELECT * FROM cmw_forum_categorie WHERE id = :id');
 	$recup->execute(array(
 		'id' => $id
 	));
+
+
 	$data = $recup->fetch(PDO::FETCH_ASSOC);
-	$sf = $data['sous-forum'] + 1;
-	$update = $bddConnection->prepare('UPDATE cmw_forum_categorie SET sous-forum = :sous-forum WHERE id = :id');
+
+	$sf = $data['sousforum'] + 1;
+
+	$update = $bddConnection->prepare('UPDATE cmw_forum_categorie SET `sous-forum` = :sousforum WHERE `id` = :id');
+	
+
 	$update->execute(array(
-		'sous-forum' => $sf,
+		'sousforum' => $sf,
 		'id' => $id
 	));
-	$insert = $bddConnection->prepare('INSERT INTO cmw_forum_sous_forum (id_categorie, nom, img) VALUES (:id, :nom, :img) ');
+
+
+	//Verificaion de l'ordre actuelle 
+	//$recup_ordre = $bddConnection->prepare('SELECT MAX(ordre) FROM `cmw_forum_sous_forum` WHERE `id_categorie` = :id');
+	$recup_ordre = $bddConnection->prepare('SELECT * FROM `cmw_forum_sous_forum` WHERE `id_categorie` = :id ORDER BY ordre DESC');
+	$recup_ordre->execute(array(
+		'id' => $id
+	));
+	$data_recup_ordre = $recup_ordre->fetch(PDO::FETCH_ASSOC);
+
+	$current_order = $data_recup_ordre['ordre'];
+	//FIn de verification
+
+	$insert = $bddConnection->prepare('INSERT INTO cmw_forum_sous_forum (id_categorie, nom, img, ordre) VALUES (:id, :nom, :img, :ordre) ');
 	$insert->execute(array(
 		'id' => $id,
 		'nom' => $nom,
-		'img' => $img
+		'img' => $img,
+		'ordre' => $current_order + 1
 	));
-	header('Location: index.php?page=sous_forum_categorie&id=' .$id. '');
+	header('Location: index.php?page=forum_categorie&id=' .$id. '');
 }
 else {
 	header('Location: index.php?page=erreur&erreur=0');

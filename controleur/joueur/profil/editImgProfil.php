@@ -1,31 +1,20 @@
 <?php
 
-if(isset($_FILES['img_profil']) AND $_FILES['img_profil']['error'] == 0)
-{
-	if($_FILES['img_profil']['size'] <= 1000000)
-	{
-		$chemin = pathinfo($_FILES['img_profil']['name']);
-		$extensionFichier = $chemin['extension'];
-		$extension_autorisees = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico');
-		if(in_array($extensionFichier, $extension_autorisees))
-		{
-		    $_ImgProfil_->removeImg($_Joueur_['pseudo']);
-		    if(!is_dir('utilisateurs/'.$_Joueur_['id']))
-		    {
-		      	mkdir('utilisateurs/'.$_Joueur_['id']);
-		    }
-			move_uploaded_file($_FILES['img_profil']['tmp_name'], 'utilisateurs/'.$_Joueur_['id'].'/profil.'.$extensionFichier);
-			$_ImgProfil_->defineExt($_Joueur_['pseudo'], $extensionFichier);
-			
-			header('Location: index.php?page=profil&profil='.$_Joueur_['pseudo'].'&status=3');
-		}
-		else
-			header('Location: index.php?page=profil&profil='.$_Joueur_['pseudo'].'&status=4');
-	}
-	else
-		header('Location: index.php?page=profil&profil='.$_Joueur_['pseudo'].'&status=5');
-}
-else
-	header('Location: index.php?page=profil&profil='.$_Joueur_['pseudo'].'&status=6');
+if (isset($_FILES['img_profil']) && $_FILES['img_profil']['error'] == 0) {
+    require_once './controleur/images.class.php';
 
-?>
+    $fileName = htmlspecialchars($_FILES['img_profil']['name']);
+    $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+    $fileName = mb_substr(basename( $fileName, $fileExtension ), 0, -1);
+
+    if(Images::upload($_FILES['img_profil'], 'utilisateurs/' . $_Joueur_['id'], false, 'profil')){
+        $_ImgProfil_->removeImg($_Joueur_['pseudo']);
+        $_ImgProfil_->defineExt($_Joueur_['pseudo'], $fileExtension);
+
+        header('Location: index.php?page=profil&profil='.$_Joueur_['pseudo'].'&status=3');
+    }
+
+    header('Location: index.php?page=profil&profil='.$_Joueur_['pseudo'].'&status=4');
+
+}
+
